@@ -1,0 +1,58 @@
+version: '3'
+
+services:
+  
+  apache:
+    image: ${PROJECT_NAME}/apache
+    container_name: ${PROJECT_NAME}-apache
+    build:
+      context: "./apache"
+      dockerfile: "Dockerfile"
+    ports:
+     - "80:80"
+     - "443:443"
+    restart: always
+    volumes:
+     - ./apache/conf.d:/etc/apache2/conf.d
+     - ./apache/ssl:/etc/apache2/ssl
+     - ./apache/logs:/var/log/apache2
+     - ../public:/var/www/html
+
+  mysql:
+    image: ${PROJECT_NAME}/mysql
+    container_name: ${PROJECT_NAME}-mysql
+    build:
+      context: "./mysql"
+      dockerfile: "Dockerfile"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+     - "3306:3306"
+    restart: always
+    volumes:
+     - ./mysql/conf.d:/etc/mysql/conf.d
+     - ./mysql/data:/var/lib/mysql
+     - ./mysql/logs:/var/log/mysql
+
+  phpmyadmin:
+    image: ${PROJECT_NAME}/phpmyadmin
+    container_name: ${PROJECT_NAME}-phpmyadmin
+    build:
+      context: "./phpmyadmin"
+      dockerfile: "Dockerfile"
+    ports:
+      - 8888:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    volumes:
+     - "./phpmyadmin/sessions:/sessions"
+ 
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: ${PROJECT_NAME}-mailhog
+    ports:
+      - 8025:8025
+      - 25:1025

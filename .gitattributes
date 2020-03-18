@@ -1,0 +1,23 @@
+*            text=auto
+*.txt        text
+*.java       text
+*.jsp        text
+*.js         text
+*.css        text
+*.html       text
+*.sql        text
+*.conf       text
+*.tld        text
+*.xml        text
+*.properties text
+*.tfl        text
+*.dicon      text
+
+*.bat        text eol=crlf
+*.a5er       text eol=crlf
+*.sh         text eol=lf
+
+*.jpg        -text
+*.png        -text
+*.gif        -text
+*.ico        -text
