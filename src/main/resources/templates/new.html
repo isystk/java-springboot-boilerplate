@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<title>商品新建</title>
+	<title>商品新規登録</title>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="card card-primary mb-3">
 	  			<div class="card-header">
-	  				<h5 class="card-title">商品新建</h5>
+	  				<h5 class="card-title">商品新規登録</h5>
 	  			</div>
 				<div class="card-body">
 	      			<form th:method="post" th:action="@{/items}" th:object="${item}">
@@ -29,14 +29,14 @@
 	          				</div>
 	        			</div>
 	        			<div class="form-group row">
-	          				<label class="col-md-2 control-label">价格</label>
+	          				<label class="col-md-2 control-label">価格</label>
 	          				<div class="col-md-10">
 	            				<input class="form-control" type="text" name="price" th:value="*{price}"/>
 	            				<div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
 	          				</div>
 	        			</div>
 	        			<div class="form-group row">
-	          				<label class="col-md-2 control-label">生产商</label>
+	          				<label class="col-md-2 control-label">生産者</label>
 	          				<div class="col-md-10">
 	            				<input class="form-control" type="text" name="vendor" th:value="*{vendor}" />
 	            				<div class="text-danger" th:if="${#fields.hasErrors('vendor')}" th:errors="*{vendor}"></div>
@@ -44,7 +44,7 @@
 	        			</div>
 	        			<div class="form-group row">
 	          				<div class="offset-md-2 col-md-10">
-	            				<button class="btn btn-primary">新建</button>
+	            				<button class="btn btn-primary">登録する</button>
 	          				</div>
 	        			</div>
 	      		</form>
