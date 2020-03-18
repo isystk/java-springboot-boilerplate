@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<title>商品详细</title>
+	<title>商品詳細</title>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -17,7 +17,7 @@
 	<div class="container">
 		<div class="card card-primary mb-3">
   			<div class="card-header">
-  				<h5 class="card-title">商品详细</h5>
+  				<h5 class="card-title">商品詳細</h5>
   			</div>
 			<div class="card-body">
 		        <div th:object="${item}">
@@ -26,11 +26,11 @@
 						<div class="col-md-10" th:text="*{name}"></div>
 		          	</div>
 		          	<div class="form-group row">
-		            	<label class="col-md-2 control-label">价格</label>
+		            	<label class="col-md-2 control-label">価格</label>
 		            	<div class="col-md-10 form-control-static" th:text="*{price}"></div>
 		          	</div>
 		          	<div class="form-group row">
-		            	<label class="col-md-2 control-label">生产商</label>
+		            	<label class="col-md-2 control-label">生産者</label>
 		            	<div class="col-md-10 form-control-static" th:text="*{vendor}"></div>
 		          	</div>
 				</div>
