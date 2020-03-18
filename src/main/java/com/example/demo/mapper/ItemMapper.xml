@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ItemMapper">
+	<select id="findAll" resultType="com.example.demo.domain.Item">
+		select * from item
+	</select>
+	
+	<select id="findOne" resultType="com.example.demo.domain.Item">
+		select * from item where id= #{id}
+	</select>
+	
+	<insert id="save" useGeneratedKeys="true" keyProperty="id">
+		insert into item(name, price, vendor) values(#{name}, #{price}, #{vendor})
+	</insert>
+	
+	<update id="update">
+		update item set name=#{name}, price=#{price}, vendor=#{vendor} where id= #{id}
+	</update>
+	
+	<delete id="delete">
+		delete from item where id = #{id}
+	</delete>
+</mapper>
