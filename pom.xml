@@ -56,6 +56,12 @@
 				<version>2.1.2</version>
 			</dependency>
 
+			<dependency>
+					<groupId>org.webjars</groupId>
+					<artifactId>AdminLTE</artifactId>
+					<version>3.0.2</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
