@@ -13,9 +13,10 @@ services:
      - "443:443"
     restart: always
     volumes:
-     - ./apache/conf.d:/etc/apache2/conf.d
-     - ./apache/ssl:/etc/apache2/ssl
-     - ./apache/logs:/var/log/apache2
+     - ./apache/conf:/usr/local/apache2/conf
+     - ./apache/conf.d:/usr/local/apache2/conf.d
+     - ./apache/ssl:/usr/local/apache2/ssl
+     - ./apache/logs:/usr/local/apache2/logs
      - ../public:/var/www/html
 
   mysql:
