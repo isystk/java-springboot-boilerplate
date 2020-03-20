@@ -1,62 +1,61 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout}">
-    <head layout:fragment="~{layouts/layout::header}">
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/layout}">
+	<head layout:fragment="~{layouts/layout::header}">
 	<title>ユーザー管理｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="content">
 
-	    <!-- Content Header (Page header) -->
-	    <div class="content-header">
-	      <div class="container-fluid">
-	        <div class="row mb-2">
-	          <div class="col-sm-6">
-	            <h1>商品詳細</h1>
-	          </div><!-- /.col -->
-	          <div class="col-sm-6">
-	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-	              <li class="breadcrumb-item"><a th:href="@{/item}">商品管理</a></li>
-	              <li class="breadcrumb-item active">商品詳細</li>
-	            </ol>
-	          </div><!-- /.col -->
-	        </div><!-- /.row -->
-	      </div><!-- /.container-fluid -->
-	    </div>
-	    <!-- /.content-header -->
+		<!-- Content Header (Page header) -->
+		<div class="content-header">
+			<div class="container-fluid">
+				<div class="row mb-2">
+					<div class="col-sm-6">
+						<h1>商品詳細</h1>
+					</div><!-- /.col -->
+					<div class="col-sm-6">
+						<ol class="breadcrumb float-sm-right">
+							<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+							<li class="breadcrumb-item"><a th:href="@{/items}">商品管理</a></li>
+							<li class="breadcrumb-item active">商品詳細</li>
+						</ol>
+					</div><!-- /.col -->
+				</div><!-- /.row -->
+			</div><!-- /.container-fluid -->
+		</div>
+		<!-- /.content-header -->
 
-	    <!-- Main content -->
-	    <div class="content">
-	      <div class="container-fluid">
+		<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
 
-	        <div class="row">
-	          <div class="col-12">
+				<div class="row">
+					<div class="col-12">
 
-	            <div class="card card-purple">
-					<div class="card-body">
-				        <div th:object="${item}">
-				        	<div class="form-group row">
-				        		<label class="col-md-2">商品名</label>
-								<div class="col-md-10" th:text="*{name}"></div>
-				          	</div>
-				          	<div class="form-group row">
-				            	<label class="col-md-2 control-label">価格</label>
-				            	<div class="col-md-10 form-control-static" th:text="*{price}"></div>
-				          	</div>
-				          	<div class="form-group row">
-				            	<label class="col-md-2 control-label">生産者</label>
-				            	<div class="col-md-10 form-control-static" th:text="*{vendor}"></div>
-				          	</div>
+						<div class="card card-purple">
+							<div class="card-body">
+								<div th:object="${item}">
+									<div class="form-group row">
+										<label class="col-md-2">商品名</label>
+										<div class="col-md-10" th:text="*{name}"></div>
+									</div>
+									<div class="form-group row">
+										<label class="col-md-2 control-label">価格</label>
+										<div class="col-md-10 form-control-static" th:text="*{price}"></div>
+									</div>
+									<div class="form-group row">
+										<label class="col-md-2 control-label">生産者</label>
+										<div class="col-md-10 form-control-static" th:text="*{vendor}"></div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			  </div>
 			</div>
-		  </div>
-	  	</div>
-	  </div>
-    </div>
+		</div>
+	</div>
 </body>
 </html>
