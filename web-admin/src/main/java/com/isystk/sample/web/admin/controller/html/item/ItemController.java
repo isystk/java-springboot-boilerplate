@@ -1,5 +1,7 @@
 package com.isystk.sample.web.admin.controller.html.item;
 
+import static com.isystk.sample.web.base.WebConst.ADMIN_ITEMS_URL;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,9 +19,17 @@ import com.isystk.sample.domain.Item;
 import com.isystk.sample.service.ItemService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
-@RequestMapping("/items")
+@Slf4j
+@RequestMapping(ADMIN_ITEMS_URL)
 public class ItemController extends AbstractHtmlController {
+
+	@Override
+	public String getFunctionName() {
+		return "ITEM";
+	}
 
 	@Autowired
 	private ItemService itemService;
