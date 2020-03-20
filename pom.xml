@@ -64,6 +64,11 @@
 				<scope>provided</scope>
 			</dependency>
 			<dependency>
+				<groupId>com.github.jmnarloch</groupId>
+				<artifactId>modelmapper-spring-boot-starter</artifactId>
+				<version>1.0.1</version>
+			</dependency>
+			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-compress</artifactId>
 				<version>1.20</version>
