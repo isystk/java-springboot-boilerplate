@@ -10,3 +10,8 @@ spring:
     show-sql: true
     
   mvc.hiddenmethod.filter.enabled: true
+
+server:
+  address: 127.0.0.1
+  port: 18080
+  servlet.context-path: /admin
