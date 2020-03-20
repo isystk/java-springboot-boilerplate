@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="ja" class="no-js">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="robots" content="noodp">
+
+        <link rel="shortcut icon" type="image/x-icon" th:href="@{/static/images/favicon.png}" />
+        <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">Sample</title>
+
+		<link rel="stylesheet" th:href="@{/webjars/AdminLTE/3.0.2/plugins/fontawesome-free/css/all.min.css}" type="text/css" />
+		<link rel="stylesheet" th:href="@{/webjars/AdminLTE/3.0.2/dist/css/adminlte.min.css}" type="text/css" />
+		<link rel="stylesheet" th:href="@{/css/admin.css}" type="text/css" />
+
+        <!--/* original */-->
+        <!--link /-->
+    </head>
+	<body class="hold-transition sidebar-mini">
+		<div class="wrapper">
+            <!--/* ヘッダー */-->
+	        <div layout:fragment="header">
+	            <div th:replace="~{layouts/header}"></div>
+	        </div>
+
+            <!--/* サイドメニュー */-->
+	        <div layout:fragment="sidebar">
+	            <div th:replace="~{layouts/sidebar}"></div>
+	        </div>
+
+			<!--/* メインコンテンツ */-->
+  			<div class="content-wrapper" layout:fragment="content" >
+
+			</div>
+
+            <!--/* フッター */-->
+	        <div layout:fragment="footer">
+	            <div th:replace="~{layouts/footer}"></div>
+	        </div>
+        </div><!--/* end wrapper */-->
+
+        <div layout:fragment="footer" th:remove="tag">
+			<script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/plugins/jquery/jquery.min.js}"></script>
+			<script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+			<script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/dist/js/adminlte.min.js}"></script>
+			<script type="text/javascript" src="@{/js/admin.js}"></script>
+        </div>
+        <div layout:fragment="scripts" th:remove="tag" />
+    </body>
+</html>
