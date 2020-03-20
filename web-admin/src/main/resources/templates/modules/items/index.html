@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+    <head layout:fragment="~{layouts/layout::header}">
+	<title>ユーザー管理｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+	    <!-- Content Header (Page header) -->
+	    <div class="content-header">
+	      <div class="container-fluid">
+	        <div class="row mb-2">
+	          <div class="col-sm-6">
+	            <h1>ユーザー管理</h1>
+	          </div><!-- /.col -->
+	          <div class="col-sm-6">
+	            <ol class="breadcrumb float-sm-right">
+	              <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+	              <li class="breadcrumb-item active">ユーザー管理</li>
+	            </ol>
+	          </div><!-- /.col -->
+	        </div><!-- /.row -->
+	      </div><!-- /.container-fluid -->
+	    </div>
+	    <!-- /.content-header -->
+
+	    <!-- Main content -->
+	    <div class="content">
+	      <div class="container-fluid">
+
+	        <div class="row">
+	          <div class="col-12">
+
+	            <div class="card card-purple">
+	            	<a th:href="@{/items/new}" class="btn btn-secondary">新規登録</a>
+				</div>
+
+	            <div class="card card-purple">
+	              <!-- .card-header -->
+	              <div class="card-header">
+	                <h3 class="card-title">検索条件</h3>
+	              </div>
+	              <!-- /.card-header -->
+	              <!-- form start -->
+	              <form role="form">
+	                <div class="card-body">
+
+	                  <div class="form-group">
+	                    <div class="control-group" id="userName">
+	                        <label class="col-sm-2 control-label">商品名</label>
+	                        <div class="col-sm-4">
+	                            <input class="form-control" type="text" size="10" maxlength="80" id="userName" name="userName" value="">
+	                        </div>
+	                    </div>
+	                  </div>
+
+	                </div>
+	                <!-- /.card-body -->
+
+	                <div class="card-footer text-center">
+	                  <button type="submit" class="btn btn-secondary">検索</button>
+	                </div>
+
+	              </form>
+	            </div>
+
+	            <div class="row">
+	              <div class="col-12">
+
+	                <div class="card card-purple">
+	                  <!-- .card-header -->
+	                  <div class="card-header">
+	                    <h3 class="card-title">検索結果</h3>
+	                  </div>
+	                  <!-- /.card-header -->
+	                  <div class="card-body table-responsive p-0">
+	                    <table class="table table-hover text-nowrap">
+	                      <thead>
+	                        <tr>
+	                            <th>ID</th>
+	                            <th>商品名</th>
+	                            <th>価格</th>
+	                            <th>生産者</th>
+	                            <th></th>
+	                        </tr>
+	                      </thead>
+	                      <tbody>
+		       				<tr th:each="item:${items}" th:object="${item}">
+		         				<td th:text="*{id}"></td>
+		         				<td th:text="*{name}"></td>
+		         				<td th:text="*{price}"></td>
+		         				<td th:text="*{vendor}"></td>
+		         				<td class="float-right">
+			         				<form th:action="@{/items/{id}(id=*{id})}" th:method="delete">
+			         					<a class="btn btn-secondary" th:href="@{/items/{id}(id=*{id})}">詳細</a>
+			         					<a class="btn btn-secondary" th:href="@{/items/{id}/edit(id=*{id})}">变更</a>
+										<button class="btn btn-secondary">削除</button>
+									</form>
+		         				</td>
+		       				</tr>
+	                      </tbody>
+	                    </table>
+	                  </div>
+	                  <!-- /.card-body -->
+	                  <!-- .card-footer -->
+	                  <div class="card-footer clearfix ">
+	                    <ul class="pagination m-0 justify-content-center">
+	                      <li class="page-item"><a class="page-link" href="#">«</a></li>
+	                      <li class="page-item"><a class="page-link" href="#">1</a></li>
+	                      <li class="page-item"><a class="page-link" href="#">2</a></li>
+	                      <li class="page-item"><a class="page-link" href="#">3</a></li>
+	                      <li class="page-item"><a class="page-link" href="#">»</a></li>
+	                    </ul>
+	                  </div>
+	                  <!-- /.card-footer -->
+	                </div>
+	                <!-- /.card -->
+	              </div>
+	            </div>
+
+	          </div>
+	        </div>
+
+	      </div>
+	    </div>
+	    <!-- /.content -->
+    </div>
+</body>
+</html>
