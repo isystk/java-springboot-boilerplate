@@ -1,21 +1,90 @@
-java-springboot-sample
-====
+# java-springboot-sample
 
-## Description
+## ローカル環境
 
-Mavenを利用したSpringBootアプリケーション作成サンプルです。
+ソースのダウンロード
+```bash
+$ git clone https://github.com/isystk/java-springboot-sample.git
+```
 
-## Demo
+### 開発環境（Eclipse）
 
-## VS. 
+#### 必要なプラグイン・設定
 
-## Requirement
+- Lombok pluginをインストールする。
 
-## Usage
+### Docker APIの有効化
 
-## Install
+#### Windows10の場合
+* Settings > General > `Expose daemon on tcp://...`をONにする。
 
-## Contribution
+#### MacOSXの場合
+* デフォルトで`unix:///var/run/docker.sock`に接続できる。
+* TCPでAPIを利用したい場合は、下記を実施する。
+
+```bash
+$ brew install socat
+$ socat -4 TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock &
+```
+
+#### Docker Toolboxの場合
+* 後述の`Dockerの起動`の手順を実施する。
+
+### Dockerの起動
+NginX、MySQLなどのサーバーを立ち上げる。
+
+#### Windows10、MacOSXの場合
+```bash
+$ ./dc.sh start
+```
+
+### アプリケーションの設定
+```bash
+$ cd /path/to/java-springboot-sample
+$ ./mvnw -X -U eclipse:clean eclipse:eclipse -P ut -f pom.xml
+```
+
+### アプリケーションの起動
+
+```bash
+$ # front application
+$ cd /path/to/java-springboot-sample
+$ ./mvnw spring-boot:run
+```
+
+### 接続先情報
+#### テストユーザー test@sample.com / passw0rd
+
+| 接続先| URL|
+| :-----| :---------------------------------------|
+| 管理側画面| http://localhost/admin|
+| 管理側API| http://localhost/admin/api/v1/users|
+| フロント側| http://localhost/|
+
+#### データベース接続先
+
+```bash
+# Windows10、MacOSXの場合
+mysql -h 127.0.0.1 -P 3306 -uroot -ppassword sample
+```
+
+## 参考
+
+| プロジェクト| 概要|
+| :---------------------------------------| :-------------------------------|
+| [Lombok Project](https://projectlombok.org/)| 定型的なコードを書かなくてもよくする|
+| [Springframework](https://projects.spring.io/spring-framework/)| Spring Framework|
+| [Spring Security](https://projects.spring.io/spring-security/)| セキュリティ対策、認証・認可のフレームワーク|
+| [mybatis](https://mybatis.org/mybatis-3/ja/index.html)| O/Rマッパー|
+| [mybatis-spring-boot](https://mybatis.org/spring/ja/getting-started.html)| mybatisとSpring Bootを連携する|
+| [Flyway](https://flywaydb.org/)| DBマイグレーションツール|
+| [Thymeleaf](http://www.thymeleaf.org/)| テンプレートエンジン|
+| [Thymeleaf Layout Dialect](https://ultraq.github.io/thymeleaf-layout-dialect/)| テンプレートをレイアウト化する|
+| [WebJars](https://www.webjars.org/)| jQueryなどのクライアント側ライブラリをJARとして組み込む|
+| [ModelMapper](http://modelmapper.org/)| Beanマッピングライブラリ|
+| [Ehcache](http://www.ehcache.org/)| キャッシュライブラリ|
+| [Spock](http://spockframework.org/)| テストフレームワーク|
+| [Mockito](http://site.mockito.org/)| モッキングフレームワーク |
 
 ## Licence
 

@@ -2,22 +2,21 @@ version: '3'
 
 services:
   
-  apache:
-    image: ${PROJECT_NAME}/apache
-    container_name: ${PROJECT_NAME}-apache
+  nginx:
+    image: ${PROJECT_NAME}/nginx
+    container_name: ${PROJECT_NAME}-nginx
     build:
-      context: "./apache"
+      context: "./nginx"
       dockerfile: "Dockerfile"
     ports:
      - "80:80"
      - "443:443"
     restart: always
     volumes:
-     - ./apache/conf:/usr/local/apache2/conf
-     - ./apache/conf.d:/usr/local/apache2/conf.d
-     - ./apache/ssl:/usr/local/apache2/ssl
-     - ./apache/logs:/usr/local/apache2/logs
-     - ../public:/var/www/html
+     - "./nginx/conf.d:/etc/nginx/conf.d"
+     - "./nginx/ssl:/etc/nginx/ssl"
+     - "./nginx/logs:/var/log/nginx"
+     - "../public:/usr/share/nginx/html"
 
   mysql:
     image: ${PROJECT_NAME}/mysql
