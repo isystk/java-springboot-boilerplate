@@ -1,4 +1,11 @@
 spring:
+
+  profiles.active: 
+    local  
+    # development  
+    # staging  
+    # production  
+
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sample
