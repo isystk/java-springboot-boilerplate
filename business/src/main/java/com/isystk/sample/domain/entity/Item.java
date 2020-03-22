@@ -5,6 +5,11 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Setter
+@Getter
 public class Item {
 	private Long id;
 
@@ -18,35 +23,4 @@ public class Item {
 	@Size(max = 50, message = "生産者は50文字以内で入力して下さい")
 	private String vendor;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public String getVendor() {
-		return vendor;
-	}
-
-	public void setVendor(String vendor) {
-		this.vendor = vendor;
-	}
 }

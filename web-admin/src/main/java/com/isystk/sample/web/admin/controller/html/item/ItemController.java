@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.isystk.sample.domain.entity.Item;
-import com.isystk.sample.domain.service.ItemService;
+import com.isystk.sample.web.admin.service.ItemService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
 import lombok.extern.slf4j.Slf4j;

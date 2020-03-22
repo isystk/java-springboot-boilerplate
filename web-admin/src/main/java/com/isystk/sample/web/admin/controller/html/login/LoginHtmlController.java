@@ -107,9 +107,4 @@ public class LoginHtmlController extends AbstractHtmlController {
         return "redirect:/login";
     }
 
-    @Override
-    public boolean authorityRequired() {
-        // 権限チェックを求めない
-        return false;
-    }
 }

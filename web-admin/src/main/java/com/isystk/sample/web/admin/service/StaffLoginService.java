@@ -1,4 +1,4 @@
-package com.isystk.sample.domain.service;
+package com.isystk.sample.web.admin.service;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -13,9 +13,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.isystk.sample.domain.dto.StaffDetails;
 import com.isystk.sample.domain.entity.Staff;
 import com.isystk.sample.domain.mapper.StaffMapper;
+import com.isystk.sample.domain.service.BaseTransactionalService;
+import com.isystk.sample.web.admin.dto.StaffDetails;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;

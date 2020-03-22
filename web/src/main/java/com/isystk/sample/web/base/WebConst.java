@@ -5,7 +5,9 @@ package com.isystk.sample.web.base;
  */
 public interface WebConst {
 
-	/** ---- MDC ---- **/
+    /** ---- MDC ---- **/
+    String MDC_LOGIN_USER_ID = "LOGIN_USER_ID";
+
     String MDC_FUNCTION_NAME = "FUNCTION_NAME";
 
     /** ---- Message ---- **/
