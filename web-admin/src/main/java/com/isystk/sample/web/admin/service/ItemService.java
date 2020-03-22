@@ -1,4 +1,4 @@
-package com.isystk.sample.domain.service;
+package com.isystk.sample.web.admin.service;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.isystk.sample.domain.entity.Item;
 import com.isystk.sample.domain.mapper.ItemMapper;
+import com.isystk.sample.domain.service.BaseTransactionalService;
 
 @Service
 public class ItemService extends BaseTransactionalService {
