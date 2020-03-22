@@ -2,10 +2,7 @@ package com.isystk.sample.web.base.security;
 
 import static com.isystk.sample.web.base.WebConst.*;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -28,21 +25,6 @@ import lombok.val;
  * 基底セキュリティコンフィグ
  */
 public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Value("${application.security.secureCookie:false}")
-    Boolean secureCookie;
-
-    @Value("${application.security.rememberMe.cookieName:rememberMe}")
-    String rememberMeCookieName;
-
-    @Value("${application.security.tokenValiditySeconds:86400}")
-    Integer tokenValiditySeconds;
-
-    @Value("${application.security.tokenPurgeSeconds:2592000}") // 30 days
-    Integer tokenPurgeSeconds;
-
-    @Autowired
-    DataSource dataSource;
 
     @Autowired
     UserDetailsService userDetailsService;
@@ -74,16 +56,18 @@ public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
         String[] permittedUrls = { LOGIN_TIMEOUT_URL, FORBIDDEN_URL, ERROR_URL, RESET_PASSWORD_URL,
                 CHANGE_PASSWORD_URL };
 
+        // 認証除外設定
         http.authorizeRequests()
                 // エラー画面は認証をかけない
                 .antMatchers(permittedUrls).permitAll()
                 // エラー画面以外は、認証をかける
-                .anyRequest().authenticated()//
-                .and()//
-                .exceptionHandling()//
-                .authenticationEntryPoint(authenticationEntryPoint())//
+                .anyRequest().authenticated()
+                .and()
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationEntryPoint())
                 .accessDeniedHandler(accessDeniedHandler());
 
+        // ログイン処理
         http.formLogin()
                 // ログイン画面のURL
                 .loginPage(LOGIN_URL)
@@ -98,11 +82,11 @@ public abstract class BaseSecurityConfig extends WebSecurityConfigurerAdapter {
                 // パスワードのパラメータ名
                 .passwordParameter("password").permitAll();
 
-        // ログアウト設定
-        http.logout()//
+        // ログアウト処理
+        http.logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL))
                 // Cookieを破棄する
-                .deleteCookies("SESSION", "JSESSIONID", rememberMeCookieName)
+                .deleteCookies("SESSION", "JSESSIONID")
                 // ログアウト画面のURL
                 .logoutUrl(LOGOUT_URL)
                 // ログアウト後の遷移先

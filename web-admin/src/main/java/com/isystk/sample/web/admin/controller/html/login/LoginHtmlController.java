@@ -41,23 +41,6 @@ public class LoginHtmlController extends AbstractHtmlController {
     }
 
     /**
-     * 入力チェック
-     *
-     * @param form
-     * @param br
-     * @return
-     */
-    @PostMapping(LOGIN_URL)
-    public String index(@Validated @ModelAttribute LoginForm form, BindingResult br) {
-        // 入力チェックエラーがある場合は、元の画面にもどる
-        if (br.hasErrors()) {
-            return "modules/login/login";
-        }
-
-        return "forward:" + LOGIN_PROCESSING_URL;
-    }
-
-    /**
      * ログイン成功
      *
      * @param form

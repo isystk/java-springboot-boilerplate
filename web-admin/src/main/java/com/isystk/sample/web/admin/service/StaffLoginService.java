@@ -16,7 +16,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import com.isystk.sample.domain.entity.Staff;
 import com.isystk.sample.domain.mapper.StaffMapper;
 import com.isystk.sample.domain.service.BaseTransactionalService;
-import com.isystk.sample.web.admin.dto.StaffDetails;
+import com.isystk.sample.web.admin.dto.StaffDto;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +41,7 @@ public class StaffLoginService extends BaseTransactionalService implements UserD
             val staff = Optional.ofNullable(staffMapper.findByEmail(email))
                     .orElseThrow(() -> new UsernameNotFoundException("User not found."));
 
-            return new StaffDetails(staff, getAuthorities(staff));
+            return new StaffDto(staff, getAuthorities(staff));
 
         } catch (Exception e) {
             if (!(e instanceof UsernameNotFoundException)) {
