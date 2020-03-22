@@ -23,22 +23,36 @@
 	<body class="hold-transition sidebar-mini">
 		<div class="wrapper">
 			<!--/* ヘッダー */-->
-			<div layout:fragment="header">
+			<div layout:fragment="header" th:remove="tag">
 				<div th:replace="~{layouts/header}"></div>
 			</div>
 
 			<!--/* サイドメニュー */-->
-			<div layout:fragment="sidebar">
+			<div layout:fragment="sidebar" th:remove="tag">
 				<div th:replace="~{layouts/sidebar}"></div>
 			</div>
 
 			<!--/* メインコンテンツ */-->
-				<div class="content-wrapper" layout:fragment="content" >
+			<div class="content-wrapper" >
+				<!-- Content Header (Page header) -->
+				<section class="content-header" >
+					<div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalMessage}">
+						<!--/* グローバルメッセージ */-->
+						<p th:text="${str}" class="alert alert-danger"></p>
+					</div>
+					<div class="container-fluid">
+						<div layout:fragment="content-header"  th:remove="tag">
+						</div>
+					</div><!-- /.container-fluid -->
+				</section>
+				<!-- /.content-header -->
 
+				<div layout:fragment="content"  th:remove="tag">
+				</div>
 			</div>
 
 			<!--/* フッター */-->
-			<div layout:fragment="footer">
+			<div layout:fragment="footer" th:remove="tag">
 				<div th:replace="~{layouts/footer}"></div>
 			</div>
 		</div><!--/* end wrapper */-->

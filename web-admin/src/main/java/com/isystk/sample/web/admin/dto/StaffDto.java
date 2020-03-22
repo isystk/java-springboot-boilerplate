@@ -7,12 +7,12 @@ import org.springframework.security.core.userdetails.User;
 import com.isystk.sample.domain.entity.Staff;
 import com.isystk.sample.web.base.filter.UserIdAware;
 
-public class StaffDetails extends User implements UserIdAware {
+public class StaffDto extends User implements UserIdAware {
 
     // 管理者情報。
     private final Staff staff;
 
-    public StaffDetails(Staff staff,
+    public StaffDto(Staff staff,
             Collection<GrantedAuthority> authorities) {
 
         super(staff.getEmail(), staff.getPassword(),

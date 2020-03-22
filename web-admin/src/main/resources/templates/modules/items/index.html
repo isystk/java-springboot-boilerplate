@@ -6,25 +6,23 @@
 	<title>商品管理｜Sample</title>
 </head>
 <body>
+	<div layout:fragment="sidebar">
+		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'item')}"></div>
+	</div>
+	<div layout:fragment="content-header">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1>商品管理</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item active">商品管理</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div>
 	<div layout:fragment="content">
-
-		<!-- Content Header (Page header) -->
-		<div class="content-header">
-			<div class="container-fluid">
-				<div class="row mb-2">
-					<div class="col-sm-6">
-						<h1>商品管理</h1>
-					</div><!-- /.col -->
-					<div class="col-sm-6">
-						<ol class="breadcrumb float-sm-right">
-							<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-							<li class="breadcrumb-item active">商品管理</li>
-						</ol>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.container-fluid -->
-		</div>
-		<!-- /.content-header -->
 
 		<!-- Main content -->
 		<div class="content">
@@ -49,10 +47,10 @@
 
 									<div class="form-group">
 										<div class="control-group" id="userName">
-												<label class="col-sm-2 control-label">商品名</label>
-												<div class="col-sm-4">
-														<input class="form-control" type="text" size="10" maxlength="80" id="userName" name="userName" value="">
-												</div>
+											<label class="col-sm-2 control-label">商品名</label>
+											<div class="col-sm-4">
+													<input class="form-control" type="text" size="10" maxlength="80" id="userName" name="userName" value="">
+											</div>
 										</div>
 									</div>
 
@@ -73,6 +71,18 @@
 									<!-- .card-header -->
 									<div class="card-header">
 										<h3 class="card-title">検索結果</h3>
+										<div class="dropdown text-right">
+											<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+												操作
+												<span class="caret"></span>
+											</button>
+											<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+												<a class="dropdown-item text-muted" th:href="@{/users/users/new}">ユーザー登録</a>
+												<a class="dropdown-item text-muted" th:href="@{/users/users/download/ユーザー.csv}">CSVダウンロード</a>
+												<a class="dropdown-item text-muted" th:href="@{/users/users/download/ユーザー.xlsx}">Excelダウンロード</a>
+												<a class="dropdown-item text-muted" th:href="@{/users/users/download/ユーザー.pdf}">PDFダウンロード</a>
+											</div>
+										</div>
 									</div>
 									<!-- /.card-header -->
 									<div class="card-body table-responsive p-0">
@@ -106,13 +116,7 @@
 									<!-- /.card-body -->
 									<!-- .card-footer -->
 									<div class="card-footer clearfix ">
-										<ul class="pagination m-0 justify-content-center">
-											<li class="page-item"><a class="page-link" href="#">«</a></li>
-											<li class="page-item"><a class="page-link" href="#">1</a></li>
-											<li class="page-item"><a class="page-link" href="#">2</a></li>
-											<li class="page-item"><a class="page-link" href="#">3</a></li>
-											<li class="page-item"><a class="page-link" href="#">»</a></li>
-										</ul>
+										<div th:replace="~{fragments/paginator :: paginator (${pages}, '/items')}" />
 									</div>
 									<!-- /.card-footer -->
 								</div>

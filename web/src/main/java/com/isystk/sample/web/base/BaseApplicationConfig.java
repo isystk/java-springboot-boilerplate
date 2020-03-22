@@ -15,9 +15,9 @@ import com.isystk.sample.web.base.aop.SetDoubleSubmitCheckTokenInterceptor;
 public abstract class BaseApplicationConfig
 		implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>, WebMvcConfigurer {
 
-	@Override
-	public void customize(ConfigurableServletWebServerFactory container) {
-	}
+    @Override
+    public void customize(ConfigurableServletWebServerFactory container) {
+    }
 
     @Bean
     public RequestTrackingInterceptor requestTrackingInterceptor() {

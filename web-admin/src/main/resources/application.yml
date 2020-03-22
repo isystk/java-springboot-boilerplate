@@ -19,6 +19,11 @@ spring:
   mvc.hiddenmethod.filter.enabled: true
 
 logging:
+  level:
+    org.springframework: INFO
+    org.springframework.jdbc: INFO
+    org.thymeleaf: INFO
+    com.isystk.sample: DEBUG
   pattern:
     # MDCで設定した値を出力する
     level: "[%X{FUNCTION_NAME}:%X{X-Track-Id}:%X{LOGIN_USER_ID}] %5p"
@@ -26,4 +31,11 @@ logging:
 server:
   address: 127.0.0.1
   port: 18080
-  servlet.context-path: /admin
+  compression:
+    enabled: true
+  servlet:
+    session:
+      timeout: 7200
+      # URLにセッションIDを出力しないようにする
+      tracking-modes: cookie
+    context-path: /admin

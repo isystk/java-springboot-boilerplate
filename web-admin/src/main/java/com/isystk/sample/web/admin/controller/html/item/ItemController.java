@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.isystk.sample.domain.entity.Item;
+import com.isystk.sample.web.admin.dto.ItemDto;
 import com.isystk.sample.web.admin.service.ItemService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
+import lombok.val;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
@@ -84,4 +86,27 @@ public class ItemController extends AbstractHtmlController {
 		itemService.delete(id);
 		return "redirect:/items";
 	}
+
+    /**
+     * 検索
+     *
+     * @param model
+     * @return
+     */
+    @GetMapping("/find")
+    public String findUser(@ModelAttribute ItemForm form, Model model) {
+		model.addAttribute("items", itemService.findAll());
+
+        // 入力値を詰め替える
+        val itemDto = modelMapper.map(form, ItemDto.class);
+//
+//        // 10件区切りで取得する
+//        val pages = userService.findAll(itemDto, form);
+//
+//        // 画面に検索結果を渡す
+//        model.addAttribute("pages", pages);
+
+		return "modules/items/index";
+    }
+
 }
