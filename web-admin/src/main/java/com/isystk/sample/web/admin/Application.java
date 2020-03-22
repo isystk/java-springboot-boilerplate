@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.isystk.sample.ComponentScanBasePackage;
 
-@MapperScan("com.isystk.sample.mapper")
+@MapperScan("com.isystk.sample.domain.mapper")
 @SpringBootApplication(scanBasePackageClasses = { ComponentScanBasePackage.class })
 public class Application {
 

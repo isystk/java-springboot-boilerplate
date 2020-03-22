@@ -1,4 +1,4 @@
-package com.isystk.sample.service;
+package com.isystk.sample.domain.service;
 
 import org.springframework.transaction.annotation.Transactional;
 

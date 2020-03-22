@@ -1,4 +1,4 @@
-package com.isystk.sample.service;
+package com.isystk.sample.domain.service;
 
 import java.util.List;
 
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.isystk.sample.domain.Item;
-import com.isystk.sample.mapper.ItemMapper;
+import com.isystk.sample.domain.entity.Item;
+import com.isystk.sample.domain.mapper.ItemMapper;
 
 @Service
 public class ItemService extends BaseTransactionalService {

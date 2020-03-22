@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.isystk.sample.domain.Item;
-import com.isystk.sample.service.ItemService;
+import com.isystk.sample.domain.entity.Item;
+import com.isystk.sample.domain.service.ItemService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +28,7 @@ public class ItemController extends AbstractHtmlController {
 
 	@Override
 	public String getFunctionName() {
-		return "ITEM";
+		return "A_ITEM";
 	}
 
 	@Autowired
