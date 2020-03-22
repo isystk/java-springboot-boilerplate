@@ -1,10 +1,10 @@
-package com.isystk.sample.mapper;
+package com.isystk.sample.domain.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.isystk.sample.domain.Item;
+import com.isystk.sample.domain.entity.Item;
 
 @Mapper
 public interface ItemMapper {

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.isystk.sample.web.base.aop.LoggingFunctionNameInterceptor;
 import com.isystk.sample.web.base.aop.RequestTrackingInterceptor;
+import com.isystk.sample.web.base.aop.SetDoubleSubmitCheckTokenInterceptor;
 
 public abstract class BaseApplicationConfig
 		implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>, WebMvcConfigurer {
@@ -30,10 +31,17 @@ public abstract class BaseApplicationConfig
 		return new LoggingFunctionNameInterceptor();
 	}
 
+    @Bean
+    public SetDoubleSubmitCheckTokenInterceptor setDoubleSubmitCheckTokenInterceptor() {
+        // 二重送信をチェックする
+        return new SetDoubleSubmitCheckTokenInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(requestTrackingInterceptor());
         registry.addInterceptor(loggingFunctionNameInterceptor());
+        registry.addInterceptor(setDoubleSubmitCheckTokenInterceptor());
     }
 
 	/**

@@ -1,4 +1,4 @@
-package com.isystk.sample.domain;
+package com.isystk.sample.domain.entity;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;

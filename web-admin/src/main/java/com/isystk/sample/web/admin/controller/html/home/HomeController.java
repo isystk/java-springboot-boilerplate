@@ -18,7 +18,7 @@ public class HomeController extends AbstractHtmlController {
 
 	@Override
 	public String getFunctionName() {
-		return "HOME";
+		return "A_HOME";
 	}
 
 	@GetMapping
