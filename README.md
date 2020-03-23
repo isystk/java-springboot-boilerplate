@@ -9,9 +9,18 @@ $ git clone https://github.com/isystk/java-springboot-sample.git
 
 ### 開発環境（Eclipse）
 
-#### 必要なプラグイン・設定
+#### 必要な設定
 
 - Lombok pluginをインストールする。
+https://qiita.com/ponsuke0531/items/c2dac01e444f510310ae
+
+- Annotation Processingを有効にする。
+https://doma.readthedocs.io/en/2.5.0/annotation-processing/#eclipse
+
+businessプロジェクトの「プロパティ」－「Javaコンパイラ」－「注釈処理」を有効にする
+ファクトリーパスで「JARの追加」を選択後に以下のJARを追加する
+docker\mysql\doma2\lib\doma-gen-1.35.0.jar
+"business\target\classes\com\isystk\sample\domain\dao" 以下に "XXImpl.class"が追加されていれば成功です。
 
 ### Docker APIの有効化
 

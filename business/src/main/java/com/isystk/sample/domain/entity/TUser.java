@@ -29,7 +29,7 @@ public class TUser {
 
     /**  */
     @Column(name = "PASSWORD")
-    byte[] password;
+    String password;
 
     /**  */
     @Column(name = "FAMILY_NAME")
@@ -145,7 +145,7 @@ public class TUser {
      * 
      * @return the password
      */
-    public byte[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -154,7 +154,7 @@ public class TUser {
      * 
      * @param password the password
      */
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

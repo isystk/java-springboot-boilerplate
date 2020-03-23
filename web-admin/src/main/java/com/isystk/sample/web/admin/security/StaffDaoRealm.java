@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.service;
+package com.isystk.sample.web.admin.security;
 
 import java.util.HashSet;
 import java.util.List;
@@ -8,17 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.isystk.sample.domain.dao.TStaffDao;
 import com.isystk.sample.domain.dto.staff.StaffCriteria;
-import com.isystk.sample.domain.repository.StaffRepository;
-import com.isystk.sample.domain.service.BaseTransactionalService;
-import com.isystk.sample.web.admin.dto.StaffDto;
+import com.isystk.sample.domain.entity.TStaff;
+import com.isystk.sample.web.base.security.BaseRealm;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
@@ -28,34 +25,41 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Component
 @Slf4j
-public class StaffLoginService extends BaseTransactionalService implements UserDetailsService {
+public class StaffDaoRealm extends BaseRealm {
 
     @Autowired
     TStaffDao tStaffDao;
 
-    @Autowired
-    StaffRepository staffRepository;
-
     @Override
-    @Transactional(readOnly = true)
-    public UserDetails loadUserByUsername(String email)
-            throws UsernameNotFoundException {
+    protected UserDetails getLoginUser(String email) {
+        TStaff staff = null;
         List<GrantedAuthority> authorityList = null;
+
         try {
+            // login_idをメールアドレスと見立てる
+            val criteria = new StaffCriteria();
+            criteria.setEmail(email);
 
-        	StaffCriteria criteria = new StaffCriteria();
-        	criteria.setEmail(email);
-
-            //DBからユーザ情報を取得。
-        	val staff = tStaffDao.select(criteria)
+            // 担当者を取得して、セッションに保存する
+            staff = tStaffDao.select(criteria)
                     .orElseThrow(() -> new UsernameNotFoundException("no staff found [id=" + email + "]"));
+//
+//            // 担当者権限を取得する
+//            List<StaffRole> staffRoles = staffRoleDao.selectByStaffId(staff.getId(), toList());
+//
+//            // 役割キーにプレフィックスをつけてまとめる
+//            Set<String> roleKeys = staffRoles.stream().map(StaffRole::getRoleKey).collect(toSet());
+//
+//            // 権限キーをまとめる
+//            Set<String> permissionKeys = staffRoles.stream().map(StaffRole::getPermissionKey).collect(toSet());
 
+            // 役割と権限を両方ともGrantedAuthorityとして渡す
             Set<String> authorities = new HashSet<>();
 //            authorities.addAll(roleKeys);
 //            authorities.addAll(permissionKeys);
             authorityList = AuthorityUtils.createAuthorityList(authorities.toArray(new String[0]));
 
-            return new StaffDto(staff, authorityList);
+            return new LoginStaff(staff, authorityList);
 
         } catch (Exception e) {
             if (!(e instanceof UsernameNotFoundException)) {
@@ -69,5 +73,4 @@ public class StaffLoginService extends BaseTransactionalService implements UserD
             throw new UsernameNotFoundException("could not select staff.", e);
         }
     }
-
 }

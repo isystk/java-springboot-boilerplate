@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.isystk.sample.domain.dto.common.DefaultPageFactoryImpl;
+import com.isystk.sample.domain.dto.common.PageFactory;
 import com.isystk.sample.web.base.aop.LoggingFunctionNameInterceptor;
 import com.isystk.sample.web.base.aop.RequestTrackingInterceptor;
 import com.isystk.sample.web.base.aop.SetDoubleSubmitCheckTokenInterceptor;
@@ -17,6 +19,11 @@ public abstract class BaseApplicationConfig
 
     @Override
     public void customize(ConfigurableServletWebServerFactory container) {
+    }
+
+    @Bean
+    public PageFactory pageFactory() {
+        return new DefaultPageFactoryImpl();
     }
 
     @Bean

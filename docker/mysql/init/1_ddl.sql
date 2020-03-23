@@ -6,6 +6,11 @@ USE sample;
 -- Author       : isystk
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
+-- Project Name : sample
+-- Date/Time    : 2020/03/24 1:16:49
+-- Author       : isystk
+-- RDBMS Type   : MySQL
+-- Application  : A5:SQL Mk-2
 
 -- メールテンプレート
 create table M_MAIL_TEMPLATE (
@@ -24,7 +29,7 @@ create table M_MAIL_TEMPLATE (
 create table T_STAFF (
   STAFF_ID INT(11) auto_increment not null comment '管理者ID'
   , EMAIL VARCHAR(256) not null comment 'メールアドレス'
-  , PASSWORD BINARY(40) not null comment 'パスワード'
+  , PASSWORD VARCHAR(100) not null comment 'パスワード'
   , FAMILY_NAME VARCHAR(20) not null comment '姓'
   , NAME VARCHAR(20) not null comment '名'
   , FAMILY_NAME_KANA VARCHAR(20) not null comment '姓（カナ）'
@@ -103,7 +108,7 @@ create table T_USER_ONETIME_VALID (
 create table T_USER (
   USER_ID INT(11) auto_increment not null comment '会員ID'
   , EMAIL VARCHAR(256) not null comment 'メールアドレス'
-  , PASSWORD BINARY(40) not null comment 'パスワード'
+  , PASSWORD VARCHAR(100) not null comment 'パスワード'
   , FAMILY_NAME VARCHAR(20) not null comment '姓'
   , NAME VARCHAR(20) not null comment '名'
   , FAMILY_NAME_KANA VARCHAR(20) not null comment '姓（カナ）'

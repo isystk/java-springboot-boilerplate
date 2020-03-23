@@ -28,7 +28,7 @@ public class TStaff {
 
     /**  */
     @Column(name = "PASSWORD")
-    byte[] password;
+    String password;
 
     /**  */
     @Column(name = "FAMILY_NAME")
@@ -108,7 +108,7 @@ public class TStaff {
      * 
      * @return the password
      */
-    public byte[] getPassword() {
+    public String getPassword() {
         return password;
     }
 
@@ -117,7 +117,7 @@ public class TStaff {
      * 
      * @param password the password
      */
-    public void setPassword(byte[] password) {
+    public void setPassword(String password) {
         this.password = password;
     }
 

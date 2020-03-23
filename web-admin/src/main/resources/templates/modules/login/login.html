@@ -60,7 +60,6 @@
 											 th:class="${'form-group' + (invalid ? ' has-error' : '')}">
 											<input type="password" class="form-control" name="password" placeholder="パスワード" />
 										</div>
-										<div class="text-danger my-2" th:if="${session['SPRING_SECURITY_LAST_EXCEPTION']} != null" th:text="${session['SPRING_SECURITY_LAST_EXCEPTION'].message}"></div>
 										<div class="form-group text-center">
 											<button type="submit" class="btn bg-purple w-50">ログイン</button>
 										</div>
