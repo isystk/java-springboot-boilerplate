@@ -52,11 +52,17 @@
 				<version>${project.version}</version>
 			</dependency>
 
-			<dependency>
+			<!-- <dependency>
 				<groupId>org.mybatis.spring.boot</groupId>
 				<artifactId>mybatis-spring-boot-starter</artifactId>
 				<version>2.1.2</version>
+			</dependency> -->
+			<dependency>
+				<groupId>org.seasar.doma.boot</groupId>
+				<artifactId>doma-spring-boot-starter</artifactId>
+    		<version>1.2.1</version>
 			</dependency>
+
 			<dependency>
 				<groupId>org.projectlombok</groupId>
 				<artifactId>lombok</artifactId>

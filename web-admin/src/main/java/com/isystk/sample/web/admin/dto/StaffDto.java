@@ -1,33 +1,33 @@
 package com.isystk.sample.web.admin.dto;
-import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import com.isystk.sample.domain.entity.Staff;
+import com.isystk.sample.domain.entity.TStaff;
 import com.isystk.sample.web.base.filter.UserIdAware;
 
 public class StaffDto extends User implements UserIdAware {
 
     // 管理者情報。
-    private final Staff staff;
+    private final TStaff staff;
 
-    public StaffDto(Staff staff,
-            Collection<GrantedAuthority> authorities) {
+    public StaffDto(TStaff staff,
+            List<GrantedAuthority> authorities) {
 
-        super(staff.getEmail(), staff.getPassword(),
+        super(staff.getEmail(), new String(staff.getPassword()),
                 true, true, true, true, authorities);
 
         this.staff = staff;
     }
 
-    public Staff Staff() {
+    public TStaff Staff() {
         return staff;
     }
 
 	@Override
 	public String getUserId() {
-		return String.valueOf(this.staff.getId());
+		return String.valueOf(this.staff.getStaffId());
 	}
 
 }

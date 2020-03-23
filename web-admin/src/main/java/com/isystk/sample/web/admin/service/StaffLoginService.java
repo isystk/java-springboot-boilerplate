@@ -1,7 +1,8 @@
 package com.isystk.sample.web.admin.service;
 
-import java.util.Collection;
-import java.util.Optional;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,8 +14,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.isystk.sample.domain.entity.Staff;
-import com.isystk.sample.domain.mapper.StaffMapper;
+import com.isystk.sample.domain.dao.TStaffDao;
+import com.isystk.sample.domain.dto.staff.StaffCriteria;
+import com.isystk.sample.domain.repository.StaffRepository;
 import com.isystk.sample.domain.service.BaseTransactionalService;
 import com.isystk.sample.web.admin.dto.StaffDto;
 
@@ -29,19 +31,31 @@ import lombok.extern.slf4j.Slf4j;
 public class StaffLoginService extends BaseTransactionalService implements UserDetailsService {
 
     @Autowired
-    StaffMapper staffMapper;
+    TStaffDao tStaffDao;
+
+    @Autowired
+    StaffRepository staffRepository;
 
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
+        List<GrantedAuthority> authorityList = null;
         try {
 
-            //DBからユーザ情報を取得。
-            val staff = Optional.ofNullable(staffMapper.findByEmail(email))
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found."));
+        	StaffCriteria criteria = new StaffCriteria();
+        	criteria.setEmail(email);
 
-            return new StaffDto(staff, getAuthorities(staff));
+            //DBからユーザ情報を取得。
+        	val staff = tStaffDao.select(criteria)
+                    .orElseThrow(() -> new UsernameNotFoundException("no staff found [id=" + email + "]"));
+
+            Set<String> authorities = new HashSet<>();
+//            authorities.addAll(roleKeys);
+//            authorities.addAll(permissionKeys);
+            authorityList = AuthorityUtils.createAuthorityList(authorities.toArray(new String[0]));
+
+            return new StaffDto(staff, authorityList);
 
         } catch (Exception e) {
             if (!(e instanceof UsernameNotFoundException)) {
@@ -54,16 +68,6 @@ public class StaffLoginService extends BaseTransactionalService implements UserD
             // それ以外の例外は、認証エラーの例外で包む
             throw new UsernameNotFoundException("could not select staff.", e);
         }
-    }
-
-    /**
-     * 認証が通った時にこのユーザに与える権限の範囲を設定する。
-     * @param account DBから取得したユーザ情報。
-     * @return 権限の範囲のリスト。
-     */
-    private Collection<GrantedAuthority> getAuthorities(Staff staff) {
-        // 認証が通った時にユーザに与える権限の範囲を設定する。
-        return AuthorityUtils.createAuthorityList("ROLE_USER");
     }
 
 }
