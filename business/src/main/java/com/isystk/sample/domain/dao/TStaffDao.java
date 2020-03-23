@@ -6,11 +6,9 @@ import org.seasar.doma.jdbc.SelectOptions;
 import com.isystk.sample.domain.dto.staff.StaffCriteria;
 import com.isystk.sample.domain.entity.TStaff;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collector;
 
-import org.seasar.doma.BatchInsert;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
@@ -77,7 +75,7 @@ public interface TStaffDao {
      * @return
      */
     @Select
-    Optional<TStaff> selectById(Long id);
+    Optional<TStaff> selectById(Long staffId);
 
     /**
      * 担当者を1件取得します。

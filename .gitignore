@@ -2,6 +2,7 @@
 # mysql
 docker/mysql/data
 
+# thumb
 public/thumb/*
 
 .DS_Store

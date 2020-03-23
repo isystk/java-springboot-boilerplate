@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.dto;
+package com.isystk.sample.web.admin.security;
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -7,15 +7,15 @@ import org.springframework.security.core.userdetails.User;
 import com.isystk.sample.domain.entity.TStaff;
 import com.isystk.sample.web.base.filter.UserIdAware;
 
-public class StaffDto extends User implements UserIdAware {
+public class LoginStaff extends User implements UserIdAware {
 
     // 管理者情報。
     private final TStaff staff;
 
-    public StaffDto(TStaff staff,
+    public LoginStaff(TStaff staff,
             List<GrantedAuthority> authorities) {
 
-        super(staff.getEmail(), new String(staff.getPassword()),
+        super(staff.getEmail(), staff.getPassword(),
                 true, true, true, true, authorities);
 
         this.staff = staff;
