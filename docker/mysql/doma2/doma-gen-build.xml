@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="doma-gen-example" default="gen" basedir=".">
+
+	<property name="templatePrimaryDir" value="template"/>
+	<property name="javaDestDir" value="../../../business/src/main/java"/>
+	<property name="sqlDestDir" value="../../../business/src/main/resources"/>
+	<property name="testJavaDestDir" value="../../../business/src/test/java"/>
+	<property name="dialectName" value="mysql"/>
+	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
+	<property name="url" value="jdbc:mysql://127.0.0.1:3306/sample"/>
+	<property name="user" value="root"/>
+	<property name="password" value="password"/>
+	<property name="entityPackageName" value="com.isystk.sample.domain.entity"/>
+	<property name="daoPackageName" value="com.isystk.sample.domain.dao"/>
+	<property name="sqlTestClassName" value="com.isystk.sample.domain.SqlTest"/>
+	<property name="sqlFilePattern" value="META-INF/**/*.sql"/>
+
+	<path id="classpath">
+		<fileset dir="lib"/>
+	</path>
+
+	<taskdef name="gen" classname="org.seasar.doma.extension.gen.task.Gen" classpathref="classpath" loaderref="loader"/>
+	<taskdef name="genTest" classname="org.seasar.doma.extension.gen.task.GenTest" loaderref="loader"/>
+	<typedef name="entityConfig" classname="org.seasar.doma.extension.gen.task.EntityConfig" loaderref="loader"/>
+	<typedef name="daoConfig" classname="org.seasar.doma.extension.gen.task.DaoConfig" loaderref="loader"/>
+	<typedef name="sqlConfig" classname="org.seasar.doma.extension.gen.task.SqlConfig" loaderref="loader"/>
+	<typedef name="sqlTestConfig" classname="org.seasar.doma.extension.gen.task.SqlTestConfig" loaderref="loader"/>
+
+	<target name="gen">
+		<gen
+			dialectName="${dialectName}"
+			driverClassName="${driverClassName}"
+			url="${url}"
+			user="${user}"
+			password="${password}"
+			templatePrimaryDir="${templatePrimaryDir}">
+			<entityConfig
+				destdir="${javaDestDir}"
+				packageName="${entityPackageName}"
+			/>
+			<daoConfig
+				destdir="${javaDestDir}"
+				packageName="${daoPackageName}"
+			/>
+			<sqlConfig
+				destdir="${sqlDestDir}"
+			/>
+		</gen>
+	</target>
+
+	<target name="genTest">
+		<genTest
+			dialectName="${dialectName}"
+			driverClassName="${driverClassName}"
+			url="${url}"
+			user="${user}"
+			password="${password}">
+			<sqlTestConfig
+				destdir="${testJavaDestDir}"
+				testClassName="${sqlTestClassName}">
+				<fileset dir="${sqlDestDir}">
+					<include name="${sqlFilePattern}"/>
+				</fileset>
+			</sqlTestConfig>
+		</genTest>
+	</target>
+
+</project>
