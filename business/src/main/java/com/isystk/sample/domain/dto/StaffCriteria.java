@@ -1,4 +1,4 @@
-package com.isystk.sample.domain.dto.staff;
+package com.isystk.sample.domain.dto;
 
 import com.isystk.sample.domain.entity.TStaff;
 

@@ -62,6 +62,11 @@
 				<artifactId>doma-spring-boot-starter</artifactId>
     		<version>1.2.1</version>
 			</dependency>
+			<dependency>
+				<groupId>org.seasar.doma</groupId>
+				<artifactId>doma</artifactId>
+				<version>2.27.1</version>
+			</dependency>
 
 			<dependency>
 				<groupId>org.projectlombok</groupId>
@@ -88,6 +93,11 @@
 				<groupId>commons-collections</groupId>
 				<artifactId>commons-collections</artifactId>
 				<version>3.2.2</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-csv</artifactId>
+				<version>2.10.3</version>
 			</dependency>
 			<dependency>
 				<groupId>org.webjars</groupId>

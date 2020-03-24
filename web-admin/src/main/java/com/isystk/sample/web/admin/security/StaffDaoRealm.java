@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.isystk.sample.domain.dao.TStaffDao;
-import com.isystk.sample.domain.dto.staff.StaffCriteria;
+import com.isystk.sample.domain.dto.StaffCriteria;
 import com.isystk.sample.domain.entity.TStaff;
 import com.isystk.sample.web.base.security.BaseRealm;
 

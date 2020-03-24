@@ -2,7 +2,7 @@ package com.isystk.sample.domain.dao;
 
 /** */
 @org.springframework.stereotype.Repository()
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T01:32:46.438+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T15:31:05.161+0900")
 public class TStaffDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao implements com.isystk.sample.domain.dao.TStaffDao {
 
     static {
@@ -19,11 +19,11 @@ public class TStaffDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao
 
     private static final java.lang.reflect.Method __method4 = org.seasar.doma.internal.jdbc.dao.AbstractDao.getDeclaredMethod(com.isystk.sample.domain.dao.TStaffDao.class, "delete", com.isystk.sample.domain.entity.TStaff.class);
 
-    private static final java.lang.reflect.Method __method5 = org.seasar.doma.internal.jdbc.dao.AbstractDao.getDeclaredMethod(com.isystk.sample.domain.dao.TStaffDao.class, "selectAll", com.isystk.sample.domain.dto.staff.StaffCriteria.class, org.seasar.doma.jdbc.SelectOptions.class, java.util.stream.Collector.class);
+    private static final java.lang.reflect.Method __method5 = org.seasar.doma.internal.jdbc.dao.AbstractDao.getDeclaredMethod(com.isystk.sample.domain.dao.TStaffDao.class, "selectAll", com.isystk.sample.domain.dto.StaffCriteria.class, org.seasar.doma.jdbc.SelectOptions.class, java.util.stream.Collector.class);
 
     private static final java.lang.reflect.Method __method6 = org.seasar.doma.internal.jdbc.dao.AbstractDao.getDeclaredMethod(com.isystk.sample.domain.dao.TStaffDao.class, "selectById", java.lang.Long.class);
 
-    private static final java.lang.reflect.Method __method7 = org.seasar.doma.internal.jdbc.dao.AbstractDao.getDeclaredMethod(com.isystk.sample.domain.dao.TStaffDao.class, "select", com.isystk.sample.domain.dto.staff.StaffCriteria.class);
+    private static final java.lang.reflect.Method __method7 = org.seasar.doma.internal.jdbc.dao.AbstractDao.getDeclaredMethod(com.isystk.sample.domain.dao.TStaffDao.class, "select", com.isystk.sample.domain.dto.StaffCriteria.class);
 
     /**
      * @param config the config
@@ -189,7 +189,7 @@ public class TStaffDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao
     }
 
     @Override
-    public <R> R selectAll(com.isystk.sample.domain.dto.staff.StaffCriteria criteria, org.seasar.doma.jdbc.SelectOptions options, java.util.stream.Collector<com.isystk.sample.domain.entity.TStaff, ?, R> collector) {
+    public <R> R selectAll(com.isystk.sample.domain.dto.StaffCriteria criteria, org.seasar.doma.jdbc.SelectOptions options, java.util.stream.Collector<com.isystk.sample.domain.entity.TStaff, ?, R> collector) {
         entering("com.isystk.sample.domain.dao.TStaffDaoImpl", "selectAll", criteria, options, collector);
         try {
             if (criteria == null) {
@@ -207,7 +207,7 @@ public class TStaffDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao
             __query.setSqlFilePath("META-INF/com/isystk/sample/domain/dao/TStaffDao/selectAll.sql");
             __query.setOptions(options);
             __query.setEntityType(com.isystk.sample.domain.entity._TStaff.getSingletonInternal());
-            __query.addParameter("criteria", com.isystk.sample.domain.dto.staff.StaffCriteria.class, criteria);
+            __query.addParameter("criteria", com.isystk.sample.domain.dto.StaffCriteria.class, criteria);
             __query.setCallerClassName("com.isystk.sample.domain.dao.TStaffDaoImpl");
             __query.setCallerMethodName("selectAll");
             __query.setResultEnsured(false);
@@ -261,7 +261,7 @@ public class TStaffDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao
     }
 
     @Override
-    public java.util.Optional<com.isystk.sample.domain.entity.TStaff> select(com.isystk.sample.domain.dto.staff.StaffCriteria criteria) {
+    public java.util.Optional<com.isystk.sample.domain.entity.TStaff> select(com.isystk.sample.domain.dto.StaffCriteria criteria) {
         entering("com.isystk.sample.domain.dao.TStaffDaoImpl", "select", criteria);
         try {
             if (criteria == null) {
@@ -272,7 +272,7 @@ public class TStaffDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao
             __query.setConfig(__config);
             __query.setSqlFilePath("META-INF/com/isystk/sample/domain/dao/TStaffDao/select.sql");
             __query.setEntityType(com.isystk.sample.domain.entity._TStaff.getSingletonInternal());
-            __query.addParameter("criteria", com.isystk.sample.domain.dto.staff.StaffCriteria.class, criteria);
+            __query.addParameter("criteria", com.isystk.sample.domain.dto.StaffCriteria.class, criteria);
             __query.setCallerClassName("com.isystk.sample.domain.dao.TStaffDaoImpl");
             __query.setCallerMethodName("select");
             __query.setResultEnsured(false);

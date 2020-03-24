@@ -40,7 +40,7 @@ public interface WebConst {
 	/** ---- URLs ---- **/
 	String ADMIN_HOME_URL = "/";
 
-	String ADMIN_ITEMS_URL = "/items";
+	String ADMIN_POST_URL = "/post";
 
 	String ERROR_URL = "/error";
 

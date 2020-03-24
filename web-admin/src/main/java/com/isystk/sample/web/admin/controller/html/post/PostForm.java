@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.controller.html.item;
+package com.isystk.sample.web.admin.controller.html.post;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -9,19 +9,22 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class ItemForm extends BaseForm {
+public class PostForm extends BaseForm {
 
     private static final long serialVersionUID = 7593564324192730932L;
 
     @NotEmpty
-    Long itemId;
+    Long postId;
 
     @NotEmpty
-    String itemName;
+    Long userId;
+
+    @NotEmpty
+    String title;
 
 	@Override
 	public Long getId() {
-		return itemId;
+		return postId;
 	}
 
 }

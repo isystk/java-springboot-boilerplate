@@ -3,7 +3,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{layouts/layout}">
 	<head layout:fragment="~{layouts/layout::header}">
-	<title>商品管理｜Sample</title>
+	<title>投稿管理｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="sidebar">
@@ -12,13 +12,13 @@
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
 			<div class="col-sm-6">
-				<h1>商品詳細</h1>
+				<h1>投稿詳細</h1>
 			</div><!-- /.col -->
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/items}">商品管理</a></li>
-					<li class="breadcrumb-item active">商品詳細</li>
+					<li class="breadcrumb-item"><a th:href="@{/items}">投稿管理</a></li>
+					<li class="breadcrumb-item active">投稿詳細</li>
 				</ol>
 			</div><!-- /.col -->
 		</div><!-- /.row -->
@@ -36,7 +36,7 @@
 							<div class="card-body">
 								<div th:object="${item}">
 									<div class="form-group row">
-										<label class="col-md-2">商品名</label>
+										<label class="col-md-2">投稿名</label>
 										<div class="col-md-10" th:text="*{name}"></div>
 									</div>
 									<div class="form-group row">
