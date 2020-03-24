@@ -1,6 +1,5 @@
-package com.isystk.sample.web.admin.service;
+package com.isystk.sample.domain.service.post;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,19 +7,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import com.isystk.sample.domain.dao.ItemDao;
+import com.isystk.sample.domain.dto.PostCriteria;
 import com.isystk.sample.domain.dto.common.Page;
 import com.isystk.sample.domain.dto.common.Pageable;
-import com.isystk.sample.domain.dto.staff.ItemCriteria;
-import com.isystk.sample.domain.entity.Item;
-import com.isystk.sample.domain.repository.ItemRepository;
+import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.repository.PostRepository;
 import com.isystk.sample.domain.service.BaseTransactionalService;
 
 @Service
-public class ItemService extends BaseTransactionalService {
+public class PostService extends BaseTransactionalService {
 
     @Autowired
-    ItemRepository staffRepository;
+    PostRepository postRepository;
 
     /**
      * 担当者を複数取得します。
@@ -30,9 +28,9 @@ public class ItemService extends BaseTransactionalService {
      * @return
      */
     @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-    public Page<Item> findAll(ItemCriteria criteria, Pageable pageable) {
+    public Page<TPost> findAll(PostCriteria criteria, Pageable pageable) {
         Assert.notNull(criteria, "criteria must not be null");
-        return staffRepository.findAll(criteria, pageable);
+        return postRepository.findAll(criteria, pageable);
     }
 
     /**
@@ -41,9 +39,9 @@ public class ItemService extends BaseTransactionalService {
      * @return
      */
     @Transactional(readOnly = true)
-    public Optional<Item> findOne(ItemCriteria criteria) {
+    public Optional<TPost> findOne(PostCriteria criteria) {
         Assert.notNull(criteria, "criteria must not be null");
-        return staffRepository.findOne(criteria);
+        return postRepository.findOne(criteria);
     }
 
     /**
@@ -52,31 +50,31 @@ public class ItemService extends BaseTransactionalService {
      * @return
      */
     @Transactional(readOnly = true)
-    public Item findById(final Long id) {
+    public TPost findById(final Long id) {
         Assert.notNull(id, "id must not be null");
-        return staffRepository.findById(id);
+        return postRepository.findById(id);
     }
 
     /**
      * 担当者を追加します。
      *
-     * @param inputItem
+     * @param input
      * @return
      */
-    public Item create(final Item inputItem) {
-        Assert.notNull(inputItem, "inputItem must not be null");
-        return staffRepository.create(inputItem);
+    public TPost create(final TPost input) {
+        Assert.notNull(input, "input must not be null");
+        return postRepository.create(input);
     }
 
     /**
      * 担当者を更新します。
      *
-     * @param inputItem
+     * @param input
      * @return
      */
-    public Item update(final Item inputItem) {
-        Assert.notNull(inputItem, "inputItem must not be null");
-        return staffRepository.update(inputItem);
+    public TPost update(final TPost input) {
+        Assert.notNull(input, "input must not be null");
+        return postRepository.update(input);
     }
 
     /**
@@ -84,8 +82,8 @@ public class ItemService extends BaseTransactionalService {
      *
      * @return
      */
-    public Item delete(final Long id) {
+    public TPost delete(final Long id) {
         Assert.notNull(id, "id must not be null");
-        return staffRepository.delete(id);
+        return postRepository.delete(id);
     }
 }

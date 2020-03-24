@@ -3,7 +3,7 @@ package com.isystk.sample.domain.dao;
 import org.seasar.doma.boot.ConfigAutowireable;
 import org.seasar.doma.jdbc.SelectOptions;
 
-import com.isystk.sample.domain.dto.staff.StaffCriteria;
+import com.isystk.sample.domain.dto.StaffCriteria;
 import com.isystk.sample.domain.entity.TStaff;
 
 import java.util.Optional;

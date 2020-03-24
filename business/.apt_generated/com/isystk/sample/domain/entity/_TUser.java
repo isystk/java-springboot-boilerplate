@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T01:32:35.988+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T15:30:58.050+0900")
 public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TUser> {
 
     static {

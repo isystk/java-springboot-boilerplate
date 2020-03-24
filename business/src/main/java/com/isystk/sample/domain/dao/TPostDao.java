@@ -1,12 +1,20 @@
 package com.isystk.sample.domain.dao;
 
 import org.seasar.doma.boot.ConfigAutowireable;
+import org.seasar.doma.jdbc.SelectOptions;
 
+import com.isystk.sample.domain.dto.PostCriteria;
 import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.entity.TPost;
+
+import java.util.Optional;
+import java.util.stream.Collector;
+
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
+import org.seasar.doma.SelectType;
 import org.seasar.doma.Update;
 
 /**
@@ -50,4 +58,33 @@ public interface TPostDao {
      */
     @Delete
     int delete(TPost entity);
+
+    /**
+     * 投稿を取得します。
+     *
+     * @param criteria
+     * @param options
+     * @return
+     */
+    @Select(strategy = SelectType.COLLECT)
+    <R> R selectAll(final PostCriteria criteria, final SelectOptions options, final Collector<TPost, ?, R> collector);
+
+    /**
+     * 投稿を1件取得します。
+     *
+     * @param id
+     * @return
+     */
+    @Select
+    Optional<TPost> selectById(Long postId);
+
+    /**
+     * 投稿を1件取得します。
+     *
+     * @param criteria
+     * @return
+     */
+    @Select
+    Optional<TPost> select(PostCriteria criteria);
+
 }

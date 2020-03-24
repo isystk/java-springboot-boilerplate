@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.isystk.sample.domain.dao.TStaffDao;
+import com.isystk.sample.domain.dto.StaffCriteria;
 import com.isystk.sample.domain.dto.common.Page;
 import com.isystk.sample.domain.dto.common.Pageable;
-import com.isystk.sample.domain.dto.staff.StaffCriteria;
 import com.isystk.sample.domain.entity.TStaff;
 import com.isystk.sample.domain.exception.NoDataFoundException;
 import com.isystk.sample.domain.service.BaseRepository;
