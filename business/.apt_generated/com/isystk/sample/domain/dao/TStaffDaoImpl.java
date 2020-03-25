@@ -2,7 +2,7 @@ package com.isystk.sample.domain.dao;
 
 /** */
 @org.springframework.stereotype.Repository()
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-25T16:19:10.997+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-26T00:53:27.375+0900")
 public class TStaffDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao implements com.isystk.sample.domain.dao.TStaffDao {
 
     static {

@@ -1,6 +1,9 @@
 package com.isystk.sample.web.admin.controller.html.post;
 
 import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.domain.util.TypeUtils.toListType;
+
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.isystk.sample.domain.dto.PostCriteria;
@@ -22,6 +26,9 @@ import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.service.post.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
+import com.isystk.sample.web.base.view.CsvView;
+import com.isystk.sample.web.base.view.ExcelView;
+import com.isystk.sample.web.base.view.PdfView;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
@@ -46,12 +53,12 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping
-	public String index(@ModelAttribute PostForm form, Model model) {
+	public String index(@ModelAttribute SearchPostForm form, Model model) {
         // 入力値を詰め替える
         val criteria = modelMapper.map(form, PostCriteria.class);
 
         // 10件区切りで取得する
-        val pages = postService.findAll(criteria, Pageable.NO_LIMIT);
+        val pages = postService.findAll(criteria, form);
 
         // 画面に検索結果を渡す
         model.addAttribute("pages", pages);
@@ -154,10 +161,68 @@ public class PostController extends AbstractHtmlController {
 		return "redirect:/post/" + updatedPost.getPostId();
 	}
 
+	/**
+	 * 削除処理
+	 * @param id
+	 * @return
+	 */
 	@DeleteMapping("{id}")
 	public String delete(@PathVariable Integer id) {
 		postService.delete(id);
 		return "redirect:/post";
 	}
 
+    /**
+     * CSVダウンロード
+     *
+     * @param filename
+     * @return
+     */
+    @GetMapping("/download/{filename:.+\\.csv}")
+    public ModelAndView downloadCsv(@PathVariable String filename) {
+        // 全件取得する
+        val posts = postService.findAll(new PostCriteria(), Pageable.NO_LIMIT);
+
+        // 詰め替える
+        List<PostCsv> csvList = modelMapper.map(posts.getData(), toListType(PostCsv.class));
+
+        // CSVスキーマクラス、データ、ダウンロード時のファイル名を指定する
+        val view = new CsvView(PostCsv.class, csvList, filename);
+
+        return new ModelAndView(view);
+    }
+
+    /**
+     * Excelダウンロード
+     *
+     * @param filename
+     * @return
+     */
+    @GetMapping(path = "/download/{filename:.+\\.xlsx}")
+    public ModelAndView downloadExcel(@PathVariable String filename) {
+        // 全件取得する
+        val posts = postService.findAll(new PostCriteria(), Pageable.NO_LIMIT);
+
+        // Excelプック生成コールバック、データ、ダウンロード時のファイル名を指定する
+        val view = new ExcelView(new PostExcel(), posts.getData(), filename);
+
+        return new ModelAndView(view);
+    }
+
+    /**
+     * PDFダウンロード
+     *
+     * @param filename
+     * @return
+     */
+    @GetMapping(path = "/download/{filename:.+\\.pdf}")
+    public ModelAndView downloadPdf(@PathVariable String filename) {
+        // 全件取得する
+        val posts = postService.findAll(new PostCriteria(), Pageable.NO_LIMIT);
+
+        // 帳票レイアウト、データ、ダウンロード時のファイル名を指定する
+        val view = new PdfView("reports/post.jrxml", posts.getData(), filename);
+
+        return new ModelAndView(view);
+    }
 }

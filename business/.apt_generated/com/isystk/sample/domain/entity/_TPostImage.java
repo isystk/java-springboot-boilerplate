@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-25T16:21:20.891+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-26T00:53:22.146+0900")
 public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TPostImage> {
 
     static {

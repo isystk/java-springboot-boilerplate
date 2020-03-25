@@ -105,6 +105,29 @@
 				<version>3.0.2</version>
 			</dependency>
 
+			<!-- Excel -->
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>4.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi-ooxml-schemas</artifactId>
+				<version>4.1.2</version>
+			</dependency>
+			<!-- PDF -->
+			<dependency>
+				<groupId>net.sf.jasperreports</groupId>
+				<artifactId>jasperreports</artifactId>
+				<version>6.12.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.tika</groupId>
+				<artifactId>tika-core</artifactId>
+				<version>1.23</version>
+			</dependency>
+			
 		</dependencies>
 	</dependencyManagement>
 
