@@ -1,6 +1,7 @@
 package com.isystk.sample.web.admin.controller.html.post;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import com.isystk.sample.web.base.controller.html.BaseForm;
 
@@ -13,20 +14,20 @@ public class PostForm extends BaseForm {
 
     private static final long serialVersionUID = 7593564324192730932L;
 
-    @NotEmpty
-    Long postId;
+    @NotNull
+    Integer postId;
 
-    @NotEmpty
-    Long userId;
+    @NotNull
+    Integer userId;
 
-    @NotEmpty
+    @NotNull
     String title;
 
-    @NotEmpty
+    @NotNull
     String text;
 
 	@Override
-	public Long getId() {
+	public Integer getId() {
 		return postId;
 	}
 

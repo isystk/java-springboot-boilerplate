@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'item')}"></div>
+		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'post')}"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -105,7 +105,7 @@
 										 				<form th:action="@{/post/{id}(id=*{e.postId})}" th:method="delete">
 										 					<a class="btn btn-secondary" th:href="@{/post/{id}(id=*{e.postId})}">詳細</a>
 										 					<a class="btn btn-secondary" th:href="@{/post/{id}/edit(id=*{e.postId})}">变更</a>
-															<button class="btn btn-secondary">削除</button>
+															<button class="btn btn-danger">削除</button>
 														</form>
 									 				</td>
 								 				</tr>

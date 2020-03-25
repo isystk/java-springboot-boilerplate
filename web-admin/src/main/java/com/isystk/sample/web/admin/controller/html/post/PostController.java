@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.isystk.sample.domain.dto.PostCriteria;
 import com.isystk.sample.domain.dto.common.Pageable;
@@ -59,15 +61,13 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 詳細画面表示
-	 * @param id
+	 * @param postId
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("{id}")
-	public String show(@PathVariable Integer id, Model model) {
-		PostCriteria criteria = new PostCriteria();
-		criteria.setPostId(id);
-		model.addAttribute("post", postService.findOne(criteria));
+	@GetMapping("{postId}")
+	public String show(@PathVariable Integer postId, Model model) {
+		model.addAttribute("post", postService.findById(postId));
 		return "modules/post/show";
 	}
 
@@ -120,16 +120,38 @@ public class PostController extends AbstractHtmlController {
 		}
 	}
 
-	@PutMapping("{id}")
-	public String update(@PathVariable Integer id, @ModelAttribute("post") @Validated TPost post, BindingResult result, Model model) {
-		if (result.hasErrors()) {
-			model.addAttribute("post", post);
+	/**
+	 * 更新処理
+	 * @param form
+	 * @param br
+	 * @param postId
+	 * @param sessionStatus
+	 * @param attributes
+	 * @return
+	 */
+	@PutMapping("{postId}")
+	public String update(@Validated @ModelAttribute("postForm") PostForm form, BindingResult br,
+            @PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
+
+        // 入力チェックエラーがある場合は、元の画面にもどる
+        if (br.hasErrors()) {
+            setFlashAttributeErrors(attributes, br);
 			return "modules/post/edit";
-		} else {
-			post.setPostId(id);
-			postService.update(post);
-			return "redirect:/post";
-		}
+        }
+
+        // 更新対象を取得する
+        val post = postService.findById(postId);
+
+        // 入力値を詰め替える
+        modelMapper.map(form, post);
+
+        // 更新する
+        val updatedPost = postService.update(post);
+
+        // セッションのpostFormをクリアする
+        sessionStatus.setComplete();
+
+		return "redirect:/post/" + updatedPost.getPostId();
 	}
 
 	@DeleteMapping("{id}")

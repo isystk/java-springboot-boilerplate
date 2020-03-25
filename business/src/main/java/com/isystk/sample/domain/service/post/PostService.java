@@ -21,7 +21,7 @@ public class PostService extends BaseTransactionalService {
     PostRepository postRepository;
 
     /**
-     * 担当者を複数取得します。
+     * 投稿を複数取得します。
      *
      * @param criteria
      * @param pageable
@@ -34,7 +34,7 @@ public class PostService extends BaseTransactionalService {
     }
 
     /**
-     * 担当者を取得します。
+     * 投稿を取得します。
      *
      * @return
      */
@@ -45,7 +45,7 @@ public class PostService extends BaseTransactionalService {
     }
 
     /**
-     * 担当者を取得します。
+     * 投稿を取得します。
      *
      * @return
      */
@@ -56,7 +56,7 @@ public class PostService extends BaseTransactionalService {
     }
 
     /**
-     * 担当者を追加します。
+     * 投稿を追加します。
      *
      * @param input
      * @return
@@ -67,7 +67,7 @@ public class PostService extends BaseTransactionalService {
     }
 
     /**
-     * 担当者を更新します。
+     * 投稿を更新します。
      *
      * @param input
      * @return
@@ -78,7 +78,7 @@ public class PostService extends BaseTransactionalService {
     }
 
     /**
-     * 担当者を論理削除します。
+     * 投稿を論理削除します。
      *
      * @return
      */
