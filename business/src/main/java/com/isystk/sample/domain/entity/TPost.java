@@ -1,6 +1,6 @@
 package com.isystk.sample.domain.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.GeneratedValue;
@@ -8,13 +8,14 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 /**
- *
+ * 
  */
-@Entity(listener = TPostListener.class)
+@Entity
 @Table(name = "t_post")
-public class TPost {
+public class TPost extends DomaDtoImpl {
 
     /** ID */
     @Id
@@ -36,11 +37,11 @@ public class TPost {
 
     /**  */
     @Column(name = "REGIST_TIME")
-    Timestamp registTime;
+    LocalDateTime registTime;
 
     /**  */
     @Column(name = "UPDATE_TIME")
-    Timestamp updateTime;
+    LocalDateTime updateTime;
 
     /**  */
     @Column(name = "DELETE_FLG")
@@ -128,7 +129,7 @@ public class TPost {
      *
      * @return the registTime
      */
-    public Timestamp getRegistTime() {
+    public LocalDateTime getRegistTime() {
         return registTime;
     }
 
@@ -137,7 +138,7 @@ public class TPost {
      *
      * @param registTime the registTime
      */
-    public void setRegistTime(Timestamp registTime) {
+    public void setRegistTime(LocalDateTime registTime) {
         this.registTime = registTime;
     }
 
@@ -146,7 +147,7 @@ public class TPost {
      *
      * @return the updateTime
      */
-    public Timestamp getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
@@ -155,7 +156,7 @@ public class TPost {
      *
      * @param updateTime the updateTime
      */
-    public void setUpdateTime(Timestamp updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
@@ -194,5 +195,4 @@ public class TPost {
     public void setVersion(Long version) {
         this.version = version;
     }
-
 }

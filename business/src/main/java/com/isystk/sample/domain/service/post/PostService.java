@@ -50,7 +50,7 @@ public class PostService extends BaseTransactionalService {
      * @return
      */
     @Transactional(readOnly = true)
-    public TPost findById(final Long id) {
+    public TPost findById(final Integer id) {
         Assert.notNull(id, "id must not be null");
         return postRepository.findById(id);
     }
@@ -82,7 +82,7 @@ public class PostService extends BaseTransactionalService {
      *
      * @return
      */
-    public TPost delete(final Long id) {
+    public TPost delete(final Integer id) {
         Assert.notNull(id, "id must not be null");
         return postRepository.delete(id);
     }

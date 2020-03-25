@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T15:31:00.183+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-25T16:21:20.761+0900")
 public final class _MMailTemplate extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.MMailTemplate> {
 
     static {
@@ -27,10 +27,10 @@ public final class _MMailTemplate extends org.seasar.doma.jdbc.entity.AbstractEn
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MMailTemplate, java.lang.String, java.lang.String> $text = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MMailTemplate.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.StringWrapper::new), "text", "TEXT", __namingType, true, true, false);
 
     /** the registTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MMailTemplate, java.sql.Timestamp, java.sql.Timestamp> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MMailTemplate.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MMailTemplate, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MMailTemplate.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
 
     /** the updateTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MMailTemplate, java.sql.Timestamp, java.sql.Timestamp> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MMailTemplate.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MMailTemplate, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MMailTemplate.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
 
     /** the deleteFlg */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MMailTemplate, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MMailTemplate.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "DELETE_FLG", __namingType, true, true, false);
@@ -38,7 +38,7 @@ public final class _MMailTemplate extends org.seasar.doma.jdbc.entity.AbstractEn
     /** the version */
     public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.MMailTemplate, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.MMailTemplate.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "VERSION", __namingType, false);
 
-    private final java.util.function.Supplier<com.isystk.sample.domain.entity.MMailTemplateListener> __listenerSupplier;
+    private final java.util.function.Supplier<com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.MMailTemplate>> __listenerSupplier;
 
     private final boolean __immutable;
 
@@ -137,48 +137,48 @@ public final class _MMailTemplate extends org.seasar.doma.jdbc.entity.AbstractEn
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preInsert(com.isystk.sample.domain.entity.MMailTemplate entity, org.seasar.doma.jdbc.entity.PreInsertContext<com.isystk.sample.domain.entity.MMailTemplate> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MMailTemplateListener.class;
-        com.isystk.sample.domain.entity.MMailTemplateListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preUpdate(com.isystk.sample.domain.entity.MMailTemplate entity, org.seasar.doma.jdbc.entity.PreUpdateContext<com.isystk.sample.domain.entity.MMailTemplate> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MMailTemplateListener.class;
-        com.isystk.sample.domain.entity.MMailTemplateListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preDelete(com.isystk.sample.domain.entity.MMailTemplate entity, org.seasar.doma.jdbc.entity.PreDeleteContext<com.isystk.sample.domain.entity.MMailTemplate> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MMailTemplateListener.class;
-        com.isystk.sample.domain.entity.MMailTemplateListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preDelete(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postInsert(com.isystk.sample.domain.entity.MMailTemplate entity, org.seasar.doma.jdbc.entity.PostInsertContext<com.isystk.sample.domain.entity.MMailTemplate> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MMailTemplateListener.class;
-        com.isystk.sample.domain.entity.MMailTemplateListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postUpdate(com.isystk.sample.domain.entity.MMailTemplate entity, org.seasar.doma.jdbc.entity.PostUpdateContext<com.isystk.sample.domain.entity.MMailTemplate> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MMailTemplateListener.class;
-        com.isystk.sample.domain.entity.MMailTemplateListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postDelete(com.isystk.sample.domain.entity.MMailTemplate entity, org.seasar.doma.jdbc.entity.PostDeleteContext<com.isystk.sample.domain.entity.MMailTemplate> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MMailTemplateListener.class;
-        com.isystk.sample.domain.entity.MMailTemplateListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postDelete(entity, context);
     }
 
@@ -255,7 +255,7 @@ public final class _MMailTemplate extends org.seasar.doma.jdbc.entity.AbstractEn
     }
 
     private static class ListenerHolder {
-        private static com.isystk.sample.domain.entity.MMailTemplateListener listener = new com.isystk.sample.domain.entity.MMailTemplateListener();
+        private static com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.MMailTemplate> listener = new com.isystk.sample.domain.dao.DefaultEntityListener<>();
     }
 
 }

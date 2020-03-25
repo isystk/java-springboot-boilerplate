@@ -1,17 +1,18 @@
 package com.isystk.sample.domain.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 /**
  * 
  */
-@Entity(listener = TUserOnetimePassListener.class)
+@Entity
 @Table(name = "t_user_onetime_pass")
-public class TUserOnetimePass {
+public class TUserOnetimePass extends DomaDtoImpl {
 
     /** ID */
     @Id
@@ -24,59 +25,59 @@ public class TUserOnetimePass {
 
     /**  */
     @Column(name = "ONETIME_VALID_TIME")
-    Timestamp onetimeValidTime;
+    LocalDateTime onetimeValidTime;
 
-    /** 
+    /**
      * Returns the userId.
-     * 
+     *
      * @return the userId
      */
     public Integer getUserId() {
         return userId;
     }
 
-    /** 
+    /**
      * Sets the userId.
-     * 
+     *
      * @param userId the userId
      */
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    /** 
+    /**
      * Returns the onetimeKey.
-     * 
+     *
      * @return the onetimeKey
      */
     public String getOnetimeKey() {
         return onetimeKey;
     }
 
-    /** 
+    /**
      * Sets the onetimeKey.
-     * 
+     *
      * @param onetimeKey the onetimeKey
      */
     public void setOnetimeKey(String onetimeKey) {
         this.onetimeKey = onetimeKey;
     }
 
-    /** 
+    /**
      * Returns the onetimeValidTime.
-     * 
+     *
      * @return the onetimeValidTime
      */
-    public Timestamp getOnetimeValidTime() {
+    public LocalDateTime getOnetimeValidTime() {
         return onetimeValidTime;
     }
 
-    /** 
+    /**
      * Sets the onetimeValidTime.
-     * 
+     *
      * @param onetimeValidTime the onetimeValidTime
      */
-    public void setOnetimeValidTime(Timestamp onetimeValidTime) {
+    public void setOnetimeValidTime(LocalDateTime onetimeValidTime) {
         this.onetimeValidTime = onetimeValidTime;
     }
 }

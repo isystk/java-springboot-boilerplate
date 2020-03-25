@@ -10,6 +10,7 @@ package ${packageName};
 <#list importNames as importName>
 import ${importName};
 </#list>
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 /**
 <#if showDbComment && comment??>
@@ -23,7 +24,7 @@ import ${importName};
 <#if showCatalogName && catalogName?? || showSchemaName && schemaName?? || showTableName && tableName??>
 @Table(<#if showCatalogName && catalogName??>catalog = "${catalogName}"</#if><#if showSchemaName && schemaName??><#if showCatalogName && catalogName??>, </#if>schema = "${schemaName}"</#if><#if showTableName><#if showCatalogName && catalogName?? || showSchemaName && schemaName??>, </#if>name = "${tableName}"</#if>)
 </#if>
-public class ${simpleName}<#if superclassSimpleName??> extends ${superclassSimpleName}</#if> {
+public class ${simpleName} extends DomaDtoImpl {
 <#list ownEntityPropertyDescs as property>
 
   <#if showDbComment && property.comment??>
@@ -59,18 +60,18 @@ public class ${simpleName}<#if superclassSimpleName??> extends ${superclassSimpl
 <#if useAccessor>
   <#list ownEntityPropertyDescs as property>
 
-    /** 
+    /**
      * Returns the ${property.name}.
-     * 
+     *
      * @return the ${property.name}
      */
     public ${property.propertyClassSimpleName} get${property.name?cap_first}() {
         return ${property.name};
     }
 
-    /** 
+    /**
      * Sets the ${property.name}.
-     * 
+     *
      * @param ${property.name} the ${property.name}
      */
     public void set${property.name?cap_first}(${property.propertyClassSimpleName} ${property.name}) {

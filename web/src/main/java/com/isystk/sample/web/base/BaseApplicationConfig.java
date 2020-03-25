@@ -12,6 +12,7 @@ import com.isystk.sample.domain.dto.common.DefaultPageFactoryImpl;
 import com.isystk.sample.domain.dto.common.PageFactory;
 import com.isystk.sample.web.base.aop.LoggingFunctionNameInterceptor;
 import com.isystk.sample.web.base.aop.RequestTrackingInterceptor;
+import com.isystk.sample.web.base.aop.SetAuditInfoInterceptor;
 import com.isystk.sample.web.base.aop.SetDoubleSubmitCheckTokenInterceptor;
 
 public abstract class BaseApplicationConfig
@@ -44,11 +45,18 @@ public abstract class BaseApplicationConfig
         return new SetDoubleSubmitCheckTokenInterceptor();
     }
 
+    @Bean
+    public SetAuditInfoInterceptor setAuditInfoInterceptor() {
+        // システム制御項目を保存してDB保存時に利用する
+        return new SetAuditInfoInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(requestTrackingInterceptor());
         registry.addInterceptor(loggingFunctionNameInterceptor());
         registry.addInterceptor(setDoubleSubmitCheckTokenInterceptor());
+        registry.addInterceptor(setAuditInfoInterceptor());
     }
 
 	/**

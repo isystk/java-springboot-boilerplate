@@ -56,38 +56,51 @@ public class PostRepository extends BaseRepository {
      *
      * @return
      */
-    public TPost findById(final Long id) {
+    public TPost findById(final Integer id) {
         return tPostDao.selectById(id).orElseThrow(() -> new NoDataFoundException("post_id=" + id + " のデータが見つかりません。"));
     }
 
     /**
      * 投稿を追加します。
      *
-     * @param item
+     * @param post
      * @return
      */
-    public TPost create(final TPost item) {
+    public TPost create(final TPost post) {
         // 1件登録
-    	tPostDao.insert(item);
+    	tPostDao.insert(post);
 
-        return item;
+        return post;
     }
 
     /**
      * 投稿を更新します。
      *
-     * @param item
+     * @param post
      * @return
      */
-    public TPost update(final TPost item) {
+    public TPost update(final TPost inputPost) {
+//        val uploadFile = inputPost.getUploadFile();
+//        if (uploadFile != null) {
+//            // 添付ファイルがある場合は、登録・更新する
+//            val uploadFileId = inputPost.getUploadFileId();
+//            if (uploadFileId == null) {
+//                uploadFileDao.insert(uploadFile);
+//            } else {
+//                uploadFileDao.update(uploadFile);
+//            }
+//
+//            inputPost.setUploadFileId(uploadFile.getId());
+//        }
+
         // 1件更新
-        int updated = tPostDao.update(item);
+        int updated = tPostDao.update(inputPost);
 
         if (updated < 1) {
-            throw new NoDataFoundException("post_id=" + item.getPostId() + " のデータが見つかりません。");
+            throw new NoDataFoundException("post_id=" + inputPost.getPostId() + " のデータが見つかりません。");
         }
 
-        return item;
+        return inputPost;
     }
 
     /**
@@ -95,7 +108,7 @@ public class PostRepository extends BaseRepository {
      *
      * @return
      */
-    public TPost delete(final Long id) {
+    public TPost delete(final Integer id) {
         val staff = tPostDao.selectById(id)
                 .orElseThrow(() -> new NoDataFoundException("post_id=" + id + " のデータが見つかりません。"));
 

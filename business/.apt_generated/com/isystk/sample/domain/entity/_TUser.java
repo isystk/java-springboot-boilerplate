@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T15:30:58.050+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-25T16:21:19.580+0900")
 public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TUser> {
 
     static {
@@ -57,19 +57,19 @@ public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.lang.Integer, java.lang.Integer> $sex = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.IntegerWrapper::new), "sex", "SEX", __namingType, true, true, false);
 
     /** the birthday */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.sql.Date, java.sql.Date> $birthday = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.DateWrapper::new), "birthday", "BIRTHDAY", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.time.LocalDate, java.time.LocalDate> $birthday = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateWrapper::new), "birthday", "BIRTHDAY", __namingType, true, true, false);
 
     /** the lastLoginTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.sql.Timestamp, java.sql.Timestamp> $lastLoginTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "lastLoginTime", "LAST_LOGIN_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.time.LocalDateTime, java.time.LocalDateTime> $lastLoginTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "lastLoginTime", "LAST_LOGIN_TIME", __namingType, true, true, false);
 
     /** the status */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.lang.Integer, java.lang.Integer> $status = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.IntegerWrapper::new), "status", "STATUS", __namingType, true, true, false);
 
     /** the registTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.sql.Timestamp, java.sql.Timestamp> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
 
     /** the updateTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.sql.Timestamp, java.sql.Timestamp> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
 
     /** the deleteFlg */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "DELETE_FLG", __namingType, true, true, false);
@@ -77,7 +77,7 @@ public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType
     /** the version */
     public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TUser, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "VERSION", __namingType, false);
 
-    private final java.util.function.Supplier<com.isystk.sample.domain.entity.TUserListener> __listenerSupplier;
+    private final java.util.function.Supplier<com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.TUser>> __listenerSupplier;
 
     private final boolean __immutable;
 
@@ -202,48 +202,48 @@ public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preInsert(com.isystk.sample.domain.entity.TUser entity, org.seasar.doma.jdbc.entity.PreInsertContext<com.isystk.sample.domain.entity.TUser> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TUserListener.class;
-        com.isystk.sample.domain.entity.TUserListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preUpdate(com.isystk.sample.domain.entity.TUser entity, org.seasar.doma.jdbc.entity.PreUpdateContext<com.isystk.sample.domain.entity.TUser> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TUserListener.class;
-        com.isystk.sample.domain.entity.TUserListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preDelete(com.isystk.sample.domain.entity.TUser entity, org.seasar.doma.jdbc.entity.PreDeleteContext<com.isystk.sample.domain.entity.TUser> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TUserListener.class;
-        com.isystk.sample.domain.entity.TUserListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preDelete(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postInsert(com.isystk.sample.domain.entity.TUser entity, org.seasar.doma.jdbc.entity.PostInsertContext<com.isystk.sample.domain.entity.TUser> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TUserListener.class;
-        com.isystk.sample.domain.entity.TUserListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postUpdate(com.isystk.sample.domain.entity.TUser entity, org.seasar.doma.jdbc.entity.PostUpdateContext<com.isystk.sample.domain.entity.TUser> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TUserListener.class;
-        com.isystk.sample.domain.entity.TUserListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postDelete(com.isystk.sample.domain.entity.TUser entity, org.seasar.doma.jdbc.entity.PostDeleteContext<com.isystk.sample.domain.entity.TUser> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TUserListener.class;
-        com.isystk.sample.domain.entity.TUserListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postDelete(entity, context);
     }
 
@@ -333,7 +333,7 @@ public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType
     }
 
     private static class ListenerHolder {
-        private static com.isystk.sample.domain.entity.TUserListener listener = new com.isystk.sample.domain.entity.TUserListener();
+        private static com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.TUser> listener = new com.isystk.sample.domain.dao.DefaultEntityListener<>();
     }
 
 }
