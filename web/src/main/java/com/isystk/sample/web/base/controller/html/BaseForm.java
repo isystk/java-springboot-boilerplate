@@ -14,9 +14,9 @@ public abstract class BaseForm implements Serializable {
 
     // 作成・更新者に使用する値
     String auditUser;
-
-    // 作成・更新日に使用する値
-    LocalDateTime auditDateTime;
+//
+//    // 作成・更新日に使用する値
+//    LocalDateTime auditDateTime;
 
     // 改定番号
     Integer version;
@@ -35,5 +35,5 @@ public abstract class BaseForm implements Serializable {
      *
      * @return
      */
-    public abstract Long getId();
+    public abstract Integer getId();
 }

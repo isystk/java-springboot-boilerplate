@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'item')}"></div>
+		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'post')}"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -33,6 +33,8 @@
 						<div class="card card-purple">
 							<div class="card-body">
 								<form th:action="@{/post/{id}(id=*{postId})}" th:method="put" th:object="${postForm}">
+									<input type="hidden" name="userId" th:value="*{userId}" />
+									<input type="hidden" name="version" th:value="*{version}" />
 									<div class="form-group row">
 										<label class="col-md-2 control-label">投稿者</label>
 										<div class="col-md-6">
@@ -53,10 +55,11 @@
 											<div class="text-danger" th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></div>
 										</div>
 									</div>
-									<div class="form-group row">
-										<div class="offset-md-2 col-md-9">
-											<button class="btn btn-secondary">変更する</button>
+									<div class="card-footer clearfix text-center">
+										<div class="text-left float-left">
+											<a class="btn btn-secondary" th:href="@{/post}">一覧に戻る</a>
 										</div>
+										<button class="btn btn-secondary">変更する</button>
 									</div>
 								</form>
 							</div>

@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'item')}"></div>
+		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'post')}"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -34,19 +34,30 @@
 
 						<div class="card card-purple">
 							<div class="card-body">
-								<div th:object="${item}">
+								<div th:object="${post}">
 									<div class="form-group row">
-										<label class="col-md-2">投稿名</label>
-										<div class="col-md-10" th:text="*{name}"></div>
+										<label class="col-md-2">投稿者</label>
+										<div class="col-md-10" th:text="*{userId}"></div>
 									</div>
 									<div class="form-group row">
-										<label class="col-md-2 control-label">価格</label>
-										<div class="col-md-10 form-control-static" th:text="*{price}"></div>
+										<label class="col-md-2 control-label">タイトル</label>
+										<div class="col-md-10 form-control-static" th:text="*{title}"></div>
 									</div>
 									<div class="form-group row">
-										<label class="col-md-2 control-label">生産者</label>
-										<div class="col-md-10 form-control-static" th:text="*{vendor}"></div>
+										<label class="col-md-2 control-label">本文</label>
+										<div class="col-md-10 form-control-static" th:text="*{text}"></div>
 									</div>
+								</div>
+							</div>
+							<div class="card-footer clearfix row">
+								<div class="col-md-10" >
+									<a class="btn btn-secondary" th:href="@{/post}">一覧に戻る</a>
+								</div>
+								<div class="col-md-2 text-right" >
+									<form th:action="@{/post/{id}(id=*{postId})}" th:method="delete">
+										<a class="btn btn-secondary" th:href="@{/post/{id}/edit(id=*{postId})}">变更</a>
+										<button type="submit" class="btn btn-danger">削除</button>
+									</form>
 								</div>
 							</div>
 						</div>
