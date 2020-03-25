@@ -80,4 +80,15 @@ public class DateUtils {
     protected static ZoneId getZoneId() {
         return ZoneId.systemDefault();
     }
+
+    /**
+	 * システムで利用する現在日時を取得します。。
+	 *
+	 * @param localDate
+	 * @return
+	 */
+    public static LocalDateTime getNow() {
+        return LocalDateTime.now();
+    }
+
 }

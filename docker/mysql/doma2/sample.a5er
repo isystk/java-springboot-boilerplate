@@ -13,7 +13,7 @@ Page=サンプル
 PageInfo="サンプル",2,"A3Landscape",$FFFFFF
 Domain=TINYINT=TINYINT(1)
 Domain=VERSION=BIGINT
-Domain=PASSWORD=BINARY(40)
+Domain=PASSWORD=@VARCHAR(100)
 Domain=USER_NAME=@VARCHAR(20)
 Domain=T_BOX=@VARCHAR(100)
 Domain=TEXT=@VARCHAR(500)
@@ -93,7 +93,7 @@ Left=200
 Top=1200
 Field="管理者ID","STAFF_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
 Field="メールアドレス","EMAIL","*MAIL","NOT NULL",,"","",$FFFFFFFF,""
-Field="パスワード","PASSWORD","@VARCHAR(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワード","PASSWORD","*PASSWORD","NOT NULL",,"","",$FFFFFFFF,""
 Field="姓","FAMILY_NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
 Field="名","NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
 Field="姓（カナ）","FAMILY_NAME_KANA","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
@@ -106,7 +106,7 @@ Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200324011629
+ModifiedDateTime=20200325152714
 Position="サンプル",200,1200,398,451
 
 [Relation]
@@ -384,7 +384,7 @@ Left=200
 Top=100
 Field="会員ID","USER_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
 Field="メールアドレス","EMAIL","*MAIL","NOT NULL",,"","",$FFFFFFFF,""
-Field="パスワード","PASSWORD","@VARCHAR(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワード","PASSWORD","*PASSWORD","NOT NULL",,"","",$FFFFFFFF,""
 Field="姓","FAMILY_NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
 Field="名","NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
 Field="姓（カナ）","FAMILY_NAME_KANA","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
@@ -406,5 +406,5 @@ Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200324011640
+ModifiedDateTime=20200325152708
 Position="サンプル",200,100,487,673

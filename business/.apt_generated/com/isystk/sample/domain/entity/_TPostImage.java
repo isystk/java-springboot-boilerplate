@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T15:30:57.357+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-25T16:21:20.891+0900")
 public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TPostImage> {
 
     static {
@@ -12,13 +12,25 @@ public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntit
 
     private final org.seasar.doma.jdbc.entity.NamingType __namingType = null;
 
+    /** the registTime */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TPostImage, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TPostImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "", __namingType, true, true, false);
+
+    /** the updateTime */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TPostImage, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TPostImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "", __namingType, true, true, false);
+
+    /** the deleteFlg */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TPostImage, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TPostImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "", __namingType, true, true, false);
+
+    /** the version */
+    public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TPostImage, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.TPostImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "version", __namingType, false);
+
     /** the postId */
     public final org.seasar.doma.jdbc.entity.AssignedIdPropertyType<com.isystk.sample.domain.entity.TPostImage, java.lang.Integer, java.lang.Integer> $postId = new org.seasar.doma.jdbc.entity.AssignedIdPropertyType<>(com.isystk.sample.domain.entity.TPostImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.IntegerWrapper::new), "postId", "POST_ID", __namingType, false);
 
     /** the imageId */
     public final org.seasar.doma.jdbc.entity.AssignedIdPropertyType<com.isystk.sample.domain.entity.TPostImage, java.lang.Integer, java.lang.Integer> $imageId = new org.seasar.doma.jdbc.entity.AssignedIdPropertyType<>(com.isystk.sample.domain.entity.TPostImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.IntegerWrapper::new), "imageId", "IMAGE_ID", __namingType, false);
 
-    private final java.util.function.Supplier<com.isystk.sample.domain.entity.TPostImageListener> __listenerSupplier;
+    private final java.util.function.Supplier<com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.TPostImage>> __listenerSupplier;
 
     private final boolean __immutable;
 
@@ -47,8 +59,16 @@ public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntit
         __tableName = "t_post_image";
         __isQuoteRequired = false;
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TPostImage, ?>> __idList = new java.util.ArrayList<>();
-        java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TPostImage, ?>> __list = new java.util.ArrayList<>(2);
-        java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TPostImage, ?>> __map = new java.util.HashMap<>(2);
+        java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TPostImage, ?>> __list = new java.util.ArrayList<>(6);
+        java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TPostImage, ?>> __map = new java.util.HashMap<>(6);
+        __list.add($registTime);
+        __map.put("registTime", $registTime);
+        __list.add($updateTime);
+        __map.put("updateTime", $updateTime);
+        __list.add($deleteFlg);
+        __map.put("deleteFlg", $deleteFlg);
+        __list.add($version);
+        __map.put("version", $version);
         __idList.add($postId);
         __list.add($postId);
         __map.put("postId", $postId);
@@ -106,48 +126,48 @@ public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntit
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preInsert(com.isystk.sample.domain.entity.TPostImage entity, org.seasar.doma.jdbc.entity.PreInsertContext<com.isystk.sample.domain.entity.TPostImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TPostImageListener.class;
-        com.isystk.sample.domain.entity.TPostImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preUpdate(com.isystk.sample.domain.entity.TPostImage entity, org.seasar.doma.jdbc.entity.PreUpdateContext<com.isystk.sample.domain.entity.TPostImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TPostImageListener.class;
-        com.isystk.sample.domain.entity.TPostImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preDelete(com.isystk.sample.domain.entity.TPostImage entity, org.seasar.doma.jdbc.entity.PreDeleteContext<com.isystk.sample.domain.entity.TPostImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TPostImageListener.class;
-        com.isystk.sample.domain.entity.TPostImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preDelete(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postInsert(com.isystk.sample.domain.entity.TPostImage entity, org.seasar.doma.jdbc.entity.PostInsertContext<com.isystk.sample.domain.entity.TPostImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TPostImageListener.class;
-        com.isystk.sample.domain.entity.TPostImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postUpdate(com.isystk.sample.domain.entity.TPostImage entity, org.seasar.doma.jdbc.entity.PostUpdateContext<com.isystk.sample.domain.entity.TPostImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TPostImageListener.class;
-        com.isystk.sample.domain.entity.TPostImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postDelete(com.isystk.sample.domain.entity.TPostImage entity, org.seasar.doma.jdbc.entity.PostDeleteContext<com.isystk.sample.domain.entity.TPostImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TPostImageListener.class;
-        com.isystk.sample.domain.entity.TPostImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postDelete(entity, context);
     }
 
@@ -173,7 +193,7 @@ public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntit
 
     @Override
     public org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TPostImage, ?, ?> getVersionPropertyType() {
-        return null;
+        return $version;
     }
 
     @Override
@@ -184,6 +204,10 @@ public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntit
     @Override
     public com.isystk.sample.domain.entity.TPostImage newEntity(java.util.Map<String, org.seasar.doma.jdbc.entity.Property<com.isystk.sample.domain.entity.TPostImage, ?>> __args) {
         com.isystk.sample.domain.entity.TPostImage entity = new com.isystk.sample.domain.entity.TPostImage();
+        if (__args.get("registTime") != null) __args.get("registTime").save(entity);
+        if (__args.get("updateTime") != null) __args.get("updateTime").save(entity);
+        if (__args.get("deleteFlg") != null) __args.get("deleteFlg").save(entity);
+        if (__args.get("version") != null) __args.get("version").save(entity);
         if (__args.get("postId") != null) __args.get("postId").save(entity);
         if (__args.get("imageId") != null) __args.get("imageId").save(entity);
         return entity;
@@ -218,7 +242,7 @@ public final class _TPostImage extends org.seasar.doma.jdbc.entity.AbstractEntit
     }
 
     private static class ListenerHolder {
-        private static com.isystk.sample.domain.entity.TPostImageListener listener = new com.isystk.sample.domain.entity.TPostImageListener();
+        private static com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.TPostImage> listener = new com.isystk.sample.domain.dao.DefaultEntityListener<>();
     }
 
 }

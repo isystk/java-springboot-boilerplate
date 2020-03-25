@@ -4,13 +4,14 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 /**
  * 
  */
-@Entity(listener = TPostTagListener.class)
+@Entity
 @Table(name = "t_post_tag")
-public class TPostTag {
+public class TPostTag extends DomaDtoImpl {
 
     /** ID */
     @Id
@@ -22,36 +23,36 @@ public class TPostTag {
     @Column(name = "POST_TAG_ID")
     Integer postTagId;
 
-    /** 
+    /**
      * Returns the postId.
-     * 
+     *
      * @return the postId
      */
     public Integer getPostId() {
         return postId;
     }
 
-    /** 
+    /**
      * Sets the postId.
-     * 
+     *
      * @param postId the postId
      */
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
 
-    /** 
+    /**
      * Returns the postTagId.
-     * 
+     *
      * @return the postTagId
      */
     public Integer getPostTagId() {
         return postTagId;
     }
 
-    /** 
+    /**
      * Sets the postTagId.
-     * 
+     *
      * @param postTagId the postTagId
      */
     public void setPostTagId(Integer postTagId) {

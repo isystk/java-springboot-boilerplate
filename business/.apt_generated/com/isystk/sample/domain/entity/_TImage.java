@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T15:31:00.366+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-25T16:21:21.276+0900")
 public final class _TImage extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TImage> {
 
     static {
@@ -12,19 +12,22 @@ public final class _TImage extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
 
     private final org.seasar.doma.jdbc.entity.NamingType __namingType = null;
 
+    /** the version */
+    public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TImage, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.TImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "version", __namingType, false);
+
     /** the imageId */
     public final org.seasar.doma.jdbc.entity.AssignedIdPropertyType<com.isystk.sample.domain.entity.TImage, java.lang.Integer, java.lang.Integer> $imageId = new org.seasar.doma.jdbc.entity.AssignedIdPropertyType<>(com.isystk.sample.domain.entity.TImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.IntegerWrapper::new), "imageId", "IMAGE_ID", __namingType, false);
 
     /** the registTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TImage, java.sql.Timestamp, java.sql.Timestamp> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TImage, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
 
     /** the updateTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TImage, java.sql.Timestamp, java.sql.Timestamp> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TImage, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
 
     /** the deleteFlg */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TImage, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TImage.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "DELETE_FLG", __namingType, true, true, false);
 
-    private final java.util.function.Supplier<com.isystk.sample.domain.entity.TImageListener> __listenerSupplier;
+    private final java.util.function.Supplier<com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.TImage>> __listenerSupplier;
 
     private final boolean __immutable;
 
@@ -53,8 +56,10 @@ public final class _TImage extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
         __tableName = "t_image";
         __isQuoteRequired = false;
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TImage, ?>> __idList = new java.util.ArrayList<>();
-        java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TImage, ?>> __list = new java.util.ArrayList<>(4);
-        java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TImage, ?>> __map = new java.util.HashMap<>(4);
+        java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TImage, ?>> __list = new java.util.ArrayList<>(5);
+        java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TImage, ?>> __map = new java.util.HashMap<>(5);
+        __list.add($version);
+        __map.put("version", $version);
         __idList.add($imageId);
         __list.add($imageId);
         __map.put("imageId", $imageId);
@@ -115,48 +120,48 @@ public final class _TImage extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preInsert(com.isystk.sample.domain.entity.TImage entity, org.seasar.doma.jdbc.entity.PreInsertContext<com.isystk.sample.domain.entity.TImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TImageListener.class;
-        com.isystk.sample.domain.entity.TImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preUpdate(com.isystk.sample.domain.entity.TImage entity, org.seasar.doma.jdbc.entity.PreUpdateContext<com.isystk.sample.domain.entity.TImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TImageListener.class;
-        com.isystk.sample.domain.entity.TImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preDelete(com.isystk.sample.domain.entity.TImage entity, org.seasar.doma.jdbc.entity.PreDeleteContext<com.isystk.sample.domain.entity.TImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TImageListener.class;
-        com.isystk.sample.domain.entity.TImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preDelete(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postInsert(com.isystk.sample.domain.entity.TImage entity, org.seasar.doma.jdbc.entity.PostInsertContext<com.isystk.sample.domain.entity.TImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TImageListener.class;
-        com.isystk.sample.domain.entity.TImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postUpdate(com.isystk.sample.domain.entity.TImage entity, org.seasar.doma.jdbc.entity.PostUpdateContext<com.isystk.sample.domain.entity.TImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TImageListener.class;
-        com.isystk.sample.domain.entity.TImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postDelete(com.isystk.sample.domain.entity.TImage entity, org.seasar.doma.jdbc.entity.PostDeleteContext<com.isystk.sample.domain.entity.TImage> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.TImageListener.class;
-        com.isystk.sample.domain.entity.TImageListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postDelete(entity, context);
     }
 
@@ -182,7 +187,7 @@ public final class _TImage extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
 
     @Override
     public org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TImage, ?, ?> getVersionPropertyType() {
-        return null;
+        return $version;
     }
 
     @Override
@@ -193,6 +198,7 @@ public final class _TImage extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
     @Override
     public com.isystk.sample.domain.entity.TImage newEntity(java.util.Map<String, org.seasar.doma.jdbc.entity.Property<com.isystk.sample.domain.entity.TImage, ?>> __args) {
         com.isystk.sample.domain.entity.TImage entity = new com.isystk.sample.domain.entity.TImage();
+        if (__args.get("version") != null) __args.get("version").save(entity);
         if (__args.get("imageId") != null) __args.get("imageId").save(entity);
         if (__args.get("registTime") != null) __args.get("registTime").save(entity);
         if (__args.get("updateTime") != null) __args.get("updateTime").save(entity);
@@ -229,7 +235,7 @@ public final class _TImage extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
     }
 
     private static class ListenerHolder {
-        private static com.isystk.sample.domain.entity.TImageListener listener = new com.isystk.sample.domain.entity.TImageListener();
+        private static com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.TImage> listener = new com.isystk.sample.domain.dao.DefaultEntityListener<>();
     }
 
 }

@@ -17,7 +17,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/items}">投稿管理</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/post}">投稿管理</a></li>
 					<li class="breadcrumb-item active">投稿変更</li>
 				</ol>
 			</div><!-- /.col -->
@@ -32,26 +32,25 @@
 					<div class="col-12">
 						<div class="card card-purple">
 							<div class="card-body">
-								<form th:action="@{/items/{id}(id=*{id})}" th:method="put" th:object="${item}">
+								<form th:action="@{/post/{id}(id=*{postId})}" th:method="put" th:object="${postForm}">
 									<div class="form-group row">
-										<label class="col-md-2 control-label">投稿名</label>
-										<div class="col-md-10">
-											<input class="form-control" type="text" th:field="*{name}" />
-											<div class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+										<label class="col-md-2 control-label">投稿者</label>
+										<div class="col-md-6">
+											<span th:text="*{userId}"></span>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-md-2 control-label">価格</label>
-										<div class="col-md-10">
-											<input class="form-control" type="text" th:field="*{price}" />
-											<div class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+										<label class="col-md-2 control-label">タイトル</label>
+										<div class="col-md-8">
+											<input class="form-control" type="text" name="title" th:value="*{title}" />
+											<div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
 										</div>
 									</div>
 									<div class="form-group row">
-										<label class="col-md-2 control-label">生産者</label>
+										<label class="col-md-2 control-label">本文</label>
 										<div class="col-md-10">
-											<input class="form-control" type="text" th:field="*{vendor}" />
-											<div class="text-danger" th:if="${#fields.hasErrors('vendor')}" th:errors="*{vendor}"></div>
+											<textarea name="text" th:text="*{text}" cols="100" rows="4" class="form-control"/></textarea>
+											<div class="text-danger" th:if="${#fields.hasErrors('text')}" th:errors="*{text}"></div>
 										</div>
 									</div>
 									<div class="form-group row">

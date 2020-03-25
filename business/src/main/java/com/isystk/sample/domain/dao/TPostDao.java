@@ -25,13 +25,6 @@ public interface TPostDao {
 
     /**
      * @param postId
-     * @return the TPost entity
-     */
-    @Select
-    TPost selectById(Integer postId);
-
-    /**
-     * @param postId
      * @param version
      * @return the TPost entity
      */
@@ -76,7 +69,7 @@ public interface TPostDao {
      * @return
      */
     @Select
-    Optional<TPost> selectById(Long postId);
+    Optional<TPost> selectById(Integer postId);
 
     /**
      * 投稿を1件取得します。

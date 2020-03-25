@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-24T15:30:59.511+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-25T16:21:20.640+0900")
 public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.MPostTag> {
 
     static {
@@ -14,6 +14,9 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
 
     private final org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator __idGenerator = new org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator();
 
+    /** the version */
+    public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "version", __namingType, false);
+
     /** the postTagId */
     public final org.seasar.doma.jdbc.entity.GeneratedIdPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.Integer, java.lang.Integer> $postTagId = new org.seasar.doma.jdbc.entity.GeneratedIdPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.IntegerWrapper::new), "postTagId", "POST_TAG_ID", __namingType, false, __idGenerator);
 
@@ -21,15 +24,15 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.String, java.lang.String> $name = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.StringWrapper::new), "name", "NAME", __namingType, true, true, false);
 
     /** the registTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.sql.Timestamp, java.sql.Timestamp> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
 
     /** the updateTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.sql.Timestamp, java.sql.Timestamp> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.TimestampWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
 
     /** the deleteFlg */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "DELETE_FLG", __namingType, true, true, false);
 
-    private final java.util.function.Supplier<com.isystk.sample.domain.entity.MPostTagListener> __listenerSupplier;
+    private final java.util.function.Supplier<com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.MPostTag>> __listenerSupplier;
 
     private final boolean __immutable;
 
@@ -58,8 +61,10 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
         __tableName = "m_post_tag";
         __isQuoteRequired = false;
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __idList = new java.util.ArrayList<>();
-        java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __list = new java.util.ArrayList<>(5);
-        java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __map = new java.util.HashMap<>(5);
+        java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __list = new java.util.ArrayList<>(6);
+        java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __map = new java.util.HashMap<>(6);
+        __list.add($version);
+        __map.put("version", $version);
         __idList.add($postTagId);
         __list.add($postTagId);
         __map.put("postTagId", $postTagId);
@@ -122,48 +127,48 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preInsert(com.isystk.sample.domain.entity.MPostTag entity, org.seasar.doma.jdbc.entity.PreInsertContext<com.isystk.sample.domain.entity.MPostTag> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MPostTagListener.class;
-        com.isystk.sample.domain.entity.MPostTagListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preUpdate(com.isystk.sample.domain.entity.MPostTag entity, org.seasar.doma.jdbc.entity.PreUpdateContext<com.isystk.sample.domain.entity.MPostTag> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MPostTagListener.class;
-        com.isystk.sample.domain.entity.MPostTagListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void preDelete(com.isystk.sample.domain.entity.MPostTag entity, org.seasar.doma.jdbc.entity.PreDeleteContext<com.isystk.sample.domain.entity.MPostTag> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MPostTagListener.class;
-        com.isystk.sample.domain.entity.MPostTagListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.preDelete(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postInsert(com.isystk.sample.domain.entity.MPostTag entity, org.seasar.doma.jdbc.entity.PostInsertContext<com.isystk.sample.domain.entity.MPostTag> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MPostTagListener.class;
-        com.isystk.sample.domain.entity.MPostTagListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postInsert(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postUpdate(com.isystk.sample.domain.entity.MPostTag entity, org.seasar.doma.jdbc.entity.PostUpdateContext<com.isystk.sample.domain.entity.MPostTag> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MPostTagListener.class;
-        com.isystk.sample.domain.entity.MPostTagListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postUpdate(entity, context);
     }
 
     @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void postDelete(com.isystk.sample.domain.entity.MPostTag entity, org.seasar.doma.jdbc.entity.PostDeleteContext<com.isystk.sample.domain.entity.MPostTag> context) {
-        Class __listenerClass = com.isystk.sample.domain.entity.MPostTagListener.class;
-        com.isystk.sample.domain.entity.MPostTagListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
+        Class __listenerClass = com.isystk.sample.domain.dao.DefaultEntityListener.class;
+        com.isystk.sample.domain.dao.DefaultEntityListener __listener = context.getConfig().getEntityListenerProvider().get(__listenerClass, __listenerSupplier);
         __listener.postDelete(entity, context);
     }
 
@@ -189,7 +194,7 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
 
     @Override
     public org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.MPostTag, ?, ?> getVersionPropertyType() {
-        return null;
+        return $version;
     }
 
     @Override
@@ -200,6 +205,7 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
     @Override
     public com.isystk.sample.domain.entity.MPostTag newEntity(java.util.Map<String, org.seasar.doma.jdbc.entity.Property<com.isystk.sample.domain.entity.MPostTag, ?>> __args) {
         com.isystk.sample.domain.entity.MPostTag entity = new com.isystk.sample.domain.entity.MPostTag();
+        if (__args.get("version") != null) __args.get("version").save(entity);
         if (__args.get("postTagId") != null) __args.get("postTagId").save(entity);
         if (__args.get("name") != null) __args.get("name").save(entity);
         if (__args.get("registTime") != null) __args.get("registTime").save(entity);
@@ -237,7 +243,7 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
     }
 
     private static class ListenerHolder {
-        private static com.isystk.sample.domain.entity.MPostTagListener listener = new com.isystk.sample.domain.entity.MPostTagListener();
+        private static com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.MPostTag> listener = new com.isystk.sample.domain.dao.DefaultEntityListener<>();
     }
 
 }

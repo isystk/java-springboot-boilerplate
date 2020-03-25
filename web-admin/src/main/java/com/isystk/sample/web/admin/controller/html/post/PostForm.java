@@ -22,6 +22,9 @@ public class PostForm extends BaseForm {
     @NotEmpty
     String title;
 
+    @NotEmpty
+    String text;
+
 	@Override
 	public Long getId() {
 		return postId;
