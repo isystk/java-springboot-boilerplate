@@ -52,11 +52,6 @@
 				<version>${project.version}</version>
 			</dependency>
 
-			<!-- <dependency>
-				<groupId>org.mybatis.spring.boot</groupId>
-				<artifactId>mybatis-spring-boot-starter</artifactId>
-				<version>2.1.2</version>
-			</dependency> -->
 			<dependency>
 				<groupId>org.seasar.doma.boot</groupId>
 				<artifactId>doma-spring-boot-starter</artifactId>
@@ -95,11 +90,6 @@
 				<version>3.2.2</version>
 			</dependency>
 			<dependency>
-				<groupId>com.fasterxml.jackson.dataformat</groupId>
-				<artifactId>jackson-dataformat-csv</artifactId>
-				<version>2.10.3</version>
-			</dependency>
-			<dependency>
 				<groupId>org.webjars</groupId>
 				<artifactId>AdminLTE</artifactId>
 				<version>3.0.2</version>
@@ -113,7 +103,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.apache.poi</groupId>
-				<artifactId>poi-ooxml-schemas</artifactId>
+				<artifactId>poi-ooxml</artifactId>
 				<version>4.1.2</version>
 			</dependency>
 			<!-- PDF -->
