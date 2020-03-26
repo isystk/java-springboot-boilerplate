@@ -179,12 +179,16 @@ public class PostController extends AbstractHtmlController {
      * @return
      */
     @GetMapping("/download/{filename:.+\\.csv}")
-    public ModelAndView downloadCsv(@PathVariable String filename) {
+    public ModelAndView downloadCsv(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
+        // 入力値を詰め替える
+        val criteria = modelMapper.map(form, PostCriteria.class);
+
         // 全件取得する
-        val posts = postService.findAll(new PostCriteria(), Pageable.NO_LIMIT);
+        form.setPerpage(Pageable.NO_LIMIT.getPerpage());
+        val pages = postService.findAll(criteria, form);
 
         // 詰め替える
-        List<PostCsv> csvList = modelMapper.map(posts.getData(), toListType(PostCsv.class));
+        List<PostCsv> csvList = modelMapper.map(pages.getData(), toListType(PostCsv.class));
 
         // CSVスキーマクラス、データ、ダウンロード時のファイル名を指定する
         val view = new CsvView(PostCsv.class, csvList, filename);
@@ -199,12 +203,16 @@ public class PostController extends AbstractHtmlController {
      * @return
      */
     @GetMapping(path = "/download/{filename:.+\\.xlsx}")
-    public ModelAndView downloadExcel(@PathVariable String filename) {
+    public ModelAndView downloadExcel(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
+        // 入力値を詰め替える
+        val criteria = modelMapper.map(form, PostCriteria.class);
+
         // 全件取得する
-        val posts = postService.findAll(new PostCriteria(), Pageable.NO_LIMIT);
+        form.setPerpage(Pageable.NO_LIMIT.getPerpage());
+        val pages = postService.findAll(criteria, form);
 
         // Excelプック生成コールバック、データ、ダウンロード時のファイル名を指定する
-        val view = new ExcelView(new PostExcel(), posts.getData(), filename);
+        val view = new ExcelView(new PostExcel(), pages.getData(), filename);
 
         return new ModelAndView(view);
     }
@@ -216,12 +224,16 @@ public class PostController extends AbstractHtmlController {
      * @return
      */
     @GetMapping(path = "/download/{filename:.+\\.pdf}")
-    public ModelAndView downloadPdf(@PathVariable String filename) {
+    public ModelAndView downloadPdf(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
+        // 入力値を詰め替える
+        val criteria = modelMapper.map(form, PostCriteria.class);
+
         // 全件取得する
-        val posts = postService.findAll(new PostCriteria(), Pageable.NO_LIMIT);
+        form.setPerpage(Pageable.NO_LIMIT.getPerpage());
+        val pages = postService.findAll(criteria, form);
 
         // 帳票レイアウト、データ、ダウンロード時のファイル名を指定する
-        val view = new PdfView("reports/post.jrxml", posts.getData(), filename);
+        val view = new PdfView("reports/post.jrxml", pages.getData(), filename);
 
         return new ModelAndView(view);
     }

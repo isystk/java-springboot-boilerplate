@@ -38,6 +38,8 @@ server:
     enabled: true
   servlet:
     session:
+      # セッションを永続化してTomcat再起動後もログイン状態とする
+      persistent: true
       timeout: 7200
       # URLにセッションIDを出力しないようにする
       tracking-modes: cookie
