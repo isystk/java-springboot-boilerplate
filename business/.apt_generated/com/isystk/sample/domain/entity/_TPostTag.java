@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-26T11:19:00.186+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-26T19:25:44.502+0900")
 public final class _TPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TPostTag> {
 
     static {

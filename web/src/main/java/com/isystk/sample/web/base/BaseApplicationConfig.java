@@ -7,6 +7,7 @@ import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerF
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import com.isystk.sample.domain.dto.common.DefaultPageFactoryImpl;
 import com.isystk.sample.domain.dto.common.PageFactory;
@@ -14,6 +15,9 @@ import com.isystk.sample.web.base.aop.LoggingFunctionNameInterceptor;
 import com.isystk.sample.web.base.aop.RequestTrackingInterceptor;
 import com.isystk.sample.web.base.aop.SetAuditInfoInterceptor;
 import com.isystk.sample.web.base.aop.SetDoubleSubmitCheckTokenInterceptor;
+import com.isystk.sample.web.base.aop.SetModelAndViewInterceptor;
+
+import lombok.val;
 
 public abstract class BaseApplicationConfig
 		implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>, WebMvcConfigurer {
@@ -25,6 +29,14 @@ public abstract class BaseApplicationConfig
     @Bean
     public PageFactory pageFactory() {
         return new DefaultPageFactoryImpl();
+    }
+
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        // langパラメータでロケールを切り替える
+        val interceptor = new LocaleChangeInterceptor();
+        interceptor.setParamName("lang");
+        return interceptor;
     }
 
     @Bean
@@ -51,12 +63,21 @@ public abstract class BaseApplicationConfig
         return new SetAuditInfoInterceptor();
     }
 
+
+    @Bean
+    public SetModelAndViewInterceptor setModelAndViewInterceptor() {
+        // 共通的な定数定義などを画面変数に設定する
+        return new SetModelAndViewInterceptor();
+    }
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeChangeInterceptor());
         registry.addInterceptor(requestTrackingInterceptor());
         registry.addInterceptor(loggingFunctionNameInterceptor());
-        registry.addInterceptor(setDoubleSubmitCheckTokenInterceptor());
         registry.addInterceptor(setAuditInfoInterceptor());
+        registry.addInterceptor(setDoubleSubmitCheckTokenInterceptor());
+        registry.addInterceptor(setModelAndViewInterceptor());
     }
 
 	/**

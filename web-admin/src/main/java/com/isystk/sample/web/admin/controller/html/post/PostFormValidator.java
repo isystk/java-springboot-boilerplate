@@ -6,7 +6,7 @@ import org.springframework.validation.Errors;
 import com.isystk.sample.domain.validator.AbstractValidator;
 
 /**
- * ユーザー登録 入力チェック
+ * 投稿 入力チェック
  */
 @Component
 public class PostFormValidator extends AbstractValidator<PostForm> {

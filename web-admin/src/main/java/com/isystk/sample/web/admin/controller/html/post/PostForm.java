@@ -14,16 +14,15 @@ public class PostForm extends BaseForm {
 
     private static final long serialVersionUID = 7593564324192730932L;
 
-    @NotNull
     Integer postId;
 
     @NotNull
     Integer userId;
 
-    @NotNull
+    @NotEmpty
     String title;
 
-    @NotNull
+    @NotEmpty
     String text;
 
 	@Override

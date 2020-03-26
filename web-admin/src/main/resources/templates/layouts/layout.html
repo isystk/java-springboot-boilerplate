@@ -64,5 +64,29 @@
 			<script type="text/javascript" th:src="@{/static/js/admin.js}"></script>
 		</div>
 		<div layout:fragment="scripts" th:remove="tag" />
+		<script type="text/javascript" th:inline="javascript">
+			$(document).ready(function() {
+				// ログアウト
+				$("#logout").bind("click", function() {
+					$("form[name='logout']").submit();
+				});
+				(function() {
+					var path = [# th:text="@{/}" /];　
+					$('.js-pushmenu').on('click', function() {
+						if ($('body').hasClass('sidebar-collapse')) {
+							document.cookie = "sidebarToggleState=opened; path=" + path + ";";
+						} else {
+							document.cookie = "sidebarToggleState=closed; path=" + path + ";";
+						}
+					});
+					var re = new RegExp('sidebarToggleState' + "=([^;]+)");
+					var value = re.exec(document.cookie);
+					var toggleState = (value != null) ? unescape(value[1]) : null;
+					if (toggleState == 'closed') {
+						$('body').addClass('sidebar-collapse');
+					}
+				})();
+			});
+		</script>
 	</body>
 </html>

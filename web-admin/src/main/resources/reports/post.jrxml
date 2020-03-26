@@ -9,7 +9,7 @@
 			<staticText>
 				<reportElement x="225" y="10" width="100" height="30" uuid="b79de7e2-69ee-48d7-b033-9aaec117caa7"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font fontName="ＭＳ 明朝" size="14"/>
+					<font fontName="IPAexゴシック" size="14"/>
 				</textElement>
 				<text><![CDATA[Post Data]]></text>
 			</staticText>
@@ -54,21 +54,21 @@
 			<textField>
 				<reportElement x="0" y="3" width="60" height="15" uuid="2a07a2ad-165d-4ace-9fdb-92a99f33feef"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="ＭＳ 明朝"/>
+					<font fontName="IPAexゴシック"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{postId}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="60" y="3" width="60" height="15" uuid="3a341cb3-8acc-4e16-bab7-b938352ff705"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="ＭＳ 明朝"/>
+					<font fontName="IPAexゴシック"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{userId}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="120" y="3" width="160" height="15" uuid="966618ef-5992-4273-9040-43295486ff7b"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
-					<font fontName="ＭＳ 明朝"/>
+					<font fontName="IPAexゴシック"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{title}]]></textFieldExpression>
 			</textField>

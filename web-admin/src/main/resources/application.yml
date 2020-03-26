@@ -6,6 +6,10 @@ spring:
     # staging  
     # production  
 
+  main:
+    # DataValueProcessorのBean上書きのため暫定対応
+    allow-bean-definition-overriding: true
+    
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sample
