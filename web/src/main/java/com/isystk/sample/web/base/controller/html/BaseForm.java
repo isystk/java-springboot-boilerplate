@@ -12,8 +12,8 @@ public abstract class BaseForm implements Serializable {
 
     private static final long serialVersionUID = 893506941860422885L;
 
-    // 作成・更新者に使用する値
-    String auditUser;
+//    // 作成・更新者に使用する値
+//    String auditUser;
 //
 //    // 作成・更新日に使用する値
 //    LocalDateTime auditDateTime;
