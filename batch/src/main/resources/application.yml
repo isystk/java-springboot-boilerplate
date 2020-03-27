@@ -11,10 +11,19 @@ spring:
     allow-bean-definition-overriding: true
     
   datasource:
+    platform: mysql
     driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/sample
     username: root
     password: password
+    hikari:
+      autoCommit: false
+      connectionTimeout: 30000
+      idleTimeout: 5000
+      maxLifetime: 1800000
+      connectionTestQuery: SELECT 1
+      minimumIdle: 10
+      maximumPoolSize: 30
 
   mvc.hiddenmethod.filter.enabled: true
 
