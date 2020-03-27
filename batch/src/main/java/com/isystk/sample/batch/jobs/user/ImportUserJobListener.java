@@ -6,7 +6,7 @@ public class ImportUserJobListener extends BaseJobExecutionListener {
 
     @Override
     protected String getBatchId() {
-        return "BATCH_002";
+        return "BATCH_001";
     }
 
     @Override
