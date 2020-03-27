@@ -1,0 +1,44 @@
+spring:
+
+  profiles.active: 
+    local  
+    # development  
+    # staging  
+    # production  
+
+  main:
+    # DataValueProcessorのBean上書きのため暫定対応
+    allow-bean-definition-overriding: true
+    
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sample
+    username: root
+    password: password
+
+  mvc.hiddenmethod.filter.enabled: true
+
+  batch:
+#    initializer:
+#      # ジョブ管理テーブルを自動的に作成しないようにする
+#      enabled: false
+    job:
+      # 自動的にバッチジョブが起動しないようにする
+      enabled: false
+
+doma:
+  dialect: mysql
+  # 小文字のスネークケースに変換する（firstName → first_name）
+  naming: SNAKE_LOWER_CASE
+  # バルクインサート・アップデートのサイズ
+  batch-size: 1000  
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.jdbc: INFO
+    org.thymeleaf: INFO
+    com.isystk.sample: DEBUG
+  pattern:
+    # MDCで設定した値を出力する
+    level: "[%X{FUNCTION_NAME}:%X{X-Track-Id}:%X{LOGIN_USER_ID}] %5p"

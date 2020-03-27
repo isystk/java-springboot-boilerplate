@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+		lang="ja" class="no-js">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="robots" content="noodp">
+
+		<link rel="shortcut icon" type="image/x-icon" th:href="@{/static/images/favicon.png}" />
+		<title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">Sample</title>
+
+		<link th:href="@{/static/css/normalize.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{/static/css/common.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css}" rel="stylesheet" type="text/css" />
+
+		<!--/* original */-->
+		<!--link /-->
+	</head>
+	<body >
+		<div class="wrap">
+			<!--/* ヘッダー */-->
+			<div layout:fragment="header" th:remove="tag">
+				<div th:replace="~{layouts/header}"></div>
+			</div>
+
+			<!--/* メインコンテンツ */-->
+			<div class="content-wrapper" >
+				<!-- Content Header (Page header) -->
+				<section class="content-header" >
+					<div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalMessage}">
+						<!--/* グローバルメッセージ */-->
+						<p th:text="${str}" class="alert alert-danger"></p>
+					</div>
+					<div class="container-fluid">
+						<div layout:fragment="content-header"  th:remove="tag">
+						</div>
+					</div><!-- /.container-fluid -->
+				</section>
+				<!-- /.content-header -->
+
+				<div layout:fragment="content"  th:remove="tag">
+				</div>
+			</div>
+
+			<!--/* フッター */-->
+			<div layout:fragment="footer" th:remove="tag">
+				<div th:replace="~{layouts/footer}"></div>
+			</div>
+		</div><!--/* end wrapper */-->
+
+		<div layout:fragment="footer" th:remove="tag">
+			<script type="text/javascript" th:src="@{/static/js/lib/jquery.js}"></script>
+			<script type="text/javascript" th:src="@{/static/js/lib/jquery-plugins.js}"></script>
+			<script type="text/javascript" th:src="@{/static/js/lib/underscore.js}"></script>
+			<script type="text/javascript" th:src="@{/static/js/lib/common.js}"></script>
+		</div>
+		<div layout:fragment="scripts" th:remove="tag" />
+	</body>
+</html>

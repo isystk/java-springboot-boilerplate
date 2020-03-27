@@ -38,10 +38,6 @@ public interface WebConst {
 	String MAV_ERRORS = "errors";
 
 	/** ---- URLs ---- **/
-	String ADMIN_HOME_URL = "/";
-
-	String ADMIN_POST_URL = "/post";
-
 	String ERROR_URL = "/error";
 
 	String FORBIDDEN_URL = "/forbidden";
@@ -69,4 +65,5 @@ public interface WebConst {
     String STATIC_RESOURCES_URL = "/static/**";
 
     String API_BASE_URL = "/api/**";
+
 }

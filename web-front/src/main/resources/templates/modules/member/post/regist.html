@@ -1,0 +1,39 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/layout}">
+	<head layout:fragment="~{layouts/layout::header}">
+	<title>投稿画面｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<div class="content">
+			<main>
+				<article class="detail">
+					<div class="entry-header">
+					  <h1 class="entry-title">投稿画面</h1>
+					</div>
+					<div class="entry-content">
+
+						<p>投稿内容を入力して下さい</p>
+						<form th:object="${postForm}" th:action="${action}" id="form1"
+							th:with="action=${postForm.isNew()} ? @{/post} : @{/post/{id}(id=*{postId})}"
+							enctype="multipart/form-data" th:method="${postForm.isNew()} ? 'post' : 'put'">
+							<input type="hidden" name="version" th:value="*{version}" />
+							<input th:replace="fragments/inputField :: input ('text', '投稿者', 'userId')" />
+							<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title')" />
+							<input th:replace="fragments/textarea :: textarea ('本文', 'text', 4)" />
+							<p class="btnArea">
+								<input type="submit" name="update" value="投稿する">
+							</p>
+						</form>
+
+					</div>
+				</article>
+			</main>
+		</div>
+
+	</div>
+</body>
+</html>

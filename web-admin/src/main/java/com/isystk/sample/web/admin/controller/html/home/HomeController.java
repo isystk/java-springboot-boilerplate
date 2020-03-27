@@ -1,6 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.home;
 
-import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.web.base.AdminUrl.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(ADMIN_HOME_URL)
+@RequestMapping(HOME_URL)
 public class HomeController extends AbstractHtmlController {
 
 	@Override

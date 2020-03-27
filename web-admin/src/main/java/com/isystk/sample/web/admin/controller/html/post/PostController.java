@@ -1,6 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.post;
 
-import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.web.base.FrontUrl.*;
 import static com.isystk.sample.domain.util.TypeUtils.toListType;
 
 import java.util.List;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -38,7 +37,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(ADMIN_POST_URL)
+@RequestMapping(POST_URL)
 //@SessionAttributes(types = { SearchPostForm.class, PostForm.class })
 public class PostController extends AbstractHtmlController {
 
