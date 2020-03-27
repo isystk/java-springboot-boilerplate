@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-26T19:25:44.716+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-27T15:37:47.056+0900")
 public final class _TUserOnetimePass extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TUserOnetimePass> {
 
     static {

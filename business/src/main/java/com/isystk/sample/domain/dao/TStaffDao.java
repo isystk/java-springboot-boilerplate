@@ -24,13 +24,6 @@ public interface TStaffDao {
 
     /**
      * @param staffId
-     * @return the TStaff entity
-     */
-    @Select
-    TStaff selectById(Integer staffId);
-
-    /**
-     * @param staffId
      * @param version
      * @return the TStaff entity
      */

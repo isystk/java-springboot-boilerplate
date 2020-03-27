@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin;
+package com.isystk.sample.web.front;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
