@@ -16,7 +16,7 @@ services:
      - "./nginx/conf.d:/etc/nginx/conf.d"
      - "./nginx/ssl:/etc/nginx/ssl"
      - "./nginx/logs:/var/log/nginx"
-     - "../public:/usr/share/nginx/html"
+     - "./nginx/public:/usr/share/nginx/html"
 
   mysql:
     image: ${PROJECT_NAME}/mysql

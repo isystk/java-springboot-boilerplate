@@ -1,7 +1,0 @@
-SELECT
-  /*%expand*/*
-FROM
-  [[${lowerFuncName}]]s
-WHERE
-  [[${lowerFuncName}]]_id = /* id */1
-  AND deleted_at IS NULL

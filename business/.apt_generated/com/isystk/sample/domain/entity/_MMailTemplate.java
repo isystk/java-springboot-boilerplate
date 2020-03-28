@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-27T15:37:47.360+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-28T22:51:00.236+0900")
 public final class _MMailTemplate extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.MMailTemplate> {
 
     static {
