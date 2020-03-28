@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PostCriteria extends TPost {
+public class TPostCriteria extends TPost {
 
     private static final long serialVersionUID = -1;
 }

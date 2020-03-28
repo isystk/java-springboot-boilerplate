@@ -1,9 +1,9 @@
-select
-  POST_ID,
-  IMAGE_ID
-from
+SELECT
+  /*%expand*/*
+FROM
   t_post_image
-where
+WHERE
   POST_ID = /* postId */1
   and
   IMAGE_ID = /* imageId */1
+LIMIT 1

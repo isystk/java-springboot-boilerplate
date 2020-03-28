@@ -2,25 +2,24 @@ package com.isystk.sample.domain.dao;
 
 import org.seasar.doma.boot.ConfigAutowireable;
 
+import org.seasar.doma.jdbc.SelectOptions;
+import java.util.Optional;
+import java.util.stream.Collector;
+
 import com.isystk.sample.domain.entity.TUserOnetimePass;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.SelectType;
+import com.isystk.sample.domain.dto.TUserOnetimePassCriteria;
 
 /**
  */
 @ConfigAutowireable
 @Dao
 public interface TUserOnetimePassDao {
-
-    /**
-     * @param userId
-     * @return the TUserOnetimePass entity
-     */
-    @Select
-    TUserOnetimePass selectById(Integer userId);
 
     /**
      * @param entity
@@ -42,4 +41,28 @@ public interface TUserOnetimePassDao {
      */
     @Delete
     int delete(TUserOnetimePass entity);
+
+    /**
+     * @param criteria
+     * @param options
+     * @return
+     */
+    @Select(strategy = SelectType.COLLECT)
+    <R> R selectAll(final TUserOnetimePassCriteria criteria, final SelectOptions options, final Collector<TUserOnetimePass, ?, R> collector);
+
+    /**
+     * @param userId
+     * @return the TUserOnetimePass entity
+     */
+    @Select
+    Optional<TUserOnetimePass> selectById(Integer userId);
+
+
+    /**
+     * @param criteria
+     * @return
+     */
+    @Select
+    Optional<TUserOnetimePass> select(TUserOnetimePassCriteria criteria);
+
 }

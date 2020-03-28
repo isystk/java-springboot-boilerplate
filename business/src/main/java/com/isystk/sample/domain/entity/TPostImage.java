@@ -13,6 +13,10 @@ import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 @Table(name = "t_post_image")
 public class TPostImage extends DomaDtoImpl {
 
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
+
+
     /** ID */
     @Id
     @Column(name = "POST_ID")
@@ -40,7 +44,6 @@ public class TPostImage extends DomaDtoImpl {
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
-
     /**
      * Returns the imageId.
      *

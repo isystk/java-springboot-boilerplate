@@ -13,12 +13,13 @@
 	<property name="entityPackageName" value="com.isystk.sample.domain.entity"/>
 	<property name="daoPackageName" value="com.isystk.sample.domain.dao"/>
 	<property name="sqlFilePattern" value="META-INF/**/*.sql"/>
+	<property name="ignoredTableNamePattern" value="BATCH.*|SYS_CONFIG"/>
 
 	<path id="classpath">
 		<fileset dir="lib"/>
 	</path>
 
-	<taskdef name="gen" classname="org.seasar.doma.extension.gen.task.Gen" classpathref="classpath" loaderref="loader"/>
+	<taskdef name="gen" classname="org.seasar.doma.extension.gen.task.Gen" classpathref="classpath" loaderref="loader" />
 	<typedef name="entityConfig" classname="org.seasar.doma.extension.gen.task.EntityConfig" loaderref="loader"/>
 	<typedef name="daoConfig" classname="org.seasar.doma.extension.gen.task.DaoConfig" loaderref="loader"/>
 	<typedef name="sqlConfig" classname="org.seasar.doma.extension.gen.task.SqlConfig" loaderref="loader"/>
@@ -30,7 +31,8 @@
 			url="${url}"
 			user="${user}"
 			password="${password}"
-			templatePrimaryDir="${templatePrimaryDir}">
+			templatePrimaryDir="${templatePrimaryDir}"
+			ignoredTableNamePattern="${ignoredTableNamePattern}" >
 			<entityConfig
 				destdir="${javaDestDir}"
 				packageName="${entityPackageName}"
@@ -43,10 +45,27 @@
 				packageName="${daoPackageName}"
 			/>
 			<sqlConfig
-				overwrite="false"
+				overwrite="true"
 				destdir="${sqlDestDir}"
 			/>
 		</gen>
+	</target>
+
+	<target name="genTest">
+		<genTest
+			dialectName="${dialectName}"
+			driverClassName="${driverClassName}"
+			url="${url}"
+			user="${user}"
+			password="${password}">
+			<sqlTestConfig
+				destdir="${javaDestDir}"
+				testClassName="${sqlTestClassName}">
+				<fileset dir="${sqlDestDir}">
+					<include name="${sqlFilePattern}"/>
+				</fileset>
+			</sqlTestConfig>
+		</genTest>
 	</target>
 
 </project>

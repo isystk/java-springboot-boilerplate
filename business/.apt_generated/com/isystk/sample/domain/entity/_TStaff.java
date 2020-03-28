@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-28T22:50:59.088+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T02:21:41.386+0900")
 public final class _TStaff extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TStaff> {
 
     static {
@@ -13,6 +13,18 @@ public final class _TStaff extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
     private final org.seasar.doma.jdbc.entity.NamingType __namingType = null;
 
     private final org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator __idGenerator = new org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator();
+
+    /** the deleteFlg */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TStaff, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "", __namingType, true, true, false);
+
+    /** the registTime */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TStaff, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "", __namingType, true, true, false);
+
+    /** the updateTime */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TStaff, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "", __namingType, true, true, false);
+
+    /** the version */
+    public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TStaff, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "version", __namingType, false);
 
     /** the staffId */
     public final org.seasar.doma.jdbc.entity.GeneratedIdPropertyType<com.isystk.sample.domain.entity.TStaff, java.lang.Integer, java.lang.Integer> $staffId = new org.seasar.doma.jdbc.entity.GeneratedIdPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.IntegerWrapper::new), "staffId", "STAFF_ID", __namingType, false, __idGenerator);
@@ -37,18 +49,6 @@ public final class _TStaff extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
 
     /** the lastLoginTime */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TStaff, java.time.LocalDateTime, java.time.LocalDateTime> $lastLoginTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "lastLoginTime", "LAST_LOGIN_TIME", __namingType, true, true, false);
-
-    /** the registTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TStaff, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
-
-    /** the updateTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TStaff, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
-
-    /** the deleteFlg */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TStaff, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "DELETE_FLG", __namingType, true, true, false);
-
-    /** the version */
-    public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TStaff, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.TStaff.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "VERSION", __namingType, false);
 
     private final java.util.function.Supplier<com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.TStaff>> __listenerSupplier;
 
@@ -81,6 +81,14 @@ public final class _TStaff extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TStaff, ?>> __idList = new java.util.ArrayList<>();
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TStaff, ?>> __list = new java.util.ArrayList<>(12);
         java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TStaff, ?>> __map = new java.util.HashMap<>(12);
+        __list.add($deleteFlg);
+        __map.put("deleteFlg", $deleteFlg);
+        __list.add($registTime);
+        __map.put("registTime", $registTime);
+        __list.add($updateTime);
+        __map.put("updateTime", $updateTime);
+        __list.add($version);
+        __map.put("version", $version);
         __idList.add($staffId);
         __list.add($staffId);
         __map.put("staffId", $staffId);
@@ -98,14 +106,6 @@ public final class _TStaff extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
         __map.put("nameKana", $nameKana);
         __list.add($lastLoginTime);
         __map.put("lastLoginTime", $lastLoginTime);
-        __list.add($registTime);
-        __map.put("registTime", $registTime);
-        __list.add($updateTime);
-        __map.put("updateTime", $updateTime);
-        __list.add($deleteFlg);
-        __map.put("deleteFlg", $deleteFlg);
-        __list.add($version);
-        __map.put("version", $version);
         __idPropertyTypes = java.util.Collections.unmodifiableList(__idList);
         __entityPropertyTypes = java.util.Collections.unmodifiableList(__list);
         __entityPropertyTypeMap = java.util.Collections.unmodifiableMap(__map);
@@ -235,6 +235,10 @@ public final class _TStaff extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
     @Override
     public com.isystk.sample.domain.entity.TStaff newEntity(java.util.Map<String, org.seasar.doma.jdbc.entity.Property<com.isystk.sample.domain.entity.TStaff, ?>> __args) {
         com.isystk.sample.domain.entity.TStaff entity = new com.isystk.sample.domain.entity.TStaff();
+        if (__args.get("deleteFlg") != null) __args.get("deleteFlg").save(entity);
+        if (__args.get("registTime") != null) __args.get("registTime").save(entity);
+        if (__args.get("updateTime") != null) __args.get("updateTime").save(entity);
+        if (__args.get("version") != null) __args.get("version").save(entity);
         if (__args.get("staffId") != null) __args.get("staffId").save(entity);
         if (__args.get("email") != null) __args.get("email").save(entity);
         if (__args.get("password") != null) __args.get("password").save(entity);
@@ -243,10 +247,6 @@ public final class _TStaff extends org.seasar.doma.jdbc.entity.AbstractEntityTyp
         if (__args.get("familyNameKana") != null) __args.get("familyNameKana").save(entity);
         if (__args.get("nameKana") != null) __args.get("nameKana").save(entity);
         if (__args.get("lastLoginTime") != null) __args.get("lastLoginTime").save(entity);
-        if (__args.get("registTime") != null) __args.get("registTime").save(entity);
-        if (__args.get("updateTime") != null) __args.get("updateTime").save(entity);
-        if (__args.get("deleteFlg") != null) __args.get("deleteFlg").save(entity);
-        if (__args.get("version") != null) __args.get("version").save(entity);
         return entity;
     }
 

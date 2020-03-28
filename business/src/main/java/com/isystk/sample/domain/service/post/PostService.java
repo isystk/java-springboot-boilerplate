@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import com.isystk.sample.domain.dto.PostCriteria;
+import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.common.Page;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
@@ -28,7 +28,7 @@ public class PostService extends BaseTransactionalService {
      * @return
      */
     @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-    public Page<TPost> findAll(PostCriteria criteria, Pageable pageable) {
+    public Page<TPost> findAll(TPostCriteria criteria, Pageable pageable) {
         Assert.notNull(criteria, "criteria must not be null");
         return postRepository.findAll(criteria, pageable);
     }
@@ -39,7 +39,7 @@ public class PostService extends BaseTransactionalService {
      * @return
      */
     @Transactional(readOnly = true)
-    public Optional<TPost> findOne(PostCriteria criteria) {
+    public Optional<TPost> findOne(TPostCriteria criteria) {
         Assert.notNull(criteria, "criteria must not be null");
         return postRepository.findOne(criteria);
     }

@@ -1,34 +1,25 @@
 package com.isystk.sample.domain.dao;
 
 import org.seasar.doma.boot.ConfigAutowireable;
+
 import org.seasar.doma.jdbc.SelectOptions;
-
-import com.isystk.sample.domain.dto.StaffCriteria;
-import com.isystk.sample.domain.entity.TStaff;
-
 import java.util.Optional;
 import java.util.stream.Collector;
 
+import com.isystk.sample.domain.entity.TStaff;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
-import org.seasar.doma.SelectType;
 import org.seasar.doma.Update;
+import org.seasar.doma.SelectType;
+import com.isystk.sample.domain.dto.TStaffCriteria;
 
 /**
  */
 @ConfigAutowireable
 @Dao
 public interface TStaffDao {
-
-    /**
-     * @param staffId
-     * @param version
-     * @return the TStaff entity
-     */
-    @Select(ensureResult = true)
-    TStaff selectByIdAndVersion(Integer staffId, Long version);
 
     /**
      * @param entity
@@ -52,31 +43,34 @@ public interface TStaffDao {
     int delete(TStaff entity);
 
     /**
-     * 担当者を取得します。
-     *
      * @param criteria
      * @param options
      * @return
      */
     @Select(strategy = SelectType.COLLECT)
-    <R> R selectAll(final StaffCriteria criteria, final SelectOptions options, final Collector<TStaff, ?, R> collector);
+    <R> R selectAll(final TStaffCriteria criteria, final SelectOptions options, final Collector<TStaff, ?, R> collector);
 
     /**
-     * 担当者を1件取得します。
-     *
-     * @param id
-     * @return
+     * @param staffId
+     * @return the TStaff entity
      */
     @Select
-    Optional<TStaff> selectById(Long staffId);
+    Optional<TStaff> selectById(Integer staffId);
 
     /**
-     * 担当者を1件取得します。
-     *
+     * @param staffId
+     * @param version
+     * @return the TStaff entity
+     */
+    @Select(ensureResult = true)
+    Optional<TStaff> selectByIdAndVersion(Integer staffId, Long version);
+
+
+    /**
      * @param criteria
      * @return
      */
     @Select
-    Optional<TStaff> select(StaffCriteria criteria);
+    Optional<TStaff> select(TStaffCriteria criteria);
 
 }

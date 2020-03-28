@@ -1,25 +1,5 @@
 select
-  USER_ID,
-  EMAIL,
-  PASSWORD,
-  FAMILY_NAME,
-  NAME,
-  FAMILY_NAME_KANA,
-  NAME_KANA,
-  ZIP,
-  PREFECTURE_ID,
-  AREA,
-  ADDRESS,
-  BUILDING,
-  TEL,
-  SEX,
-  BIRTHDAY,
-  LAST_LOGIN_TIME,
-  STATUS,
-  REGIST_TIME,
-  UPDATE_TIME,
-  DELETE_FLG,
-  VERSION
+  /*%expand*/*
 from
   t_user
 where

@@ -2,26 +2,24 @@ package com.isystk.sample.domain.dao;
 
 import org.seasar.doma.boot.ConfigAutowireable;
 
+import org.seasar.doma.jdbc.SelectOptions;
+import java.util.Optional;
+import java.util.stream.Collector;
+
 import com.isystk.sample.domain.entity.TPostImage;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.SelectType;
+import com.isystk.sample.domain.dto.TPostImageCriteria;
 
 /**
  */
 @ConfigAutowireable
 @Dao
 public interface TPostImageDao {
-
-    /**
-     * @param postId
-     * @param imageId
-     * @return the TPostImage entity
-     */
-    @Select
-    TPostImage selectById(Integer postId, Integer imageId);
 
     /**
      * @param entity
@@ -43,4 +41,29 @@ public interface TPostImageDao {
      */
     @Delete
     int delete(TPostImage entity);
+
+    /**
+     * @param criteria
+     * @param options
+     * @return
+     */
+    @Select(strategy = SelectType.COLLECT)
+    <R> R selectAll(final TPostImageCriteria criteria, final SelectOptions options, final Collector<TPostImage, ?, R> collector);
+
+    /**
+     * @param postId
+     * @param imageId
+     * @return the TPostImage entity
+     */
+    @Select
+    Optional<TPostImage> selectById(Integer postId, Integer imageId);
+
+
+    /**
+     * @param criteria
+     * @return
+     */
+    @Select
+    Optional<TPostImage> select(TPostImageCriteria criteria);
+
 }

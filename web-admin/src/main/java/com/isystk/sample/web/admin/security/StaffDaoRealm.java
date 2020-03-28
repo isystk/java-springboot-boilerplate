@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.isystk.sample.domain.dao.TStaffDao;
-import com.isystk.sample.domain.dto.StaffCriteria;
+import com.isystk.sample.domain.dto.TStaffCriteria;
 import com.isystk.sample.domain.entity.TStaff;
 import com.isystk.sample.web.base.security.BaseRealm;
 
@@ -37,7 +37,7 @@ public class StaffDaoRealm extends BaseRealm {
 
         try {
             // login_idをメールアドレスと見立てる
-            val criteria = new StaffCriteria();
+            val criteria = new TStaffCriteria();
             criteria.setEmail(email);
 
             // 担当者を取得して、セッションに保存する

@@ -17,6 +17,10 @@ import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 @Table(name = "t_staff")
 public class TStaff extends DomaDtoImpl {
 
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
+
+
     /** ID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,22 +55,9 @@ public class TStaff extends DomaDtoImpl {
     @Column(name = "LAST_LOGIN_TIME")
     LocalDateTime lastLoginTime;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
 
-    /**  */
-    @Version
-    @Column(name = "VERSION")
-    Long version;
 
     /**
      * Returns the staffId.
@@ -85,7 +76,6 @@ public class TStaff extends DomaDtoImpl {
     public void setStaffId(Integer staffId) {
         this.staffId = staffId;
     }
-
     /**
      * Returns the email.
      *
@@ -103,7 +93,6 @@ public class TStaff extends DomaDtoImpl {
     public void setEmail(String email) {
         this.email = email;
     }
-
     /**
      * Returns the password.
      *
@@ -121,7 +110,6 @@ public class TStaff extends DomaDtoImpl {
     public void setPassword(String password) {
         this.password = password;
     }
-
     /**
      * Returns the familyName.
      *
@@ -139,7 +127,6 @@ public class TStaff extends DomaDtoImpl {
     public void setFamilyName(String familyName) {
         this.familyName = familyName;
     }
-
     /**
      * Returns the name.
      *
@@ -157,7 +144,6 @@ public class TStaff extends DomaDtoImpl {
     public void setName(String name) {
         this.name = name;
     }
-
     /**
      * Returns the familyNameKana.
      *
@@ -175,7 +161,6 @@ public class TStaff extends DomaDtoImpl {
     public void setFamilyNameKana(String familyNameKana) {
         this.familyNameKana = familyNameKana;
     }
-
     /**
      * Returns the nameKana.
      *
@@ -193,7 +178,6 @@ public class TStaff extends DomaDtoImpl {
     public void setNameKana(String nameKana) {
         this.nameKana = nameKana;
     }
-
     /**
      * Returns the lastLoginTime.
      *
@@ -210,77 +194,5 @@ public class TStaff extends DomaDtoImpl {
      */
     public void setLastLoginTime(LocalDateTime lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
-    }
-
-    /**
-     * Returns the registTime.
-     *
-     * @return the registTime
-     */
-    public LocalDateTime getRegistTime() {
-        return registTime;
-    }
-
-    /**
-     * Sets the registTime.
-     *
-     * @param registTime the registTime
-     */
-    public void setRegistTime(LocalDateTime registTime) {
-        this.registTime = registTime;
-    }
-
-    /**
-     * Returns the updateTime.
-     *
-     * @return the updateTime
-     */
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * Sets the updateTime.
-     *
-     * @param updateTime the updateTime
-     */
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    /**
-     * Returns the deleteFlg.
-     *
-     * @return the deleteFlg
-     */
-    public Boolean getDeleteFlg() {
-        return deleteFlg;
-    }
-
-    /**
-     * Sets the deleteFlg.
-     *
-     * @param deleteFlg the deleteFlg
-     */
-    public void setDeleteFlg(Boolean deleteFlg) {
-        this.deleteFlg = deleteFlg;
-    }
-
-    /**
-     * Returns the version.
-     *
-     * @return the version
-     */
-    public Long getVersion() {
-        return version;
-    }
-
-    /**
-     * Sets the version.
-     *
-     * @param version the version
-     */
-    public void setVersion(Long version) {
-        this.version = version;
     }
 }

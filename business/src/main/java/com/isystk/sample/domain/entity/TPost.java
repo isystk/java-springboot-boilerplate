@@ -17,6 +17,10 @@ import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 @Table(name = "t_post")
 public class TPost extends DomaDtoImpl {
 
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
+
+
     /** ID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,22 +39,9 @@ public class TPost extends DomaDtoImpl {
     @Column(name = "TEXT")
     String text;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
 
-    /**  */
-    @Version
-    @Column(name = "VERSION")
-    Long version;
 
     /**
      * Returns the postId.
@@ -69,7 +60,6 @@ public class TPost extends DomaDtoImpl {
     public void setPostId(Integer postId) {
         this.postId = postId;
     }
-
     /**
      * Returns the userId.
      *
@@ -87,7 +77,6 @@ public class TPost extends DomaDtoImpl {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-
     /**
      * Returns the title.
      *
@@ -105,7 +94,6 @@ public class TPost extends DomaDtoImpl {
     public void setTitle(String title) {
         this.title = title;
     }
-
     /**
      * Returns the text.
      *
@@ -122,77 +110,5 @@ public class TPost extends DomaDtoImpl {
      */
     public void setText(String text) {
         this.text = text;
-    }
-
-    /**
-     * Returns the registTime.
-     *
-     * @return the registTime
-     */
-    public LocalDateTime getRegistTime() {
-        return registTime;
-    }
-
-    /**
-     * Sets the registTime.
-     *
-     * @param registTime the registTime
-     */
-    public void setRegistTime(LocalDateTime registTime) {
-        this.registTime = registTime;
-    }
-
-    /**
-     * Returns the updateTime.
-     *
-     * @return the updateTime
-     */
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * Sets the updateTime.
-     *
-     * @param updateTime the updateTime
-     */
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    /**
-     * Returns the deleteFlg.
-     *
-     * @return the deleteFlg
-     */
-    public Boolean getDeleteFlg() {
-        return deleteFlg;
-    }
-
-    /**
-     * Sets the deleteFlg.
-     *
-     * @param deleteFlg the deleteFlg
-     */
-    public void setDeleteFlg(Boolean deleteFlg) {
-        this.deleteFlg = deleteFlg;
-    }
-
-    /**
-     * Returns the version.
-     *
-     * @return the version
-     */
-    public Long getVersion() {
-        return version;
-    }
-
-    /**
-     * Sets the version.
-     *
-     * @param version the version
-     */
-    public void setVersion(Long version) {
-        this.version = version;
     }
 }

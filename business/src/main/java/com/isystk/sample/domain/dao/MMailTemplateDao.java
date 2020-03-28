@@ -2,33 +2,24 @@ package com.isystk.sample.domain.dao;
 
 import org.seasar.doma.boot.ConfigAutowireable;
 
+import org.seasar.doma.jdbc.SelectOptions;
+import java.util.Optional;
+import java.util.stream.Collector;
+
 import com.isystk.sample.domain.entity.MMailTemplate;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.SelectType;
+import com.isystk.sample.domain.dto.MMailTemplateCriteria;
 
 /**
  */
 @ConfigAutowireable
 @Dao
 public interface MMailTemplateDao {
-
-    /**
-     * @param mailTemplateId
-     * @return the MMailTemplate entity
-     */
-    @Select
-    MMailTemplate selectById(Integer mailTemplateId);
-
-    /**
-     * @param mailTemplateId
-     * @param version
-     * @return the MMailTemplate entity
-     */
-    @Select(ensureResult = true)
-    MMailTemplate selectByIdAndVersion(Integer mailTemplateId, Long version);
 
     /**
      * @param entity
@@ -50,4 +41,36 @@ public interface MMailTemplateDao {
      */
     @Delete
     int delete(MMailTemplate entity);
+
+    /**
+     * @param criteria
+     * @param options
+     * @return
+     */
+    @Select(strategy = SelectType.COLLECT)
+    <R> R selectAll(final MMailTemplateCriteria criteria, final SelectOptions options, final Collector<MMailTemplate, ?, R> collector);
+
+    /**
+     * @param mailTemplateId
+     * @return the MMailTemplate entity
+     */
+    @Select
+    Optional<MMailTemplate> selectById(Integer mailTemplateId);
+
+    /**
+     * @param mailTemplateId
+     * @param version
+     * @return the MMailTemplate entity
+     */
+    @Select(ensureResult = true)
+    Optional<MMailTemplate> selectByIdAndVersion(Integer mailTemplateId, Long version);
+
+
+    /**
+     * @param criteria
+     * @return
+     */
+    @Select
+    Optional<MMailTemplate> select(MMailTemplateCriteria criteria);
+
 }

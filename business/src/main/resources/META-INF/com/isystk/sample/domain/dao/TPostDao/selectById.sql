@@ -1,13 +1,7 @@
-select
-  POST_ID,
-  USER_ID,
-  TITLE,
-  TEXT,
-  REGIST_TIME,
-  UPDATE_TIME,
-  DELETE_FLG,
-  VERSION
-from
+SELECT
+  /*%expand*/*
+FROM
   t_post
-where
+WHERE
   POST_ID = /* postId */1
+LIMIT 1

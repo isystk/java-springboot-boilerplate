@@ -1,12 +1,5 @@
 select
-  MAIL_TEMPLATE_ID,
-  TEMPLATE_DIV,
-  TITLE,
-  TEXT,
-  REGIST_TIME,
-  UPDATE_TIME,
-  DELETE_FLG,
-  VERSION
+  /*%expand*/*
 from
   m_mail_template
 where

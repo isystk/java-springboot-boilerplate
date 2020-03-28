@@ -11,9 +11,15 @@ package ${packageName};
 import ${annotationImportName};
 </#list>
 
+import org.seasar.doma.jdbc.SelectOptions;
+import java.util.Optional;
+import java.util.stream.Collector;
+
 <#list importNames as importName>
 import ${importName};
 </#list>
+import org.seasar.doma.SelectType;
+import com.isystk.sample.domain.dto.${entityDesc.simpleName}Criteria;
 
 /**
 <#if lib.author??>
@@ -26,29 +32,6 @@ import ${importName};
 @Dao<#if configClassSimpleName??>(config = ${configClassSimpleName}.class)</#if>
 public interface ${simpleName} {
 
-<#if entityDesc.idEntityPropertyDescs?size gt 0>
-    /**
-<#list entityDesc.idEntityPropertyDescs as property>
-     * @param ${property.name}
-</#list>
-     * @return the ${entityDesc.simpleName} entity
-     */
-    @Select
-    ${entityDesc.simpleName} selectById(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}<#if property_has_next>, </#if></#list>);
-
-</#if>
-<#if entityDesc.idEntityPropertyDescs?size gt 0 && entityDesc.versionEntityPropertyDesc??>
-    /**
-<#list entityDesc.idEntityPropertyDescs as property>
-     * @param ${property.name}
-</#list>
-     * @param ${entityDesc.versionEntityPropertyDesc.name}
-     * @return the ${entityDesc.simpleName} entity
-     */
-    @Select(ensureResult = true)
-    ${entityDesc.simpleName} selectByIdAndVersion(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}, </#list>${entityDesc.versionEntityPropertyDesc.propertyClassSimpleName} ${entityDesc.versionEntityPropertyDesc.name});
-
-</#if>
     /**
      * @param entity
      * @return affected rows
@@ -69,4 +52,44 @@ public interface ${simpleName} {
      */
     @Delete
     int delete(${entityDesc.simpleName} entity);
+
+    /**
+     * @param criteria
+     * @param options
+     * @return
+     */
+    @Select(strategy = SelectType.COLLECT)
+    <R> R selectAll(final ${entityDesc.simpleName}Criteria criteria, final SelectOptions options, final Collector<${entityDesc.simpleName}, ?, R> collector);
+
+<#if entityDesc.idEntityPropertyDescs?size gt 0>
+    /**
+<#list entityDesc.idEntityPropertyDescs as property>
+     * @param ${property.name}
+</#list>
+     * @return the ${entityDesc.simpleName} entity
+     */
+    @Select
+    Optional<${entityDesc.simpleName}> selectById(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}<#if property_has_next>, </#if></#list>);
+
+</#if>
+<#if entityDesc.idEntityPropertyDescs?size gt 0 && entityDesc.versionEntityPropertyDesc??>
+    /**
+<#list entityDesc.idEntityPropertyDescs as property>
+     * @param ${property.name}
+</#list>
+     * @param ${entityDesc.versionEntityPropertyDesc.name}
+     * @return the ${entityDesc.simpleName} entity
+     */
+    @Select(ensureResult = true)
+    Optional<${entityDesc.simpleName}> selectByIdAndVersion(<#list entityDesc.idEntityPropertyDescs as property>${property.propertyClassSimpleName} ${property.name}, </#list>${entityDesc.versionEntityPropertyDesc.propertyClassSimpleName} ${entityDesc.versionEntityPropertyDesc.name});
+
+</#if>
+
+    /**
+     * @param criteria
+     * @return
+     */
+    @Select
+    Optional<${entityDesc.simpleName}> select(${entityDesc.simpleName}Criteria criteria);
+
 }

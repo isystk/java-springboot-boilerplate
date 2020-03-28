@@ -3,14 +3,27 @@ SELECT
 FROM
   t_post
 WHERE
-  DELETE_FLG = false
 /*%if criteria.postId != null */
-  AND post_id = /* criteria.postId */1
+  POST_ID = /* criteria.postId */1
 /*%end*/
 /*%if criteria.userId != null */
-  AND user_id = /* criteria.userId */1
+  USER_ID = /* criteria.userId */1
 /*%end*/
 /*%if criteria.title != null */
-  AND title LIKE /* @infix(criteria.title) */'john' ESCAPE '$'
+  TITLE = /* criteria.title */'a'
 /*%end*/
-ORDER BY post_id ASC
+/*%if criteria.text != null */
+  TEXT = /* criteria.text */'a'
+/*%end*/
+/*%if criteria.registTime != null */
+  REGIST_TIME = /* criteria.registTime */'2010-01-23 12:34:56'
+/*%end*/
+/*%if criteria.updateTime != null */
+  UPDATE_TIME = /* criteria.updateTime */'2010-01-23 12:34:56'
+/*%end*/
+/*%if criteria.deleteFlg != null */
+  DELETE_FLG = /* criteria.deleteFlg */'a'
+/*%end*/
+/*%if criteria.version != null */
+  VERSION = /* criteria.version */1
+/*%end*/

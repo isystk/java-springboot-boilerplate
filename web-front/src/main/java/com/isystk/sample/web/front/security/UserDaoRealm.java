@@ -12,7 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.isystk.sample.domain.dao.TUserDao;
-import com.isystk.sample.domain.dto.UserCriteria;
+import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TUser;
 import com.isystk.sample.web.base.security.BaseRealm;
 
@@ -36,7 +36,7 @@ public class UserDaoRealm extends BaseRealm {
 
         try {
             // login_idをメールアドレスと見立てる
-            val criteria = new UserCriteria();
+            val criteria = new TUserCriteria();
             criteria.setEmail(email);
 
             // 担当者を取得して、セッションに保存する
