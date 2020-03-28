@@ -108,9 +108,15 @@ node_modules/
 docs/_build/
 
 
+# nginx
+docker/nginx/logs
 
 # mysql
 docker/mysql/data
+docker/mysql/logs
+
+# solr
+docker/solr/logs
 
 # thumb
 docker/nginx/public/thumb/*

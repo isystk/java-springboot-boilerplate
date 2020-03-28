@@ -1,10 +1,7 @@
-select
-  POST_TAG_ID,
-  NAME,
-  REGIST_TIME,
-  UPDATE_TIME,
-  DELETE_FLG
-from
+SELECT
+  /*%expand*/*
+FROM
   m_post_tag
-where
+WHERE
   POST_TAG_ID = /* postTagId */1
+LIMIT 1

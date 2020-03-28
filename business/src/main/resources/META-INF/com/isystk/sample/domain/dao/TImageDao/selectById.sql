@@ -1,9 +1,7 @@
-select
-  IMAGE_ID,
-  REGIST_TIME,
-  UPDATE_TIME,
-  DELETE_FLG
-from
+SELECT
+  /*%expand*/*
+FROM
   t_image
-where
+WHERE
   IMAGE_ID = /* imageId */1
+LIMIT 1

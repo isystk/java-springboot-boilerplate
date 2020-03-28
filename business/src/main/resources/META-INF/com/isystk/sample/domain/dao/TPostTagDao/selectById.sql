@@ -1,9 +1,9 @@
-select
-  POST_ID,
-  POST_TAG_ID
-from
+SELECT
+  /*%expand*/*
+FROM
   t_post_tag
-where
+WHERE
   POST_ID = /* postId */1
   and
   POST_TAG_ID = /* postTagId */1
+LIMIT 1

@@ -23,7 +23,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.isystk.sample.domain.dto.PostCriteria;
+import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.service.post.PostService;
@@ -66,7 +66,7 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping
 	public String index(@ModelAttribute SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, PostCriteria.class);
+		val criteria = modelMapper.map(form, TPostCriteria.class);
 
 		// 10件区切りで取得する
 		val pages = postService.findAll(criteria, form);
@@ -204,7 +204,7 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping("/download/{filename:.+\\.csv}")
 	public ModelAndView downloadCsv(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, PostCriteria.class);
+		val criteria = modelMapper.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
@@ -228,7 +228,7 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping(path = "/download/{filename:.+\\.xlsx}")
 	public ModelAndView downloadExcel(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, PostCriteria.class);
+		val criteria = modelMapper.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
@@ -249,7 +249,7 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping(path = "/download/{filename:.+\\.pdf}")
 	public ModelAndView downloadPdf(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, PostCriteria.class);
+		val criteria = modelMapper.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());

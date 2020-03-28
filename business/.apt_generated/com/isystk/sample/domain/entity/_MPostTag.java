@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-28T22:50:59.760+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T02:21:42.180+0900")
 public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.MPostTag> {
 
     static {
@@ -14,6 +14,15 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
 
     private final org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator __idGenerator = new org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator();
 
+    /** the deleteFlg */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "", __namingType, true, true, false);
+
+    /** the registTime */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "", __namingType, true, true, false);
+
+    /** the updateTime */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "", __namingType, true, true, false);
+
     /** the version */
     public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "version", __namingType, false);
 
@@ -22,15 +31,6 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
 
     /** the name */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.String, java.lang.String> $name = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.StringWrapper::new), "name", "NAME", __namingType, true, true, false);
-
-    /** the registTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "REGIST_TIME", __namingType, true, true, false);
-
-    /** the updateTime */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "UPDATE_TIME", __namingType, true, true, false);
-
-    /** the deleteFlg */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.MPostTag, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.MPostTag.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "DELETE_FLG", __namingType, true, true, false);
 
     private final java.util.function.Supplier<com.isystk.sample.domain.dao.DefaultEntityListener<com.isystk.sample.domain.entity.MPostTag>> __listenerSupplier;
 
@@ -63,6 +63,12 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __idList = new java.util.ArrayList<>();
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __list = new java.util.ArrayList<>(6);
         java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.MPostTag, ?>> __map = new java.util.HashMap<>(6);
+        __list.add($deleteFlg);
+        __map.put("deleteFlg", $deleteFlg);
+        __list.add($registTime);
+        __map.put("registTime", $registTime);
+        __list.add($updateTime);
+        __map.put("updateTime", $updateTime);
         __list.add($version);
         __map.put("version", $version);
         __idList.add($postTagId);
@@ -70,12 +76,6 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
         __map.put("postTagId", $postTagId);
         __list.add($name);
         __map.put("name", $name);
-        __list.add($registTime);
-        __map.put("registTime", $registTime);
-        __list.add($updateTime);
-        __map.put("updateTime", $updateTime);
-        __list.add($deleteFlg);
-        __map.put("deleteFlg", $deleteFlg);
         __idPropertyTypes = java.util.Collections.unmodifiableList(__idList);
         __entityPropertyTypes = java.util.Collections.unmodifiableList(__list);
         __entityPropertyTypeMap = java.util.Collections.unmodifiableMap(__map);
@@ -205,12 +205,12 @@ public final class _MPostTag extends org.seasar.doma.jdbc.entity.AbstractEntityT
     @Override
     public com.isystk.sample.domain.entity.MPostTag newEntity(java.util.Map<String, org.seasar.doma.jdbc.entity.Property<com.isystk.sample.domain.entity.MPostTag, ?>> __args) {
         com.isystk.sample.domain.entity.MPostTag entity = new com.isystk.sample.domain.entity.MPostTag();
+        if (__args.get("deleteFlg") != null) __args.get("deleteFlg").save(entity);
+        if (__args.get("registTime") != null) __args.get("registTime").save(entity);
+        if (__args.get("updateTime") != null) __args.get("updateTime").save(entity);
         if (__args.get("version") != null) __args.get("version").save(entity);
         if (__args.get("postTagId") != null) __args.get("postTagId").save(entity);
         if (__args.get("name") != null) __args.get("name").save(entity);
-        if (__args.get("registTime") != null) __args.get("registTime").save(entity);
-        if (__args.get("updateTime") != null) __args.get("updateTime").save(entity);
-        if (__args.get("deleteFlg") != null) __args.get("deleteFlg").save(entity);
         return entity;
     }
 

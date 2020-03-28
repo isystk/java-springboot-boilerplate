@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.isystk.sample.domain.dao.TStaffDao;
-import com.isystk.sample.domain.dto.StaffCriteria;
+import com.isystk.sample.domain.dto.TStaffCriteria;
 import com.isystk.sample.domain.dto.common.Page;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TStaff;
@@ -34,7 +34,7 @@ public class StaffRepository extends BaseRepository {
      * @param pageable
      * @return
      */
-    public Page<TStaff> findAll(StaffCriteria criteria, Pageable pageable) {
+    public Page<TStaff> findAll(TStaffCriteria criteria, Pageable pageable) {
         // ページングを指定する
         val options = createSelectOptions(pageable).count();
         val data = tStaffDao.selectAll(criteria, options, toList());
@@ -47,7 +47,7 @@ public class StaffRepository extends BaseRepository {
      * @param criteria
      * @return
      */
-    public Optional<TStaff> findOne(StaffCriteria criteria) {
+    public Optional<TStaff> findOne(TStaffCriteria criteria) {
         return tStaffDao.select(criteria);
     }
 
@@ -56,7 +56,7 @@ public class StaffRepository extends BaseRepository {
      *
      * @return
      */
-    public TStaff findById(final Long id) {
+    public TStaff findById(final Integer id) {
         return tStaffDao.selectById(id).orElseThrow(() -> new NoDataFoundException("staff_id=" + id + " のデータが見つかりません。"));
     }
 
@@ -95,7 +95,7 @@ public class StaffRepository extends BaseRepository {
      *
      * @return
      */
-    public TStaff delete(final Long id) {
+    public TStaff delete(final Integer id) {
         val staff = tStaffDao.selectById(id)
                 .orElseThrow(() -> new NoDataFoundException("staff_id=" + id + " のデータが見つかりません。"));
 

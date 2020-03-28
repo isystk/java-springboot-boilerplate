@@ -14,6 +14,10 @@ import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 @Table(name = "t_user_onetime_pass")
 public class TUserOnetimePass extends DomaDtoImpl {
 
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
+
+
     /** ID */
     @Id
     @Column(name = "USER_ID")
@@ -44,7 +48,6 @@ public class TUserOnetimePass extends DomaDtoImpl {
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
-
     /**
      * Returns the onetimeKey.
      *
@@ -62,7 +65,6 @@ public class TUserOnetimePass extends DomaDtoImpl {
     public void setOnetimeKey(String onetimeKey) {
         this.onetimeKey = onetimeKey;
     }
-
     /**
      * Returns the onetimeValidTime.
      *

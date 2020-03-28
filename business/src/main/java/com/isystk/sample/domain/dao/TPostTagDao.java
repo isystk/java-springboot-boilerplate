@@ -2,26 +2,24 @@ package com.isystk.sample.domain.dao;
 
 import org.seasar.doma.boot.ConfigAutowireable;
 
+import org.seasar.doma.jdbc.SelectOptions;
+import java.util.Optional;
+import java.util.stream.Collector;
+
 import com.isystk.sample.domain.entity.TPostTag;
 import org.seasar.doma.Dao;
 import org.seasar.doma.Delete;
 import org.seasar.doma.Insert;
 import org.seasar.doma.Select;
 import org.seasar.doma.Update;
+import org.seasar.doma.SelectType;
+import com.isystk.sample.domain.dto.TPostTagCriteria;
 
 /**
  */
 @ConfigAutowireable
 @Dao
 public interface TPostTagDao {
-
-    /**
-     * @param postId
-     * @param postTagId
-     * @return the TPostTag entity
-     */
-    @Select
-    TPostTag selectById(Integer postId, Integer postTagId);
 
     /**
      * @param entity
@@ -43,4 +41,29 @@ public interface TPostTagDao {
      */
     @Delete
     int delete(TPostTag entity);
+
+    /**
+     * @param criteria
+     * @param options
+     * @return
+     */
+    @Select(strategy = SelectType.COLLECT)
+    <R> R selectAll(final TPostTagCriteria criteria, final SelectOptions options, final Collector<TPostTag, ?, R> collector);
+
+    /**
+     * @param postId
+     * @param postTagId
+     * @return the TPostTag entity
+     */
+    @Select
+    Optional<TPostTag> selectById(Integer postId, Integer postTagId);
+
+
+    /**
+     * @param criteria
+     * @return
+     */
+    @Select
+    Optional<TPostTag> select(TPostTagCriteria criteria);
+
 }

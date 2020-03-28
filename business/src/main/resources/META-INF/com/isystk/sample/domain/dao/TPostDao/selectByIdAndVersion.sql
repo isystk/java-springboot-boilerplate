@@ -1,12 +1,5 @@
 select
-  POST_ID,
-  USER_ID,
-  TITLE,
-  TEXT,
-  REGIST_TIME,
-  UPDATE_TIME,
-  DELETE_FLG,
-  VERSION
+  /*%expand*/*
 from
   t_post
 where

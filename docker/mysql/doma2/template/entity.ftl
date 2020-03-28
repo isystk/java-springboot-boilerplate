@@ -25,8 +25,14 @@ import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 @Table(<#if showCatalogName && catalogName??>catalog = "${catalogName}"</#if><#if showSchemaName && schemaName??><#if showCatalogName && catalogName??>, </#if>schema = "${schemaName}"</#if><#if showTableName><#if showCatalogName && catalogName?? || showSchemaName && schemaName??>, </#if>name = "${tableName}"</#if>)
 </#if>
 public class ${simpleName} extends DomaDtoImpl {
+
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
+
 <#list ownEntityPropertyDescs as property>
 
+  <#if property.columnName == "REGIST_TIME" || property.columnName == "UPDATE_TIME" || property.columnName == "DELETE_FLG" || property.columnName == "VERSION" >
+  <#else>
   <#if showDbComment && property.comment??>
     /** ${property.comment} */
   <#else>
@@ -50,6 +56,7 @@ public class ${simpleName} extends DomaDtoImpl {
     @Column(name = "${property.columnName}")
   </#if>
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name};
+  </#if>
 </#list>
 <#if originalStatesPropertyName??>
 
@@ -57,9 +64,11 @@ public class ${simpleName} extends DomaDtoImpl {
     @OriginalStates
     ${simpleName} ${originalStatesPropertyName};
 </#if>
+
 <#if useAccessor>
   <#list ownEntityPropertyDescs as property>
-
+    <#if property.columnName == "REGIST_TIME" || property.columnName == "UPDATE_TIME" || property.columnName == "DELETE_FLG" || property.columnName == "VERSION" >
+    <#else>
     /**
      * Returns the ${property.name}.
      *
@@ -77,6 +86,7 @@ public class ${simpleName} extends DomaDtoImpl {
     public void set${property.name?cap_first}(${property.propertyClassSimpleName} ${property.name}) {
         this.${property.name} = ${property.name};
     }
+    </#if>
   </#list>
 </#if>
 }

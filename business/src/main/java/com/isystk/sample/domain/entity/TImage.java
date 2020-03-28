@@ -14,22 +14,17 @@ import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 @Table(name = "t_image")
 public class TImage extends DomaDtoImpl {
 
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
+
+
     /** ID */
     @Id
     @Column(name = "IMAGE_ID")
     Integer imageId;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
 
     /**
      * Returns the imageId.
@@ -47,59 +42,5 @@ public class TImage extends DomaDtoImpl {
      */
     public void setImageId(Integer imageId) {
         this.imageId = imageId;
-    }
-
-    /**
-     * Returns the registTime.
-     *
-     * @return the registTime
-     */
-    public LocalDateTime getRegistTime() {
-        return registTime;
-    }
-
-    /**
-     * Sets the registTime.
-     *
-     * @param registTime the registTime
-     */
-    public void setRegistTime(LocalDateTime registTime) {
-        this.registTime = registTime;
-    }
-
-    /**
-     * Returns the updateTime.
-     *
-     * @return the updateTime
-     */
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    /**
-     * Sets the updateTime.
-     *
-     * @param updateTime the updateTime
-     */
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    /**
-     * Returns the deleteFlg.
-     *
-     * @return the deleteFlg
-     */
-    public Boolean getDeleteFlg() {
-        return deleteFlg;
-    }
-
-    /**
-     * Sets the deleteFlg.
-     *
-     * @param deleteFlg the deleteFlg
-     */
-    public void setDeleteFlg(Boolean deleteFlg) {
-        this.deleteFlg = deleteFlg;
     }
 }

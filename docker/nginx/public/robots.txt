@@ -1,1 +1,4 @@
-test
+User-Agent:*
+
+Disallow:/admin/
+Allow:/

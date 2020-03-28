@@ -1,8 +1,7 @@
-select
-  USER_ID,
-  ONETIME_KEY,
-  ONETIME_VALID_TIME
-from
+SELECT
+  /*%expand*/*
+FROM
   t_user_onetime_valid
-where
+WHERE
   USER_ID = /* userId */1
+LIMIT 1

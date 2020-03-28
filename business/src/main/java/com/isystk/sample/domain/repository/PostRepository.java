@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.isystk.sample.domain.dao.TPostDao;
-import com.isystk.sample.domain.dto.PostCriteria;
+import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.common.Page;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
@@ -34,7 +34,7 @@ public class PostRepository extends BaseRepository {
      * @param pageable
      * @return
      */
-    public Page<TPost> findAll(PostCriteria criteria, Pageable pageable) {
+    public Page<TPost> findAll(TPostCriteria criteria, Pageable pageable) {
         // ページングを指定する
         val options = createSelectOptions(pageable).count();
         val data = tPostDao.selectAll(criteria, options, toList());
@@ -47,7 +47,7 @@ public class PostRepository extends BaseRepository {
      * @param criteria
      * @return
      */
-    public Optional<TPost> findOne(PostCriteria criteria) {
+    public Optional<TPost> findOne(TPostCriteria criteria) {
         return tPostDao.select(criteria);
     }
 
