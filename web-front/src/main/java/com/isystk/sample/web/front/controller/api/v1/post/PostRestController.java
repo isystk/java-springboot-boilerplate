@@ -1,6 +1,7 @@
 package com.isystk.sample.web.front.controller.api.v1.post;
 
-import static com.isystk.sample.web.base.WebConst.MESSAGE_SUCCESS;
+import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.web.base.FrontUrl.*;
 
 import java.io.IOException;
 
@@ -20,7 +21,7 @@ import com.isystk.sample.web.base.controller.api.resource.PageableResourceImpl;
 import lombok.val;
 
 @RestController
-@RequestMapping(path = "/api/v1/posts", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = API_V1_POST, produces = MediaType.APPLICATION_JSON_VALUE)
 public class PostRestController extends AbstractRestController {
 
     @Autowired

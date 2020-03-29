@@ -7,14 +7,43 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="content">
+		<div class="content" id="content">
 			<main class="photogallery">
 
-				<div class="photo">
+				<div class="photo" v-for="e in datalist">
+					<a href="#">
+					<div class="inner">
+						<div class="square">
+							<img src="/thumb/sample.jpg" class="photo"/>
+						</div>
+						<div class="txt">
+							<p>{{e.title}}&nbsp;{{e.registTime}}</p>
+							<span>
+							</span>
+						</div>
+					</div>
+					</a>
 				</div>
 
 			</main>
 		</div>
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+		var myVueapp = new Vue({
+			el:"#content",
+			data:{
+				url: '/api/v1/post',
+				datalist:[]
+			},
+			created () {
+				(async () => {
+					var res = await axios.get(this.url);
+					this.datalist = res.data.data;
+				})();
+			}
+			})
+		</script>
 	</div>
 </body>
 </html>
