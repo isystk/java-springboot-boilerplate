@@ -1,12 +1,12 @@
 package com.isystk.sample.web.base.controller.api;
 
-import org.apache.naming.factory.ResourceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.isystk.sample.common.FunctionNameAware;
 import com.isystk.sample.web.base.controller.BaseController;
+import com.isystk.sample.web.base.controller.api.resource.ResourceFactory;
 
 import lombok.extern.slf4j.Slf4j;
 

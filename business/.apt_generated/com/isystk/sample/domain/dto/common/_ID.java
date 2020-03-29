@@ -3,7 +3,7 @@ package com.isystk.sample.domain.dto.common;
 /**
  * @param <T> T
  */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T01:13:05.279+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T20:24:29.584+0900")
 public final class _ID<T> extends org.seasar.doma.jdbc.domain.AbstractDomainType<java.lang.Integer, com.isystk.sample.domain.dto.common.ID<T>> {
 
     static {
