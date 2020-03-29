@@ -64,6 +64,4 @@ public interface WebConst {
 
     String STATIC_RESOURCES_URL = "/static/**";
 
-    String API_BASE_URL = "/api/**";
-
 }

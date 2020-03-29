@@ -40,7 +40,7 @@ public class SecurityConfig extends BaseSecurityConfig {
     public void configure(WebSecurity web) throws Exception {
         // 静的ファイルへのアクセスは認証をかけない
         web.ignoring()//
-        .antMatchers(STATIC_RESOURCES_URL);
+                .antMatchers(WEBJARS_URL, STATIC_RESOURCES_URL);
     }
 
     @Override
