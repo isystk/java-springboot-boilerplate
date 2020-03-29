@@ -117,6 +117,8 @@ docker/mysql/logs
 
 # solr
 docker/solr/logs
+docker/solr/data/mycore/data
+docker/solr/data/post/data
 
 # thumb
 docker/nginx/public/thumb/*

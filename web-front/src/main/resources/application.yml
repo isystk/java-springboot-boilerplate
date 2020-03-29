@@ -17,6 +17,8 @@ spring:
     password: password
 
   mvc.hiddenmethod.filter.enabled: true
+  
+  data.solr.host: http://localhost:8983/solr
 
 doma:
   dialect: mysql

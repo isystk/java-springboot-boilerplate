@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.entity;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T02:21:40.928+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T20:24:30.056+0900")
 public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.entity.TUser> {
 
     static {
@@ -14,14 +14,14 @@ public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType
 
     private final org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator __idGenerator = new org.seasar.doma.jdbc.id.BuiltinIdentityIdGenerator();
 
-    /** the deleteFlg */
-    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "", __namingType, true, true, false);
-
     /** the registTime */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.time.LocalDateTime, java.time.LocalDateTime> $registTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "registTime", "", __namingType, true, true, false);
 
     /** the updateTime */
     public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.time.LocalDateTime, java.time.LocalDateTime> $updateTime = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LocalDateTimeWrapper::new), "updateTime", "", __namingType, true, true, false);
+
+    /** the deleteFlg */
+    public final org.seasar.doma.jdbc.entity.DefaultPropertyType<com.isystk.sample.domain.entity.TUser, java.lang.Boolean, java.lang.Boolean> $deleteFlg = new org.seasar.doma.jdbc.entity.DefaultPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.BooleanWrapper::new), "deleteFlg", "", __namingType, true, true, false);
 
     /** the version */
     public final org.seasar.doma.jdbc.entity.VersionPropertyType<com.isystk.sample.domain.entity.TUser, java.lang.Long, java.lang.Long> $version = new org.seasar.doma.jdbc.entity.VersionPropertyType<>(com.isystk.sample.domain.entity.TUser.class, () -> new org.seasar.doma.internal.jdbc.scalar.BasicScalar<>(org.seasar.doma.wrapper.LongWrapper::new), "version", "version", __namingType, false);
@@ -108,12 +108,12 @@ public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TUser, ?>> __idList = new java.util.ArrayList<>();
         java.util.List<org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TUser, ?>> __list = new java.util.ArrayList<>(21);
         java.util.Map<String, org.seasar.doma.jdbc.entity.EntityPropertyType<com.isystk.sample.domain.entity.TUser, ?>> __map = new java.util.HashMap<>(21);
-        __list.add($deleteFlg);
-        __map.put("deleteFlg", $deleteFlg);
         __list.add($registTime);
         __map.put("registTime", $registTime);
         __list.add($updateTime);
         __map.put("updateTime", $updateTime);
+        __list.add($deleteFlg);
+        __map.put("deleteFlg", $deleteFlg);
         __list.add($version);
         __map.put("version", $version);
         __idList.add($userId);
@@ -280,9 +280,9 @@ public final class _TUser extends org.seasar.doma.jdbc.entity.AbstractEntityType
     @Override
     public com.isystk.sample.domain.entity.TUser newEntity(java.util.Map<String, org.seasar.doma.jdbc.entity.Property<com.isystk.sample.domain.entity.TUser, ?>> __args) {
         com.isystk.sample.domain.entity.TUser entity = new com.isystk.sample.domain.entity.TUser();
-        if (__args.get("deleteFlg") != null) __args.get("deleteFlg").save(entity);
         if (__args.get("registTime") != null) __args.get("registTime").save(entity);
         if (__args.get("updateTime") != null) __args.get("updateTime").save(entity);
+        if (__args.get("deleteFlg") != null) __args.get("deleteFlg").save(entity);
         if (__args.get("version") != null) __args.get("version").save(entity);
         if (__args.get("userId") != null) __args.get("userId").save(entity);
         if (__args.get("email") != null) __args.get("email").save(entity);

@@ -2,7 +2,7 @@ package com.isystk.sample.domain.dao;
 
 /** */
 @org.springframework.stereotype.Repository()
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T01:38:36.291+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T20:24:42.224+0900")
 public class TImageDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao implements com.isystk.sample.domain.dao.TImageDao {
 
     static {

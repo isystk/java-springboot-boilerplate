@@ -16,6 +16,8 @@ import com.isystk.sample.web.base.aop.RequestTrackingInterceptor;
 import com.isystk.sample.web.base.aop.SetAuditInfoInterceptor;
 import com.isystk.sample.web.base.aop.SetDoubleSubmitCheckTokenInterceptor;
 import com.isystk.sample.web.base.aop.SetModelAndViewInterceptor;
+import com.isystk.sample.web.base.controller.api.resource.DefaultResourceFactoryImpl;
+import com.isystk.sample.web.base.controller.api.resource.ResourceFactory;
 
 import lombok.val;
 
@@ -29,6 +31,11 @@ public abstract class BaseApplicationConfig
     @Bean
     public PageFactory pageFactory() {
         return new DefaultPageFactoryImpl();
+    }
+
+    @Bean
+    public ResourceFactory resourceFactory() {
+        return new DefaultResourceFactoryImpl();
     }
 
     @Bean
