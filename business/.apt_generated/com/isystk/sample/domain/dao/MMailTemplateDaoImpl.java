@@ -2,7 +2,7 @@ package com.isystk.sample.domain.dao;
 
 /** */
 @org.springframework.stereotype.Repository()
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-30T15:00:03.345+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-30T19:39:04.998+0900")
 public class MMailTemplateDaoImpl extends org.seasar.doma.internal.jdbc.dao.AbstractDao implements com.isystk.sample.domain.dao.MMailTemplateDao {
 
     static {
