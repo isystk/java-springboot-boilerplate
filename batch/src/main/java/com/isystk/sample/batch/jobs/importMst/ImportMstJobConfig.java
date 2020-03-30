@@ -1,4 +1,4 @@
-package com.isystk.sample.batch.jobs.user;
+package com.isystk.sample.batch.jobs.importMst;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecutionListener;
@@ -19,7 +19,7 @@ import com.isystk.sample.batch.listener.DefaultStepExecutionListener;
  */
 @Configuration
 @EnableBatchProcessing
-public class ImportUserJobConfig {
+public class ImportMstJobConfig {
 
     @Autowired
     JobBuilderFactory jobBuilderFactory;
@@ -29,23 +29,26 @@ public class ImportUserJobConfig {
 
     @Bean
     public JobExecutionListener importUserJobListener() {
-        return new ImportUserJobListener();
+        return new ImportMstJobListener();
     }
 
     @Bean
-    public Job importUserJob() {
-        return jobBuilderFactory.get("importUserJob").incrementer(new RunIdIncrementer())
-                .listener(importUserJobListener()).flow(importUserStep()).end().build();
+    public Job importMstJob() {
+        return jobBuilderFactory.get("importMstJob").incrementer(new RunIdIncrementer())
+                .listener(importUserJobListener())
+                .start(importMstPostStep())
+//              .next(importMstPostStep())
+                .build();
     }
 
     @Bean
-    public Step importUserStep() {
-        return stepBuilderFactory.get("importUserStep").listener(new DefaultStepExecutionListener())
-                .tasklet(importUserTasklet()).build();
+    public Step importMstPostStep() {
+        return stepBuilderFactory.get("importMstPostStep").listener(new DefaultStepExecutionListener())
+                .tasklet(importMstPostTasklet()).build();
     }
 
     @Bean
-    public Tasklet importUserTasklet() {
-        return new ImportUserTasklet();
+    public Tasklet importMstPostTasklet() {
+        return new ImportMstPostTasklet();
     }
 }

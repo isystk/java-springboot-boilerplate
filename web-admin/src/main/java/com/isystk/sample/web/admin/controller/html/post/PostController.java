@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
-import com.isystk.sample.domain.service.post.PostService;
+import com.isystk.sample.domain.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
 import com.isystk.sample.web.base.view.ExcelView;

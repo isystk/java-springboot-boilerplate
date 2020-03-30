@@ -1,8 +1,8 @@
-package com.isystk.sample.batch.jobs.user;
+package com.isystk.sample.batch.jobs.solr;
 
 import com.isystk.sample.batch.listener.BaseJobExecutionListener;
 
-public class ImportUserJobListener extends BaseJobExecutionListener {
+public class SolrlRegistJobListener extends BaseJobExecutionListener {
 
     @Override
     protected String getBatchId() {
@@ -11,6 +11,6 @@ public class ImportUserJobListener extends BaseJobExecutionListener {
 
     @Override
     protected String getBatchName() {
-        return "ユーザー情報取り込み";
+        return "インデックス生成";
     }
 }

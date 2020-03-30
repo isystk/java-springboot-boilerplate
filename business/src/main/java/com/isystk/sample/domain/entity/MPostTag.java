@@ -1,6 +1,5 @@
 package com.isystk.sample.domain.entity;
 
-import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.GeneratedValue;
@@ -10,7 +9,7 @@ import org.seasar.doma.Table;
 import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 /**
- * 
+ *
  */
 @Entity
 @Table(name = "m_post_tag")

@@ -1,4 +1,4 @@
-package com.isystk.sample.domain.service.post;
+package com.isystk.sample.domain.service;
 
 import java.util.Optional;
 
@@ -12,7 +12,6 @@ import com.isystk.sample.domain.dto.common.Page;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.repository.PostRepository;
-import com.isystk.sample.domain.service.BaseTransactionalService;
 
 @Service
 public class PostService extends BaseTransactionalService {

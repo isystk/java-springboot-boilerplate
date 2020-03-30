@@ -18,6 +18,8 @@ spring:
 
   mvc.hiddenmethod.filter.enabled: true
 
+  data.solr.host: http://localhost:8983/solr
+
 doma:
   dialect: mysql
   # 小文字のスネークケースに変換する（firstName → first_name）
