@@ -91,7 +91,6 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
-
 ### Gradle ###
 .gradle
 build/
@@ -107,6 +106,10 @@ node_modules/
 .springBeans
 docs/_build/
 
+
+.apt_generated
+.factorypath
+.sts4-cache
 
 # nginx
 docker/nginx/logs
