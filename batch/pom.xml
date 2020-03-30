@@ -2,15 +2,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<artifactId>batch</artifactId>
+  <version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>batch</name>
+  <description>batch Module</description>
+
 	<parent>
 		<groupId>com.isystk.sample</groupId>
 		<artifactId>parent</artifactId>
   	<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>batch</artifactId>
-	<packaging>jar</packaging>
-	<name>batch</name>
-	<url>http://maven.apache.org</url>
 
 	<dependencies>
 		<dependency>
@@ -28,5 +31,33 @@
 			<artifactId>lombok</artifactId>
 		</dependency>
 	</dependencies>
+
+	<build>
+			<finalName>batch</finalName>
+			<plugins>
+					<plugin>
+							<groupId>org.springframework.boot</groupId>
+							<artifactId>spring-boot-maven-plugin</artifactId>
+							<configuration>
+									<excludeDevtools>true</excludeDevtools>
+									<executable>true</executable>
+							</configuration>
+					</plugin>
+					<plugin>
+							<groupId>org.apache.maven.plugins</groupId>
+							<artifactId>maven-compiler-plugin</artifactId>
+							<version>3.3</version>
+							<configuration>
+									<compilerVersion>11</compilerVersion>
+									<source>11</source>
+									<target>11</target>
+									<encoding>UTF-8</encoding>
+									<compilerArgs>
+											<arg>-Xlint:all,-options,-path</arg>
+									</compilerArgs>
+							</configuration>
+					</plugin>
+			</plugins>
+	</build>
 
 </project>

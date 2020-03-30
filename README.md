@@ -90,22 +90,27 @@ $ cd /path/to/java-springboot-sample
 $ ./mvnw -X -U eclipse:clean eclipse:eclipse -P ut -f pom.xml
 ```
 
-#### webアプリケーションの起動
+#### 実行ファイルの生成
 
 ```bash
 $ cd /path/to/java-springboot-sample
-$ # admin application
-$ ./mvnw web-admin:bootRun
-$ # front application
-$ ./mvnw web-front:bootRun
+$ ./mvnw clean package -Dmaven.test.skip=true
+```
+
+```bash
+$ cd /path/to/java-springboot-sample
+# bootrun admin application
+$ java -jar web-admin/target/web-admin.jar
+# bootrun front application
+$ java -jar web-front/target/web-front.jar
 ```
 
 #### バッチの起動
 
 ```bash
-$ # batch application
+$ # bootrun batch application
 $ cd /path/to/java-springboot-sample
-$ ./mvnw batch:bootRun -Pargs="--job=solrRegistJob"
+$ java -jar batch/target/batch.jar "--job=solrRegistJob"
 ```
 
 #### 接続先情報

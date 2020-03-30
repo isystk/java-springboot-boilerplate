@@ -2,15 +2,18 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
+	<artifactId>business</artifactId>
+  <version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>business</name>
+  <description>business Module</description>
+
 	<parent>
 		<groupId>com.isystk.sample</groupId>
 		<artifactId>parent</artifactId>
   	<version>1.0-SNAPSHOT</version>
 	</parent>
-	<artifactId>business</artifactId>
-	<packaging>jar</packaging>
-	<name>business</name>
-	<url>http://maven.apache.org</url>
 
 	<dependencies>
 		<dependency>
