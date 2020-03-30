@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.isystk.sample.domain.service.post.PostService;
+import com.isystk.sample.domain.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
 import lombok.extern.slf4j.Slf4j;

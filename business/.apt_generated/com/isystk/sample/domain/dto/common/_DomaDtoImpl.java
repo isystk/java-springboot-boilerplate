@@ -1,7 +1,7 @@
 package com.isystk.sample.domain.dto.common;
 
 /** */
-@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-29T20:24:30.506+0900")
+@javax.annotation.Generated(value = { "Doma", "2.27.1" }, date = "2020-03-30T14:59:59.998+0900")
 public final class _DomaDtoImpl extends org.seasar.doma.jdbc.entity.AbstractEntityType<com.isystk.sample.domain.dto.common.DomaDtoImpl> {
 
     static {

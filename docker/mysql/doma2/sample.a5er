@@ -219,10 +219,11 @@ Field="名称","NAME","@VARCHAR(20)","NOT NULL",,"","",$FFFFFFFF,""
 Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="削除フラグ","DELETE_FLG","*TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200224005959
+ModifiedDateTime=20200330164627
 Position="サンプル",1900,600,394,182
 
 [Entity]

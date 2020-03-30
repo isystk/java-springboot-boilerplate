@@ -1,5 +1,7 @@
 package com.isystk.sample.solr.dto;
 
+import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
@@ -23,6 +25,9 @@ public class SolrPost {
 
     @Indexed(name = "text", type = "string")
     private String text;
+
+    @Indexed(name = "regist_time", type = "pdate")
+    private LocalDateTime registTime;
 
 	public String getId() {
 		return id;
@@ -62,6 +67,14 @@ public class SolrPost {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public LocalDateTime getRegistTime() {
+		return registTime;
+	}
+
+	public void setRegistTime(LocalDateTime registTime) {
+		this.registTime = registTime;
 	}
 
 }

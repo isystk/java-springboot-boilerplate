@@ -11,6 +11,11 @@ USE sample;
 -- Author       : isystk
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
+-- Project Name : sample
+-- Date/Time    : 2020/03/30 16:46:35
+-- Author       : isystk
+-- RDBMS Type   : MySQL
+-- Application  : A5:SQL Mk-2
 
 -- メールテンプレート
 create table M_MAIL_TEMPLATE (
@@ -57,6 +62,7 @@ create table M_POST_TAG (
   , REGIST_TIME DATETIME not null comment '登録日時'
   , UPDATE_TIME DATETIME not null comment '更新日時'
   , DELETE_FLG TINYINT(1) default 0 not null comment '削除フラグ'
+  , VERSION BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint M_POST_TAG_PKC primary key (POST_TAG_ID)
 ) comment '投稿タグマスタ' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
 

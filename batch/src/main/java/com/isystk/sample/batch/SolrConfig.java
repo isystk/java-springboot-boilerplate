@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front;
+package com.isystk.sample.batch;
 
 import org.springframework.context.annotation.Configuration;
 
