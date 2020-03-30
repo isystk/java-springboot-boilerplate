@@ -1,15 +1,16 @@
 # java-springboot-sample
+
+![GitHub issues](https://img.shields.io/github/issues/isystk/java-springboot-sample)
+![GitHub forks](https://img.shields.io/github/forks/isystk/java-springboot-sample)
+![GitHub stars](https://img.shields.io/github/stars/isystk/java-springboot-sample)
+![GitHub license](https://img.shields.io/github/license/isystk/java-springboot-sample)
+
 ====
 
 SpringBoot を利用したマルチモジュールのボイラープレートです。
 1. 管理画面(AdminLTE、ログイン/ログアウト、一覧/詳細/登録/更新/削除、CSV/Excel/PDFダウンロード)
 2. フロント画面（Vuejs、Solr検索API、ログイン/ログアウト）
 3. バッチ（Solrインデックス生成、CSV読み込み/DB登録）
-
-![GitHub issues](https://img.shields.io/github/issues/isystk/java-springboot-sample)
-![GitHub forks](https://img.shields.io/github/forks/isystk/java-springboot-sample)
-![GitHub stars](https://img.shields.io/github/stars/isystk/java-springboot-sample)
-![GitHub license](https://img.shields.io/github/license/isystk/java-springboot-sample)
 
 ## Description
 
@@ -112,9 +113,9 @@ $ ./mvnw batch:bootRun -Pargs="--job=solrRegistJob"
 
 | 接続先| URL|
 | :-----| :---------------------------------------|
-| 管理側画面| https://localhost/admin|
+| 管理側画面| https://localhost/admin/|
 | フロント側| https://localhost/|
-| フロントAPI| https://localhost/api/v1/post|
+| フロントAPI| https://localhost/api/v1/post/|
 | phpMyAdmin| http://localhost:8888/|
 | Solr| http://localhost:8983/solr/|
 | MailHog| http://localhost:8025/|
