@@ -18,7 +18,7 @@ public class PostCsv implements Serializable {
     private static final long serialVersionUID = -1883999589975469540L;
 
     @JsonProperty("投稿ID")
-    Integer postId;
+    String postId;
 
     @JsonProperty("ユーザーID")
     String userId;

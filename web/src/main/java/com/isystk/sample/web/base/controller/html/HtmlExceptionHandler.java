@@ -157,7 +157,7 @@ public class HtmlExceptionHandler {
             String messageCode) {
         // メッセージを遷移先に表示する
         val message = MessageUtils.getMessage(messageCode, locale);
-        outputFlashMap(request, response, GLOBAL_MESSAGE, message);
+        outputFlashMap(request, response, GLOBAL_DANGER_MESSAGE, message);
 
         val requestURI = request.getRequestURI();
         val view = new RedirectView(requestURI);

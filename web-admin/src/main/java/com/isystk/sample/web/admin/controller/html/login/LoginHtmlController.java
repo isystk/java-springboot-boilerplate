@@ -49,7 +49,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      */
     @PostMapping(LOGIN_SUCCESS_URL)
     public String loginSuccess(@ModelAttribute LoginForm form, RedirectAttributes attributes) {
-        attributes.addFlashAttribute(GLOBAL_MESSAGE, getMessage("login.success"));
+        attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("login.success"));
         return "redirect:/";
     }
 
@@ -62,7 +62,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      */
     @GetMapping(LOGIN_FAILURE_URL)
     public String loginFailure(@ModelAttribute LoginForm form, Model model) {
-        model.addAttribute(GLOBAL_MESSAGE, getMessage("login.failed"));
+        model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.failed"));
         return "modules/login/login";
     }
 
@@ -75,7 +75,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      */
     @GetMapping(LOGIN_TIMEOUT_URL)
     public String loginTimeout(@ModelAttribute LoginForm form, Model model) {
-        model.addAttribute(GLOBAL_MESSAGE, getMessage("login.timeout"));
+        model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.timeout"));
         return "modules/login/login";
     }
 
@@ -86,7 +86,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      */
     @GetMapping(LOGOUT_SUCCESS_URL)
     public String logoutSuccess(@ModelAttribute LoginForm form, RedirectAttributes attributes) {
-        attributes.addFlashAttribute(GLOBAL_MESSAGE, getMessage("logout.success"));
+        attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("logout.success"));
         return "redirect:/login";
     }
 
