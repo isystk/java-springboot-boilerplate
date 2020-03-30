@@ -23,7 +23,8 @@ SpringBoot を利用したマルチモジュールのボイラープレートで
 │   │   ├── doma2 (doma2のGenファイル)
 │   │   ├── init （mysqlの初期DDL）
 │   │   ├── logs （mysqlのログ）
-│   │   └── script （mysql関連のスクリプト）
+│   │   ├── script （mysql関連のスクリプト）
+│   │   └── sample.a5er （ER図）
 │   ├── nginx （Webサーバー）
 │   │   ├── conf.d (nginxの設定ファイル)
 │   │   ├── public (WEB公開ディレクトリ)
