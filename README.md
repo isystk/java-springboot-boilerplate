@@ -1,13 +1,69 @@
 # java-springboot-sample
+====
 
-## ローカル環境
+## Description
 
-ソースのダウンロード
+SpringBoot-Doma を利用したマルチモジュールのボイラープレートです。
+
+## 利用している技術
+
+#### インフラ
+NginX 1.15
+MySQL 5.7
+Solr 8.4
+phpMyAdmin
+MailHog
+
+#### アプリ
+Java 11
+Maven2
+SpringBoot 2.2.5
+Doma2
+AdminLTE3
+Vuejs2
+
+
+### ディレクトリ構造
+```
+.
+├── docker
+│   ├── mysql （DBサーバー）
+│   │   ├── conf.d (mysqlの設定ファイル)
+│   │   ├── data (mysqlのデータファイル)
+│   │   ├── doma2 (doma2のGenファイル)
+│   │   ├── init （mysqlの初期DDL）
+│   │   ├── logs （mysqlのログ）
+│   │   └── script （mysql関連のスクリプト）
+│   ├── nginx （Webサーバー）
+│   │   ├── conf.d (nginxの設定ファイル)
+│   │   ├── public (WEB公開ディレクトリ)
+│   │   │   └── thumb （アップロードした写真）
+│   │   ├── logs （nginxのログ）
+│   │   └── ssl （SSL自己証明書）
+│   ├── phpmyadmin （DB管理画面）
+│   ├── solr （検索エンジン）
+│   │   ├── data (solrのデータファイル)
+│   │   └── logs （solrのログ）
+│   ├── .env
+│   └── docker-compose.yml
+├── batch (バッチ)
+├── business (共通ロジック)
+├── web (Web共通ロジック)
+├── web-admin (管理画面)
+├── web-front (フロント画面)
+├── dc.sh （Dockerの起動用スクリプト）
+└── pom.xml （Maven用設定ファイル）
+```
+
+
+## 開発環境
+
+### ソースのダウンロード
 ```bash
 $ git clone https://github.com/isystk/java-springboot-sample.git
 ```
 
-### 開発環境（Eclipse）
+### Eclipseの場合
 
 #### 必要な設定
 
@@ -36,9 +92,6 @@ $ brew install socat
 $ socat -4 TCP-LISTEN:2375,fork UNIX-CONNECT:/var/run/docker.sock &
 ```
 
-#### Docker Toolboxの場合
-* 後述の`Dockerの起動`の手順を実施する。
-
 ### Dockerの起動
 NginX、MySQLなどのサーバーを立ち上げる。
 
@@ -66,9 +119,13 @@ $ ./mvnw spring-boot:run
 
 | 接続先| URL|
 | :-----| :---------------------------------------|
-| 管理側画面| http://localhost/admin|
-| 管理側API| http://localhost/admin/api/v1/users|
-| フロント側| http://localhost/|
+| 管理側画面| https://localhost/admin|
+| フロント側| https://localhost/|
+| フロントAPI| https://localhost/api/v1/post|
+| :-----| :---------------------------------------|
+| phpMyAdmin| http://localhost:8888/|
+| Solr| http://localhost:8983/solr/|
+| MailHog| http://localhost:8025/|
 
 #### データベース接続先
 
@@ -84,8 +141,8 @@ mysql -h 127.0.0.1 -P 3306 -uroot -ppassword sample
 | [Lombok Project](https://projectlombok.org/)| 定型的なコードを書かなくてもよくする|
 | [Springframework](https://projects.spring.io/spring-framework/)| Spring Framework|
 | [Spring Security](https://projects.spring.io/spring-security/)| セキュリティ対策、認証・認可のフレームワーク|
-| [mybatis](https://mybatis.org/mybatis-3/ja/index.html)| O/Rマッパー|
-| [mybatis-spring-boot](https://mybatis.org/spring/ja/getting-started.html)| mybatisとSpring Bootを連携する|
+| [Doma2](https://doma.readthedocs.io/ja/stable/)| O/Rマッパー|
+| [spring-boot-doma2](https://github.com/domaframework/doma-spring-boot)| Doma2とSpring Bootを連携する|
 | [Flyway](https://flywaydb.org/)| DBマイグレーションツール|
 | [Thymeleaf](http://www.thymeleaf.org/)| テンプレートエンジン|
 | [Thymeleaf Layout Dialect](https://ultraq.github.io/thymeleaf-layout-dialect/)| テンプレートをレイアウト化する|
