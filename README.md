@@ -151,7 +151,7 @@ docker\mysql\doma2\lib\doma-2.27.0.jar
 
 ## Contribution
 
-1. Fork it ( http://github.com//java-springboot-sample/fork )
+1. Fork it ( http://github.com/isystk/java-springboot-sample/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -177,7 +177,7 @@ docker\mysql\doma2\lib\doma-2.27.0.jar
 
 ## Licence
 
-[MIT](https://github.com/isystk/java-springboot-sample/LICENCE)
+[MIT](https://github.com/isystk/java-springboot-sample/blob/master/LICENSE)
 
 ## Author
 
