@@ -11,7 +11,9 @@ public interface WebConst {
     String MDC_FUNCTION_NAME = "FUNCTION_NAME";
 
     /** ---- Message ---- **/
-    String GLOBAL_MESSAGE = "GlobalMessage";
+    String GLOBAL_SUCCESS_MESSAGE = "GlobalSuccessMessage";
+
+    String GLOBAL_DANGER_MESSAGE = "GlobalDangerMessage";
 
     String VALIDATION_ERROR = "ValidationError";
 

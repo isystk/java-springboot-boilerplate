@@ -70,7 +70,7 @@ public class SetModelAndViewInterceptor extends BaseHandlerInterceptor {
                     val formName = br.getObjectName();
                     val key = BindingResult.MODEL_KEY_PREFIX + formName;
                     model.addAttribute(key, errors);
-                    model.addAttribute(GLOBAL_MESSAGE, MessageUtils.getMessage(VALIDATION_ERROR));
+                    model.addAttribute(GLOBAL_DANGER_MESSAGE, MessageUtils.getMessage(VALIDATION_ERROR));
                 }
             }
         }
