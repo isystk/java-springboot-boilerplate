@@ -1,0 +1,18 @@
+# 共通の設定を定義する
+spring:
+  profiles:
+    local
+  datasource:
+    platform: mysql
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sample
+    username: root
+    password: password
+  data.solr.host: http://localhost:8983/solr
+
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.jdbc: INFO
+    org.thymeleaf: INFO
+    com.isystk.sample: INFO

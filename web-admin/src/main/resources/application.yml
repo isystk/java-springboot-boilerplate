@@ -1,24 +1,14 @@
+# 共通の設定を定義する
 spring:
-
-  profiles.active: 
-    local  
-    # development  
-    # staging  
-    # production  
-
+  profiles:
+    # デフォルトを明示的に指定する
+    # ローカル環境以外は環境変数でプロファイルを切り替える
+    default: local
+    active: local
   main:
     # DataValueProcessorのBean上書きのため暫定対応
     allow-bean-definition-overriding: true
-    
-  datasource:
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sample
-    username: root
-    password: password
-
   mvc.hiddenmethod.filter.enabled: true
-
-  data.solr.host: http://localhost:8983/solr
 
 doma:
   dialect: mysql
@@ -28,11 +18,6 @@ doma:
   batch-size: 1000  
 
 logging:
-  level:
-    org.springframework: INFO
-    org.springframework.jdbc: INFO
-    org.thymeleaf: INFO
-    com.isystk.sample: DEBUG
   pattern:
     # MDCで設定した値を出力する
     level: "[%X{FUNCTION_NAME}:%X{X-Track-Id}:%X{LOGIN_USER_ID}] %5p"
@@ -50,8 +35,3 @@ server:
       # URLにセッションIDを出力しないようにする
       tracking-modes: cookie
     context-path: /admin
-
-####
-# アプリケーションの設定
-application:
-  fileUploadLocation: ../docker/nginx/public/thumb
