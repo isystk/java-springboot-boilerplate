@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/layout}">
+<head layout:fragment="~{layouts/layout::header}">
+	<title>{{e.title}}｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="content" id="content">
+			<main class="photogallery">
+				<div class="card card-purple" th:if="${0 < pages.count}">
+					<!-- .card-header -->
+					<div class="card-header">
+						<h3 class="card-title">検索結果</h3>
+						<div class="dropdown text-right">
+							<button class="btn btn-default dropdown-toggle btn-sm" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+								操作
+								<span class="caret"></span>
+							</button>
+							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+								<a class="dropdown-item text-muted js-download" th:href="@{/post/download/post.csv}">CSVダウンロード</a>
+								<a class="dropdown-item text-muted js-download" th:href="@{/post/download/post.xlsx}">Excelダウンロード</a>
+								<a class="dropdown-item text-muted js-download" th:href="@{/post/download/post.pdf}">PDFダウンロード</a>
+							</div>
+						</div>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover text-nowrap">
+							<thead>
+								<tr>
+									<th>投稿ID</th>
+									<th>ユーザーID</th>
+									<th>タイトル</th>
+									<th>投稿日時</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="e : ${pages.data}">
+					 				<td th:text="*{e.postId}"></td>
+					 				<td th:text="*{e.userId}"></td>
+					 				<td th:text="*{e.title}"></td>
+					 				<td th:text="*{e.registTime}"></td>
+					 				<td class="float-right">
+						 				<form th:action="@{/post/{id}(id=*{e.postId})}" th:method="delete">
+						 					<a class="btn btn-secondary" th:href="@{/post/{id}(id=*{e.postId})}">詳細</a>
+						 					<a class="btn btn-secondary" th:href="@{/post/{id}/edit(id=*{e.postId})}">变更</a>
+											<button class="btn btn-danger">削除</button>
+										</form>
+					 				</td>
+				 				</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.card-body -->
+					<!-- .card-footer -->
+					<div class="card-footer clearfix ">
+						<div th:replace="~{fragments/paginator :: paginator (${pages}, '/post')}" />
+					</div>
+					<!-- /.card-footer -->
+				</div>
+			</main>
+		</div>
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+		var myVueapp = new Vue({
+			el:"#content",
+			data:{
+				url: '/api/v1/post' + 1,
+				data: null
+			},
+			created () {
+				(async () => {
+					var res = await axios.get(this.url);
+					this.data = res.data.data;
+				})();
+			}
+			})
+		</script>
+	</div>
+</body>
+</html>

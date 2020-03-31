@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.isystk.sample.domain.dao.AuditInfoHolder;
+import com.isystk.sample.domain.dao.TUserDao;
+import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
@@ -30,17 +33,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping(MEMBER_POST_URL)
 //@SessionAttributes(types = { SearchPostForm.class, PostForm.class })
-public class PostHtmlController extends AbstractHtmlController {
+public class MemberPostHtmlController extends AbstractHtmlController {
+
+    @Autowired
+	TUserDao tUserDao;
 
 	@Autowired
 	PostService postService;
 
     @Autowired
-    PostHtmlFormValidator postFormValidator;
+    MemberPostHtmlFormValidator postFormValidator;
 
 	@Override
 	public String getFunctionName() {
-		return "A_POST";
+		return "A_MEMBER_POST";
 	}
 
     @InitBinder("postHtmlForm")
@@ -55,10 +61,10 @@ public class PostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("regist")
-	public String regist(@ModelAttribute("postHtmlForm") PostHtmlForm form, Model model) {
+	public String regist(@ModelAttribute("postHtmlForm") MemberPostHtmlForm form, Model model) {
 		if (!form.isNew()) {
 			// SessionAttributeに残っている場合は再生成する
-			model.addAttribute("postForm", new PostHtmlForm());
+			model.addAttribute("postForm", new MemberPostHtmlForm());
 		}
 
 		return "modules/member/post/regist";
@@ -72,7 +78,7 @@ public class PostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping
-	public String regist(@Validated @ModelAttribute("postHtmlForm") PostHtmlForm form, BindingResult br,
+	public String regist(@Validated @ModelAttribute("postHtmlForm") MemberPostHtmlForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -82,10 +88,15 @@ public class PostHtmlController extends AbstractHtmlController {
 
 		// 入力値からDTOを作成する
 		val inputPost = modelMapper.map(form, TPost.class);
+		// ログインユーザーID
+		var criteria = new TUserCriteria();
+		criteria.setEmail(AuditInfoHolder.getAuditUser());
+	    var tUser = tUserDao.select(criteria).orElseThrow();
+		inputPost.setUserId(tUser.getUserId());
 
 		val createdPost = postService.create(inputPost);
 
-		return "redirect:/member/post/" + createdPost.getPostId();
+		return "redirect:/member/";
 	}
 
 	/**
@@ -98,7 +109,7 @@ public class PostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping("{postId}")
-	public String update(@Validated @ModelAttribute("postHtmlForm") PostHtmlForm form, BindingResult br,
+	public String update(@Validated @ModelAttribute("postHtmlForm") MemberPostHtmlForm form, BindingResult br,
 			@PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる

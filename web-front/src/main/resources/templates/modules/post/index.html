@@ -3,28 +3,22 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{layouts/layout}">
 <head layout:fragment="~{layouts/layout::header}">
-	<title>Home｜Sample</title>
+	<title>{{e.title}}｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="content">
 		<div class="content" id="content">
 			<main class="photogallery">
-
-				<div class="photo" v-for="e in datalist">
-					<a href="/post/1/">
+				<h1>title</h1>
+				registTime
+				<div class="photo" >
 					<div class="inner">
 						<div class="square">
 							<img src="/thumb/sample.jpg" class="photo"/>
 						</div>
-						<div class="txt">
-							<p>{{e.title}}&nbsp;{{e.registTime}}</p>
-							<span>
-							</span>
-						</div>
 					</div>
-					</a>
 				</div>
-
+				<p>text</p>
 			</main>
 		</div>
 	</div>
@@ -33,13 +27,15 @@
 		var myVueapp = new Vue({
 			el:"#content",
 			data:{
-				url: '/api/v1/post',
-				datalist:[]
+				url: '/api/v1/post' + 1,
+				title: null,
+				registTime: null,
+				text: null
 			},
 			created () {
 				(async () => {
 					var res = await axios.get(this.url);
-					this.datalist = res.data.data;
+					this.data = res.data.data;
 				})();
 			}
 			})

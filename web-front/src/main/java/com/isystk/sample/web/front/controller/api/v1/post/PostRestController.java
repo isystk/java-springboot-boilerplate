@@ -3,7 +3,7 @@ package com.isystk.sample.web.front.controller.api.v1.post;
 import static com.isystk.sample.web.base.WebConst.*;
 import static com.isystk.sample.web.base.FrontUrl.*;
 
-import java.io.IOException;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -17,6 +17,7 @@ import com.isystk.sample.solr.service.SolrPostService;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.PageableResource;
 import com.isystk.sample.web.base.controller.api.resource.PageableResourceImpl;
+import com.isystk.sample.web.base.controller.api.resource.Resource;
 
 import lombok.val;
 
@@ -33,7 +34,7 @@ public class PostRestController extends AbstractRestController {
     }
 
     /**
-     * ユーザーを複数取得します。
+     * 投稿一覧を複数取得します。
      *
      * @param query
      * @param page
@@ -49,6 +50,24 @@ public class PostRestController extends AbstractRestController {
         Page<SolrPost> posts = solrPostService.findAll(criteria, Pageable.DEFAULT);
 
         PageableResource resource = modelMapper.map(posts, PageableResourceImpl.class);
+        resource.setMessage(getMessage(MESSAGE_SUCCESS));
+
+        return resource;
+    }
+
+    /**
+     * 投稿詳細を取得します。
+     *
+     * @param postId
+     * @return
+     */
+    @GetMapping(value = "/{postId}")
+    public Resource show(@PathVariable Integer postId) {
+        // 1件取得する
+    	var post = solrPostService.findById(postId);
+
+        Resource resource = resourceFactory.create();
+        resource.setData(Arrays.asList(post.orElse(new SolrPost())));
         resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
         return resource;
