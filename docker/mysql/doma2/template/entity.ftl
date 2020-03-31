@@ -12,6 +12,9 @@ import ${importName};
 </#list>
 import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
 <#if showDbComment && comment??>
  * ${comment}
@@ -24,6 +27,8 @@ import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 <#if showCatalogName && catalogName?? || showSchemaName && schemaName?? || showTableName && tableName??>
 @Table(<#if showCatalogName && catalogName??>catalog = "${catalogName}"</#if><#if showSchemaName && schemaName??><#if showCatalogName && catalogName??>, </#if>schema = "${schemaName}"</#if><#if showTableName><#if showCatalogName && catalogName?? || showSchemaName && schemaName??>, </#if>name = "${tableName}"</#if>)
 </#if>
+@Getter
+@Setter
 public class ${simpleName} extends DomaDtoImpl {
 
     /** serialVersionUID */
@@ -31,8 +36,6 @@ public class ${simpleName} extends DomaDtoImpl {
 
 <#list ownEntityPropertyDescs as property>
 
-  <#if property.columnName == "REGIST_TIME" || property.columnName == "UPDATE_TIME" || property.columnName == "DELETE_FLG" || property.columnName == "VERSION" >
-  <#else>
   <#if showDbComment && property.comment??>
     /** ${property.comment} */
   <#else>
@@ -56,37 +59,11 @@ public class ${simpleName} extends DomaDtoImpl {
     @Column(name = "${property.columnName}")
   </#if>
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name};
-  </#if>
 </#list>
 <#if originalStatesPropertyName??>
 
     /** */
     @OriginalStates
     ${simpleName} ${originalStatesPropertyName};
-</#if>
-
-<#if useAccessor>
-  <#list ownEntityPropertyDescs as property>
-    <#if property.columnName == "REGIST_TIME" || property.columnName == "UPDATE_TIME" || property.columnName == "DELETE_FLG" || property.columnName == "VERSION" >
-    <#else>
-    /**
-     * Returns the ${property.name}.
-     *
-     * @return the ${property.name}
-     */
-    public ${property.propertyClassSimpleName} get${property.name?cap_first}() {
-        return ${property.name};
-    }
-
-    /**
-     * Sets the ${property.name}.
-     *
-     * @param ${property.name} the ${property.name}
-     */
-    public void set${property.name?cap_first}(${property.propertyClassSimpleName} ${property.name}) {
-        this.${property.name} = ${property.name};
-    }
-    </#if>
-  </#list>
 </#if>
 }

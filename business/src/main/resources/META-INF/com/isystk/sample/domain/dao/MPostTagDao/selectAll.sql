@@ -18,3 +18,6 @@ WHERE
 /*%if criteria.deleteFlg != null */
   DELETE_FLG = /* criteria.deleteFlg */'a'
 /*%end*/
+/*%if criteria.version != null */
+  VERSION = /* criteria.version */1
+/*%end*/

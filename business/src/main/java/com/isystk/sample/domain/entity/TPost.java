@@ -10,11 +10,16 @@ import org.seasar.doma.Table;
 import org.seasar.doma.Version;
 import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 
  */
 @Entity
 @Table(name = "t_post")
+@Getter
+@Setter
 public class TPost extends DomaDtoImpl {
 
     /** serialVersionUID */
@@ -39,76 +44,20 @@ public class TPost extends DomaDtoImpl {
     @Column(name = "TEXT")
     String text;
 
+    /**  */
+    @Column(name = "REGIST_TIME")
+    LocalDateTime registTime;
 
+    /**  */
+    @Column(name = "UPDATE_TIME")
+    LocalDateTime updateTime;
 
+    /**  */
+    @Column(name = "DELETE_FLG")
+    Boolean deleteFlg;
 
-
-    /**
-     * Returns the postId.
-     *
-     * @return the postId
-     */
-    public Integer getPostId() {
-        return postId;
-    }
-
-    /**
-     * Sets the postId.
-     *
-     * @param postId the postId
-     */
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
-    /**
-     * Returns the userId.
-     *
-     * @return the userId
-     */
-    public Integer getUserId() {
-        return userId;
-    }
-
-    /**
-     * Sets the userId.
-     *
-     * @param userId the userId
-     */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-    /**
-     * Returns the title.
-     *
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    /**
-     * Returns the text.
-     *
-     * @return the text
-     */
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the text
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
+    /**  */
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 }

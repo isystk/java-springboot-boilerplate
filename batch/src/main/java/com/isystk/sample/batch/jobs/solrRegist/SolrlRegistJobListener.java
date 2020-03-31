@@ -1,4 +1,4 @@
-package com.isystk.sample.batch.jobs.solr;
+package com.isystk.sample.batch.jobs.solrRegist;
 
 import com.isystk.sample.batch.listener.BaseJobExecutionListener;
 

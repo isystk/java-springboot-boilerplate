@@ -17,7 +17,7 @@ import lombok.Setter;
 @Entity(listener = DefaultEntityListener.class) // 自動的にシステム制御項目を更新するためにリスナーを指定する
 @Setter
 @Getter
-public abstract class DomaDtoImpl implements DomaDto, Serializable {
+public abstract class DomaDtoImpl implements Serializable {
 
     /** 登録日時 */
     @JsonIgnore
