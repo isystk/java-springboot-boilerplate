@@ -30,20 +30,20 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping(MEMBER_POST_URL)
 //@SessionAttributes(types = { SearchPostForm.class, PostForm.class })
-public class PostController extends AbstractHtmlController {
+public class PostHtmlController extends AbstractHtmlController {
 
 	@Autowired
 	PostService postService;
 
     @Autowired
-    PostFormValidator postFormValidator;
+    PostHtmlFormValidator postFormValidator;
 
 	@Override
 	public String getFunctionName() {
 		return "A_POST";
 	}
 
-    @InitBinder("postForm")
+    @InitBinder("postHtmlForm")
     public void validatorBinder(WebDataBinder binder) {
         binder.addValidators(postFormValidator);
     }
@@ -55,10 +55,10 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("regist")
-	public String regist(@ModelAttribute("postForm") PostForm form, Model model) {
+	public String regist(@ModelAttribute("postHtmlForm") PostHtmlForm form, Model model) {
 		if (!form.isNew()) {
 			// SessionAttributeに残っている場合は再生成する
-			model.addAttribute("postForm", new PostForm());
+			model.addAttribute("postForm", new PostHtmlForm());
 		}
 
 		return "modules/member/post/regist";
@@ -72,7 +72,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping
-	public String regist(@Validated @ModelAttribute("postForm") PostForm form, BindingResult br,
+	public String regist(@Validated @ModelAttribute("postHtmlForm") PostHtmlForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -98,7 +98,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping("{postId}")
-	public String update(@Validated @ModelAttribute("postForm") PostForm form, BindingResult br,
+	public String update(@Validated @ModelAttribute("postHtmlForm") PostHtmlForm form, BindingResult br,
 			@PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる

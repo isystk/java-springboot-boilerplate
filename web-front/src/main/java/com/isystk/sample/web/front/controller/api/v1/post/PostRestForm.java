@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PostQuery implements Serializable {
+public class PostRestForm implements Serializable {
 
     private static final long serialVersionUID = 7593564324192730932L;
 
