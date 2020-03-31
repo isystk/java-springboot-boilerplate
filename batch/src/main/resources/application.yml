@@ -1,21 +1,14 @@
+# 共通の設定を定義する
 spring:
-
-  profiles.active: 
-    local  
-    # development  
-    # staging  
-    # production  
-
+  profiles:
+    # デフォルトを明示的に指定する
+    # ローカル環境以外は環境変数でプロファイルを切り替える
+    default: local
+    active: local
   main:
     # DataValueProcessorのBean上書きのため暫定対応
     allow-bean-definition-overriding: true
-    
   datasource:
-    platform: mysql
-    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sample
-    username: root
-    password: password
     hikari:
       autoCommit: false
       connectionTimeout: 30000
@@ -24,15 +17,11 @@ spring:
       connectionTestQuery: SELECT 1
       minimumIdle: 10
       maximumPoolSize: 30
-
   mvc.hiddenmethod.filter.enabled: true
-
-  data.solr.host: http://localhost:8983/solr
-
   batch:
-#    initializer:
-#      # ジョブ管理テーブルを自動的に作成しないようにする
-#      enabled: false
+    initializer:
+      # ジョブ管理テーブルを自動的に作成しないようにする
+      enabled: false
     job:
       # 自動的にバッチジョブが起動しないようにする
       enabled: false
@@ -45,11 +34,6 @@ doma:
   batch-size: 1000  
 
 logging:
-  level:
-    org.springframework: INFO
-    org.springframework.jdbc: INFO
-    org.thymeleaf: INFO
-    com.isystk.sample: DEBUG
   pattern:
     # MDCで設定した値を出力する
     level: "[%X{FUNCTION_NAME}:%X{X-Track-Id}:%X{LOGIN_USER_ID}] %5p"

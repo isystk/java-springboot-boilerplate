@@ -8,6 +8,6 @@ set PATH=%JAVA_HOME%\bin;%PATH%
 set PATH=%MAVEN_HOME%\bin;%PATH%
 
 call cd %~dp0
-call mvn -X -U eclipse:clean eclipse:eclipse -P ut -f pom.xml
+call mvn -X -U eclipse:clean eclipse:eclipse -f pom.xml
 
 pause
