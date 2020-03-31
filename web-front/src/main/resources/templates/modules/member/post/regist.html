@@ -18,14 +18,24 @@
 
 						<p>投稿内容を入力して下さい</p>
 						<form th:object="${postForm}" th:action="${action}" id="form1"
-							th:with="action=${postForm.isNew()} ? @{/post} : @{/post/{id}(id=*{postId})}"
+							th:with="action=${postForm.isNew()} ? @{/member/post} : @{/member/post/{id}(id=*{postId})}"
 							enctype="multipart/form-data" th:method="${postForm.isNew()} ? 'post' : 'put'">
 							<input type="hidden" name="version" th:value="*{version}" />
 							<input th:replace="fragments/inputField :: input ('text', '投稿者', 'userId')" />
 							<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title')" />
 							<input th:replace="fragments/textarea :: textarea ('本文', 'text', 4)" />
+
+							<tr>
+								<th colspan="2"><span class="mark">写真</span><span class="required">【必須】</span></th>
+								<td>
+								  	<label class="btn_formSelectImage"><input type="file" name="imageFile" class="js-upload-postImage-btn" multiple="multiple" ></label>
+									<ul class="selectedPhotoList">
+									</ul>
+								</td>
+							</tr>
+
 							<p class="btnArea">
-								<input type="submit" name="update" value="投稿する">
+								<input type="submit" name="regist" value="投稿する">
 							</p>
 						</form>
 
@@ -34,6 +44,102 @@
 			</main>
 		</div>
 
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+			// カテゴリー写真ファイル選択時
+			$('.js-upload-postImage-btn').change(function(){
+
+				var dataType = 'postImage';
+
+				var slides = $('.selectedPhotoList'),
+					imagesLength = slides.find('li').length;
+				var fileLength = this.files.length;
+				if (10 < (imagesLength + fileLength)) {
+					showErrorMsg(dataType, ['コンテンツ写真の登録可能件数は、最大10件です。']);
+					return;
+				}
+
+				// Loading画像
+				$('<div id="site_loader_overlay"><div class="site_loader_spinner" ></div></div>').appendTo('body');
+
+				var count = 0;
+				imageUpload(this, dataType, function(res) {
+
+					if (!res) {
+						// Loading画像
+						$('#site_loader_overlay').remove();
+						return false;
+					}
+
+					// 画像をアニメーション（フェードイン）で表示します。
+					var src = res.imageFullpath + '?time=' + new Date().getTime();
+					var image = $([
+						'<li><a href="#" class="close">',
+							'<img src="'+src+'" width="120px" />',
+							'<input type="hidden" name="postImageId" value="'+res.imageId+'" />',
+						'</a></li>'
+						].join(''));
+					slides.append(image);
+
+					count = count + 1;
+					if (fileLength == count) {
+						// エラーメッセージを消す
+						$('[id="addCategoryList[0].' + dataType + 'IdErrMessage"]').empty();
+
+						// Loading画像
+						$('#site_loader_overlay').remove();
+					}
+				});
+			});
+
+			// 画像ファイル選択時
+			var imageUpload = function(file, dataType, callbackfunc){
+				var self = $(file);
+
+				// 未選択の場合は何もしない。
+				if (self.val() === '') {
+					return;
+				}
+
+				// アップロード中は、「ファイル選択」ボタンを非活性にする。
+				self.attr('disabled', 'disabled');
+
+				$.imageUpload({
+					uploadUrl: '/api/v1/fileupload',
+					form: $('#form1'),
+					successCallback : function(res) {
+
+						self.removeAttr('disabled');
+
+						// エラー処理
+						$('#errorsArea').empty();
+						$('input','select').removeClass('error');
+						if (res.errors) {
+							showErrorMsg(dataType, res.errors);
+							return false;
+						}
+
+						if (callbackfunc) {
+							callbackfunc(res);
+						}
+
+					},
+					errorsCallback : function(errors) {
+						self.removeAttr('disabled');
+
+						 if (callbackfunc) {
+							callbackfunc();
+						}
+
+						showErrorMsg(dataType, errors);
+						return false;
+					}
+
+				}).fileUpload(file);
+
+			};
+		</script>
 	</div>
 </body>
 </html>
