@@ -50,3 +50,8 @@ server:
       # URLにセッションIDを出力しないようにする
       tracking-modes: cookie
     context-path: /
+
+####
+# アプリケーションの設定
+application:
+  fileUploadLocation: ../docker/nginx/public/thumb

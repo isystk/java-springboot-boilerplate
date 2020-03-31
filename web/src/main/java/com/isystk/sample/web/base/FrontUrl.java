@@ -14,9 +14,13 @@ public class FrontUrl {
 
 	public static final String MEMBER_POST_URL = "/member/post";
 
+	public static final String UPLOADFILE_THUMB_URL = "/hoge";
+
 	/** ---- APIｓ ---- **/
 
 	public static final String API_V1_POST = "/api/v1/post";
+
+	public static final String API_V1_FILEUPLOAD = "/api/v1/fileupload";
 
 
 }

@@ -3,6 +3,8 @@ package com.isystk.sample.web.front.controller.html.member.post;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.isystk.sample.web.base.controller.html.BaseForm;
 
 import lombok.Getter;
@@ -24,6 +26,8 @@ public class PostForm extends BaseForm {
 
     @NotEmpty
     String text;
+
+    MultipartFile imageFile;
 
 	@Override
 	public Integer getId() {
