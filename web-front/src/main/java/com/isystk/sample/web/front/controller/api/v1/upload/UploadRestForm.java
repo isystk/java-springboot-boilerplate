@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class UploadForm extends BaseForm {
+public class UploadRestForm extends BaseForm {
 
     private static final long serialVersionUID = 7593564324192730932L;
 

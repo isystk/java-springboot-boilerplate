@@ -40,7 +40,7 @@ public class PostRestController extends AbstractRestController {
      * @return
      */
     @GetMapping
-    public PageableResource index(PostQuery query, @RequestParam(required = false, defaultValue = "1") int page) {
+    public PageableResource index(PostRestForm query, @RequestParam(required = false, defaultValue = "1") int page) {
 
         // 入力値からDTOを作成する
         val criteria = modelMapper.map(query, SolrPostCriteria.class);

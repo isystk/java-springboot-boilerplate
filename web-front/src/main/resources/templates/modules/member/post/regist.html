@@ -17,9 +17,9 @@
 					<div class="entry-content">
 
 						<p>投稿内容を入力して下さい</p>
-						<form th:object="${postForm}" th:action="${action}" id="form1"
-							th:with="action=${postForm.isNew()} ? @{/member/post} : @{/member/post/{id}(id=*{postId})}"
-							enctype="multipart/form-data" th:method="${postForm.isNew()} ? 'post' : 'put'">
+						<form th:object="${postHtmlForm}" th:action="${action}" id="form1"
+							th:with="action=${postHtmlForm.isNew()} ? @{/member/post} : @{/member/post/{id}(id=*{postId})}"
+							enctype="multipart/form-data" th:method="${postHtmlForm.isNew()} ? 'post' : 'put'">
 							<input type="hidden" name="version" th:value="*{version}" />
 							<input th:replace="fragments/inputField :: input ('text', '投稿者', 'userId')" />
 							<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title')" />
@@ -72,12 +72,14 @@
 						return false;
 					}
 
+					var data = res.data[0];
+
 					// 画像をアニメーション（フェードイン）で表示します。
-					var src = res.imageFullpath + '?time=' + new Date().getTime();
+					var src = data.path + '?time=' + new Date().getTime();
 					var image = $([
 						'<li><a href="#" class="close">',
 							'<img src="'+src+'" width="120px" />',
-							'<input type="hidden" name="postImageId" value="'+res.imageId+'" />',
+							'<input type="hidden" name="postImageId" value="'+data.id+'" />',
 						'</a></li>'
 						].join(''));
 					slides.append(image);
@@ -106,7 +108,7 @@
 				self.attr('disabled', 'disabled');
 
 				$.imageUpload({
-					uploadUrl: '/api/v1/fileupload',
+					uploadUrl: '/api/v1/fileupload/image',
 					form: $('#form1'),
 					successCallback : function(res) {
 

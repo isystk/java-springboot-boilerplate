@@ -33,7 +33,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      * @return
      */
     @GetMapping(LOGIN_URL)
-    public String index(@ModelAttribute LoginForm form, Model model) {
+    public String index(@ModelAttribute LoginHtmlForm form, Model model) {
         return "modules/login/login";
     }
 
@@ -45,7 +45,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      * @return
      */
     @PostMapping(LOGIN_SUCCESS_URL)
-    public String loginSuccess(@ModelAttribute LoginForm form, RedirectAttributes attributes) {
+    public String loginSuccess(@ModelAttribute LoginHtmlForm form, RedirectAttributes attributes) {
         attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("login.success"));
         return "redirect:/";
     }
@@ -58,7 +58,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      * @return
      */
     @GetMapping(LOGIN_FAILURE_URL)
-    public String loginFailure(@ModelAttribute LoginForm form, Model model) {
+    public String loginFailure(@ModelAttribute LoginHtmlForm form, Model model) {
         model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.failed"));
         return "modules/login/login";
     }
@@ -71,7 +71,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      * @return
      */
     @GetMapping(LOGIN_TIMEOUT_URL)
-    public String loginTimeout(@ModelAttribute LoginForm form, Model model) {
+    public String loginTimeout(@ModelAttribute LoginHtmlForm form, Model model) {
         model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.timeout"));
         return "modules/login/login";
     }
@@ -82,7 +82,7 @@ public class LoginHtmlController extends AbstractHtmlController {
      * @return
      */
     @GetMapping(LOGOUT_SUCCESS_URL)
-    public String logoutSuccess(@ModelAttribute LoginForm form, RedirectAttributes attributes) {
+    public String logoutSuccess(@ModelAttribute LoginHtmlForm form, RedirectAttributes attributes) {
         attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("logout.success"));
         return "redirect:/login";
     }
