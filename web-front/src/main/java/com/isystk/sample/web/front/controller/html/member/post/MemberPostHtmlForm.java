@@ -12,14 +12,11 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PostHtmlForm extends BaseForm {
+public class MemberPostHtmlForm extends BaseForm {
 
     private static final long serialVersionUID = 7593564324192730932L;
 
     Integer postId;
-
-    @NotNull
-    Integer userId;
 
     @NotEmpty
     String title;

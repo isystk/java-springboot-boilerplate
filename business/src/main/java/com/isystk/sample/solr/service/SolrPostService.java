@@ -2,6 +2,7 @@ package com.isystk.sample.solr.service;
 
 import static com.isystk.sample.domain.util.DomaUtils.createSelectOptions;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.compress.utils.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,21 @@ public class SolrPostService extends BaseTransactionalService {
         val options = createSelectOptions(pageable).count();
 
         return pageFactory.create(solrPostList, pageable, options.getCount());
+    }
+
+    /**
+     * Solrの投稿インデックスを取得します。
+     *
+     * @param datas
+     * @return
+     */
+    @Transactional(readOnly = true) // 読み取りのみの場合は指定する
+    public Optional<SolrPost> findById(Integer postId) {
+        Assert.notNull(postId, "criteria must not be null");
+
+        SolrPost post = solrPostRepository.findByPostId(postId);
+
+        return Optional.of(post);
     }
 
     /**

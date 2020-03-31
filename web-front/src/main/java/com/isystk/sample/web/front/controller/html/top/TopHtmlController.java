@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping(TOP_URL)
-public class TopController extends AbstractHtmlController {
+public class TopHtmlController extends AbstractHtmlController {
 
 	@Override
 	public String getFunctionName() {
