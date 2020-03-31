@@ -1,13 +1,17 @@
 package com.isystk.sample.solr.dto;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @SolrDocument(collection = "post")
+@Getter
+@Setter
 public class SolrPost {
 
     @Id
@@ -28,53 +32,5 @@ public class SolrPost {
 
     @Indexed(name = "regist_time", type = "pdate")
     private LocalDateTime registTime;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Integer getPostId() {
-		return postId;
-	}
-
-	public void setPostId(Integer postId) {
-		this.postId = postId;
-	}
-
-	public Integer getUserId() {
-		return userId;
-	}
-
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String text) {
-		this.text = text;
-	}
-
-	public LocalDateTime getRegistTime() {
-		return registTime;
-	}
-
-	public void setRegistTime(LocalDateTime registTime) {
-		this.registTime = registTime;
-	}
 
 }

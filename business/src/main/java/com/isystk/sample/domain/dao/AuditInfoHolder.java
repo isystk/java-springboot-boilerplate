@@ -7,8 +7,10 @@ import java.time.LocalDateTime;
  */
 public class AuditInfoHolder {
 
+	/** ログインユーザー */
     private static final ThreadLocal<String> AUDIT_USER = new ThreadLocal<>();
 
+	/** ログイン日時 */
     private static final ThreadLocal<LocalDateTime> AUDIT_DATE_TIME = new ThreadLocal<>();
 
     /**

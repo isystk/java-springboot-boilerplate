@@ -10,11 +10,16 @@ import org.seasar.doma.Table;
 import org.seasar.doma.Version;
 import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 
  */
 @Entity
 @Table(name = "m_mail_template")
+@Getter
+@Setter
 public class MMailTemplate extends DomaDtoImpl {
 
     /** serialVersionUID */
@@ -39,76 +44,20 @@ public class MMailTemplate extends DomaDtoImpl {
     @Column(name = "TEXT")
     String text;
 
+    /**  */
+    @Column(name = "REGIST_TIME")
+    LocalDateTime registTime;
 
+    /**  */
+    @Column(name = "UPDATE_TIME")
+    LocalDateTime updateTime;
 
+    /**  */
+    @Column(name = "DELETE_FLG")
+    Boolean deleteFlg;
 
-
-    /**
-     * Returns the mailTemplateId.
-     *
-     * @return the mailTemplateId
-     */
-    public Integer getMailTemplateId() {
-        return mailTemplateId;
-    }
-
-    /**
-     * Sets the mailTemplateId.
-     *
-     * @param mailTemplateId the mailTemplateId
-     */
-    public void setMailTemplateId(Integer mailTemplateId) {
-        this.mailTemplateId = mailTemplateId;
-    }
-    /**
-     * Returns the templateDiv.
-     *
-     * @return the templateDiv
-     */
-    public Integer getTemplateDiv() {
-        return templateDiv;
-    }
-
-    /**
-     * Sets the templateDiv.
-     *
-     * @param templateDiv the templateDiv
-     */
-    public void setTemplateDiv(Integer templateDiv) {
-        this.templateDiv = templateDiv;
-    }
-    /**
-     * Returns the title.
-     *
-     * @return the title
-     */
-    public String getTitle() {
-        return title;
-    }
-
-    /**
-     * Sets the title.
-     *
-     * @param title the title
-     */
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    /**
-     * Returns the text.
-     *
-     * @return the text
-     */
-    public String getText() {
-        return text;
-    }
-
-    /**
-     * Sets the text.
-     *
-     * @param text the text
-     */
-    public void setText(String text) {
-        this.text = text;
-    }
+    /**  */
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 }

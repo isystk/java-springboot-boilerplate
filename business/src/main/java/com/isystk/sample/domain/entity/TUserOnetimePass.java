@@ -7,11 +7,16 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 
  */
 @Entity
 @Table(name = "t_user_onetime_pass")
+@Getter
+@Setter
 public class TUserOnetimePass extends DomaDtoImpl {
 
     /** serialVersionUID */
@@ -30,56 +35,4 @@ public class TUserOnetimePass extends DomaDtoImpl {
     /**  */
     @Column(name = "ONETIME_VALID_TIME")
     LocalDateTime onetimeValidTime;
-
-    /**
-     * Returns the userId.
-     *
-     * @return the userId
-     */
-    public Integer getUserId() {
-        return userId;
-    }
-
-    /**
-     * Sets the userId.
-     *
-     * @param userId the userId
-     */
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
-    /**
-     * Returns the onetimeKey.
-     *
-     * @return the onetimeKey
-     */
-    public String getOnetimeKey() {
-        return onetimeKey;
-    }
-
-    /**
-     * Sets the onetimeKey.
-     *
-     * @param onetimeKey the onetimeKey
-     */
-    public void setOnetimeKey(String onetimeKey) {
-        this.onetimeKey = onetimeKey;
-    }
-    /**
-     * Returns the onetimeValidTime.
-     *
-     * @return the onetimeValidTime
-     */
-    public LocalDateTime getOnetimeValidTime() {
-        return onetimeValidTime;
-    }
-
-    /**
-     * Sets the onetimeValidTime.
-     *
-     * @param onetimeValidTime the onetimeValidTime
-     */
-    public void setOnetimeValidTime(LocalDateTime onetimeValidTime) {
-        this.onetimeValidTime = onetimeValidTime;
-    }
 }

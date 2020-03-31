@@ -6,11 +6,16 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 
  */
 @Entity
 @Table(name = "t_post_image")
+@Getter
+@Setter
 public class TPostImage extends DomaDtoImpl {
 
     /** serialVersionUID */
@@ -26,39 +31,4 @@ public class TPostImage extends DomaDtoImpl {
     @Id
     @Column(name = "IMAGE_ID")
     Integer imageId;
-
-    /**
-     * Returns the postId.
-     *
-     * @return the postId
-     */
-    public Integer getPostId() {
-        return postId;
-    }
-
-    /**
-     * Sets the postId.
-     *
-     * @param postId the postId
-     */
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
-    /**
-     * Returns the imageId.
-     *
-     * @return the imageId
-     */
-    public Integer getImageId() {
-        return imageId;
-    }
-
-    /**
-     * Sets the imageId.
-     *
-     * @param imageId the imageId
-     */
-    public void setImageId(Integer imageId) {
-        this.imageId = imageId;
-    }
 }

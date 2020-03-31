@@ -6,11 +6,16 @@ import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /**
  * 
  */
 @Entity
 @Table(name = "t_post_tag")
+@Getter
+@Setter
 public class TPostTag extends DomaDtoImpl {
 
     /** serialVersionUID */
@@ -26,39 +31,4 @@ public class TPostTag extends DomaDtoImpl {
     @Id
     @Column(name = "POST_TAG_ID")
     Integer postTagId;
-
-    /**
-     * Returns the postId.
-     *
-     * @return the postId
-     */
-    public Integer getPostId() {
-        return postId;
-    }
-
-    /**
-     * Sets the postId.
-     *
-     * @param postId the postId
-     */
-    public void setPostId(Integer postId) {
-        this.postId = postId;
-    }
-    /**
-     * Returns the postTagId.
-     *
-     * @return the postTagId
-     */
-    public Integer getPostTagId() {
-        return postTagId;
-    }
-
-    /**
-     * Sets the postTagId.
-     *
-     * @param postTagId the postTagId
-     */
-    public void setPostTagId(Integer postTagId) {
-        this.postTagId = postTagId;
-    }
 }
