@@ -36,14 +36,14 @@ public class SetModelAndViewInterceptor extends BaseHandlerInterceptor {
             return;
         }
 
-//        val locale = LocaleContextHolder.getLocale();
-//        val pulldownOption = MessageUtils.getMessage(MAV_PULLDOWN_OPTION, locale);
-//
-//        // 定数定義を画面に渡す
-//        Map<String, Object> constants = new HashMap<>();
-//        constants.put(MAV_PULLDOWN_OPTION, pulldownOption);
-//        modelAndView.addObject(MAV_CONST, constants);
-//
+        val locale = LocaleContextHolder.getLocale();
+        val pulldownOption = MessageUtils.getMessage(MAV_PULLDOWN_OPTION, locale);
+
+        // 定数定義を画面に渡す
+        Map<String, Object> constants = new HashMap<>();
+        constants.put(MAV_PULLDOWN_OPTION, pulldownOption);
+        modelAndView.addObject(MAV_CONST, constants);
+
 //        // 定形のリスト等
 //        val codeCategories = getCodeCategories();
 //        modelAndView.addObject(MAV_CODE_CATEGORIES, codeCategories);

@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.isystk.sample.domain.dao.AuditInfoHolder;
-import com.isystk.sample.domain.dao.TUserDao;
 import com.isystk.sample.domain.dto.TPostCriteria;
-import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.dto.common.Pageable;
+import com.isystk.sample.domain.helper.UserHelper;
 import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
@@ -28,8 +26,8 @@ public class MemberHtmlController extends AbstractHtmlController {
 	@Autowired
 	PostService postService;
 
-	@Autowired
-	TUserDao tUserDao;
+    @Autowired
+    UserHelper userHelper;
 
 	@Override
 	public String getFunctionName() {
@@ -47,10 +45,7 @@ public class MemberHtmlController extends AbstractHtmlController {
 		// 入力値を詰め替える
 		var inputPost = new TPostCriteria();
 		// ログインユーザーID
-		var criteria = new TUserCriteria();
-		criteria.setEmailEqual(AuditInfoHolder.getAuditUser());
-	    var tUser = tUserDao.select(criteria).orElseThrow();
-		inputPost.setUserId(tUser.getUserId());
+		inputPost.setUserId(userHelper.getLoginUserId());
 		// TODO 10件区切りで取得する
 		val pages = postService.findAll(inputPost, Pageable.NO_LIMIT);
 

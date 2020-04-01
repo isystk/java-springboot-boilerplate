@@ -38,7 +38,7 @@
 									th:with="action=${postForm.isNew()} ? @{/post} : @{/post/{id}(id=*{postId})}"
 									enctype="multipart/form-data" th:method="${postForm.isNew()} ? 'post' : 'put'">
 									<input type="hidden" name="version" th:value="*{version}" />
-									<input th:replace="fragments/inputField :: input ('text', '投稿者', 'userId')" />
+									<input th:replace="~{fragments/selectField :: select ('投稿者', 'userId', ${userList}, 'userId', 'familyName')}" />
 									<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title')" />
 									<input th:replace="fragments/textarea :: textarea ('本文', 'text', 4)" />
 									<div class="card-footer clearfix text-center">

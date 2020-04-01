@@ -19,10 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.isystk.sample.domain.dao.AuditInfoHolder;
-import com.isystk.sample.domain.dao.TUserDao;
-import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.helper.UserHelper;
 import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
@@ -35,11 +33,11 @@ import lombok.extern.slf4j.Slf4j;
 //@SessionAttributes(types = { SearchPostForm.class, PostForm.class })
 public class MemberPostHtmlController extends AbstractHtmlController {
 
-    @Autowired
-	TUserDao tUserDao;
-
 	@Autowired
 	PostService postService;
+
+    @Autowired
+    UserHelper userHelper;
 
     @Autowired
     MemberPostHtmlFormValidator postFormValidator;
@@ -89,11 +87,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 		// 入力値からDTOを作成する
 		val inputPost = modelMapper.map(form, TPost.class);
 		// ログインユーザーID
-		var criteria = new TUserCriteria();
-		criteria.setEmailEqual(AuditInfoHolder.getAuditUser());
-	    var tUser = tUserDao.select(criteria).orElseThrow();
-		inputPost.setUserId(tUser.getUserId());
-
+		inputPost.setUserId(userHelper.getLoginUserId());
 		val createdPost = postService.create(inputPost);
 
 		return "redirect:/member/";

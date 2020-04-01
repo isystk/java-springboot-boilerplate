@@ -36,8 +36,14 @@ public interface WebConst {
 
     String FORBIDDEN_VIEW = "/error/403.html";
 
-	/** ---- ViewComponents ---- **/
-	String MAV_ERRORS = "errors";
+    /** ---- ViewComponents ---- **/
+    String MAV_CONST = "Const";
+
+    String MAV_ERRORS = "errors";
+
+    String MAV_PULLDOWN_OPTION = "PulldownOption";
+
+//    String MAV_CODE_CATEGORIES = "CodeCategories";
 
 	/** ---- URLs ---- **/
 	String ERROR_URL = "/error";

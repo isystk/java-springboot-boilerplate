@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.helper.UserHelper;
 import com.isystk.sample.web.admin.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
@@ -38,7 +40,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping(POST_URL)
-//@SessionAttributes(types = { SearchPostForm.class, PostForm.class })
+@SessionAttributes(types = { SearchPostForm.class, PostForm.class })
 public class PostController extends AbstractHtmlController {
 
 	@Autowired
@@ -46,6 +48,9 @@ public class PostController extends AbstractHtmlController {
 
     @Autowired
     PostFormValidator postFormValidator;
+
+    @Autowired
+    UserHelper userHelper;
 
 	@Override
 	public String getFunctionName() {
@@ -64,7 +69,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping
-	public String index(@ModelAttribute SearchPostForm form, Model model) {
+	public String index(SearchPostForm form, Model model) {
 		// 入力値を詰め替える
 		TPostCriteria criteria = new TPostCriteria();
 		criteria.setPostIdEqual(form.getPostId());
@@ -99,11 +104,15 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("regist")
-	public String regist(@ModelAttribute("postForm") PostForm form, Model model) {
+	public String regist(PostForm form, Model model) {
 		if (!form.isNew()) {
 			// SessionAttributeに残っている場合は再生成する
 			model.addAttribute("postForm", new PostForm());
 		}
+
+        // ユーザー一覧
+        val userList = userHelper.getUserList();
+        model.addAttribute("userList", userList);
 
 		return "modules/post/regist";
 	}
@@ -116,7 +125,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("{postId}/edit")
-	public String edit(@PathVariable Integer postId, @ModelAttribute("postForm") PostForm form, Model model) {
+	public String edit(@PathVariable Integer postId, PostForm form, Model model) {
 		// セッションから取得できる場合は、読み込み直さない
 		if (!hasErrors(model)) {
 			// 1件取得する
@@ -125,6 +134,10 @@ public class PostController extends AbstractHtmlController {
 			// 取得したDtoをFromに詰め替える
 			modelMapper.map(post, form);
 		}
+
+        // ユーザー一覧
+        val userList = userHelper.getUserList();
+        model.addAttribute("userList", userList);
 
 		return "modules/post/regist";
 	}
@@ -137,7 +150,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping
-	public String regist(@Validated @ModelAttribute("postForm") PostForm form, BindingResult br,
+	public String regist(@Validated PostForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -163,7 +176,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping("{postId}")
-	public String update(@Validated @ModelAttribute("postForm") PostForm form, BindingResult br,
+	public String update(@Validated PostForm form, BindingResult br,
 			@PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
@@ -205,7 +218,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("/download/{filename:.+\\.csv}")
-	public ModelAndView downloadCsv(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
+	public ModelAndView downloadCsv(@PathVariable String filename, SearchPostForm form, Model model) {
 		// 入力値を詰め替える
 		val criteria = modelMapper.map(form, TPostCriteria.class);
 
@@ -229,7 +242,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping(path = "/download/{filename:.+\\.xlsx}")
-	public ModelAndView downloadExcel(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
+	public ModelAndView downloadExcel(@PathVariable String filename, SearchPostForm form, Model model) {
 		// 入力値を詰め替える
 		val criteria = modelMapper.map(form, TPostCriteria.class);
 
@@ -250,7 +263,7 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping(path = "/download/{filename:.+\\.pdf}")
-	public ModelAndView downloadPdf(@PathVariable String filename, @ModelAttribute SearchPostForm form, Model model) {
+	public ModelAndView downloadPdf(@PathVariable String filename, SearchPostForm form, Model model) {
 		// 入力値を詰め替える
 		val criteria = modelMapper.map(form, TPostCriteria.class);
 
