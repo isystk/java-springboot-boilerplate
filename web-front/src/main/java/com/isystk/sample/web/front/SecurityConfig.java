@@ -59,10 +59,10 @@ public class SecurityConfig extends BaseSecurityConfig {
 
         // 認証除外設定
         http.authorizeRequests()
-//                // すべての画面は認証をかけない
-//                .antMatchers("*").permitAll()
-                // マイページ配下は、認証をかける
-                .antMatchers(permittedUrls).authenticated()
+				// マイページ配下は、認証をかける
+				.antMatchers(permittedUrls).authenticated()
+				// それ以外は認証をかけない
+				.anyRequest().permitAll()
                 .and()
                 .exceptionHandling()
                 .authenticationEntryPoint(authenticationEntryPoint())

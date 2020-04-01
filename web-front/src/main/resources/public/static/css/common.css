@@ -311,40 +311,41 @@ background:#fff;
 /* メインコンテンツ */
 .content main {
 max-width:100%;
+min-height:600px;
 padding: 20px;
 }
 
 /* 投稿 */
-article.detail {
+.detail {
 background-color: #fff;
 box-shadow:0px 0px 5px;
 margin-bottom: 16px;
 padding-bottom: 10px;
 }
-article.detail .entry-header {
+.detail .entry-header {
 margin-bottom: 8px;
 }
-article.detail .entry-header a {
+.detail .entry-header a {
 text-decoration:none;
 }
 /* h1 タイトル */
-article.detail .entry-header .entry-title {
+.detail .entry-header .entry-title {
 font-size: 1.5em;
 padding:16px;
 margin-top: 0;
 }
 /* 記事内容 */
-article.detail .entry-content {
+.detail .entry-content {
 padding: 18px;
 font-size: 	em;
 }
 /* 見出し h2 */
-article.detail .entry-content h2 {
+.detail .entry-content h2 {
 font-size: 1.2em;
 margin: 32px 0 24px 0;
 clear: both;
 }
-article.detail .entry-content h2:after {
+.detail .entry-content h2:after {
 margin-top: .3em;
 content: "";
 display: block;
@@ -354,7 +355,7 @@ background: -webkit-linear-gradient(to right,#ffba73,#ffb2b2);
 background: linear-gradient(to right,#ffba73,#ffb2b2);
 }
 /* サブ見出し h3 */
-article.detail .entry-content h3 {
+.detail .entry-content h3 {
 font-size: 1.0em;
 margin: 24px 0 18px 0;
 padding: .5em 0 .5em .5em;
@@ -365,11 +366,11 @@ background: linear-gradient(to right,#ffefd5,#fff);
 clear: both;
 }
 /* サブ見出し h3 */
-article.detail .entry-content p {
+.detail .entry-content p {
 padding-bottom:5px;
 }
 /* 強調 h4 */
-article.detail .entry-content h4 {
+.detail .entry-content h4 {
 margin: 12px 0 12px 0;
 clear: both;
 }
@@ -533,47 +534,48 @@ font-size:.8rem;
 }
 
 
-.photogallery {
+/* トップ画面 */
+#top {
 display: flex;
 display: -webkit-flex;
 flex-wrap: wrap;
 -webkit-flex-wrap: wrap;
 }
-.photogallery .photo {
+#top .photo {
 position: relative;
 width: 100%;
 height: auto;
 margin: 1%;
 overflow: hidden;
 }
-.photogallery .photo:before {
+#top .photo:before {
 content: "";
 display: block;
 padding-top: 100%;
 }
-.photogallery .inner {
+#top .inner {
 position: absolute;
 top: 0; left: 0;
 width: 100%;
 height: 100%;
 }
-.photogallery .square {
+#top .square {
 width: 100%;
 position: relative;
 }
-.photogallery .square::before {
+#top .square::before {
 content: "";
 display: block;
 padding-top: 100%;
 }
-.photogallery .square img {
+#top .square img {
 width: 100%;
 height: 100%;
 position: absolute;
 top: 0;
 object-fit: cover;
 }
-.photogallery .txt {
+#top .txt {
 position: absolute;
 background-color: #fff;
 bottom: 0px;
@@ -581,6 +583,26 @@ opacity: 0.8;
 padding: 5px;
 font-size: 0.8em;
 width: 100%;
+}
+
+/* 投稿詳細*/
+#detail .photo {
+max-width: 500px;
+float: left;
+margin-right: 20px;
+}
+
+/* マイページ*/
+#member .photo {
+max-width: 200px;
+float: left;
+margin-right: 10px;
+}
+#member .box {
+background-color: #fff;
+box-shadow:0px 0px 5px;
+margin-bottom: 16px;
+padding: 10px;
 }
 
 /* 環境表示用ヘッダー */
@@ -912,7 +934,7 @@ color: #454545;
 /* 画面サイズが640pxより大きい場合に以下を適用 */
 @media screen and (min-width:640px){
 
-.photogallery .photo {
+#top .photo {
 width: 48%;
 margin: 1%;
 }
@@ -922,7 +944,7 @@ margin: 1%;
 /* 画面サイズが760pxより大きい場合に以下を適用 */
 @media screen and (min-width:760px){
 
-.photogallery .photo {
+#top .photo {
 width: 31%;
 margin: 1%;
 }
@@ -932,7 +954,7 @@ margin: 1%;
 /* 画面サイズが992pxより大きい場合に以下を適用 */
 @media screen and (min-width:992px){
 
-.photogallery .photo {
+#top .photo {
 width: 23%;
 margin: 1%;
 }
