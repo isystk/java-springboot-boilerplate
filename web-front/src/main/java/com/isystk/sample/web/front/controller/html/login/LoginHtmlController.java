@@ -14,7 +14,7 @@ import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 管理側ログイン
+ * フロント側ログイン
  */
 @Controller
 @Slf4j
