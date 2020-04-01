@@ -22,29 +22,19 @@ public class TImageCriteria extends TImage {
     boolean imageIdIsNotNull;
     List<Integer> imageIdIn;
     List<Integer> imageIdNotIn;
-    Integer imageIdLike;
 
     LocalDateTime registTimeEqual;
     LocalDateTime registTimeNotEqual;
     boolean registTimeIsNull;
     boolean registTimeIsNotNull;
-    List<LocalDateTime> registTimeIn;
-    List<LocalDateTime> registTimeNotIn;
-    LocalDateTime registTimeLike;
 
     LocalDateTime updateTimeEqual;
     LocalDateTime updateTimeNotEqual;
     boolean updateTimeIsNull;
     boolean updateTimeIsNotNull;
-    List<LocalDateTime> updateTimeIn;
-    List<LocalDateTime> updateTimeNotIn;
-    LocalDateTime updateTimeLike;
 
     Boolean deleteFlgEqual;
     Boolean deleteFlgNotEqual;
     boolean deleteFlgIsNull;
     boolean deleteFlgIsNotNull;
-    List<Boolean> deleteFlgIn;
-    List<Boolean> deleteFlgNotIn;
-    Boolean deleteFlgLike;
 }

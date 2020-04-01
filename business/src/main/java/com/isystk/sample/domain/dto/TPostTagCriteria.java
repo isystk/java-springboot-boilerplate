@@ -22,7 +22,6 @@ public class TPostTagCriteria extends TPostTag {
     boolean postIdIsNotNull;
     List<Integer> postIdIn;
     List<Integer> postIdNotIn;
-    Integer postIdLike;
 
     Integer postTagIdEqual;
     Integer postTagIdNotEqual;
@@ -30,5 +29,4 @@ public class TPostTagCriteria extends TPostTag {
     boolean postTagIdIsNotNull;
     List<Integer> postTagIdIn;
     List<Integer> postTagIdNotIn;
-    Integer postTagIdLike;
 }

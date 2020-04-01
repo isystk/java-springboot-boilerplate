@@ -15,6 +15,12 @@ WHERE
 /*%if criteria.postIdIsNotNull  */
   POST_ID IS NOT NULL
 /*%end*/
+/*%if criteria.postIdIn != null  */
+  POST_ID IN /* criteria.postIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.postIdNotIn != null  */
+  POST_ID NOT IN /* criteria.postIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.imageIdEqual != null */
   IMAGE_ID = /* criteria.imageIdEqual */1
 /*%end*/
@@ -26,4 +32,10 @@ WHERE
 /*%end*/
 /*%if criteria.imageIdIsNotNull  */
   IMAGE_ID IS NOT NULL
+/*%end*/
+/*%if criteria.imageIdIn != null  */
+  IMAGE_ID IN /* criteria.imageIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.imageIdNotIn != null  */
+  IMAGE_ID NOT IN /* criteria.imageIdNotIn */(1,2,3)
 /*%end*/

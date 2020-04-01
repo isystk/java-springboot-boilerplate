@@ -24,12 +24,20 @@ public class ${simpleName}Criteria extends ${simpleName} {
 
 <#list ownEntityPropertyDescs as property>
 
+<#if property.name != "version">
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name}Equal;
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name}NotEqual;
     <#if !useAccessor>public </#if>boolean ${property.name}IsNull;
     <#if !useAccessor>public </#if>boolean ${property.name}IsNotNull;
+<#if property.number>
     <#if !useAccessor>public </#if>List<${property.propertyClassSimpleName}> ${property.name}In;
     <#if !useAccessor>public </#if>List<${property.propertyClassSimpleName}> ${property.name}NotIn;
+<#elseif property.time>
+<#elseif (property.date || property.timestamp)>
+<#elseif 0 lt property.name?index_of("Flg") >
+<#else>
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name}Like;
+</#if>
+</#if>
 </#list>
 }

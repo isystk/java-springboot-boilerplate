@@ -15,6 +15,12 @@ WHERE
 /*%if criteria.postTagIdIsNotNull  */
   POST_TAG_ID IS NOT NULL
 /*%end*/
+/*%if criteria.postTagIdIn != null  */
+  POST_TAG_ID IN /* criteria.postTagIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.postTagIdNotIn != null  */
+  POST_TAG_ID NOT IN /* criteria.postTagIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.nameEqual != null */
   NAME = /* criteria.nameEqual */'a'
 /*%end*/
@@ -26,6 +32,9 @@ WHERE
 /*%end*/
 /*%if criteria.nameIsNotNull  */
   NAME IS NOT NULL
+/*%end*/
+/*%if criteria.nameLike != null  */
+  NAME LIKE /* @infix(criteria.nameLike) */'smith'
 /*%end*/
 /*%if criteria.registTimeEqual != null */
   REGIST_TIME = /* criteria.registTimeEqual */'2010-01-23 12:34:56'
@@ -62,16 +71,4 @@ WHERE
 /*%end*/
 /*%if criteria.deleteFlgIsNotNull  */
   DELETE_FLG IS NOT NULL
-/*%end*/
-/*%if criteria.versionEqual != null */
-  VERSION = /* criteria.versionEqual */1
-/*%end*/
-/*%if criteria.versionNotEqual != null */
-  VERSION != /* criteria.versionNotEqual */1
-/*%end*/
-/*%if criteria.versionIsNull  */
-  VERSION IS NULL
-/*%end*/
-/*%if criteria.versionIsNotNull  */
-  VERSION IS NOT NULL
 /*%end*/

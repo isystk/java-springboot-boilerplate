@@ -2,6 +2,8 @@ package com.isystk.sample.web.front.controller.html.entry;
 
 import static com.isystk.sample.web.base.FrontUrl.*;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,7 +59,11 @@ public class EntryHtmlController extends AbstractHtmlController {
 		val inputPost = modelMapper.map(form, TUser.class);
 
 		entryService.regist(inputPost);
-
+		String str = "hoge";
+		Optional<String> value = Optional.of(str);
+		if(value.isPresent()) {
+		    System.out.println("値があります");
+		}
 		return "redirect:/member/";
 	}
 

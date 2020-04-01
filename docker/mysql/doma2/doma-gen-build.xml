@@ -5,7 +5,6 @@
 	<property name="templateCriteriaPrimaryDir" value="templateCriteria"/>
 	<property name="javaDestDir" value="../../../business/src/main/java"/>
 	<property name="sqlDestDir" value="../../../business/src/main/resources"/>
-	<property name="testJavaDestDir" value="../../../business/src/test/java"/>
 	<property name="dialectName" value="mysql"/>
 	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
 	<property name="url" value="jdbc:mysql://127.0.0.1:3306/sample"/>
@@ -73,27 +72,9 @@
 		</gen>
 	</target>
 
-	<target name="genTest">
-		<genTest
-			dialectName="${dialectName}"
-			driverClassName="${driverClassName}"
-			url="${url}"
-			user="${user}"
-			password="${password}">
-			<sqlTestConfig
-				destdir="${javaDestDir}"
-				testClassName="${sqlTestClassName}">
-				<fileset dir="${sqlDestDir}">
-					<include name="${sqlFilePattern}"/>
-				</fileset>
-			</sqlTestConfig>
-		</genTest>
-	</target>
-
 	<target name="all" >
 		<antcall target="gen"/>
 		<antcall target="genCriteria"/>
-		<antcall target="genTest"/>
 	</target>
 
 </project>
