@@ -7,6 +7,15 @@ spring:
     username: root
     password: password
   data.solr.host: http://localhost:8983/solr
+  mail:
+    host: 127.0.0.1
+    port: 25
+    username: test
+    password: test
+    properties:
+      mail:
+        from: from@test.com
+
 logging:
   level:
     org.springframework: INFO

@@ -1,6 +1,4 @@
-package com.isystk.sample.common.dto;
-
-import com.isystk.sample.domain.dto.common.Dto;
+package com.isystk.sample.domain.dto.common;
 
 import lombok.Getter;
 import lombok.Setter;

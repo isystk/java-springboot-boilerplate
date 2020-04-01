@@ -14,7 +14,7 @@ public class FrontUrl {
 
 	public static final String MEMBER_POST_URL = "/member/post";
 
-	public static final String UPLOADFILE_THUMB_URL = "/hoge";
+	public static final String ENTRY_REGIST_URL = "/entry/regist";
 
 	/** ---- APIｓ ---- **/
 
