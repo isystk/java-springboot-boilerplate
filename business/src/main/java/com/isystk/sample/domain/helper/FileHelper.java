@@ -20,10 +20,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.isystk.sample.common.dto.UploadFileDto;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.FileUtils;
 import com.isystk.sample.domain.dao.TImageDao;
-import com.isystk.sample.domain.dto.UploadFileDto;
 import com.isystk.sample.domain.entity.TImage;
 import com.isystk.sample.domain.exception.FileNotFoundException;
 import com.isystk.sample.domain.exception.SystemException;

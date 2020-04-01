@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.isystk.sample.domain.dto.TPostCriteria;
-import com.isystk.sample.domain.service.PostService;
+import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
 import lombok.val;

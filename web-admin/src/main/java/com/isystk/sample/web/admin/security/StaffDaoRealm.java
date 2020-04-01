@@ -38,7 +38,7 @@ public class StaffDaoRealm extends BaseRealm {
         try {
             // login_idをメールアドレスと見立てる
             val criteria = new TStaffCriteria();
-            criteria.setEmail(email);
+            criteria.setEmailEqual(email);
 
             // 担当者を取得して、セッションに保存する
             staff = tStaffDao.select(criteria)
