@@ -8,10 +8,10 @@
 <body>
 	<div layout:fragment="content">
 		<div class="content" id="content">
-			<main class="photogallery">
+			<main id="top">
 
 				<div class="photo" v-for="e in datalist">
-					<a href="/post/1/">
+					<a :href="'/post/'+e.postId+'/'">
 					<div class="inner">
 						<div class="square">
 							<img src="/thumb/sample.jpg" class="photo"/>

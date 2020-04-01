@@ -2,23 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{layouts/layout}">
-<head layout:fragment="~{layouts/layout::header}">
-	<title>{{e.title}}｜Sample</title>
+<head layout:fragment="~{layouts/layout::header}" >
+	<title>投稿詳細｜Sample</title>
 </head>
 <body>
-	<div layout:fragment="content">
-		<div class="content" id="content">
-			<main class="photogallery">
-				<h1>title</h1>
-				registTime
+	<div layout:fragment="content" th:object="${post}" >
+		<div class="content" id="content" th:data-id="*{postId}">
+			<main id="detail">
+				<h1>{{title}}</h1>
+				<p>{{registTime}}</p>
 				<div class="photo" >
-					<div class="inner">
-						<div class="square">
-							<img src="/thumb/sample.jpg" class="photo"/>
-						</div>
-					</div>
+					<img src="/thumb/sample.jpg" class="photo"/>
 				</div>
-				<p>text</p>
+				<p>{{text}}</p>
 			</main>
 		</div>
 	</div>
@@ -27,17 +23,28 @@
 		var myVueapp = new Vue({
 			el:"#content",
 			data:{
-				url: '/api/v1/post' + 1,
+				url: null,
 				title: null,
 				registTime: null,
 				text: null
 			},
 			created () {
-				(async () => {
-					var res = await axios.get(this.url);
-					this.data = res.data.data;
-				})();
-			}
+			},
+			mounted () {
+				this.url = '/api/v1/post/' + $('#content').data('id') + '/';
+			},
+			watch: {
+				url: function (val) {
+					(async () => {
+						var res = await axios.get(this.url);
+						var data = res.data.data[0];
+						console.log(data);
+						this.title = data.title;
+						this.registTime = data.registTime;
+						this.text = data.text;
+					})();
+				},
+			},
 			})
 		</script>
 	</div>
