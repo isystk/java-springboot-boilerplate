@@ -26,7 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
-import com.isystk.sample.domain.service.PostService;
+import com.isystk.sample.web.admin.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
 import com.isystk.sample.web.base.view.ExcelView;
@@ -66,7 +66,10 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping
 	public String index(@ModelAttribute SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, TPostCriteria.class);
+		TPostCriteria criteria = new TPostCriteria();
+		criteria.setPostIdEqual(form.getPostId());
+		criteria.setUserIdEqual(form.getUserId());
+		criteria.setTitleLike(form.getTitle());
 
 		// 10件区切りで取得する
 		val pages = postService.findAll(criteria, form);

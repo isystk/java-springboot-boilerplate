@@ -3,22 +3,76 @@ SELECT
 FROM
   m_post_tag
 WHERE
-/*%if criteria.postTagId != null */
-  POST_TAG_ID = /* criteria.postTagId */1
+/*%if criteria.postTagIdEqual != null */
+  POST_TAG_ID = /* criteria.postTagIdEqual */1
 /*%end*/
-/*%if criteria.name != null */
-  NAME = /* criteria.name */'a'
+/*%if criteria.postTagIdNotEqual != null */
+  POST_TAG_ID != /* criteria.postTagIdNotEqual */1
 /*%end*/
-/*%if criteria.registTime != null */
-  REGIST_TIME = /* criteria.registTime */'2010-01-23 12:34:56'
+/*%if criteria.postTagIdIsNull  */
+  POST_TAG_ID IS NULL
 /*%end*/
-/*%if criteria.updateTime != null */
-  UPDATE_TIME = /* criteria.updateTime */'2010-01-23 12:34:56'
+/*%if criteria.postTagIdIsNotNull  */
+  POST_TAG_ID IS NOT NULL
 /*%end*/
-/*%if criteria.deleteFlg != null */
-  DELETE_FLG = /* criteria.deleteFlg */'a'
+/*%if criteria.nameEqual != null */
+  NAME = /* criteria.nameEqual */'a'
 /*%end*/
-/*%if criteria.version != null */
-  VERSION = /* criteria.version */1
+/*%if criteria.nameNotEqual != null */
+  NAME != /* criteria.nameNotEqual */'a'
+/*%end*/
+/*%if criteria.nameIsNull  */
+  NAME IS NULL
+/*%end*/
+/*%if criteria.nameIsNotNull  */
+  NAME IS NOT NULL
+/*%end*/
+/*%if criteria.registTimeEqual != null */
+  REGIST_TIME = /* criteria.registTimeEqual */'2010-01-23 12:34:56'
+/*%end*/
+/*%if criteria.registTimeNotEqual != null */
+  REGIST_TIME != /* criteria.registTimeNotEqual */'2010-01-23 12:34:56'
+/*%end*/
+/*%if criteria.registTimeIsNull  */
+  REGIST_TIME IS NULL
+/*%end*/
+/*%if criteria.registTimeIsNotNull  */
+  REGIST_TIME IS NOT NULL
+/*%end*/
+/*%if criteria.updateTimeEqual != null */
+  UPDATE_TIME = /* criteria.updateTimeEqual */'2010-01-23 12:34:56'
+/*%end*/
+/*%if criteria.updateTimeNotEqual != null */
+  UPDATE_TIME != /* criteria.updateTimeNotEqual */'2010-01-23 12:34:56'
+/*%end*/
+/*%if criteria.updateTimeIsNull  */
+  UPDATE_TIME IS NULL
+/*%end*/
+/*%if criteria.updateTimeIsNotNull  */
+  UPDATE_TIME IS NOT NULL
+/*%end*/
+/*%if criteria.deleteFlgEqual != null */
+  DELETE_FLG = /* criteria.deleteFlgEqual */'a'
+/*%end*/
+/*%if criteria.deleteFlgNotEqual != null */
+  DELETE_FLG != /* criteria.deleteFlgNotEqual */'a'
+/*%end*/
+/*%if criteria.deleteFlgIsNull  */
+  DELETE_FLG IS NULL
+/*%end*/
+/*%if criteria.deleteFlgIsNotNull  */
+  DELETE_FLG IS NOT NULL
+/*%end*/
+/*%if criteria.versionEqual != null */
+  VERSION = /* criteria.versionEqual */1
+/*%end*/
+/*%if criteria.versionNotEqual != null */
+  VERSION != /* criteria.versionNotEqual */1
+/*%end*/
+/*%if criteria.versionIsNull  */
+  VERSION IS NULL
+/*%end*/
+/*%if criteria.versionIsNotNull  */
+  VERSION IS NOT NULL
 /*%end*/
 

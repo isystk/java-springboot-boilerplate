@@ -1,6 +1,8 @@
 package com.isystk.sample.domain.dto.common;
 
-// TODO: コメントを書く
+/**
+ * エンティティのスーパークラス
+ */
 public interface DomaDto extends Dto {
 
 }

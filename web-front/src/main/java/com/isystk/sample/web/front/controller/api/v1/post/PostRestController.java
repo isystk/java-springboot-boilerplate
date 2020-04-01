@@ -13,11 +13,11 @@ import com.isystk.sample.domain.dto.common.Page;
 import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.dto.SolrPostCriteria;
-import com.isystk.sample.solr.service.SolrPostService;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.PageableResource;
 import com.isystk.sample.web.base.controller.api.resource.PageableResourceImpl;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
+import com.isystk.sample.web.front.service.PostService;
 
 import lombok.val;
 
@@ -26,7 +26,7 @@ import lombok.val;
 public class PostRestController extends AbstractRestController {
 
     @Autowired
-    SolrPostService solrPostService;
+    PostService postService;
 
     @Override
     public String getFunctionName() {
@@ -47,7 +47,7 @@ public class PostRestController extends AbstractRestController {
         val criteria = modelMapper.map(query, SolrPostCriteria.class);
 
         // 10件で区切って取得する
-        Page<SolrPost> posts = solrPostService.findAll(criteria, Pageable.DEFAULT);
+        Page<SolrPost> posts = postService.findSolrAll(criteria, Pageable.DEFAULT);
 
         PageableResource resource = modelMapper.map(posts, PageableResourceImpl.class);
         resource.setMessage(getMessage(MESSAGE_SUCCESS));
@@ -64,7 +64,7 @@ public class PostRestController extends AbstractRestController {
     @GetMapping(value = "/{postId}")
     public Resource show(@PathVariable Integer postId) {
         // 1件取得する
-    	var post = solrPostService.findById(postId);
+    	var post = postService.findSolrById(postId);
 
         Resource resource = resourceFactory.create();
         resource.setData(Arrays.asList(post.orElse(new SolrPost())));

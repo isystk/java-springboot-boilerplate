@@ -23,7 +23,7 @@ import com.isystk.sample.domain.dao.AuditInfoHolder;
 import com.isystk.sample.domain.dao.TUserDao;
 import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TPost;
-import com.isystk.sample.domain.service.PostService;
+import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
 import lombok.val;
@@ -90,7 +90,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 		val inputPost = modelMapper.map(form, TPost.class);
 		// ログインユーザーID
 		var criteria = new TUserCriteria();
-		criteria.setEmail(AuditInfoHolder.getAuditUser());
+		criteria.setEmailEqual(AuditInfoHolder.getAuditUser());
 	    var tUser = tUserDao.select(criteria).orElseThrow();
 		inputPost.setUserId(tUser.getUserId());
 

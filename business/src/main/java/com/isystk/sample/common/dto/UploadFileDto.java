@@ -1,4 +1,4 @@
-package com.isystk.sample.domain.dto;
+package com.isystk.sample.common.dto;
 
 import com.isystk.sample.domain.dto.common.Dto;
 
