@@ -15,6 +15,12 @@ WHERE
 /*%if criteria.staffIdIsNotNull  */
   STAFF_ID IS NOT NULL
 /*%end*/
+/*%if criteria.staffIdIn != null  */
+  STAFF_ID IN /* criteria.staffIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.staffIdNotIn != null  */
+  STAFF_ID NOT IN /* criteria.staffIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.emailEqual != null */
   EMAIL = /* criteria.emailEqual */'a'
 /*%end*/
@@ -26,6 +32,9 @@ WHERE
 /*%end*/
 /*%if criteria.emailIsNotNull  */
   EMAIL IS NOT NULL
+/*%end*/
+/*%if criteria.emailLike != null  */
+  EMAIL LIKE /* @infix(criteria.emailLike) */'smith'
 /*%end*/
 /*%if criteria.passwordEqual != null */
   PASSWORD = /* criteria.passwordEqual */'a'
@@ -39,6 +48,9 @@ WHERE
 /*%if criteria.passwordIsNotNull  */
   PASSWORD IS NOT NULL
 /*%end*/
+/*%if criteria.passwordLike != null  */
+  PASSWORD LIKE /* @infix(criteria.passwordLike) */'smith'
+/*%end*/
 /*%if criteria.familyNameEqual != null */
   FAMILY_NAME = /* criteria.familyNameEqual */'a'
 /*%end*/
@@ -50,6 +62,9 @@ WHERE
 /*%end*/
 /*%if criteria.familyNameIsNotNull  */
   FAMILY_NAME IS NOT NULL
+/*%end*/
+/*%if criteria.familyNameLike != null  */
+  FAMILY_NAME LIKE /* @infix(criteria.familyNameLike) */'smith'
 /*%end*/
 /*%if criteria.nameEqual != null */
   NAME = /* criteria.nameEqual */'a'
@@ -63,6 +78,9 @@ WHERE
 /*%if criteria.nameIsNotNull  */
   NAME IS NOT NULL
 /*%end*/
+/*%if criteria.nameLike != null  */
+  NAME LIKE /* @infix(criteria.nameLike) */'smith'
+/*%end*/
 /*%if criteria.familyNameKanaEqual != null */
   FAMILY_NAME_KANA = /* criteria.familyNameKanaEqual */'a'
 /*%end*/
@@ -75,6 +93,9 @@ WHERE
 /*%if criteria.familyNameKanaIsNotNull  */
   FAMILY_NAME_KANA IS NOT NULL
 /*%end*/
+/*%if criteria.familyNameKanaLike != null  */
+  FAMILY_NAME_KANA LIKE /* @infix(criteria.familyNameKanaLike) */'smith'
+/*%end*/
 /*%if criteria.nameKanaEqual != null */
   NAME_KANA = /* criteria.nameKanaEqual */'a'
 /*%end*/
@@ -86,6 +107,9 @@ WHERE
 /*%end*/
 /*%if criteria.nameKanaIsNotNull  */
   NAME_KANA IS NOT NULL
+/*%end*/
+/*%if criteria.nameKanaLike != null  */
+  NAME_KANA LIKE /* @infix(criteria.nameKanaLike) */'smith'
 /*%end*/
 /*%if criteria.lastLoginTimeEqual != null */
   LAST_LOGIN_TIME = /* criteria.lastLoginTimeEqual */'2010-01-23 12:34:56'
@@ -134,16 +158,4 @@ WHERE
 /*%end*/
 /*%if criteria.deleteFlgIsNotNull  */
   DELETE_FLG IS NOT NULL
-/*%end*/
-/*%if criteria.versionEqual != null */
-  VERSION = /* criteria.versionEqual */1
-/*%end*/
-/*%if criteria.versionNotEqual != null */
-  VERSION != /* criteria.versionNotEqual */1
-/*%end*/
-/*%if criteria.versionIsNull  */
-  VERSION IS NULL
-/*%end*/
-/*%if criteria.versionIsNotNull  */
-  VERSION IS NOT NULL
 /*%end*/

@@ -15,6 +15,12 @@ WHERE
 /*%if criteria.userIdIsNotNull  */
   USER_ID IS NOT NULL
 /*%end*/
+/*%if criteria.userIdIn != null  */
+  USER_ID IN /* criteria.userIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.userIdNotIn != null  */
+  USER_ID NOT IN /* criteria.userIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.onetimeKeyEqual != null */
   ONETIME_KEY = /* criteria.onetimeKeyEqual */'a'
 /*%end*/
@@ -26,6 +32,9 @@ WHERE
 /*%end*/
 /*%if criteria.onetimeKeyIsNotNull  */
   ONETIME_KEY IS NOT NULL
+/*%end*/
+/*%if criteria.onetimeKeyLike != null  */
+  ONETIME_KEY LIKE /* @infix(criteria.onetimeKeyLike) */'smith'
 /*%end*/
 /*%if criteria.onetimeValidTimeEqual != null */
   ONETIME_VALID_TIME = /* criteria.onetimeValidTimeEqual */'2010-01-23 12:34:56'

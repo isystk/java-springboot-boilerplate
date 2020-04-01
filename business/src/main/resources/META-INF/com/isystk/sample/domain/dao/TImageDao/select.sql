@@ -15,6 +15,12 @@ WHERE
 /*%if criteria.imageIdIsNotNull  */
   IMAGE_ID IS NOT NULL
 /*%end*/
+/*%if criteria.imageIdIn != null  */
+  IMAGE_ID IN /* criteria.imageIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.imageIdNotIn != null  */
+  IMAGE_ID NOT IN /* criteria.imageIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.registTimeEqual != null */
   REGIST_TIME = /* criteria.registTimeEqual */'2010-01-23 12:34:56'
 /*%end*/

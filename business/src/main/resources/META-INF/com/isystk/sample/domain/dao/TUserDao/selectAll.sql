@@ -15,6 +15,12 @@ WHERE
 /*%if criteria.userIdIsNotNull  */
   USER_ID IS NOT NULL
 /*%end*/
+/*%if criteria.userIdIn != null  */
+  USER_ID IN /* criteria.userIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.userIdNotIn != null  */
+  USER_ID NOT IN /* criteria.userIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.emailEqual != null */
   EMAIL = /* criteria.emailEqual */'a'
 /*%end*/
@@ -26,6 +32,9 @@ WHERE
 /*%end*/
 /*%if criteria.emailIsNotNull  */
   EMAIL IS NOT NULL
+/*%end*/
+/*%if criteria.emailLike != null  */
+  EMAIL LIKE /* @infix(criteria.emailLike) */'smith'
 /*%end*/
 /*%if criteria.passwordEqual != null */
   PASSWORD = /* criteria.passwordEqual */'a'
@@ -39,6 +48,9 @@ WHERE
 /*%if criteria.passwordIsNotNull  */
   PASSWORD IS NOT NULL
 /*%end*/
+/*%if criteria.passwordLike != null  */
+  PASSWORD LIKE /* @infix(criteria.passwordLike) */'smith'
+/*%end*/
 /*%if criteria.familyNameEqual != null */
   FAMILY_NAME = /* criteria.familyNameEqual */'a'
 /*%end*/
@@ -50,6 +62,9 @@ WHERE
 /*%end*/
 /*%if criteria.familyNameIsNotNull  */
   FAMILY_NAME IS NOT NULL
+/*%end*/
+/*%if criteria.familyNameLike != null  */
+  FAMILY_NAME LIKE /* @infix(criteria.familyNameLike) */'smith'
 /*%end*/
 /*%if criteria.nameEqual != null */
   NAME = /* criteria.nameEqual */'a'
@@ -63,6 +78,9 @@ WHERE
 /*%if criteria.nameIsNotNull  */
   NAME IS NOT NULL
 /*%end*/
+/*%if criteria.nameLike != null  */
+  NAME LIKE /* @infix(criteria.nameLike) */'smith'
+/*%end*/
 /*%if criteria.familyNameKanaEqual != null */
   FAMILY_NAME_KANA = /* criteria.familyNameKanaEqual */'a'
 /*%end*/
@@ -74,6 +92,9 @@ WHERE
 /*%end*/
 /*%if criteria.familyNameKanaIsNotNull  */
   FAMILY_NAME_KANA IS NOT NULL
+/*%end*/
+/*%if criteria.familyNameKanaLike != null  */
+  FAMILY_NAME_KANA LIKE /* @infix(criteria.familyNameKanaLike) */'smith'
 /*%end*/
 /*%if criteria.nameKanaEqual != null */
   NAME_KANA = /* criteria.nameKanaEqual */'a'
@@ -87,6 +108,9 @@ WHERE
 /*%if criteria.nameKanaIsNotNull  */
   NAME_KANA IS NOT NULL
 /*%end*/
+/*%if criteria.nameKanaLike != null  */
+  NAME_KANA LIKE /* @infix(criteria.nameKanaLike) */'smith'
+/*%end*/
 /*%if criteria.zipEqual != null */
   ZIP = /* criteria.zipEqual */'a'
 /*%end*/
@@ -98,6 +122,9 @@ WHERE
 /*%end*/
 /*%if criteria.zipIsNotNull  */
   ZIP IS NOT NULL
+/*%end*/
+/*%if criteria.zipLike != null  */
+  ZIP LIKE /* @infix(criteria.zipLike) */'smith'
 /*%end*/
 /*%if criteria.prefectureIdEqual != null */
   PREFECTURE_ID = /* criteria.prefectureIdEqual */1
@@ -111,6 +138,12 @@ WHERE
 /*%if criteria.prefectureIdIsNotNull  */
   PREFECTURE_ID IS NOT NULL
 /*%end*/
+/*%if criteria.prefectureIdIn != null  */
+  PREFECTURE_ID IN /* criteria.prefectureIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.prefectureIdNotIn != null  */
+  PREFECTURE_ID NOT IN /* criteria.prefectureIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.areaEqual != null */
   AREA = /* criteria.areaEqual */'a'
 /*%end*/
@@ -122,6 +155,9 @@ WHERE
 /*%end*/
 /*%if criteria.areaIsNotNull  */
   AREA IS NOT NULL
+/*%end*/
+/*%if criteria.areaLike != null  */
+  AREA LIKE /* @infix(criteria.areaLike) */'smith'
 /*%end*/
 /*%if criteria.addressEqual != null */
   ADDRESS = /* criteria.addressEqual */'a'
@@ -135,6 +171,9 @@ WHERE
 /*%if criteria.addressIsNotNull  */
   ADDRESS IS NOT NULL
 /*%end*/
+/*%if criteria.addressLike != null  */
+  ADDRESS LIKE /* @infix(criteria.addressLike) */'smith'
+/*%end*/
 /*%if criteria.buildingEqual != null */
   BUILDING = /* criteria.buildingEqual */'a'
 /*%end*/
@@ -146,6 +185,9 @@ WHERE
 /*%end*/
 /*%if criteria.buildingIsNotNull  */
   BUILDING IS NOT NULL
+/*%end*/
+/*%if criteria.buildingLike != null  */
+  BUILDING LIKE /* @infix(criteria.buildingLike) */'smith'
 /*%end*/
 /*%if criteria.telEqual != null */
   TEL = /* criteria.telEqual */'a'
@@ -159,6 +201,9 @@ WHERE
 /*%if criteria.telIsNotNull  */
   TEL IS NOT NULL
 /*%end*/
+/*%if criteria.telLike != null  */
+  TEL LIKE /* @infix(criteria.telLike) */'smith'
+/*%end*/
 /*%if criteria.sexEqual != null */
   SEX = /* criteria.sexEqual */1
 /*%end*/
@@ -170,6 +215,12 @@ WHERE
 /*%end*/
 /*%if criteria.sexIsNotNull  */
   SEX IS NOT NULL
+/*%end*/
+/*%if criteria.sexIn != null  */
+  SEX IN /* criteria.sexIn */(1,2,3)
+/*%end*/
+/*%if criteria.sexNotIn != null  */
+  SEX NOT IN /* criteria.sexNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.birthdayEqual != null */
   BIRTHDAY = /* criteria.birthdayEqual */'2010-01-23'
@@ -207,6 +258,12 @@ WHERE
 /*%if criteria.statusIsNotNull  */
   STATUS IS NOT NULL
 /*%end*/
+/*%if criteria.statusIn != null  */
+  STATUS IN /* criteria.statusIn */(1,2,3)
+/*%end*/
+/*%if criteria.statusNotIn != null  */
+  STATUS NOT IN /* criteria.statusNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.registTimeEqual != null */
   REGIST_TIME = /* criteria.registTimeEqual */'2010-01-23 12:34:56'
 /*%end*/
@@ -242,16 +299,4 @@ WHERE
 /*%end*/
 /*%if criteria.deleteFlgIsNotNull  */
   DELETE_FLG IS NOT NULL
-/*%end*/
-/*%if criteria.versionEqual != null */
-  VERSION = /* criteria.versionEqual */1
-/*%end*/
-/*%if criteria.versionNotEqual != null */
-  VERSION != /* criteria.versionNotEqual */1
-/*%end*/
-/*%if criteria.versionIsNull  */
-  VERSION IS NULL
-/*%end*/
-/*%if criteria.versionIsNotNull  */
-  VERSION IS NOT NULL
 /*%end*/

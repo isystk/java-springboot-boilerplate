@@ -15,6 +15,12 @@ WHERE
 /*%if criteria.postIdIsNotNull  */
   POST_ID IS NOT NULL
 /*%end*/
+/*%if criteria.postIdIn != null  */
+  POST_ID IN /* criteria.postIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.postIdNotIn != null  */
+  POST_ID NOT IN /* criteria.postIdNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.userIdEqual != null */
   USER_ID = /* criteria.userIdEqual */1
 /*%end*/
@@ -26,6 +32,12 @@ WHERE
 /*%end*/
 /*%if criteria.userIdIsNotNull  */
   USER_ID IS NOT NULL
+/*%end*/
+/*%if criteria.userIdIn != null  */
+  USER_ID IN /* criteria.userIdIn */(1,2,3)
+/*%end*/
+/*%if criteria.userIdNotIn != null  */
+  USER_ID NOT IN /* criteria.userIdNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.titleEqual != null */
   TITLE = /* criteria.titleEqual */'a'
@@ -39,6 +51,9 @@ WHERE
 /*%if criteria.titleIsNotNull  */
   TITLE IS NOT NULL
 /*%end*/
+/*%if criteria.titleLike != null  */
+  TITLE LIKE /* @infix(criteria.titleLike) */'smith'
+/*%end*/
 /*%if criteria.textEqual != null */
   TEXT = /* criteria.textEqual */'a'
 /*%end*/
@@ -50,6 +65,9 @@ WHERE
 /*%end*/
 /*%if criteria.textIsNotNull  */
   TEXT IS NOT NULL
+/*%end*/
+/*%if criteria.textLike != null  */
+  TEXT LIKE /* @infix(criteria.textLike) */'smith'
 /*%end*/
 /*%if criteria.registTimeEqual != null */
   REGIST_TIME = /* criteria.registTimeEqual */'2010-01-23 12:34:56'
@@ -86,17 +104,5 @@ WHERE
 /*%end*/
 /*%if criteria.deleteFlgIsNotNull  */
   DELETE_FLG IS NOT NULL
-/*%end*/
-/*%if criteria.versionEqual != null */
-  VERSION = /* criteria.versionEqual */1
-/*%end*/
-/*%if criteria.versionNotEqual != null */
-  VERSION != /* criteria.versionNotEqual */1
-/*%end*/
-/*%if criteria.versionIsNull  */
-  VERSION IS NULL
-/*%end*/
-/*%if criteria.versionIsNotNull  */
-  VERSION IS NOT NULL
 /*%end*/
 

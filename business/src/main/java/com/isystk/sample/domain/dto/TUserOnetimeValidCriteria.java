@@ -22,21 +22,15 @@ public class TUserOnetimeValidCriteria extends TUserOnetimeValid {
     boolean userIdIsNotNull;
     List<Integer> userIdIn;
     List<Integer> userIdNotIn;
-    Integer userIdLike;
 
     String onetimeKeyEqual;
     String onetimeKeyNotEqual;
     boolean onetimeKeyIsNull;
     boolean onetimeKeyIsNotNull;
-    List<String> onetimeKeyIn;
-    List<String> onetimeKeyNotIn;
     String onetimeKeyLike;
 
     LocalDateTime onetimeValidTimeEqual;
     LocalDateTime onetimeValidTimeNotEqual;
     boolean onetimeValidTimeIsNull;
     boolean onetimeValidTimeIsNotNull;
-    List<LocalDateTime> onetimeValidTimeIn;
-    List<LocalDateTime> onetimeValidTimeNotIn;
-    LocalDateTime onetimeValidTimeLike;
 }

@@ -22,7 +22,6 @@ public class TPostImageCriteria extends TPostImage {
     boolean postIdIsNotNull;
     List<Integer> postIdIn;
     List<Integer> postIdNotIn;
-    Integer postIdLike;
 
     Integer imageIdEqual;
     Integer imageIdNotEqual;
@@ -30,5 +29,4 @@ public class TPostImageCriteria extends TPostImage {
     boolean imageIdIsNotNull;
     List<Integer> imageIdIn;
     List<Integer> imageIdNotIn;
-    Integer imageIdLike;
 }
