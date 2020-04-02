@@ -36,24 +36,25 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 	@Autowired
 	PostService postService;
 
-    @Autowired
-    UserHelper userHelper;
+	@Autowired
+	UserHelper userHelper;
 
-    @Autowired
-    MemberPostHtmlFormValidator postFormValidator;
+	@Autowired
+	MemberPostHtmlFormValidator postFormValidator;
 
 	@Override
 	public String getFunctionName() {
 		return "A_MEMBER_POST";
 	}
 
-    @InitBinder("postHtmlForm")
-    public void validatorBinder(WebDataBinder binder) {
-        binder.addValidators(postFormValidator);
-    }
+	@InitBinder("postHtmlForm")
+	public void validatorBinder(WebDataBinder binder) {
+		binder.addValidators(postFormValidator);
+	}
 
 	/**
 	 * 登録画面表示
+	 * 
 	 * @param post
 	 * @param model
 	 * @return
@@ -70,6 +71,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 登録処理
+	 * 
 	 * @param post
 	 * @param result
 	 * @param model
@@ -95,6 +97,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 更新処理
+	 * 
 	 * @param form
 	 * @param br
 	 * @param postId
@@ -129,6 +132,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 削除処理
+	 * 
 	 * @param id
 	 * @return
 	 */

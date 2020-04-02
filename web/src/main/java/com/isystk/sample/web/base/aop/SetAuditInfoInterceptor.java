@@ -23,49 +23,49 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SetAuditInfoInterceptor extends BaseHandlerInterceptor {
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
-        // コントローラーの動作前
-        val now = LocalDateTime.now();
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// コントローラーの動作前
+		val now = LocalDateTime.now();
 
-        // 未ログインの場合は、ゲスト扱いにする
-        AuditInfoHolder.set("GUEST", now);
+		// 未ログインの場合は、ゲスト扱いにする
+		AuditInfoHolder.set("GUEST", now);
 
-        // ログインユーザーが存在する場合
-        getLoginUser().ifPresent(loginUser -> {
-            // 監査情報を設定する
-            AuditInfoHolder.set(loginUser.getUsername(), now);
-        });
+		// ログインユーザーが存在する場合
+		getLoginUser().ifPresent(loginUser -> {
+			// 監査情報を設定する
+			AuditInfoHolder.set(loginUser.getUsername(), now);
+		});
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        // コントローラーの動作後
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		// コントローラーの動作後
 
-        // 監査情報をクリアする
-        AuditInfoHolder.clear();
-    }
+		// 監査情報をクリアする
+		AuditInfoHolder.clear();
+	}
 
-    /**
-     * ログインユーザを取得する
-     *
-     * @return
-     */
-    protected Optional<UserDetails> getLoginUser() {
-        val auth = SecurityContextHolder.getContext().getAuthentication();
+	/**
+	 * ログインユーザを取得する
+	 *
+	 * @return
+	 */
+	protected Optional<UserDetails> getLoginUser() {
+		val auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if (auth != null) {
-            Object principal = auth.getPrincipal();
+		if (auth != null) {
+			Object principal = auth.getPrincipal();
 
-            if (principal instanceof UserDetails) {
-                return ofNullable((UserDetails) principal);
-            }
-        }
+			if (principal instanceof UserDetails) {
+				return ofNullable((UserDetails) principal);
+			}
+		}
 
-        return Optional.empty();
-    }
+		return Optional.empty();
+	}
 }

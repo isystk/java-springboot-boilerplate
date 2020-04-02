@@ -5,19 +5,19 @@ package com.isystk.sample.common.exception;
  */
 public class NoDataFoundException extends RuntimeException {
 
-    private static final long serialVersionUID = -3553226048751584224L;
+	private static final long serialVersionUID = -3553226048751584224L;
 
-    /**
-     * コンストラクタ
-     */
-    public NoDataFoundException(String message) {
-        super(message);
-    }
+	/**
+	 * コンストラクタ
+	 */
+	public NoDataFoundException(String message) {
+		super(message);
+	}
 
-    /**
-     * コンストラクタ
-     */
-    public NoDataFoundException(Exception e) {
-        super(e);
-    }
+	/**
+	 * コンストラクタ
+	 */
+	public NoDataFoundException(Exception e) {
+		super(e);
+	}
 }

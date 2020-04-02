@@ -27,48 +27,48 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoginUserTrackingFilter extends OncePerRequestFilter {
 
-    @Setter
-    List<String> excludeUrlPatterns;
+	@Setter
+	List<String> excludeUrlPatterns;
 
-    private static final AntPathMatcher pathMatcher = new AntPathMatcher();
+	private static final AntPathMatcher pathMatcher = new AntPathMatcher();
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
 
-        try {
-            if (!shouldNotFilter(request)) {
-                MDC.put(MDC_LOGIN_USER_ID, "GUEST");
-                getUserId().ifPresent(userId -> MDC.put(MDC_LOGIN_USER_ID, userId));
-            }
-        } finally {
-            filterChain.doFilter(request, response);
-        }
-    }
+		try {
+			if (!shouldNotFilter(request)) {
+				MDC.put(MDC_LOGIN_USER_ID, "GUEST");
+				getUserId().ifPresent(userId -> MDC.put(MDC_LOGIN_USER_ID, userId));
+			}
+		} finally {
+			filterChain.doFilter(request, response);
+		}
+	}
 
-    protected Optional<String> getUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	protected Optional<String> getUserId() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null) {
-            Object principal = authentication.getPrincipal();
+		if (authentication != null) {
+			Object principal = authentication.getPrincipal();
 
-            if (principal instanceof UserIdAware) {
-                val loginId = ((UserIdAware) principal).getUserId();
-                return Optional.of(loginId);
-            }
-        }
+			if (principal instanceof UserIdAware) {
+				val loginId = ((UserIdAware) principal).getUserId();
+				return Optional.of(loginId);
+			}
+		}
 
-        return Optional.empty();
-    }
+		return Optional.empty();
+	}
 
-    @Override
-    protected boolean shouldNotFilter(HttpServletRequest request) {
-        val exclude = excludeUrlPatterns.stream().anyMatch(p -> pathMatcher.match(p, request.getServletPath()));
+	@Override
+	protected boolean shouldNotFilter(HttpServletRequest request) {
+		val exclude = excludeUrlPatterns.stream().anyMatch(p -> pathMatcher.match(p, request.getServletPath()));
 
-        if (exclude) {
-            return true;
-        }
+		if (exclude) {
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 }

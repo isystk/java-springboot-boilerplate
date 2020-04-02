@@ -24,33 +24,33 @@ import lombok.val;
 public abstract class BaseApplicationConfig
 		implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>, WebMvcConfigurer {
 
-    @Override
-    public void customize(ConfigurableServletWebServerFactory container) {
-    }
+	@Override
+	public void customize(ConfigurableServletWebServerFactory container) {
+	}
 
-    @Bean
-    public PageFactory pageFactory() {
-        return new DefaultPageFactoryImpl();
-    }
+	@Bean
+	public PageFactory pageFactory() {
+		return new DefaultPageFactoryImpl();
+	}
 
-    @Bean
-    public ResourceFactory resourceFactory() {
-        return new DefaultResourceFactoryImpl();
-    }
+	@Bean
+	public ResourceFactory resourceFactory() {
+		return new DefaultResourceFactoryImpl();
+	}
 
-    @Bean
-    public LocaleChangeInterceptor localeChangeInterceptor() {
-        // langパラメータでロケールを切り替える
-        val interceptor = new LocaleChangeInterceptor();
-        interceptor.setParamName("lang");
-        return interceptor;
-    }
+	@Bean
+	public LocaleChangeInterceptor localeChangeInterceptor() {
+		// langパラメータでロケールを切り替える
+		val interceptor = new LocaleChangeInterceptor();
+		interceptor.setParamName("lang");
+		return interceptor;
+	}
 
-    @Bean
-    public RequestTrackingInterceptor requestTrackingInterceptor() {
-        // MDCにIDを設定してリクエストをトラッキングする
-        return new RequestTrackingInterceptor();
-    }
+	@Bean
+	public RequestTrackingInterceptor requestTrackingInterceptor() {
+		// MDCにIDを設定してリクエストをトラッキングする
+		return new RequestTrackingInterceptor();
+	}
 
 	@Bean
 	public LoggingFunctionNameInterceptor loggingFunctionNameInterceptor() {
@@ -58,51 +58,51 @@ public abstract class BaseApplicationConfig
 		return new LoggingFunctionNameInterceptor();
 	}
 
-    @Bean
-    public SetDoubleSubmitCheckTokenInterceptor setDoubleSubmitCheckTokenInterceptor() {
-        // 二重送信をチェックする
-        return new SetDoubleSubmitCheckTokenInterceptor();
-    }
+	@Bean
+	public SetDoubleSubmitCheckTokenInterceptor setDoubleSubmitCheckTokenInterceptor() {
+		// 二重送信をチェックする
+		return new SetDoubleSubmitCheckTokenInterceptor();
+	}
 
-    @Bean
-    public SetAuditInfoInterceptor setAuditInfoInterceptor() {
-        // システム制御項目を保存してDB保存時に利用する
-        return new SetAuditInfoInterceptor();
-    }
+	@Bean
+	public SetAuditInfoInterceptor setAuditInfoInterceptor() {
+		// システム制御項目を保存してDB保存時に利用する
+		return new SetAuditInfoInterceptor();
+	}
 
+	@Bean
+	public SetModelAndViewInterceptor setModelAndViewInterceptor() {
+		// 共通的な定数定義などを画面変数に設定する
+		return new SetModelAndViewInterceptor();
+	}
 
-    @Bean
-    public SetModelAndViewInterceptor setModelAndViewInterceptor() {
-        // 共通的な定数定義などを画面変数に設定する
-        return new SetModelAndViewInterceptor();
-    }
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(localeChangeInterceptor());
-        registry.addInterceptor(requestTrackingInterceptor());
-        registry.addInterceptor(loggingFunctionNameInterceptor());
-        registry.addInterceptor(setAuditInfoInterceptor());
-        registry.addInterceptor(setDoubleSubmitCheckTokenInterceptor());
-        registry.addInterceptor(setModelAndViewInterceptor());
-    }
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(localeChangeInterceptor());
+		registry.addInterceptor(requestTrackingInterceptor());
+		registry.addInterceptor(loggingFunctionNameInterceptor());
+		registry.addInterceptor(setAuditInfoInterceptor());
+		registry.addInterceptor(setDoubleSubmitCheckTokenInterceptor());
+		registry.addInterceptor(setModelAndViewInterceptor());
+	}
 
 	/**
 	 * [] を含むURLをGETしようとするとTomcatが400を返す 問題に対応
+	 * 
 	 * @return
 	 */
 	@Bean
-	public WebServerFactoryCustomizer<TomcatServletWebServerFactory>
-	    containerCustomizer(){
-	    return new EmbeddedTomcatCustomizer();
+	public WebServerFactoryCustomizer<TomcatServletWebServerFactory> containerCustomizer() {
+		return new EmbeddedTomcatCustomizer();
 	}
+
 	private static class EmbeddedTomcatCustomizer implements WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
-	    @Override
-	    public void customize(TomcatServletWebServerFactory factory) {
-	        factory.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
-	            connector.setAttribute("relaxedPathChars", "<>[\\]^`{|}");
-	            connector.setAttribute("relaxedQueryChars", "<>[\\]^`{|}");
-	        });
-	    }
+		@Override
+		public void customize(TomcatServletWebServerFactory factory) {
+			factory.addConnectorCustomizers((TomcatConnectorCustomizer) connector -> {
+				connector.setAttribute("relaxedPathChars", "<>[\\]^`{|}");
+				connector.setAttribute("relaxedQueryChars", "<>[\\]^`{|}");
+			});
+		}
 	}
 }

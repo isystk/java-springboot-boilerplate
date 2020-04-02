@@ -18,7 +18,7 @@
 
 						<p>会員情報を入力してください。この情報は後で変更することも出来ます。</p>
 
-						<form id="entryForm" th:object="${entryHtmlForm}" th:action="@{/entry}" method="post">
+						<form id="entryForm" th:object="${entryHtmlForm}" th:action="@{/entry/regist}" method="post">
 							<table class="formTable">
 								<tbody>
 								<!-- loop -->
@@ -45,7 +45,7 @@
 							<tr>
 								<th colspan="2"><span class="mark">メールアドレス</span><span class="required">【必須】</span></th>
 								<td>
-									<p><input type="text" name="mail" class="text size_l " maxlength="100" /></p>
+									<p><input type="text" name="email" class="text size_l " maxlength="100" /></p>
 									<div id="mailErrMessage">
 									</div>
 								</td>

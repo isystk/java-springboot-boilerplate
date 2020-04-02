@@ -7,8 +7,8 @@ import lombok.Setter;
 @Getter
 public class UploadFileDto implements Dto {
 
-    Integer id;
+	Integer id;
 
-    String path;
+	String path;
 
 }

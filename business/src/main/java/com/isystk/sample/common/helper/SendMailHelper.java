@@ -24,55 +24,55 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SendMailHelper {
 
-    @Autowired
-    JavaMailSender javaMailSender;
+	@Autowired
+	JavaMailSender javaMailSender;
 
-    /**
-     * メールを送信します。
-     *
-     * @param fromAddress
-     * @param toAddress
-     * @param subject
-     * @param body
-     */
-    public void sendMail(String fromAddress, String[] toAddress, String subject, String body) {
-        val message = new SimpleMailMessage();
-        message.setFrom(fromAddress);
-        message.setTo(toAddress);
-        message.setSubject(subject);
-        message.setText(body);
+	/**
+	 * メールを送信します。
+	 *
+	 * @param fromAddress
+	 * @param toAddress
+	 * @param subject
+	 * @param body
+	 */
+	public void sendMail(String fromAddress, String[] toAddress, String subject, String body) {
+		val message = new SimpleMailMessage();
+		message.setFrom(fromAddress);
+		message.setTo(toAddress);
+		message.setSubject(subject);
+		message.setText(body);
 
-        try {
-            javaMailSender.send(message);
-        } catch (MailException e) {
-            log.error("failed to send mail.", e);
-            throw e;
-        }
-    }
+		try {
+			javaMailSender.send(message);
+		} catch (MailException e) {
+			log.error("failed to send mail.", e);
+			throw e;
+		}
+	}
 
-    /**
-     * 指定したテンプレートのメール本文を返します。
-     *
-     * @param template
-     * @param objects
-     * @return
-     */
-    public String getMailBody(String template, Map<String, Object> objects) {
-        val templateEngine = new SpringTemplateEngine();
-        templateEngine.setTemplateResolver(templateResolver());
+	/**
+	 * 指定したテンプレートのメール本文を返します。
+	 *
+	 * @param template
+	 * @param objects
+	 * @return
+	 */
+	public String getMailBody(String template, Map<String, Object> objects) {
+		val templateEngine = new SpringTemplateEngine();
+		templateEngine.setTemplateResolver(templateResolver());
 
-        val context = new Context();
-        if (isNotEmpty(objects)) {
-            objects.forEach(context::setVariable);
-        }
+		val context = new Context();
+		if (isNotEmpty(objects)) {
+			objects.forEach(context::setVariable);
+		}
 
-        return templateEngine.process(template, context);
-    }
+		return templateEngine.process(template, context);
+	}
 
-    private ITemplateResolver templateResolver() {
-        val resolver = new StringTemplateResolver();
-        resolver.setTemplateMode("TEXT");
-        resolver.setCacheable(false); // 安全をとってキャッシュしない
-        return resolver;
-    }
+	private ITemplateResolver templateResolver() {
+		val resolver = new StringTemplateResolver();
+		resolver.setTemplateMode("TEXT");
+		resolver.setCacheable(false); // 安全をとってキャッシュしない
+		return resolver;
+	}
 }

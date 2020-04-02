@@ -11,8 +11,8 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ResourceImpl implements Resource {
 
-    List<? extends Dto> data;
+	List<? extends Dto> data;
 
-    // メッセージ
-    String message;
+	// メッセージ
+	String message;
 }

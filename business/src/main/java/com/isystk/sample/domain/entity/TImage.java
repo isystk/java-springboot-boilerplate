@@ -20,24 +20,23 @@ import lombok.Setter;
 @Setter
 public class TImage extends DomaDtoImpl {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	/** ID */
+	@Id
+	@Column(name = "IMAGE_ID")
+	Integer imageId;
 
-    /** ID */
-    @Id
-    @Column(name = "IMAGE_ID")
-    Integer imageId;
+	/**  */
+	@Column(name = "REGIST_TIME")
+	LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
+	/**  */
+	@Column(name = "UPDATE_TIME")
+	LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
-
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
+	/**  */
+	@Column(name = "DELETE_FLG")
+	Boolean deleteFlg;
 }

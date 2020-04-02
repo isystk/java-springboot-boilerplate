@@ -34,63 +34,63 @@ import com.isystk.sample.domain.entity.TImage;
 @Component
 public class FileHelper {
 
-    @Value("${application.fileUploadLocation:#{systemProperties['java.io.tmpdir']}}") // 設定ファイルに定義されたアップロード先を取得する
-    String fileUploadLocation;
+	@Value("${application.fileUploadLocation:#{systemProperties['java.io.tmpdir']}}") // 設定ファイルに定義されたアップロード先を取得する
+	String fileUploadLocation;
 
-    @Autowired
-    TImageDao tImageDao;
+	@Autowired
+	TImageDao tImageDao;
 
-    /**
-     * ファイルの一覧を取得します。
-     *
-     * @param location
-     * @return
-     */
-    public Stream<Path> listAllFiles(Path location) {
-        try {
-            return Files.walk(location, 1).filter(path -> !path.equals(location)).map(location::relativize);
-        } catch (IOException e) {
-            throw new IllegalArgumentException("failed to list uploadfiles. ", e);
-        }
-    }
+	/**
+	 * ファイルの一覧を取得します。
+	 *
+	 * @param location
+	 * @return
+	 */
+	public Stream<Path> listAllFiles(Path location) {
+		try {
+			return Files.walk(location, 1).filter(path -> !path.equals(location)).map(location::relativize);
+		} catch (IOException e) {
+			throw new IllegalArgumentException("failed to list uploadfiles. ", e);
+		}
+	}
 
-    /**
-     * ファイルを読み込みます。
-     *
-     * @param location
-     * @param filename
-     * @return
-     */
-    public Resource loadFile(Integer imageId) {
+	/**
+	 * ファイルを読み込みます。
+	 *
+	 * @param location
+	 * @param filename
+	 * @return
+	 */
+	public Resource loadFile(Integer imageId) {
 		// ディレクトリ
 		String dir = getHash(imageId);
-        Path location = Paths.get(fileUploadLocation, dir);
-        try {
+		Path location = Paths.get(fileUploadLocation, dir);
+		try {
 
 			// 保存するファイル名
 			String saveFileName = imageId + ".jpg";
 
-            Path file = location.resolve(dir).resolve(saveFileName);
-            Resource resource = new UrlResource(file.toUri());
+			Path file = location.resolve(dir).resolve(saveFileName);
+			Resource resource = new UrlResource(file.toUri());
 
-            if (resource.exists() || resource.isReadable()) {
-                return resource;
-            }
+			if (resource.exists() || resource.isReadable()) {
+				return resource;
+			}
 
-            throw new FileNotFoundException("could not read file. " + imageId);
+			throw new FileNotFoundException("could not read file. " + imageId);
 
-        } catch (MalformedURLException e) {
-            throw new IllegalArgumentException(
-                    "malformed Url resource. [location=" + location.toString() + ", imageId=" + imageId + "]", e);
-        }
-    }
+		} catch (MalformedURLException e) {
+			throw new IllegalArgumentException(
+					"malformed Url resource. [location=" + location.toString() + ", imageId=" + imageId + "]", e);
+		}
+	}
 
 	/**
 	 * ID生成
 	 *
 	 * @return 生成されたID
 	 */
-    private Integer generateID(int maxLength) {
+	private Integer generateID(int maxLength) {
 		Integer id = 0;
 		boolean loopFlg = true;
 
@@ -111,8 +111,7 @@ public class FileHelper {
 	/**
 	 * 画像IDからパスを表すハッシュを取得する。
 	 *
-	 * @param imgId
-	 *            画像ID
+	 * @param imgId 画像ID
 	 * @return ハッシュ
 	 */
 	private String getHash(Integer imgId) {
@@ -130,14 +129,13 @@ public class FileHelper {
 		return f.toString();
 	}
 
-    /**
-     * ファイルを保存します。
-     *
-     * @param location
-     * @param file
-     *            保存先ディレクトリ
-     */
-    public UploadFileDto saveFile(MultipartFile file) {
+	/**
+	 * ファイルを保存します。
+	 *
+	 * @param location
+	 * @param file     保存先ディレクトリ
+	 */
+	public UploadFileDto saveFile(MultipartFile file) {
 		Assert.notNull(file, "file can't be null");
 		String upFileName = file.getOriginalFilename();
 
@@ -158,7 +156,7 @@ public class FileHelper {
 
 			// ディレクトリ
 			String dir = getHash(id);
-	        Path location = Paths.get(fileUploadLocation, dir);
+			Path location = Paths.get(fileUploadLocation, dir);
 
 			// 保存するファイル名
 			String saveFileName = id + ".jpg";

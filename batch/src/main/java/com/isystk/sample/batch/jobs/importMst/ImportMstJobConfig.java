@@ -21,34 +21,33 @@ import com.isystk.sample.batch.listener.DefaultStepExecutionListener;
 @EnableBatchProcessing
 public class ImportMstJobConfig {
 
-    @Autowired
-    JobBuilderFactory jobBuilderFactory;
+	@Autowired
+	JobBuilderFactory jobBuilderFactory;
 
-    @Autowired
-    StepBuilderFactory stepBuilderFactory;
+	@Autowired
+	StepBuilderFactory stepBuilderFactory;
 
-    @Bean
-    public JobExecutionListener importUserJobListener() {
-        return new ImportMstJobListener();
-    }
+	@Bean
+	public JobExecutionListener importUserJobListener() {
+		return new ImportMstJobListener();
+	}
 
-    @Bean
-    public Job importMstJob() {
-        return jobBuilderFactory.get("importMstJob").incrementer(new RunIdIncrementer())
-                .listener(importUserJobListener())
-                .start(importMstPostStep())
+	@Bean
+	public Job importMstJob() {
+		return jobBuilderFactory.get("importMstJob").incrementer(new RunIdIncrementer())
+				.listener(importUserJobListener()).start(importMstPostStep())
 //              .next(importMstPostStep())
-                .build();
-    }
+				.build();
+	}
 
-    @Bean
-    public Step importMstPostStep() {
-        return stepBuilderFactory.get("importMstPostStep").listener(new DefaultStepExecutionListener())
-                .tasklet(importMstPostTasklet()).build();
-    }
+	@Bean
+	public Step importMstPostStep() {
+		return stepBuilderFactory.get("importMstPostStep").listener(new DefaultStepExecutionListener())
+				.tasklet(importMstPostTasklet()).build();
+	}
 
-    @Bean
-    public Tasklet importMstPostTasklet() {
-        return new ImportMstPostTasklet();
-    }
+	@Bean
+	public Tasklet importMstPostTasklet() {
+		return new ImportMstPostTasklet();
+	}
 }

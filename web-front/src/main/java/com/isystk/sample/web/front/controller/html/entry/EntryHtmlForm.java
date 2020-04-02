@@ -11,34 +11,34 @@ import lombok.Setter;
 @Getter
 public class EntryHtmlForm implements Serializable {
 
-    private static final long serialVersionUID = 7593564324192730932L;
+	private static final long serialVersionUID = 7593564324192730932L;
 
 	/** 姓 */
-    @NotEmpty
+	@NotEmpty
 	public String familyName;
 
 	/** 名 */
-    @NotEmpty
+	@NotEmpty
 	public String name;
 
 	/** 姓（カナ） */
-    @NotEmpty
+	@NotEmpty
 	public String familyNameKana;
 
 	/** 名（カナ） */
-    @NotEmpty
+	@NotEmpty
 	public String nameKana;
 
 	/** メールアドレス */
-    @NotEmpty
-	public String mail;
+	@NotEmpty
+	public String email;
 
 	/** パスワード */
-    @NotEmpty
+	@NotEmpty
 	public String password;
 
 	/** パスワード(確認用) */
-    @NotEmpty
+	@NotEmpty
 	public String passwordConf;
 
 	/** 郵便番号 */

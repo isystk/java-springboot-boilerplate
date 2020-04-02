@@ -23,6 +23,9 @@ logging:
     org.thymeleaf: INFO
     com.isystk.sample: DEBUG
 
+server:
+  address: localhost
+
 ####
 # アプリケーションの設定
 application:

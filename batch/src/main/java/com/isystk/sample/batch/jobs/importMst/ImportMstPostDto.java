@@ -11,16 +11,16 @@ import lombok.Setter;
 @Getter
 public class ImportMstPostDto implements ItemPosition {
 
-    // タグID
-    @NotEmpty
-    String postTagId;
+	// タグID
+	@NotEmpty
+	String postTagId;
 
-    // タグ名称
-    @NotEmpty
-    String name;
+	// タグ名称
+	@NotEmpty
+	String name;
 
-    // 取り込み元ファイル
-    String sourceName;
+	// 取り込み元ファイル
+	String sourceName;
 
-    int position;
+	int position;
 }

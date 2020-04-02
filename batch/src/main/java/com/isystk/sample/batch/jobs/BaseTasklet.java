@@ -23,44 +23,44 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class BaseTasklet<I extends ItemPosition> implements Tasklet {
 
-    @Autowired
-    protected ModelMapper modelMapper;
+	@Autowired
+	protected ModelMapper modelMapper;
 
-    /**
-     * メインメソッド
-     *
-     * @param contribution
-     * @param chunkContext
-     * @return
-     * @throws Exception
-     */
-    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws IOException {
-        val context = BatchContextHolder.getContext();
+	/**
+	 * メインメソッド
+	 *
+	 * @param contribution
+	 * @param chunkContext
+	 * @return
+	 * @throws Exception
+	 */
+	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws IOException {
+		val context = BatchContextHolder.getContext();
 
-        // 実処理
-        doProcess(context);
+		// 実処理
+		doProcess(context);
 
-        return RepeatStatus.FINISHED;
-    }
+		return RepeatStatus.FINISHED;
+	}
 
-    /**
-     * 実処理を実施します。
-     *
-     * @param context
-     * @param item
-     * @return
-     */
-    protected abstract void doProcess(BatchContext context);
+	/**
+	 * 実処理を実施します。
+	 *
+	 * @param context
+	 * @param item
+	 * @return
+	 */
+	protected abstract void doProcess(BatchContext context);
 
-    /**
-     * 例外発生時のデフォルト実装
-     *
-     * @param item
-     * @param e
-     */
-    @OnProcessError
-    protected void onProcessError(I item, Exception e) {
-        log.error("failed to process item.", e);
-        throw new IllegalStateException(e);
-    }
+	/**
+	 * 例外発生時のデフォルト実装
+	 *
+	 * @param item
+	 * @param e
+	 */
+	@OnProcessError
+	protected void onProcessError(I item, Exception e) {
+		log.error("failed to process item.", e);
+		throw new IllegalStateException(e);
+	}
 }

@@ -20,35 +20,35 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SetDoubleSubmitCheckTokenInterceptor extends BaseHandlerInterceptor {
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
-        // コントローラーの動作前
-        val expected = DoubleSubmitCheckToken.getExpectedToken(request);
-        val actual = DoubleSubmitCheckToken.getActualToken(request);
-        DoubleSubmitCheckTokenHolder.set(expected, actual);
-        return true;
-    }
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// コントローラーの動作前
+		val expected = DoubleSubmitCheckToken.getExpectedToken(request);
+		val actual = DoubleSubmitCheckToken.getActualToken(request);
+		DoubleSubmitCheckTokenHolder.set(expected, actual);
+		return true;
+	}
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        // コントローラーの動作後
-        if (StringUtils.equalsIgnoreCase(request.getMethod(), "POST")) {
-            // POSTされたときにトークンが一致していれば新たなトークンを発行する
-            val expected = DoubleSubmitCheckToken.getExpectedToken(request);
-            val actual = DoubleSubmitCheckToken.getActualToken(request);
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		// コントローラーの動作後
+		if (StringUtils.equalsIgnoreCase(request.getMethod(), "POST")) {
+			// POSTされたときにトークンが一致していれば新たなトークンを発行する
+			val expected = DoubleSubmitCheckToken.getExpectedToken(request);
+			val actual = DoubleSubmitCheckToken.getActualToken(request);
 
-            if (expected != null && actual != null && Objects.equals(expected, actual)) {
-                DoubleSubmitCheckToken.renewToken(request);
-            }
-        }
-    }
+			if (expected != null && actual != null && Objects.equals(expected, actual)) {
+				DoubleSubmitCheckToken.renewToken(request);
+			}
+		}
+	}
 
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-            throws Exception {
-        // 処理完了後
-        DoubleSubmitCheckTokenHolder.clear();
-    }
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		// 処理完了後
+		DoubleSubmitCheckTokenHolder.clear();
+	}
 }

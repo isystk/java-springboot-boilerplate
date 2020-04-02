@@ -1,6 +1,5 @@
 package com.isystk.sample.common.values;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -60,10 +59,10 @@ public enum Prefecture implements Values {
     OKINAWA     (47, "沖縄"),
     ;
 
-    private Prefecture(int code, String text) {
-        this.code = code;
-        this.text = text;
-    }
+	private Prefecture(int code, String text) {
+		this.code = code;
+		this.text = text;
+	}
 
 	private final Integer code;
 	private final String text;

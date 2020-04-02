@@ -22,43 +22,43 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DefaultAuthenticationEntryPoint extends LoginUrlAuthenticationEntryPoint {
 
-    private final String loginTimeoutUrl;
+	private final String loginTimeoutUrl;
 
-    /**
-     *
-     * @param loginUrl
-     * @param loginTimeoutUrl
-     */
-    public DefaultAuthenticationEntryPoint(String loginUrl, String loginTimeoutUrl) {
-        super(loginUrl);
-        this.loginTimeoutUrl = loginTimeoutUrl;
-    }
+	/**
+	 *
+	 * @param loginUrl
+	 * @param loginTimeoutUrl
+	 */
+	public DefaultAuthenticationEntryPoint(String loginUrl, String loginTimeoutUrl) {
+		super(loginUrl);
+		this.loginTimeoutUrl = loginTimeoutUrl;
+	}
 
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response,
-            AuthenticationException authException) throws IOException, ServletException {
+	@Override
+	public void commence(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException authException) throws IOException, ServletException {
 
-        if (RequestUtils.isAjaxRequest(request)) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            return;
-        }
+		if (RequestUtils.isAjaxRequest(request)) {
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+			return;
+		}
 
-        super.commence(request, response, authException);
-    }
+		super.commence(request, response, authException);
+	}
 
-    @Override
-    protected String determineUrlToUseForThisRequest(HttpServletRequest request, HttpServletResponse response,
-            AuthenticationException exception) {
-        val url = super.determineUrlToUseForThisRequest(request, response, exception);
+	@Override
+	protected String determineUrlToUseForThisRequest(HttpServletRequest request, HttpServletResponse response,
+			AuthenticationException exception) {
+		val url = super.determineUrlToUseForThisRequest(request, response, exception);
 
-        if (request.getRequestedSessionId() != null && !request.isRequestedSessionIdValid()) {
-            if (log.isDebugEnabled()) {
-                log.debug("セッションがタイムアウトしました。");
-            }
+		if (request.getRequestedSessionId() != null && !request.isRequestedSessionIdValid()) {
+			if (log.isDebugEnabled()) {
+				log.debug("セッションがタイムアウトしました。");
+			}
 
-            return this.loginTimeoutUrl;
-        }
+			return this.loginTimeoutUrl;
+		}
 
-        return url;
-    }
+		return url;
+	}
 }

@@ -23,42 +23,41 @@ import lombok.Setter;
 @Setter
 public class TPost extends DomaDtoImpl {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	/** ID */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "POST_ID")
+	Integer postId;
 
-    /** ID */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "POST_ID")
-    Integer postId;
+	/** ID */
+	@Column(name = "USER_ID")
+	Integer userId;
 
-    /** ID */
-    @Column(name = "USER_ID")
-    Integer userId;
+	/**  */
+	@Column(name = "TITLE")
+	String title;
 
-    /**  */
-    @Column(name = "TITLE")
-    String title;
+	/**  */
+	@Column(name = "TEXT")
+	String text;
 
-    /**  */
-    @Column(name = "TEXT")
-    String text;
+	/**  */
+	@Column(name = "REGIST_TIME")
+	LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
+	/**  */
+	@Column(name = "UPDATE_TIME")
+	LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
+	/**  */
+	@Column(name = "DELETE_FLG")
+	Boolean deleteFlg;
 
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
-
-    /**  */
-    @Version
-    @Column(name = "VERSION")
-    Long version;
+	/**  */
+	@Version
+	@Column(name = "VERSION")
+	Long version;
 }

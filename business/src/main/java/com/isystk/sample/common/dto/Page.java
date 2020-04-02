@@ -9,24 +9,24 @@ import java.util.List;
  */
 public interface Page<T> extends Pageable {
 
-    /**
-     * データを返します。
-     *
-     * @return
-     */
-    List<T> getData();
+	/**
+	 * データを返します。
+	 *
+	 * @return
+	 */
+	List<T> getData();
 
-    /**
-     * データ件数を返します。
-     *
-     * @return
-     */
-    long getCount();
+	/**
+	 * データ件数を返します。
+	 *
+	 * @return
+	 */
+	long getCount();
 
-    /**
-     * ページ数を返します。
-     *
-     * @return
-     */
-    int getTotalPages();
+	/**
+	 * ページ数を返します。
+	 *
+	 * @return
+	 */
+	int getTotalPages();
 }

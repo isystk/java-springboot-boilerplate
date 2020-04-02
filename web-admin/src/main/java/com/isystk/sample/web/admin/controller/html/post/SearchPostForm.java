@@ -14,13 +14,13 @@ import lombok.Setter;
 @Getter
 public class SearchPostForm extends BaseSearchForm implements Pageable {
 
-    private static final long serialVersionUID = 7593564324192730932L;
+	private static final long serialVersionUID = 7593564324192730932L;
 
-    Integer postId;
+	Integer postId;
 
-    Integer userId;
+	Integer userId;
 
-    String title;
+	String title;
 
 	@Override
 	public Integer getId() {

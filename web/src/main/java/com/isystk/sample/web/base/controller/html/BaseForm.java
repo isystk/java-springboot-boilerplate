@@ -9,24 +9,24 @@ import lombok.Setter;
 @Getter
 public abstract class BaseForm implements Serializable {
 
-    private static final long serialVersionUID = 893506941860422885L;
+	private static final long serialVersionUID = 893506941860422885L;
 
-    // 改定番号
-    Integer version;
+	// 改定番号
+	Integer version;
 
-    /**
-     * 既存レコードがないデータであるか
-     *
-     * @return
-     */
-    public boolean isNew() {
-        return getId() == null;
-    }
+	/**
+	 * 既存レコードがないデータであるか
+	 *
+	 * @return
+	 */
+	public boolean isNew() {
+		return getId() == null;
+	}
 
-    /**
-     * IdカラムのGetter
-     *
-     * @return
-     */
-    public abstract Integer getId();
+	/**
+	 * IdカラムのGetter
+	 *
+	 * @return
+	 */
+	public abstract Integer getId();
 }

@@ -23,56 +23,56 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SetModelAndViewInterceptor extends BaseHandlerInterceptor {
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        // コントローラーの動作後
-        if (isRestController(handler)) {
-            // APIの場合はスキップする
-            return;
-        }
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		// コントローラーの動作後
+		if (isRestController(handler)) {
+			// APIの場合はスキップする
+			return;
+		}
 
-        if (modelAndView == null) {
-            return;
-        }
+		if (modelAndView == null) {
+			return;
+		}
 
-        val locale = LocaleContextHolder.getLocale();
-        val pulldownOption = MessageUtils.getMessage(MAV_PULLDOWN_OPTION, locale);
+		val locale = LocaleContextHolder.getLocale();
+		val pulldownOption = MessageUtils.getMessage(MAV_PULLDOWN_OPTION, locale);
 
-        // 定数定義を画面に渡す
-        Map<String, Object> constants = new HashMap<>();
-        constants.put(MAV_PULLDOWN_OPTION, pulldownOption);
-        modelAndView.addObject(MAV_CONST, constants);
+		// 定数定義を画面に渡す
+		Map<String, Object> constants = new HashMap<>();
+		constants.put(MAV_PULLDOWN_OPTION, pulldownOption);
+		modelAndView.addObject(MAV_CONST, constants);
 
 //        // 定形のリスト等
 //        val codeCategories = getCodeCategories();
 //        modelAndView.addObject(MAV_CODE_CATEGORIES, codeCategories);
 
-        // 入力エラーを画面オブジェクトに設定する
-        retainValidateErrors(modelAndView);
-    }
+		// 入力エラーを画面オブジェクトに設定する
+		retainValidateErrors(modelAndView);
+	}
 
-    /**
-     * 入力エラーを画面オブジェクトに設定する
-     *
-     * @param modelAndView
-     */
-    protected void retainValidateErrors(ModelAndView modelAndView) {
-        val model = modelAndView.getModelMap();
+	/**
+	 * 入力エラーを画面オブジェクトに設定する
+	 *
+	 * @param modelAndView
+	 */
+	protected void retainValidateErrors(ModelAndView modelAndView) {
+		val model = modelAndView.getModelMap();
 
-        if (model != null && model.containsAttribute(MAV_ERRORS)) {
-            val errors = model.get(MAV_ERRORS);
+		if (model != null && model.containsAttribute(MAV_ERRORS)) {
+			val errors = model.get(MAV_ERRORS);
 
-            if (errors != null && errors instanceof BeanPropertyBindingResult) {
-                val br = ((BeanPropertyBindingResult) errors);
+			if (errors != null && errors instanceof BeanPropertyBindingResult) {
+				val br = ((BeanPropertyBindingResult) errors);
 
-                if (br.hasErrors()) {
-                    val formName = br.getObjectName();
-                    val key = BindingResult.MODEL_KEY_PREFIX + formName;
-                    model.addAttribute(key, errors);
-                    model.addAttribute(GLOBAL_DANGER_MESSAGE, MessageUtils.getMessage(VALIDATION_ERROR));
-                }
-            }
-        }
-    }
+				if (br.hasErrors()) {
+					val formName = br.getObjectName();
+					val key = BindingResult.MODEL_KEY_PREFIX + formName;
+					model.addAttribute(key, errors);
+					model.addAttribute(GLOBAL_DANGER_MESSAGE, MessageUtils.getMessage(VALIDATION_ERROR));
+				}
+			}
+		}
+	}
 }

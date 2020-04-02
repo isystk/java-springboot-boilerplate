@@ -11,11 +11,11 @@ import lombok.Setter;
 @Getter
 public class UploadRestForm extends BaseForm {
 
-    private static final long serialVersionUID = 7593564324192730932L;
+	private static final long serialVersionUID = 7593564324192730932L;
 
-    Integer imageId;
+	Integer imageId;
 
-    MultipartFile imageFile;
+	MultipartFile imageFile;
 
 	@Override
 	public Integer getId() {

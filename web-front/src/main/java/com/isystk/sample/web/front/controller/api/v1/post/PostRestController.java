@@ -25,52 +25,52 @@ import lombok.val;
 @RequestMapping(path = API_V1_POST, produces = MediaType.APPLICATION_JSON_VALUE)
 public class PostRestController extends AbstractRestController {
 
-    @Autowired
-    PostService postService;
+	@Autowired
+	PostService postService;
 
-    @Override
-    public String getFunctionName() {
-        return "API_POST";
-    }
+	@Override
+	public String getFunctionName() {
+		return "API_POST";
+	}
 
-    /**
-     * 投稿一覧を複数取得します。
-     *
-     * @param query
-     * @param page
-     * @return
-     */
-    @GetMapping
-    public PageableResource index(PostRestForm query, @RequestParam(required = false, defaultValue = "1") int page) {
+	/**
+	 * 投稿一覧を複数取得します。
+	 *
+	 * @param query
+	 * @param page
+	 * @return
+	 */
+	@GetMapping
+	public PageableResource index(PostRestForm query, @RequestParam(required = false, defaultValue = "1") int page) {
 
-        // 入力値からDTOを作成する
-        val criteria = modelMapper.map(query, SolrPostCriteria.class);
+		// 入力値からDTOを作成する
+		val criteria = modelMapper.map(query, SolrPostCriteria.class);
 
-        // 10件で区切って取得する
-        Page<SolrPost> posts = postService.findSolrAll(criteria, Pageable.DEFAULT);
+		// 10件で区切って取得する
+		Page<SolrPost> posts = postService.findSolrAll(criteria, Pageable.DEFAULT);
 
-        PageableResource resource = modelMapper.map(posts, PageableResourceImpl.class);
-        resource.setMessage(getMessage(MESSAGE_SUCCESS));
+		PageableResource resource = modelMapper.map(posts, PageableResourceImpl.class);
+		resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
-        return resource;
-    }
+		return resource;
+	}
 
-    /**
-     * 投稿詳細を取得します。
-     *
-     * @param postId
-     * @return
-     */
-    @GetMapping(value = "/{postId}")
-    public Resource show(@PathVariable Integer postId) {
-        // 1件取得する
-    	var post = postService.findSolrById(postId);
+	/**
+	 * 投稿詳細を取得します。
+	 *
+	 * @param postId
+	 * @return
+	 */
+	@GetMapping(value = "/{postId}")
+	public Resource show(@PathVariable Integer postId) {
+		// 1件取得する
+		var post = postService.findSolrById(postId);
 
-        Resource resource = resourceFactory.create();
-        resource.setData(Arrays.asList(post.orElse(new SolrPost())));
-        resource.setMessage(getMessage(MESSAGE_SUCCESS));
+		Resource resource = resourceFactory.create();
+		resource.setData(Arrays.asList(post.orElse(new SolrPost())));
+		resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
-        return resource;
-    }
+		return resource;
+	}
 
 }

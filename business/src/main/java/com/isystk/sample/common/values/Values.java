@@ -2,8 +2,8 @@ package com.isystk.sample.common.values;
 
 public interface Values {
 
-    public Integer getCode();
+	public Integer getCode();
 
-    public String getText();
+	public String getText();
 
 }

@@ -23,34 +23,33 @@ import lombok.Setter;
 @Setter
 public class MPostTag extends DomaDtoImpl {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	/** ID */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "POST_TAG_ID")
+	Integer postTagId;
 
-    /** ID */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "POST_TAG_ID")
-    Integer postTagId;
+	/**  */
+	@Column(name = "NAME")
+	String name;
 
-    /**  */
-    @Column(name = "NAME")
-    String name;
+	/**  */
+	@Column(name = "REGIST_TIME")
+	LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
+	/**  */
+	@Column(name = "UPDATE_TIME")
+	LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
+	/**  */
+	@Column(name = "DELETE_FLG")
+	Boolean deleteFlg;
 
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
-
-    /**  */
-    @Version
-    @Column(name = "VERSION")
-    Long version;
+	/**  */
+	@Version
+	@Column(name = "VERSION")
+	Long version;
 }

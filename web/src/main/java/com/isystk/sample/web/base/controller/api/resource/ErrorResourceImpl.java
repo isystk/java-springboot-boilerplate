@@ -14,12 +14,12 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ErrorResourceImpl extends ResourceImpl {
 
-    // リクエストID
-    String requestId;
+	// リクエストID
+	String requestId;
 
-    // 入力エラー
-    List<FieldErrorResource> fieldErrors;
+	// 入力エラー
+	List<FieldErrorResource> fieldErrors;
 
-    public ErrorResourceImpl() {
-    }
+	public ErrorResourceImpl() {
+	}
 }

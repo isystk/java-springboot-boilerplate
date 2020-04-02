@@ -5,5 +5,5 @@ package com.isystk.sample.common.exception;
  */
 public class DoubleSubmitErrorException extends RuntimeException {
 
-    private static final long serialVersionUID = -4104071331904983830L;
+	private static final long serialVersionUID = -4104071331904983830L;
 }

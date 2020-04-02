@@ -46,24 +46,25 @@ public class PostController extends AbstractHtmlController {
 	@Autowired
 	PostService postService;
 
-    @Autowired
-    PostFormValidator postFormValidator;
+	@Autowired
+	PostFormValidator postFormValidator;
 
-    @Autowired
-    UserHelper userHelper;
+	@Autowired
+	UserHelper userHelper;
 
 	@Override
 	public String getFunctionName() {
 		return "A_POST";
 	}
 
-    @InitBinder("postForm")
-    public void validatorBinder(WebDataBinder binder) {
-        binder.addValidators(postFormValidator);
-    }
+	@InitBinder("postForm")
+	public void validatorBinder(WebDataBinder binder) {
+		binder.addValidators(postFormValidator);
+	}
 
 	/**
 	 * 一覧画面表示
+	 * 
 	 * @param form
 	 * @param model
 	 * @return
@@ -87,6 +88,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 詳細画面表示
+	 * 
 	 * @param postId
 	 * @param model
 	 * @return
@@ -99,6 +101,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 登録画面表示
+	 * 
 	 * @param post
 	 * @param model
 	 * @return
@@ -110,15 +113,16 @@ public class PostController extends AbstractHtmlController {
 			model.addAttribute("postForm", new PostForm());
 		}
 
-        // ユーザー一覧
-        val userList = userHelper.getUserList();
-        model.addAttribute("userList", userList);
+		// ユーザー一覧
+		val userList = userHelper.getUserList();
+		model.addAttribute("userList", userList);
 
 		return "modules/post/regist";
 	}
 
 	/**
 	 * 変更画面表示
+	 * 
 	 * @param postId
 	 * @param form
 	 * @param model
@@ -135,23 +139,24 @@ public class PostController extends AbstractHtmlController {
 			modelMapper.map(post, form);
 		}
 
-        // ユーザー一覧
-        val userList = userHelper.getUserList();
-        model.addAttribute("userList", userList);
+		// ユーザー一覧
+		val userList = userHelper.getUserList();
+		model.addAttribute("userList", userList);
 
 		return "modules/post/regist";
 	}
 
 	/**
 	 * 登録処理
+	 * 
 	 * @param post
 	 * @param result
 	 * @param model
 	 * @return
 	 */
 	@PostMapping
-	public String regist(@Validated PostForm form, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String regist(@Validated PostForm form, BindingResult br, SessionStatus sessionStatus,
+			RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
@@ -168,6 +173,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 更新処理
+	 * 
 	 * @param form
 	 * @param br
 	 * @param postId
@@ -176,8 +182,8 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping("{postId}")
-	public String update(@Validated PostForm form, BindingResult br,
-			@PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String update(@Validated PostForm form, BindingResult br, @PathVariable Integer postId,
+			SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -202,6 +208,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 削除処理
+	 * 
 	 * @param id
 	 * @return
 	 */

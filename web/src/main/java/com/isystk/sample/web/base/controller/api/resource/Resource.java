@@ -6,11 +6,11 @@ import com.isystk.sample.common.dto.Dto;
 
 public interface Resource {
 
-    List<? extends Dto> getData();
+	List<? extends Dto> getData();
 
-    void setData(List<? extends Dto> data);
+	void setData(List<? extends Dto> data);
 
-    String getMessage();
+	String getMessage();
 
-    void setMessage(String message);
+	void setMessage(String message);
 }

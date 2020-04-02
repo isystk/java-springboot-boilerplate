@@ -19,17 +19,16 @@ import lombok.Setter;
 @Setter
 public class TPostImage extends DomaDtoImpl {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	/** ID */
+	@Id
+	@Column(name = "POST_ID")
+	Integer postId;
 
-    /** ID */
-    @Id
-    @Column(name = "POST_ID")
-    Integer postId;
-
-    /** ID */
-    @Id
-    @Column(name = "IMAGE_ID")
-    Integer imageId;
+	/** ID */
+	@Id
+	@Column(name = "IMAGE_ID")
+	Integer imageId;
 }

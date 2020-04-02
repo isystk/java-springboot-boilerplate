@@ -17,6 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class AbstractRestController extends BaseController implements FunctionNameAware {
 
-    @Autowired
-    protected ResourceFactory resourceFactory;
+	@Autowired
+	protected ResourceFactory resourceFactory;
 }

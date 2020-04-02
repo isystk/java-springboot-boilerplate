@@ -26,8 +26,8 @@ public class MemberHtmlController extends AbstractHtmlController {
 	@Autowired
 	PostService postService;
 
-    @Autowired
-    UserHelper userHelper;
+	@Autowired
+	UserHelper userHelper;
 
 	@Override
 	public String getFunctionName() {
@@ -36,6 +36,7 @@ public class MemberHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 会員表示
+	 * 
 	 * @param postId
 	 * @param model
 	 * @return

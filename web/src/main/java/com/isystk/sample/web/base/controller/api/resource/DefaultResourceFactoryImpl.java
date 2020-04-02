@@ -5,13 +5,13 @@ package com.isystk.sample.web.base.controller.api.resource;
  */
 public class DefaultResourceFactoryImpl implements ResourceFactory {
 
-    /**
-     * インスタンスを作成します。
-     *
-     * @return
-     */
-    @Override
-    public Resource create() {
-        return new ResourceImpl();
-    }
+	/**
+	 * インスタンスを作成します。
+	 *
+	 * @return
+	 */
+	@Override
+	public Resource create() {
+		return new ResourceImpl();
+	}
 }

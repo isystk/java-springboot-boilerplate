@@ -26,118 +26,118 @@ import lombok.val;
 @Service
 public class PostService extends BaseTransactionalService {
 
-    @Autowired
-    SolrPostRepository solrPostRepository;
+	@Autowired
+	SolrPostRepository solrPostRepository;
 
-    @Autowired
-    PostRepository postRepository;
+	@Autowired
+	PostRepository postRepository;
 
-    @Autowired
-    PageFactory pageFactory;
+	@Autowired
+	PageFactory pageFactory;
 
-    /**
-     * Solrの投稿インデックスを取得します。
-     *
-     * @param datas
-     * @return
-     */
-    @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-    public Page<SolrPost> findSolrAll(SolrPostCriteria criteria, Pageable pageable) {
-        Assert.notNull(criteria, "criteria must not be null");
+	/**
+	 * Solrの投稿インデックスを取得します。
+	 *
+	 * @param datas
+	 * @return
+	 */
+	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
+	public Page<SolrPost> findSolrAll(SolrPostCriteria criteria, Pageable pageable) {
+		Assert.notNull(criteria, "criteria must not be null");
 
-        // TODO ここでページングを設定
-        Iterable<SolrPost> posts = solrPostRepository.findAll();
+		// TODO ここでページングを設定
+		Iterable<SolrPost> posts = solrPostRepository.findAll();
 
-        List<SolrPost> solrPostList = Lists.newArrayList();
-        for (SolrPost post : posts) {
-        	solrPostList.add(post);
-        }
+		List<SolrPost> solrPostList = Lists.newArrayList();
+		for (SolrPost post : posts) {
+			solrPostList.add(post);
+		}
 
-        // ページングを指定する
-        val options = createSelectOptions(pageable).count();
+		// ページングを指定する
+		val options = createSelectOptions(pageable).count();
 
-        return pageFactory.create(solrPostList, pageable, options.getCount());
-    }
+		return pageFactory.create(solrPostList, pageable, options.getCount());
+	}
 
-    /**
-     * Solrの投稿インデックスを取得します。
-     *
-     * @param datas
-     * @return
-     */
-    @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-    public Optional<SolrPost> findSolrById(Integer postId) {
-        Assert.notNull(postId, "criteria must not be null");
+	/**
+	 * Solrの投稿インデックスを取得します。
+	 *
+	 * @param datas
+	 * @return
+	 */
+	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
+	public Optional<SolrPost> findSolrById(Integer postId) {
+		Assert.notNull(postId, "criteria must not be null");
 
-        SolrPost post = solrPostRepository.findByPostId(postId);
+		SolrPost post = solrPostRepository.findByPostId(postId);
 
-        return Optional.of(post);
-    }
+		return Optional.of(post);
+	}
 
-    /**
-     * 投稿を複数取得します。
-     *
-     * @param criteria
-     * @param pageable
-     * @return
-     */
-    @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-    public Page<TPost> findAll(TPostCriteria criteria, Pageable pageable) {
-        Assert.notNull(criteria, "criteria must not be null");
-        return postRepository.findAll(criteria, pageable);
-    }
+	/**
+	 * 投稿を複数取得します。
+	 *
+	 * @param criteria
+	 * @param pageable
+	 * @return
+	 */
+	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
+	public Page<TPost> findAll(TPostCriteria criteria, Pageable pageable) {
+		Assert.notNull(criteria, "criteria must not be null");
+		return postRepository.findAll(criteria, pageable);
+	}
 
-    /**
-     * 投稿を取得します。
-     *
-     * @return
-     */
-    @Transactional(readOnly = true)
-    public Optional<TPost> findOne(TPostCriteria criteria) {
-        Assert.notNull(criteria, "criteria must not be null");
-        return postRepository.findOne(criteria);
-    }
+	/**
+	 * 投稿を取得します。
+	 *
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public Optional<TPost> findOne(TPostCriteria criteria) {
+		Assert.notNull(criteria, "criteria must not be null");
+		return postRepository.findOne(criteria);
+	}
 
-    /**
-     * 投稿を取得します。
-     *
-     * @return
-     */
-    @Transactional(readOnly = true)
-    public TPost findById(final Integer id) {
-        Assert.notNull(id, "id must not be null");
-        return postRepository.findById(id);
-    }
+	/**
+	 * 投稿を取得します。
+	 *
+	 * @return
+	 */
+	@Transactional(readOnly = true)
+	public TPost findById(final Integer id) {
+		Assert.notNull(id, "id must not be null");
+		return postRepository.findById(id);
+	}
 
-    /**
-     * 投稿を追加します。
-     *
-     * @param input
-     * @return
-     */
-    public TPost create(final TPost input) {
-        Assert.notNull(input, "input must not be null");
-        return postRepository.create(input);
-    }
+	/**
+	 * 投稿を追加します。
+	 *
+	 * @param input
+	 * @return
+	 */
+	public TPost create(final TPost input) {
+		Assert.notNull(input, "input must not be null");
+		return postRepository.create(input);
+	}
 
-    /**
-     * 投稿を更新します。
-     *
-     * @param input
-     * @return
-     */
-    public TPost update(final TPost input) {
-        Assert.notNull(input, "input must not be null");
-        return postRepository.update(input);
-    }
+	/**
+	 * 投稿を更新します。
+	 *
+	 * @param input
+	 * @return
+	 */
+	public TPost update(final TPost input) {
+		Assert.notNull(input, "input must not be null");
+		return postRepository.update(input);
+	}
 
-    /**
-     * 投稿を論理削除します。
-     *
-     * @return
-     */
-    public TPost delete(final Integer id) {
-        Assert.notNull(id, "id must not be null");
-        return postRepository.delete(id);
-    }
+	/**
+	 * 投稿を論理削除します。
+	 *
+	 * @return
+	 */
+	public TPost delete(final Integer id) {
+		Assert.notNull(id, "id must not be null");
+		return postRepository.delete(id);
+	}
 }

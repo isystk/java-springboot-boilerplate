@@ -28,67 +28,67 @@ public class DefaultEntityListener<ENTITY> implements EntityListener<ENTITY> {
 	/**
 	 * 新規登録
 	 */
-    @Override
-    public void preInsert(ENTITY entity, PreInsertContext<ENTITY> context) {
-        // 二重送信防止チェック
-        val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
-        val actual = DoubleSubmitCheckTokenHolder.getActualToken();
+	@Override
+	public void preInsert(ENTITY entity, PreInsertContext<ENTITY> context) {
+		// 二重送信防止チェック
+		val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
+		val actual = DoubleSubmitCheckTokenHolder.getActualToken();
 
-        if (expected != null && actual != null && !Objects.equals(expected, actual)) {
-            throw new DoubleSubmitErrorException();
-        }
+		if (expected != null && actual != null && !Objects.equals(expected, actual)) {
+			throw new DoubleSubmitErrorException();
+		}
 
-    }
+	}
 
-    /**
-     * 更新・論理削除
-     */
-    @Override
-    public void preUpdate(ENTITY entity, PreUpdateContext<ENTITY> context) {
-        // 二重送信防止チェック
-        val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
-        val actual = DoubleSubmitCheckTokenHolder.getActualToken();
+	/**
+	 * 更新・論理削除
+	 */
+	@Override
+	public void preUpdate(ENTITY entity, PreUpdateContext<ENTITY> context) {
+		// 二重送信防止チェック
+		val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
+		val actual = DoubleSubmitCheckTokenHolder.getActualToken();
 
-        if (expected != null && actual != null && !Objects.equals(expected, actual)) {
-            throw new DoubleSubmitErrorException();
-        }
+		if (expected != null && actual != null && !Objects.equals(expected, actual)) {
+			throw new DoubleSubmitErrorException();
+		}
 
-    }
+	}
 
-    /**
-     * 物理削除
-     */
-    @Override
-    public void preDelete(ENTITY entity, PreDeleteContext<ENTITY> context) {
+	/**
+	 * 物理削除
+	 */
+	@Override
+	public void preDelete(ENTITY entity, PreDeleteContext<ENTITY> context) {
 
-        // 二重送信防止チェック
-        val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
-        val actual = DoubleSubmitCheckTokenHolder.getActualToken();
+		// 二重送信防止チェック
+		val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
+		val actual = DoubleSubmitCheckTokenHolder.getActualToken();
 
-        if (expected != null && actual != null && !Objects.equals(expected, actual)) {
-            throw new DoubleSubmitErrorException();
-        }
+		if (expected != null && actual != null && !Objects.equals(expected, actual)) {
+			throw new DoubleSubmitErrorException();
+		}
 
-        if (entity instanceof DomaDto) {
-            val domaDto = (DomaDto) entity;
-            val deletedAt = AuditInfoHolder.getAuditDateTime();
-            val deletedBy = DateUtils.getNow();
-            val name = domaDto.getClass().getName();
-            val ids = getIds(domaDto);
+		if (entity instanceof DomaDto) {
+			val domaDto = (DomaDto) entity;
+			val deletedAt = AuditInfoHolder.getAuditDateTime();
+			val deletedBy = DateUtils.getNow();
+			val name = domaDto.getClass().getName();
+			val ids = getIds(domaDto);
 
-            // 物理削除した場合はログ出力する
-            log.info("データを物理削除しました。entity={}, id={}, deletedBy={}, deletedAt={}", name, ids, deletedBy, deletedAt);
-        }
-    }
+			// 物理削除した場合はログ出力する
+			log.info("データを物理削除しました。entity={}, id={}, deletedBy={}, deletedAt={}", name, ids, deletedBy, deletedAt);
+		}
+	}
 
-    /**
-     * Idアノテーションが付与されたフィールドの値のリストを返します。
-     *
-     * @param dto
-     * @return
-     */
-    protected List<Object> getIds(Dto dto) {
-        return ReflectionUtils.findWithAnnotation(dto.getClass(), Id.class)
-                .map(f -> ReflectionUtils.getFieldValue(f, dto)).collect(toList());
-    }
+	/**
+	 * Idアノテーションが付与されたフィールドの値のリストを返します。
+	 *
+	 * @param dto
+	 * @return
+	 */
+	protected List<Object> getIds(Dto dto) {
+		return ReflectionUtils.findWithAnnotation(dto.getClass(), Id.class)
+				.map(f -> ReflectionUtils.getFieldValue(f, dto)).collect(toList());
+	}
 }

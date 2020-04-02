@@ -21,49 +21,49 @@ import com.isystk.sample.domain.dto.TPostTagCriteria;
 @Dao
 public interface TPostTagDao {
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Insert
-    int insert(TPostTag entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Insert
+	int insert(TPostTag entity);
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Update
-    int update(TPostTag entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Update
+	int update(TPostTag entity);
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Delete
-    int delete(TPostTag entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Delete
+	int delete(TPostTag entity);
 
-    /**
-     * @param criteria
-     * @param options
-     * @return
-     */
-    @Select(strategy = SelectType.COLLECT)
-    <R> R selectAll(final TPostTagCriteria criteria, final SelectOptions options, final Collector<TPostTag, ?, R> collector);
+	/**
+	 * @param criteria
+	 * @param options
+	 * @return
+	 */
+	@Select(strategy = SelectType.COLLECT)
+	<R> R selectAll(final TPostTagCriteria criteria, final SelectOptions options,
+			final Collector<TPostTag, ?, R> collector);
 
-    /**
-     * @param postId
-     * @param postTagId
-     * @return the TPostTag entity
-     */
-    @Select
-    Optional<TPostTag> selectById(Integer postId, Integer postTagId);
+	/**
+	 * @param postId
+	 * @param postTagId
+	 * @return the TPostTag entity
+	 */
+	@Select
+	Optional<TPostTag> selectById(Integer postId, Integer postTagId);
 
-
-    /**
-     * @param criteria
-     * @return
-     */
-    @Select
-    Optional<TPostTag> select(TPostTagCriteria criteria);
+	/**
+	 * @param criteria
+	 * @return
+	 */
+	@Select
+	Optional<TPostTag> select(TPostTagCriteria criteria);
 
 }

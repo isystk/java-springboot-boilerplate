@@ -16,77 +16,77 @@ import lombok.val;
  */
 public abstract class BaseHandlerInterceptor extends HandlerInterceptorAdapter {
 
-    @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-            throws Exception {
-        // コントローラーの動作前
-        return true;
-    }
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
+		// コントローラーの動作前
+		return true;
+	}
 
-    @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-            ModelAndView modelAndView) throws Exception {
-        // コントローラーの動作後
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		// コントローラーの動作後
 
-    }
+	}
 
-    @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-            throws Exception {
-        // 処理完了後
-    }
+	@Override
+	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+			throws Exception {
+		// 処理完了後
+	}
 
-    /**
-     * RestControllerであるかどうかを示す値を返します。
-     *
-     * @param handler
-     * @return
-     */
-    protected boolean isRestController(Object handler) {
-        val bean = getBean(handler, AbstractRestController.class);
+	/**
+	 * RestControllerであるかどうかを示す値を返します。
+	 *
+	 * @param handler
+	 * @return
+	 */
+	protected boolean isRestController(Object handler) {
+		val bean = getBean(handler, AbstractRestController.class);
 
-        if (bean instanceof AbstractRestController) {
-            return true;
-        }
+		if (bean instanceof AbstractRestController) {
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * 引数のオブジェクトが指定のクラスであるかどうかを示すを返します。
-     *
-     * @param obj
-     * @param clazz
-     * @return
-     */
-    protected boolean isInstanceOf(Object obj, Class<?> clazz) {
+	/**
+	 * 引数のオブジェクトが指定のクラスであるかどうかを示すを返します。
+	 *
+	 * @param obj
+	 * @param clazz
+	 * @return
+	 */
+	protected boolean isInstanceOf(Object obj, Class<?> clazz) {
 
-        if (clazz.isAssignableFrom(obj.getClass())) {
-            return true;
-        }
+		if (clazz.isAssignableFrom(obj.getClass())) {
+			return true;
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * HandlerのBeanを返します。
-     *
-     * @param handler
-     * @return
-     */
-    @SuppressWarnings("unchecked")
-    protected <T> T getBean(Object handler, Class<T> clazz) {
+	/**
+	 * HandlerのBeanを返します。
+	 *
+	 * @param handler
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	protected <T> T getBean(Object handler, Class<T> clazz) {
 
-        if (handler != null && handler instanceof HandlerMethod) {
-            val hm = ((HandlerMethod) handler).getBean();
+		if (handler != null && handler instanceof HandlerMethod) {
+			val hm = ((HandlerMethod) handler).getBean();
 
-            if (clazz.isAssignableFrom(hm.getClass())) {
-                return (T) hm;
-            }
+			if (clazz.isAssignableFrom(hm.getClass())) {
+				return (T) hm;
+			}
 
-            return null;
-        }
+			return null;
+		}
 
-        return null;
-    }
+		return null;
+	}
 }

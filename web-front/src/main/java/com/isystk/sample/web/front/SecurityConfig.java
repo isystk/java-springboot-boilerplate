@@ -28,85 +28,81 @@ import com.isystk.sample.web.base.util.RequestUtils;
 @Configuration
 public class SecurityConfig extends BaseSecurityConfig {
 
-    @Autowired
-    UserDetailsService userDetailsService;
+	@Autowired
+	UserDetailsService userDetailsService;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        // 静的ファイルへのアクセスは認証をかけない
-        web.ignoring()//
-                .antMatchers(WEBJARS_URL, STATIC_RESOURCES_URL);
-    }
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		// 静的ファイルへのアクセスは認証をかけない
+		web.ignoring()//
+				.antMatchers(WEBJARS_URL, STATIC_RESOURCES_URL);
+	}
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService)//
-                .passwordEncoder(passwordEncoder());
-    }
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		auth.userDetailsService(userDetailsService)//
+				.passwordEncoder(passwordEncoder());
+	}
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        // CookieにCSRFトークンを保存する
-        http.csrf()//
-                .csrfTokenRepository(new CookieCsrfTokenRepository());
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		// CookieにCSRFトークンを保存する
+		http.csrf()//
+				.csrfTokenRepository(new CookieCsrfTokenRepository());
 
-        String[] permittedUrls = { MEMBER_URL + "/**" };
+		String[] permittedUrls = { MEMBER_URL + "/**" };
 
-        // 認証除外設定
-        http.authorizeRequests()
+		// 認証除外設定
+		http.authorizeRequests()
 				// マイページ配下は、認証をかける
 				.antMatchers(permittedUrls).authenticated()
 				// それ以外は認証をかけない
-				.anyRequest().permitAll()
-                .and()
-                .exceptionHandling()
-                .authenticationEntryPoint(authenticationEntryPoint())
-                .accessDeniedHandler(accessDeniedHandler());
+				.anyRequest().permitAll().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
+				.accessDeniedHandler(accessDeniedHandler());
 
-        // ログイン処理
-        http.formLogin()
-                // ログイン画面のURL
-                .loginPage(LOGIN_URL)
-                // 認可を処理するURL
-                .loginProcessingUrl(LOGIN_PROCESSING_URL)
-                // ログイン成功時の遷移先
-                .successForwardUrl(LOGIN_SUCCESS_URL)
-                // ログイン失敗時の遷移先
-                .failureUrl(LOGIN_FAILURE_URL)
-                // ログインIDのパラメータ名
-                .usernameParameter("loginId")
-                // パスワードのパラメータ名
-                .passwordParameter("password").permitAll();
+		// ログイン処理
+		http.formLogin()
+				// ログイン画面のURL
+				.loginPage(LOGIN_URL)
+				// 認可を処理するURL
+				.loginProcessingUrl(LOGIN_PROCESSING_URL)
+				// ログイン成功時の遷移先
+				.successForwardUrl(LOGIN_SUCCESS_URL)
+				// ログイン失敗時の遷移先
+				.failureUrl(LOGIN_FAILURE_URL)
+				// ログインIDのパラメータ名
+				.usernameParameter("loginId")
+				// パスワードのパラメータ名
+				.passwordParameter("password").permitAll();
 
-        // ログアウト処理
-        http.logout()
-                .logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL))
-                // Cookieを破棄する
-                .deleteCookies("SESSION", "JSESSIONID")
-                // ログアウト画面のURL
-                .logoutUrl(LOGOUT_URL)
-                // ログアウト後の遷移先
-                .logoutSuccessUrl(LOGOUT_SUCCESS_URL)
-                // ajaxの場合は、HTTPステータスを返す
-                .defaultLogoutSuccessHandlerFor(new HttpStatusReturningLogoutSuccessHandler(),
-                        RequestUtils::isAjaxRequest)
-                // セッションを破棄する
-                .invalidateHttpSession(true).permitAll();
+		// ログアウト処理
+		http.logout().logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL))
+				// Cookieを破棄する
+				.deleteCookies("SESSION", "JSESSIONID")
+				// ログアウト画面のURL
+				.logoutUrl(LOGOUT_URL)
+				// ログアウト後の遷移先
+				.logoutSuccessUrl(LOGOUT_SUCCESS_URL)
+				// ajaxの場合は、HTTPステータスを返す
+				.defaultLogoutSuccessHandlerFor(new HttpStatusReturningLogoutSuccessHandler(),
+						RequestUtils::isAjaxRequest)
+				// セッションを破棄する
+				.invalidateHttpSession(true).permitAll();
 
-    }
+	}
 
-    @Bean
-    public AccessDeniedHandler accessDeniedHandler() {
-        return new DefaultAccessDeniedHandler();
-    }
+	@Bean
+	public AccessDeniedHandler accessDeniedHandler() {
+		return new DefaultAccessDeniedHandler();
+	}
 
-    @Bean
-    public AuthenticationEntryPoint authenticationEntryPoint() {
-        return new DefaultAuthenticationEntryPoint(LOGIN_URL, LOGIN_TIMEOUT_URL);
-    }
+	@Bean
+	public AuthenticationEntryPoint authenticationEntryPoint() {
+		return new DefaultAuthenticationEntryPoint(LOGIN_URL, LOGIN_TIMEOUT_URL);
+	}
 }

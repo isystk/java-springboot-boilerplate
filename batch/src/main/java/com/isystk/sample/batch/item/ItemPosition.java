@@ -5,15 +5,15 @@ package com.isystk.sample.batch.item;
  */
 public interface ItemPosition {
 
-    String getSourceName();
+	String getSourceName();
 
-    void setSourceName(String sourceName);
+	void setSourceName(String sourceName);
 
-    int getPosition();
+	int getPosition();
 
-    void setPosition(int position);
+	void setPosition(int position);
 
-    default boolean isFirst() {
-        return getPosition() == 1;
-    }
+	default boolean isFirst() {
+		return getPosition() == 1;
+	}
 }

@@ -9,10 +9,8 @@ public class SystemException extends RuntimeException {
 	private static final long serialVersionUID = 8462188377363105093L;
 
 	/**
-	 * @param message
-	 *            この例外に関する詳細な情報.
-	 * @param cause
-	 *            原因となった例外
+	 * @param message この例外に関する詳細な情報.
+	 * @param cause   原因となった例外
 	 */
 	public SystemException(String message, Throwable cause) {
 		super(message, cause);
@@ -24,8 +22,7 @@ public class SystemException extends RuntimeException {
 	/**
 	 * メッセージを指定するコンストラクタ。
 	 *
-	 * @param message
-	 *            メッセージ
+	 * @param message メッセージ
 	 */
 	public SystemException(String message) {
 		super(message);
@@ -34,8 +31,7 @@ public class SystemException extends RuntimeException {
 	/**
 	 * 根源の例外を指定するコンストラクタ。
 	 *
-	 * @param cause
-	 *            根源の例外
+	 * @param cause 根源の例外
 	 */
 	public SystemException(Throwable cause) {
 		super(cause);

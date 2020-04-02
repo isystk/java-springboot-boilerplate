@@ -1,4 +1,5 @@
 package com.isystk.sample.web.admin.security;
+
 import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -9,21 +10,19 @@ import com.isystk.sample.web.base.filter.UserIdAware;
 
 public class LoginStaff extends User implements UserIdAware {
 
-    // 管理者情報。
-    private final TStaff staff;
+	// 管理者情報。
+	private final TStaff staff;
 
-    public LoginStaff(TStaff staff,
-            List<GrantedAuthority> authorities) {
+	public LoginStaff(TStaff staff, List<GrantedAuthority> authorities) {
 
-        super(staff.getEmail(), staff.getPassword(),
-                true, true, true, true, authorities);
+		super(staff.getEmail(), staff.getPassword(), true, true, true, true, authorities);
 
-        this.staff = staff;
-    }
+		this.staff = staff;
+	}
 
-    public TStaff Staff() {
-        return staff;
-    }
+	public TStaff Staff() {
+		return staff;
+	}
 
 	@Override
 	public String getUserId() {

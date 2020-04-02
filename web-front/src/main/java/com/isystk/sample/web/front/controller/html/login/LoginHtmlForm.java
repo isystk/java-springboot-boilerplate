@@ -11,12 +11,12 @@ import lombok.Setter;
 @Getter
 public class LoginHtmlForm implements Serializable {
 
-    private static final long serialVersionUID = 7593564324192730932L;
+	private static final long serialVersionUID = 7593564324192730932L;
 
-    @NotEmpty
-    String loginId;
+	@NotEmpty
+	String loginId;
 
-    @NotEmpty
-    String password;
+	@NotEmpty
+	String password;
 
 }

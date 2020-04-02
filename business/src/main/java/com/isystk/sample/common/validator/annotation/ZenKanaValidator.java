@@ -13,26 +13,26 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ZenKanaValidator implements ConstraintValidator<ZenKana, String> {
 
-    static final Pattern p = Pattern.compile("^[ァ-ヶ]+$");
+	static final Pattern p = Pattern.compile("^[ァ-ヶ]+$");
 
-    @Override
-    public void initialize(ZenKana ZenKana) {
-    }
+	@Override
+	public void initialize(ZenKana ZenKana) {
+	}
 
-    @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        boolean isValid = false;
+	@Override
+	public boolean isValid(String value, ConstraintValidatorContext context) {
+		boolean isValid = false;
 
-        if (StringUtils.isEmpty(value)) {
-            isValid = true;
-        } else {
-            Matcher m = p.matcher(value);
+		if (StringUtils.isEmpty(value)) {
+			isValid = true;
+		} else {
+			Matcher m = p.matcher(value);
 
-            if (m.matches()) {
-                isValid = true;
-            }
-        }
+			if (m.matches()) {
+				isValid = true;
+			}
+		}
 
-        return isValid;
-    }
+		return isValid;
+	}
 }

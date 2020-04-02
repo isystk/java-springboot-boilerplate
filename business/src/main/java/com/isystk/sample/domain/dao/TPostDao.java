@@ -21,56 +21,55 @@ import com.isystk.sample.domain.dto.TPostCriteria;
 @Dao
 public interface TPostDao {
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Insert
-    int insert(TPost entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Insert
+	int insert(TPost entity);
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Update
-    int update(TPost entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Update
+	int update(TPost entity);
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Delete
-    int delete(TPost entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Delete
+	int delete(TPost entity);
 
-    /**
-     * @param criteria
-     * @param options
-     * @return
-     */
-    @Select(strategy = SelectType.COLLECT)
-    <R> R selectAll(final TPostCriteria criteria, final SelectOptions options, final Collector<TPost, ?, R> collector);
+	/**
+	 * @param criteria
+	 * @param options
+	 * @return
+	 */
+	@Select(strategy = SelectType.COLLECT)
+	<R> R selectAll(final TPostCriteria criteria, final SelectOptions options, final Collector<TPost, ?, R> collector);
 
-    /**
-     * @param postId
-     * @return the TPost entity
-     */
-    @Select
-    Optional<TPost> selectById(Integer postId);
+	/**
+	 * @param postId
+	 * @return the TPost entity
+	 */
+	@Select
+	Optional<TPost> selectById(Integer postId);
 
-    /**
-     * @param postId
-     * @param version
-     * @return the TPost entity
-     */
-    @Select(ensureResult = true)
-    Optional<TPost> selectByIdAndVersion(Integer postId, Long version);
+	/**
+	 * @param postId
+	 * @param version
+	 * @return the TPost entity
+	 */
+	@Select(ensureResult = true)
+	Optional<TPost> selectByIdAndVersion(Integer postId, Long version);
 
-
-    /**
-     * @param criteria
-     * @return
-     */
-    @Select
-    Optional<TPost> select(TPostCriteria criteria);
+	/**
+	 * @param criteria
+	 * @return
+	 */
+	@Select
+	Optional<TPost> select(TPostCriteria criteria);
 
 }

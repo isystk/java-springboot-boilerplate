@@ -21,38 +21,38 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserHelper {
 
-    @Autowired
-    UserRepository userRepository;
+	@Autowired
+	UserRepository userRepository;
 
-    /**
-     * ユーザーを全件取得します。
-     *
-     * @return
-     */
-    public List<TUser> getUserList() {
-    	TUserCriteria criteria = new TUserCriteria();
-    	criteria.setDeleteFlgEqual(false);
-        return userRepository.findAll(criteria, Pageable.NO_LIMIT).getData();
-    }
+	/**
+	 * ユーザーを全件取得します。
+	 *
+	 * @return
+	 */
+	public List<TUser> getUserList() {
+		TUserCriteria criteria = new TUserCriteria();
+		criteria.setDeleteFlgEqual(false);
+		return userRepository.findAll(criteria, Pageable.NO_LIMIT).getData();
+	}
 
-    /**
-     * ログインユーザーを取得します。
-     *
-     * @return
-     */
-    public Integer getLoginUserId() {
-        return getLoginUser().getUserId();
-    }
+	/**
+	 * ログインユーザーを取得します。
+	 *
+	 * @return
+	 */
+	public Integer getLoginUserId() {
+		return getLoginUser().getUserId();
+	}
 
-    /**
-     * ログインユーザーを取得します。
-     *
-     * @return
-     */
-    public TUser getLoginUser() {
-    	TUserCriteria criteria = new TUserCriteria();
-    	criteria.setEmailEqual(AuditInfoHolder.getAuditUser());
-        return userRepository.findOne(criteria)
-                .orElseThrow(() -> new NoDataFoundException("email=" + AuditInfoHolder.getAuditUser() + "のデータが見つかりません。"));
-    }
+	/**
+	 * ログインユーザーを取得します。
+	 *
+	 * @return
+	 */
+	public TUser getLoginUser() {
+		TUserCriteria criteria = new TUserCriteria();
+		criteria.setEmailEqual(AuditInfoHolder.getAuditUser());
+		return userRepository.findOne(criteria).orElseThrow(
+				() -> new NoDataFoundException("email=" + AuditInfoHolder.getAuditUser() + "のデータが見つかりません。"));
+	}
 }
