@@ -23,7 +23,7 @@ import lombok.val;
  * 担当者リポジトリ
  */
 @Repository
-public class StaffRepository extends BaseRepository {
+public class TStaffRepository extends BaseRepository {
 
 	@Autowired
 	TStaffDao tStaffDao;

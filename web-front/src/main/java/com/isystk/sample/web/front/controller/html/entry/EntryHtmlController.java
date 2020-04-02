@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -53,20 +54,20 @@ public class EntryHtmlController extends AbstractHtmlController {
 	}
 
 	/**
-	 * 登録表示
-	 * 
+	 * 仮会員登録処理
+	 *
 	 * @param post
 	 * @param model
 	 * @return
 	 */
 	@PostMapping
-	public String regist(@Validated @ModelAttribute("entryHtmlForm") EntryHtmlForm form, BindingResult br,
+	public String ontime(@Validated @ModelAttribute("entryHtmlForm") EntryHtmlForm form, BindingResult br,
 			RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
-			return "redirect:/users/users/new";
+			return "modules/entry/regist/index";
 		}
 
 		// 入力値からDTOを作成する
@@ -79,7 +80,22 @@ public class EntryHtmlController extends AbstractHtmlController {
 		// 仮会員登録
 		entryService.registTemporary(inputUser);
 
-		return "redirect:/member/";
+		return "modules/entry/regist/confirm";
+	}
+
+	/**
+	 * 本会員登録処理
+	 *
+	 * @param onetimeKey
+	 * @return
+	 */
+	@GetMapping("{onetimeKey}")
+	public String complete(@PathVariable String onetimeKey, Model model) {
+
+		// 本会員登録
+		entryService.registComplete(onetimeKey);
+
+		return "modules/entry/regist/complete";
 	}
 
 }

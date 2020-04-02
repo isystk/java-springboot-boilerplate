@@ -24,7 +24,7 @@ import lombok.val;
  * 投稿リポジトリ
  */
 @Repository
-public class PostRepository extends BaseRepository {
+public class TPostRepository extends BaseRepository {
 
 	@Autowired
 	TPostDao tPostDao;

@@ -23,7 +23,7 @@ import lombok.val;
  * ユーザーリポジトリ
  */
 @Repository
-public class UserRepository extends BaseRepository {
+public class TUserRepository extends BaseRepository {
 
 	@Autowired
 	TUserDao tUserDao;
