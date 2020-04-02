@@ -8,14 +8,13 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-
-import com.isystk.sample.common.dto.DomaDtoImpl;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 
+ *
  */
 @Entity
 @Table(name = "t_post")
@@ -23,41 +22,42 @@ import lombok.Setter;
 @Setter
 public class TPost extends DomaDtoImpl {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/** ID */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "POST_ID")
-	Integer postId;
 
-	/** ID */
-	@Column(name = "USER_ID")
-	Integer userId;
+    /** ID */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "POST_ID")
+    Integer postId;
 
-	/**  */
-	@Column(name = "TITLE")
-	String title;
+    /** ID */
+    @Column(name = "USER_ID")
+    Integer userId;
 
-	/**  */
-	@Column(name = "TEXT")
-	String text;
+    /**  */
+    @Column(name = "TITLE")
+    String title;
 
-	/**  */
-	@Column(name = "REGIST_TIME")
-	LocalDateTime registTime;
+    /**  */
+    @Column(name = "TEXT")
+    String text;
 
-	/**  */
-	@Column(name = "UPDATE_TIME")
-	LocalDateTime updateTime;
+    /**  */
+    @Column(name = "REGIST_TIME")
+    LocalDateTime registTime;
 
-	/**  */
-	@Column(name = "DELETE_FLG")
-	Boolean deleteFlg;
+    /**  */
+    @Column(name = "UPDATE_TIME")
+    LocalDateTime updateTime;
 
-	/**  */
-	@Version
-	@Column(name = "VERSION")
-	Long version;
+    /**  */
+    @Column(name = "DELETE_FLG")
+    Boolean deleteFlg;
+
+    /**  */
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 }

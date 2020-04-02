@@ -38,7 +38,7 @@ public class TUserRepository extends BaseRepository {
 	public Page<TUser> findAll(TUserCriteria criteria, Pageable pageable) {
 		// ページングを指定する
 		val options = createSelectOptions(pageable).count();
-		val data = tUserDao.selectAll(criteria, options, toList());
+		val data = tUserDao.findAll(criteria, options, toList());
 		return pageFactory.create(data, pageable, options.getCount());
 	}
 
@@ -49,7 +49,7 @@ public class TUserRepository extends BaseRepository {
 	 * @return
 	 */
 	public Optional<TUser> findOne(TUserCriteria criteria) {
-		return tUserDao.select(criteria);
+		return tUserDao.findOne(criteria);
 	}
 
 	/**

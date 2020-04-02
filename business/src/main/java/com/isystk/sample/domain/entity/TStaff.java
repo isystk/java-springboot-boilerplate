@@ -8,8 +8,7 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-
-import com.isystk.sample.common.dto.DomaDtoImpl;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,57 +22,58 @@ import lombok.Setter;
 @Setter
 public class TStaff extends DomaDtoImpl {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/** ID */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "STAFF_ID")
-	Integer staffId;
 
-	/**  */
-	@Column(name = "EMAIL")
-	String email;
+    /** ID */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "STAFF_ID")
+    Integer staffId;
 
-	/**  */
-	@Column(name = "PASSWORD")
-	String password;
+    /**  */
+    @Column(name = "EMAIL")
+    String email;
 
-	/**  */
-	@Column(name = "FAMILY_NAME")
-	String familyName;
+    /**  */
+    @Column(name = "PASSWORD")
+    String password;
 
-	/**  */
-	@Column(name = "NAME")
-	String name;
+    /**  */
+    @Column(name = "FAMILY_NAME")
+    String familyName;
 
-	/**  */
-	@Column(name = "FAMILY_NAME_KANA")
-	String familyNameKana;
+    /**  */
+    @Column(name = "NAME")
+    String name;
 
-	/**  */
-	@Column(name = "NAME_KANA")
-	String nameKana;
+    /**  */
+    @Column(name = "FAMILY_NAME_KANA")
+    String familyNameKana;
 
-	/**  */
-	@Column(name = "LAST_LOGIN_TIME")
-	LocalDateTime lastLoginTime;
+    /**  */
+    @Column(name = "NAME_KANA")
+    String nameKana;
 
-	/**  */
-	@Column(name = "REGIST_TIME")
-	LocalDateTime registTime;
+    /**  */
+    @Column(name = "LAST_LOGIN_TIME")
+    LocalDateTime lastLoginTime;
 
-	/**  */
-	@Column(name = "UPDATE_TIME")
-	LocalDateTime updateTime;
+    /**  */
+    @Column(name = "REGIST_TIME")
+    LocalDateTime registTime;
 
-	/**  */
-	@Column(name = "DELETE_FLG")
-	Boolean deleteFlg;
+    /**  */
+    @Column(name = "UPDATE_TIME")
+    LocalDateTime updateTime;
 
-	/**  */
-	@Version
-	@Column(name = "VERSION")
-	Long version;
+    /**  */
+    @Column(name = "DELETE_FLG")
+    Boolean deleteFlg;
+
+    /**  */
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 }

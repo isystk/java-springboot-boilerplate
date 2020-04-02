@@ -4,8 +4,7 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
-
-import com.isystk.sample.common.dto.DomaDtoImpl;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -19,16 +18,17 @@ import lombok.Setter;
 @Setter
 public class TPostImage extends DomaDtoImpl {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/** ID */
-	@Id
-	@Column(name = "POST_ID")
-	Integer postId;
 
-	/** ID */
-	@Id
-	@Column(name = "IMAGE_ID")
-	Integer imageId;
+    /** ID */
+    @Id
+    @Column(name = "POST_ID")
+    Integer postId;
+
+    /** ID */
+    @Id
+    @Column(name = "IMAGE_ID")
+    Integer imageId;
 }

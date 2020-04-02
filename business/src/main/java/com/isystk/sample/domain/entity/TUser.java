@@ -9,8 +9,7 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-
-import com.isystk.sample.common.dto.DomaDtoImpl;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,93 +23,94 @@ import lombok.Setter;
 @Setter
 public class TUser extends DomaDtoImpl {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/** ID */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "USER_ID")
-	Integer userId;
 
-	/**  */
-	@Column(name = "EMAIL")
-	String email;
+    /** ID */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "USER_ID")
+    Integer userId;
 
-	/**  */
-	@Column(name = "PASSWORD")
-	String password;
+    /**  */
+    @Column(name = "EMAIL")
+    String email;
 
-	/**  */
-	@Column(name = "FAMILY_NAME")
-	String familyName;
+    /**  */
+    @Column(name = "PASSWORD")
+    String password;
 
-	/**  */
-	@Column(name = "NAME")
-	String name;
+    /**  */
+    @Column(name = "FAMILY_NAME")
+    String familyName;
 
-	/**  */
-	@Column(name = "FAMILY_NAME_KANA")
-	String familyNameKana;
+    /**  */
+    @Column(name = "NAME")
+    String name;
 
-	/**  */
-	@Column(name = "NAME_KANA")
-	String nameKana;
+    /**  */
+    @Column(name = "FAMILY_NAME_KANA")
+    String familyNameKana;
 
-	/**  */
-	@Column(name = "ZIP")
-	String zip;
+    /**  */
+    @Column(name = "NAME_KANA")
+    String nameKana;
 
-	/**  */
-	@Column(name = "PREFECTURE_ID")
-	Integer prefectureId;
+    /**  */
+    @Column(name = "ZIP")
+    String zip;
 
-	/**  */
-	@Column(name = "AREA")
-	String area;
+    /**  */
+    @Column(name = "PREFECTURE_ID")
+    Integer prefectureId;
 
-	/**  */
-	@Column(name = "ADDRESS")
-	String address;
+    /**  */
+    @Column(name = "AREA")
+    String area;
 
-	/**  */
-	@Column(name = "BUILDING")
-	String building;
+    /**  */
+    @Column(name = "ADDRESS")
+    String address;
 
-	/**  */
-	@Column(name = "TEL")
-	String tel;
+    /**  */
+    @Column(name = "BUILDING")
+    String building;
 
-	/**  */
-	@Column(name = "SEX")
-	Integer sex;
+    /**  */
+    @Column(name = "TEL")
+    String tel;
 
-	/**  */
-	@Column(name = "BIRTHDAY")
-	LocalDate birthday;
+    /**  */
+    @Column(name = "SEX")
+    Integer sex;
 
-	/**  */
-	@Column(name = "LAST_LOGIN_TIME")
-	LocalDateTime lastLoginTime;
+    /**  */
+    @Column(name = "BIRTHDAY")
+    LocalDate birthday;
 
-	/**  */
-	@Column(name = "STATUS")
-	Integer status;
+    /**  */
+    @Column(name = "LAST_LOGIN_TIME")
+    LocalDateTime lastLoginTime;
 
-	/**  */
-	@Column(name = "REGIST_TIME")
-	LocalDateTime registTime;
+    /**  */
+    @Column(name = "STATUS")
+    Integer status;
 
-	/**  */
-	@Column(name = "UPDATE_TIME")
-	LocalDateTime updateTime;
+    /**  */
+    @Column(name = "REGIST_TIME")
+    LocalDateTime registTime;
 
-	/**  */
-	@Column(name = "DELETE_FLG")
-	Boolean deleteFlg;
+    /**  */
+    @Column(name = "UPDATE_TIME")
+    LocalDateTime updateTime;
 
-	/**  */
-	@Version
-	@Column(name = "VERSION")
-	Long version;
+    /**  */
+    @Column(name = "DELETE_FLG")
+    Boolean deleteFlg;
+
+    /**  */
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 }

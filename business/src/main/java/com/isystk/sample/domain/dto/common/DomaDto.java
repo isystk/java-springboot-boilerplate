@@ -1,4 +1,6 @@
-package com.isystk.sample.common.dto;
+package com.isystk.sample.domain.dto.common;
+
+import com.isystk.sample.common.dto.Dto;
 
 /**
  * エンティティのスーパークラス

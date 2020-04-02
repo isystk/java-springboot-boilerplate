@@ -150,7 +150,7 @@ public class EntryService extends BaseTransactionalService {
 	protected MMailTemplate getMailTemplate(Integer templateId) {
 		val criteria = new MMailTemplateCriteria();
 		criteria.setMailTemplateIdEqual(templateId);
-		val mailTemplate = mMailTemplateDao.select(criteria).orElseThrow(
+		val mailTemplate = mMailTemplateDao.findOne(criteria).orElseThrow(
 				() -> new NoDataFoundException("templateKey=" + criteria.getMailTemplateId() + " のデータが見つかりません。"));
 
 		return mailTemplate;

@@ -1,7 +1,6 @@
-SELECT
+select
   /*%expand*/*
-FROM
+from
   t_user
-WHERE
+where
   USER_ID = /* userId */1
-LIMIT 1

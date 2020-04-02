@@ -1,7 +1,6 @@
-SELECT
+select
   /*%expand*/*
-FROM
+from
   t_staff
-WHERE
+where
   STAFF_ID = /* staffId */1
-LIMIT 1

@@ -41,7 +41,7 @@
 				useListener="false"
 			/>
 			<daoConfig
-				overwrite="false"
+				overwrite="true"
 				destdir="${javaDestDir}"
 				packageName="${daoPackageName}"
 			/>

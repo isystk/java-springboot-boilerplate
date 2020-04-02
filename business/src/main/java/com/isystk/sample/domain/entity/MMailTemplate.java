@@ -8,8 +8,7 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-
-import com.isystk.sample.common.dto.DomaDtoImpl;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,41 +22,42 @@ import lombok.Setter;
 @Setter
 public class MMailTemplate extends DomaDtoImpl {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/** MAIL_TEMPLATEID */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "MAIL_TEMPLATE_ID")
-	Integer mailTemplateId;
 
-	/**  */
-	@Column(name = "TEMPLATE_DIV")
-	Integer templateDiv;
+    /** MAIL_TEMPLATEID */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "MAIL_TEMPLATE_ID")
+    Integer mailTemplateId;
 
-	/**  */
-	@Column(name = "TITLE")
-	String title;
+    /**  */
+    @Column(name = "TEMPLATE_DIV")
+    Integer templateDiv;
 
-	/**  */
-	@Column(name = "TEXT")
-	String text;
+    /**  */
+    @Column(name = "TITLE")
+    String title;
 
-	/**  */
-	@Column(name = "REGIST_TIME")
-	LocalDateTime registTime;
+    /**  */
+    @Column(name = "TEXT")
+    String text;
 
-	/**  */
-	@Column(name = "UPDATE_TIME")
-	LocalDateTime updateTime;
+    /**  */
+    @Column(name = "REGIST_TIME")
+    LocalDateTime registTime;
 
-	/**  */
-	@Column(name = "DELETE_FLG")
-	Boolean deleteFlg;
+    /**  */
+    @Column(name = "UPDATE_TIME")
+    LocalDateTime updateTime;
 
-	/**  */
-	@Version
-	@Column(name = "VERSION")
-	Long version;
+    /**  */
+    @Column(name = "DELETE_FLG")
+    Boolean deleteFlg;
+
+    /**  */
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 }

@@ -1,7 +1,6 @@
-SELECT
+select
   /*%expand*/*
-FROM
+from
   t_image
-WHERE
+where
   IMAGE_ID = /* imageId */1
-LIMIT 1
