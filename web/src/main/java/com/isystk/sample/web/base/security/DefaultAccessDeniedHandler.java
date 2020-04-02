@@ -1,6 +1,6 @@
 package com.isystk.sample.web.base.security;
 
-import static com.isystk.sample.web.base.WebConst.FORBIDDEN_URL;
+import static com.isystk.sample.common.Const.FORBIDDEN_URL;
 
 import java.io.IOException;
 

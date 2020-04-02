@@ -1,6 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.login;
 
-import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.common.Const.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

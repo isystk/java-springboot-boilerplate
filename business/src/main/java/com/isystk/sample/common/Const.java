@@ -1,9 +1,12 @@
-package com.isystk.sample.web.base;
+package com.isystk.sample.common;
 
 /**
  * 定数定義
  */
-public interface WebConst {
+public interface Const {
+
+	/** ---- Image ---- **/
+	String IMAGE_EXTENSION = "jpg";
 
 	/** ---- MDC ---- **/
 	String MDC_LOGIN_USER_ID = "LOGIN_USER_ID";

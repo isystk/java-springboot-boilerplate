@@ -29,4 +29,4 @@ server:
 ####
 # アプリケーションの設定
 application:
-  fileUploadLocation: /var/www/html/thumb
+  imageUploadLocation: /var/www/html/thumb

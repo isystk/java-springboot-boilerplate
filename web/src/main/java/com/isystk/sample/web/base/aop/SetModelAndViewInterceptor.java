@@ -1,6 +1,6 @@
 package com.isystk.sample.web.base.aop;
 
-import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.common.Const.*;
 
 import java.util.HashMap;
 import java.util.List;

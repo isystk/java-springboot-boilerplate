@@ -1,5 +1,7 @@
 package com.isystk.sample.common.helper;
 
+import static com.isystk.sample.common.Const.*;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -29,13 +31,13 @@ import com.isystk.sample.domain.dao.TImageDao;
 import com.isystk.sample.domain.entity.TImage;
 
 /**
- * ファイルアップロード
+ * 画像ヘルパー
  */
-@Component
-public class FileHelper {
+@Component("img")
+public class ImageHelper {
 
-	@Value("${application.fileUploadLocation:#{systemProperties['java.io.tmpdir']}}") // 設定ファイルに定義されたアップロード先を取得する
-	String fileUploadLocation;
+	@Value("${application.imageUploadLocation:#{systemProperties['java.io.tmpdir']}}") // 設定ファイルに定義されたアップロード先を取得する
+	String imageUploadLocation;
 
 	@Autowired
 	TImageDao tImageDao;
@@ -64,11 +66,11 @@ public class FileHelper {
 	public Resource loadFile(Integer imageId) {
 		// ディレクトリ
 		String dir = getHash(imageId);
-		Path location = Paths.get(fileUploadLocation, dir);
+		Path location = Paths.get(imageUploadLocation, dir);
 		try {
 
 			// 保存するファイル名
-			String saveFileName = imageId + ".jpg";
+			String saveFileName = imageId + "." + IMAGE_EXTENSION;
 
 			Path file = location.resolve(dir).resolve(saveFileName);
 			Resource resource = new UrlResource(file.toUri());
@@ -156,10 +158,10 @@ public class FileHelper {
 
 			// ディレクトリ
 			String dir = getHash(id);
-			Path location = Paths.get(fileUploadLocation, dir);
+			Path location = Paths.get(imageUploadLocation, dir);
 
 			// 保存するファイル名
-			String saveFileName = id + ".jpg";
+			String saveFileName = id + "." + IMAGE_EXTENSION;
 
 			// ディレクトリがない場合は作成する
 			FileUtils.createDirectories(location);
@@ -176,11 +178,24 @@ public class FileHelper {
 
 			UploadFileDto dto = new UploadFileDto();
 			dto.setId(id);
-			dto.setPath("/thumb" + dir + "/" + saveFileName);
+			dto.setPath(getUrl(id));
 			return dto;
 
 		} catch (IOException e) {
 			throw new IllegalStateException("failed to save file. " + upFileName, e);
 		}
 	}
+
+	/**
+	 * 画像IDを元に表示用のパスを取得します。
+	 *
+	 * @param imageId
+	 * @return
+	 */
+	public String getUrl(Integer imageId) {
+		String dir = getHash(imageId);
+		String saveFileName = imageId + "." + IMAGE_EXTENSION;
+		return "/thumb" + dir + "/" + saveFileName;
+	}
+
 }

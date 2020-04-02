@@ -1,7 +1,7 @@
 package com.isystk.sample.web.front.controller.api.v1.post;
 
-import static com.isystk.sample.web.base.WebConst.*;
-import static com.isystk.sample.web.base.FrontUrl.*;
+import static com.isystk.sample.common.FrontUrl.*;
+import static com.isystk.sample.common.Const.*;
 
 import java.util.Arrays;
 
@@ -17,6 +17,7 @@ import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.PageableResource;
 import com.isystk.sample.web.base.controller.api.resource.PageableResourceImpl;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
+import com.isystk.sample.web.front.dto.FrontPostDto;
 import com.isystk.sample.web.front.service.PostService;
 
 import lombok.val;
@@ -47,7 +48,7 @@ public class PostRestController extends AbstractRestController {
 		val criteria = modelMapper.map(query, SolrPostCriteria.class);
 
 		// 10件で区切って取得する
-		Page<SolrPost> posts = postService.findSolrAll(criteria, Pageable.DEFAULT);
+		Page<FrontPostDto> posts = postService.findSolrAll(criteria, Pageable.DEFAULT);
 
 		PageableResource resource = modelMapper.map(posts, PageableResourceImpl.class);
 		resource.setMessage(getMessage(MESSAGE_SUCCESS));

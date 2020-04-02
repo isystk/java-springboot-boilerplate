@@ -1,6 +1,6 @@
 package com.isystk.sample.web.base.controller.html;
 
-import static com.isystk.sample.web.base.WebConst.MAV_ERRORS;
+import static com.isystk.sample.common.Const.MAV_ERRORS;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BeanPropertyBindingResult;

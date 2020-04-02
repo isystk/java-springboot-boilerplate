@@ -1,6 +1,6 @@
 package com.isystk.sample.web.front.controller.html.top;
 
-import static com.isystk.sample.web.base.FrontUrl.*;
+import static com.isystk.sample.common.FrontUrl.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

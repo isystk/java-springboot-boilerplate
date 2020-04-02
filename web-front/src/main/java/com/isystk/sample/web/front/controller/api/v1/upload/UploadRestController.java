@@ -1,6 +1,6 @@
 package com.isystk.sample.web.front.controller.api.v1.upload;
 
-import static com.isystk.sample.web.base.FrontUrl.API_V1_FILEUPLOAD;
+import static com.isystk.sample.common.FrontUrl.API_V1_FILEUPLOAD;
 
 import java.util.Arrays;
 
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.isystk.sample.common.dto.UploadFileDto;
-import com.isystk.sample.common.helper.FileHelper;
+import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import com.isystk.sample.web.base.view.FileDownloadView;
@@ -33,7 +33,7 @@ import lombok.val;
 public class UploadRestController extends AbstractRestController {
 
 	@Autowired
-	FileHelper fileHelper;
+	ImageHelper fileHelper;
 
 	@Override
 	public String getFunctionName() {

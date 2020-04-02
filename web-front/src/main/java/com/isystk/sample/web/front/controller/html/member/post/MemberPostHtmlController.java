@@ -1,6 +1,6 @@
 package com.isystk.sample.web.front.controller.html.member.post;
 
-import static com.isystk.sample.web.base.FrontUrl.*;
+import static com.isystk.sample.common.FrontUrl.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

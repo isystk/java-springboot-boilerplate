@@ -1,6 +1,6 @@
 package com.isystk.sample.web.base.controller.api;
 
-import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.common.Const.*;
 
 import java.util.ArrayList;
 import java.util.Map;
