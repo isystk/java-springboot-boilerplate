@@ -4,8 +4,8 @@ import java.io.IOException;
 
 import org.springframework.web.multipart.MultipartFile;
 
-import com.isystk.sample.domain.dto.common.BZip2Data;
-import com.isystk.sample.domain.dto.common.MultipartFileConvertible;
+import com.isystk.sample.common.dto.BZip2Data;
+import com.isystk.sample.common.dto.MultipartFileConvertible;
 
 import lombok.extern.slf4j.Slf4j;
 

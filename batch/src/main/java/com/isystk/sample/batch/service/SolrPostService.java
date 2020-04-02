@@ -6,11 +6,11 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.isystk.sample.common.dto.PageFactory;
+import com.isystk.sample.common.dto.Pageable;
+import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.domain.dto.TPostCriteria;
-import com.isystk.sample.domain.dto.common.PageFactory;
-import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.repository.PostRepository;
-import com.isystk.sample.domain.service.BaseTransactionalService;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.repository.SolrPostRepository;
 

@@ -11,11 +11,11 @@ import org.seasar.doma.jdbc.entity.PreDeleteContext;
 import org.seasar.doma.jdbc.entity.PreInsertContext;
 import org.seasar.doma.jdbc.entity.PreUpdateContext;
 
+import com.isystk.sample.common.dto.DomaDto;
+import com.isystk.sample.common.dto.Dto;
+import com.isystk.sample.common.exception.DoubleSubmitErrorException;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.ReflectionUtils;
-import com.isystk.sample.domain.dto.common.DomaDto;
-import com.isystk.sample.domain.dto.common.Dto;
-import com.isystk.sample.domain.exception.DoubleSubmitErrorException;
 
 import lombok.NoArgsConstructor;
 import lombok.val;

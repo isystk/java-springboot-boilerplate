@@ -7,12 +7,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import com.isystk.sample.common.dto.Page;
+import com.isystk.sample.common.dto.Pageable;
+import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.domain.dto.TPostCriteria;
-import com.isystk.sample.domain.dto.common.Page;
-import com.isystk.sample.domain.dto.common.Pageable;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.repository.PostRepository;
-import com.isystk.sample.domain.service.BaseTransactionalService;
 
 @Service
 public class PostService extends BaseTransactionalService {

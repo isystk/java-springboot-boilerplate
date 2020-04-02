@@ -5,8 +5,8 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.modelmapper.spi.PropertyInfo;
 
-import com.isystk.sample.domain.dto.common.DomaDto;
-import com.isystk.sample.domain.dto.common.ID;
+import com.isystk.sample.common.dto.DomaDto;
+import com.isystk.sample.common.dto.ID;
 
 import lombok.val;
 

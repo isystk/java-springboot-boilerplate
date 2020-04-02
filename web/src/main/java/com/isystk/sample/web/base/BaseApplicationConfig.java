@@ -9,8 +9,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
-import com.isystk.sample.domain.dto.common.DefaultPageFactoryImpl;
-import com.isystk.sample.domain.dto.common.PageFactory;
+import com.isystk.sample.common.dto.DefaultPageFactoryImpl;
+import com.isystk.sample.common.dto.PageFactory;
 import com.isystk.sample.web.base.aop.LoggingFunctionNameInterceptor;
 import com.isystk.sample.web.base.aop.RequestTrackingInterceptor;
 import com.isystk.sample.web.base.aop.SetAuditInfoInterceptor;

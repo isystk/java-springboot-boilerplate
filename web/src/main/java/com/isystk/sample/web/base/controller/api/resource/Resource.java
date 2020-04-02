@@ -2,7 +2,7 @@ package com.isystk.sample.web.base.controller.api.resource;
 
 import java.util.List;
 
-import com.isystk.sample.domain.dto.common.Dto;
+import com.isystk.sample.common.dto.Dto;
 
 public interface Resource {
 

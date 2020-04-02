@@ -18,7 +18,7 @@
 
 						<p>会員情報を入力してください。この情報は後で変更することも出来ます。</p>
 
-						<form id="entryForm" th:object="${entryForm}" th:action="@{/entry}" method="post">
+						<form id="entryForm" th:object="${entryHtmlForm}" th:action="@{/entry}" method="post">
 							<table class="formTable">
 								<tbody>
 								<!-- loop -->
@@ -71,20 +71,7 @@
 							<tr>
 								<th colspan="2"><span class="mark">性別</span><span class="required">【必須】</span></th>
 								<td>
-									<ul>
-										<li>
-											<label for="sex_c1">
-												<input type="radio" name="sex" value="1" class="radio" id="sex_c1"/>
-												<span>女性</span>
-											</label>
-										</li>
-										<li>
-											<label for="sex_c2">
-												<input type="radio" name="sex" value="2" class="radio" id="sex_c2"/>
-												<span>男性</span>
-											</label>
-										</li>
-									</ul>
+									<input th:replace="~{fragments/selectField :: select ('sex', ${@vh.values('Sex')}, 'code', 'text')}" />
 								</td>
 							</tr>
 							<tr>
@@ -103,11 +90,7 @@
 							<tr>
 								<th>都道府県
 								<td>
-									<p>
-										<select name="prefectureId" id="prefectureId" >
-											<option value="">-----</option>
-										</select>
-									</p>
+									<input th:replace="~{fragments/selectField :: select ('prefectureId', ${@vh.values('Prefecture')}, 'code', 'text')}" />
 								</td>
 							</tr>
 							<tr>

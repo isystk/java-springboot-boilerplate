@@ -7,7 +7,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.InitBinder;
 
-import com.isystk.sample.domain.dto.common.ID;
+import com.isystk.sample.common.dto.ID;
 import com.isystk.sample.web.base.controller.IDTypeEditor;
 
 import lombok.extern.slf4j.Slf4j;

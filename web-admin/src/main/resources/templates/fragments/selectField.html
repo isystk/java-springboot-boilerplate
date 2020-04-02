@@ -10,7 +10,7 @@
                                     th:text="${Const['PulldownOption']}">pick one
                             </option>
                             <option th:each="item : ${items}"
-                                    th:with="val=${(item['__${k}__'] instanceof T(com.isystk.sample.domain.dto.common.ID)) ? item['__${k}__'].value : item['__${k}__']}"
+                                    th:with="val=${(item['__${k}__'] instanceof T(com.isystk.sample.common.dto.ID)) ? item['__${k}__'].value : item['__${k}__']}"
                                     th:value="${val}"
                                     th:text="${item['__${v}__']}">dog
                             </option>

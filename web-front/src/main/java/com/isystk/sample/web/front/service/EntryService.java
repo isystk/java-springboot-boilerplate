@@ -5,18 +5,21 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+import com.isystk.sample.common.dto.CommaSeparatedString;
+import com.isystk.sample.common.exception.NoDataFoundException;
+import com.isystk.sample.common.helper.SendMailHelper;
+import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.domain.dao.MMailTemplateDao;
 import com.isystk.sample.domain.dto.MMailTemplateCriteria;
-import com.isystk.sample.domain.dto.common.CommaSeparatedString;
 import com.isystk.sample.domain.entity.MMailTemplate;
 import com.isystk.sample.domain.entity.TUser;
-import com.isystk.sample.domain.exception.NoDataFoundException;
-import com.isystk.sample.domain.helper.SendMailHelper;
 
 import lombok.val;
 
-public class EntryService {
+@Service
+public class EntryService extends BaseTransactionalService {
 
     @Value("${spring.mail.properties.mail.from}")
     String fromAddress;

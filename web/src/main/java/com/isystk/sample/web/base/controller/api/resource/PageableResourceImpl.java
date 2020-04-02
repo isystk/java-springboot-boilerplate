@@ -3,7 +3,7 @@ package com.isystk.sample.web.base.controller.api.resource;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.isystk.sample.domain.dto.common.Dto;
+import com.isystk.sample.common.dto.Dto;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
