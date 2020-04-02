@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.isystk.sample.common.exception.NoDataFoundException;
+import com.isystk.sample.common.exception.ValidationErrorException;
 import com.isystk.sample.common.util.MessageUtils;
-import com.isystk.sample.domain.exception.NoDataFoundException;
-import com.isystk.sample.domain.exception.ValidationErrorException;
 import com.isystk.sample.web.base.controller.api.resource.ErrorResourceImpl;
 import com.isystk.sample.web.base.controller.api.resource.FieldErrorResource;
 

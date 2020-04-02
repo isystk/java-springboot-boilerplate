@@ -5,7 +5,7 @@ import java.util.Objects;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
-import com.isystk.sample.domain.validator.AbstractValidator;
+import com.isystk.sample.common.validator.AbstractValidator;
 
 import lombok.extern.slf4j.Slf4j;
 

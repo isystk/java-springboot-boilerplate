@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.Indexed;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
-import com.isystk.sample.domain.dto.common.Dto;
+import com.isystk.sample.common.dto.Dto;
 
 import lombok.Getter;
 import lombok.Setter;

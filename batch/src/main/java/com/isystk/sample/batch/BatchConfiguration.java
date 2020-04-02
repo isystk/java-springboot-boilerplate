@@ -16,10 +16,10 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 import com.isystk.sample.batch.jobs.SingleJobCommandLineRunner;
+import com.isystk.sample.common.dto.DefaultPageFactoryImpl;
+import com.isystk.sample.common.dto.PageFactory;
 import com.isystk.sample.common.util.MessageUtils;
 import com.isystk.sample.domain.DefaultModelMapperFactory;
-import com.isystk.sample.domain.dto.common.DefaultPageFactoryImpl;
-import com.isystk.sample.domain.dto.common.PageFactory;
 
 import lombok.val;
 

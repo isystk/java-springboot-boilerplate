@@ -9,8 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import com.isystk.sample.domain.dto.common.Page;
-import com.isystk.sample.domain.dto.common.Pageable;
+import com.isystk.sample.common.dto.Page;
+import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.dto.SolrPostCriteria;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;

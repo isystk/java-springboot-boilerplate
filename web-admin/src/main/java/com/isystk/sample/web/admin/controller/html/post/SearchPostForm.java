@@ -3,7 +3,7 @@ package com.isystk.sample.web.admin.controller.html.post;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import com.isystk.sample.domain.dto.common.Pageable;
+import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.web.base.controller.html.BaseForm;
 import com.isystk.sample.web.base.controller.html.BaseSearchForm;
 

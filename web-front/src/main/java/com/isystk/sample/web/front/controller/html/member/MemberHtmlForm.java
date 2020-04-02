@@ -1,6 +1,6 @@
 package com.isystk.sample.web.front.controller.html.member;
 
-import com.isystk.sample.domain.dto.common.Pageable;
+import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.web.base.controller.html.BaseSearchForm;
 
 import lombok.Getter;
