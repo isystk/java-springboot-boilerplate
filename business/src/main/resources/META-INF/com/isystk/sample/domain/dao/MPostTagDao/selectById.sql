@@ -1,7 +1,6 @@
-SELECT
+select
   /*%expand*/*
-FROM
+from
   m_post_tag
-WHERE
+where
   POST_TAG_ID = /* postTagId */1
-LIMIT 1

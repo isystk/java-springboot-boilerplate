@@ -38,7 +38,7 @@ public class TStaffRepository extends BaseRepository {
 	public Page<TStaff> findAll(TStaffCriteria criteria, Pageable pageable) {
 		// ページングを指定する
 		val options = createSelectOptions(pageable).count();
-		val data = tStaffDao.selectAll(criteria, options, toList());
+		val data = tStaffDao.findAll(criteria, options, toList());
 		return pageFactory.create(data, pageable, options.getCount());
 	}
 
@@ -49,7 +49,7 @@ public class TStaffRepository extends BaseRepository {
 	 * @return
 	 */
 	public Optional<TStaff> findOne(TStaffCriteria criteria) {
-		return tStaffDao.select(criteria);
+		return tStaffDao.findOne(criteria);
 	}
 
 	/**

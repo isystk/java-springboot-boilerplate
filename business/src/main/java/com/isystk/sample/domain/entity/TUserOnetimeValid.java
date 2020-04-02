@@ -5,8 +5,7 @@ import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
-
-import com.isystk.sample.common.dto.DomaDtoImpl;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,19 +19,20 @@ import lombok.Setter;
 @Setter
 public class TUserOnetimeValid extends DomaDtoImpl {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/** ID */
-	@Id
-	@Column(name = "USER_ID")
-	Integer userId;
 
-	/**  */
-	@Column(name = "ONETIME_KEY")
-	String onetimeKey;
+    /** ID */
+    @Id
+    @Column(name = "USER_ID")
+    Integer userId;
 
-	/**  */
-	@Column(name = "ONETIME_VALID_TIME")
-	LocalDateTime onetimeValidTime;
+    /**  */
+    @Column(name = "ONETIME_KEY")
+    String onetimeKey;
+
+    /**  */
+    @Column(name = "ONETIME_VALID_TIME")
+    LocalDateTime onetimeValidTime;
 }

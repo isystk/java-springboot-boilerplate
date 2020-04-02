@@ -605,6 +605,34 @@ margin-bottom: 16px;
 padding: 10px;
 }
 
+
+/* ページング */
+.page-numbers {
+margin-top: 30px;
+}
+.page-numbers li{
+  display: inline-block;
+}
+.page-numbers a {
+color: #eee;
+font-size: 0.8em;
+margin-bottom: 60px;
+text-decoration:none;
+}
+.page-numbers .page-numbers {
+background-color: #222;
+border: solid 2px #222;
+padding: 15px 19px;
+margin-right: 10px;
+}
+.page-numbers .current {
+background-color: #fff;
+border: solid 1px #ccc;
+color: #333;
+font-weight: 700;
+}
+
+
 /* 環境表示用ヘッダー */
 .headerSt {
 position: fixed;

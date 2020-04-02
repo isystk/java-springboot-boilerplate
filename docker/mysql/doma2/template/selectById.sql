@@ -1,6 +1,7 @@
-select
+SELECT
   /*%expand*/*
-from
+FROM
   t_post
-where
+WHERE
   POST_ID = /* postId */1
+LIMIT 1

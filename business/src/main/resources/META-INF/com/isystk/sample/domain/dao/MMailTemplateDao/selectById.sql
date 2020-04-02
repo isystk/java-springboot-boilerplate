@@ -1,7 +1,6 @@
-SELECT
+select
   /*%expand*/*
-FROM
+from
   m_mail_template
-WHERE
+where
   MAIL_TEMPLATE_ID = /* mailTemplateId */1
-LIMIT 1

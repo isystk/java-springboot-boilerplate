@@ -11,6 +11,7 @@ package ${packageName};
 import ${annotationImportName};
 </#list>
 
+import java.util.List;
 import org.seasar.doma.jdbc.SelectOptions;
 import java.util.Optional;
 import java.util.stream.Collector;
@@ -59,7 +60,14 @@ public interface ${simpleName} {
      * @return
      */
     @Select(strategy = SelectType.COLLECT)
-    <R> R selectAll(final ${entityDesc.simpleName}Criteria criteria, final SelectOptions options, final Collector<${entityDesc.simpleName}, ?, R> collector);
+    <R> R findAll(final ${entityDesc.simpleName}Criteria criteria, final SelectOptions options, final Collector<${entityDesc.simpleName}, ?, R> collector);
+
+    /**
+     * @param criteria
+     * @return
+     */
+    @Select
+    List<${entityDesc.simpleName}> findAll(${entityDesc.simpleName}Criteria criteria);
 
 <#if entityDesc.idEntityPropertyDescs?size gt 0>
     /**
@@ -90,6 +98,6 @@ public interface ${simpleName} {
      * @return
      */
     @Select
-    Optional<${entityDesc.simpleName}> select(${entityDesc.simpleName}Criteria criteria);
+    Optional<${entityDesc.simpleName}> findOne(${entityDesc.simpleName}Criteria criteria);
 
 }

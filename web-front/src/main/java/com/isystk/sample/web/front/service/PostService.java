@@ -14,11 +14,14 @@ import org.springframework.util.Assert;
 
 import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.PageFactory;
+import com.isystk.sample.common.dto.PageImpl;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
+import com.isystk.sample.domain.dto.PostDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.dto.SolrPostCriteria;
@@ -102,9 +105,23 @@ public class PostService extends BaseTransactionalService {
 	 * @return
 	 */
 	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
-	public Page<TPost> findAll(TPostCriteria criteria, Pageable pageable) {
+	public Page<FrontPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		Assert.notNull(criteria, "criteria must not be null");
-		return postRepository.findAll(criteria, pageable);
+		Page<PostDto> postDtoPage = postRepository.findAll(criteria, pageable);
+
+		List<FrontPostDto> list = Lists.newArrayList();
+		for (PostDto postDto : postDtoPage.getData()) {
+			var dto = modelMapper.map(postDto, FrontPostDto.class);
+
+			List<String> imageUrlList = Lists.newArrayList();
+			for (TPostImage tPostImage : postDto.getTPostImageList()) {
+				imageUrlList.add(imageHelper.getUrl(tPostImage.getImageId()));
+			}
+			dto.setImageUrlList(imageUrlList);
+
+			list.add(dto);
+		}
+		return new PageImpl<FrontPostDto>(list, pageable, postDtoPage.getCount());
 	}
 
 	/**

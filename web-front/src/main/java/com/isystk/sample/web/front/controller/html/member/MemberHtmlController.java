@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.web.front.service.PostService;
@@ -36,19 +34,19 @@ public class MemberHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 会員表示
-	 * 
+	 *
 	 * @param postId
 	 * @param model
 	 * @return
 	 */
 	@GetMapping()
-	public String index(@ModelAttribute MemberHtmlForm form, Model model) {
+	public String index(MemberHtmlForm form, Model model) {
 		// 入力値を詰め替える
-		var inputPost = new TPostCriteria();
-		// ログインユーザーID
-		inputPost.setUserId(userHelper.getLoginUserId());
-		// TODO 10件区切りで取得する
-		val pages = postService.findAll(inputPost, Pageable.NO_LIMIT);
+		TPostCriteria criteria = new TPostCriteria();
+		criteria.setUserId(userHelper.getLoginUserId());
+
+		// 10件区切りで取得する
+		val pages = postService.findAll(criteria, form);
 
 		// 画面に検索結果を渡す
 		model.addAttribute("pages", pages);

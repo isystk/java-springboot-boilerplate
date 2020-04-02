@@ -28,7 +28,7 @@ public class TUserOnetimeValidRepository extends BaseRepository {
 	public Optional<TUserOnetimeValid> findOneByOnetimeKey(String onetimeKey) {
     	TUserOnetimeValidCriteria criteria = new TUserOnetimeValidCriteria();
     	criteria.setOnetimeKeyEqual(onetimeKey);
-		return tUserOnetimeValidDao.select(criteria);
+		return tUserOnetimeValidDao.findOne(criteria);
 	}
 
 	/**

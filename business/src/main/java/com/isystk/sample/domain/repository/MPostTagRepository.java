@@ -34,7 +34,7 @@ public class MPostTagRepository extends BaseRepository {
 	public Page<MPostTag> findAll(MPostTagCriteria criteria, Pageable pageable) {
 		// ページングを指定する
 		val options = createSelectOptions(pageable).count();
-		val data = mPostTagDao.selectAll(criteria, options, toList());
+		val data = mPostTagDao.findAll(criteria, options, toList());
 		return pageFactory.create(data, pageable, options.getCount());
 	}
 

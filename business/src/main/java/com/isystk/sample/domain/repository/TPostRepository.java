@@ -3,7 +3,10 @@ package com.isystk.sample.domain.repository;
 import static com.isystk.sample.domain.util.DomaUtils.createSelectOptions;
 import static java.util.stream.Collectors.toList;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,10 +16,17 @@ import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.common.service.BaseRepository;
 import com.isystk.sample.common.util.DateUtils;
-import com.isystk.sample.domain.dao.AuditInfoHolder;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.TPostDao;
+import com.isystk.sample.domain.dao.TPostImageDao;
+import com.isystk.sample.domain.dao.TPostTagDao;
+import com.isystk.sample.domain.dto.PostDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
+import com.isystk.sample.domain.dto.TPostImageCriteria;
+import com.isystk.sample.domain.dto.TPostTagCriteria;
 import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.entity.TPostImage;
+import com.isystk.sample.domain.entity.TPostTag;
 
 import lombok.val;
 
@@ -29,6 +39,12 @@ public class TPostRepository extends BaseRepository {
 	@Autowired
 	TPostDao tPostDao;
 
+	@Autowired
+	TPostImageDao tPostImageDao;
+
+	@Autowired
+	TPostTagDao tPostTagDao;
+
 	/**
 	 * 投稿を複数取得します。
 	 *
@@ -36,11 +52,32 @@ public class TPostRepository extends BaseRepository {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<TPost> findAll(TPostCriteria criteria, Pageable pageable) {
+	public Page<PostDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		// ページングを指定する
 		val options = createSelectOptions(pageable).count();
-		val data = tPostDao.selectAll(criteria, options, toList());
-		return pageFactory.create(data, pageable, options.getCount());
+		List<TPost> tPostList = tPostDao.findAll(criteria, options, toList());
+
+		// tPostListからPostIdのListを抽出
+		List<Integer> postIdList = tPostList.stream().map(e -> Integer.valueOf(e.getPostId())).collect(Collectors.toList());
+
+		// postId をkeyとした、tPostImageListのMapを生成
+		TPostImageCriteria tPostImageCriteria = new TPostImageCriteria();
+		tPostImageCriteria.setPostIdIn(postIdList);
+		Map<Integer, List<TPostImage>> tPostImageMap = tPostImageDao.findAll(tPostImageCriteria).stream().collect(Collectors.groupingBy(TPostImage::getPostId));
+
+		// postId をkeyとした、tPostTagListのMapを生成
+		TPostTagCriteria tPostTagCriteria = new TPostTagCriteria();
+		tPostTagCriteria.setPostIdIn(postIdList);
+		Map<Integer, List<TPostTag>> tPostTagMap = tPostTagDao.findAll(tPostTagCriteria).stream().collect(Collectors.groupingBy(TPostTag::getPostId));
+
+		// tPostList を元に、postDtoList へコピー
+		List<PostDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, PostDto.class);
+		for (PostDto postDto : postDtoList) {
+			postDto.setTPostImageList(tPostImageMap.get(postDto.getPostId()));
+			postDto.setTPostTagList(tPostTagMap.get(postDto.getPostId()));
+		}
+
+		return pageFactory.create(postDtoList, pageable, options.getCount());
 	}
 
 	/**
@@ -50,7 +87,7 @@ public class TPostRepository extends BaseRepository {
 	 * @return
 	 */
 	public Optional<TPost> findOne(TPostCriteria criteria) {
-		return tPostDao.select(criteria);
+		return tPostDao.findOne(criteria);
 	}
 
 	/**

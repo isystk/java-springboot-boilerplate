@@ -40,7 +40,7 @@ public class UserDaoRealm extends BaseRealm {
 			criteria.setEmailEqual(email);
 
 			// 担当者を取得して、セッションに保存する
-			user = tUserDao.select(criteria)
+			user = tUserDao.findOne(criteria)
 					.orElseThrow(() -> new UsernameNotFoundException("no user found [id=" + email + "]"));
 
 			// 役割と権限を両方ともGrantedAuthorityとして渡す

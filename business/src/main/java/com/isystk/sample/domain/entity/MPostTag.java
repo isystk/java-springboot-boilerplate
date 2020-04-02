@@ -8,8 +8,7 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-
-import com.isystk.sample.common.dto.DomaDtoImpl;
+import com.isystk.sample.domain.dto.common.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,33 +22,34 @@ import lombok.Setter;
 @Setter
 public class MPostTag extends DomaDtoImpl {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
+    /** serialVersionUID */
+    private static final long serialVersionUID = 1L;
 
-	/** ID */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "POST_TAG_ID")
-	Integer postTagId;
 
-	/**  */
-	@Column(name = "NAME")
-	String name;
+    /** ID */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "POST_TAG_ID")
+    Integer postTagId;
 
-	/**  */
-	@Column(name = "REGIST_TIME")
-	LocalDateTime registTime;
+    /**  */
+    @Column(name = "NAME")
+    String name;
 
-	/**  */
-	@Column(name = "UPDATE_TIME")
-	LocalDateTime updateTime;
+    /**  */
+    @Column(name = "REGIST_TIME")
+    LocalDateTime registTime;
 
-	/**  */
-	@Column(name = "DELETE_FLG")
-	Boolean deleteFlg;
+    /**  */
+    @Column(name = "UPDATE_TIME")
+    LocalDateTime updateTime;
 
-	/**  */
-	@Version
-	@Column(name = "VERSION")
-	Long version;
+    /**  */
+    @Column(name = "DELETE_FLG")
+    Boolean deleteFlg;
+
+    /**  */
+    @Version
+    @Column(name = "VERSION")
+    Long version;
 }

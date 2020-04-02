@@ -195,7 +195,7 @@ public class ImageHelper {
 	public String getUrl(Integer imageId) {
 		String dir = getHash(imageId);
 		String saveFileName = imageId + "." + IMAGE_EXTENSION;
-		return "/thumb" + dir + "/" + saveFileName;
+		return "/thumb" + dir + saveFileName;
 	}
 
 }

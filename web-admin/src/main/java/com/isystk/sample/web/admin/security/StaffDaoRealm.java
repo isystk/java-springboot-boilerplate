@@ -41,7 +41,7 @@ public class StaffDaoRealm extends BaseRealm {
 			criteria.setEmailEqual(email);
 
 			// 担当者を取得して、セッションに保存する
-			staff = tStaffDao.select(criteria)
+			staff = tStaffDao.findOne(criteria)
 					.orElseThrow(() -> new UsernameNotFoundException("no staff found [id=" + email + "]"));
 //
 //            // 担当者権限を取得する
