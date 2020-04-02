@@ -3,9 +3,9 @@ package com.isystk.sample.solr.repository;
 import org.springframework.data.solr.repository.Query;
 import org.springframework.data.solr.repository.SolrCrudRepository;
 
-import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.solr.dto.SolrPost;
+import com.isystk.sample.solr.dto.SolrPostCriteria;
 
 public interface SolrPostRepository extends SolrCrudRepository<SolrPost, String> {
 

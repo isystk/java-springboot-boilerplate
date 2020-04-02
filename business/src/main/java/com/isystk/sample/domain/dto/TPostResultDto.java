@@ -10,7 +10,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PostDto extends TPost {
+public class TPostResultDto extends TPost {
 
 	List<TPostImage> tPostImageList;
 

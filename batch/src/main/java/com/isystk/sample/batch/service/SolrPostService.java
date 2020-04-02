@@ -17,7 +17,6 @@ import com.isystk.sample.domain.dao.MPostTagDao;
 import com.isystk.sample.domain.dto.MPostTagCriteria;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.MPostTag;
-import com.isystk.sample.domain.repository.MPostTagRepository;
 import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.repository.SolrPostRepository;
@@ -34,7 +33,7 @@ public class SolrPostService extends BaseTransactionalService {
 	TPostRepository postRepository;
 
 	@Autowired
-	MPostTagRepository mPostTagRepository;
+	MPostTagDao mPostTagDao;
 
 	@Autowired
 	ModelMapper modelMapper;
@@ -60,7 +59,7 @@ public class SolrPostService extends BaseTransactionalService {
 
 		MPostTagCriteria mPostTagCriteria = new MPostTagCriteria();
 		mPostTagCriteria.setDeleteFlgEqual(false);
-		var mPostTagList = mPostTagRepository.findAll(mPostTagCriteria, Pageable.NO_LIMIT).getData();
+		val mPostTagList = mPostTagDao.findAll(mPostTagCriteria);
 		Map<Integer, String> tagNameMap = Maps.newHashMap();
 		for (MPostTag mPostTag : mPostTagList) {
 			tagNameMap.put(mPostTag.getPostTagId(), mPostTag.getName());

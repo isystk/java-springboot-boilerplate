@@ -20,7 +20,7 @@ import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.TPostDao;
 import com.isystk.sample.domain.dao.TPostImageDao;
 import com.isystk.sample.domain.dao.TPostTagDao;
-import com.isystk.sample.domain.dto.PostDto;
+import com.isystk.sample.domain.dto.TPostResultDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.TPostImageCriteria;
 import com.isystk.sample.domain.dto.TPostTagCriteria;
@@ -52,7 +52,7 @@ public class TPostRepository extends BaseRepository {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<PostDto> findAll(TPostCriteria criteria, Pageable pageable) {
+	public Page<TPostResultDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		// ページングを指定する
 		val options = createSelectOptions(pageable).count();
 		List<TPost> tPostList = tPostDao.findAll(criteria, options, toList());
@@ -71,8 +71,8 @@ public class TPostRepository extends BaseRepository {
 		Map<Integer, List<TPostTag>> tPostTagMap = tPostTagDao.findAll(tPostTagCriteria).stream().collect(Collectors.groupingBy(TPostTag::getPostId));
 
 		// tPostList を元に、postDtoList へコピー
-		List<PostDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, PostDto.class);
-		for (PostDto postDto : postDtoList) {
+		List<TPostResultDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, TPostResultDto.class);
+		for (TPostResultDto postDto : postDtoList) {
 			postDto.setTPostImageList(tPostImageMap.get(postDto.getPostId()));
 			postDto.setTPostTagList(tPostTagMap.get(postDto.getPostId()));
 		}
