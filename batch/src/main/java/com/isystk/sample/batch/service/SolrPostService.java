@@ -19,25 +19,25 @@ import lombok.val;
 @Service
 public class SolrPostService extends BaseTransactionalService {
 
-    @Autowired
-    SolrPostRepository solrPostRepository;
+	@Autowired
+	SolrPostRepository solrPostRepository;
 
-    @Autowired
-    PostRepository postRepository;
+	@Autowired
+	PostRepository postRepository;
 
-    @Autowired
-    ModelMapper modelMapper;
+	@Autowired
+	ModelMapper modelMapper;
 
-    @Autowired
-    PageFactory pageFactory;
+	@Autowired
+	PageFactory pageFactory;
 
-    /**
-     * Solrの投稿インデックスを更新します。
-     *
-     * @param datas
-     * @return
-     */
-    public void refresh() {
+	/**
+	 * Solrの投稿インデックスを更新します。
+	 *
+	 * @param datas
+	 * @return
+	 */
+	public void refresh() {
 
 		// 全件取得する
 		val pages = postRepository.findAll(new TPostCriteria(), Pageable.NO_LIMIT);
@@ -50,6 +50,6 @@ public class SolrPostService extends BaseTransactionalService {
 
 		// Solrに保存
 		solrPostRepository.saveAll(Arrays.asList(datas));
-    }
+	}
 
 }

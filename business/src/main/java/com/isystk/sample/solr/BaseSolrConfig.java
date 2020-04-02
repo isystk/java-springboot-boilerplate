@@ -10,16 +10,16 @@ import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 @EnableSolrRepositories(basePackages = "com.isystk.sample.solr.repository")
 public class BaseSolrConfig {
 
-    @Value("#{'${spring.data.solr.host:*}'}")
+	@Value("#{'${spring.data.solr.host:*}'}")
 	String solrURL;
 
 	@Bean
 	public SolrClient solrClient() {
-	  return new HttpSolrClient.Builder(solrURL).build();
+		return new HttpSolrClient.Builder(solrURL).build();
 	}
 
 	@Bean
 	public SolrTemplate solrTemplate(SolrClient client) throws Exception {
-	  return new SolrTemplate(client);
+		return new SolrTemplate(client);
 	}
 }

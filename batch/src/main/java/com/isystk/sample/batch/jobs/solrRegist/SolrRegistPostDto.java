@@ -14,23 +14,23 @@ import lombok.Setter;
 @Getter
 public class SolrRegistPostDto implements ItemPosition {
 
-    @NotNull
-    Integer postId;
+	@NotNull
+	Integer postId;
 
-    @NotNull
-    Integer userId;
+	@NotNull
+	Integer userId;
 
-    @NotEmpty
-    String title;
+	@NotEmpty
+	String title;
 
-    @NotEmpty
-    String text;
+	@NotEmpty
+	String text;
 
-    @NotEmpty
-    LocalDateTime registTime;
+	@NotEmpty
+	LocalDateTime registTime;
 
-    // 取り込み元ファイル
-    String sourceName;
+	// 取り込み元ファイル
+	String sourceName;
 
-    int position;
+	int position;
 }

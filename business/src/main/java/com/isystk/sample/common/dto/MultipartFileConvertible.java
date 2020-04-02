@@ -6,11 +6,11 @@ package com.isystk.sample.common.dto;
  */
 public interface MultipartFileConvertible {
 
-    void setFilename(String filename);
+	void setFilename(String filename);
 
-    void setOriginalFilename(String originalFilename);
+	void setOriginalFilename(String originalFilename);
 
-    void setContentType(String contentType);
+	void setContentType(String contentType);
 
-    void setContent(BZip2Data data);
+	void setContent(BZip2Data data);
 }

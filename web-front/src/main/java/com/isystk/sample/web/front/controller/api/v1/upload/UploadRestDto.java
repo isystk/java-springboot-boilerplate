@@ -9,8 +9,8 @@ import lombok.Setter;
 @Getter
 public class UploadRestDto implements Dto {
 
-    Integer imageId;
+	Integer imageId;
 
-    Integer imagePath;
+	Integer imagePath;
 
 }

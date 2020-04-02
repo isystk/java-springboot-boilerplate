@@ -14,17 +14,17 @@ import lombok.Setter;
 @Getter
 public class MemberPostHtmlForm extends BaseForm {
 
-    private static final long serialVersionUID = 7593564324192730932L;
+	private static final long serialVersionUID = 7593564324192730932L;
 
-    Integer postId;
+	Integer postId;
 
-    @NotEmpty
-    String title;
+	@NotEmpty
+	String title;
 
-    @NotEmpty
-    String text;
+	@NotEmpty
+	String text;
 
-    MultipartFile imageFile;
+	MultipartFile imageFile;
 
 	@Override
 	public Integer getId() {

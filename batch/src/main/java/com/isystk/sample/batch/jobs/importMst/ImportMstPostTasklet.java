@@ -36,78 +36,78 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ImportMstPostTasklet extends BaseTasklet<ImportMstPostDto> {
 
-    @Autowired
-    MPostTagDao mPostTagDao;
+	@Autowired
+	MPostTagDao mPostTagDao;
 
-    @Override
-    public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws IOException {
-        val status = super.execute(contribution, chunkContext);
+	@Override
+	public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext) throws IOException {
+		val status = super.execute(contribution, chunkContext);
 
-        val context = BatchContextHolder.getContext();
-        val errors = getErrors(context);
+		val context = BatchContextHolder.getContext();
+		val errors = getErrors(context);
 
-        if (isNotEmpty(errors)) {
-            errors.forEach(e -> {
-                val sourceName = e.getSourceName();
-                val position = e.getPosition();
-                val errorMessage = e.getErrorMessage();
-                log.error("エラーがあります。ファイル名={}, 行数={}, エラーメッセージ={}", sourceName, position, errorMessage);
-            });
+		if (isNotEmpty(errors)) {
+			errors.forEach(e -> {
+				val sourceName = e.getSourceName();
+				val position = e.getPosition();
+				val errorMessage = e.getErrorMessage();
+				log.error("エラーがあります。ファイル名={}, 行数={}, エラーメッセージ={}", sourceName, position, errorMessage);
+			});
 
-            throw new ValidationException("取り込むファイルに不正な行が含まれています。");
-        }
+			throw new ValidationException("取り込むファイルに不正な行が含まれています。");
+		}
 
-        return status;
-    }
+		return status;
+	}
 
-    @Override
-    protected void doProcess(BatchContext context) {
+	@Override
+	protected void doProcess(BatchContext context) {
 
-        Path path = Paths.get("src/main/resources/tag_mst.csv");
-        val importTagDtoList = Lists.newArrayList();
+		Path path = Paths.get("src/main/resources/tag_mst.csv");
+		val importTagDtoList = Lists.newArrayList();
 		try {
-	        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
-	        lines.forEach(line -> {
+			List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+			lines.forEach(line -> {
 				val row = StringUtils.splitByWholeSeparatorPreserveAllTokens(line, ",");
 				val dto = new ImportMstPostDto();
 				dto.setSourceName(path.toString());
 				dto.setPostTagId(row[0]);
 				dto.setName(row[1]);
 				importTagDtoList.add(dto);
-	        });
+			});
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-        val csvPostTags = modelMapper.map(importTagDtoList, MPostTag[].class);
+		val csvPostTags = modelMapper.map(importTagDtoList, MPostTag[].class);
 
-        for (MPostTag csvPostTag : csvPostTags) {
-        	var data = mPostTagDao.selectById(csvPostTag.getPostTagId());
-        	if (data.isEmpty()) {
-        		MPostTag mPostTag = modelMapper.map(csvPostTag, MPostTag.class);
-        		mPostTag.setRegistTime(DateUtils.getNow());
-        		mPostTag.setUpdateTime(DateUtils.getNow());
-        		mPostTag.setDeleteFlg(false);
-                mPostTagDao.insert(mPostTag);
-        	} else {
-        		MPostTag mPostTag = data.get();
-        		mPostTag.setName(csvPostTag.getName());
-        		mPostTag.setUpdateTime(DateUtils.getNow());
-                mPostTagDao.update(mPostTag);
-        	}
-        }
-    }
+		for (MPostTag csvPostTag : csvPostTags) {
+			var data = mPostTagDao.selectById(csvPostTag.getPostTagId());
+			if (data.isEmpty()) {
+				MPostTag mPostTag = modelMapper.map(csvPostTag, MPostTag.class);
+				mPostTag.setRegistTime(DateUtils.getNow());
+				mPostTag.setUpdateTime(DateUtils.getNow());
+				mPostTag.setDeleteFlg(false);
+				mPostTagDao.insert(mPostTag);
+			} else {
+				MPostTag mPostTag = data.get();
+				mPostTag.setName(csvPostTag.getName());
+				mPostTag.setUpdateTime(DateUtils.getNow());
+				mPostTagDao.update(mPostTag);
+			}
+		}
+	}
 
-    @SuppressWarnings("unchecked")
-    private List<ItemError> getErrors(BatchContext context) {
-        val additionalInfo = context.getAdditionalInfo();
-        List<ItemError> errors = (List<ItemError>) additionalInfo.get("errors");
+	@SuppressWarnings("unchecked")
+	private List<ItemError> getErrors(BatchContext context) {
+		val additionalInfo = context.getAdditionalInfo();
+		List<ItemError> errors = (List<ItemError>) additionalInfo.get("errors");
 
-        if (errors == null) {
-            errors = new ArrayList<>();
-        }
+		if (errors == null) {
+			errors = new ArrayList<>();
+		}
 
-        return errors;
-    }
+		return errors;
+	}
 
 }

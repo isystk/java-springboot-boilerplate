@@ -16,23 +16,23 @@ import lombok.Setter;
 @Setter
 public class SolrPost implements Dto {
 
-    @Id
-    @Indexed(name = "id", type = "string")
-    private String id;
+	@Id
+	@Indexed(name = "id", type = "string")
+	private String id;
 
-    @Indexed(name = "post_id", type = "long")
-    private Integer postId;
+	@Indexed(name = "post_id", type = "long")
+	private Integer postId;
 
-    @Indexed(name = "user_id", type = "long")
-    private Integer userId;
+	@Indexed(name = "user_id", type = "long")
+	private Integer userId;
 
-    @Indexed(name = "title", type = "string")
-    private String title;
+	@Indexed(name = "title", type = "string")
+	private String title;
 
-    @Indexed(name = "text", type = "string")
-    private String text;
+	@Indexed(name = "text", type = "string")
+	private String text;
 
-    @Indexed(name = "regist_time", type = "pdate")
-    private LocalDateTime registTime;
+	@Indexed(name = "regist_time", type = "pdate")
+	private LocalDateTime registTime;
 
 }

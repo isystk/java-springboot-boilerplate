@@ -29,6 +29,7 @@ public class PostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 詳細画面表示
+	 * 
 	 * @param postId
 	 * @param model
 	 * @return

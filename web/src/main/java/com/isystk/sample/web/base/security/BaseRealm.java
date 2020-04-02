@@ -12,22 +12,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class BaseRealm implements UserDetailsService {
 
-    @Override
-    public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
-        UserDetails user = null;
+	@Override
+	public UserDetails loadUserByUsername(String loginId) throws UsernameNotFoundException {
+		UserDetails user = null;
 
-        try {
-            user = getLoginUser(loginId);
-        } catch (Throwable e) {
-            throw new UsernameNotFoundException("failed to find login user.");
-        }
+		try {
+			user = getLoginUser(loginId);
+		} catch (Throwable e) {
+			throw new UsernameNotFoundException("failed to find login user.");
+		}
 
-        if (user == null) {
-            throw new UsernameNotFoundException("no user found. [login_id=" + loginId + "]");
-        }
+		if (user == null) {
+			throw new UsernameNotFoundException("no user found. [login_id=" + loginId + "]");
+		}
 
-        return user;
-    }
+		return user;
+	}
 
-    protected abstract UserDetails getLoginUser(String loginId);
+	protected abstract UserDetails getLoginUser(String loginId);
 }

@@ -21,40 +21,39 @@ import com.isystk.sample.batch.listener.DefaultStepExecutionListener;
 @EnableBatchProcessing
 public class SolrRegistJobConfig {
 
-    @Autowired
-    JobBuilderFactory jobBuilderFactory;
+	@Autowired
+	JobBuilderFactory jobBuilderFactory;
 
-    @Autowired
-    StepBuilderFactory stepBuilderFactory;
+	@Autowired
+	StepBuilderFactory stepBuilderFactory;
 
-    @Bean
-    public JobExecutionListener solrlRegistJobListener() {
-        return new SolrlRegistJobListener();
-    }
+	@Bean
+	public JobExecutionListener solrlRegistJobListener() {
+		return new SolrlRegistJobListener();
+	}
 
-    @Bean
-    public Job solrRegistJob() {
-        return jobBuilderFactory.get("solrRegistJob").incrementer(new RunIdIncrementer())
-                .listener(solrlRegistJobListener())
-                .start(solrRegistStep1())
+	@Bean
+	public Job solrRegistJob() {
+		return jobBuilderFactory.get("solrRegistJob").incrementer(new RunIdIncrementer())
+				.listener(solrlRegistJobListener()).start(solrRegistStep1())
 //                .next(solrRegistStep2())
-                .build();
-    }
+				.build();
+	}
 
-    @Bean
-    public Step solrRegistStep1() {
-        return stepBuilderFactory.get("solrRegistStep1").listener(new DefaultStepExecutionListener())
-                .tasklet(solrRegistTasklet()).build();
-    }
+	@Bean
+	public Step solrRegistStep1() {
+		return stepBuilderFactory.get("solrRegistStep1").listener(new DefaultStepExecutionListener())
+				.tasklet(solrRegistTasklet()).build();
+	}
 
-    @Bean
-    public Step solrRegistStep2() {
-        return stepBuilderFactory.get("solrRegistStep2").listener(new DefaultStepExecutionListener())
-                .tasklet(solrRegistTasklet()).build();
-    }
+	@Bean
+	public Step solrRegistStep2() {
+		return stepBuilderFactory.get("solrRegistStep2").listener(new DefaultStepExecutionListener())
+				.tasklet(solrRegistTasklet()).build();
+	}
 
-    @Bean
-    public Tasklet solrRegistTasklet() {
-        return new SolrRegistTasklet();
-    }
+	@Bean
+	public Tasklet solrRegistTasklet() {
+		return new SolrRegistTasklet();
+	}
 }

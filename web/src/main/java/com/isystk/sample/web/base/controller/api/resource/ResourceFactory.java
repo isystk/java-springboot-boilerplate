@@ -5,10 +5,10 @@ package com.isystk.sample.web.base.controller.api.resource;
  */
 public interface ResourceFactory {
 
-    /**
-     * インスタンスを作成します。
-     *
-     * @return
-     */
-    Resource create();
+	/**
+	 * インスタンスを作成します。
+	 *
+	 * @return
+	 */
+	Resource create();
 }

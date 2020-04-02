@@ -13,30 +13,30 @@ import lombok.val;
 @NoArgsConstructor
 public class CommaSeparatedString implements Serializable {
 
-    private static final long serialVersionUID = -6864852815920199569L;
+	private static final long serialVersionUID = -6864852815920199569L;
 
-    @Getter
-    String data;
+	@Getter
+	String data;
 
-    /**
-     * ファクトリメソッド
-     *
-     * @param data
-     * @return
-     */
-    public static CommaSeparatedString of(String data) {
-        val css = new CommaSeparatedString();
-        css.data = StringUtils.join(data, ",");
-        return css;
-    }
+	/**
+	 * ファクトリメソッド
+	 *
+	 * @param data
+	 * @return
+	 */
+	public static CommaSeparatedString of(String data) {
+		val css = new CommaSeparatedString();
+		css.data = StringUtils.join(data, ",");
+		return css;
+	}
 
-    // ResultSet.getBytes(int)で取得された値がこのコンストラクタで設定される
-    CommaSeparatedString(String data) {
-        this.data = StringUtils.join(data, ",");
-    }
+	// ResultSet.getBytes(int)で取得された値がこのコンストラクタで設定される
+	CommaSeparatedString(String data) {
+		this.data = StringUtils.join(data, ",");
+	}
 
-    // PreparedStatement.setBytes(int, bytes)へ設定する値がこのメソッドから取得される
-    String getValue() {
-        return this.data;
-    }
+	// PreparedStatement.setBytes(int, bytes)へ設定する値がこのメソッドから取得される
+	String getValue() {
+		return this.data;
+	}
 }

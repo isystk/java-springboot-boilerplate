@@ -12,18 +12,18 @@ import lombok.Setter;
 @Getter
 public class PostForm extends BaseForm {
 
-    private static final long serialVersionUID = 7593564324192730932L;
+	private static final long serialVersionUID = 7593564324192730932L;
 
-    Integer postId;
+	Integer postId;
 
-    @NotNull
-    Integer userId;
+	@NotNull
+	Integer userId;
 
-    @NotEmpty
-    String title;
+	@NotEmpty
+	String title;
 
-    @NotEmpty
-    String text;
+	@NotEmpty
+	String text;
 
 	@Override
 	public Integer getId() {

@@ -21,49 +21,49 @@ import com.isystk.sample.domain.dto.TPostImageCriteria;
 @Dao
 public interface TPostImageDao {
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Insert
-    int insert(TPostImage entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Insert
+	int insert(TPostImage entity);
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Update
-    int update(TPostImage entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Update
+	int update(TPostImage entity);
 
-    /**
-     * @param entity
-     * @return affected rows
-     */
-    @Delete
-    int delete(TPostImage entity);
+	/**
+	 * @param entity
+	 * @return affected rows
+	 */
+	@Delete
+	int delete(TPostImage entity);
 
-    /**
-     * @param criteria
-     * @param options
-     * @return
-     */
-    @Select(strategy = SelectType.COLLECT)
-    <R> R selectAll(final TPostImageCriteria criteria, final SelectOptions options, final Collector<TPostImage, ?, R> collector);
+	/**
+	 * @param criteria
+	 * @param options
+	 * @return
+	 */
+	@Select(strategy = SelectType.COLLECT)
+	<R> R selectAll(final TPostImageCriteria criteria, final SelectOptions options,
+			final Collector<TPostImage, ?, R> collector);
 
-    /**
-     * @param postId
-     * @param imageId
-     * @return the TPostImage entity
-     */
-    @Select
-    Optional<TPostImage> selectById(Integer postId, Integer imageId);
+	/**
+	 * @param postId
+	 * @param imageId
+	 * @return the TPostImage entity
+	 */
+	@Select
+	Optional<TPostImage> selectById(Integer postId, Integer imageId);
 
-
-    /**
-     * @param criteria
-     * @return
-     */
-    @Select
-    Optional<TPostImage> select(TPostImageCriteria criteria);
+	/**
+	 * @param criteria
+	 * @return
+	 */
+	@Select
+	Optional<TPostImage> select(TPostImageCriteria criteria);
 
 }

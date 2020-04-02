@@ -23,58 +23,57 @@ import lombok.Setter;
 @Setter
 public class TStaff extends DomaDtoImpl {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	/** ID */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "STAFF_ID")
+	Integer staffId;
 
-    /** ID */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "STAFF_ID")
-    Integer staffId;
+	/**  */
+	@Column(name = "EMAIL")
+	String email;
 
-    /**  */
-    @Column(name = "EMAIL")
-    String email;
+	/**  */
+	@Column(name = "PASSWORD")
+	String password;
 
-    /**  */
-    @Column(name = "PASSWORD")
-    String password;
+	/**  */
+	@Column(name = "FAMILY_NAME")
+	String familyName;
 
-    /**  */
-    @Column(name = "FAMILY_NAME")
-    String familyName;
+	/**  */
+	@Column(name = "NAME")
+	String name;
 
-    /**  */
-    @Column(name = "NAME")
-    String name;
+	/**  */
+	@Column(name = "FAMILY_NAME_KANA")
+	String familyNameKana;
 
-    /**  */
-    @Column(name = "FAMILY_NAME_KANA")
-    String familyNameKana;
+	/**  */
+	@Column(name = "NAME_KANA")
+	String nameKana;
 
-    /**  */
-    @Column(name = "NAME_KANA")
-    String nameKana;
+	/**  */
+	@Column(name = "LAST_LOGIN_TIME")
+	LocalDateTime lastLoginTime;
 
-    /**  */
-    @Column(name = "LAST_LOGIN_TIME")
-    LocalDateTime lastLoginTime;
+	/**  */
+	@Column(name = "REGIST_TIME")
+	LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
+	/**  */
+	@Column(name = "UPDATE_TIME")
+	LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
+	/**  */
+	@Column(name = "DELETE_FLG")
+	Boolean deleteFlg;
 
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
-
-    /**  */
-    @Version
-    @Column(name = "VERSION")
-    Long version;
+	/**  */
+	@Version
+	@Column(name = "VERSION")
+	Long version;
 }

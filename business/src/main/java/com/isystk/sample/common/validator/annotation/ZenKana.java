@@ -20,16 +20,16 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 public @interface ZenKana {
 
-    String message() default "{validator.annotation.ZenKana.message}";
+	String message() default "{validator.annotation.ZenKana.message}";
 
-    Class<?>[] groups() default {};
+	Class<?>[] groups() default {};
 
-    Class<? extends Payload>[] payload() default {};
+	Class<? extends Payload>[] payload() default {};
 
-    @Target({ FIELD })
-    @Retention(RUNTIME)
-    @Documented
-    @interface List {
-        ZenKana[] value();
-    }
+	@Target({ FIELD })
+	@Retention(RUNTIME)
+	@Documented
+	@interface List {
+		ZenKana[] value();
+	}
 }

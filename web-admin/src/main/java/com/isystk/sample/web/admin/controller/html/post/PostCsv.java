@@ -15,15 +15,15 @@ import lombok.Setter;
 @Setter
 public class PostCsv implements Serializable {
 
-    private static final long serialVersionUID = -1883999589975469540L;
+	private static final long serialVersionUID = -1883999589975469540L;
 
-    @JsonProperty("投稿ID")
-    String postId;
+	@JsonProperty("投稿ID")
+	String postId;
 
-    @JsonProperty("ユーザーID")
-    String userId;
+	@JsonProperty("ユーザーID")
+	String userId;
 
-    @JsonProperty("タイトル")
-    String title;
+	@JsonProperty("タイトル")
+	String title;
 
 }

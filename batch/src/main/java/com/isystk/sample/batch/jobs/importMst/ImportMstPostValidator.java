@@ -13,11 +13,11 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ImportMstPostValidator extends AbstractValidator<ImportMstPostDto> {
 
-    @Override
-    protected void doValidate(ImportMstPostDto dto, Errors errors) {
+	@Override
+	protected void doValidate(ImportMstPostDto dto, Errors errors) {
 
-        if (dto.getPosition() == 1 && !Objects.equals(dto.getPostTagId(), "Wyn")) {
-            errors.rejectValue("postTagId", "importMstJob.invalidMstPostId");
-        }
-    }
+		if (dto.getPosition() == 1 && !Objects.equals(dto.getPostTagId(), "Wyn")) {
+			errors.rejectValue("postTagId", "importMstJob.invalidMstPostId");
+		}
+	}
 }

@@ -6,6 +6,6 @@ import com.isystk.sample.common.dto.PageFactory;
 
 public abstract class BaseRepository {
 
-    @Autowired
-    protected PageFactory pageFactory;
+	@Autowired
+	protected PageFactory pageFactory;
 }

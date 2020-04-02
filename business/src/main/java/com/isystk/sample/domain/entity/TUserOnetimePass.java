@@ -20,20 +20,19 @@ import lombok.Setter;
 @Setter
 public class TUserOnetimePass extends DomaDtoImpl {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	/** ID */
+	@Id
+	@Column(name = "USER_ID")
+	Integer userId;
 
-    /** ID */
-    @Id
-    @Column(name = "USER_ID")
-    Integer userId;
+	/**  */
+	@Column(name = "ONETIME_KEY")
+	String onetimeKey;
 
-    /**  */
-    @Column(name = "ONETIME_KEY")
-    String onetimeKey;
-
-    /**  */
-    @Column(name = "ONETIME_VALID_TIME")
-    LocalDateTime onetimeValidTime;
+	/**  */
+	@Column(name = "ONETIME_VALID_TIME")
+	LocalDateTime onetimeValidTime;
 }

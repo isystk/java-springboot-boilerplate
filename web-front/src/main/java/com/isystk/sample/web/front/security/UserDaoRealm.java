@@ -26,38 +26,38 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserDaoRealm extends BaseRealm {
 
-    @Autowired
-    TUserDao tUserDao;
+	@Autowired
+	TUserDao tUserDao;
 
-    @Override
-    protected UserDetails getLoginUser(String email) {
-        TUser user = null;
-        List<GrantedAuthority> authorityList = null;
+	@Override
+	protected UserDetails getLoginUser(String email) {
+		TUser user = null;
+		List<GrantedAuthority> authorityList = null;
 
-        try {
-            // login_idをメールアドレスと見立てる
-            val criteria = new TUserCriteria();
-            criteria.setEmailEqual(email);
+		try {
+			// login_idをメールアドレスと見立てる
+			val criteria = new TUserCriteria();
+			criteria.setEmailEqual(email);
 
-            // 担当者を取得して、セッションに保存する
-            user = tUserDao.select(criteria)
-                    .orElseThrow(() -> new UsernameNotFoundException("no user found [id=" + email + "]"));
+			// 担当者を取得して、セッションに保存する
+			user = tUserDao.select(criteria)
+					.orElseThrow(() -> new UsernameNotFoundException("no user found [id=" + email + "]"));
 
-            // 役割と権限を両方ともGrantedAuthorityとして渡す
-            authorityList = AuthorityUtils.createAuthorityList(new HashSet<>().toArray(new String[0]));
+			// 役割と権限を両方ともGrantedAuthorityとして渡す
+			authorityList = AuthorityUtils.createAuthorityList(new HashSet<>().toArray(new String[0]));
 
-            return new LoginUser(user, authorityList);
+			return new LoginUser(user, authorityList);
 
-        } catch (Exception e) {
-            if (!(e instanceof UsernameNotFoundException)) {
-                // 入力間違い以外の例外はログ出力する
-                log.error("failed to getLoginUser. ", e);
-                throw e;
-            }
+		} catch (Exception e) {
+			if (!(e instanceof UsernameNotFoundException)) {
+				// 入力間違い以外の例外はログ出力する
+				log.error("failed to getLoginUser. ", e);
+				throw e;
+			}
 
-            // 0件例外がスローされた場合は何もしない
-            // それ以外の例外は、認証エラーの例外で包む
-            throw new UsernameNotFoundException("could not select user.", e);
-        }
-    }
+			// 0件例外がスローされた場合は何もしない
+			// それ以外の例外は、認証エラーの例外で包む
+			throw new UsernameNotFoundException("could not select user.", e);
+		}
+	}
 }

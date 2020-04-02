@@ -5,10 +5,10 @@ package com.isystk.sample.common;
  */
 public interface FunctionNameAware {
 
-    /**
-     * 機能名を返します。
-     *
-     * @return
-     */
-    String getFunctionName();
+	/**
+	 * 機能名を返します。
+	 *
+	 * @return
+	 */
+	String getFunctionName();
 }

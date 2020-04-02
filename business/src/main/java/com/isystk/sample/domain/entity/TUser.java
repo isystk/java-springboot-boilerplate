@@ -24,94 +24,93 @@ import lombok.Setter;
 @Setter
 public class TUser extends DomaDtoImpl {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	/** ID */
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "USER_ID")
+	Integer userId;
 
-    /** ID */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "USER_ID")
-    Integer userId;
+	/**  */
+	@Column(name = "EMAIL")
+	String email;
 
-    /**  */
-    @Column(name = "EMAIL")
-    String email;
+	/**  */
+	@Column(name = "PASSWORD")
+	String password;
 
-    /**  */
-    @Column(name = "PASSWORD")
-    String password;
+	/**  */
+	@Column(name = "FAMILY_NAME")
+	String familyName;
 
-    /**  */
-    @Column(name = "FAMILY_NAME")
-    String familyName;
+	/**  */
+	@Column(name = "NAME")
+	String name;
 
-    /**  */
-    @Column(name = "NAME")
-    String name;
+	/**  */
+	@Column(name = "FAMILY_NAME_KANA")
+	String familyNameKana;
 
-    /**  */
-    @Column(name = "FAMILY_NAME_KANA")
-    String familyNameKana;
+	/**  */
+	@Column(name = "NAME_KANA")
+	String nameKana;
 
-    /**  */
-    @Column(name = "NAME_KANA")
-    String nameKana;
+	/**  */
+	@Column(name = "ZIP")
+	String zip;
 
-    /**  */
-    @Column(name = "ZIP")
-    String zip;
+	/**  */
+	@Column(name = "PREFECTURE_ID")
+	Integer prefectureId;
 
-    /**  */
-    @Column(name = "PREFECTURE_ID")
-    Integer prefectureId;
+	/**  */
+	@Column(name = "AREA")
+	String area;
 
-    /**  */
-    @Column(name = "AREA")
-    String area;
+	/**  */
+	@Column(name = "ADDRESS")
+	String address;
 
-    /**  */
-    @Column(name = "ADDRESS")
-    String address;
+	/**  */
+	@Column(name = "BUILDING")
+	String building;
 
-    /**  */
-    @Column(name = "BUILDING")
-    String building;
+	/**  */
+	@Column(name = "TEL")
+	String tel;
 
-    /**  */
-    @Column(name = "TEL")
-    String tel;
+	/**  */
+	@Column(name = "SEX")
+	Integer sex;
 
-    /**  */
-    @Column(name = "SEX")
-    Integer sex;
+	/**  */
+	@Column(name = "BIRTHDAY")
+	LocalDate birthday;
 
-    /**  */
-    @Column(name = "BIRTHDAY")
-    LocalDate birthday;
+	/**  */
+	@Column(name = "LAST_LOGIN_TIME")
+	LocalDateTime lastLoginTime;
 
-    /**  */
-    @Column(name = "LAST_LOGIN_TIME")
-    LocalDateTime lastLoginTime;
+	/**  */
+	@Column(name = "STATUS")
+	Integer status;
 
-    /**  */
-    @Column(name = "STATUS")
-    Integer status;
+	/**  */
+	@Column(name = "REGIST_TIME")
+	LocalDateTime registTime;
 
-    /**  */
-    @Column(name = "REGIST_TIME")
-    LocalDateTime registTime;
+	/**  */
+	@Column(name = "UPDATE_TIME")
+	LocalDateTime updateTime;
 
-    /**  */
-    @Column(name = "UPDATE_TIME")
-    LocalDateTime updateTime;
+	/**  */
+	@Column(name = "DELETE_FLG")
+	Boolean deleteFlg;
 
-    /**  */
-    @Column(name = "DELETE_FLG")
-    Boolean deleteFlg;
-
-    /**  */
-    @Version
-    @Column(name = "VERSION")
-    Long version;
+	/**  */
+	@Version
+	@Column(name = "VERSION")
+	Long version;
 }

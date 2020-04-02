@@ -27,54 +27,54 @@ import lombok.val;
 @EnableBatchProcessing
 public class BatchConfiguration implements InitializingBean {
 
-    @Value("${application.batch.corePoolSize:2}")
-    int corePoolSize = 2;
+	@Value("${application.batch.corePoolSize:2}")
+	int corePoolSize = 2;
 
-    @Value("${application.batch.maxPoolSize:64}")
-    int maxPoolSize = 64;
+	@Value("${application.batch.maxPoolSize:64}")
+	int maxPoolSize = 64;
 
-    @Autowired
-    MessageSource messageSource;
+	@Autowired
+	MessageSource messageSource;
 
-    @Bean
-    public JobParametersConverter jobParametersConverter(DataSource dataSource) {
-        return new JsrJobParametersConverter(dataSource);
-    }
+	@Bean
+	public JobParametersConverter jobParametersConverter(DataSource dataSource) {
+		return new JsrJobParametersConverter(dataSource);
+	}
 
-    @Bean
-    public SingleJobCommandLineRunner commandLineRunner() {
-        return new SingleJobCommandLineRunner();
-    }
+	@Bean
+	public SingleJobCommandLineRunner commandLineRunner() {
+		return new SingleJobCommandLineRunner();
+	}
 
-    @Bean
-    public ThreadPoolTaskExecutor taskExecutor() {
-        val executor = new ThreadPoolTaskExecutor();
-        executor.setCorePoolSize(corePoolSize);
-        executor.setMaxPoolSize(maxPoolSize);
-        executor.setWaitForTasksToCompleteOnShutdown(true);
-        return executor;
-    }
+	@Bean
+	public ThreadPoolTaskExecutor taskExecutor() {
+		val executor = new ThreadPoolTaskExecutor();
+		executor.setCorePoolSize(corePoolSize);
+		executor.setMaxPoolSize(maxPoolSize);
+		executor.setWaitForTasksToCompleteOnShutdown(true);
+		return executor;
+	}
 
-    @Bean
-    public ModelMapper modelMapper() {
-        // ObjectMappingのためのマッパー
-        return DefaultModelMapperFactory.create();
-    }
+	@Bean
+	public ModelMapper modelMapper() {
+		// ObjectMappingのためのマッパー
+		return DefaultModelMapperFactory.create();
+	}
 
-    @Bean
-    public LocalValidatorFactoryBean beanValidator(MessageSource messageSource) {
-        val bean = new LocalValidatorFactoryBean();
-        bean.setValidationMessageSource(messageSource);
-        return bean;
-    }
+	@Bean
+	public LocalValidatorFactoryBean beanValidator(MessageSource messageSource) {
+		val bean = new LocalValidatorFactoryBean();
+		bean.setValidationMessageSource(messageSource);
+		return bean;
+	}
 
-    @Bean
-    public PageFactory pageFactory() {
-        return new DefaultPageFactoryImpl();
-    }
+	@Bean
+	public PageFactory pageFactory() {
+		return new DefaultPageFactoryImpl();
+	}
 
-    @Override
-    public void afterPropertiesSet() {
-        new MessageUtils().setMessageSource(messageSource);
-    }
+	@Override
+	public void afterPropertiesSet() {
+		new MessageUtils().setMessageSource(messageSource);
+	}
 }

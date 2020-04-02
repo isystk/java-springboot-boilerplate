@@ -32,74 +32,74 @@ import lombok.val;
 @RequestMapping(path = API_V1_FILEUPLOAD, produces = MediaType.APPLICATION_JSON_VALUE)
 public class UploadRestController extends AbstractRestController {
 
-    @Autowired
-    FileHelper fileHelper;
+	@Autowired
+	FileHelper fileHelper;
 
-    @Override
-    public String getFunctionName() {
-        return "API_FILEUPLOAD";
-    }
+	@Override
+	public String getFunctionName() {
+		return "API_FILEUPLOAD";
+	}
 
-    /**
-     * ファイル内容表示
-     *
-     * @param imageId
-     * @return
-     */
-    @GetMapping("/{imageId}")
-    @ResponseBody
-    public ModelAndView serveFile(@PathVariable Integer imageId) {
-        // ファイルを読み込む
-        val resource = fileHelper.loadFile(imageId);
+	/**
+	 * ファイル内容表示
+	 *
+	 * @param imageId
+	 * @return
+	 */
+	@GetMapping("/{imageId}")
+	@ResponseBody
+	public ModelAndView serveFile(@PathVariable Integer imageId) {
+		// ファイルを読み込む
+		val resource = fileHelper.loadFile(imageId);
 
-        // レスポンスを設定する
-        val view = new FileDownloadView(resource);
-        view.setAttachment(false);
-        view.setFilename(imageId + ".jpg");
+		// レスポンスを設定する
+		val view = new FileDownloadView(resource);
+		view.setAttachment(false);
+		view.setFilename(imageId + ".jpg");
 
-        return new ModelAndView(view);
-    }
+		return new ModelAndView(view);
+	}
 
-    /**
-     * ファイルダウンロード
-     *
-     * @param filename
-     * @return
-     */
-    @GetMapping("/download/{imageId}")
-    @ResponseBody
-    public ModelAndView downloadFile(@PathVariable Integer imageId) {
-        // ファイルを読み込む
-        val resource = fileHelper.loadFile(imageId);
+	/**
+	 * ファイルダウンロード
+	 *
+	 * @param filename
+	 * @return
+	 */
+	@GetMapping("/download/{imageId}")
+	@ResponseBody
+	public ModelAndView downloadFile(@PathVariable Integer imageId) {
+		// ファイルを読み込む
+		val resource = fileHelper.loadFile(imageId);
 
-        // レスポンスを設定する
-        val view = new FileDownloadView(resource);
-        view.setFilename(imageId + ".jpg");
+		// レスポンスを設定する
+		val view = new FileDownloadView(resource);
+		view.setFilename(imageId + ".jpg");
 
-        return new ModelAndView(view);
-    }
+		return new ModelAndView(view);
+	}
 
-    /**
-     * 一括アップロードを行う
-     *
-     * @param multipartFile
-     * @param fileType
-     * @param registrationType
-     * @param dailyAttendanceYyyymm
-     * @param loginUser
-     * @return
-     */
-    @PostMapping("/image")
-    public Resource post(@ModelAttribute("uploadRestForm") UploadRestForm form, Model model) {
+	/**
+	 * 一括アップロードを行う
+	 *
+	 * @param multipartFile
+	 * @param fileType
+	 * @param registrationType
+	 * @param dailyAttendanceYyyymm
+	 * @param loginUser
+	 * @return
+	 */
+	@PostMapping("/image")
+	public Resource post(@ModelAttribute("uploadRestForm") UploadRestForm form, Model model) {
 
-        // ファイルを保存する
-    	UploadFileDto dto = fileHelper.saveFile(form.getImageFile());
+		// ファイルを保存する
+		UploadFileDto dto = fileHelper.saveFile(form.getImageFile());
 
-        Resource resource = resourceFactory.create();
-        resource.setData(Arrays.asList(dto));
-        resource.setMessage(getMessage("uploadfiles.upload.success"));
+		Resource resource = resourceFactory.create();
+		resource.setData(Arrays.asList(dto));
+		resource.setMessage(getMessage("uploadfiles.upload.success"));
 
-        return resource;
-    }
+		return resource;
+	}
 
 }

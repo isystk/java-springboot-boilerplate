@@ -12,21 +12,20 @@ import lombok.Setter;
 @Setter
 public class TPostTagCriteria extends TPostTag {
 
-    /** serialVersionUID */
-    private static final long serialVersionUID = 1L;
+	/** serialVersionUID */
+	private static final long serialVersionUID = 1L;
 
+	Integer postIdEqual;
+	Integer postIdNotEqual;
+	boolean postIdIsNull;
+	boolean postIdIsNotNull;
+	List<Integer> postIdIn;
+	List<Integer> postIdNotIn;
 
-    Integer postIdEqual;
-    Integer postIdNotEqual;
-    boolean postIdIsNull;
-    boolean postIdIsNotNull;
-    List<Integer> postIdIn;
-    List<Integer> postIdNotIn;
-
-    Integer postTagIdEqual;
-    Integer postTagIdNotEqual;
-    boolean postTagIdIsNull;
-    boolean postTagIdIsNotNull;
-    List<Integer> postTagIdIn;
-    List<Integer> postTagIdNotIn;
+	Integer postTagIdEqual;
+	Integer postTagIdNotEqual;
+	boolean postTagIdIsNull;
+	boolean postTagIdIsNotNull;
+	List<Integer> postTagIdIn;
+	List<Integer> postTagIdNotIn;
 }

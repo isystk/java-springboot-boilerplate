@@ -13,26 +13,26 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ZipCodeValidator implements ConstraintValidator<ZipCode, String> {
 
-    static final Pattern p = Pattern.compile("^[0-9]{7}$");
+	static final Pattern p = Pattern.compile("^[0-9]{7}$");
 
-    @Override
-    public void initialize(ZipCode ZipCode) {
-    }
+	@Override
+	public void initialize(ZipCode ZipCode) {
+	}
 
-    @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        boolean isValid = false;
+	@Override
+	public boolean isValid(String value, ConstraintValidatorContext context) {
+		boolean isValid = false;
 
-        if (StringUtils.isEmpty(value)) {
-            isValid = true;
-        } else {
-            Matcher m = p.matcher(value);
+		if (StringUtils.isEmpty(value)) {
+			isValid = true;
+		} else {
+			Matcher m = p.matcher(value);
 
-            if (m.matches()) {
-                isValid = true;
-            }
-        }
+			if (m.matches()) {
+				isValid = true;
+			}
+		}
 
-        return isValid;
-    }
+		return isValid;
+	}
 }

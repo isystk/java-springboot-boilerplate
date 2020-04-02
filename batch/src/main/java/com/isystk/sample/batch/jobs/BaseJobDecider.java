@@ -15,22 +15,22 @@ import lombok.val;
  */
 public abstract class BaseJobDecider implements JobExecutionDecider {
 
-    @Override
-    public FlowExecutionStatus decide(JobExecution jobExecution, StepExecution stepExecution) {
-        val context = jobExecution.getExecutionContext();
+	@Override
+	public FlowExecutionStatus decide(JobExecution jobExecution, StepExecution stepExecution) {
+		val context = jobExecution.getExecutionContext();
 
-        if (!decideToProceed(context)) {
-            return new FlowExecutionStatus(EXECUTION_STATUS_SKIP);
-        }
+		if (!decideToProceed(context)) {
+			return new FlowExecutionStatus(EXECUTION_STATUS_SKIP);
+		}
 
-        return FlowExecutionStatus.COMPLETED;
-    }
+		return FlowExecutionStatus.COMPLETED;
+	}
 
-    /**
-     * Falseを返した場合は処理をスキップします。
-     * 
-     * @param context
-     * @return
-     */
-    protected abstract boolean decideToProceed(ExecutionContext context);
+	/**
+	 * Falseを返した場合は処理をスキップします。
+	 * 
+	 * @param context
+	 * @return
+	 */
+	protected abstract boolean decideToProceed(ExecutionContext context);
 }

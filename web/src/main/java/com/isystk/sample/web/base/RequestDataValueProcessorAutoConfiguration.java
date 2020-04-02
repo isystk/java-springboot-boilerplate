@@ -16,10 +16,10 @@ import com.isystk.sample.web.base.security.DoubleSubmitCheckingRequestDataValueP
 @AutoConfigureAfter(SecurityAutoConfiguration.class)
 public class RequestDataValueProcessorAutoConfiguration {
 
-    // requestDataValueProcessorという名称でなければならない
-    @Bean
-    public RequestDataValueProcessor requestDataValueProcessor() {
-        // 二重送信防止のトークンを自動で埋め込む
-        return new DoubleSubmitCheckingRequestDataValueProcessor();
-    }
+	// requestDataValueProcessorという名称でなければならない
+	@Bean
+	public RequestDataValueProcessor requestDataValueProcessor() {
+		// 二重送信防止のトークンを自動で埋め込む
+		return new DoubleSubmitCheckingRequestDataValueProcessor();
+	}
 }
