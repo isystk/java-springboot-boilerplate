@@ -1,4 +1,4 @@
-package com.isystk.sample.web.base;
+package com.isystk.sample.common;
 
 /**
  * 管理画面 URL

@@ -1,6 +1,6 @@
 package com.isystk.sample.web.base.filter;
 
-import static com.isystk.sample.web.base.WebConst.MDC_LOGIN_USER_ID;
+import static com.isystk.sample.common.Const.MDC_LOGIN_USER_ID;
 
 import java.io.IOException;
 import java.util.List;

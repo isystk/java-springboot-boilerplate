@@ -1,6 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.post;
 
-import static com.isystk.sample.web.base.FrontUrl.*;
+import static com.isystk.sample.common.FrontUrl.*;
 import static com.isystk.sample.domain.util.TypeUtils.toListType;
 
 import java.util.List;

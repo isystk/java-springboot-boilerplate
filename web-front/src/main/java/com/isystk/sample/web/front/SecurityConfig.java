@@ -1,7 +1,7 @@
 package com.isystk.sample.web.front;
 
-import static com.isystk.sample.web.base.WebConst.*;
-import static com.isystk.sample.web.base.FrontUrl.*;
+import static com.isystk.sample.common.FrontUrl.*;
+import static com.isystk.sample.common.Const.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

@@ -1,6 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.home;
 
-import static com.isystk.sample.web.base.AdminUrl.*;
+import static com.isystk.sample.common.AdminUrl.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

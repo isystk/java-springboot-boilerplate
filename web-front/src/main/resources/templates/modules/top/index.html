@@ -13,8 +13,8 @@
 				<div class="photo" v-for="e in datalist">
 					<a :href="'/post/'+e.postId+'/'">
 					<div class="inner">
-						<div class="square">
-							<img src="/thumb/sample.jpg" class="photo"/>
+						<div class="square" v-for="e2 in e.imageUrlList">
+							<img :src="e2" class="photo"/>
 						</div>
 						<div class="txt">
 							<p>{{e.title}}&nbsp;{{e.registTime}}</p>

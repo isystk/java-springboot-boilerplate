@@ -1,6 +1,6 @@
 package com.isystk.sample.web.base.controller.html;
 
-import static com.isystk.sample.web.base.WebConst.*;
+import static com.isystk.sample.common.Const.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

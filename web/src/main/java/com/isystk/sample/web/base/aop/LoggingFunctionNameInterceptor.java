@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
 
 import com.isystk.sample.common.FunctionNameAware;
-import com.isystk.sample.web.base.WebConst;
+import com.isystk.sample.common.Const;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoggingFunctionNameInterceptor extends BaseHandlerInterceptor {
 
-	private static final String MDC_FUNCTION_NAME = WebConst.MDC_FUNCTION_NAME;
+	private static final String MDC_FUNCTION_NAME = Const.MDC_FUNCTION_NAME;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
