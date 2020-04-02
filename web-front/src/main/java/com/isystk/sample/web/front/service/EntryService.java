@@ -16,11 +16,13 @@ import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.values.MailTemplate;
 import com.isystk.sample.common.values.UserStatus;
 import com.isystk.sample.domain.dao.MMailTemplateDao;
+import com.isystk.sample.domain.dao.TUserDao;
+import com.isystk.sample.domain.dao.TUserOnetimeValidDao;
 import com.isystk.sample.domain.dto.MMailTemplateCriteria;
+import com.isystk.sample.domain.dto.TUserOnetimeValidCriteria;
 import com.isystk.sample.domain.entity.MMailTemplate;
 import com.isystk.sample.domain.entity.TUser;
 import com.isystk.sample.domain.entity.TUserOnetimeValid;
-import com.isystk.sample.domain.repository.TUserOnetimeValidRepository;
 import com.isystk.sample.domain.repository.TUserRepository;
 
 import lombok.val;
@@ -35,10 +37,13 @@ public class EntryService extends BaseTransactionalService {
 	String domain;
 
 	@Autowired
+	TUserDao tUserDao;
+
+	@Autowired
 	TUserRepository tUserRepository;
 
 	@Autowired
-	TUserOnetimeValidRepository tUserOnetimeValidRepository;
+	TUserOnetimeValidDao tUserOnetimeValidDao;
 
 	@Autowired
 	MMailTemplateDao mMailTemplateDao;
@@ -63,7 +68,7 @@ public class EntryService extends BaseTransactionalService {
 		String onetimeKey = generateOnetimeKey();
 		tUserOnetimeValid.setOnetimeKey(onetimeKey);
 		tUserOnetimeValid.setOnetimeValidTime(DateUtils.addHour(DateUtils.getNow(), 7));
-		tUserOnetimeValidRepository.create(tUserOnetimeValid);
+		tUserOnetimeValidDao.insert(tUserOnetimeValid);
 
 		// 仮会員登録メールを送信する
 		val mailTemplate = getMailTemplate(MailTemplate.ENTRY_REGIST_TEMPORARY.getCode());
@@ -87,11 +92,11 @@ public class EntryService extends BaseTransactionalService {
 	public void registComplete(String  onetimeKey) {
 
 		// ワンタイムキーからユーザーIDを取得する
-		var tUserOnetimeValid = tUserOnetimeValidRepository.findOneByOnetimeKey(onetimeKey)
-				.orElseThrow(() -> new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]"));
+		var tUserOnetimeValid = getTUserOnetimeValid(onetimeKey);
 
 		// ユーザー情報を取得する
-		TUser tUser = tUserRepository.findById(tUserOnetimeValid.getUserId());
+		TUser tUser = tUserDao.selectById(tUserOnetimeValid.getUserId())
+				.orElseThrow(() -> new NoDataFoundException("user_id=" + tUserOnetimeValid.getUserId() + " のデータが見つかりません。"));
 
 		// DB登録する
 		tUser.setStatus(UserStatus.VALID.getCode());
@@ -139,7 +144,10 @@ public class EntryService extends BaseTransactionalService {
      * @return 会員Entity
      */
     public TUserOnetimeValid getTUserOnetimeValid(String onetimeKey) {
-    	return tUserOnetimeValidRepository.findOneByOnetimeKey(onetimeKey).orElse(null);
+    	TUserOnetimeValidCriteria criteria = new TUserOnetimeValidCriteria();
+    	criteria.setOnetimeKeyEqual(onetimeKey);
+		return tUserOnetimeValidDao.findOne(criteria)
+				.orElseThrow(() -> new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]"));
     }
 
 	/**

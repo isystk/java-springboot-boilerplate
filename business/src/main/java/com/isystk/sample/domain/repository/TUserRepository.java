@@ -1,20 +1,12 @@
 package com.isystk.sample.domain.repository;
 
-import static com.isystk.sample.domain.util.DomaUtils.createSelectOptions;
-import static java.util.stream.Collectors.toList;
-
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.isystk.sample.common.dto.Page;
-import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.common.service.BaseRepository;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.domain.dao.TUserDao;
-import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TUser;
 
 import lombok.val;
@@ -27,39 +19,6 @@ public class TUserRepository extends BaseRepository {
 
 	@Autowired
 	TUserDao tUserDao;
-
-	/**
-	 * ユーザーを複数取得します。
-	 *
-	 * @param criteria
-	 * @param pageable
-	 * @return
-	 */
-	public Page<TUser> findAll(TUserCriteria criteria, Pageable pageable) {
-		// ページングを指定する
-		val options = createSelectOptions(pageable).count();
-		val data = tUserDao.findAll(criteria, options, toList());
-		return pageFactory.create(data, pageable, options.getCount());
-	}
-
-	/**
-	 * ユーザーを取得します。
-	 *
-	 * @param criteria
-	 * @return
-	 */
-	public Optional<TUser> findOne(TUserCriteria criteria) {
-		return tUserDao.findOne(criteria);
-	}
-
-	/**
-	 * ユーザーを取得します。
-	 *
-	 * @return
-	 */
-	public TUser findById(final Integer id) {
-		return tUserDao.selectById(id).orElseThrow(() -> new NoDataFoundException("user_id=" + id + " のデータが見つかりません。"));
-	}
 
 	/**
 	 * ユーザーを追加します。

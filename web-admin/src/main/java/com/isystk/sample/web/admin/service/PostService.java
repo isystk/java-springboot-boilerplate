@@ -10,7 +10,7 @@ import org.springframework.util.Assert;
 import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.service.BaseTransactionalService;
-import com.isystk.sample.domain.dto.PostDto;
+import com.isystk.sample.domain.dto.TPostResultDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.repository.TPostRepository;
@@ -29,7 +29,7 @@ public class PostService extends BaseTransactionalService {
 	 * @return
 	 */
 	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
-	public Page<PostDto> findAll(TPostCriteria criteria, Pageable pageable) {
+	public Page<TPostResultDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		Assert.notNull(criteria, "criteria must not be null");
 		return postRepository.findAll(criteria, pageable);
 	}

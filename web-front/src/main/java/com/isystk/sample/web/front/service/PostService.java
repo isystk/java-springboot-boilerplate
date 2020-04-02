@@ -18,7 +18,7 @@ import com.isystk.sample.common.dto.PageImpl;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
-import com.isystk.sample.domain.dto.PostDto;
+import com.isystk.sample.domain.dto.TPostResultDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.entity.TPostImage;
@@ -107,21 +107,25 @@ public class PostService extends BaseTransactionalService {
 	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
 	public Page<FrontPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		Assert.notNull(criteria, "criteria must not be null");
-		Page<PostDto> postDtoPage = postRepository.findAll(criteria, pageable);
+		Page<TPostResultDto> postDtoPage = postRepository.findAll(criteria, pageable);
 
 		List<FrontPostDto> list = Lists.newArrayList();
-		for (PostDto postDto : postDtoPage.getData()) {
+		for (TPostResultDto postDto : postDtoPage.getData()) {
 			var dto = modelMapper.map(postDto, FrontPostDto.class);
 
 			List<String> imageUrlList = Lists.newArrayList();
-			for (TPostImage tPostImage : postDto.getTPostImageList()) {
-				imageUrlList.add(imageHelper.getUrl(tPostImage.getImageId()));
+			if (postDto.getTPostImageList() != null) {
+				for (TPostImage tPostImage : postDto.getTPostImageList()) {
+					imageUrlList.add(imageHelper.getUrl(tPostImage.getImageId()));
+				}
 			}
 			dto.setImageUrlList(imageUrlList);
 
 			list.add(dto);
 		}
-		return new PageImpl<FrontPostDto>(list, pageable, postDtoPage.getCount());
+
+		val options = createSelectOptions(pageable).count();
+		return pageFactory.create(list, pageable, options.getCount());
 	}
 
 	/**
