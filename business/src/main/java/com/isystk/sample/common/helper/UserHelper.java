@@ -10,7 +10,7 @@ import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.domain.dao.AuditInfoHolder;
 import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TUser;
-import com.isystk.sample.domain.repository.UserRepository;
+import com.isystk.sample.domain.repository.TUserRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserHelper {
 
 	@Autowired
-	UserRepository userRepository;
+	TUserRepository userRepository;
 
 	/**
 	 * ユーザーを全件取得します。

@@ -10,7 +10,7 @@ import com.isystk.sample.common.dto.PageFactory;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.domain.dto.TPostCriteria;
-import com.isystk.sample.domain.repository.PostRepository;
+import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.repository.SolrPostRepository;
 
@@ -23,7 +23,7 @@ public class SolrPostService extends BaseTransactionalService {
 	SolrPostRepository solrPostRepository;
 
 	@Autowired
-	PostRepository postRepository;
+	TPostRepository postRepository;
 
 	@Autowired
 	ModelMapper modelMapper;

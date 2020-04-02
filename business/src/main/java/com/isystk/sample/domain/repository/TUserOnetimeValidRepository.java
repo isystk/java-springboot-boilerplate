@@ -20,12 +20,14 @@ public class TUserOnetimeValidRepository extends BaseRepository {
 	TUserOnetimeValidDao tUserOnetimeValidDao;
 
 	/**
-	 * ユーザーワンタイム認証を取得します。
+	 * ワンタイムキーを元にーザーワンタイム認証を取得します。
 	 *
 	 * @param criteria
 	 * @return
 	 */
-	public Optional<TUserOnetimeValid> findOne(TUserOnetimeValidCriteria criteria) {
+	public Optional<TUserOnetimeValid> findOneByOnetimeKey(String onetimeKey) {
+    	TUserOnetimeValidCriteria criteria = new TUserOnetimeValidCriteria();
+    	criteria.setOnetimeKeyEqual(onetimeKey);
 		return tUserOnetimeValidDao.select(criteria);
 	}
 

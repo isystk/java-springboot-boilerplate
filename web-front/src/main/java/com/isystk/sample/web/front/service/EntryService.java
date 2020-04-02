@@ -17,12 +17,11 @@ import com.isystk.sample.common.values.MailTemplate;
 import com.isystk.sample.common.values.UserStatus;
 import com.isystk.sample.domain.dao.MMailTemplateDao;
 import com.isystk.sample.domain.dto.MMailTemplateCriteria;
-import com.isystk.sample.domain.dto.TUserOnetimeValidCriteria;
 import com.isystk.sample.domain.entity.MMailTemplate;
 import com.isystk.sample.domain.entity.TUser;
 import com.isystk.sample.domain.entity.TUserOnetimeValid;
 import com.isystk.sample.domain.repository.TUserOnetimeValidRepository;
-import com.isystk.sample.domain.repository.UserRepository;
+import com.isystk.sample.domain.repository.TUserRepository;
 
 import lombok.val;
 
@@ -36,7 +35,7 @@ public class EntryService extends BaseTransactionalService {
 	String domain;
 
 	@Autowired
-	UserRepository userRepository;
+	TUserRepository tUserRepository;
 
 	@Autowired
 	TUserOnetimeValidRepository tUserOnetimeValidRepository;
@@ -56,7 +55,7 @@ public class EntryService extends BaseTransactionalService {
 
 		// DB登録する
 		tUser.setStatus(UserStatus.TEMPORARY.getCode());
-		userRepository.create(tUser);
+		tUserRepository.create(tUser);
 
 		// 会員-初期承認を登録する
 		TUserOnetimeValid tUserOnetimeValid = new TUserOnetimeValid();
@@ -67,13 +66,44 @@ public class EntryService extends BaseTransactionalService {
 		tUserOnetimeValidRepository.create(tUserOnetimeValid);
 
 		// 仮会員登録メールを送信する
-		val mailTemplate = getMailTemplate(MailTemplate.ENTRY_REGIST_1.getCode());
+		val mailTemplate = getMailTemplate(MailTemplate.ENTRY_REGIST_TEMPORARY.getCode());
 		val subject = mailTemplate.getTitle();
 		val templateBody = mailTemplate.getText();
 		EntryRegist1 dto = new EntryRegist1();
 		dto.setFamilyName(tUser.getFamilyName());
 		dto.setDomain(domain);
 		dto.setOnetimeKey(onetimeKey);
+		Map<String, Object> objects = new HashMap<>();
+		objects.put("dto", dto);
+		val body = sendMailHelper.getMailBody(templateBody, objects);
+		sendMailHelper.sendMail(fromAddress, new String[] { tUser.getEmail() }, subject, body);
+	}
+
+	/**
+	 * 仮会員登録
+	 *
+	 * @param onetimeKey
+	 */
+	public void registComplete(String  onetimeKey) {
+
+		// ワンタイムキーからユーザーIDを取得する
+		var tUserOnetimeValid = tUserOnetimeValidRepository.findOneByOnetimeKey(onetimeKey)
+				.orElseThrow(() -> new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]"));
+
+		// ユーザー情報を取得する
+		TUser tUser = tUserRepository.findById(tUserOnetimeValid.getUserId());
+
+		// DB登録する
+		tUser.setStatus(UserStatus.VALID.getCode());
+		tUserRepository.update(tUser);
+
+		// 本会員登録完了メールを送信する
+		val mailTemplate = getMailTemplate(MailTemplate.ENTRY_REGIST_VALID.getCode());
+		val subject = mailTemplate.getTitle();
+		val templateBody = mailTemplate.getText();
+		EntryRegist1 dto = new EntryRegist1();
+		dto.setFamilyName(tUser.getFamilyName());
+		dto.setDomain(domain);
 		Map<String, Object> objects = new HashMap<>();
 		objects.put("dto", dto);
 		val body = sendMailHelper.getMailBody(templateBody, objects);
@@ -109,9 +139,7 @@ public class EntryService extends BaseTransactionalService {
      * @return 会員Entity
      */
     public TUserOnetimeValid getTUserOnetimeValid(String onetimeKey) {
-    	TUserOnetimeValidCriteria criteria = new TUserOnetimeValidCriteria();
-    	criteria.setOnetimeKeyEqual(onetimeKey);
-    	return tUserOnetimeValidRepository.findOne(criteria).orElse(null);
+    	return tUserOnetimeValidRepository.findOneByOnetimeKey(onetimeKey).orElse(null);
     }
 
 	/**
