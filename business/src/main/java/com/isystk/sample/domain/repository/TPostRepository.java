@@ -20,12 +20,12 @@ import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.TPostDao;
 import com.isystk.sample.domain.dao.TPostImageDao;
 import com.isystk.sample.domain.dao.TPostTagDao;
-import com.isystk.sample.domain.dto.TPostResultDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.TPostImageCriteria;
 import com.isystk.sample.domain.dto.TPostTagCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.entity.TPostImage;
+import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostTag;
 
 import lombok.val;
@@ -52,7 +52,7 @@ public class TPostRepository extends BaseRepository {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<TPostResultDto> findAll(TPostCriteria criteria, Pageable pageable) {
+	public Page<TPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		// ページングを指定する
 		val options = createSelectOptions(pageable).count();
 		List<TPost> tPostList = tPostDao.findAll(criteria, options, toList());
@@ -71,8 +71,8 @@ public class TPostRepository extends BaseRepository {
 		Map<Integer, List<TPostTag>> tPostTagMap = tPostTagDao.findAll(tPostTagCriteria).stream().collect(Collectors.groupingBy(TPostTag::getPostId));
 
 		// tPostList を元に、postDtoList へコピー
-		List<TPostResultDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, TPostResultDto.class);
-		for (TPostResultDto postDto : postDtoList) {
+		List<TPostDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, TPostDto.class);
+		for (TPostDto postDto : postDtoList) {
 			postDto.setTPostImageList(tPostImageMap.get(postDto.getPostId()));
 			postDto.setTPostTagList(tPostTagMap.get(postDto.getPostId()));
 		}
@@ -105,17 +105,32 @@ public class TPostRepository extends BaseRepository {
 	 * @param post
 	 * @return
 	 */
-	public TPost create(final TPost post) {
-		// 1件登録
+	public TPost create(final TPostDto tPostDto) {
 		val time = DateUtils.getNow();
 
-		post.setRegistTime(time); // 作成日
-		post.setUpdateTime(time); // 更新日
-		post.setDeleteFlg(false); // 削除フラグ
-		post.setVersion(0L); // 楽観ロック改定番号
-		tPostDao.insert(post);
+		// 投稿テーブル
+		val tPost = ObjectMapperUtils.map(tPostDto, TPost.class);
+		tPost.setRegistTime(time); // 作成日
+		tPost.setUpdateTime(time); // 更新日
+		tPost.setDeleteFlg(false); // 削除フラグ
+		tPost.setVersion(0L); // 楽観ロック改定番号
+		tPostDao.insert(tPost);
 
-		return post;
+		// 投稿画像テーブル
+		val tPostImageList = ObjectMapperUtils.mapAll(tPostDto.getTPostImageList(), TPostImage.class);
+		for (TPostImage tPostImage : tPostImageList) {
+			tPostImage.setPostId(tPost.getPostId());
+			tPostImageDao.insert(tPostImage);
+		}
+
+		// 投稿タグテーブル
+		val tPostTagList = ObjectMapperUtils.mapAll(tPostDto.getTPostTagList(), TPostTag.class);
+		for (TPostTag tPostTag : tPostTagList) {
+			tPostTag.setPostId(tPost.getPostId());
+			tPostTagDao.insert(tPostTag);
+		}
+
+		return tPost;
 	}
 
 	/**
@@ -124,30 +139,42 @@ public class TPostRepository extends BaseRepository {
 	 * @param post
 	 * @return
 	 */
-	public TPost update(final TPost inputPost) {
-//        val uploadFile = inputPost.getUploadFile();
-//        if (uploadFile != null) {
-//            // 添付ファイルがある場合は、登録・更新する
-//            val uploadFileId = inputPost.getUploadFileId();
-//            if (uploadFileId == null) {
-//                uploadFileDao.insert(uploadFile);
-//            } else {
-//                uploadFileDao.update(uploadFile);
-//            }
-//
-//            inputPost.setUploadFileId(uploadFile.getId());
-//        }
-
-		// 1件更新
+	public TPost update(final TPostDto tPostDto) {
 		val time = DateUtils.getNow();
-		inputPost.setUpdateTime(time); // 更新日
-		int updated = tPostDao.update(inputPost);
 
-		if (updated < 1) {
-			throw new NoDataFoundException("post_id=" + inputPost.getPostId() + " のデータが見つかりません。");
+		val post = tPostDao.selectById(tPostDto.getPostId())
+				.orElseThrow(() -> new NoDataFoundException("post_id=" + tPostDto.getPostId() + " のデータが見つかりません。"));
+
+		// 投稿テーブル
+		val tPost = ObjectMapperUtils.mapExcludeNull(tPostDto, post);
+		tPost.setUpdateTime(time); // 更新日
+		tPostDao.update(tPost);
+
+		// 投稿画像テーブル (Delete→Insert)
+		TPostImageCriteria tPostImageCriteria = new TPostImageCriteria();
+		tPostImageCriteria.setPostIdEqual(tPostDto.getPostId());
+		for (TPostImage tPostImage : tPostImageDao.findAll(tPostImageCriteria)) {
+			tPostImageDao.delete(tPostImage);
+		}
+		val tPostImageList = ObjectMapperUtils.mapAll(tPostDto.getTPostImageList(), TPostImage.class);
+		for (TPostImage tPostImage : tPostImageList) {
+			tPostImage.setPostId(tPost.getPostId());
+			tPostImageDao.insert(tPostImage);
 		}
 
-		return inputPost;
+		// 投稿タグテーブル (Delete→Insert)
+		TPostTagCriteria tPostTagCriteria = new TPostTagCriteria();
+		tPostTagCriteria.setPostIdEqual(tPostDto.getPostId());
+		for (TPostTag tPostTag : tPostTagDao.findAll(tPostTagCriteria)) {
+			tPostTagDao.delete(tPostTag);
+		}
+		val tPostTagList = ObjectMapperUtils.mapAll(tPostDto.getTPostTagList(), TPostTag.class);
+		for (TPostTag tPostTag : tPostTagList) {
+			tPostTag.setPostId(tPost.getPostId());
+			tPostTagDao.insert(tPostTag);
+		}
+
+		return tPost;
 	}
 
 	/**
@@ -155,9 +182,9 @@ public class TPostRepository extends BaseRepository {
 	 *
 	 * @return
 	 */
-	public TPost delete(final Integer id) {
-		val post = tPostDao.selectById(id)
-				.orElseThrow(() -> new NoDataFoundException("post_id=" + id + " のデータが見つかりません。"));
+	public TPost delete(final Integer postId) {
+		val post = tPostDao.selectById(postId)
+				.orElseThrow(() -> new NoDataFoundException("post_id=" + postId + " のデータが見つかりません。"));
 
 		val time = DateUtils.getNow();
 		post.setUpdateTime(time); // 削除日
@@ -165,7 +192,7 @@ public class TPostRepository extends BaseRepository {
 		int updated = tPostDao.delete(post);
 
 		if (updated < 1) {
-			throw new NoDataFoundException("post_id=" + id + " は更新できませんでした。");
+			throw new NoDataFoundException("post_id=" + postId + " は更新できませんでした。");
 		}
 
 		return post;

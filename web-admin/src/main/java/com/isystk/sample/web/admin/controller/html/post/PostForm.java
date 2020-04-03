@@ -1,7 +1,12 @@
 package com.isystk.sample.web.admin.controller.html.post;
 
+import java.util.List;
+
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import com.isystk.sample.web.base.controller.html.BaseForm;
 
@@ -24,6 +29,12 @@ public class PostForm extends BaseForm {
 
 	@NotEmpty
 	String text;
+
+	List<@Digits(integer = 9, fraction = 0) Integer> postImageId;
+
+	List<@Digits(integer = 9, fraction = 0) Integer> postTagId;
+
+	MultipartFile imageFile;
 
 	@Override
 	public Integer getId() {

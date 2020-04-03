@@ -1,6 +1,7 @@
 package com.isystk.sample.web.front.controller.api.v1.upload;
 
-import static com.isystk.sample.common.FrontUrl.API_V1_FILEUPLOAD;
+import static com.isystk.sample.common.Const.*;
+import static com.isystk.sample.common.FrontUrl.*;
 
 import java.util.Arrays;
 
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,7 +33,7 @@ import lombok.val;
 public class UploadRestController extends AbstractRestController {
 
 	@Autowired
-	ImageHelper fileHelper;
+	ImageHelper imageHelper;
 
 	@Override
 	public String getFunctionName() {
@@ -50,12 +50,12 @@ public class UploadRestController extends AbstractRestController {
 	@ResponseBody
 	public ModelAndView serveFile(@PathVariable Integer imageId) {
 		// ファイルを読み込む
-		val resource = fileHelper.loadFile(imageId);
+		val resource = imageHelper.loadFile(imageId);
 
 		// レスポンスを設定する
 		val view = new FileDownloadView(resource);
 		view.setAttachment(false);
-		view.setFilename(imageId + ".jpg");
+		view.setFilename(imageId + "." + IMAGE_EXTENSION);
 
 		return new ModelAndView(view);
 	}
@@ -70,17 +70,17 @@ public class UploadRestController extends AbstractRestController {
 	@ResponseBody
 	public ModelAndView downloadFile(@PathVariable Integer imageId) {
 		// ファイルを読み込む
-		val resource = fileHelper.loadFile(imageId);
+		val resource = imageHelper.loadFile(imageId);
 
 		// レスポンスを設定する
 		val view = new FileDownloadView(resource);
-		view.setFilename(imageId + ".jpg");
+		view.setFilename(imageId + "." + IMAGE_EXTENSION);
 
 		return new ModelAndView(view);
 	}
 
 	/**
-	 * 一括アップロードを行う
+	 * 画像アップロードを行う
 	 *
 	 * @param multipartFile
 	 * @param fileType
@@ -93,7 +93,7 @@ public class UploadRestController extends AbstractRestController {
 	public Resource post(@ModelAttribute("uploadRestForm") UploadRestForm form, Model model) {
 
 		// ファイルを保存する
-		UploadFileDto dto = fileHelper.saveFile(form.getImageFile());
+		UploadFileDto dto = imageHelper.saveFile(form.getImageFile());
 
 		Resource resource = resourceFactory.create();
 		resource.setData(Arrays.asList(dto));

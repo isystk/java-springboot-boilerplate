@@ -62,7 +62,7 @@
 			};
 
 			// ファイルのアップロード
-			var fileUpload = this.fileUpload = function (obj) {
+			var fileUpload = this.fileUpload = function (obj, csrf) {
 
 				// ファイルAPIに対応している場合は、画像チェックとサイズチェックをクライアント側でも行う。
 				if (window.File && window.FileReader && window.FileList && window.Blob){
@@ -105,8 +105,9 @@
 
 						var newPromise = $.Deferred();
 
-						var formData = new FormData(form[0]);
+						var formData = new FormData();
 						formData.enctype = 'multipart/form-data';
+						formData.append('_csrf', csrf);
 						formData.append('imageFile', file, file.name);
 
 						$.ajax({
