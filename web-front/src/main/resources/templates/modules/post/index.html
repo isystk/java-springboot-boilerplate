@@ -11,10 +11,17 @@
 			<main id="detail">
 				<h1>{{title}}</h1>
 				<p>{{registTimeYYYYMMDD}}</p>
-				<div class="photo" >
-					<img src="/thumb/sample.jpg" class="photo"/>
+				<div class="inner">
+					<ul class="photo">
+						<li v-for="e2 in imageUrlList" >
+							<div class="square">
+								<img :src="e2" class="photo"/>
+							</div>
+						</li>
+					</ul>
 				</div>
-				<p v-html="text"></p>
+				<p v-html="$options.filters.nl2br($options.filters.sanitaize(text))"></p>
+				<div class="clearfix"></div>
 			</main>
 		</div>
 	</div>
@@ -22,11 +29,13 @@
 		<script type="text/javascript" th:inline="javascript">
 		var myVueapp = new Vue({
 			el:"#content",
+			mixins: [isystkMixin],
 			data:{
 				url: null,
 				data: null,
-				registTimeYYYYMMDD: null,
-				text: null
+				text: null,
+				imageUrlList: [],
+				registTimeYYYYMMDD: null
 			},
 			created () {
 			},
@@ -39,8 +48,9 @@
 						var res = await axios.get(this.url);
 						var data = res.data.data[0];
 						this.title = data.title;
+						this.text = data.text;
+						this.imageUrlList = data.imageUrlList;
 						this.registTimeYYYYMMDD = data.registTimeYYYYMMDD;
-						this.text = data.text.replace(/\n/g, '<br/>');
 					})();
 				},
 			}

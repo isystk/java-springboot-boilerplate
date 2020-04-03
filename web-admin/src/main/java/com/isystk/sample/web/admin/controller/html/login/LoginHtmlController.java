@@ -2,16 +2,15 @@ package com.isystk.sample.web.admin.controller.html.login;
 
 import static com.isystk.sample.common.Const.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.isystk.sample.common.helper.StaffHelper;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +21,9 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 public class LoginHtmlController extends AbstractHtmlController {
+
+	@Autowired
+	StaffHelper staffHelper;
 
 	@Override
 	public String getFunctionName() {
@@ -49,6 +51,10 @@ public class LoginHtmlController extends AbstractHtmlController {
 	 */
 	@PostMapping(LOGIN_SUCCESS_URL)
 	public String loginSuccess(@ModelAttribute LoginForm form, RedirectAttributes attributes) {
+
+		// 最終ログイン日時を更新します。
+		staffHelper.updateLastLogin();
+
 		attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("login.success"));
 		return "redirect:/";
 	}

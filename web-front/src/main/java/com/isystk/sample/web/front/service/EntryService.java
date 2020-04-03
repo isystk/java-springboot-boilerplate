@@ -85,7 +85,7 @@ public class EntryService extends BaseTransactionalService {
 	}
 
 	/**
-	 * 仮会員登録
+	 * 本会員登録
 	 *
 	 * @param onetimeKey
 	 */
@@ -93,6 +93,9 @@ public class EntryService extends BaseTransactionalService {
 
 		// ワンタイムキーからユーザーIDを取得する
 		var tUserOnetimeValid = getTUserOnetimeValid(onetimeKey);
+		if (tUserOnetimeValid == null) {
+			new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]");
+		}
 
 		// ユーザー情報を取得する
 		TUser tUser = tUserDao.selectById(tUserOnetimeValid.getUserId())
@@ -146,8 +149,7 @@ public class EntryService extends BaseTransactionalService {
     public TUserOnetimeValid getTUserOnetimeValid(String onetimeKey) {
     	TUserOnetimeValidCriteria criteria = new TUserOnetimeValidCriteria();
     	criteria.setOnetimeKeyEqual(onetimeKey);
-		return tUserOnetimeValidDao.findOne(criteria)
-				.orElseThrow(() -> new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]"));
+		return tUserOnetimeValidDao.findOne(criteria).orElse(null);
     }
 
 	/**
@@ -159,7 +161,7 @@ public class EntryService extends BaseTransactionalService {
 		val criteria = new MMailTemplateCriteria();
 		criteria.setMailTemplateIdEqual(templateId);
 		val mailTemplate = mMailTemplateDao.findOne(criteria).orElseThrow(
-				() -> new NoDataFoundException("templateKey=" + criteria.getMailTemplateId() + " のデータが見つかりません。"));
+				() -> new NoDataFoundException("templateKey=" + templateId + " のデータが見つかりません。"));
 
 		return mailTemplate;
 	}

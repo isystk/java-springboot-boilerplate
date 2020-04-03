@@ -13,11 +13,17 @@
 					<div th:each="e : ${pages.data}">
 						<div class="box">
 					 		<p th:text="*{e.title}"></p>
-							<div class="photo" >
-								<div th:each="e2 : ${e.imageIdList}">
-									<img th:src="${@img.getUrl('407611769', '_sd')}" class="photo"/>
-								</div>
+							<a th:href="'/post/'+${e.postId}+'/'">
+							<div class="inner">
+								<ul class="photo">
+									<li th:each="e2 : ${e.imageIdList}">
+										<div class="square">
+											<img th:src="${@img.url(e2, '_square')}" class="photo"/>
+										</div>
+									</li>
+								</ul>
 							</div>
+							</a>
 					 		<p th:text="*{e.text}"></p>
 					 		<p th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></p>
 					 		<a href="#"><input type="button" value="編集"></a>

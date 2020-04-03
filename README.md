@@ -50,14 +50,16 @@ SpringBoot を利用したマルチモジュールのボイラープレートで
 ## VS. 
 
 ### 利用している技術
-- インフラ
-    - NginX 1.15
-    - MySQL 5.7
-    - Solr 8.4
-    - phpMyAdmin
-    - MailHog
-- アプリ
+- Docker
+    - NginX 1.15　・・・　WebサーバーとしてNginXを採用しました。自己証明書を設定済みなので開発環境でSSLとして動作可能です。
+    - MySQL 5.7　・・・　DBサーバーにはMySQLを採用しました。データファイルや設定ファイル、 ログなどはコンテナの外に出して 開発時に参照出来るようにしています。
+    - Solr 8.4　・・・　フロント表示はSolrからデータ取得表示、また、バッチでDB取得したデータをインデックス生成させています。
+    - phpMyAdmin　・・・　起動したMySQLのデータを参照・編集するためのツールです。
+    - MailHog 　・・・　ダミーのSMTPサーバーです。送信したメールをブラウザで閲覧することが可能です。実際にはメールは送信されないので開発時の誤送信してしまう心配がありません。
+- アプリケーション
     - SpringBoot 2.2.5
+    - Spring Data Solr
+    - Spring Batch
     - Doma2
     - AdminLTE3
     - Vuejs2
@@ -69,6 +71,9 @@ SpringBoot を利用したマルチモジュールのボイラープレートで
 
 フロント画面.
 ![フロント画面](./front.jpg "フロント画面")
+
+テーブル構成.
+![テーブル構成](./er.jpg "テーブル構成")
 
 ## Requirement
 
@@ -114,7 +119,7 @@ $ java -jar batch/target/batch.jar "--job=solrRegistJob"
 ```
 
 #### 接続先情報
-##### テストユーザー test@sample.com / passw0rd
+##### テストユーザー test@sample.com / password
 
 | 接続先| URL|
 | :-----| :---------------------------------------|

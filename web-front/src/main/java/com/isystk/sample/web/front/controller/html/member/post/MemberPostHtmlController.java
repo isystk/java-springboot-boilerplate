@@ -46,14 +46,14 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 	UserHelper userHelper;
 
 	@Autowired
-	MemberPostHtmlFormValidator postFormValidator;
+	MemberPostFormValidator postFormValidator;
 
 	@Override
 	public String getFunctionName() {
 		return "A_MEMBER_POST";
 	}
 
-	@InitBinder("postHtmlForm")
+	@InitBinder("postForm")
 	public void validatorBinder(WebDataBinder binder) {
 		binder.addValidators(postFormValidator);
 	}
@@ -66,10 +66,10 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("regist")
-	public String regist(@ModelAttribute("postHtmlForm") MemberPostHtmlForm form, Model model) {
+	public String regist(@ModelAttribute("postForm") MemberPostForm form, Model model) {
 		if (!form.isNew()) {
 			// SessionAttributeに残っている場合は再生成する
-			model.addAttribute("postForm", new MemberPostHtmlForm());
+			model.addAttribute("postForm", new MemberPostForm());
 		}
 
 		return "modules/member/post/regist";
@@ -84,7 +84,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping
-	public String regist(@Validated @ModelAttribute("postHtmlForm") MemberPostHtmlForm form, BindingResult br,
+	public String regist(@Validated @ModelAttribute("postForm") MemberPostForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -132,7 +132,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping("{postId}")
-	public String update(@Validated @ModelAttribute("postHtmlForm") MemberPostHtmlForm form, BindingResult br,
+	public String update(@Validated @ModelAttribute("postForm") MemberPostForm form, BindingResult br,
 			@PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる

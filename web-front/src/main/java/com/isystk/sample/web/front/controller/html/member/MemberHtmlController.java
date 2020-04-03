@@ -40,7 +40,7 @@ public class MemberHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping()
-	public String index(MemberHtmlForm form, Model model) {
+	public String index(MemberForm form, Model model) {
 		// 入力値を詰め替える
 		TPostCriteria criteria = new TPostCriteria();
 		criteria.setUserIdEqual(userHelper.getLoginUserId());

@@ -2,16 +2,6 @@
 USE sample;
 
 -- Project Name : sample
--- Date/Time    : 2020/03/23 17:46:12
--- Author       : isystk
--- RDBMS Type   : MySQL
--- Application  : A5:SQL Mk-2
--- Project Name : sample
--- Date/Time    : 2020/03/24 1:16:49
--- Author       : isystk
--- RDBMS Type   : MySQL
--- Application  : A5:SQL Mk-2
--- Project Name : sample
 -- Date/Time    : 2020/03/30 16:46:35
 -- Author       : isystk
 -- RDBMS Type   : MySQL

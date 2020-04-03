@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="~{layouts/sidebar :: sidebar ('master', 'post')}"></div>
+		<div th:replace="~{layouts/sidebar :: sidebar ('user', 'post')}"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -117,12 +117,12 @@
 									 				<td th:text="*{e.postId}"></td>
 									 				<td th:text="*{e.userId}"></td>
 									 				<td th:text="*{e.title}"></td>
-									 				<td th:text="*{e.registTime}"></td>
+									 				<td th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></td>
 									 				<td class="float-right">
 										 				<form th:action="@{/post/{id}(id=*{e.postId})}" th:method="delete">
 										 					<a class="btn btn-secondary" th:href="@{/post/{id}(id=*{e.postId})}">詳細</a>
 										 					<a class="btn btn-secondary" th:href="@{/post/{id}/edit(id=*{e.postId})}">变更</a>
-															<button class="btn btn-danger">削除</button>
+															<button class="btn btn-danger js-delete">削除</button>
 														</form>
 									 				</td>
 								 				</tr>
@@ -156,6 +156,12 @@
 						href = self.attr('href'),
 						form = $('#searchPostForm');
 					location.href = [href, form.serialize()].join('?');
+				});
+				$('.js-delete').click(function(e) {
+					if (!confirm('削除します。よろしいですか？')) {
+						e.preventDefault();
+						return false;
+					}
 				});
 			});
 		</script>

@@ -50,7 +50,7 @@ public class SolrPostService extends BaseTransactionalService {
 
 		// 有効な投稿を全件取得する
 		var criteria = new TPostCriteria();
-		criteria.setDeleteFlgEqual(false);
+		criteria.setDeleteFlgFalse(true);
 		val postPage = postRepository.findAll(criteria, Pageable.NO_LIMIT);
 		if (postPage.getCount() == 0) {
 			// 投稿データが0件の場合は何もしない
@@ -58,7 +58,7 @@ public class SolrPostService extends BaseTransactionalService {
 		}
 
 		MPostTagCriteria mPostTagCriteria = new MPostTagCriteria();
-		mPostTagCriteria.setDeleteFlgEqual(false);
+		mPostTagCriteria.setDeleteFlgFalse(true);
 		val mPostTagList = mPostTagDao.findAll(mPostTagCriteria);
 		Map<Integer, String> tagNameMap = Maps.newHashMap();
 		for (MPostTag mPostTag : mPostTagList) {
