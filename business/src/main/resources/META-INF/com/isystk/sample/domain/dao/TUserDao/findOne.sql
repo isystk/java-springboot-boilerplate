@@ -288,16 +288,9 @@ WHERE
 /*%if criteria.updateTimeIsNotNull  */
   UPDATE_TIME IS NOT NULL
 /*%end*/
-/*%if criteria.deleteFlgEqual != null */
-  DELETE_FLG = /* criteria.deleteFlgEqual */'a'
+/*%if criteria.deleteFlgTrue  */
+  DELETE_FLG = true
 /*%end*/
-/*%if criteria.deleteFlgNotEqual != null */
-  DELETE_FLG != /* criteria.deleteFlgNotEqual */'a'
+/*%if criteria.deleteFlgFalse  */
+  DELETE_FLG = false
 /*%end*/
-/*%if criteria.deleteFlgIsNull  */
-  DELETE_FLG IS NULL
-/*%end*/
-/*%if criteria.deleteFlgIsNotNull  */
-  DELETE_FLG IS NOT NULL
-/*%end*/
-

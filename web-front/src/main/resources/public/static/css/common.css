@@ -586,23 +586,49 @@ width: 100%;
 }
 
 /* 投稿詳細*/
-#detail .photo {
-max-width: 500px;
+#detail .inner {
+overflow: hidden;
+width: 400px;
+height: 400px;
 float: left;
-margin-right: 20px;
+margin-right: 20px
+}
+#detail .photo ul {
+width: 2000px;
+}
+#detail .photo li {
+width: 400px;
+float: left;
+}
+#detail .square {
+width: 100%;
+position: relative;
 }
 
 /* マイページ*/
-#member .photo {
-max-width: 200px;
-float: left;
-margin-right: 10px;
-}
 #member .box {
 background-color: #fff;
 box-shadow:0px 0px 5px;
 margin-bottom: 16px;
 padding: 10px;
+}
+#member .inner {
+overflow: hidden;
+width: 200px;
+height: 200px;
+float: left;
+margin-right: 20px
+}
+#member .photo ul {
+width: 2000px;
+}
+#member .photo li {
+width: 200px;
+float: left;
+}
+#member .square {
+width: 100%;
+position: relative;
 }
 
 

@@ -67,21 +67,17 @@ LName=メールテンプレート
 Comment=
 TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
 Page=サンプル
-Left=700
+Left=800
 Top=1200
-Field="MAIL_TEMPLATEID","MAIL_TEMPLATE_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
-Field="テンプレート区分","TEMPLATE_DIV","*DIV","NOT NULL",,"","",$FFFFFFFF,""
+Field="テンプレートID","MAIL_TEMPLATE_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="テンプレート区分","MAIL_TEMPLATE_DIV","*DIV","NOT NULL",,"","",$FFFFFFFF,""
 Field="タイトル","TITLE","@VARCHAR(100)","NOT NULL",,"","",$FFFFFFFF,""
 Field="本文","TEXT","@VARCHAR(500)","NOT NULL",,"","",$FFFFFFFF,""
-Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
-Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
-Field="削除フラグ","DELETE_FLG","*TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
-Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20200323174207
-Position="サンプル",700,1200,421,436
+ModifiedDateTime=20200403220805
+Position="サンプル",800,1200,421,207
 
 [Entity]
 PName=T_STAFF
@@ -118,14 +114,14 @@ Fields1=USER_ID
 Fields2=USER_ID
 Cardinarity1=
 Cardinarity2=
-Position="サンプル",0,549,9451,1562,R,R
+Position="サンプル",0,549,9451,1640,R,R
 Dependence=1
 Caption=
 PName=
 LineMode=0
 Bar1=55
 Bar2=945
-Bar3=156
+Bar3=164
 TermPos1=R
 TermPos2=R
 
@@ -269,7 +265,7 @@ Comment=
 TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
 Page=サンプル
 Left=1500
-Top=100
+Top=50
 Field="画像ID","IMAGE_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
 Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
 Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
@@ -278,7 +274,7 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20200227132347
-Position="サンプル",1500,100,334,404
+Position="サンプル",1500,50,334,404
 
 [Relation]
 Entity1=T_POST
@@ -381,8 +377,8 @@ LName=会員
 Comment=
 TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
 Page=サンプル
-Left=200
-Top=100
+Left=150
+Top=50
 Field="会員ID","USER_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
 Field="メールアドレス","EMAIL","*MAIL","NOT NULL",,"","",$FFFFFFFF,""
 Field="パスワード","PASSWORD","*PASSWORD","NOT NULL",,"","",$FFFFFFFF,""
@@ -408,4 +404,4 @@ EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
 ModifiedDateTime=20200325152708
-Position="サンプル",200,100,487,673
+Position="サンプル",150,50,487,673

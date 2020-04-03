@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.isystk.sample.common.util.ObjectMapperUtils;
+import com.isystk.sample.domain.dao.AuditInfoHolder;
+import com.isystk.sample.domain.dao.TUserDao;
+import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TUser;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.front.service.EntryService;
@@ -30,6 +34,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping(ENTRY_REGIST_URL)
 public class EntryHtmlController extends AbstractHtmlController {
+
+	@Autowired
+	TUserDao tUserDao;
 
 	@Autowired
 	EntryService entryService;
@@ -50,7 +57,7 @@ public class EntryHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping
-	public String index(@ModelAttribute EntryHtmlForm form, Model model) {
+	public String index(@ModelAttribute EntryForm form, Model model) {
 		return "modules/entry/regist/index";
 	}
 
@@ -62,8 +69,15 @@ public class EntryHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping
-	public String ontime(@Validated @ModelAttribute("entryHtmlForm") EntryHtmlForm form, BindingResult br,
+	public String ontime(@Validated @ModelAttribute("entryForm") EntryForm form, BindingResult br,
 			RedirectAttributes attributes) {
+
+		TUserCriteria criteria = new TUserCriteria();
+		criteria.setEmailEqual(form.getEmail());
+		if(tUserDao.findOne(criteria).orElse(null) != null) {
+			FieldError fieldError = new FieldError(br.getObjectName(), "email", "入力されたメールアドレスは既に登録されています");
+			br.addError(fieldError);
+		}
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {

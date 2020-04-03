@@ -17,7 +17,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class MemberPostHtmlForm extends BaseForm {
+public class MemberPostForm extends BaseForm {
 
 	private static final long serialVersionUID = 7593564324192730932L;
 

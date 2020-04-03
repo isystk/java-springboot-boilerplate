@@ -39,4 +39,3 @@ WHERE
 /*%if criteria.imageIdNotIn != null  */
   IMAGE_ID NOT IN /* criteria.imageIdNotIn */(1,2,3)
 /*%end*/
-

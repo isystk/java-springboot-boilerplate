@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class MemberHtmlForm extends BaseSearchForm implements Pageable {
+public class MemberForm extends BaseSearchForm implements Pageable {
 
 	private static final long serialVersionUID = 7593564324192730932L;
 

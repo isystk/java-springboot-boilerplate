@@ -32,6 +32,7 @@
 		<script type="text/javascript" th:inline="javascript">
 		var myVueapp = new Vue({
 			el:"#content",
+			mixins: [isystkMixin],
 			data:{
 				url: '/api/v1/post',
 				datalist:[]

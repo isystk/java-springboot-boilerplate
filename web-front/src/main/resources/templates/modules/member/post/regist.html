@@ -17,9 +17,9 @@
 					<div class="entry-content">
 
 						<p>投稿内容を入力して下さい</p>
-						<form th:object="${postHtmlForm}" th:action="${action}" id="form1"
-							th:with="action=${postHtmlForm.isNew()} ? @{/member/post} : @{/member/post/{id}(id=*{postId})}"
-							enctype="multipart/form-data" th:method="${postHtmlForm.isNew()} ? 'post' : 'put'">
+						<form th:object="${postForm}" th:action="${action}" id="form1"
+							th:with="action=${postForm.isNew()} ? @{/member/post} : @{/member/post/{id}(id=*{postId})}"
+							enctype="multipart/form-data" th:method="${postForm.isNew()} ? 'post' : 'put'">
 							<input type="hidden" name="version" th:value="*{version}" />
 							<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title')" />
 							<tr>

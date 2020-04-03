@@ -3,37 +3,32 @@ package com.isystk.sample.domain.dto;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import com.isystk.sample.domain.entity.TImage;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class TImageCriteria extends TImage {
+public class TImageCriteria {
 
-	/** serialVersionUID */
-	private static final long serialVersionUID = 1L;
 
-	Integer imageIdEqual;
-	Integer imageIdNotEqual;
-	boolean imageIdIsNull;
-	boolean imageIdIsNotNull;
-	List<Integer> imageIdIn;
-	List<Integer> imageIdNotIn;
+    Integer imageIdEqual;
+    Integer imageIdNotEqual;
+    boolean imageIdIsNull;
+    boolean imageIdIsNotNull;
+    List<Integer> imageIdIn;
+    List<Integer> imageIdNotIn;
 
-	LocalDateTime registTimeEqual;
-	LocalDateTime registTimeNotEqual;
-	boolean registTimeIsNull;
-	boolean registTimeIsNotNull;
+    LocalDateTime registTimeEqual;
+    LocalDateTime registTimeNotEqual;
+    boolean registTimeIsNull;
+    boolean registTimeIsNotNull;
 
-	LocalDateTime updateTimeEqual;
-	LocalDateTime updateTimeNotEqual;
-	boolean updateTimeIsNull;
-	boolean updateTimeIsNotNull;
+    LocalDateTime updateTimeEqual;
+    LocalDateTime updateTimeNotEqual;
+    boolean updateTimeIsNull;
+    boolean updateTimeIsNotNull;
 
-	Boolean deleteFlgEqual;
-	Boolean deleteFlgNotEqual;
-	boolean deleteFlgIsNull;
-	boolean deleteFlgIsNotNull;
+    boolean deleteFlgTrue;
+    boolean deleteFlgFalse;
 }

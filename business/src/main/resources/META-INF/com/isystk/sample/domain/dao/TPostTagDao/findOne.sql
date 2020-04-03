@@ -39,4 +39,3 @@ WHERE
 /*%if criteria.postTagIdNotIn != null  */
   POST_TAG_ID NOT IN /* criteria.postTagIdNotIn */(1,2,3)
 /*%end*/
-

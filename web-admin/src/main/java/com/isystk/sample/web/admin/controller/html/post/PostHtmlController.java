@@ -43,7 +43,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping(POST_URL)
 @SessionAttributes(types = { SearchPostForm.class, PostForm.class })
-public class PostController extends AbstractHtmlController {
+public class PostHtmlController extends AbstractHtmlController {
 
 	@Autowired
 	PostService postService;

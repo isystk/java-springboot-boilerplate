@@ -9,10 +9,10 @@ import com.isystk.sample.common.validator.AbstractValidator;
  * 投稿 入力チェック
  */
 @Component
-public class MemberPostHtmlFormValidator extends AbstractValidator<MemberPostHtmlForm> {
+public class MemberPostFormValidator extends AbstractValidator<MemberPostForm> {
 
 	@Override
-	protected void doValidate(MemberPostHtmlForm form, Errors errors) {
+	protected void doValidate(MemberPostForm form, Errors errors) {
 
 	}
 }

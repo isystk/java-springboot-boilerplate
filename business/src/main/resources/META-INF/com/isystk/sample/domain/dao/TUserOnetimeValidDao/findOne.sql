@@ -48,4 +48,3 @@ WHERE
 /*%if criteria.onetimeValidTimeIsNotNull  */
   ONETIME_VALID_TIME IS NOT NULL
 /*%end*/
-

@@ -18,7 +18,7 @@
 
 						<p>会員情報を入力してください。この情報は後で変更することも出来ます。</p>
 
-						<form id="entryForm" th:object="${entryHtmlForm}" th:action="@{/entry/regist}" method="post">
+						<form id="entryForm" th:object="${entryForm}" th:action="@{/entry/regist}" method="post">
 							<table class="formTable">
 								<tbody>
 								<!-- loop -->
@@ -120,7 +120,7 @@
 							<tr>
 								<th colspan="2"><span class="mark">電話番号</span></th>
 								<td>
-									<p><input type="text" name="tel" class="text size_l " maxlength="10"/>　<span class="sub">半角数字、ハイフン(-)</span></p>
+									<p><input type="text" name="tel" class="text size_l " maxlength="14"/>　<span class="sub">半角数字、ハイフン(-)</span></p>
 									<p class="noticetxt">例：090-1234-5678</p>
 									<div id="telErrMessage">
 									</div>

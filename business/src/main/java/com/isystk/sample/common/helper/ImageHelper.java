@@ -262,4 +262,8 @@ public class ImageHelper {
 		return "/thumb" + dir + saveFileName;
 	}
 
+	/** JSPからアクセス用*/
+	public String url(Integer imageId, String suffix) {
+		return getUrl(imageId, suffix);
+	}
 }

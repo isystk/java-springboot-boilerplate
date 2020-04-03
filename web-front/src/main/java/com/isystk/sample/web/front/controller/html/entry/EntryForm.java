@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class EntryHtmlForm implements Serializable {
+public class EntryForm implements Serializable {
 
 	private static final long serialVersionUID = 7593564324192730932L;
 

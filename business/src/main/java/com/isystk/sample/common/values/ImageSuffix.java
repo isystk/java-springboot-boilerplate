@@ -6,7 +6,7 @@ import lombok.Getter;
  * 保存する画像サイズ
  */
 @Getter
-public enum ImageSuffix {
+public enum ImageSuffix implements Values {
 
 	SQUARE("_square", 900, 900),
 	SD("_sd", 900, 675),
