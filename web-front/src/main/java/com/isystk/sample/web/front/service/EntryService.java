@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.isystk.sample.common.dto.mail.EntryRegist1;
+import com.isystk.sample.common.dto.mail.EntryRegistTemporary;
 import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.common.helper.SendMailHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
@@ -74,7 +74,7 @@ public class EntryService extends BaseTransactionalService {
 		val mailTemplate = getMailTemplate(MailTemplate.ENTRY_REGIST_TEMPORARY.getCode());
 		val subject = mailTemplate.getTitle();
 		val templateBody = mailTemplate.getText();
-		EntryRegist1 dto = new EntryRegist1();
+		EntryRegistTemporary dto = new EntryRegistTemporary();
 		dto.setFamilyName(tUser.getFamilyName());
 		dto.setDomain(domain);
 		dto.setOnetimeKey(onetimeKey);
@@ -106,7 +106,7 @@ public class EntryService extends BaseTransactionalService {
 		val mailTemplate = getMailTemplate(MailTemplate.ENTRY_REGIST_VALID.getCode());
 		val subject = mailTemplate.getTitle();
 		val templateBody = mailTemplate.getText();
-		EntryRegist1 dto = new EntryRegist1();
+		EntryRegistTemporary dto = new EntryRegistTemporary();
 		dto.setFamilyName(tUser.getFamilyName());
 		dto.setDomain(domain);
 		Map<String, Object> objects = new HashMap<>();

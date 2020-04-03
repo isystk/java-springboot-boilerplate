@@ -22,11 +22,14 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.TPostCriteria;
-import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.entity.TPostDto;
+import com.isystk.sample.domain.entity.TPostImage;
+import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.web.admin.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
@@ -106,12 +109,19 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("regist")
-	public String regist(PostForm form, Model model) {
-		if (!form.isNew()) {
-			// SessionAttributeに残っている場合は再生成する
-			model.addAttribute("postForm", new PostForm());
-		}
+	public String regist(PostForm form, Model model, SessionStatus sessionStatus) {
 
+		// セッションのpostFormをクリアする
+		sessionStatus.setComplete();
+
+		// ユーザー一覧
+		val userList = userHelper.getUserList();
+		model.addAttribute("userList", userList);
+
+		return showRegist(model);
+	}
+
+	private String showRegist(Model model) {
 		// ユーザー一覧
 		val userList = userHelper.getUserList();
 		model.addAttribute("userList", userList);
@@ -128,21 +138,18 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("{postId}/edit")
-	public String edit(@PathVariable Integer postId, PostForm form, Model model) {
-		// セッションから取得できる場合は、読み込み直さない
-		if (!hasErrors(model)) {
-			// 1件取得する
-			val post = postService.findById(postId);
+	public String edit(@PathVariable Integer postId, PostForm form, Model model, SessionStatus sessionStatus) {
 
-			// 取得したDtoをFromに詰め替える
-			ObjectMapperUtils.map(post, form);
-		}
+		// セッションのpostFormをクリアする
+		sessionStatus.setComplete();
 
-		// ユーザー一覧
-		val userList = userHelper.getUserList();
-		model.addAttribute("userList", userList);
+		// 1件取得する
+		val post = postService.findById(postId);
 
-		return "modules/post/regist";
+		// 取得したDtoをFromに詰め替える
+		ObjectMapperUtils.map(post, form);
+
+		return showRegist(model);
 	}
 
 	/**
@@ -154,20 +161,41 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping
-	public String regist(@Validated PostForm form, BindingResult br, SessionStatus sessionStatus,
+	public String regist(@Validated PostForm form, Model model, BindingResult br, SessionStatus sessionStatus,
 			RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
-			return "modules/post/regist";
+			return showRegist(model);
 		}
 
 		// 入力値からDTOを作成する
-		val inputPost = ObjectMapperUtils.map(form, TPost.class);
+		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
+		// ログインユーザーID
+		tPostDto.setUserId(userHelper.getLoginUserId());
+		// 投稿画像
+		List<TPostImage> tPostImageList = Lists.newArrayList();
+		if (form.getPostImageId() != null) {
+			for (Integer imageId : form.getPostImageId()) {
+				TPostImage tPostImage = new TPostImage();
+				tPostImage.setImageId(imageId);
+				tPostImageList.add(tPostImage);
+			}
+		}
+		tPostDto.setTPostImageList(tPostImageList);
+		// 投稿タグ
+		List<TPostTag> tPostTagList = Lists.newArrayList();
+		if (form.getPostTagId() != null) {
+			for (Integer tagId : form.getPostTagId()) {
+				TPostTag tPostTag = new TPostTag();
+				tPostTag.setPostTagId(tagId);
+				tPostTagList.add(tPostTag);
+			}
+		}
+		tPostDto.setTPostTagList(tPostTagList);
+		val tPost = postService.create(tPostDto);
 
-		val createdPost = postService.create(inputPost);
-
-		return "redirect:/post/" + createdPost.getPostId();
+		return "redirect:/post/" + tPost.getPostId();
 	}
 
 	/**
@@ -181,28 +209,44 @@ public class PostController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping("{postId}")
-	public String update(@Validated PostForm form, BindingResult br, @PathVariable Integer postId,
+	public String update(@PathVariable Integer postId, @Validated PostForm form, Model model, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
-			return "modules/post/regist";
+			return showRegist(model);
 		}
 
-		// 更新対象を取得する
-		val post = postService.findById(postId);
-
 		// 入力値を詰め替える
-		ObjectMapperUtils.map(form, post);
-
+		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
+		// 投稿画像
+		List<TPostImage> tPostImageList = Lists.newArrayList();
+		if (form.getPostImageId() != null) {
+			for (Integer imageId : form.getPostImageId()) {
+				TPostImage tPostImage = new TPostImage();
+				tPostImage.setImageId(imageId);
+				tPostImageList.add(tPostImage);
+			}
+		}
+		tPostDto.setTPostImageList(tPostImageList);
+		// 投稿タグ
+		List<TPostTag> tPostTagList = Lists.newArrayList();
+		if (form.getPostTagId() != null) {
+			for (Integer tagId : form.getPostTagId()) {
+				TPostTag tPostTag = new TPostTag();
+				tPostTag.setPostTagId(tagId);
+				tPostTagList.add(tPostTag);
+			}
+		}
+		tPostDto.setTPostTagList(tPostTagList);
 		// 更新する
-		val updatedPost = postService.update(post);
+		postService.update(tPostDto);
 
 		// セッションのpostFormをクリアする
 		sessionStatus.setComplete();
 
-		return "redirect:/post/" + updatedPost.getPostId();
+		return "redirect:/post/" + tPostDto.getPostId();
 	}
 
 	/**

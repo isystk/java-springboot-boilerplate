@@ -8,7 +8,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class EntryRegist1 {
+public class EntryRegistTemporary {
 	String familyName;
 	String domain;
 	String onetimeKey;

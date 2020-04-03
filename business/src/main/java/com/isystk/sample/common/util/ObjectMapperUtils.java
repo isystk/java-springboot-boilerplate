@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.modelmapper.Conditions;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 
@@ -62,6 +63,19 @@ public class ObjectMapperUtils {
      * @param destination object to map to
      */
     public static <S, D> D map(final S source, D destination) {
+        modelMapper.map(source, destination);
+        return destination;
+    }
+
+    /**
+     * Maps {@code source} to {@code destination}.
+     *
+     * @param source      object to map from
+     * @param destination object to map to
+     */
+    public static <S, D> D mapExcludeNull(final S source, D destination) {
+        // Nullは除いてコピー
+        modelMapper.getConfiguration().setPropertyCondition(Conditions.isNotNull());
         modelMapper.map(source, destination);
         return destination;
     }

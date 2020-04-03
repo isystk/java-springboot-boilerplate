@@ -1,8 +1,13 @@
 package com.isystk.sample.web.front.controller.html.member.post;
 
+import java.util.List;
+
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.isystk.sample.web.base.controller.html.BaseForm;
@@ -23,6 +28,10 @@ public class MemberPostHtmlForm extends BaseForm {
 
 	@NotEmpty
 	String text;
+
+	List<@Digits(integer = 9, fraction = 0) Integer> postImageId;
+
+	List<@Digits(integer = 9, fraction = 0) Integer> postTagId;
 
 	MultipartFile imageFile;
 

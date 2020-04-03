@@ -2,6 +2,10 @@ package com.isystk.sample.common.helper;
 
 import static com.isystk.sample.common.Const.*;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -12,6 +16,8 @@ import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.util.Formatter;
 import java.util.stream.Stream;
+
+import javax.imageio.ImageIO;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +33,20 @@ import com.isystk.sample.common.exception.FileNotFoundException;
 import com.isystk.sample.common.exception.SystemException;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.FileUtils;
+import com.isystk.sample.common.values.ImageSuffix;
 import com.isystk.sample.domain.dao.TImageDao;
 import com.isystk.sample.domain.entity.TImage;
+
+import lombok.extern.slf4j.Slf4j;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.filters.Canvas;
+import net.coobird.thumbnailator.geometry.Positions;
 
 /**
  * 画像ヘルパー
  */
 @Component("img")
+@Slf4j
 public class ImageHelper {
 
 	@Value("${application.imageUploadLocation:#{systemProperties['java.io.tmpdir']}}") // 設定ファイルに定義されたアップロード先を取得する
@@ -149,25 +162,36 @@ public class ImageHelper {
 			// 画像の拡張子
 			String extension = upFileName.substring(upFileName.lastIndexOf(".") + 1);
 
-			if (!"jpg".equalsIgnoreCase(extension)) {
-				// TODO JPG 以外の場合は変換する
-			}
-
 			// 画像ID
 			var id = generateID(Integer.valueOf(9));
 
 			// ディレクトリ
 			String dir = getHash(id);
-			Path location = Paths.get(imageUploadLocation, dir);
-
-			// 保存するファイル名
-			String saveFileName = id + "." + IMAGE_EXTENSION;
+			Path dirPath = Paths.get(imageUploadLocation, dir);
 
 			// ディレクトリがない場合は作成する
-			FileUtils.createDirectories(location);
+			FileUtils.createDirectories(dirPath);
+
+			Path filePath = dirPath.resolve(id + "." + extension);
 
 			// インプットストリームをファイルに書き出す
-			Files.copy(file.getInputStream(), location.resolve(saveFileName));
+			Files.copy(file.getInputStream(), filePath);
+
+			File source = new File(dirPath.toUri().getPath(), String.valueOf(id) + "." + IMAGE_EXTENSION);
+			if (!IMAGE_EXTENSION.equalsIgnoreCase(extension)) {
+				// JPG 以外の場合は変換する
+			    BufferedImage image = ImageIO.read(filePath.toFile());
+			    BufferedImage tmp = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_INT_RGB);
+			    Graphics2D off = tmp.createGraphics();
+			    off.drawImage(image, 0, 0, Color.WHITE, null);
+			    ImageIO.write(tmp, IMAGE_EXTENSION, source);
+			}
+
+			// 画像のアスペクト比を変換
+			for (ImageSuffix suffix: ImageSuffix.values()) {
+				File dist = new File(dirPath.toUri().getPath(), String.valueOf(id) + suffix.getSuffix() + "." + IMAGE_EXTENSION);
+				convert(source, dist, suffix.getWidth(), suffix.getHeight());
+			}
 
 			TImage tImage = new TImage();
 			tImage.setImageId(id);
@@ -177,8 +201,9 @@ public class ImageHelper {
 			tImageDao.insert(tImage);
 
 			UploadFileDto dto = new UploadFileDto();
-			dto.setId(id);
-			dto.setPath(getUrl(id));
+			dto.setImageId(id);
+			dto.setImageUrlSquare(getUrl(id, ImageSuffix.SQUARE.getSuffix()));
+			dto.setImageUrlSd(getUrl(id, ImageSuffix.SD.getSuffix()));
 			return dto;
 
 		} catch (IOException e) {
@@ -186,15 +211,54 @@ public class ImageHelper {
 		}
 	}
 
+    /**
+     * 画像をトリミングします。
+     * @param source
+     * @param dist
+     * @param width
+     * @param height
+     * @throws IOException
+     */
+    private void convert(File source, File dist, int width, int height) throws IOException {
+
+		BufferedImage bimage = ImageIO.read(source);
+
+		// 縦長と横長の場合とでリサイズ
+		if (bimage.getHeight() > bimage.getWidth()) {
+			// 縦長画像
+			log.info("縦長画像のため中心をトリミングします");
+			if (width == height) {
+				// 1:1画像の場合はそのまま中央をトリミング
+				Thumbnails.of(bimage).crop(Positions.CENTER).size(width, height).keepAspectRatio(true)
+						.outputQuality(0.9f).toFile(dist);
+			} else {
+				// 1:1画像でない場合は中央をトリミング後、左右に白背景を設定
+				Thumbnails.of(bimage).crop(Positions.CENTER).size(width, width).keepAspectRatio(true)
+						.outputQuality(0.9f).toFile(dist);
+				BufferedImage wkimage = ImageIO.read(dist);
+				Thumbnails.of(wkimage).height(height)
+						.addFilter(new Canvas(width, height, Positions.CENTER, Color.white)).keepAspectRatio(true)
+						.outputQuality(0.95f).toFile(dist);
+			}
+		} else {
+			// 横長画像
+			log.info("横長画像のため中心をトリミングします");
+			Thumbnails.of(bimage).crop(Positions.CENTER).size(width, height).keepAspectRatio(true).outputQuality(0.9f)
+					.toFile(dist);
+		}
+
+		log.info("width:" + width + " height:" + height + " path:" + dist);
+    }
+
 	/**
 	 * 画像IDを元に表示用のパスを取得します。
 	 *
 	 * @param imageId
 	 * @return
 	 */
-	public String getUrl(Integer imageId) {
+	public String getUrl(Integer imageId, String suffix) {
 		String dir = getHash(imageId);
-		String saveFileName = imageId + "." + IMAGE_EXTENSION;
+		String saveFileName = imageId + suffix + "." + IMAGE_EXTENSION;
 		return "/thumb" + dir + saveFileName;
 	}
 

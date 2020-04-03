@@ -14,7 +14,9 @@
 						<div class="box">
 					 		<p th:text="*{e.title}"></p>
 							<div class="photo" >
-								<img src="/thumb/sample.jpg" class="photo"/>
+								<div th:each="e2 : ${e.imageIdList}">
+									<img th:src="${@img.getUrl('407611769', '_sd')}" class="photo"/>
+								</div>
 							</div>
 					 		<p th:text="*{e.text}"></p>
 					 		<p th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></p>

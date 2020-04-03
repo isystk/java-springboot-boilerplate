@@ -1,10 +1,8 @@
 package com.isystk.sample.batch.service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +16,9 @@ import com.isystk.sample.domain.dao.MPostTagDao;
 import com.isystk.sample.domain.dto.MPostTagCriteria;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.MPostTag;
+import com.isystk.sample.domain.entity.TPostDto;
+import com.isystk.sample.domain.entity.TPostImage;
+import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.repository.SolrPostRepository;
@@ -50,10 +51,11 @@ public class SolrPostService extends BaseTransactionalService {
 		// 有効な投稿を全件取得する
 		var criteria = new TPostCriteria();
 		criteria.setDeleteFlgEqual(false);
-		val pages = postRepository.findAll(criteria, Pageable.NO_LIMIT);
-
-		// 入力値を詰め替える
-		SolrPost[] datas = ObjectMapperUtils.map(pages.getData(), SolrPost[].class);
+		val postPage = postRepository.findAll(criteria, Pageable.NO_LIMIT);
+		if (postPage.getCount() == 0) {
+			// 投稿データが0件の場合は何もしない
+			return;
+		}
 
 		MPostTagCriteria mPostTagCriteria = new MPostTagCriteria();
 		mPostTagCriteria.setDeleteFlgEqual(false);
@@ -63,29 +65,42 @@ public class SolrPostService extends BaseTransactionalService {
 			tagNameMap.put(mPostTag.getPostTagId(), mPostTag.getName());
 		}
 
-		for (SolrPost data : datas) {
+		List<SolrPost> solrPostList = Lists.newArrayList();
+		for (TPostDto tPostDto : postPage.getData()) {
+			SolrPost solrPost = ObjectMapperUtils.map(tPostDto, SolrPost.class);
+
 			// 投稿画像データを詰める
-			var imageIdList = Lists.newArrayList(481317464);
-			data.setImageIdList(imageIdList);
+			List<Integer> imageIdList = Lists.newArrayList();
+			if (tPostDto.getTPostImageList() != null) {
+				for (TPostImage tPostImage : tPostDto.getTPostImageList()) {
+					imageIdList.add(tPostImage.getImageId());
+				}
+			}
+			solrPost.setImageIdList(imageIdList);
 
 			// 投稿タグIDデータを詰める
-			var tagIdList = Lists.newArrayList(1,3,5,7,9);
-			data.setTagIdList(tagIdList);
+			List<Integer> tagIdList = Lists.newArrayList();
+			if (tPostDto.getTPostTagList() != null) {
+				for (TPostTag tPostTag : tPostDto.getTPostTagList()) {
+					tagIdList.add(tPostTag.getPostTagId());
+				}
+			}
+			solrPost.setTagIdList(tagIdList);
 
 			// 投稿タグ名称データを詰める
 			List<String> tagNameList = Lists.newArrayList();
 			for (Integer tagId : tagIdList) {
 				tagNameList.add(tagNameMap.get(tagId));
 			}
-			data.setTagNameList(tagNameList);
-
+			solrPost.setTagNameList(tagNameList);
+			solrPostList.add(solrPost);
 		}
 
 		// Solrをすべて削除
 		solrPostRepository.deleteAll();
 
 		// Solrに保存
-		solrPostRepository.saveAll(Arrays.asList(datas));
+		solrPostRepository.saveAll(solrPostList);
 	}
 
 }

@@ -2,6 +2,8 @@ package com.isystk.sample.web.front.controller.html.member.post;
 
 import static com.isystk.sample.common.FrontUrl.*;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.google.common.collect.Lists;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.entity.TPostDto;
+import com.isystk.sample.domain.entity.TPostImage;
+import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
@@ -88,10 +93,30 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 		}
 
 		// 入力値からDTOを作成する
-		val inputPost = ObjectMapperUtils.map(form, TPost.class);
+		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
 		// ログインユーザーID
-		inputPost.setUserId(userHelper.getLoginUserId());
-		val createdPost = postService.create(inputPost);
+		tPostDto.setUserId(userHelper.getLoginUserId());
+		// 投稿画像
+		List<TPostImage> tPostImageList = Lists.newArrayList();
+		if (form.getPostImageId() != null) {
+			for (Integer imageId : form.getPostImageId()) {
+				TPostImage tPostImage = new TPostImage();
+				tPostImage.setImageId(imageId);
+				tPostImageList.add(tPostImage);
+			}
+		}
+		tPostDto.setTPostImageList(tPostImageList);
+		// 投稿タグ
+		List<TPostTag> tPostTagList = Lists.newArrayList();
+		if (form.getPostTagId() != null) {
+			for (Integer tagId : form.getPostTagId()) {
+				TPostTag tPostTag = new TPostTag();
+				tPostTag.setPostTagId(tagId);
+				tPostTagList.add(tPostTag);
+			}
+		}
+		tPostDto.setTPostTagList(tPostTagList);
+		val postId = postService.create(tPostDto);
 
 		return "redirect:/member/";
 	}
@@ -116,19 +141,35 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 			return "modules/post/regist";
 		}
 
-		// 更新対象を取得する
-		val post = postService.findById(postId);
-
 		// 入力値を詰め替える
-		ObjectMapperUtils.map(form, post);
-
+		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
+		// 投稿画像
+		List<TPostImage> tPostImageList = Lists.newArrayList();
+		if (form.getPostImageId() != null) {
+			for (Integer imageId : form.getPostImageId()) {
+				TPostImage tPostImage = new TPostImage();
+				tPostImage.setImageId(imageId);
+				tPostImageList.add(tPostImage);
+			}
+		}
+		tPostDto.setTPostImageList(tPostImageList);
+		// 投稿タグ
+		List<TPostTag> tPostTagList = Lists.newArrayList();
+		if (form.getPostTagId() != null) {
+			for (Integer tagId : form.getPostTagId()) {
+				TPostTag tPostTag = new TPostTag();
+				tPostTag.setPostTagId(tagId);
+				tPostTagList.add(tPostTag);
+			}
+		}
+		tPostDto.setTPostTagList(tPostTagList);
 		// 更新する
-		val updatedPost = postService.update(post);
+		postService.update(tPostDto);
 
 		// セッションのpostFormをクリアする
 		sessionStatus.setComplete();
 
-		return "redirect:/post/" + updatedPost.getPostId();
+		return "redirect:/post/" + tPostDto.getPostId();
 	}
 
 	/**

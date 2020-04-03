@@ -10,9 +10,9 @@ import org.springframework.util.Assert;
 import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.service.BaseTransactionalService;
-import com.isystk.sample.domain.dto.TPostResultDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPost;
+import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.repository.TPostRepository;
 
 @Service
@@ -29,7 +29,7 @@ public class PostService extends BaseTransactionalService {
 	 * @return
 	 */
 	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
-	public Page<TPostResultDto> findAll(TPostCriteria criteria, Pageable pageable) {
+	public Page<TPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		Assert.notNull(criteria, "criteria must not be null");
 		return postRepository.findAll(criteria, pageable);
 	}
@@ -62,9 +62,9 @@ public class PostService extends BaseTransactionalService {
 	 * @param input
 	 * @return
 	 */
-	public TPost create(final TPost input) {
-		Assert.notNull(input, "input must not be null");
-		return postRepository.create(input);
+	public TPost create(final TPostDto tPostDto) {
+		Assert.notNull(tPostDto, "input must not be null");
+		return postRepository.create(tPostDto);
 	}
 
 	/**
@@ -73,9 +73,9 @@ public class PostService extends BaseTransactionalService {
 	 * @param input
 	 * @return
 	 */
-	public TPost update(final TPost input) {
-		Assert.notNull(input, "input must not be null");
-		return postRepository.update(input);
+	public TPost update(final TPostDto tPostDto) {
+		Assert.notNull(tPostDto, "input must not be null");
+		return postRepository.update(tPostDto);
 	}
 
 	/**

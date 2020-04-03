@@ -53,8 +53,8 @@
 				var slides = $('.selectedPhotoList'),
 					imagesLength = slides.find('li').length;
 				var fileLength = this.files.length;
-				if (10 < (imagesLength + fileLength)) {
-					showErrorMsg(dataType, ['コンテンツ写真の登録可能件数は、最大10件です。']);
+				if (5 < (imagesLength + fileLength)) {
+					showErrorMsg(dataType, ['コンテンツ写真の登録可能件数は、最大5件です。']);
 					return;
 				}
 
@@ -73,11 +73,11 @@
 					var data = res.data[0];
 
 					// 画像をアニメーション（フェードイン）で表示します。
-					var src = data.path + '?time=' + new Date().getTime();
+					var src = data.imageUrlSquare + '?time=' + new Date().getTime();
 					var image = $([
 						'<li><a href="#" class="close">',
 							'<img src="'+src+'" width="120px" />',
-							'<input type="hidden" name="postImageId" value="'+data.id+'" />',
+							'<input type="hidden" name="postImageId" value="'+data.imageId+'" />',
 						'</a></li>'
 						].join(''));
 					slides.append(image);
@@ -136,9 +136,27 @@
 						return false;
 					}
 
-				}).fileUpload(file);
+				}).fileUpload(file, $('input[name="_csrf"]').val());
 
 			};
+
+			// 選択中の画像を削除する
+			$(document).on('click', '.selectedPhotoList li a', function(e) {
+				e.preventDefault();
+				$(this).closest('li').remove();
+			});
+
+			// エラーメッセージを表示します。
+			var showErrorMsg = function(dataType, errors) {
+				var divs = _.map(errors, function(error) {
+					return '<p class=\"errortxt\">'+error+'</p>';
+				});
+				var errDiv = $('[id="' + dataType + 'IdErrMessage"]');
+				errDiv.empty().append('<div class=\"alertBox\">' + divs.join('') + '</div>');
+				// Loading画像削除
+				$('#site_loader_overlay').remove();
+			};
+
 		</script>
 	</div>
 </body>
