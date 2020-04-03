@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.entity.TUser;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.front.service.EntryService;
@@ -71,7 +72,7 @@ public class EntryHtmlController extends AbstractHtmlController {
 		}
 
 		// 入力値からDTOを作成する
-		val inputUser = modelMapper.map(form, TUser.class);
+		val inputUser = ObjectMapperUtils.map(form, TUser.class);
 		val password = form.getPassword();
 
 		// パスワードをハッシュ化する

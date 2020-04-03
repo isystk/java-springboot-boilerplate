@@ -10,14 +10,14 @@
 		<div class="content">
 			<main id="member">
 				<div th:if="${0 < pages.count}">
-					<div th:if="${0 < pages.count}" th:each="e : ${pages.data}">
+					<div th:each="e : ${pages.data}">
 						<div class="box">
 					 		<p th:text="*{e.title}"></p>
 							<div class="photo" >
 								<img src="/thumb/sample.jpg" class="photo"/>
 							</div>
 					 		<p th:text="*{e.text}"></p>
-					 		<p th:text="*{e.registTime}"></p>
+					 		<p th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></p>
 					 		<a href="#"><input type="button" value="編集"></a>
 							<div class="clearfix"></div>
 						</div>

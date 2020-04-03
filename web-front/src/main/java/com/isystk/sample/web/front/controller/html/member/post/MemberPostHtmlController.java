@@ -20,6 +20,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.isystk.sample.common.helper.UserHelper;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
@@ -54,7 +55,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 登録画面表示
-	 * 
+	 *
 	 * @param post
 	 * @param model
 	 * @return
@@ -71,7 +72,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 登録処理
-	 * 
+	 *
 	 * @param post
 	 * @param result
 	 * @param model
@@ -87,7 +88,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 		}
 
 		// 入力値からDTOを作成する
-		val inputPost = modelMapper.map(form, TPost.class);
+		val inputPost = ObjectMapperUtils.map(form, TPost.class);
 		// ログインユーザーID
 		inputPost.setUserId(userHelper.getLoginUserId());
 		val createdPost = postService.create(inputPost);
@@ -97,7 +98,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 更新処理
-	 * 
+	 *
 	 * @param form
 	 * @param br
 	 * @param postId
@@ -119,7 +120,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 		val post = postService.findById(postId);
 
 		// 入力値を詰め替える
-		modelMapper.map(form, post);
+		ObjectMapperUtils.map(form, post);
 
 		// 更新する
 		val updatedPost = postService.update(post);
@@ -132,7 +133,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 削除処理
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */

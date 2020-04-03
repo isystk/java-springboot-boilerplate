@@ -2,7 +2,6 @@ package com.isystk.sample.web.base.controller;
 
 import java.util.Locale;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
@@ -14,9 +13,6 @@ public class BaseController {
 
 	@Autowired
 	protected ApplicationContext applicationContext;
-
-	@Autowired
-	protected ModelMapper modelMapper;
 
 	/**
 	 * 入力エラーの共通メッセージを返します。

@@ -24,6 +24,7 @@ import com.isystk.sample.batch.context.BatchContextHolder;
 import com.isystk.sample.batch.item.ItemError;
 import com.isystk.sample.batch.jobs.BaseTasklet;
 import com.isystk.sample.common.util.DateUtils;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.MPostTagDao;
 import com.isystk.sample.domain.entity.MPostTag;
 
@@ -79,12 +80,12 @@ public class ImportMstPostTasklet extends BaseTasklet<ImportMstPostDto> {
 			e.printStackTrace();
 		}
 
-		val csvPostTags = modelMapper.map(importTagDtoList, MPostTag[].class);
+		val csvPostTags = ObjectMapperUtils.map(importTagDtoList, MPostTag[].class);
 
 		for (MPostTag csvPostTag : csvPostTags) {
 			var data = mPostTagDao.selectById(csvPostTag.getPostTagId());
 			if (data.isEmpty()) {
-				MPostTag mPostTag = modelMapper.map(csvPostTag, MPostTag.class);
+				MPostTag mPostTag = ObjectMapperUtils.map(csvPostTag, MPostTag.class);
 				mPostTag.setRegistTime(DateUtils.getNow());
 				mPostTag.setUpdateTime(DateUtils.getNow());
 				mPostTag.setDeleteFlg(false);

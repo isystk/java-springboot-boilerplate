@@ -1,6 +1,9 @@
 package com.isystk.sample.web.front.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
+
+import com.isystk.sample.common.dto.Dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,19 +13,25 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class FrontPostDto {
+public class FrontPostDto implements Dto {
 
-	private Integer postId;
+	Integer postId;
 
-	private Integer userId;
+	Integer userId;
 
-	private String title;
+	String title;
 
-	private String text;
+	String text;
 
-	private List<String> imageUrlList;
+    LocalDateTime registTime;
 
-	private List<String> tagNameList;
+	String registTimeYYYYMMDD;
+
+	String registTimeMMDD;
+
+	List<String> imageUrlList;
+
+	List<String> tagNameList;
 
 
 }

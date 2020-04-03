@@ -47,7 +47,7 @@ public class LoginHtmlController extends AbstractHtmlController {
 	@PostMapping(LOGIN_SUCCESS_URL)
 	public String loginSuccess(@ModelAttribute LoginHtmlForm form, RedirectAttributes attributes) {
 		attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("login.success"));
-		return "redirect:/";
+		return "redirect:/member";
 	}
 
 	/**

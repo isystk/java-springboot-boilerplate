@@ -43,7 +43,7 @@ public class MemberHtmlController extends AbstractHtmlController {
 	public String index(MemberHtmlForm form, Model model) {
 		// 入力値を詰め替える
 		TPostCriteria criteria = new TPostCriteria();
-		criteria.setUserId(userHelper.getLoginUserId());
+		criteria.setUserIdEqual(userHelper.getLoginUserId());
 
 		// 10件区切りで取得する
 		val pages = postService.findAll(criteria, form);
