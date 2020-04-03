@@ -19,7 +19,6 @@ import com.isystk.sample.batch.jobs.SingleJobCommandLineRunner;
 import com.isystk.sample.common.dto.DefaultPageFactoryImpl;
 import com.isystk.sample.common.dto.PageFactory;
 import com.isystk.sample.common.util.MessageUtils;
-import com.isystk.sample.domain.DefaultModelMapperFactory;
 
 import lombok.val;
 
@@ -53,12 +52,6 @@ public class BatchConfiguration implements InitializingBean {
 		executor.setMaxPoolSize(maxPoolSize);
 		executor.setWaitForTasksToCompleteOnShutdown(true);
 		return executor;
-	}
-
-	@Bean
-	public ModelMapper modelMapper() {
-		// ObjectMappingのためのマッパー
-		return DefaultModelMapperFactory.create();
 	}
 
 	@Bean

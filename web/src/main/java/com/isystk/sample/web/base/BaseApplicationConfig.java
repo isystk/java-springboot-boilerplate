@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 
 import com.isystk.sample.common.dto.DefaultPageFactoryImpl;
 import com.isystk.sample.common.dto.PageFactory;
@@ -88,7 +89,7 @@ public abstract class BaseApplicationConfig
 
 	/**
 	 * [] を含むURLをGETしようとするとTomcatが400を返す 問題に対応
-	 * 
+	 *
 	 * @return
 	 */
 	@Bean

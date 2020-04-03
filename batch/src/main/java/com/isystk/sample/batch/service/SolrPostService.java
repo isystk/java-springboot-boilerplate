@@ -13,6 +13,7 @@ import com.google.common.collect.Maps;
 import com.isystk.sample.common.dto.PageFactory;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.service.BaseTransactionalService;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.MPostTagDao;
 import com.isystk.sample.domain.dto.MPostTagCriteria;
 import com.isystk.sample.domain.dto.TPostCriteria;
@@ -36,9 +37,6 @@ public class SolrPostService extends BaseTransactionalService {
 	MPostTagDao mPostTagDao;
 
 	@Autowired
-	ModelMapper modelMapper;
-
-	@Autowired
 	PageFactory pageFactory;
 
 	/**
@@ -55,7 +53,7 @@ public class SolrPostService extends BaseTransactionalService {
 		val pages = postRepository.findAll(criteria, Pageable.NO_LIMIT);
 
 		// 入力値を詰め替える
-		SolrPost[] datas = modelMapper.map(pages.getData(), SolrPost[].class);
+		SolrPost[] datas = ObjectMapperUtils.map(pages.getData(), SolrPost[].class);
 
 		MPostTagCriteria mPostTagCriteria = new MPostTagCriteria();
 		mPostTagCriteria.setDeleteFlgEqual(false);

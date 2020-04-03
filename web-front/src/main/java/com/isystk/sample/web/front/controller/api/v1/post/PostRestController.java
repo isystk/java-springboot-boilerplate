@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.Pageable;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.dto.SolrPostCriteria;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
@@ -45,12 +46,12 @@ public class PostRestController extends AbstractRestController {
 	public PageableResource index(PostRestForm query, @RequestParam(required = false, defaultValue = "1") int page) {
 
 		// 入力値からDTOを作成する
-		val criteria = modelMapper.map(query, SolrPostCriteria.class);
+		val criteria = ObjectMapperUtils.map(query, SolrPostCriteria.class);
 
 		// 10件で区切って取得する
 		Page<FrontPostDto> posts = postService.findSolrAll(criteria, Pageable.DEFAULT);
 
-		PageableResource resource = modelMapper.map(posts, PageableResourceImpl.class);
+		PageableResource resource = ObjectMapperUtils.map(posts, PageableResourceImpl.class);
 		resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
 		return resource;
@@ -68,7 +69,7 @@ public class PostRestController extends AbstractRestController {
 		var post = postService.findSolrById(postId);
 
 		Resource resource = resourceFactory.create();
-		resource.setData(Arrays.asList(post.orElse(new SolrPost())));
+		resource.setData(Arrays.asList(post.orElse(new FrontPostDto())));
 		resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
 		return resource;

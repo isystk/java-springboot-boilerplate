@@ -10,11 +10,11 @@
 		<div class="content" id="content" th:data-id="*{postId}">
 			<main id="detail">
 				<h1>{{title}}</h1>
-				<p>{{registTime}}</p>
+				<p>{{registTimeYYYYMMDD}}</p>
 				<div class="photo" >
 					<img src="/thumb/sample.jpg" class="photo"/>
 				</div>
-				<p>{{text}}</p>
+				<p v-html="text"></p>
 			</main>
 		</div>
 	</div>
@@ -24,8 +24,8 @@
 			el:"#content",
 			data:{
 				url: null,
-				title: null,
-				registTime: null,
+				data: null,
+				registTimeYYYYMMDD: null,
 				text: null
 			},
 			created () {
@@ -38,13 +38,12 @@
 					(async () => {
 						var res = await axios.get(this.url);
 						var data = res.data.data[0];
-						console.log(data);
 						this.title = data.title;
-						this.registTime = data.registTime;
-						this.text = data.text;
+						this.registTimeYYYYMMDD = data.registTimeYYYYMMDD;
+						this.text = data.text.replace(/\n/g, '<br/>');
 					})();
 				},
-			},
+			}
 			})
 		</script>
 	</div>

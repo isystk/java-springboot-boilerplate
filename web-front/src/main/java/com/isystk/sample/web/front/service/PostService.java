@@ -2,22 +2,22 @@ package com.isystk.sample.web.front.service;
 
 import static com.isystk.sample.domain.util.DomaUtils.createSelectOptions;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
 import org.apache.commons.compress.utils.Lists;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import com.isystk.sample.common.dto.Page;
-import com.isystk.sample.common.dto.PageFactory;
-import com.isystk.sample.common.dto.PageImpl;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
+import com.isystk.sample.common.util.DateUtils;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.TPostResultDto;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPost;
@@ -40,13 +40,7 @@ public class PostService extends BaseTransactionalService {
 	TPostRepository postRepository;
 
 	@Autowired
-	PageFactory pageFactory;
-
-	@Autowired
 	ImageHelper imageHelper;
-
-	@Autowired
-	ModelMapper modelMapper;
 
 	/**
 	 * Solrの投稿インデックスを取得します。
@@ -59,26 +53,15 @@ public class PostService extends BaseTransactionalService {
 		Assert.notNull(criteria, "criteria must not be null");
 
 		// TODO ここでページングを設定
-		Iterable<SolrPost> posts = solrPostRepository.findAll();
+		Iterable<SolrPost> solrPosts = solrPostRepository.findAll();
 
 		List<FrontPostDto> solrPostList = Lists.newArrayList();
-		for (SolrPost post : posts) {
-			// 入力値を詰め替える
-			var dto = modelMapper.map(post, FrontPostDto.class);
-
-			// 画像のパスを設定
-			List<String> imageUrlList = Lists.newArrayList();
-			for (Integer imageId : post.getImageIdList()) {
-				imageUrlList.add(imageHelper.getUrl(imageId));
-			}
-			dto.setImageUrlList(imageUrlList);
-
-			solrPostList.add(dto);
+		for (SolrPost solrPost : solrPosts) {
+			solrPostList.add(convertToFrontPostDto(solrPost));
 		}
 
 		// ページングを指定する
 		val options = createSelectOptions(pageable).count();
-
 		return pageFactory.create(solrPostList, pageable, options.getCount());
 	}
 
@@ -89,12 +72,33 @@ public class PostService extends BaseTransactionalService {
 	 * @return
 	 */
 	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
-	public Optional<SolrPost> findSolrById(Integer postId) {
+	public Optional<FrontPostDto> findSolrById(Integer postId) {
 		Assert.notNull(postId, "criteria must not be null");
 
-		SolrPost post = solrPostRepository.findByPostId(postId);
+		SolrPost solrPost = solrPostRepository.findByPostId(postId);
 
-		return Optional.of(post);
+		return Optional.of(convertToFrontPostDto(solrPost));
+	}
+
+	/**
+	 *
+	 * @param solrPost
+	 * @return
+	 */
+	private FrontPostDto convertToFrontPostDto(SolrPost solrPost) {
+		// 入力値を詰め替える
+		var dto = ObjectMapperUtils.map(solrPost, FrontPostDto.class);
+
+		// 画像のパスを設定
+		List<String> imageUrlList = Lists.newArrayList();
+		for (Integer imageId : solrPost.getImageIdList()) {
+			imageUrlList.add(imageHelper.getUrl(imageId));
+		}
+		dto.setImageUrlList(imageUrlList);
+
+		dto.setRegistTimeYYYYMMDD(DateUtils.format(solrPost.getRegistTime(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+		dto.setRegistTimeMMDD(DateUtils.format(solrPost.getRegistTime(), DateTimeFormatter.ofPattern("MM/dd")));
+		return dto;
 	}
 
 	/**
@@ -111,7 +115,7 @@ public class PostService extends BaseTransactionalService {
 
 		List<FrontPostDto> list = Lists.newArrayList();
 		for (TPostResultDto postDto : postDtoPage.getData()) {
-			var dto = modelMapper.map(postDto, FrontPostDto.class);
+			var dto = ObjectMapperUtils.map(postDto, FrontPostDto.class);
 
 			List<String> imageUrlList = Lists.newArrayList();
 			if (postDto.getTPostImageList() != null) {
@@ -124,8 +128,7 @@ public class PostService extends BaseTransactionalService {
 			list.add(dto);
 		}
 
-		val options = createSelectOptions(pageable).count();
-		return pageFactory.create(list, pageable, options.getCount());
+		return pageFactory.create(list, postDtoPage, postDtoPage.getCount());
 	}
 
 	/**

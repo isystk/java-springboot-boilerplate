@@ -1,7 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.post;
 
 import static com.isystk.sample.common.FrontUrl.*;
-import static com.isystk.sample.domain.util.TypeUtils.toListType;
 
 import java.util.List;
 
@@ -14,7 +13,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.UserHelper;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.web.admin.service.PostService;
@@ -64,7 +63,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 一覧画面表示
-	 * 
+	 *
 	 * @param form
 	 * @param model
 	 * @return
@@ -88,7 +87,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 詳細画面表示
-	 * 
+	 *
 	 * @param postId
 	 * @param model
 	 * @return
@@ -101,7 +100,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 登録画面表示
-	 * 
+	 *
 	 * @param post
 	 * @param model
 	 * @return
@@ -122,7 +121,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 変更画面表示
-	 * 
+	 *
 	 * @param postId
 	 * @param form
 	 * @param model
@@ -136,7 +135,7 @@ public class PostController extends AbstractHtmlController {
 			val post = postService.findById(postId);
 
 			// 取得したDtoをFromに詰め替える
-			modelMapper.map(post, form);
+			ObjectMapperUtils.map(post, form);
 		}
 
 		// ユーザー一覧
@@ -148,7 +147,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 登録処理
-	 * 
+	 *
 	 * @param post
 	 * @param result
 	 * @param model
@@ -164,7 +163,7 @@ public class PostController extends AbstractHtmlController {
 		}
 
 		// 入力値からDTOを作成する
-		val inputPost = modelMapper.map(form, TPost.class);
+		val inputPost = ObjectMapperUtils.map(form, TPost.class);
 
 		val createdPost = postService.create(inputPost);
 
@@ -173,7 +172,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 更新処理
-	 * 
+	 *
 	 * @param form
 	 * @param br
 	 * @param postId
@@ -195,7 +194,7 @@ public class PostController extends AbstractHtmlController {
 		val post = postService.findById(postId);
 
 		// 入力値を詰め替える
-		modelMapper.map(form, post);
+		ObjectMapperUtils.map(form, post);
 
 		// 更新する
 		val updatedPost = postService.update(post);
@@ -208,7 +207,7 @@ public class PostController extends AbstractHtmlController {
 
 	/**
 	 * 削除処理
-	 * 
+	 *
 	 * @param id
 	 * @return
 	 */
@@ -227,14 +226,14 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping("/download/{filename:.+\\.csv}")
 	public ModelAndView downloadCsv(@PathVariable String filename, SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, TPostCriteria.class);
+		val criteria = ObjectMapperUtils.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
 		val pages = postService.findAll(criteria, form);
 
 		// 詰め替える
-		List<PostCsv> csvList = modelMapper.map(pages.getData(), toListType(PostCsv.class));
+		List<PostCsv> csvList = ObjectMapperUtils.mapAll(pages.getData(), PostCsv.class);
 
 		// CSVスキーマクラス、データ、ダウンロード時のファイル名を指定する
 		val view = new CsvView(PostCsv.class, csvList, filename);
@@ -251,7 +250,7 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping(path = "/download/{filename:.+\\.xlsx}")
 	public ModelAndView downloadExcel(@PathVariable String filename, SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, TPostCriteria.class);
+		val criteria = ObjectMapperUtils.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
@@ -272,7 +271,7 @@ public class PostController extends AbstractHtmlController {
 	@GetMapping(path = "/download/{filename:.+\\.pdf}")
 	public ModelAndView downloadPdf(@PathVariable String filename, SearchPostForm form, Model model) {
 		// 入力値を詰め替える
-		val criteria = modelMapper.map(form, TPostCriteria.class);
+		val criteria = ObjectMapperUtils.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());

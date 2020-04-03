@@ -23,9 +23,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public abstract class BaseTasklet<I extends ItemPosition> implements Tasklet {
 
-	@Autowired
-	protected ModelMapper modelMapper;
-
 	/**
 	 * メインメソッド
 	 *
