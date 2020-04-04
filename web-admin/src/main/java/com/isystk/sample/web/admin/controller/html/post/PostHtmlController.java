@@ -75,8 +75,8 @@ public class PostHtmlController extends AbstractHtmlController {
 	public String index(SearchPostForm form, Model model) {
 		// 入力値を詰め替える
 		TPostCriteria criteria = new TPostCriteria();
-		criteria.setPostIdEqual(form.getPostId());
-		criteria.setUserIdEqual(form.getUserId());
+		criteria.setPostIdEq(form.getPostId());
+		criteria.setUserIdEq(form.getUserId());
 		criteria.setTitleLike(form.getTitle());
 
 		// 10件区切りで取得する

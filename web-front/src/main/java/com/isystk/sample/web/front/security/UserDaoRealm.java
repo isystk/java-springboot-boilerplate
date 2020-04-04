@@ -37,7 +37,7 @@ public class UserDaoRealm extends BaseRealm {
 		try {
 			// login_idをメールアドレスと見立てる
 			val criteria = new TUserCriteria();
-			criteria.setEmailEqual(email);
+			criteria.setEmailEq(email);
 
 			// 担当者を取得して、セッションに保存する
 			user = tUserDao.findOne(criteria)

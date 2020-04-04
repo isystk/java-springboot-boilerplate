@@ -7,26 +7,49 @@ import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
+ */
 @Getter
 @Setter
 public class TUserOnetimePassCriteria {
 
 
-    Integer userIdEqual;
-    Integer userIdNotEqual;
+    Integer userIdEq;
+    Integer userIdNe;
+    Integer userIdLt;
+    Integer userIdLe;
+    Integer userIdGt;
+    Integer userIdGe;
     boolean userIdIsNull;
     boolean userIdIsNotNull;
     List<Integer> userIdIn;
     List<Integer> userIdNotIn;
 
-    String onetimeKeyEqual;
-    String onetimeKeyNotEqual;
+    String onetimeKeyEq;
+    String onetimeKeyNe;
+    String onetimeKeyLt;
+    String onetimeKeyLe;
+    String onetimeKeyGt;
+    String onetimeKeyGe;
     boolean onetimeKeyIsNull;
     boolean onetimeKeyIsNotNull;
     String onetimeKeyLike;
+    String onetimeKeyNotLike;
+    String onetimeKeyStarts;
+    String onetimeKeyNotStarts;
+    String onetimeKeyEnds;
+    String onetimeKeyNotEnds;
 
-    LocalDateTime onetimeValidTimeEqual;
-    LocalDateTime onetimeValidTimeNotEqual;
+    LocalDateTime onetimeValidTimeEq;
+    LocalDateTime onetimeValidTimeNe;
+    LocalDateTime onetimeValidTimeLt;
+    LocalDateTime onetimeValidTimeLe;
+    LocalDateTime onetimeValidTimeGt;
+    LocalDateTime onetimeValidTimeGe;
     boolean onetimeValidTimeIsNull;
     boolean onetimeValidTimeIsNotNull;
 }

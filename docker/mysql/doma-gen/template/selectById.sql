@@ -1,3 +1,5 @@
+--  自動生成のため原則修正禁止!!
+SELECT
 SELECT
   /*%expand*/*
 FROM

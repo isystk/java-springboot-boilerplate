@@ -38,7 +38,7 @@ public class StaffHelper {
 	 */
 	public TStaff getLoginStaff() {
 		TStaffCriteria criteria = new TStaffCriteria();
-		criteria.setEmailEqual(AuditInfoHolder.getAuditUser());
+		criteria.setEmailEq(AuditInfoHolder.getAuditUser());
 		return tStaffDao.findOne(criteria).orElseThrow(
 				() -> new NoDataFoundException("email=" + AuditInfoHolder.getAuditUser() + "のデータが見つかりません。"));
 	}

@@ -51,7 +51,7 @@ public class UserHelper {
 	 */
 	public TUser getLoginUser() {
 		TUserCriteria criteria = new TUserCriteria();
-		criteria.setEmailEqual(AuditInfoHolder.getAuditUser());
+		criteria.setEmailEq(AuditInfoHolder.getAuditUser());
 		return tUserDao.findOne(criteria).orElseThrow(
 				() -> new NoDataFoundException("email=" + AuditInfoHolder.getAuditUser() + "のデータが見つかりません。"));
 	}

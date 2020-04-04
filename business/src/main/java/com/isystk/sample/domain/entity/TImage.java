@@ -12,6 +12,9 @@ import lombok.Setter;
 
 /**
  * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
  */
 @Entity
 @Table(name = "t_image")
@@ -23,20 +26,20 @@ public class TImage extends DomaDtoImpl {
     private static final long serialVersionUID = 1L;
 
 
-    /** ID */
+    /** 画像ID */
     @Id
     @Column(name = "IMAGE_ID")
     Integer imageId;
 
-    /**  */
+    /** 登録日時 */
     @Column(name = "REGIST_TIME")
     LocalDateTime registTime;
 
-    /**  */
+    /** 更新日時 */
     @Column(name = "UPDATE_TIME")
     LocalDateTime updateTime;
 
-    /**  */
+    /** 削除フラグ */
     @Column(name = "DELETE_FLG")
     Boolean deleteFlg;
 }

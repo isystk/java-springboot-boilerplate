@@ -7,66 +7,142 @@ import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
+ */
 @Getter
 @Setter
 public class TStaffCriteria {
 
 
-    Integer staffIdEqual;
-    Integer staffIdNotEqual;
+    Integer staffIdEq;
+    Integer staffIdNe;
+    Integer staffIdLt;
+    Integer staffIdLe;
+    Integer staffIdGt;
+    Integer staffIdGe;
     boolean staffIdIsNull;
     boolean staffIdIsNotNull;
     List<Integer> staffIdIn;
     List<Integer> staffIdNotIn;
 
-    String emailEqual;
-    String emailNotEqual;
+    String emailEq;
+    String emailNe;
+    String emailLt;
+    String emailLe;
+    String emailGt;
+    String emailGe;
     boolean emailIsNull;
     boolean emailIsNotNull;
     String emailLike;
+    String emailNotLike;
+    String emailStarts;
+    String emailNotStarts;
+    String emailEnds;
+    String emailNotEnds;
 
-    String passwordEqual;
-    String passwordNotEqual;
+    String passwordEq;
+    String passwordNe;
+    String passwordLt;
+    String passwordLe;
+    String passwordGt;
+    String passwordGe;
     boolean passwordIsNull;
     boolean passwordIsNotNull;
     String passwordLike;
+    String passwordNotLike;
+    String passwordStarts;
+    String passwordNotStarts;
+    String passwordEnds;
+    String passwordNotEnds;
 
-    String familyNameEqual;
-    String familyNameNotEqual;
+    String familyNameEq;
+    String familyNameNe;
+    String familyNameLt;
+    String familyNameLe;
+    String familyNameGt;
+    String familyNameGe;
     boolean familyNameIsNull;
     boolean familyNameIsNotNull;
     String familyNameLike;
+    String familyNameNotLike;
+    String familyNameStarts;
+    String familyNameNotStarts;
+    String familyNameEnds;
+    String familyNameNotEnds;
 
-    String nameEqual;
-    String nameNotEqual;
+    String nameEq;
+    String nameNe;
+    String nameLt;
+    String nameLe;
+    String nameGt;
+    String nameGe;
     boolean nameIsNull;
     boolean nameIsNotNull;
     String nameLike;
+    String nameNotLike;
+    String nameStarts;
+    String nameNotStarts;
+    String nameEnds;
+    String nameNotEnds;
 
-    String familyNameKanaEqual;
-    String familyNameKanaNotEqual;
+    String familyNameKanaEq;
+    String familyNameKanaNe;
+    String familyNameKanaLt;
+    String familyNameKanaLe;
+    String familyNameKanaGt;
+    String familyNameKanaGe;
     boolean familyNameKanaIsNull;
     boolean familyNameKanaIsNotNull;
     String familyNameKanaLike;
+    String familyNameKanaNotLike;
+    String familyNameKanaStarts;
+    String familyNameKanaNotStarts;
+    String familyNameKanaEnds;
+    String familyNameKanaNotEnds;
 
-    String nameKanaEqual;
-    String nameKanaNotEqual;
+    String nameKanaEq;
+    String nameKanaNe;
+    String nameKanaLt;
+    String nameKanaLe;
+    String nameKanaGt;
+    String nameKanaGe;
     boolean nameKanaIsNull;
     boolean nameKanaIsNotNull;
     String nameKanaLike;
+    String nameKanaNotLike;
+    String nameKanaStarts;
+    String nameKanaNotStarts;
+    String nameKanaEnds;
+    String nameKanaNotEnds;
 
-    LocalDateTime lastLoginTimeEqual;
-    LocalDateTime lastLoginTimeNotEqual;
+    LocalDateTime lastLoginTimeEq;
+    LocalDateTime lastLoginTimeNe;
+    LocalDateTime lastLoginTimeLt;
+    LocalDateTime lastLoginTimeLe;
+    LocalDateTime lastLoginTimeGt;
+    LocalDateTime lastLoginTimeGe;
     boolean lastLoginTimeIsNull;
     boolean lastLoginTimeIsNotNull;
 
-    LocalDateTime registTimeEqual;
-    LocalDateTime registTimeNotEqual;
+    LocalDateTime registTimeEq;
+    LocalDateTime registTimeNe;
+    LocalDateTime registTimeLt;
+    LocalDateTime registTimeLe;
+    LocalDateTime registTimeGt;
+    LocalDateTime registTimeGe;
     boolean registTimeIsNull;
     boolean registTimeIsNotNull;
 
-    LocalDateTime updateTimeEqual;
-    LocalDateTime updateTimeNotEqual;
+    LocalDateTime updateTimeEq;
+    LocalDateTime updateTimeNe;
+    LocalDateTime updateTimeLt;
+    LocalDateTime updateTimeLe;
+    LocalDateTime updateTimeGt;
+    LocalDateTime updateTimeGe;
     boolean updateTimeIsNull;
     boolean updateTimeIsNotNull;
 
