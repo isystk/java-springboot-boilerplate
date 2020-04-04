@@ -94,7 +94,7 @@ public class EntryService extends BaseTransactionalService {
 		// ワンタイムキーからユーザーIDを取得する
 		var tUserOnetimeValid = getTUserOnetimeValid(onetimeKey);
 		if (tUserOnetimeValid == null) {
-			new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]");
+			throw new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]");
 		}
 
 		// ユーザー情報を取得する
@@ -116,6 +116,9 @@ public class EntryService extends BaseTransactionalService {
 		objects.put("dto", dto);
 		val body = sendMailHelper.getMailBody(templateBody, objects);
 		sendMailHelper.sendMail(fromAddress, new String[] { tUser.getEmail() }, subject, body);
+
+		// ワンタイムキーを削除
+		tUserOnetimeValidDao.delete(tUserOnetimeValid);
 	}
 
     /**

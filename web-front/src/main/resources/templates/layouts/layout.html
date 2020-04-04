@@ -31,13 +31,6 @@
 			<div class="content-wrapper" >
 				<!-- Content Header (Page header) -->
 				<section class="content-header" >
-					<!--/* グローバルメッセージ */-->
-					<div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalSuccessMessage}">
-						<p th:text="${str}" class="alert alert-success"></p>
-					</div>
-					<div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalDangerMessage}">
-						<p th:text="${str}" class="alert alert-danger"></p>
-					</div>
 					<div class="container-fluid">
 						<div layout:fragment="content-header"  th:remove="tag">
 						</div>

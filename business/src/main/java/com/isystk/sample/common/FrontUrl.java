@@ -6,15 +6,19 @@ package com.isystk.sample.common;
 public class FrontUrl {
 
 	/** ---- URLs ---- **/
-	public static final String TOP_URL = "/";
+	public static final String TOP = "/";
 
-	public static final String POST_URL = "/post";
+	public static final String POST = "/post";
 
-	public static final String MEMBER_URL = "/member";
+	public static final String MEMBER = "/member";
 
-	public static final String MEMBER_POST_URL = "/member/post";
+	public static final String MEMBER_POST_REGIST = "/member/post/regist";
 
-	public static final String ENTRY_REGIST_URL = "/entry/regist";
+	public static final String MEMBER_POST_EDIT = "/member/post/edit";
+
+	public static final String MEMBER_POST_DELETE = "/member/post/delete";
+
+	public static final String ENTRY_REGIST = "/entry/regist";
 
 	/** ---- APIｓ ---- **/
 

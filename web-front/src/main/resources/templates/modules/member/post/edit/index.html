@@ -3,7 +3,7 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="~{layouts/layout}">
 	<head layout:fragment="~{layouts/layout::header}">
-	<title>投稿画面｜Sample</title>
+	<title>投稿修正画面｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="content">
@@ -12,29 +12,52 @@
 			<main>
 				<article class="detail">
 					<div class="entry-header">
-					  <h1 class="entry-title">投稿画面</h1>
+					  <h1 class="entry-title">投稿修正画面</h1>
 					</div>
 					<div class="entry-content">
 
 						<p>投稿内容を入力して下さい</p>
-						<form th:object="${postForm}" th:action="${action}" id="form1"
-							th:with="action=${postForm.isNew()} ? @{/member/post} : @{/member/post/{id}(id=*{postId})}"
-							enctype="multipart/form-data" th:method="${postForm.isNew()} ? 'post' : 'put'">
+						<form th:object="${memberPostForm}" th:action="@{/member/post/edit/confirm}" id="form1"
+							th:method="post">
+							<input type="hidden" name="postId" th:value="*{postId}" />
 							<input type="hidden" name="version" th:value="*{version}" />
-							<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title')" />
-							<tr>
-								<th colspan="2"><span class="mark">写真</span><span class="required">【必須】</span></th>
-								<td>
-								  	<label class="btn_formSelectImage"><input type="file" name="imageFile" class="js-upload-postImage-btn" multiple="multiple" ></label>
-									<ul class="selectedPhotoList">
-									</ul>
-								</td>
-							</tr>
-							<input th:replace="fragments/textarea :: textarea ('本文', 'text', 4)" />
-
-							<p class="btnArea">
-								<input type="submit" name="regist" value="投稿する">
-							</p>
+							<table class="formTable">
+								<tr>
+									<th colspan="2"><span class="mark">タイトル</span><span class="required">【必須】</span></th>
+									<td>
+										<input th:replace="fragments/inputField :: input ('text', '', 'title', 'text size_l', 100)" />
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2"><span class="mark">写真</span><span class="required">【必須】</span></th>
+									<td>
+										<label class="btn_formSelectImage"><input type="file" name="imageFile" class="js-upload-postImage-btn" multiple="multiple" ></label>
+										<ul class="selectedPhotoList">
+											<li  th:each="e, s : *{postImageId}" >
+											<a href="#" class="close">
+												<input type="hidden" name="postImageId" th:value="${e}" />
+												<img th:src="${@img.url(e, '_square')}" width="120px"/>
+											</a>
+											</li>
+										</ul>
+										<div th:with="valid=${!#fields.hasErrors('postImageId')}" th:class="${valid ? '' : ' has-error'}" >
+											<div th:if="${!valid}" class="errortxt" th:errors="*{__${'postImageId'}__}">Error</div>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2"><span class="mark">本文<span class="required">【必須】</span></th>
+									<td>
+										<input th:replace="fragments/textarea :: textarea ('', 'text', '', 4)" />
+									</td>
+								</tr>
+							</table>
+							<div class="btnArea">
+								<div class="left">
+									<a href="/member/"><input type="button" name="back" value="一覧に戻る"></a>
+								</div>
+								<input type="submit" name="confirm" value="確認画面へ">
+							</div>
 						</form>
 
 					</div>
@@ -54,7 +77,7 @@
 					imagesLength = slides.find('li').length;
 				var fileLength = this.files.length;
 				if (5 < (imagesLength + fileLength)) {
-					showErrorMsg(dataType, ['コンテンツ写真の登録可能件数は、最大5件です。']);
+					showErrorMsg(dataType, ['コンテンツ写真の登録可能件数は、最大8件です。']);
 					return;
 				}
 

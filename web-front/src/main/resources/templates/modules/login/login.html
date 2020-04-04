@@ -27,7 +27,7 @@
 									</tr>
 								<tr>
 									<td>
-										<p><input type="text" name="loginId" class="text size_l" maxlength="100" /></p>
+										<input th:replace="fragments/inputField :: input ('text', '', 'loginId', 'text size_l', 100)" />
 										<p class="sub">記入例：xxxx@bbb.cc</p>
 									</td>
 								</tr>
@@ -38,7 +38,10 @@
 								</tr>
 								<tr>
 									<td>
-									<p><input type="password" name="password" class=" text size_l" maxlength="100" /></p>
+										<input th:replace="fragments/inputField :: input ('password', '', 'password', 'text size_l', 100)" />
+										<div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalDangerMessage}">
+											<p th:text="${str}" class="errortxt"></p>
+										</div>
 									</td>
 								</tr>
 								<!--/ loop -->

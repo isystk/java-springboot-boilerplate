@@ -13,7 +13,7 @@
 					<div th:each="e : ${pages.data}">
 						<div class="box">
 					 		<p th:text="*{e.title}"></p>
-							<a th:href="'/post/'+${e.postId}+'/'">
+							<a th:href="@{/post/{id}/(id=*{e.postId})}">
 							<div class="inner">
 								<ul class="photo">
 									<li th:each="e2 : ${e.imageIdList}">
@@ -26,7 +26,10 @@
 							</a>
 					 		<p th:text="*{e.text}"></p>
 					 		<p th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></p>
-					 		<a href="#"><input type="button" value="編集"></a>
+					 		<a th:href="@{/member/post/edit/{id}/(id=*{e.postId})}"><input type="button" value="編集"></a>
+							<form th:action="@{/member/post/delete/{id}/(id=*{e.postId})}" th:method="delete">
+								<button class="js-delete">削除</button>
+							</form>
 							<div class="clearfix"></div>
 						</div>
 					</div>
@@ -36,6 +39,18 @@
 				</div>
 			</main>
 		</div>
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+			$(document).ready(function() {
+				$('.js-delete').click(function(e) {
+					if (!confirm('削除します。よろしいですか？')) {
+						e.preventDefault();
+						return false;
+					}
+				});
+			});
+		</script>
 	</div>
 </body>
 </html>

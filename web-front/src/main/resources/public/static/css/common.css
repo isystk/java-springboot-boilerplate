@@ -75,6 +75,43 @@ margin-top: 4px;
 padding: 8px;
 max-width: 95%;
 }
+input, button {
+font-family: inherit;
+font-size: 100%;
+padding: 2px;
+margin: 5px;
+}
+input.txtSmall {
+width: 120px;
+}
+input[type="button"],
+input[type="submit"],
+button {
+cursor: pointer;
+}
+input.size_m {
+width: 232px;
+}
+input.size_l {
+width: 464px;
+}
+select {
+padding: 2px;
+margin: 5px;
+}
+
+.has-error input,
+.has-error select,
+.has-error textarea {
+border: solid 1px #f36;
+background: #ffb2b2;
+}
+.errortxt {
+font-size: 12px;
+color: #f36;
+}
+
+
 
 /* clearfix（回り込み解除）
 ------------------------------------- */
@@ -384,6 +421,10 @@ text-align: center;
 border: 1px solid #ddd;
 padding: 10px 0;
 }
+.btnArea .left{
+position: absolute;
+float: left;
+}
 .btnArea input {
 padding: 6px 20px;
 margin: 0 5px 0 5px;
@@ -487,27 +528,6 @@ padding: 5px 7px 3px 7px;
 }
 .paging ul li a {
 display: inline-block;
-}
-
-/* フォーム */
-input {
-font-family: inherit;
-font-size: 100%;
-padding: 2px;
-margin: 5px;
-}
-input.txtSmall {
-width: 120px;
-}
-input[type="button"],
-input[type="submit"] {
-cursor: pointer;
-}
-input.size_m {
-width: 232px;
-}
-input.size_l {
-width: 464px;
 }
 
 .selectedPhotoList li {
@@ -675,12 +695,6 @@ font-size: 0.8em;
 line-height: 1.6;
 color: #fff;
 }
-
-.errortxt {
-font-size: 12px;
-color: #f36;
-}
-
 
 /* タグ選択 */
 #dialogPeopleTag {
