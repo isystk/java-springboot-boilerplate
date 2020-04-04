@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.member.post;
+package com.isystk.sample.web.front.controller.html.member.post.regist;
 
 import static com.isystk.sample.common.FrontUrl.*;
 
@@ -10,14 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -35,9 +33,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(MEMBER_POST_URL)
-//@SessionAttributes(types = { SearchPostForm.class, PostForm.class })
-public class MemberPostHtmlController extends AbstractHtmlController {
+@RequestMapping(MEMBER_POST_REGIST)
+@SessionAttributes(types = { MemberPostRegistForm.class })
+public class MemberPostRegistHtmlController extends AbstractHtmlController {
 
 	@Autowired
 	PostService postService;
@@ -46,16 +44,21 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 	UserHelper userHelper;
 
 	@Autowired
-	MemberPostFormValidator postFormValidator;
+	MemberPostRigstFormValidator memberPostFormValidator;
+
+    @ModelAttribute("memberPostForm")
+    public MemberPostRegistForm memberPostForm() {
+        return new MemberPostRegistForm();
+    }
+
+    @InitBinder("memberPostForm")
+    public void validatorBinder(WebDataBinder binder) {
+        binder.addValidators(memberPostFormValidator);
+    }
 
 	@Override
 	public String getFunctionName() {
-		return "A_MEMBER_POST";
-	}
-
-	@InitBinder("postForm")
-	public void validatorBinder(WebDataBinder binder) {
-		binder.addValidators(postFormValidator);
+		return "A_MEMBER_POST_REGIST";
 	}
 
 	/**
@@ -65,31 +68,49 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 	 * @param model
 	 * @return
 	 */
-	@GetMapping("regist")
-	public String regist(@ModelAttribute("postForm") MemberPostForm form, Model model) {
-		if (!form.isNew()) {
-			// SessionAttributeに残っている場合は再生成する
-			model.addAttribute("postForm", new MemberPostForm());
+	@GetMapping
+	public String registIndex(@ModelAttribute("memberPostForm") MemberPostRegistForm form, Model model) {
+
+		return "modules/member/post/regist/index";
+	}
+
+	/**
+	 * 登録確認画面表示
+	 *
+	 * @param form
+	 * @param br
+	 * @param sessionStatus
+	 * @param attributes
+	 * @return
+	 */
+	@PostMapping("confirm")
+	public String registConfirm(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes) {
+		// 入力チェックエラーがある場合は、元の画面にもどる
+		if (br.hasErrors()) {
+			setFlashAttributeErrors(attributes, br);
+			return "modules/member/post/index";
 		}
 
-		return "modules/member/post/regist";
+		return "modules/member/post/regist/confirm";
 	}
 
 	/**
 	 * 登録処理
 	 *
-	 * @param post
-	 * @param result
-	 * @param model
+	 * @param form
+	 * @param br
+	 * @param sessionStatus
+	 * @param attributes
 	 * @return
 	 */
-	@PostMapping
-	public String regist(@Validated @ModelAttribute("postForm") MemberPostForm form, BindingResult br,
+	@PostMapping("complete")
+	public String registComplete(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
-			return "modules/post/regist";
+			return "modules/member/post/regist/index";
 		}
 
 		// 入力値からDTOを作成する
@@ -118,70 +139,7 @@ public class MemberPostHtmlController extends AbstractHtmlController {
 		tPostDto.setTPostTagList(tPostTagList);
 		val postId = postService.create(tPostDto);
 
-		return "redirect:/member/";
-	}
-
-	/**
-	 * 更新処理
-	 *
-	 * @param form
-	 * @param br
-	 * @param postId
-	 * @param sessionStatus
-	 * @param attributes
-	 * @return
-	 */
-	@PutMapping("{postId}")
-	public String update(@Validated @ModelAttribute("postForm") MemberPostForm form, BindingResult br,
-			@PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
-
-		// 入力チェックエラーがある場合は、元の画面にもどる
-		if (br.hasErrors()) {
-			setFlashAttributeErrors(attributes, br);
-			return "modules/post/regist";
-		}
-
-		// 入力値を詰め替える
-		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
-		// 投稿画像
-		List<TPostImage> tPostImageList = Lists.newArrayList();
-		if (form.getPostImageId() != null) {
-			for (Integer imageId : form.getPostImageId()) {
-				TPostImage tPostImage = new TPostImage();
-				tPostImage.setImageId(imageId);
-				tPostImageList.add(tPostImage);
-			}
-		}
-		tPostDto.setTPostImageList(tPostImageList);
-		// 投稿タグ
-		List<TPostTag> tPostTagList = Lists.newArrayList();
-		if (form.getPostTagId() != null) {
-			for (Integer tagId : form.getPostTagId()) {
-				TPostTag tPostTag = new TPostTag();
-				tPostTag.setPostTagId(tagId);
-				tPostTagList.add(tPostTag);
-			}
-		}
-		tPostDto.setTPostTagList(tPostTagList);
-		// 更新する
-		postService.update(tPostDto);
-
-		// セッションのpostFormをクリアする
-		sessionStatus.setComplete();
-
-		return "redirect:/post/" + tPostDto.getPostId();
-	}
-
-	/**
-	 * 削除処理
-	 *
-	 * @param id
-	 * @return
-	 */
-	@DeleteMapping("{id}")
-	public String delete(@PathVariable Integer id) {
-		postService.delete(id);
-		return "redirect:/post";
+		return "modules/member/post/regist/complete";
 	}
 
 }

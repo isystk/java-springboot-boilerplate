@@ -10,17 +10,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.isystk.sample.web.front.service.PostService;
+import com.isystk.sample.common.exception.NoDataFoundException;
+import com.isystk.sample.domain.dao.TPostDao;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(POST_URL)
+@RequestMapping(POST)
 public class PostHtmlController extends AbstractHtmlController {
 
 	@Autowired
-	PostService postService;
+	TPostDao tPostDao;
 
 	@Override
 	public String getFunctionName() {
@@ -29,14 +31,16 @@ public class PostHtmlController extends AbstractHtmlController {
 
 	/**
 	 * 詳細画面表示
-	 * 
+	 *
 	 * @param postId
 	 * @param model
 	 * @return
 	 */
 	@GetMapping("{postId}")
 	public String show(@PathVariable Integer postId, Model model) {
-		model.addAttribute("post", postService.findById(postId));
+		var post = tPostDao.selectById(postId)
+			.orElseThrow(() -> new NoDataFoundException("post_id=" + postId + " のデータが見つかりません。"));
+		model.addAttribute("post", post);
 		return "modules/post/index";
 	}
 

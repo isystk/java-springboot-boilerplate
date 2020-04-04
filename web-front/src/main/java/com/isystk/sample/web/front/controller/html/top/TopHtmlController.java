@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(TOP_URL)
+@RequestMapping(TOP)
 public class TopHtmlController extends AbstractHtmlController {
 
 	@Override

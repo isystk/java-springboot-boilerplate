@@ -55,7 +55,7 @@ public class SecurityConfig extends BaseSecurityConfig {
 		http.csrf()//
 				.csrfTokenRepository(new CookieCsrfTokenRepository());
 
-		String[] permittedUrls = { MEMBER_URL + "/**" };
+		String[] permittedUrls = { MEMBER + "/**" };
 
 		// 認証除外設定
 		http.authorizeRequests()

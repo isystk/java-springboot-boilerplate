@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.common.collect.Lists;
 import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.exception.NoDataFoundException;
@@ -53,9 +54,23 @@ public class TPostRepository extends BaseRepository {
 	 * @return
 	 */
 	public Page<TPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
+		var options = createSelectOptions(pageable);
 		// ページングを指定する
-		val options = createSelectOptions(pageable).count();
-		List<TPost> tPostList = tPostDao.findAll(criteria, options, toList());
+		return pageFactory.create(
+			convertTPostDto(
+				tPostDao.findAll(criteria,
+					options.count(),
+					toList()
+				)
+			), pageable, options.getCount());
+	}
+
+	/**
+	 * TPost からTPostDto に変換します。
+	 * @param tPostList
+	 * @return
+	 */
+	private List<TPostDto> convertTPostDto(List<TPost> tPostList) {
 
 		// tPostListからPostIdのListを抽出
 		List<Integer> postIdList = tPostList.stream().map(e -> Integer.valueOf(e.getPostId())).collect(Collectors.toList());
@@ -77,7 +92,7 @@ public class TPostRepository extends BaseRepository {
 			postDto.setTPostTagList(tPostTagMap.get(postDto.getPostId()));
 		}
 
-		return pageFactory.create(postDtoList, pageable, options.getCount());
+		return postDtoList;
 	}
 
 	/**
@@ -86,8 +101,10 @@ public class TPostRepository extends BaseRepository {
 	 * @param criteria
 	 * @return
 	 */
-	public Optional<TPost> findOne(TPostCriteria criteria) {
-		return tPostDao.findOne(criteria);
+	public Optional<TPostDto> findOne(TPostCriteria criteria) {
+		var data= tPostDao.findOne(criteria)
+				.orElseThrow(() -> new NoDataFoundException(criteria + "のデータが見つかりません。"));
+		return Optional.ofNullable(convertTPostDto(Lists.newArrayList(data)).get(0));
 	}
 
 	/**
@@ -95,8 +112,9 @@ public class TPostRepository extends BaseRepository {
 	 *
 	 * @return
 	 */
-	public TPost findById(final Integer id) {
-		return tPostDao.selectById(id).orElseThrow(() -> new NoDataFoundException("post_id=" + id + " のデータが見つかりません。"));
+	public TPostDto findById(final Integer id) {
+		var data= tPostDao.selectById(id).orElseThrow(() -> new NoDataFoundException("post_id=" + id + " のデータが見つかりません。"));
+		return convertTPostDto(Lists.newArrayList(data)).get(0);
 	}
 
 	/**

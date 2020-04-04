@@ -18,7 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(MEMBER_URL)
+@RequestMapping(MEMBER)
 public class MemberHtmlController extends AbstractHtmlController {
 
 	@Autowired

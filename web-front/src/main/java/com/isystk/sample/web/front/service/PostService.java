@@ -136,28 +136,6 @@ public class PostService extends BaseTransactionalService {
 	}
 
 	/**
-	 * 投稿を取得します。
-	 *
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public Optional<TPost> findOne(TPostCriteria criteria) {
-		Assert.notNull(criteria, "criteria must not be null");
-		return postRepository.findOne(criteria);
-	}
-
-	/**
-	 * 投稿を取得します。
-	 *
-	 * @return
-	 */
-	@Transactional(readOnly = true)
-	public TPost findById(final Integer id) {
-		Assert.notNull(id, "id must not be null");
-		return postRepository.findById(id);
-	}
-
-	/**
 	 * 投稿を追加します。
 	 *
 	 * @param input

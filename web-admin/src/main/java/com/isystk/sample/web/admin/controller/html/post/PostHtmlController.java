@@ -30,6 +30,7 @@ import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.entity.TPostTag;
+import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.web.admin.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
@@ -41,12 +42,15 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(POST_URL)
+@RequestMapping(POST)
 @SessionAttributes(types = { SearchPostForm.class, PostForm.class })
 public class PostHtmlController extends AbstractHtmlController {
 
 	@Autowired
 	PostService postService;
+
+	@Autowired
+	TPostRepository postRepository;
 
 	@Autowired
 	PostFormValidator postFormValidator;
@@ -80,7 +84,7 @@ public class PostHtmlController extends AbstractHtmlController {
 		criteria.setTitleLike(form.getTitle());
 
 		// 10件区切りで取得する
-		val pages = postService.findAll(criteria, form);
+		val pages = postRepository.findAll(criteria, form);
 
 		// 画面に検索結果を渡す
 		model.addAttribute("pages", pages);
@@ -97,7 +101,7 @@ public class PostHtmlController extends AbstractHtmlController {
 	 */
 	@GetMapping("{postId}")
 	public String show(@PathVariable Integer postId, Model model) {
-		model.addAttribute("post", postService.findById(postId));
+		model.addAttribute("post", postRepository.findById(postId));
 		return "modules/post/detail";
 	}
 
@@ -144,7 +148,7 @@ public class PostHtmlController extends AbstractHtmlController {
 		sessionStatus.setComplete();
 
 		// 1件取得する
-		val post = postService.findById(postId);
+		val post = postRepository.findById(postId);
 
 		// 取得したDtoをFromに詰め替える
 		ObjectMapperUtils.map(post, form);
@@ -274,7 +278,7 @@ public class PostHtmlController extends AbstractHtmlController {
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-		val pages = postService.findAll(criteria, form);
+		val pages = postRepository.findAll(criteria, form);
 
 		// 詰め替える
 		List<PostCsv> csvList = ObjectMapperUtils.mapAll(pages.getData(), PostCsv.class);
@@ -298,7 +302,7 @@ public class PostHtmlController extends AbstractHtmlController {
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-		val pages = postService.findAll(criteria, form);
+		val pages = postRepository.findAll(criteria, form);
 
 		// Excelプック生成コールバック、データ、ダウンロード時のファイル名を指定する
 		val view = new ExcelView(new PostExcel(), pages.getData(), filename);
@@ -319,7 +323,7 @@ public class PostHtmlController extends AbstractHtmlController {
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-		val pages = postService.findAll(criteria, form);
+		val pages = postRepository.findAll(criteria, form);
 
 		// 帳票レイアウト、データ、ダウンロード時のファイル名を指定する
 		val view = new PdfView("reports/post.jrxml", pages.getData(), filename);

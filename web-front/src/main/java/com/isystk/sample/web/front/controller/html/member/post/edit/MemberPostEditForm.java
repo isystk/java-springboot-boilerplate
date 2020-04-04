@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.member.post;
+package com.isystk.sample.web.front.controller.html.member.post.edit;
 
 import java.util.List;
 
@@ -17,10 +17,11 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class MemberPostForm extends BaseForm {
+public class MemberPostEditForm extends BaseForm {
 
 	private static final long serialVersionUID = 7593564324192730932L;
 
+	@NotNull
 	Integer postId;
 
 	@NotEmpty
@@ -29,11 +30,10 @@ public class MemberPostForm extends BaseForm {
 	@NotEmpty
 	String text;
 
+	@NotEmpty
 	List<@Digits(integer = 9, fraction = 0) Integer> postImageId;
 
 	List<@Digits(integer = 9, fraction = 0) Integer> postTagId;
-
-	MultipartFile imageFile;
 
 	@Override
 	public Integer getId() {

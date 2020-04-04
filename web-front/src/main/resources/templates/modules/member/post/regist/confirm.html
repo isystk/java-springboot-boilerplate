@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/layout}">
+	<head layout:fragment="~{layouts/layout::header}">
+	<title>投稿確認画面｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<div class="content">
+			<main>
+				<article class="detail">
+					<div class="entry-header">
+					  <h1 class="entry-title">投稿確認画面</h1>
+					</div>
+					<div class="entry-content">
+
+						<p>以下の内容で登録します。</p>
+						<form th:object="${memberPostForm}" th:action="${action}" id="form1"
+							th:with="action=${memberPostForm.isNew()} ? @{/member/post/regist/complete} : @{/member/post/{id}(id=*{postId})}"
+							th:method="${memberPostForm.isNew()} ? 'post' : 'put'">
+							<input type="hidden" name="title" th:value="*{title}" />
+							<th:block  th:each="e, s : *{postImageId}" >
+								<input type="hidden" name="postImageId" th:value="${e}" />
+							</th:block>
+							<th:block  th:each="e, s : *{postTagId}" >
+								<input type="hidden" name="postTagId" th:value="${e}" />
+							</th:block>
+							<input type="hidden" name="text" th:value="*{text}" />
+							<input type="hidden" name="version" th:value="*{version}" />
+							<table class="formTable">
+								<tr>
+									<th colspan="2"><span class="mark">タイトル</span></th>
+									<td th:text="*{title}"></td>
+								</tr>
+								<tr>
+									<th colspan="2"><span class="mark">写真</span></th>
+									<td>
+										<ul class="selectedPhotoList">
+											<li  th:each="e, s : *{postImageId}" >
+												<img th:src="${@img.url(e, '_square')}" width="120px"/>
+											</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2"><span class="mark">本文</th>
+									<td th:text="*{text}"></td>
+								</tr>
+							</table>
+							<p class="btnArea">
+								<input type="submit" name="regist" value="投稿する">
+							</p>
+						</form>
+
+					</div>
+				</article>
+			</main>
+		</div>
+
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+		</script>
+	</div>
+</body>
+</html>

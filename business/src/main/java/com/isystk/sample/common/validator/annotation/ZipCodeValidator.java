@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ZipCodeValidator implements ConstraintValidator<ZipCode, String> {
 
-	static final Pattern p = Pattern.compile("^[0-9]{7}$");
+	static final Pattern p = Pattern.compile("^[0-9]{3}-[0-9]{4}$");
 
 	@Override
 	public void initialize(ZipCode ZipCode) {
