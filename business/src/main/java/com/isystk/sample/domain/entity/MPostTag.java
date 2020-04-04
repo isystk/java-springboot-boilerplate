@@ -15,6 +15,9 @@ import lombok.Setter;
 
 /**
  * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
  */
 @Entity
 @Table(name = "m_post_tag")
@@ -26,29 +29,29 @@ public class MPostTag extends DomaDtoImpl {
     private static final long serialVersionUID = 1L;
 
 
-    /** ID */
+    /** 投稿タグID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "POST_TAG_ID")
     Integer postTagId;
 
-    /**  */
+    /** 名称 */
     @Column(name = "NAME")
     String name;
 
-    /**  */
+    /** 登録日時 */
     @Column(name = "REGIST_TIME")
     LocalDateTime registTime;
 
-    /**  */
+    /** 更新日時 */
     @Column(name = "UPDATE_TIME")
     LocalDateTime updateTime;
 
-    /**  */
+    /** 削除フラグ */
     @Column(name = "DELETE_FLG")
     Boolean deleteFlg;
 
-    /**  */
+    /** 楽観チェック用バージョン */
     @Version
     @Column(name = "VERSION")
     Long version;

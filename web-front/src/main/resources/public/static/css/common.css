@@ -541,23 +541,20 @@ display: -webkit-flex;
 flex-wrap: wrap;
 -webkit-flex-wrap: wrap;
 }
-#top .photo {
-position: relative;
-width: 100%;
-height: auto;
-margin: 1%;
-overflow: hidden;
-}
-#top .photo:before {
-content: "";
-display: block;
-padding-top: 100%;
-}
 #top .inner {
-position: absolute;
-top: 0; left: 0;
-width: 100%;
-height: 100%;
+overflow: hidden;
+width: 200px;
+height: 200px;
+float: left;
+margin-right: 20px;
+position: relative;
+}
+#top .photo ul {
+width: 2000px;
+}
+#top .photo li {
+width: 200px;
+float: left;
 }
 #top .square {
 width: 100%;
@@ -583,6 +580,12 @@ opacity: 0.8;
 padding: 5px;
 font-size: 0.8em;
 width: 100%;
+height: 47px;
+}
+#top .txt p {
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
 }
 
 /* 投稿詳細*/

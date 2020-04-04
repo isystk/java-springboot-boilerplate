@@ -7,25 +7,43 @@ import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
+ */
 @Getter
 @Setter
 public class TImageCriteria {
 
 
-    Integer imageIdEqual;
-    Integer imageIdNotEqual;
+    Integer imageIdEq;
+    Integer imageIdNe;
+    Integer imageIdLt;
+    Integer imageIdLe;
+    Integer imageIdGt;
+    Integer imageIdGe;
     boolean imageIdIsNull;
     boolean imageIdIsNotNull;
     List<Integer> imageIdIn;
     List<Integer> imageIdNotIn;
 
-    LocalDateTime registTimeEqual;
-    LocalDateTime registTimeNotEqual;
+    LocalDateTime registTimeEq;
+    LocalDateTime registTimeNe;
+    LocalDateTime registTimeLt;
+    LocalDateTime registTimeLe;
+    LocalDateTime registTimeGt;
+    LocalDateTime registTimeGe;
     boolean registTimeIsNull;
     boolean registTimeIsNotNull;
 
-    LocalDateTime updateTimeEqual;
-    LocalDateTime updateTimeNotEqual;
+    LocalDateTime updateTimeEq;
+    LocalDateTime updateTimeNe;
+    LocalDateTime updateTimeLt;
+    LocalDateTime updateTimeLe;
+    LocalDateTime updateTimeGt;
+    LocalDateTime updateTimeGe;
     boolean updateTimeIsNull;
     boolean updateTimeIsNotNull;
 

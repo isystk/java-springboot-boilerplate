@@ -15,6 +15,9 @@ import lombok.Setter;
 
 /**
  * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
  */
 @Entity
 @Table(name = "m_mail_template")
@@ -32,31 +35,31 @@ public class MMailTemplate extends DomaDtoImpl {
     @Column(name = "MAIL_TEMPLATE_ID")
     Integer mailTemplateId;
 
-    /**  */
+    /** テンプレート区分 */
     @Column(name = "TEMPLATE_DIV")
     Integer templateDiv;
 
-    /**  */
+    /** タイトル */
     @Column(name = "TITLE")
     String title;
 
-    /**  */
+    /** 本文 */
     @Column(name = "TEXT")
     String text;
 
-    /**  */
+    /** 登録日時 */
     @Column(name = "REGIST_TIME")
     LocalDateTime registTime;
 
-    /**  */
+    /** 更新日時 */
     @Column(name = "UPDATE_TIME")
     LocalDateTime updateTime;
 
-    /**  */
+    /** 削除フラグ */
     @Column(name = "DELETE_FLG")
     Boolean deleteFlg;
 
-    /**  */
+    /** 楽観チェック用バージョン */
     @Version
     @Column(name = "VERSION")
     Long version;

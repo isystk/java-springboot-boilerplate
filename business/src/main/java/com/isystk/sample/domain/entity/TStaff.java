@@ -15,6 +15,9 @@ import lombok.Setter;
 
 /**
  * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
  */
 @Entity
 @Table(name = "t_staff")
@@ -26,53 +29,53 @@ public class TStaff extends DomaDtoImpl {
     private static final long serialVersionUID = 1L;
 
 
-    /** ID */
+    /** 管理者ID */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "STAFF_ID")
     Integer staffId;
 
-    /**  */
+    /** メールアドレス */
     @Column(name = "EMAIL")
     String email;
 
-    /**  */
+    /** パスワード */
     @Column(name = "PASSWORD")
     String password;
 
-    /**  */
+    /** 姓 */
     @Column(name = "FAMILY_NAME")
     String familyName;
 
-    /**  */
+    /** 名 */
     @Column(name = "NAME")
     String name;
 
-    /**  */
+    /** 姓（カナ） */
     @Column(name = "FAMILY_NAME_KANA")
     String familyNameKana;
 
-    /**  */
+    /** 名（カナ） */
     @Column(name = "NAME_KANA")
     String nameKana;
 
-    /**  */
+    /** 最終ログイン日時 */
     @Column(name = "LAST_LOGIN_TIME")
     LocalDateTime lastLoginTime;
 
-    /**  */
+    /** 登録日時 */
     @Column(name = "REGIST_TIME")
     LocalDateTime registTime;
 
-    /**  */
+    /** 更新日時 */
     @Column(name = "UPDATE_TIME")
     LocalDateTime updateTime;
 
-    /**  */
+    /** 削除フラグ */
     @Column(name = "DELETE_FLG")
     Boolean deleteFlg;
 
-    /**  */
+    /** 楽観チェック用バージョン */
     @Version
     @Column(name = "VERSION")
     Long version;

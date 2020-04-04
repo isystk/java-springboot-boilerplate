@@ -73,7 +73,7 @@ public class EntryHtmlController extends AbstractHtmlController {
 			RedirectAttributes attributes) {
 
 		TUserCriteria criteria = new TUserCriteria();
-		criteria.setEmailEqual(form.getEmail());
+		criteria.setEmailEq(form.getEmail());
 		if(tUserDao.findOne(criteria).orElse(null) != null) {
 			FieldError fieldError = new FieldError(br.getObjectName(), "email", "入力されたメールアドレスは既に登録されています");
 			br.addError(fieldError);

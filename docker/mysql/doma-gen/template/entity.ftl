@@ -19,6 +19,9 @@ import lombok.Setter;
 <#if showDbComment && comment??>
  * ${comment}
 </#if>
+ *
+ * 自動生成のため原則修正禁止!!
+ *
 <#if lib.author??>
  * @author ${lib.author}
 </#if>

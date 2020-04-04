@@ -1,13 +1,26 @@
+--  自動生成のため原則修正禁止!!
 SELECT
   /*%expand*/*
 FROM
   t_post_tag
 WHERE
-/*%if criteria.postIdEqual != null */
-  POST_ID = /* criteria.postIdEqual */1
+/*%if criteria.postIdEq != null */
+  POST_ID = /* criteria.postIdEq */1
 /*%end*/
-/*%if criteria.postIdNotEqual != null */
-  POST_ID != /* criteria.postIdNotEqual */1
+/*%if criteria.postIdNe != null */
+  POST_ID != /* criteria.postIdNe */1
+/*%end*/
+/*%if criteria.postIdLt != null */
+  POST_ID < /* criteria.postIdLt */1
+/*%end*/
+/*%if criteria.postIdLe != null */
+  POST_ID <= /* criteria.postIdLe */1
+/*%end*/
+/*%if criteria.postIdGt != null */
+  POST_ID > /* criteria.postIdLt */1
+/*%end*/
+/*%if criteria.postIdGe != null */
+  POST_ID >= /* criteria.postIdLe */1
 /*%end*/
 /*%if criteria.postIdIsNull  */
   POST_ID IS NULL
@@ -21,11 +34,23 @@ WHERE
 /*%if criteria.postIdNotIn != null  */
   POST_ID NOT IN /* criteria.postIdNotIn */(1,2,3)
 /*%end*/
-/*%if criteria.postTagIdEqual != null */
-  POST_TAG_ID = /* criteria.postTagIdEqual */1
+/*%if criteria.postTagIdEq != null */
+  POST_TAG_ID = /* criteria.postTagIdEq */1
 /*%end*/
-/*%if criteria.postTagIdNotEqual != null */
-  POST_TAG_ID != /* criteria.postTagIdNotEqual */1
+/*%if criteria.postTagIdNe != null */
+  POST_TAG_ID != /* criteria.postTagIdNe */1
+/*%end*/
+/*%if criteria.postTagIdLt != null */
+  POST_TAG_ID < /* criteria.postTagIdLt */1
+/*%end*/
+/*%if criteria.postTagIdLe != null */
+  POST_TAG_ID <= /* criteria.postTagIdLe */1
+/*%end*/
+/*%if criteria.postTagIdGt != null */
+  POST_TAG_ID > /* criteria.postTagIdLt */1
+/*%end*/
+/*%if criteria.postTagIdGe != null */
+  POST_TAG_ID >= /* criteria.postTagIdLe */1
 /*%end*/
 /*%if criteria.postTagIdIsNull  */
   POST_TAG_ID IS NULL

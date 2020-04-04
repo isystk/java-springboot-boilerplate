@@ -10,16 +10,18 @@
 		<div class="content" id="content">
 			<main id="top">
 
-				<div class="photo" v-for="e in datalist">
+				<div v-for="e in datalist">
 					<a :href="'/post/'+e.postId+'/'">
 					<div class="inner">
-						<div class="square" v-for="e2 in e.imageUrlList">
-							<img :src="e2" class="photo"/>
-						</div>
+						<ul class="photo">
+							<li v-for="e2 in e.imageUrlList">
+								<div class="square">
+									<img :src="e2" class="photo"/>
+								</div>
+							</li>
+						</ul>
 						<div class="txt">
-							<p>{{e.title}}&nbsp;{{e.registTimeMMDD}}</p>
-							<span>
-							</span>
+							<p>{{e.registTimeMMDD}}&nbsp;{{e.title}}</p>
 						</div>
 					</div>
 					</a>

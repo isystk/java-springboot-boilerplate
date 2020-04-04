@@ -152,7 +152,7 @@ public class TPostRepository extends BaseRepository {
 
 		// 投稿画像テーブル (Delete→Insert)
 		TPostImageCriteria tPostImageCriteria = new TPostImageCriteria();
-		tPostImageCriteria.setPostIdEqual(tPostDto.getPostId());
+		tPostImageCriteria.setPostIdEq(tPostDto.getPostId());
 		for (TPostImage tPostImage : tPostImageDao.findAll(tPostImageCriteria)) {
 			tPostImageDao.delete(tPostImage);
 		}
@@ -164,7 +164,7 @@ public class TPostRepository extends BaseRepository {
 
 		// 投稿タグテーブル (Delete→Insert)
 		TPostTagCriteria tPostTagCriteria = new TPostTagCriteria();
-		tPostTagCriteria.setPostIdEqual(tPostDto.getPostId());
+		tPostTagCriteria.setPostIdEq(tPostDto.getPostId());
 		for (TPostTag tPostTag : tPostTagDao.findAll(tPostTagCriteria)) {
 			tPostTagDao.delete(tPostTag);
 		}

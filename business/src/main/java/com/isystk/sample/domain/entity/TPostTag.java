@@ -11,6 +11,9 @@ import lombok.Setter;
 
 /**
  * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
  */
 @Entity
 @Table(name = "t_post_tag")
@@ -22,12 +25,12 @@ public class TPostTag extends DomaDtoImpl {
     private static final long serialVersionUID = 1L;
 
 
-    /** ID */
+    /** 投稿ID */
     @Id
     @Column(name = "POST_ID")
     Integer postId;
 
-    /** ID */
+    /** 投稿タグID */
     @Id
     @Column(name = "POST_TAG_ID")
     Integer postTagId;

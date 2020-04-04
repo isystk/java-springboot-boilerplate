@@ -21,7 +21,7 @@ SpringBoot を利用したマルチモジュールのボイラープレートで
 │   ├── mysql （DBサーバー）
 │   │   ├── conf.d (mysqlの設定ファイル)
 │   │   ├── data (mysqlのデータファイル)
-│   │   ├── doma2 (doma2のGenファイル)
+│   │   ├── doma-gen (doma2のジェネレータ)
 │   │   ├── init （mysqlの初期DDL）
 │   │   ├── logs （mysqlのログ）
 │   │   ├── script （mysql関連のスクリプト）
@@ -149,7 +149,7 @@ https://doma.readthedocs.io/en/2.5.0/annotation-processing/#eclipse
 
 businessプロジェクトの「プロパティ」－「Javaコンパイラ」－「注釈処理」を有効にする
 ファクトリーパスで「JARの追加」を選択後に以下のJARを追加する
-docker\mysql\doma2\lib\doma-2.27.0.jar
+docker\mysql\doma-gen\lib\doma-2.27.0.jar
 "business\target\classes\com\isystk\sample\domain\dao" 以下に "XXImpl.class"が追加されていれば成功です。
 
 #### Docker APIの有効化

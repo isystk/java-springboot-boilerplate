@@ -11,6 +11,9 @@ import lombok.Setter;
 
 /**
  * 
+ *
+ * 自動生成のため原則修正禁止!!
+ *
  */
 @Entity
 @Table(name = "t_post_image")
@@ -22,12 +25,12 @@ public class TPostImage extends DomaDtoImpl {
     private static final long serialVersionUID = 1L;
 
 
-    /** ID */
+    /** 投稿ID */
     @Id
     @Column(name = "POST_ID")
     Integer postId;
 
-    /** ID */
+    /** 画像ID */
     @Id
     @Column(name = "IMAGE_ID")
     Integer imageId;

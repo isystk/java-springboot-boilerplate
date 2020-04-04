@@ -148,7 +148,7 @@ public class EntryService extends BaseTransactionalService {
      */
     public TUserOnetimeValid getTUserOnetimeValid(String onetimeKey) {
     	TUserOnetimeValidCriteria criteria = new TUserOnetimeValidCriteria();
-    	criteria.setOnetimeKeyEqual(onetimeKey);
+    	criteria.setOnetimeKeyEq(onetimeKey);
 		return tUserOnetimeValidDao.findOne(criteria).orElse(null);
     }
 
@@ -159,7 +159,7 @@ public class EntryService extends BaseTransactionalService {
 	 */
 	protected MMailTemplate getMailTemplate(Integer templateId) {
 		val criteria = new MMailTemplateCriteria();
-		criteria.setMailTemplateIdEqual(templateId);
+		criteria.setMailTemplateIdEq(templateId);
 		val mailTemplate = mMailTemplateDao.findOne(criteria).orElseThrow(
 				() -> new NoDataFoundException("templateKey=" + templateId + " のデータが見つかりません。"));
 
