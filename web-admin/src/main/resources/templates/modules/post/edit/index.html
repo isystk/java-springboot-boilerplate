@@ -17,7 +17,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right" >
 					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/post}">投稿管理</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/post/}">投稿管理</a></li>
 					<li class="breadcrumb-item active" >投稿修正</li>
 				</ol>
 			</div><!-- /.col -->
@@ -25,47 +25,36 @@
 	</div>
 	<div layout:fragment="content">
 
-		<!-- Main content -->
-		<div class="content">
-			<div class="container-fluid">
-
-				<div class="row">
-					<div class="col-12">
-
-						<div class="card card-purple">
-							<div class="card-body">
-								<p>投稿内容を入力して下さい</p>
-								<form th:object="${postEditForm}" th:action="@{/post/edit}" th:method="put">
-									<input type="hidden" name="postId" th:value="*{postId}" />
-									<input th:replace="~{fragments/selectField :: select ('投稿者', 'userId', ${userList}, 'userId', 'familyName')}" />
-									<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title')" />
-									<label class="col-md-2 control-label" >写真</label>
-									<div class="col-md-12">
-										<label class="btn_formSelectImage"><input type="file" name="imageFile" class="js-upload-postImage-btn" multiple="multiple" ></label>
-										<div class="row selectedPhotoList">
-											<div class="col-2 mr-3" th:each="e, s : *{postImageId}" >
-											<a href="#" class="close">
-												<input type="hidden" name="postImageId" th:value="${e}" />
-												<img th:src="${@img.url(e, '_square')}" width="120px"/>
-											</a>
-											</div>
-										</div>
-										<div th:with="valid=${!#fields.hasErrors('postImageId')}" th:class="${valid ? '' : ' has-error'}" >
-											<div th:if="${!valid}" class="errortxt" th:errors="*{__${'postImageId'}__}">Error</div>
-										</div>
-									</div>
-									<input th:replace="fragments/textarea :: textarea ('本文', 'text', 4)" />
-									<div class="card-footer clearfix text-center">
-										<div class="text-left float-left">
-											<a class="btn btn-secondary" th:href="@{/post}">一覧に戻る</a>
-										</div>
-										<button class="btn btn-secondary js-submit" th:data-uri="@{/post/edit?confirm}">確認画面へ</button>
-									</div>
-								</form>
+		<div class="card card-purple">
+			<div class="card-body">
+				<p>投稿内容を入力して下さい</p>
+				<form th:object="${postEditForm}" th:action="@{/post/edit}" th:method="put">
+					<input type="hidden" name="postId" th:value="*{postId}" />
+					<input th:replace="~{fragments/selectField :: select ('投稿者', 'userId', ${userList}, 'userId', 'familyName')}" />
+					<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title', 'col-md-6', 100)" />
+					<label class="col-md-2 control-label" >写真</label>
+					<div class="col-md-12">
+						<label class="btn_formSelectImage"><input type="file" name="imageFile" class="js-upload-postImage-btn" multiple="multiple" ></label>
+						<div class="row selectedPhotoList">
+							<div class="col-2 mr-3" th:each="e, s : *{postImageId}" >
+							<a href="#" class="close">
+								<input type="hidden" name="postImageId" th:value="${e}" />
+								<img th:src="${@img.url(e, '_square')}" width="120px"/>
+							</a>
 							</div>
 						</div>
+						<div th:with="valid=${!#fields.hasErrors('postImageId')}" th:class="${valid ? '' : ' has-error'}" >
+							<div th:if="${!valid}" class="errortxt" th:errors="*{__${'postImageId'}__}">Error</div>
+						</div>
 					</div>
-				</div>
+					<input th:replace="fragments/textarea :: textarea ('本文', 'text', 'col-md-10', 4)" />
+					<div class="card-footer clearfix text-center">
+						<div class="text-left float-left">
+							<a class="btn btn-secondary" th:href="@{/post}">一覧に戻る</a>
+						</div>
+						<button class="btn btn-secondary js-submit" th:data-uri="@{/post/edit?confirm}">確認画面へ</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
@@ -105,10 +94,10 @@
 					// 画像をアニメーション（フェードイン）で表示します。
 					var src = data.imageUrlSquare + '?time=' + new Date().getTime();
 					var image = $([
-						'<li><a href="#" class="close">',
+						'<div class="col-2 mr-3"><a href="#" class="close">',
 							'<img src="'+src+'" width="120px" />',
 							'<input type="hidden" name="postImageId" value="'+data.imageId+'" />',
-						'</a></li>'
+						'</a></div>'
 						].join(''));
 					slides.append(image);
 

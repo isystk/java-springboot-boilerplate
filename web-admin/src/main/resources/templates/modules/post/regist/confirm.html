@@ -17,7 +17,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right" >
 					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/post}">投稿管理</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/post/}">投稿管理</a></li>
 					<li class="breadcrumb-item active" >投稿登録</li>
 				</ol>
 			</div><!-- /.col -->
@@ -25,50 +25,39 @@
 	</div>
 	<div layout:fragment="content">
 
-		<!-- Main content -->
-		<div class="content">
-			<div class="container-fluid">
+		<div class="card card-purple">
+			<div class="card-body">
 
-				<div class="row">
-					<div class="col-12">
-
-						<div class="card card-purple">
-							<div class="card-body">
-
-								<p>以下の内容で登録します。</p>
-								<form th:object="${postRegistForm}" th:action="@{/post/regist}" th:method="post">
-									<input type="hidden" name="title" th:value="*{title}" />
-									<th:block  th:each="e, s : *{postImageId}" >
-										<input type="hidden" name="postImageId" th:value="${e}" />
-									</th:block>
-									<th:block  th:each="e, s : *{postTagId}" >
-										<input type="hidden" name="postTagId" th:value="${e}" />
-									</th:block>
-									<input type="hidden" name="text" th:value="*{text}" />
-									<input type="hidden" name="version" th:value="*{version}" />
-									<label class="col-md-2 control-label" >タイトル</label>
-									<div class="col-md-6" th:text="*{title}"></div>
-									<label class="col-md-2 control-label" >写真</label>
-									<div class="col-md-12" >
-										<div class="row selectedPhotoList">
-											<div class="col-2 mr-3" th:each="e, s : *{postImageId}" >
-												<img th:src="${@img.url(e, '_square')}" width="120px"/>
-											</div>
-										</div>
-									</div>
-									<label class="col-md-2 control-label" >本文</label>
-									<div class="col-md-6" th:text="*{text}"></div>
-									<div class="card-footer clearfix text-center">
-										<div class="text-left float-left">
-											<button class="btn btn-secondary js-submit" th:data-uri="@{/post/regist?back}">前に戻る</button>
-										</div>
-										<button class="btn btn-secondary js-submit" th:data-uri="@{/post/regist?complete}">投稿する</button>
-									</div>
-								</form>
+				<p>以下の内容で登録します。</p>
+				<form th:object="${postRegistForm}" th:action="@{/post/regist}" th:method="post">
+					<input type="hidden" name="title" th:value="*{title}" />
+					<th:block  th:each="e, s : *{postImageId}" >
+						<input type="hidden" name="postImageId" th:value="${e}" />
+					</th:block>
+					<th:block  th:each="e, s : *{postTagId}" >
+						<input type="hidden" name="postTagId" th:value="${e}" />
+					</th:block>
+					<input type="hidden" name="text" th:value="*{text}" />
+					<input type="hidden" name="version" th:value="*{version}" />
+					<label class="col-md-2 control-label" >タイトル</label>
+					<div class="col-md-6" th:text="*{title}"></div>
+					<label class="col-md-2 control-label" >写真</label>
+					<div class="col-md-12" >
+						<div class="row selectedPhotoList">
+							<div class="col-2 mr-3" th:each="e, s : *{postImageId}" >
+								<img th:src="${@img.url(e, '_square')}" width="120px"/>
 							</div>
 						</div>
 					</div>
-				</div>
+					<label class="col-md-2 control-label" >本文</label>
+					<div class="col-md-6" th:text="*{text}"></div>
+					<div class="card-footer clearfix text-center">
+						<div class="text-left float-left">
+							<button class="btn btn-secondary js-submit" th:data-uri="@{/post/regist?back}">前に戻る</button>
+						</div>
+						<button class="btn btn-secondary js-submit" th:data-uri="@{/post/regist?complete}">登録する</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
