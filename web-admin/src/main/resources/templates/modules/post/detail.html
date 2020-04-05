@@ -17,7 +17,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right">
 					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/post}">投稿管理</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/post/}">投稿管理</a></li>
 					<li class="breadcrumb-item active">投稿詳細</li>
 				</ol>
 			</div><!-- /.col -->
@@ -25,43 +25,40 @@
 	</div>
 	<div layout:fragment="content">
 
-		<!-- Main content -->
-		<div class="content">
-			<div class="container-fluid">
-
-				<div class="row">
-					<div class="col-12">
-
-						<div class="card card-purple">
-							<div class="card-body">
-								<div th:object="${post}">
-									<div class="form-group row">
-										<label class="col-md-2">投稿者</label>
-										<div class="col-md-10" th:text="*{userId}"></div>
-									</div>
-									<div class="form-group row">
-										<label class="col-md-2 control-label">タイトル</label>
-										<div class="col-md-10 form-control-static" th:text="*{title}"></div>
-									</div>
-									<div class="form-group row">
-										<label class="col-md-2 control-label">本文</label>
-										<div class="col-md-10 form-control-static" th:text="*{text}"></div>
-									</div>
-								</div>
-							</div>
-							<div class="card-footer clearfix row">
-								<div class="col-md-10" >
-									<a class="btn btn-secondary" th:href="@{/post}">一覧に戻る</a>
-								</div>
-								<div class="col-md-2 text-right" >
-									<form th:action="@{/post/{id}(id=*{postId})}" th:method="delete">
-										<a class="btn btn-secondary" th:href="@{/post/edit/{id}(id=*{postId})}">变更</a>
-										<button type="submit" class="btn btn-danger js-delete">削除</button>
-									</form>
-								</div>
+		<div class="card card-purple">
+			<div class="card-body">
+				<div th:object="${post}">
+					<div class="form-group row">
+						<label class="col-md-2">投稿者</label>
+						<div class="col-md-10" th:text="*{userId}"></div>
+					</div>
+					<div class="form-group row">
+						<label class="col-md-2 control-label">タイトル</label>
+						<div class="col-md-10 form-control-static" th:text="*{title}"></div>
+					</div>
+					<label class="col-md-2 control-label" >写真</label>
+					<div class="col-md-12" >
+						<div class="row selectedPhotoList">
+							<div class="col-2 mr-3" th:each="e, s : *{tPostImageList}" >
+								<img th:src="${@img.url(e.imageId, '_square')}" width="120px"/>
 							</div>
 						</div>
 					</div>
+					<div class="form-group row">
+						<label class="col-md-2 control-label">本文</label>
+						<div class="col-md-10 form-control-static" th:text="*{text}"></div>
+					</div>
+				</div>
+			</div>
+			<div class="card-footer clearfix row">
+				<div class="col-md-8" >
+					<a class="btn btn-secondary" th:href="@{/post/}">一覧に戻る</a>
+				</div>
+				<div class="col-md-4 text-right" >
+					<form th:action="@{/post/{id}/(id=*{postId})}" th:method="delete">
+						<a class="btn btn-secondary" th:href="@{/post/edit/{id}/(id=*{postId})}">变更</a>
+						<button type="submit" class="btn btn-danger js-delete">削除</button>
+					</form>
 				</div>
 			</div>
 		</div>
