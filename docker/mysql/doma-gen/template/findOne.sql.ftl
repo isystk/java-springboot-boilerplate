@@ -8,7 +8,7 @@ WHERE
 <#if property.name == "version" >
 <#elseif 0 lte property.name?index_of("Flg") >
 /*%if criteria.${property.name}True  */
-  ${property.columnName} = true
+  and ${property.columnName} = true
 /*%end*/
 /*%if criteria.${property.name}False  */
   and ${property.columnName} = false

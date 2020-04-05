@@ -149,4 +149,6 @@ public class TStaffCriteria {
     boolean deleteFlgTrue;
     boolean deleteFlgFalse;
 
+
+    String orderBy;
 }

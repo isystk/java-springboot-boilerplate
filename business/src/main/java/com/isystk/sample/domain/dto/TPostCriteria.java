@@ -91,4 +91,6 @@ public class TPostCriteria {
     boolean deleteFlgTrue;
     boolean deleteFlgFalse;
 
+
+    String orderBy;
 }

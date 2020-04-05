@@ -58,4 +58,6 @@ public class ${simpleName}Criteria {
 </#if>
 </#if>
 </#list>
+
+    String orderBy;
 }

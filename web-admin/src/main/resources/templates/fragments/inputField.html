@@ -2,7 +2,7 @@
 	<body>
 		<form>
 			<th:block th:fragment="input (type, label, name, class, maxlength)">
-				<div th:with="valid=${!#fields.hasErrors(name)}" th:class="${'form-group' + (valid ? '' : ' has-error')}" class="form-group row">
+				<div th:with="valid=${!#fields.hasErrors(name)}" th:class="${'form-group row' + (valid ? '' : ' has-error')}" >
 					<label th:if="${label != ''}" class="col-md-2 control-label" th:text="${label}">Label</label>
 					<div  th:class="${class}">
 						<input class="form-control" type="text" th:type="${type}" th:field="*{__${name}__}" th:maxlength="${maxlength}" />

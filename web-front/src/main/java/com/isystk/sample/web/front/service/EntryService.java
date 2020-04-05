@@ -67,7 +67,8 @@ public class EntryService extends BaseTransactionalService {
 		tUserOnetimeValid.setUserId(tUser.getUserId());
 		String onetimeKey = generateOnetimeKey();
 		tUserOnetimeValid.setOnetimeKey(onetimeKey);
-		tUserOnetimeValid.setOnetimeValidTime(DateUtils.addHour(DateUtils.getNow(), 7));
+		// 7時間の制限時間を設ける
+		tUserOnetimeValid.setOnetimeValidTime(DateUtils.getNow().plusHours(7));
 		tUserOnetimeValidDao.insert(tUserOnetimeValid);
 
 		// 仮会員登録メールを送信する
@@ -95,6 +96,11 @@ public class EntryService extends BaseTransactionalService {
 		var tUserOnetimeValid = getTUserOnetimeValid(onetimeKey);
 		if (tUserOnetimeValid == null) {
 			throw new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]");
+		}
+
+		// 承認期限オーバー
+		if (DateUtils.beforeNow(tUserOnetimeValid.getOnetimeValidTime())) {
+			throw new NoDataFoundException("指定されたワンタイムキーは承認期限を過ぎています。[onetimeKey=" + onetimeKey + "]");
 		}
 
 		// ユーザー情報を取得する

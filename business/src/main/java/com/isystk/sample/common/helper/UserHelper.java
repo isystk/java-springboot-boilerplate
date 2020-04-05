@@ -36,6 +36,18 @@ public class UserHelper {
 	}
 
 	/**
+	 * ユーザーを取得します。
+	 *
+	 * @return
+	 */
+	public TUser getLoginUser(Integer userId) {
+		TUserCriteria criteria = new TUserCriteria();
+		criteria.setUserIdEq(userId);
+		return tUserDao.findOne(criteria).orElseThrow(
+				() -> new NoDataFoundException("userId=" + userId + "のデータが見つかりません。"));
+	}
+
+	/**
 	 * ログインユーザーを取得します。
 	 *
 	 * @return

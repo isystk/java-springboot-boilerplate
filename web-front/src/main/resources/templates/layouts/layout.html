@@ -24,7 +24,7 @@
 		<div class="wrap">
 			<!--/* ヘッダー */-->
 			<div layout:fragment="header" th:remove="tag">
-				<div th:replace="~{layouts/header}"></div>
+				<div th:replace="layouts/header"></div>
 			</div>
 
 			<!--/* メインコンテンツ */-->
@@ -52,7 +52,7 @@
 
 			<!--/* フッター */-->
 			<div layout:fragment="footer" th:remove="tag">
-				<div th:replace="~{layouts/footer}"></div>
+				<div th:replace="layouts/footer"></div>
 			</div>
 		</div><!--/* end wrapper */-->
 

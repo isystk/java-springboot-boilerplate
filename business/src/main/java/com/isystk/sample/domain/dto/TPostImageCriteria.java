@@ -39,4 +39,6 @@ public class TPostImageCriteria {
     boolean imageIdIsNotNull;
     List<Integer> imageIdIn;
     List<Integer> imageIdNotIn;
+
+    String orderBy;
 }

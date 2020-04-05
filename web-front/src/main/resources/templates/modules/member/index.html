@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorate="~{layouts/layout}">
-<head layout:fragment="~{layouts/layout::header}">
+		layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
 	<title>マイページ｜Sample</title>
 </head>
 <body>
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					<div class="clearfix">
-						<div th:replace="~{fragments/paginator :: paginator (${pages}, '/member')}" />
+						<div th:replace="fragments/paginator :: paginator (${pages}, '/member')" />
 					</div>
 				</div>
 			</main>

@@ -1,0 +1,23 @@
+<html xmlns:th="http://www.thymeleaf.org">
+	<body>
+		<form>
+			<th:block th:fragment="input (label, name, items, class, multiple)">
+				<div th:with="valid=${!#fields.hasErrors(name)}" th:class="${'form-group row' + (valid ? '' : ' has-error')}" >
+					<label th:if="${label != ''}" class="col-md-2 control-label" th:text="${label}">Label</label>
+					<div th:class="${class}">
+						<label class="btn_formSelectImage"><input th:if="${!multiple}" type="file" name="imageFile" class="js-upload-postImage-btn"  /><input th:if="${multiple}" type="file" name="imageFile" class="js-upload-postImage-btn" multiple="multiple" /></label>
+						<div class="row selectedPhotoList">
+							<div class="col-3 m-2" th:each="e, s : ${items}" >
+							<a href="#" class="js-close">
+								<input type="hidden" th:name="${name}" th:value="${e}" />
+								<img th:src="${@img.url(e, '_square')}" width="120px"/>
+							</a>
+							</div>
+						</div>
+						<div th:if="${!valid}" class="text-danger" th:errors="*{__${name}__}">Error</div>
+					</div>
+				</div>
+			</th:block>
+		</form>
+	</body>
+</html>

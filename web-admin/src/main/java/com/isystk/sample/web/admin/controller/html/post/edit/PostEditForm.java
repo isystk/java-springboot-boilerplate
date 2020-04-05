@@ -3,6 +3,7 @@ package com.isystk.sample.web.admin.controller.html.post.edit;
 import java.util.List;
 
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -27,10 +28,10 @@ public class PostEditForm extends BaseForm {
 	@NotNull
 	Integer postId;
 
-	@NotEmpty
+	@NotBlank
 	String title;
 
-	@NotEmpty
+	@NotBlank
 	String text;
 
 	@NotEmpty

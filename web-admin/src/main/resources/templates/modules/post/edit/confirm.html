@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorate="~{layouts/layout}">
-	<head layout:fragment="~{layouts/layout::header}">
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
 	<title>投稿修正確認画面｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="~{layouts/sidebar :: sidebar ('user', 'post')}"></div>
+		<div th:replace="layouts/sidebar :: sidebar ('user', 'post')"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -41,18 +41,19 @@
 					</th:block>
 					<input type="hidden" name="text" th:value="*{text}" />
 					<input type="hidden" name="version" th:value="*{version}" />
-					<label class="col-md-2 control-label" >タイトル</label>
-					<div class="col-md-6" th:text="*{title}"></div>
-					<label class="col-md-2 control-label" >写真</label>
-					<div class="col-md-12" >
-						<div class="row selectedPhotoList">
-							<div class="col-2 mr-3" th:each="e, s : *{postImageId}" >
-								<img th:src="${@img.url(e, '_square')}" width="120px"/>
+					<input th:replace="fragments/labelField :: input ('投稿者', ${user['__familyName__']}, 'col-md-6')" />
+					<input th:replace="fragments/labelField :: input ('タイトル', *{title}, 'col-md-6')" />
+					<div class="form-group row">
+						<label class="col-md-2 control-label" >写真</label>
+						<div class="col-md-10" >
+							<div class="row selectedPhotoList">
+								<div class="col-3 m-2" th:each="e, s : *{postImageId}" >
+									<img th:src="${@img.url(e, '_square')}" width="120px"/>
+								</div>
 							</div>
 						</div>
 					</div>
-					<label class="col-md-2 control-label" >本文</label>
-					<div class="col-md-6" th:text="*{text}"></div>
+					<input th:replace="fragments/labelField :: input ('本文', *{text}, 'col-md-6')" />
 					<div class="card-footer clearfix text-center">
 						<div class="text-left float-left">
 							<button class="btn btn-secondary js-submit" th:data-uri="@{/post/edit?back}">前に戻る</button>

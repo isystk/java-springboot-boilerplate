@@ -15,7 +15,7 @@ spring:
     properties:
       mail:
         from: from@test.com
-
+  
 logging:
   level:
     org.springframework: INFO
