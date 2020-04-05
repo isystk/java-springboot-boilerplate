@@ -44,6 +44,7 @@ public class MemberHtmlController extends AbstractHtmlController {
 		// 入力値を詰め替える
 		TPostCriteria criteria = new TPostCriteria();
 		criteria.setUserIdEq(userHelper.getLoginUserId());
+		criteria.setDeleteFlgFalse(true);
 
 		// 10件区切りで取得する
 		val pages = postService.findAll(criteria, form);

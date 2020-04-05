@@ -6,9 +6,13 @@ package com.isystk.sample.common;
 public interface AdminUrl {
 
 	/** ---- URLs ---- **/
-	public static final String HOME_URL = "/";
+	public static final String HOME = "/";
 
-	public static final String POST_URL = "/post";
+	public static final String POST = "/post";
+
+	public static final String POST_REGIST = "/post/regist";
+
+	public static final String POST_EDIT = "/post/edit";
 
 	/** ---- APIｓ ---- **/
 

@@ -55,8 +55,8 @@
 								</div>
 								<div class="col-md-2 text-right" >
 									<form th:action="@{/post/{id}(id=*{postId})}" th:method="delete">
-										<a class="btn btn-secondary" th:href="@{/post/{id}/edit(id=*{postId})}">变更</a>
-										<button type="submit" class="btn btn-danger">削除</button>
+										<a class="btn btn-secondary" th:href="@{/post/edit/{id}(id=*{postId})}">变更</a>
+										<button type="submit" class="btn btn-danger js-delete">削除</button>
 									</form>
 								</div>
 							</div>
@@ -65,6 +65,18 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+			$(document).ready(function() {
+				$('.js-delete').click(function(e) {
+					if (!confirm('削除します。よろしいですか？')) {
+						e.preventDefault();
+						return false;
+					}
+				});
+			});
+		</script>
 	</div>
 </body>
 </html>

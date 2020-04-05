@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div layout:fragment="content">
-		<div class="content" id="content">
+		<div class="content" id="app">
 			<main id="top">
 
 				<div v-for="e in datalist">
@@ -33,7 +33,7 @@
 	<div layout:fragment="scripts">
 		<script type="text/javascript" th:inline="javascript">
 		var myVueapp = new Vue({
-			el:"#content",
+			el:"#app",
 			mixins: [isystkMixin],
 			data:{
 				url: '/api/v1/post',

@@ -1,12 +1,10 @@
-package com.isystk.sample.web.admin.controller.html.post;
+package com.isystk.sample.web.admin.controller.html.post.regist;
 
 import java.util.List;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import com.isystk.sample.web.base.controller.html.BaseForm;
 
@@ -15,11 +13,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class PostForm extends BaseForm {
+public class PostRegistForm extends BaseForm {
 
 	private static final long serialVersionUID = 7593564324192730932L;
-
-	Integer postId;
 
 	@NotNull
 	Integer userId;
@@ -30,15 +26,9 @@ public class PostForm extends BaseForm {
 	@NotEmpty
 	String text;
 
+	@NotEmpty
 	List<@Digits(integer = 9, fraction = 0) Integer> postImageId;
 
 	List<@Digits(integer = 9, fraction = 0) Integer> postTagId;
-
-	MultipartFile imageFile;
-
-	@Override
-	public Integer getId() {
-		return postId;
-	}
 
 }

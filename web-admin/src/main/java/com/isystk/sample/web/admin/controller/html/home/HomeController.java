@@ -13,7 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
-@RequestMapping(HOME_URL)
+@RequestMapping(HOME)
 public class HomeController extends AbstractHtmlController {
 
 	@Override

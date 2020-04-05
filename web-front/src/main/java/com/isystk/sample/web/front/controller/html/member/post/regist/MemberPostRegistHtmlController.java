@@ -58,7 +58,7 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 
 	@Override
 	public String getFunctionName() {
-		return "A_MEMBER_POST_REGIST";
+		return "F_MEMBER_POST_REGIST";
 	}
 
 	/**
@@ -83,16 +83,29 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 	 * @param attributes
 	 * @return
 	 */
-	@PostMapping("confirm")
+	@PostMapping(params = "confirm")
 	public String registConfirm(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
-			return "modules/member/post/index";
+			return "modules/member/post/regist/index";
 		}
 
 		return "modules/member/post/regist/confirm";
+	}
+
+	/**
+	 * 前に戻る
+	 *
+	 * @param post
+	 * @param model
+	 * @return
+	 */
+	@PostMapping(params = "back")
+	public String registBack(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes) {
+		return "modules/member/post/regist/index";
 	}
 
 	/**
@@ -104,7 +117,7 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 	 * @param attributes
 	 * @return
 	 */
-	@PostMapping("complete")
+	@PostMapping(params = "complete")
 	public String registComplete(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
@@ -139,6 +152,16 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 		tPostDto.setTPostTagList(tPostTagList);
 		val postId = postService.create(tPostDto);
 
+		return "redirect:/member/post/regist/complete";
+	}
+
+	/**
+	 * 登録完了画面表示
+	 *
+	 * @return
+	 */
+	@GetMapping("complete")
+	public String showComplete() {
 		return "modules/member/post/regist/complete";
 	}
 

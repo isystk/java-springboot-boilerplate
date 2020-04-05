@@ -17,9 +17,4 @@ public class UploadRestForm extends BaseForm {
 
 	MultipartFile imageFile;
 
-	@Override
-	public Integer getId() {
-		return imageId;
-	}
-
 }

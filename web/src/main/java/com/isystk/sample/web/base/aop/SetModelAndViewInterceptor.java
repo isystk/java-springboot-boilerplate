@@ -44,10 +44,6 @@ public class SetModelAndViewInterceptor extends BaseHandlerInterceptor {
 		constants.put(MAV_PULLDOWN_OPTION, pulldownOption);
 		modelAndView.addObject(MAV_CONST, constants);
 
-//        // 定形のリスト等
-//        val codeCategories = getCodeCategories();
-//        modelAndView.addObject(MAV_CODE_CATEGORIES, codeCategories);
-
 		// 入力エラーを画面オブジェクトに設定する
 		retainValidateErrors(modelAndView);
 	}

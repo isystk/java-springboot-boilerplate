@@ -17,8 +17,8 @@
 					<div class="entry-content">
 
 						<p>投稿内容を入力して下さい</p>
-						<form th:object="${memberPostForm}" th:action="@{/member/post/edit/confirm}" id="form1"
-							th:method="post">
+						<form th:object="${memberPostForm}" th:action="@{/member/post/edit}" id="form1"
+							th:method="put">
 							<input type="hidden" name="postId" th:value="*{postId}" />
 							<input type="hidden" name="version" th:value="*{version}" />
 							<table class="formTable">
@@ -56,7 +56,7 @@
 								<div class="left">
 									<a href="/member/"><input type="button" name="back" value="一覧に戻る"></a>
 								</div>
-								<input type="submit" name="confirm" value="確認画面へ">
+								<input type="submit" name="confirm" value="確認画面へ" class="js-submit" th:data-uri="@{/member/post/edit?confirm}">
 							</div>
 						</form>
 
@@ -68,6 +68,10 @@
 	</div>
 	<div layout:fragment="scripts">
 		<script type="text/javascript" th:inline="javascript">
+		$(function() {
+			// サブミット
+			$('.js-submit').submitbutton();
+
 			// カテゴリー写真ファイル選択時
 			$('.js-upload-postImage-btn').change(function(){
 
@@ -180,6 +184,7 @@
 				$('#site_loader_overlay').remove();
 			};
 
+		});
 		</script>
 	</div>
 </body>

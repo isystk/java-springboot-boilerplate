@@ -45,14 +45,6 @@ public class DefaultEntityListener<ENTITY> implements EntityListener<ENTITY> {
 	 */
 	@Override
 	public void preUpdate(ENTITY entity, PreUpdateContext<ENTITY> context) {
-		// 二重送信防止チェック
-		val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
-		val actual = DoubleSubmitCheckTokenHolder.getActualToken();
-
-		if (expected != null && actual != null && !Objects.equals(expected, actual)) {
-			throw new DoubleSubmitErrorException();
-		}
-
 	}
 
 	/**
@@ -60,15 +52,6 @@ public class DefaultEntityListener<ENTITY> implements EntityListener<ENTITY> {
 	 */
 	@Override
 	public void preDelete(ENTITY entity, PreDeleteContext<ENTITY> context) {
-
-		// 二重送信防止チェック
-		val expected = DoubleSubmitCheckTokenHolder.getExpectedToken();
-		val actual = DoubleSubmitCheckTokenHolder.getActualToken();
-
-		if (expected != null && actual != null && !Objects.equals(expected, actual)) {
-			throw new DoubleSubmitErrorException();
-		}
-
 		if (entity instanceof DomaDto) {
 			val domaDto = (DomaDto) entity;
 			val deletedAt = AuditInfoHolder.getAuditDateTime();
