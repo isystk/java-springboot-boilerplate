@@ -17,10 +17,10 @@ WHERE
   and STAFF_ID <= /* criteria.staffIdLe */1
 /*%end*/
 /*%if criteria.staffIdGt != null */
-  and STAFF_ID > /* criteria.staffIdLt */1
+  and STAFF_ID > /* criteria.staffIdGt */1
 /*%end*/
 /*%if criteria.staffIdGe != null */
-  and STAFF_ID >= /* criteria.staffIdLe */1
+  and STAFF_ID >= /* criteria.staffIdGe */1
 /*%end*/
 /*%if criteria.staffIdIsNull  */
   and STAFF_ID IS NULL
@@ -47,10 +47,10 @@ WHERE
   and EMAIL <= /* criteria.emailLe */'a'
 /*%end*/
 /*%if criteria.emailGt != null */
-  and EMAIL > /* criteria.emailLt */'a'
+  and EMAIL > /* criteria.emailGt */'a'
 /*%end*/
 /*%if criteria.emailGe != null */
-  and EMAIL >= /* criteria.emailLe */'a'
+  and EMAIL >= /* criteria.emailGe */'a'
 /*%end*/
 /*%if criteria.emailIsNull  */
   and EMAIL IS NULL
@@ -89,10 +89,10 @@ WHERE
   and PASSWORD <= /* criteria.passwordLe */'a'
 /*%end*/
 /*%if criteria.passwordGt != null */
-  and PASSWORD > /* criteria.passwordLt */'a'
+  and PASSWORD > /* criteria.passwordGt */'a'
 /*%end*/
 /*%if criteria.passwordGe != null */
-  and PASSWORD >= /* criteria.passwordLe */'a'
+  and PASSWORD >= /* criteria.passwordGe */'a'
 /*%end*/
 /*%if criteria.passwordIsNull  */
   and PASSWORD IS NULL
@@ -131,10 +131,10 @@ WHERE
   and FAMILY_NAME <= /* criteria.familyNameLe */'a'
 /*%end*/
 /*%if criteria.familyNameGt != null */
-  and FAMILY_NAME > /* criteria.familyNameLt */'a'
+  and FAMILY_NAME > /* criteria.familyNameGt */'a'
 /*%end*/
 /*%if criteria.familyNameGe != null */
-  and FAMILY_NAME >= /* criteria.familyNameLe */'a'
+  and FAMILY_NAME >= /* criteria.familyNameGe */'a'
 /*%end*/
 /*%if criteria.familyNameIsNull  */
   and FAMILY_NAME IS NULL
@@ -173,10 +173,10 @@ WHERE
   and NAME <= /* criteria.nameLe */'a'
 /*%end*/
 /*%if criteria.nameGt != null */
-  and NAME > /* criteria.nameLt */'a'
+  and NAME > /* criteria.nameGt */'a'
 /*%end*/
 /*%if criteria.nameGe != null */
-  and NAME >= /* criteria.nameLe */'a'
+  and NAME >= /* criteria.nameGe */'a'
 /*%end*/
 /*%if criteria.nameIsNull  */
   and NAME IS NULL
@@ -215,10 +215,10 @@ WHERE
   and FAMILY_NAME_KANA <= /* criteria.familyNameKanaLe */'a'
 /*%end*/
 /*%if criteria.familyNameKanaGt != null */
-  and FAMILY_NAME_KANA > /* criteria.familyNameKanaLt */'a'
+  and FAMILY_NAME_KANA > /* criteria.familyNameKanaGt */'a'
 /*%end*/
 /*%if criteria.familyNameKanaGe != null */
-  and FAMILY_NAME_KANA >= /* criteria.familyNameKanaLe */'a'
+  and FAMILY_NAME_KANA >= /* criteria.familyNameKanaGe */'a'
 /*%end*/
 /*%if criteria.familyNameKanaIsNull  */
   and FAMILY_NAME_KANA IS NULL
@@ -257,10 +257,10 @@ WHERE
   and NAME_KANA <= /* criteria.nameKanaLe */'a'
 /*%end*/
 /*%if criteria.nameKanaGt != null */
-  and NAME_KANA > /* criteria.nameKanaLt */'a'
+  and NAME_KANA > /* criteria.nameKanaGt */'a'
 /*%end*/
 /*%if criteria.nameKanaGe != null */
-  and NAME_KANA >= /* criteria.nameKanaLe */'a'
+  and NAME_KANA >= /* criteria.nameKanaGe */'a'
 /*%end*/
 /*%if criteria.nameKanaIsNull  */
   and NAME_KANA IS NULL
@@ -299,10 +299,10 @@ WHERE
   and LAST_LOGIN_TIME <= /* criteria.lastLoginTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.lastLoginTimeGt != null */
-  and LAST_LOGIN_TIME > /* criteria.lastLoginTimeLt */'2010-01-23 12:34:56'
+  and LAST_LOGIN_TIME > /* criteria.lastLoginTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.lastLoginTimeGe != null */
-  and LAST_LOGIN_TIME >= /* criteria.lastLoginTimeLe */'2010-01-23 12:34:56'
+  and LAST_LOGIN_TIME >= /* criteria.lastLoginTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.lastLoginTimeIsNull  */
   and LAST_LOGIN_TIME IS NULL
@@ -323,10 +323,10 @@ WHERE
   and REGIST_TIME <= /* criteria.registTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGt != null */
-  and REGIST_TIME > /* criteria.registTimeLt */'2010-01-23 12:34:56'
+  and REGIST_TIME > /* criteria.registTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGe != null */
-  and REGIST_TIME >= /* criteria.registTimeLe */'2010-01-23 12:34:56'
+  and REGIST_TIME >= /* criteria.registTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeIsNull  */
   and REGIST_TIME IS NULL
@@ -347,10 +347,10 @@ WHERE
   and UPDATE_TIME <= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGt != null */
-  and UPDATE_TIME > /* criteria.updateTimeLt */'2010-01-23 12:34:56'
+  and UPDATE_TIME > /* criteria.updateTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGe != null */
-  and UPDATE_TIME >= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
+  and UPDATE_TIME >= /* criteria.updateTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeIsNull  */
   and UPDATE_TIME IS NULL

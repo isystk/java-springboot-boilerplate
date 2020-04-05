@@ -17,10 +17,10 @@ WHERE
   and IMAGE_ID <= /* criteria.imageIdLe */1
 /*%end*/
 /*%if criteria.imageIdGt != null */
-  and IMAGE_ID > /* criteria.imageIdLt */1
+  and IMAGE_ID > /* criteria.imageIdGt */1
 /*%end*/
 /*%if criteria.imageIdGe != null */
-  and IMAGE_ID >= /* criteria.imageIdLe */1
+  and IMAGE_ID >= /* criteria.imageIdGe */1
 /*%end*/
 /*%if criteria.imageIdIsNull  */
   and IMAGE_ID IS NULL
@@ -47,10 +47,10 @@ WHERE
   and REGIST_TIME <= /* criteria.registTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGt != null */
-  and REGIST_TIME > /* criteria.registTimeLt */'2010-01-23 12:34:56'
+  and REGIST_TIME > /* criteria.registTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGe != null */
-  and REGIST_TIME >= /* criteria.registTimeLe */'2010-01-23 12:34:56'
+  and REGIST_TIME >= /* criteria.registTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeIsNull  */
   and REGIST_TIME IS NULL
@@ -71,10 +71,10 @@ WHERE
   and UPDATE_TIME <= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGt != null */
-  and UPDATE_TIME > /* criteria.updateTimeLt */'2010-01-23 12:34:56'
+  and UPDATE_TIME > /* criteria.updateTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGe != null */
-  and UPDATE_TIME >= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
+  and UPDATE_TIME >= /* criteria.updateTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeIsNull  */
   and UPDATE_TIME IS NULL

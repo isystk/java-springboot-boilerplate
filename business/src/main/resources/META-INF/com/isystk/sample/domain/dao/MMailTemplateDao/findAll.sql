@@ -17,10 +17,10 @@ WHERE
   and MAIL_TEMPLATE_ID <= /* criteria.mailTemplateIdLe */1
 /*%end*/
 /*%if criteria.mailTemplateIdGt != null */
-  and MAIL_TEMPLATE_ID > /* criteria.mailTemplateIdLt */1
+  and MAIL_TEMPLATE_ID > /* criteria.mailTemplateIdGt */1
 /*%end*/
 /*%if criteria.mailTemplateIdGe != null */
-  and MAIL_TEMPLATE_ID >= /* criteria.mailTemplateIdLe */1
+  and MAIL_TEMPLATE_ID >= /* criteria.mailTemplateIdGe */1
 /*%end*/
 /*%if criteria.mailTemplateIdIsNull  */
   and MAIL_TEMPLATE_ID IS NULL
@@ -47,10 +47,10 @@ WHERE
   and TEMPLATE_DIV <= /* criteria.templateDivLe */1
 /*%end*/
 /*%if criteria.templateDivGt != null */
-  and TEMPLATE_DIV > /* criteria.templateDivLt */1
+  and TEMPLATE_DIV > /* criteria.templateDivGt */1
 /*%end*/
 /*%if criteria.templateDivGe != null */
-  and TEMPLATE_DIV >= /* criteria.templateDivLe */1
+  and TEMPLATE_DIV >= /* criteria.templateDivGe */1
 /*%end*/
 /*%if criteria.templateDivIsNull  */
   and TEMPLATE_DIV IS NULL
@@ -77,10 +77,10 @@ WHERE
   and TITLE <= /* criteria.titleLe */'a'
 /*%end*/
 /*%if criteria.titleGt != null */
-  and TITLE > /* criteria.titleLt */'a'
+  and TITLE > /* criteria.titleGt */'a'
 /*%end*/
 /*%if criteria.titleGe != null */
-  and TITLE >= /* criteria.titleLe */'a'
+  and TITLE >= /* criteria.titleGe */'a'
 /*%end*/
 /*%if criteria.titleIsNull  */
   and TITLE IS NULL
@@ -119,10 +119,10 @@ WHERE
   and TEXT <= /* criteria.textLe */'a'
 /*%end*/
 /*%if criteria.textGt != null */
-  and TEXT > /* criteria.textLt */'a'
+  and TEXT > /* criteria.textGt */'a'
 /*%end*/
 /*%if criteria.textGe != null */
-  and TEXT >= /* criteria.textLe */'a'
+  and TEXT >= /* criteria.textGe */'a'
 /*%end*/
 /*%if criteria.textIsNull  */
   and TEXT IS NULL
@@ -161,10 +161,10 @@ WHERE
   and REGIST_TIME <= /* criteria.registTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGt != null */
-  and REGIST_TIME > /* criteria.registTimeLt */'2010-01-23 12:34:56'
+  and REGIST_TIME > /* criteria.registTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGe != null */
-  and REGIST_TIME >= /* criteria.registTimeLe */'2010-01-23 12:34:56'
+  and REGIST_TIME >= /* criteria.registTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeIsNull  */
   and REGIST_TIME IS NULL
@@ -185,10 +185,10 @@ WHERE
   and UPDATE_TIME <= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGt != null */
-  and UPDATE_TIME > /* criteria.updateTimeLt */'2010-01-23 12:34:56'
+  and UPDATE_TIME > /* criteria.updateTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGe != null */
-  and UPDATE_TIME >= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
+  and UPDATE_TIME >= /* criteria.updateTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeIsNull  */
   and UPDATE_TIME IS NULL

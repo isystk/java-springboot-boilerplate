@@ -2,6 +2,7 @@ package com.isystk.sample.web.admin.controller.html.post;
 
 import static com.isystk.sample.common.FrontUrl.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -10,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,11 +25,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.UserHelper;
-import com.isystk.sample.common.util.NumberUtils;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.repository.TPostRepository;
-import com.isystk.sample.web.admin.controller.html.post.regist.PostRegistForm;
 import com.isystk.sample.web.admin.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
@@ -91,9 +88,15 @@ public class PostHtmlController extends AbstractHtmlController {
 
 		// 入力値を詰め替える
 		TPostCriteria criteria = new TPostCriteria();
-		criteria.setPostIdEq(NumberUtils.toInteger(form.getPostId()));
-		criteria.setUserIdEq(NumberUtils.toInteger(form.getUserId()));
+		criteria.setPostIdEq(form.getPostId());
+		criteria.setUserIdEq(form.getUserId());
 		criteria.setTitleLike(form.getTitle());
+		if (form.getRegistDateFrom() != null) {
+			criteria.setRegistTimeGe(form.getRegistDateFrom().atStartOfDay());
+		}
+		if (form.getRegistDateTo() != null) {
+			criteria.setRegistTimeLe(form.getRegistDateTo().atTime(LocalTime.MAX));
+		}
 		criteria.setDeleteFlgFalse(true);
 
 		// 10件区切りで取得する

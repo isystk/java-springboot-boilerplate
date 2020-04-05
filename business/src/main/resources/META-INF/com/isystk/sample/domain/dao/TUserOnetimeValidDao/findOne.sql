@@ -17,10 +17,10 @@ WHERE
   and USER_ID <= /* criteria.userIdLe */1
 /*%end*/
 /*%if criteria.userIdGt != null */
-  and USER_ID > /* criteria.userIdLt */1
+  and USER_ID > /* criteria.userIdGt */1
 /*%end*/
 /*%if criteria.userIdGe != null */
-  and USER_ID >= /* criteria.userIdLe */1
+  and USER_ID >= /* criteria.userIdGe */1
 /*%end*/
 /*%if criteria.userIdIsNull  */
   and USER_ID IS NULL
@@ -47,10 +47,10 @@ WHERE
   and ONETIME_KEY <= /* criteria.onetimeKeyLe */'a'
 /*%end*/
 /*%if criteria.onetimeKeyGt != null */
-  and ONETIME_KEY > /* criteria.onetimeKeyLt */'a'
+  and ONETIME_KEY > /* criteria.onetimeKeyGt */'a'
 /*%end*/
 /*%if criteria.onetimeKeyGe != null */
-  and ONETIME_KEY >= /* criteria.onetimeKeyLe */'a'
+  and ONETIME_KEY >= /* criteria.onetimeKeyGe */'a'
 /*%end*/
 /*%if criteria.onetimeKeyIsNull  */
   and ONETIME_KEY IS NULL
@@ -89,10 +89,10 @@ WHERE
   and ONETIME_VALID_TIME <= /* criteria.onetimeValidTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.onetimeValidTimeGt != null */
-  and ONETIME_VALID_TIME > /* criteria.onetimeValidTimeLt */'2010-01-23 12:34:56'
+  and ONETIME_VALID_TIME > /* criteria.onetimeValidTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.onetimeValidTimeGe != null */
-  and ONETIME_VALID_TIME >= /* criteria.onetimeValidTimeLe */'2010-01-23 12:34:56'
+  and ONETIME_VALID_TIME >= /* criteria.onetimeValidTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.onetimeValidTimeIsNull  */
   and ONETIME_VALID_TIME IS NULL

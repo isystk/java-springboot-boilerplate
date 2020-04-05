@@ -27,10 +27,10 @@ WHERE
   and ${property.columnName} <= /* criteria.${property.name}Le */<#if property.number>1<#elseif property.time>${toTime("12:34:56")}<#elseif property.date>${toDate("2010-01-23")}<#elseif property.timestamp>${toTimestamp("2010-01-23 12:34:56")}<#else>'a'</#if>
 /*%end*/
 /*%if criteria.${property.name}Gt != null */
-  and ${property.columnName} > /* criteria.${property.name}Lt */<#if property.number>1<#elseif property.time>${toTime("12:34:56")}<#elseif property.date>${toDate("2010-01-23")}<#elseif property.timestamp>${toTimestamp("2010-01-23 12:34:56")}<#else>'a'</#if>
+  and ${property.columnName} > /* criteria.${property.name}Gt */<#if property.number>1<#elseif property.time>${toTime("12:34:56")}<#elseif property.date>${toDate("2010-01-23")}<#elseif property.timestamp>${toTimestamp("2010-01-23 12:34:56")}<#else>'a'</#if>
 /*%end*/
 /*%if criteria.${property.name}Ge != null */
-  and ${property.columnName} >= /* criteria.${property.name}Le */<#if property.number>1<#elseif property.time>${toTime("12:34:56")}<#elseif property.date>${toDate("2010-01-23")}<#elseif property.timestamp>${toTimestamp("2010-01-23 12:34:56")}<#else>'a'</#if>
+  and ${property.columnName} >= /* criteria.${property.name}Ge */<#if property.number>1<#elseif property.time>${toTime("12:34:56")}<#elseif property.date>${toDate("2010-01-23")}<#elseif property.timestamp>${toTimestamp("2010-01-23 12:34:56")}<#else>'a'</#if>
 /*%end*/
 /*%if criteria.${property.name}IsNull  */
   and ${property.columnName} IS NULL
