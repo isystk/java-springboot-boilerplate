@@ -39,4 +39,6 @@ public class TPostTagCriteria {
     boolean postTagIdIsNotNull;
     List<Integer> postTagIdIn;
     List<Integer> postTagIdNotIn;
+
+    String orderBy;
 }

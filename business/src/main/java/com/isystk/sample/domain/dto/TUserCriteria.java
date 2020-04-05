@@ -266,4 +266,6 @@ public class TUserCriteria {
     boolean deleteFlgTrue;
     boolean deleteFlgFalse;
 
+
+    String orderBy;
 }

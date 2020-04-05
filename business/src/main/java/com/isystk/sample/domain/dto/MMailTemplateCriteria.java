@@ -91,4 +91,6 @@ public class MMailTemplateCriteria {
     boolean deleteFlgTrue;
     boolean deleteFlgFalse;
 
+
+    String orderBy;
 }

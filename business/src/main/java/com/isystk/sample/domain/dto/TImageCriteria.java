@@ -49,4 +49,6 @@ public class TImageCriteria {
 
     boolean deleteFlgTrue;
     boolean deleteFlgFalse;
+
+    String orderBy;
 }

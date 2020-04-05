@@ -24,12 +24,12 @@
 		<div class="wrapper">
 			<!--/* ヘッダー */-->
 			<div layout:fragment="header" th:remove="tag">
-				<div th:replace="~{layouts/header}"></div>
+				<div th:replace="layouts/header"></div>
 			</div>
 
 			<!--/* サイドメニュー */-->
 			<div layout:fragment="sidebar" th:remove="tag">
-				<div th:replace="~{layouts/sidebar}"></div>
+				<div th:replace="layouts/sidebar"></div>
 			</div>
 
 			<!--/* メインコンテンツ */-->
@@ -70,7 +70,7 @@
 
 			<!--/* フッター */-->
 			<div layout:fragment="footer" th:remove="tag">
-				<div th:replace="~{layouts/footer}"></div>
+				<div th:replace="layouts/footer"></div>
 			</div>
 		</div><!--/* end wrapper */-->
 

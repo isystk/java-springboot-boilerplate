@@ -9,6 +9,8 @@ import lombok.Setter;
 @Setter
 public class TPostDto extends TPost {
 
+	TUser tUser;
+
 	List<TPostImage> tPostImageList;
 
 	List<TPostTag> tPostTagList;

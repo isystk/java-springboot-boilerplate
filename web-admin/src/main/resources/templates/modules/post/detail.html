@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorate="~{layouts/layout}">
-	<head layout:fragment="~{layouts/layout::header}">
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
 	<title>投稿管理｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="~{layouts/sidebar :: sidebar ('user', 'post')}"></div>
+		<div th:replace="layouts/sidebar :: sidebar ('user', 'post')"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -28,26 +28,19 @@
 		<div class="card card-purple">
 			<div class="card-body">
 				<div th:object="${post}">
+					<input th:replace="fragments/labelField :: input ('投稿者', ${user['__familyName__']}, 'col-md-6')" />
+					<input th:replace="fragments/labelField :: input ('タイトル', *{title}, 'col-md-6')" />
 					<div class="form-group row">
-						<label class="col-md-2">投稿者</label>
-						<div class="col-md-10" th:text="*{userId}"></div>
-					</div>
-					<div class="form-group row">
-						<label class="col-md-2 control-label">タイトル</label>
-						<div class="col-md-10 form-control-static" th:text="*{title}"></div>
-					</div>
-					<label class="col-md-2 control-label" >写真</label>
-					<div class="col-md-12" >
-						<div class="row selectedPhotoList">
-							<div class="col-2 mr-3" th:each="e, s : *{tPostImageList}" >
-								<img th:src="${@img.url(e.imageId, '_square')}" width="120px"/>
+						<label class="col-md-2 control-label" >写真</label>
+						<div class="col-md-10" >
+							<div class="row selectedPhotoList">
+								<div class="col-2 mr-3" th:each="e, s : *{tPostImageList}" >
+									<img th:src="${@img.url(e.imageId, '_square')}" width="120px"/>
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="form-group row">
-						<label class="col-md-2 control-label">本文</label>
-						<div class="col-md-10 form-control-static" th:text="*{text}"></div>
-					</div>
+					<input th:replace="fragments/labelField :: input ('本文', *{text}, 'col-md-6')" />
 				</div>
 			</div>
 			<div class="card-footer clearfix row">

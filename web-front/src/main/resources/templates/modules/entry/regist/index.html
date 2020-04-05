@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorate="~{layouts/layout}">
-	<head layout:fragment="~{layouts/layout::header}">
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
 	<title>会員登録｜Sample</title>
 </head>
 <body>
@@ -58,7 +58,7 @@
 							<tr>
 								<th colspan="2"><span class="mark">性別</span><span class="required">【必須】</span></th>
 								<td>
-									<input th:replace="~{fragments/selectField :: select ('sex', ${@vh.values('Sex')}, 'code', 'text')}" />
+									<input th:replace="fragments/selectField :: select ('sex', ${@vh.values('Sex')}, 'code', 'text')" />
 								</td>
 							</tr>
 							<tr>
@@ -72,7 +72,7 @@
 							<tr>
 								<th>都道府県
 								<td>
-									<input th:replace="~{fragments/selectField :: select ('prefectureId', ${@vh.values('Prefecture')}, 'code', 'text')}" />
+									<input th:replace="fragments/selectField :: select ('prefectureId', ${@vh.values('Prefecture')}, 'code', 'text')" />
 								</td>
 							</tr>
 							<tr>

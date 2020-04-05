@@ -125,7 +125,7 @@ WHERE
   and UPDATE_TIME IS NOT NULL
 /*%end*/
 /*%if criteria.deleteFlgTrue  */
-  DELETE_FLG = true
+  and DELETE_FLG = true
 /*%end*/
 /*%if criteria.deleteFlgFalse  */
   and DELETE_FLG = false

@@ -1,13 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org"
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-		layout:decorate="~{layouts/layout}">
-	<head layout:fragment="~{layouts/layout::header}">
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
 	<title>投稿画面｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="~{layouts/sidebar :: sidebar ('user', 'post')}"></div>
+		<div th:replace="layouts/sidebar :: sidebar ('user', 'post')"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -29,23 +29,9 @@
 			<div class="card-body">
 				<p>投稿内容を入力して下さい</p>
 				<form th:object="${postRegistForm}" th:action="@{/post/regist}" th:method="post">
-					<input th:replace="~{fragments/selectField :: select ('投稿者', 'userId', ${userList}, 'userId', 'familyName')}" />
+					<input th:replace="fragments/selectField :: select ('投稿者', 'userId', ${userList}, 'userId', 'familyName')" />
 					<input th:replace="fragments/inputField :: input ('text', 'タイトル', 'title', 'col-md-6', 100)" />
-					<label class="col-md-2 control-label" >写真</label>
-					<div class="col-md-12">
-						<label class="btn_formSelectImage"><input type="file" name="imageFile" class="js-upload-postImage-btn" multiple="multiple" ></label>
-						<div class="row selectedPhotoList">
-							<div class="col-2 mr-3" th:each="e, s : *{postImageId}" >
-							<a href="#" class="close">
-								<input type="hidden" name="postImageId" th:value="${e}" />
-								<img th:src="${@img.url(e, '_square')}" width="120px"/>
-							</a>
-							</div>
-						</div>
-						<div th:with="valid=${!#fields.hasErrors('postImageId')}" th:class="${valid ? '' : ' has-error'}" >
-							<div th:if="${!valid}" class="errortxt" th:errors="*{__${'postImageId'}__}">Error</div>
-						</div>
-					</div>
+					<input th:replace="fragments/imageUpload :: input ('写真', 'postImageId', *{postImageId}, 'col-md-10', true)" />
 					<input th:replace="fragments/textarea :: textarea ('本文', 'text', 'col-md-10', 4)" />
 					<div class="card-footer clearfix text-center">
 						<div class="text-left float-left">
@@ -93,7 +79,7 @@
 					// 画像をアニメーション（フェードイン）で表示します。
 					var src = data.imageUrlSquare + '?time=' + new Date().getTime();
 					var image = $([
-						'<div class="col-2 mr-3"><a href="#" class="close">',
+						'<div class="col-3 m-2"><a href="#" class="js-close">',
 							'<img src="'+src+'" width="120px" />',
 							'<input type="hidden" name="postImageId" value="'+data.imageId+'" />',
 						'</a></div>'
@@ -159,7 +145,7 @@
 			};
 
 			// 選択中の画像を削除する
-			$(document).on('click', '.selectedPhotoList a.close', function(e) {
+			$(document).on('click', '.selectedPhotoList a.js-close', function(e) {
 				e.preventDefault();
 				$(this).closest('div').remove();
 			});

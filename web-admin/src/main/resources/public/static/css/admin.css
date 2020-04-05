@@ -28,7 +28,7 @@ background-size: cover;
 }
 
 
-.selectedPhotoList a.close:after {
+.selectedPhotoList a.js-close:after {
 content: "";
 background: url(../images/close.png) no-repeat;
 background-size: 25px auto;

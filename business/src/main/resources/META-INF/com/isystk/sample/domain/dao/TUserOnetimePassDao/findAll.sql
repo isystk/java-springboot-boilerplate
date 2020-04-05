@@ -100,3 +100,4 @@ WHERE
 /*%if criteria.onetimeValidTimeIsNotNull  */
   and ONETIME_VALID_TIME IS NOT NULL
 /*%end*/
+/*# criteria.orderBy */

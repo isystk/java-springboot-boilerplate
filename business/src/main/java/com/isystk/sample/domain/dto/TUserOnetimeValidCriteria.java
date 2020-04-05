@@ -52,4 +52,6 @@ public class TUserOnetimeValidCriteria {
     LocalDateTime onetimeValidTimeGe;
     boolean onetimeValidTimeIsNull;
     boolean onetimeValidTimeIsNotNull;
+
+    String orderBy;
 }

@@ -27,6 +27,7 @@ import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.TPostCriteria;
+import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.web.admin.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
@@ -78,13 +79,28 @@ public class PostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping
-	public String index(@ModelAttribute("postSearchForm") @Valid PostSearchForm form, Model model, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String index(@ModelAttribute("postSearchForm") @Valid PostSearchForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
 			return "modules/post/list";
 		}
+
+		// 10件区切りで取得する
+		val pages = postRepository.findAll(formToCriteria(form), form);
+
+		// 画面に検索結果を渡す
+		model.addAttribute("pages", pages);
+
+		return "modules/post/list";
+	}
+
+	/**
+	 * 検索条件を詰める
+	 * @return
+	 */
+	private TPostCriteria formToCriteria(PostSearchForm form) {
 
 		// 入力値を詰め替える
 		TPostCriteria criteria = new TPostCriteria();
@@ -98,14 +114,9 @@ public class PostHtmlController extends AbstractHtmlController {
 			criteria.setRegistTimeLe(form.getRegistDateTo().atTime(LocalTime.MAX));
 		}
 		criteria.setDeleteFlgFalse(true);
+		criteria.setOrderBy("order by update_time desc");
 
-		// 10件区切りで取得する
-		val pages = postRepository.findAll(criteria, form);
-
-		// 画面に検索結果を渡す
-		model.addAttribute("pages", pages);
-
-		return "modules/post/list";
+		return criteria;
 	}
 
 	/**
@@ -117,7 +128,11 @@ public class PostHtmlController extends AbstractHtmlController {
 	 */
 	@GetMapping("{postId}")
 	public String show(@PathVariable Integer postId, Model model) {
-		model.addAttribute("post", postRepository.findById(postId));
+		TPost tPost = postRepository.findById(postId);
+		model.addAttribute("post", tPost);
+
+		model.addAttribute("user", userHelper.getLoginUser(tPost.getUserId()));
+
 		return "modules/post/detail";
 	}
 
@@ -141,12 +156,10 @@ public class PostHtmlController extends AbstractHtmlController {
 	 */
 	@GetMapping("/download/{filename:.+\\.csv}")
 	public ModelAndView downloadCsv(@PathVariable String filename, PostSearchForm form, Model model) {
-		// 入力値を詰め替える
-		val criteria = ObjectMapperUtils.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-		val pages = postRepository.findAll(criteria, form);
+		val pages = postRepository.findAll(formToCriteria(form), form);
 
 		// 詰め替える
 		List<PostCsv> csvList = ObjectMapperUtils.mapAll(pages.getData(), PostCsv.class);
@@ -165,12 +178,10 @@ public class PostHtmlController extends AbstractHtmlController {
 	 */
 	@GetMapping(path = "/download/{filename:.+\\.xlsx}")
 	public ModelAndView downloadExcel(@PathVariable String filename, PostSearchForm form, Model model) {
-		// 入力値を詰め替える
-		val criteria = ObjectMapperUtils.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-		val pages = postRepository.findAll(criteria, form);
+		val pages = postRepository.findAll(formToCriteria(form), form);
 
 		// Excelプック生成コールバック、データ、ダウンロード時のファイル名を指定する
 		val view = new ExcelView(new PostExcel(), pages.getData(), filename);
@@ -186,12 +197,10 @@ public class PostHtmlController extends AbstractHtmlController {
 	 */
 	@GetMapping(path = "/download/{filename:.+\\.pdf}")
 	public ModelAndView downloadPdf(@PathVariable String filename, PostSearchForm form, Model model) {
-		// 入力値を詰め替える
-		val criteria = ObjectMapperUtils.map(form, TPostCriteria.class);
 
 		// 全件取得する
 		form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-		val pages = postRepository.findAll(criteria, form);
+		val pages = postRepository.findAll(formToCriteria(form), form);
 
 		// 帳票レイアウト、データ、ダウンロード時のファイル名を指定する
 		val view = new PdfView("reports/post.jrxml", pages.getData(), filename);

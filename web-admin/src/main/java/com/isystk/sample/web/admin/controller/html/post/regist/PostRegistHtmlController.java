@@ -97,13 +97,15 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "confirm")
-	public String registConfirm(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, Model model, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String registConfirm(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
 			return showRegistIndex(model);
 		}
+
+		model.addAttribute("user", userHelper.getLoginUser(form.getUserId()));
 
 		return "modules/post/regist/confirm";
 	}
@@ -116,8 +118,8 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "back")
-	public String registBack(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, Model model, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String registBack(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 		return showRegistIndex(model);
 	}
 
@@ -131,8 +133,8 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "complete")
-	public String registComplete(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, Model model, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String registComplete(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);

@@ -64,3 +64,4 @@ WHERE
 /*%if criteria.postTagIdNotIn != null  */
   and POST_TAG_ID NOT IN /* criteria.postTagIdNotIn */(1,2,3)
 /*%end*/
+/*# criteria.orderBy */

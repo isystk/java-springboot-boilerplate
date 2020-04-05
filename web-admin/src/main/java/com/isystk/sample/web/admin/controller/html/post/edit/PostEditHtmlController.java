@@ -4,6 +4,8 @@ import static com.isystk.sample.common.AdminUrl.*;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -50,6 +52,9 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	@Autowired
 	PostEditFormValidator postEditFormValidator;
 
+	@Autowired
+	HttpSession session;
+
     @ModelAttribute("postEditForm")
     public PostEditForm postEditForm() {
         return new PostEditForm();
@@ -93,7 +98,7 @@ public class PostEditHtmlController extends AbstractHtmlController {
 			}
 		}
 
-		return showEditIndex(model);
+		return showEditIndex(form, model);
 	}
 
 	/**
@@ -101,10 +106,12 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @param model
 	 * @return
 	 */
-	private String showEditIndex(Model model) {
+	private String showEditIndex(PostEditForm form, Model model) {
 		// ユーザー一覧
 		val userList = userHelper.getUserList();
 		model.addAttribute("userList", userList);
+
+		model.addAttribute("user", userHelper.getLoginUser(form.getUserId()));
 
 		return "modules/post/edit/index";
 	}
@@ -117,13 +124,16 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "confirm")
-	public String editConfirm(@Validated @ModelAttribute("postEditForm") PostEditForm form, Model model, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String editConfirm(@Validated @ModelAttribute("postEditForm") PostEditForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
+
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
-			return showEditIndex(model);
+			return showEditIndex(form, model);
 		}
+
+		model.addAttribute("user", userHelper.getLoginUser(form.getUserId()));
 
 		return "modules/post/edit/confirm";
 	}
@@ -136,9 +146,9 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "back")
-	public String editBack(@Validated @ModelAttribute("postEditForm") PostEditForm form, Model model, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
-		return showEditIndex(model);
+	public String editBack(@Validated @ModelAttribute("postEditForm") PostEditForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
+		return showEditIndex(form, model);
 	}
 
 	/**
@@ -152,13 +162,13 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "complete")
-	public String updateComplete(@Validated @ModelAttribute("postEditForm") PostEditForm form, Model model, BindingResult br,
-			SessionStatus sessionStatus, RedirectAttributes attributes) {
+	public String updateComplete(@Validated @ModelAttribute("postEditForm") PostEditForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
 			setFlashAttributeErrors(attributes, br);
-			return showEditIndex(model);
+			return showEditIndex(form, model);
 		}
 
 		// 入力値を詰め替える

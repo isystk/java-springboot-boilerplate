@@ -21,13 +21,16 @@ import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.TPostDao;
 import com.isystk.sample.domain.dao.TPostImageDao;
 import com.isystk.sample.domain.dao.TPostTagDao;
+import com.isystk.sample.domain.dao.TUserDao;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.dto.TPostImageCriteria;
 import com.isystk.sample.domain.dto.TPostTagCriteria;
+import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostTag;
+import com.isystk.sample.domain.entity.TUser;
 
 import lombok.val;
 
@@ -45,6 +48,9 @@ public class TPostRepository extends BaseRepository {
 
 	@Autowired
 	TPostTagDao tPostTagDao;
+
+	@Autowired
+	TUserDao tUserDao;
 
 	/**
 	 * 投稿を複数取得します。
@@ -85,11 +91,20 @@ public class TPostRepository extends BaseRepository {
 		tPostTagCriteria.setPostIdIn(postIdList);
 		Map<Integer, List<TPostTag>> tPostTagMap = tPostTagDao.findAll(tPostTagCriteria).stream().collect(Collectors.groupingBy(TPostTag::getPostId));
 
+		// tPostListからUserIdのListを抽出
+		List<Integer> userIdList = tPostList.stream().map(e -> Integer.valueOf(e.getUserId())).collect(Collectors.toList());
+
+		// userId をkeyとした、tUserのMapを生成
+		TUserCriteria tUserCriteria = new TUserCriteria();
+		tUserCriteria.setUserIdIn(userIdList);
+		Map<Integer, List<TUser>> tUserMap = tUserDao.findAll(tUserCriteria).stream().collect(Collectors.groupingBy(TUser::getUserId));
+
 		// tPostList を元に、postDtoList へコピー
 		List<TPostDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, TPostDto.class);
 		for (TPostDto postDto : postDtoList) {
 			postDto.setTPostImageList(tPostImageMap.get(postDto.getPostId()));
 			postDto.setTPostTagList(tPostTagMap.get(postDto.getPostId()));
+			postDto.setTUser(tUserMap.get(postDto.getUserId()).get(0));
 		}
 
 		return postDtoList;
