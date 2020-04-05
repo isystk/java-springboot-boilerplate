@@ -42,7 +42,7 @@
 							</div>
 							<!-- /.card-header -->
 							<!-- form start -->
-							<form th:action="@{/post}" th:method="get" th:object="${searchPostForm}">
+							<form th:action="@{/post}" th:method="get" th:object="${postSearchForm}">
 								<div class="card-body">
 
 									<div class="form-group">
@@ -75,7 +75,7 @@
 							</form>
 						</div>
 
-						<form th:action="@{/post}" th:method="get" th:object="${searchPostForm}" id="searchPostForm">
+						<form th:action="@{/post}" th:method="get" th:object="${postSearchForm}" id="pagingForm">
 							<input type="hidden" name="postId" th:value="*{postId}">
 							<input type="hidden" name="userId" th:value="*{userId}">
 							<input type="hidden" name="title" th:value="*{title}">
@@ -121,7 +121,7 @@
 									 				<td class="float-right">
 										 				<form th:action="@{/post/{id}(id=*{e.postId})}" th:method="delete">
 										 					<a class="btn btn-secondary" th:href="@{/post/{id}(id=*{e.postId})}">詳細</a>
-										 					<a class="btn btn-secondary" th:href="@{/post/{id}/edit(id=*{e.postId})}">变更</a>
+										 					<a class="btn btn-secondary" th:href="@{/post/edit/{id}(id=*{e.postId})}">变更</a>
 															<button class="btn btn-danger js-delete">削除</button>
 														</form>
 									 				</td>
@@ -154,7 +154,7 @@
 					e.preventDefault();
 					var self = $(this),
 						href = self.attr('href'),
-						form = $('#searchPostForm');
+						form = $('#pagingForm');
 					location.href = [href, form.serialize()].join('?');
 				});
 				$('.js-delete').click(function(e) {

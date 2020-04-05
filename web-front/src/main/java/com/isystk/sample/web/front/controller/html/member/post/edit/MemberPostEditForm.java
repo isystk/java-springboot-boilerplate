@@ -35,9 +35,4 @@ public class MemberPostEditForm extends BaseForm {
 
 	List<@Digits(integer = 9, fraction = 0) Integer> postTagId;
 
-	@Override
-	public Integer getId() {
-		return postId;
-	}
-
 }

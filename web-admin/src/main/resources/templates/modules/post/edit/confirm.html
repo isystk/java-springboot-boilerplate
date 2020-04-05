@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="~{layouts/layout}">
+	<head layout:fragment="~{layouts/layout::header}">
+	<title>投稿修正確認画面｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="sidebar">
+		<div th:replace="~{layouts/sidebar :: sidebar ('user', 'post')}"></div>
+	</div>
+	<div layout:fragment="content-header">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1>投稿修正確認</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right" >
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/post}">投稿管理</a></li>
+					<li class="breadcrumb-item active" >投稿修正</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div>
+	<div layout:fragment="content">
+
+		<!-- Main content -->
+		<div class="content">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-12">
+
+						<div class="card card-purple">
+							<div class="card-body">
+
+								<p>以下の内容で登録します。</p>
+								<form th:object="${postEditForm}" th:action="@{/post/edit}" th:method="put">
+									<input type="hidden" name="postId" th:value="*{postId}" />
+									<input type="hidden" name="userId" th:value="*{userId}" />
+									<input type="hidden" name="title" th:value="*{title}" />
+									<th:block  th:each="e, s : *{postImageId}" >
+										<input type="hidden" name="postImageId" th:value="${e}" />
+									</th:block>
+									<th:block  th:each="e, s : *{postTagId}" >
+										<input type="hidden" name="postTagId" th:value="${e}" />
+									</th:block>
+									<input type="hidden" name="text" th:value="*{text}" />
+									<input type="hidden" name="version" th:value="*{version}" />
+									<label class="col-md-2 control-label" >タイトル</label>
+									<div class="col-md-6" th:text="*{title}"></div>
+									<label class="col-md-2 control-label" >写真</label>
+									<div class="col-md-12" >
+										<div class="row selectedPhotoList">
+											<div class="col-2 mr-3" th:each="e, s : *{postImageId}" >
+												<img th:src="${@img.url(e, '_square')}" width="120px"/>
+											</div>
+										</div>
+									</div>
+									<label class="col-md-2 control-label" >本文</label>
+									<div class="col-md-6" th:text="*{text}"></div>
+									<div class="card-footer clearfix text-center">
+										<div class="text-left float-left">
+											<button class="btn btn-secondary js-submit" th:data-uri="@{/post/edit?back}">前に戻る</button>
+										</div>
+										<button class="btn btn-secondary js-submit" th:data-uri="@{/post/edit?complete}">投稿する</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+		$(function() {
+			// サブミット
+			$('.js-submit').submitbutton();
+		});
+		</script>
+	</div>
+</body>
+</html>

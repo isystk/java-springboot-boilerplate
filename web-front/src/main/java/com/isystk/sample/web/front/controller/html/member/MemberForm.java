@@ -14,9 +14,4 @@ public class MemberForm extends BaseSearchForm implements Pageable {
 
 	Integer postId;
 
-	@Override
-	public Integer getId() {
-		return postId;
-	}
-
 }

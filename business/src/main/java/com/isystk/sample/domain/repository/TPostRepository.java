@@ -207,7 +207,7 @@ public class TPostRepository extends BaseRepository {
 		val time = DateUtils.getNow();
 		post.setUpdateTime(time); // 削除日
 		post.setDeleteFlg(true); // 削除フラグ
-		int updated = tPostDao.delete(post);
+		int updated = tPostDao.update(post);
 
 		if (updated < 1) {
 			throw new NoDataFoundException("post_id=" + postId + " は更新できませんでした。");

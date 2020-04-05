@@ -14,19 +14,4 @@ public abstract class BaseForm implements Serializable {
 	// 改定番号
 	Integer version;
 
-	/**
-	 * 既存レコードがないデータであるか
-	 *
-	 * @return
-	 */
-	public boolean isNew() {
-		return getId() == null;
-	}
-
-	/**
-	 * IdカラムのGetter
-	 *
-	 * @return
-	 */
-	public abstract Integer getId();
 }

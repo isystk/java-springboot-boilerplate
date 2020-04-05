@@ -21,8 +21,6 @@ public class MemberPostRegistForm extends BaseForm {
 
 	private static final long serialVersionUID = 7593564324192730932L;
 
-	Integer postId;
-
 	@NotEmpty
 	String title;
 
@@ -33,10 +31,5 @@ public class MemberPostRegistForm extends BaseForm {
 	List<@Digits(integer = 9, fraction = 0) Integer> postImageId;
 
 	List<@Digits(integer = 9, fraction = 0) Integer> postTagId;
-
-	@Override
-	public Integer getId() {
-		return postId;
-	}
 
 }

@@ -32,7 +32,6 @@ import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.web.front.controller.html.member.post.edit.MemberPostEditForm;
 import com.isystk.sample.web.front.controller.html.member.post.edit.MemberPostEditFormValidator;
-import com.isystk.sample.web.front.controller.html.member.post.regist.MemberPostRegistForm;
 import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
@@ -69,7 +68,7 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 
 	@Override
 	public String getFunctionName() {
-		return "A_MEMBER_POST_EDIT";
+		return "F_MEMBER_POST_EDIT";
 	}
 
 	/**
@@ -80,7 +79,7 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("{postId}")
-	public String registIndex(@ModelAttribute("memberPostForm") MemberPostEditForm form, Model model) {
+	public String editIndex(@ModelAttribute("memberPostForm") MemberPostEditForm form, Model model) {
 
 		// 1件取得する
 		val post = postRepository.findById(form.getPostId());
@@ -113,8 +112,8 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	 * @param model
 	 * @return
 	 */
-	@PostMapping("confirm")
-	public String registConfirm(@Validated @ModelAttribute("memberPostForm") MemberPostEditForm form, BindingResult br,
+	@PutMapping(params = "confirm")
+	public String editConfirm(@Validated @ModelAttribute("memberPostForm") MemberPostEditForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -123,6 +122,19 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 		}
 
 		return "modules/member/post/edit/confirm";
+	}
+
+	/**
+	 * 前に戻る
+	 *
+	 * @param post
+	 * @param model
+	 * @return
+	 */
+	@PutMapping(params = "back")
+	public String editBack(@Validated @ModelAttribute("memberPostForm") MemberPostEditForm form, BindingResult br,
+			SessionStatus sessionStatus, RedirectAttributes attributes) {
+		return "modules/member/post/edit/index";
 	}
 
 	/**
@@ -135,9 +147,9 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	 * @param attributes
 	 * @return
 	 */
-	@PutMapping("complete")
+	@PutMapping(params = "complete")
 	public String updateComplete(@Validated @ModelAttribute("memberPostForm") MemberPostEditForm form, BindingResult br,
-			@PathVariable Integer postId, SessionStatus sessionStatus, RedirectAttributes attributes) {
+			SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -173,7 +185,17 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 		// セッションのmemberPostFormをクリアする
 		sessionStatus.setComplete();
 
-		return "redirect:/member/";
+		return "redirect:/member/post/edit/complete";
+	}
+
+	/**
+	 * 修正完了画面表示
+	 *
+	 * @return
+	 */
+	@GetMapping("complete")
+	public String showComplete() {
+		return "modules/member/post/edit/complete";
 	}
 
 }

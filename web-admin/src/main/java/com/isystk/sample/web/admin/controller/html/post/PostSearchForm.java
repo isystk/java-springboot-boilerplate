@@ -1,5 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.post;
 
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
@@ -12,19 +13,16 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public class SearchPostForm extends BaseSearchForm implements Pageable {
+public class PostSearchForm extends BaseSearchForm implements Pageable {
 
 	private static final long serialVersionUID = 7593564324192730932L;
 
-	Integer postId;
+	@Digits(integer = 9, fraction = 0)
+	String postId;
 
-	Integer userId;
+	@Digits(integer = 9, fraction = 0)
+	String userId;
 
 	String title;
-
-	@Override
-	public Integer getId() {
-		return postId;
-	}
 
 }

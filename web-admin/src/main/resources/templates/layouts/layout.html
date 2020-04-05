@@ -37,9 +37,11 @@
 				<!-- Content Header (Page header) -->
 				<section class="content-header" >
 					<!--/* グローバルメッセージ */-->
+					<!--/*
 					<div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalSuccessMessage}">
 						<p th:text="${str}" class="alert alert-success"></p>
 					</div>
+					*/-->
 					<div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalDangerMessage}">
 						<p th:text="${str}" class="alert alert-danger"></p>
 					</div>
@@ -64,6 +66,7 @@
 			<script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/plugins/jquery/jquery.min.js}"></script>
 			<script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
 			<script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/dist/js/adminlte.min.js}"></script>
+			<script type="text/javascript" th:src="@{/static/js/jquery-plugins.js}"></script>
 			<script type="text/javascript" th:src="@{/static/js/admin.js}"></script>
 		</div>
 		<div layout:fragment="scripts" th:remove="tag" />

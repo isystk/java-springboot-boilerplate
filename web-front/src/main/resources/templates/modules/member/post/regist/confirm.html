@@ -17,9 +17,8 @@
 					<div class="entry-content">
 
 						<p>以下の内容で登録します。</p>
-						<form th:object="${memberPostForm}" th:action="${action}" id="form1"
-							th:with="action=${memberPostForm.isNew()} ? @{/member/post/regist/complete} : @{/member/post/{id}(id=*{postId})}"
-							th:method="${memberPostForm.isNew()} ? 'post' : 'put'">
+						<form th:object="${memberPostForm}" th:action="@{/member/post/regist}" id="form1"
+							method="post">
 							<input type="hidden" name="title" th:value="*{title}" />
 							<th:block  th:each="e, s : *{postImageId}" >
 								<input type="hidden" name="postImageId" th:value="${e}" />
@@ -49,9 +48,12 @@
 									<td th:text="*{text}"></td>
 								</tr>
 							</table>
-							<p class="btnArea">
-								<input type="submit" name="regist" value="投稿する">
-							</p>
+							<div class="btnArea">
+								<div class="left">
+									<input type="button" name="regist" value="前に戻る" class="js-submit" th:data-uri="@{/member/post/regist?back}">
+								</div>
+								<input type="submit" name="complete" value="修正する" class="js-submit" th:data-uri="@{/member/post/regist?complete}">
+							</div>
 						</form>
 
 					</div>
@@ -62,6 +64,10 @@
 	</div>
 	<div layout:fragment="scripts">
 		<script type="text/javascript" th:inline="javascript">
+		$(function() {
+			// サブミット
+			$('.js-submit').submitbutton();
+		});
 		</script>
 	</div>
 </body>
