@@ -17,10 +17,10 @@ WHERE
   and POST_ID <= /* criteria.postIdLe */1
 /*%end*/
 /*%if criteria.postIdGt != null */
-  and POST_ID > /* criteria.postIdLt */1
+  and POST_ID > /* criteria.postIdGt */1
 /*%end*/
 /*%if criteria.postIdGe != null */
-  and POST_ID >= /* criteria.postIdLe */1
+  and POST_ID >= /* criteria.postIdGe */1
 /*%end*/
 /*%if criteria.postIdIsNull  */
   and POST_ID IS NULL
@@ -47,10 +47,10 @@ WHERE
   and IMAGE_ID <= /* criteria.imageIdLe */1
 /*%end*/
 /*%if criteria.imageIdGt != null */
-  and IMAGE_ID > /* criteria.imageIdLt */1
+  and IMAGE_ID > /* criteria.imageIdGt */1
 /*%end*/
 /*%if criteria.imageIdGe != null */
-  and IMAGE_ID >= /* criteria.imageIdLe */1
+  and IMAGE_ID >= /* criteria.imageIdGe */1
 /*%end*/
 /*%if criteria.imageIdIsNull  */
   and IMAGE_ID IS NULL

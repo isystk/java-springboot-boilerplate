@@ -17,10 +17,10 @@ WHERE
   and USER_ID <= /* criteria.userIdLe */1
 /*%end*/
 /*%if criteria.userIdGt != null */
-  and USER_ID > /* criteria.userIdLt */1
+  and USER_ID > /* criteria.userIdGt */1
 /*%end*/
 /*%if criteria.userIdGe != null */
-  and USER_ID >= /* criteria.userIdLe */1
+  and USER_ID >= /* criteria.userIdGe */1
 /*%end*/
 /*%if criteria.userIdIsNull  */
   and USER_ID IS NULL
@@ -47,10 +47,10 @@ WHERE
   and EMAIL <= /* criteria.emailLe */'a'
 /*%end*/
 /*%if criteria.emailGt != null */
-  and EMAIL > /* criteria.emailLt */'a'
+  and EMAIL > /* criteria.emailGt */'a'
 /*%end*/
 /*%if criteria.emailGe != null */
-  and EMAIL >= /* criteria.emailLe */'a'
+  and EMAIL >= /* criteria.emailGe */'a'
 /*%end*/
 /*%if criteria.emailIsNull  */
   and EMAIL IS NULL
@@ -89,10 +89,10 @@ WHERE
   and PASSWORD <= /* criteria.passwordLe */'a'
 /*%end*/
 /*%if criteria.passwordGt != null */
-  and PASSWORD > /* criteria.passwordLt */'a'
+  and PASSWORD > /* criteria.passwordGt */'a'
 /*%end*/
 /*%if criteria.passwordGe != null */
-  and PASSWORD >= /* criteria.passwordLe */'a'
+  and PASSWORD >= /* criteria.passwordGe */'a'
 /*%end*/
 /*%if criteria.passwordIsNull  */
   and PASSWORD IS NULL
@@ -131,10 +131,10 @@ WHERE
   and FAMILY_NAME <= /* criteria.familyNameLe */'a'
 /*%end*/
 /*%if criteria.familyNameGt != null */
-  and FAMILY_NAME > /* criteria.familyNameLt */'a'
+  and FAMILY_NAME > /* criteria.familyNameGt */'a'
 /*%end*/
 /*%if criteria.familyNameGe != null */
-  and FAMILY_NAME >= /* criteria.familyNameLe */'a'
+  and FAMILY_NAME >= /* criteria.familyNameGe */'a'
 /*%end*/
 /*%if criteria.familyNameIsNull  */
   and FAMILY_NAME IS NULL
@@ -173,10 +173,10 @@ WHERE
   and NAME <= /* criteria.nameLe */'a'
 /*%end*/
 /*%if criteria.nameGt != null */
-  and NAME > /* criteria.nameLt */'a'
+  and NAME > /* criteria.nameGt */'a'
 /*%end*/
 /*%if criteria.nameGe != null */
-  and NAME >= /* criteria.nameLe */'a'
+  and NAME >= /* criteria.nameGe */'a'
 /*%end*/
 /*%if criteria.nameIsNull  */
   and NAME IS NULL
@@ -215,10 +215,10 @@ WHERE
   and FAMILY_NAME_KANA <= /* criteria.familyNameKanaLe */'a'
 /*%end*/
 /*%if criteria.familyNameKanaGt != null */
-  and FAMILY_NAME_KANA > /* criteria.familyNameKanaLt */'a'
+  and FAMILY_NAME_KANA > /* criteria.familyNameKanaGt */'a'
 /*%end*/
 /*%if criteria.familyNameKanaGe != null */
-  and FAMILY_NAME_KANA >= /* criteria.familyNameKanaLe */'a'
+  and FAMILY_NAME_KANA >= /* criteria.familyNameKanaGe */'a'
 /*%end*/
 /*%if criteria.familyNameKanaIsNull  */
   and FAMILY_NAME_KANA IS NULL
@@ -257,10 +257,10 @@ WHERE
   and NAME_KANA <= /* criteria.nameKanaLe */'a'
 /*%end*/
 /*%if criteria.nameKanaGt != null */
-  and NAME_KANA > /* criteria.nameKanaLt */'a'
+  and NAME_KANA > /* criteria.nameKanaGt */'a'
 /*%end*/
 /*%if criteria.nameKanaGe != null */
-  and NAME_KANA >= /* criteria.nameKanaLe */'a'
+  and NAME_KANA >= /* criteria.nameKanaGe */'a'
 /*%end*/
 /*%if criteria.nameKanaIsNull  */
   and NAME_KANA IS NULL
@@ -299,10 +299,10 @@ WHERE
   and ZIP <= /* criteria.zipLe */'a'
 /*%end*/
 /*%if criteria.zipGt != null */
-  and ZIP > /* criteria.zipLt */'a'
+  and ZIP > /* criteria.zipGt */'a'
 /*%end*/
 /*%if criteria.zipGe != null */
-  and ZIP >= /* criteria.zipLe */'a'
+  and ZIP >= /* criteria.zipGe */'a'
 /*%end*/
 /*%if criteria.zipIsNull  */
   and ZIP IS NULL
@@ -341,10 +341,10 @@ WHERE
   and PREFECTURE_ID <= /* criteria.prefectureIdLe */1
 /*%end*/
 /*%if criteria.prefectureIdGt != null */
-  and PREFECTURE_ID > /* criteria.prefectureIdLt */1
+  and PREFECTURE_ID > /* criteria.prefectureIdGt */1
 /*%end*/
 /*%if criteria.prefectureIdGe != null */
-  and PREFECTURE_ID >= /* criteria.prefectureIdLe */1
+  and PREFECTURE_ID >= /* criteria.prefectureIdGe */1
 /*%end*/
 /*%if criteria.prefectureIdIsNull  */
   and PREFECTURE_ID IS NULL
@@ -371,10 +371,10 @@ WHERE
   and AREA <= /* criteria.areaLe */'a'
 /*%end*/
 /*%if criteria.areaGt != null */
-  and AREA > /* criteria.areaLt */'a'
+  and AREA > /* criteria.areaGt */'a'
 /*%end*/
 /*%if criteria.areaGe != null */
-  and AREA >= /* criteria.areaLe */'a'
+  and AREA >= /* criteria.areaGe */'a'
 /*%end*/
 /*%if criteria.areaIsNull  */
   and AREA IS NULL
@@ -413,10 +413,10 @@ WHERE
   and ADDRESS <= /* criteria.addressLe */'a'
 /*%end*/
 /*%if criteria.addressGt != null */
-  and ADDRESS > /* criteria.addressLt */'a'
+  and ADDRESS > /* criteria.addressGt */'a'
 /*%end*/
 /*%if criteria.addressGe != null */
-  and ADDRESS >= /* criteria.addressLe */'a'
+  and ADDRESS >= /* criteria.addressGe */'a'
 /*%end*/
 /*%if criteria.addressIsNull  */
   and ADDRESS IS NULL
@@ -455,10 +455,10 @@ WHERE
   and BUILDING <= /* criteria.buildingLe */'a'
 /*%end*/
 /*%if criteria.buildingGt != null */
-  and BUILDING > /* criteria.buildingLt */'a'
+  and BUILDING > /* criteria.buildingGt */'a'
 /*%end*/
 /*%if criteria.buildingGe != null */
-  and BUILDING >= /* criteria.buildingLe */'a'
+  and BUILDING >= /* criteria.buildingGe */'a'
 /*%end*/
 /*%if criteria.buildingIsNull  */
   and BUILDING IS NULL
@@ -497,10 +497,10 @@ WHERE
   and TEL <= /* criteria.telLe */'a'
 /*%end*/
 /*%if criteria.telGt != null */
-  and TEL > /* criteria.telLt */'a'
+  and TEL > /* criteria.telGt */'a'
 /*%end*/
 /*%if criteria.telGe != null */
-  and TEL >= /* criteria.telLe */'a'
+  and TEL >= /* criteria.telGe */'a'
 /*%end*/
 /*%if criteria.telIsNull  */
   and TEL IS NULL
@@ -539,10 +539,10 @@ WHERE
   and SEX <= /* criteria.sexLe */1
 /*%end*/
 /*%if criteria.sexGt != null */
-  and SEX > /* criteria.sexLt */1
+  and SEX > /* criteria.sexGt */1
 /*%end*/
 /*%if criteria.sexGe != null */
-  and SEX >= /* criteria.sexLe */1
+  and SEX >= /* criteria.sexGe */1
 /*%end*/
 /*%if criteria.sexIsNull  */
   and SEX IS NULL
@@ -569,10 +569,10 @@ WHERE
   and BIRTHDAY <= /* criteria.birthdayLe */'2010-01-23'
 /*%end*/
 /*%if criteria.birthdayGt != null */
-  and BIRTHDAY > /* criteria.birthdayLt */'2010-01-23'
+  and BIRTHDAY > /* criteria.birthdayGt */'2010-01-23'
 /*%end*/
 /*%if criteria.birthdayGe != null */
-  and BIRTHDAY >= /* criteria.birthdayLe */'2010-01-23'
+  and BIRTHDAY >= /* criteria.birthdayGe */'2010-01-23'
 /*%end*/
 /*%if criteria.birthdayIsNull  */
   and BIRTHDAY IS NULL
@@ -593,10 +593,10 @@ WHERE
   and LAST_LOGIN_TIME <= /* criteria.lastLoginTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.lastLoginTimeGt != null */
-  and LAST_LOGIN_TIME > /* criteria.lastLoginTimeLt */'2010-01-23 12:34:56'
+  and LAST_LOGIN_TIME > /* criteria.lastLoginTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.lastLoginTimeGe != null */
-  and LAST_LOGIN_TIME >= /* criteria.lastLoginTimeLe */'2010-01-23 12:34:56'
+  and LAST_LOGIN_TIME >= /* criteria.lastLoginTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.lastLoginTimeIsNull  */
   and LAST_LOGIN_TIME IS NULL
@@ -617,10 +617,10 @@ WHERE
   and STATUS <= /* criteria.statusLe */1
 /*%end*/
 /*%if criteria.statusGt != null */
-  and STATUS > /* criteria.statusLt */1
+  and STATUS > /* criteria.statusGt */1
 /*%end*/
 /*%if criteria.statusGe != null */
-  and STATUS >= /* criteria.statusLe */1
+  and STATUS >= /* criteria.statusGe */1
 /*%end*/
 /*%if criteria.statusIsNull  */
   and STATUS IS NULL
@@ -647,10 +647,10 @@ WHERE
   and REGIST_TIME <= /* criteria.registTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGt != null */
-  and REGIST_TIME > /* criteria.registTimeLt */'2010-01-23 12:34:56'
+  and REGIST_TIME > /* criteria.registTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeGe != null */
-  and REGIST_TIME >= /* criteria.registTimeLe */'2010-01-23 12:34:56'
+  and REGIST_TIME >= /* criteria.registTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.registTimeIsNull  */
   and REGIST_TIME IS NULL
@@ -671,10 +671,10 @@ WHERE
   and UPDATE_TIME <= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGt != null */
-  and UPDATE_TIME > /* criteria.updateTimeLt */'2010-01-23 12:34:56'
+  and UPDATE_TIME > /* criteria.updateTimeGt */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeGe != null */
-  and UPDATE_TIME >= /* criteria.updateTimeLe */'2010-01-23 12:34:56'
+  and UPDATE_TIME >= /* criteria.updateTimeGe */'2010-01-23 12:34:56'
 /*%end*/
 /*%if criteria.updateTimeIsNull  */
   and UPDATE_TIME IS NULL
