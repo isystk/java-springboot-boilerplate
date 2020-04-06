@@ -45,6 +45,7 @@ public class MemberHtmlController extends AbstractHtmlController {
 		TPostCriteria criteria = new TPostCriteria();
 		criteria.setUserIdEq(userHelper.getLoginUserId());
 		criteria.setDeleteFlgFalse(true);
+		criteria.setOrderBy("order by update_time desc");
 
 		// 10件区切りで取得する
 		val pages = postService.findAll(criteria, form);

@@ -1043,6 +1043,16 @@ margin: 6px 12px 6px 6px;
 .header #menu-btn {
 display: none;
 }
+.header #logout {
+display: block;
+float: right;
+padding: 15px;
+font-size: 14px;
+text-decoration: none;
+}
+.header #logout a {
+color: #fff;
+}
 
 #pc-menu {
 display: block;

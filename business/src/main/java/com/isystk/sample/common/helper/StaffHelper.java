@@ -15,12 +15,19 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * 管理者ヘルパー
  */
-@Component
+@Component("staff")
 @Slf4j
 public class StaffHelper {
 
 	@Autowired
 	TStaffDao tStaffDao;
+
+	/**
+	 * ログイン済みかどうか
+	 */
+	public boolean isLogined() {
+		return AuditInfoHolder.getAuditUser() != null;
+	}
 
 	/**
 	 * ログインユーザーを取得します。

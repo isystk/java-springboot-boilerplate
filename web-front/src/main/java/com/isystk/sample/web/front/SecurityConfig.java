@@ -55,12 +55,16 @@ public class SecurityConfig extends BaseSecurityConfig {
 		http.csrf()//
 				.csrfTokenRepository(new CookieCsrfTokenRepository());
 
-		String[] permittedUrls = { MEMBER + "/**" };
+		String[] permittedUrls = { "*"};
+
+		String[] authenticatedUrls = { MEMBER + "/**" };
 
 		// 認証除外設定
 		http.authorizeRequests()
+				// 認証をかけない
+				.antMatchers(permittedUrls).permitAll()
 				// マイページ配下は、認証をかける
-				.antMatchers(permittedUrls).authenticated()
+				.antMatchers(authenticatedUrls).authenticated()
 				// それ以外は認証をかけない
 				.anyRequest().permitAll().and().exceptionHandling().authenticationEntryPoint(authenticationEntryPoint())
 				.accessDeniedHandler(accessDeniedHandler());

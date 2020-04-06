@@ -35,19 +35,19 @@ public class MemberPostDeleteHtmlController extends AbstractHtmlController {
 	@Autowired
 	MemberPostRigstFormValidator memberPostFormValidator;
 
-    @ModelAttribute("memberPostForm")
-    public MemberPostRegistForm memberPostForm() {
-        return new MemberPostRegistForm();
-    }
+	@ModelAttribute("memberPostForm")
+	public MemberPostRegistForm memberPostForm() {
+		return new MemberPostRegistForm();
+	}
 
-    @InitBinder("memberPostForm")
-    public void validatorBinder(WebDataBinder binder) {
-        binder.addValidators(memberPostFormValidator);
-    }
+	@InitBinder("memberPostForm")
+	public void validatorBinder(WebDataBinder binder) {
+		binder.addValidators(memberPostFormValidator);
+	}
 
 	@Override
 	public String getFunctionName() {
-		return "A_MEMBER_POST_DELETE";
+		return "F_MEMBER_POST_DELETE";
 	}
 
 	/**

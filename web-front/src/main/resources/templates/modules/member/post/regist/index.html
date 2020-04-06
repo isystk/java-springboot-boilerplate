@@ -17,7 +17,7 @@
 					<div class="entry-content">
 
 						<p>投稿内容を入力して下さい</p>
-						<form th:object="${memberPostForm}" th:action="@{/member/post/regist}" id="form1"
+						<form th:object="${memberPostRegistForm}" th:action="@{/member/post/regist}" id="form1"
 							method="post">
 							<input type="hidden" name="version" th:value="*{version}" />
 							<table class="formTable">

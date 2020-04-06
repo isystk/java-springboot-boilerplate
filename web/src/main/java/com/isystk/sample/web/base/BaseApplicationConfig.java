@@ -3,6 +3,8 @@ package com.isystk.sample.web.base;
 import static com.isystk.sample.common.Const.*;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
@@ -25,7 +27,10 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.thymeleaf.dialect.IDialect;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
+import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.isystk.sample.common.dto.DefaultPageFactoryImpl;
 import com.isystk.sample.common.dto.PageFactory;

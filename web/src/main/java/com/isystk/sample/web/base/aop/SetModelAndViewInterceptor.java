@@ -10,18 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.isystk.sample.common.util.MessageUtils;
+import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.web.base.filter.UserIdAware;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class SetModelAndViewInterceptor extends BaseHandlerInterceptor {
+
+	@Value("${application.imageUploadLocation:#{systemProperties['java.io.tmpdir']}}") // 設定ファイルに定義されたアップロード先を取得する
+	String imageUploadLocation;
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
@@ -39,10 +47,18 @@ public class SetModelAndViewInterceptor extends BaseHandlerInterceptor {
 		val locale = LocaleContextHolder.getLocale();
 		val pulldownOption = MessageUtils.getMessage(MAV_PULLDOWN_OPTION, locale);
 
+		// ログインユーザーID
+		UserIdAware user = null;
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (authentication.getPrincipal() instanceof UserIdAware) {
+			user = UserIdAware.class.cast(authentication.getPrincipal());
+		}
+
 		// 定数定義を画面に渡す
 		Map<String, Object> constants = new HashMap<>();
 		constants.put(MAV_PULLDOWN_OPTION, pulldownOption);
 		modelAndView.addObject(MAV_CONST, constants);
+		modelAndView.addObject(MAV_LOGIN_USER, user);
 
 		// 入力エラーを画面オブジェクトに設定する
 		retainValidateErrors(modelAndView);

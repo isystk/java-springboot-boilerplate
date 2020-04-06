@@ -69,7 +69,7 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping
-	public String registIndex(@ModelAttribute("postRegistForm") PostRegistForm form, Model model) {
+	public String registIndex(@ModelAttribute PostRegistForm form, Model model) {
 
         // SessionAttributeを再生成する
         model.addAttribute("postRegistForm", new PostRegistForm());
@@ -100,7 +100,7 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "confirm")
-	public String registConfirm(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, BindingResult br,
+	public String registConfirm(@Validated @ModelAttribute PostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -121,7 +121,7 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "back")
-	public String registBack(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, BindingResult br,
+	public String registBack(@Validated @ModelAttribute PostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 		return showRegistIndex(model);
 	}
@@ -136,7 +136,7 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "complete")
-	public String registComplete(@Validated @ModelAttribute("postRegistForm") PostRegistForm form, BindingResult br,
+	public String registComplete(@Validated @ModelAttribute PostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {

@@ -27,7 +27,7 @@ public class LoginHtmlController extends AbstractHtmlController {
 
 	@Override
 	public String getFunctionName() {
-		return "A_LOGIN";
+		return "F_LOGIN";
 	}
 
 	/**

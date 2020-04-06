@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +27,7 @@ import lombok.val;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 会員登録ログイン
+ * 会員登録
  */
 @Controller
 @SessionAttributes(types = { EntryForm.class })
@@ -57,7 +56,7 @@ public class EntryHtmlController extends AbstractHtmlController {
 
 	@Override
 	public String getFunctionName() {
-		return "A_ENTRY";
+		return "F_ENTRY";
 	}
 
 	/**
@@ -69,6 +68,10 @@ public class EntryHtmlController extends AbstractHtmlController {
 	 */
 	@GetMapping
 	public String index(@ModelAttribute EntryForm form, Model model) {
+
+        // SessionAttributeを再生成する
+        model.addAttribute("entryForm", new EntryForm());
+
 		return "modules/entry/regist/index";
 	}
 
@@ -82,7 +85,7 @@ public class EntryHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping
-	public String ontime(@Validated @ModelAttribute("entryForm") EntryForm form, BindingResult br,
+	public String ontime(@Validated @ModelAttribute EntryForm form, BindingResult br,
 			RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
@@ -116,6 +119,16 @@ public class EntryHtmlController extends AbstractHtmlController {
 		// 本会員登録
 		entryService.registComplete(onetimeKey);
 
+		return "redirect:/entry/regist/complete";
+	}
+
+	/**
+	 * 完了画面表示
+	 *
+	 * @return
+	 */
+	@GetMapping("complete")
+	public String showComplete() {
 		return "modules/entry/regist/complete";
 	}
 

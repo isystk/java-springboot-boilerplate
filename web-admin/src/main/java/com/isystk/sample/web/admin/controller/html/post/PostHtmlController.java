@@ -79,7 +79,7 @@ public class PostHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping
-	public String index(@ModelAttribute("postSearchForm") @Valid PostSearchForm form, BindingResult br,
+	public String index(@ModelAttribute @Valid PostSearchForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
 		if (br.hasErrors()) {

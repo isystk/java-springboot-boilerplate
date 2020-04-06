@@ -17,7 +17,7 @@
 					<div class="entry-content">
 
 						<p>以下の内容で登録します。</p>
-						<form th:object="${memberPostForm}" th:action="@{/member/post/edit}" id="form1"
+						<form th:object="${memberPostEditForm}" th:action="@{/member/post/edit}" id="form1"
 							th:method="put">
 							<input type="hidden" name="postId" th:value="*{postId}" />
 							<input type="hidden" name="title" th:value="*{title}" />

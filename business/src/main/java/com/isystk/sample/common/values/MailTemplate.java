@@ -11,7 +11,8 @@ import lombok.Getter;
 public enum MailTemplate implements Values {
 
 	ENTRY_REGIST_TEMPORARY(1, "仮会員登録通知メール", MailTemplateDiv.ENTRY_REGIST),
-	ENTRY_REGIST_VALID(2, "本登録完了通知メール", MailTemplateDiv.ENTRY_REGIST);
+	ENTRY_REGIST_VALID(2, "本登録完了通知メール", MailTemplateDiv.ENTRY_REGIST),
+	ENTRY_REMIND(3, "新パスワード設定画面のお知らせメール", MailTemplateDiv.ENTRY_REGIST);
 
 	private MailTemplate(int code, String text, MailTemplateDiv div) {
 		this.code = code;

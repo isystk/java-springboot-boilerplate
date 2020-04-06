@@ -46,12 +46,12 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 	@Autowired
 	MemberPostRigstFormValidator memberPostFormValidator;
 
-    @ModelAttribute("memberPostForm")
-    public MemberPostRegistForm memberPostForm() {
+    @ModelAttribute("memberPostRegistForm")
+    public MemberPostRegistForm memberPostRegistForm() {
         return new MemberPostRegistForm();
     }
 
-    @InitBinder("memberPostForm")
+    @InitBinder("memberPostRegistForm")
     public void validatorBinder(WebDataBinder binder) {
         binder.addValidators(memberPostFormValidator);
     }
@@ -69,7 +69,10 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping
-	public String registIndex(@ModelAttribute("memberPostForm") MemberPostRegistForm form, Model model) {
+	public String registIndex(@ModelAttribute MemberPostRegistForm form, Model model) {
+
+        // SessionAttributeを再生成する
+        model.addAttribute("memberPostRegistForm", new MemberPostRegistForm());
 
 		return "modules/member/post/regist/index";
 	}
@@ -84,7 +87,7 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "confirm")
-	public String registConfirm(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
+	public String registConfirm(@Validated @ModelAttribute MemberPostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -103,7 +106,7 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "back")
-	public String registBack(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
+	public String registBack(@Validated @ModelAttribute MemberPostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		return "modules/member/post/regist/index";
 	}
@@ -118,7 +121,7 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PostMapping(params = "complete")
-	public String registComplete(@Validated @ModelAttribute("memberPostForm") MemberPostRegistForm form, BindingResult br,
+	public String registComplete(@Validated @ModelAttribute MemberPostRegistForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {

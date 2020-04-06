@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
+	<title>パスワード変更｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="content">
+
+		<div class="content">
+			<main>
+				<article class="detail">
+					<div class="entry-header">
+					  <h1 class="entry-title">パスワード変更</h1>
+					</div>
+					<div class="entry-content">
+
+						<p>新しいパスワードを入力して下さい。</p>
+
+						<form th:object="${entryRemindConfigForm}" th:action="@{/entry/remind/config}" method="post">
+							<input type="hidden" name="onetimeKey" th:value="*{onetimeKey}" />
+							<table class="formTable">
+								<tbody>
+								<!-- loop -->
+								<tr>
+									<th colspan="2"><span class="mark">パスワード</span><span class="required">【必須】</span></th>
+									<td>
+										<input th:replace="fragments/inputField :: input ('password', '', 'password', 'text size_l', 100)" />
+										<p class="sub">半角英数字8～15文字 / 記号は「.」「_」「-」のみ使用可能</p>
+									</td>
+								</tr>
+								<tr>
+									<th colspan="2"><span class="mark">パスワード（確認用）</span><span class="required">【必須】</span></th>
+									<td>
+										<input th:replace="fragments/inputField :: input ('password', '', 'passwordConf', 'text size_l', 100)" />
+									</td>
+								</tr>
+								<!--/ loop -->
+								</tbody>
+							</table>
+							<!-- ↑↑↑入力 -->
+
+							<p class="btnArea"><input type="submit" name="regist" value="送信する"></p>
+
+						</form>
+
+					</div>
+				</article>
+			</main>
+		</div>
+
+	</div>
+</body>
+</html>
