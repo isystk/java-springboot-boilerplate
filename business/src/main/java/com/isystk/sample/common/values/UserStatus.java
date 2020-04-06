@@ -24,4 +24,20 @@ public enum UserStatus implements Values {
 	private final Integer code;
 	private final String text;
 
+	/**
+	 * コードに一致する値を取得します。
+	 * @param code
+	 * @return
+	 */
+	public static UserStatus getValue(Integer code) {
+		if (code == null) {
+			return null;
+		}
+		for (UserStatus div : values()) {
+			if (div.getCode().equals(code)) {
+				return div;
+			}
+		}
+		return null;
+	}
 }

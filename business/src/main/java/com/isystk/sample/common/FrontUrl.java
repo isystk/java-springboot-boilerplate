@@ -10,6 +10,10 @@ public class FrontUrl {
 
 	public static final String POST = "/post";
 
+	public static final String POST_TAG = "/post/tag";
+
+	public static final String SYSTEM_MAIL = "/system/mail";
+
 	public static final String MEMBER = "/member";
 
 	public static final String MEMBER_POST_REGIST = "/member/post/regist";

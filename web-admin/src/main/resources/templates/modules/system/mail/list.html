@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
+	<title>メールテンプレート一覧｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="sidebar">
+		<div th:replace="layouts/sidebar :: sidebar ('system', 'mail')"></div>
+	</div>
+	<div layout:fragment="content-header">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1>メールテンプレート一覧</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item active">メールテンプレート一覧</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div>
+	<div layout:fragment="content">
+
+		<div class="card card-purple">
+			<!-- .card-header -->
+			<div class="card-header">
+				<h3 class="card-title">検索条件</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<form th:action="@{/system/mail/}" th:method="get" th:object="${systemMailSearchForm}">
+				<input type="hidden" name="page" value="1" />
+				<div class="card-body">
+
+					<div class="form-group">
+						<div class="control-group">
+							<input th:replace="fragments/selectField :: select ('テンプレート区分', 'templateDiv', ${@vh.values('MailTemplateDiv')}, 'code', 'text')" />
+						</div>
+					</div>
+				</div>
+				<!-- /.card-body -->
+
+				<div class="card-footer text-center">
+					<button type="submit" class="btn btn-secondary">検索</button>
+				</div>
+
+			</form>
+		</div>
+
+		<form th:action="@{/system/mail}" th:method="get" th:object="${systemMailSearchForm}" id="pagingForm">
+			<input type="hidden" name="templateDiv" th:value="*{templateDiv}">
+		</form>
+
+		<div class="row">
+			<div class="col-12">
+
+				<div class="card card-purple" th:if="${0 < pages.count}">
+					<!-- .card-header -->
+					<div class="card-header">
+						<h3 class="card-title">検索結果</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover" style="table-layout:fixed;">
+							<thead>
+								<tr>
+									<th>メールテンプレートID</th>
+									<th>メールテンプレート区分</th>
+									<th>タントル</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="e : ${pages.data}">
+					 				<td th:text="*{e.mailTemplateId}"></td>
+					 				<td th:text="*{e.mailTemplateDiv.text}"></td>
+					 				<td th:text="*{e.title}"></td>
+					 				<td class="float-right">
+						 				<a class="btn btn-secondary m-1 btn-sm" th:href="@{/system/mail/{id}/(id=*{e.mailTemplateId})}">詳細</a><br>
+						 			</td>
+					 			</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.card-body -->
+					<!-- .card-footer -->
+					<div class="card-footer clearfix ">
+						<div th:replace="fragments/paginator :: paginator (${pages}, '/system/mail')" />
+					</div>
+					<!-- /.card-footer -->
+				</div>
+				<!-- /.card -->
+			</div>
+		</div>
+
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+		</script>
+	</div>
+</body>
+</html>

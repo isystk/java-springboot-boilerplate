@@ -10,9 +10,9 @@
 		<nav class="mt-2">
 			<ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 			<li class="nav-item has-treeview">
-				<a href="#" class="nav-link" th:class="|nav-link ${category=='user' ? 'active' : ''}|">
+				<a href="#" class="nav-link" th:class="|nav-link ${category=='post' ? 'active' : ''}|">
 				<i class="nav-icon fas fa-table"></i>
-				<p>ユーザー管理
+				<p>投稿管理
 					<i class="fas fa-angle-left right"></i>
 				</p>
 				</a>
@@ -21,6 +21,12 @@
 					<a th:href="@{/post/}" class="nav-link" th:class="|nav-link ${item=='post' ? 'active' : ''}|">
 					<i class="far fa-circle nav-icon"></i>
 					<p>投稿一覧</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a th:href="@{/post/tag/}" class="nav-link" th:class="|nav-link ${item=='tag' ? 'active' : ''}|">
+					<i class="far fa-circle nav-icon"></i>
+					<p>投稿タグ一覧</p>
 					</a>
 				</li>
 				</ul>
@@ -34,7 +40,7 @@
 				</a>
 				<ul class="nav nav-treeview">
 				<li class="nav-item">
-					<a href="#" class="nav-link" th:class="|nav-link ${item=='mail' ? 'active' : ''}|">
+					<a th:href="@{/system/mail/}" class="nav-link" th:class="|nav-link ${item=='mail' ? 'active' : ''}|">
 					<i class="fa fa-envelope"></i>
 					<p>メールテンプレート</p>
 					</a>

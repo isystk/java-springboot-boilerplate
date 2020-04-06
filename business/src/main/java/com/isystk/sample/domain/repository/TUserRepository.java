@@ -1,13 +1,23 @@
 package com.isystk.sample.domain.repository;
 
+import static com.isystk.sample.domain.util.DomaUtils.createSelectOptions;
+import static java.util.stream.Collectors.toList;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.isystk.sample.common.dto.Page;
+import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.common.service.BaseRepository;
 import com.isystk.sample.common.util.DateUtils;
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.TUserDao;
+import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.domain.repository.dto.TUserRepositoryDto;
 
 import lombok.val;
 
@@ -19,6 +29,33 @@ public class TUserRepository extends BaseRepository {
 
 	@Autowired
 	TUserDao tUserDao;
+
+	/**
+	 * 投稿を複数取得します。
+	 *
+	 * @param criteria
+	 * @param pageable
+	 * @return
+	 */
+	public Page<TUserRepositoryDto> findAll(TUserCriteria criteria, Pageable pageable) {
+		var options = createSelectOptions(pageable);
+		// ページングを指定する
+		return pageFactory.create(convertDto(
+				tUserDao.findAll(criteria,
+				options.count(),
+				toList()
+			)), pageable, options.getCount());
+	}
+
+	/**
+	 * RepositoryDto に変換します。
+	 * @param tUserList
+	 * @return
+	 */
+	private List<TUserRepositoryDto> convertDto(List<TUser> tUserList) {
+
+		return ObjectMapperUtils.mapAll(tUserList, TUserRepositoryDto.class);
+	}
 
 	/**
 	 * ユーザーを追加します。

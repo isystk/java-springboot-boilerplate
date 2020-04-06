@@ -23,4 +23,20 @@ public enum MailTemplate implements Values {
 	private final String text;
 	private final MailTemplateDiv div;
 
+	/**
+	 * コードに一致する値を取得します。
+	 * @param code
+	 * @return
+	 */
+	public static MailTemplate getValue(Integer code) {
+		if (code == null) {
+			return null;
+		}
+		for (MailTemplate div : values()) {
+			if (div.getCode().equals(code)) {
+				return div;
+			}
+		}
+		return null;
+	}
 }

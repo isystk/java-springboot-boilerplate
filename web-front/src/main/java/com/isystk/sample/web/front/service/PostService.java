@@ -22,8 +22,8 @@ import com.isystk.sample.common.values.ImageSuffix;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.entity.TPostImage;
-import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.repository.TPostRepository;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.dto.SolrPostCriteria;
 import com.isystk.sample.solr.repository.SolrPostRepository;
@@ -114,10 +114,10 @@ public class PostService extends BaseTransactionalService {
 	@Transactional(readOnly = true) // 読み取りのみの場合は指定する
 	public Page<FrontPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		Assert.notNull(criteria, "criteria must not be null");
-		Page<TPostDto> postDtoPage = postRepository.findAll(criteria, pageable);
+		Page<TPostRepositoryDto> postDtoPage = postRepository.findAll(criteria, pageable);
 
 		List<FrontPostDto> list = Lists.newArrayList();
-		for (TPostDto postDto : postDtoPage.getData()) {
+		for (TPostRepositoryDto postDto : postDtoPage.getData()) {
 			var dto = ObjectMapperUtils.map(postDto, FrontPostDto.class);
 
 			dto.setImageUrlList(Lists.newArrayList());
@@ -141,7 +141,7 @@ public class PostService extends BaseTransactionalService {
 	 * @param input
 	 * @return
 	 */
-	public int create(final TPostDto tPostDto) {
+	public int create(final TPostRepositoryDto tPostDto) {
 		Assert.notNull(tPostDto, "input must not be null");
 		TPost tPost = postRepository.create(tPostDto);
 		return tPost.getPostId();
@@ -153,7 +153,7 @@ public class PostService extends BaseTransactionalService {
 	 * @param input
 	 * @return
 	 */
-	public void update(final TPostDto tPostDto) {
+	public void update(final TPostRepositoryDto tPostDto) {
 		Assert.notNull(tPostDto, "input must not be null");
 		postRepository.update(tPostDto);
 	}

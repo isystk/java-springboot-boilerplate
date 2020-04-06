@@ -24,10 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.common.collect.Lists;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.repository.TPostRepository;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
+import com.isystk.sample.web.admin.controller.html.post.regist.PostRegistForm;
 import com.isystk.sample.web.admin.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
@@ -79,6 +80,9 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 */
 	@GetMapping("{postId}")
 	public String editIndex(@ModelAttribute("postEditForm") PostEditForm form, Model model) {
+
+        // SessionAttributeを再生成する
+        model.addAttribute("postEditForm", new PostEditForm());
 
 		// 1件取得する
 		val post = postRepository.findById(form.getPostId());
@@ -172,7 +176,7 @@ public class PostEditHtmlController extends AbstractHtmlController {
 		}
 
 		// 入力値を詰め替える
-		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
+		val tPostDto = ObjectMapperUtils.map(form, TPostRepositoryDto.class);
 		// 投稿画像
 		List<TPostImage> tPostImageList = Lists.newArrayList();
 		if (form.getPostImageId() != null) {

@@ -22,9 +22,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.common.collect.Lists;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.entity.TPostTag;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import com.isystk.sample.web.front.service.PostService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 
@@ -127,7 +127,7 @@ public class MemberPostRegistHtmlController extends AbstractHtmlController {
 		}
 
 		// 入力値からDTOを作成する
-		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
+		val tPostDto = ObjectMapperUtils.map(form, TPostRepositoryDto.class);
 		// ログインユーザーID
 		tPostDto.setUserId(userHelper.getLoginUserId());
 		// 投稿画像

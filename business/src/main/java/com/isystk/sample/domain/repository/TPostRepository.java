@@ -28,9 +28,9 @@ import com.isystk.sample.domain.dto.TPostTagCriteria;
 import com.isystk.sample.domain.dto.TUserCriteria;
 import com.isystk.sample.domain.entity.TPost;
 import com.isystk.sample.domain.entity.TPostImage;
-import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 
 import lombok.val;
 
@@ -59,24 +59,22 @@ public class TPostRepository extends BaseRepository {
 	 * @param pageable
 	 * @return
 	 */
-	public Page<TPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
+	public Page<TPostRepositoryDto> findAll(TPostCriteria criteria, Pageable pageable) {
 		var options = createSelectOptions(pageable);
 		// ページングを指定する
-		return pageFactory.create(
-			convertTPostDto(
+		return pageFactory.create(convertDto(
 				tPostDao.findAll(criteria,
 					options.count(),
 					toList()
-				)
-			), pageable, options.getCount());
+				)), pageable, options.getCount());
 	}
 
 	/**
-	 * TPost からTPostDto に変換します。
+	 * RepositoryDto に変換します。
 	 * @param tPostList
 	 * @return
 	 */
-	private List<TPostDto> convertTPostDto(List<TPost> tPostList) {
+	private List<TPostRepositoryDto> convertDto(List<TPost> tPostList) {
 
 		// tPostListからPostIdのListを抽出
 		List<Integer> postIdList = tPostList.stream().map(e -> Integer.valueOf(e.getPostId())).collect(Collectors.toList());
@@ -100,8 +98,8 @@ public class TPostRepository extends BaseRepository {
 		Map<Integer, List<TUser>> tUserMap = tUserDao.findAll(tUserCriteria).stream().collect(Collectors.groupingBy(TUser::getUserId));
 
 		// tPostList を元に、postDtoList へコピー
-		List<TPostDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, TPostDto.class);
-		for (TPostDto postDto : postDtoList) {
+		List<TPostRepositoryDto> postDtoList = ObjectMapperUtils.mapAll(tPostList, TPostRepositoryDto.class);
+		for (TPostRepositoryDto postDto : postDtoList) {
 			postDto.setTPostImageList(tPostImageMap.get(postDto.getPostId()));
 			postDto.setTPostTagList(tPostTagMap.get(postDto.getPostId()));
 			postDto.setTUser(tUserMap.get(postDto.getUserId()).get(0));
@@ -116,10 +114,10 @@ public class TPostRepository extends BaseRepository {
 	 * @param criteria
 	 * @return
 	 */
-	public Optional<TPostDto> findOne(TPostCriteria criteria) {
+	public Optional<TPostRepositoryDto> findOne(TPostCriteria criteria) {
 		var data= tPostDao.findOne(criteria)
 				.orElseThrow(() -> new NoDataFoundException(criteria + "のデータが見つかりません。"));
-		return Optional.ofNullable(convertTPostDto(Lists.newArrayList(data)).get(0));
+		return Optional.ofNullable(convertDto(Lists.newArrayList(data)).get(0));
 	}
 
 	/**
@@ -127,9 +125,9 @@ public class TPostRepository extends BaseRepository {
 	 *
 	 * @return
 	 */
-	public TPostDto findById(final Integer id) {
+	public TPostRepositoryDto findById(final Integer id) {
 		var data= tPostDao.selectById(id).orElseThrow(() -> new NoDataFoundException("post_id=" + id + " のデータが見つかりません。"));
-		return convertTPostDto(Lists.newArrayList(data)).get(0);
+		return convertDto(Lists.newArrayList(data)).get(0);
 	}
 
 	/**
@@ -138,7 +136,7 @@ public class TPostRepository extends BaseRepository {
 	 * @param post
 	 * @return
 	 */
-	public TPost create(final TPostDto tPostDto) {
+	public TPost create(final TPostRepositoryDto tPostDto) {
 		val time = DateUtils.getNow();
 
 		// 投稿テーブル
@@ -172,7 +170,7 @@ public class TPostRepository extends BaseRepository {
 	 * @param post
 	 * @return
 	 */
-	public TPost update(final TPostDto tPostDto) {
+	public TPost update(final TPostRepositoryDto tPostDto) {
 		val time = DateUtils.getNow();
 
 		val post = tPostDao.selectById(tPostDto.getPostId())

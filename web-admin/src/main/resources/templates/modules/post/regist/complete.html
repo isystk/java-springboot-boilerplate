@@ -3,11 +3,11 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="layouts/layout">
 	<head layout:fragment="layouts/layout::header">
-	<title>投稿完了画面｜Sample</title>
+	<title>投稿登録完了｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="layouts/sidebar :: sidebar ('user', 'post')"></div>
+		<div th:replace="layouts/sidebar :: sidebar ('post', 'post')"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">

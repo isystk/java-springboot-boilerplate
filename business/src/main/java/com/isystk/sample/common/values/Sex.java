@@ -22,4 +22,20 @@ public enum Sex implements Values {
 	private final Integer code;
 	private final String text;
 
+	/**
+	 * コードに一致する値を取得します。
+	 * @param code
+	 * @return
+	 */
+	public static Sex getValue(Integer code) {
+		if (code == null) {
+			return null;
+		}
+		for (Sex div : values()) {
+			if (div.getCode().equals(code)) {
+				return div;
+			}
+		}
+		return null;
+	}
 }
