@@ -24,7 +24,7 @@ logging:
     com.isystk.sample: INFO
 
 server:
-  address: example.com
+  address: localhost
 
 ####
 # アプリケーションの設定

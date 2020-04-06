@@ -92,7 +92,7 @@ $ ./dc.sh start
 #### Eclipse用の初期設定
 ```bash
 $ cd /path/to/java-springboot-sample
-$ ./mvnw -X -U eclipse:clean eclipse:eclipse -P ut -f pom.xml
+$ ./mvnw -X -U eclipse:clean eclipse:eclipse -f pom.xml
 ```
 
 #### 実行ファイルの生成

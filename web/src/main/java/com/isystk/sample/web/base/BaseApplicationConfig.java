@@ -3,34 +3,17 @@ package com.isystk.sample.web.base;
 import static com.isystk.sample.common.Const.*;
 
 import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.Ordered;
-import org.springframework.format.FormatterRegistry;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
-import org.springframework.web.filter.ForwardedHeaderFilter;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
-import org.springframework.web.filter.ShallowEtagHeaderFilter;
-import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.i18n.CookieLocaleResolver;
-import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
-import org.thymeleaf.dialect.IDialect;
-import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
-import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
-import org.thymeleaf.spring5.SpringTemplateEngine;
 
 import com.isystk.sample.common.dto.DefaultPageFactoryImpl;
 import com.isystk.sample.common.dto.PageFactory;
@@ -41,7 +24,6 @@ import com.isystk.sample.web.base.aop.SetDoubleSubmitCheckTokenInterceptor;
 import com.isystk.sample.web.base.aop.SetModelAndViewInterceptor;
 import com.isystk.sample.web.base.controller.api.resource.DefaultResourceFactoryImpl;
 import com.isystk.sample.web.base.controller.api.resource.ResourceFactory;
-import com.isystk.sample.web.base.filter.CheckOverflowFilter;
 import com.isystk.sample.web.base.filter.LoginUserTrackingFilter;
 
 import lombok.val;

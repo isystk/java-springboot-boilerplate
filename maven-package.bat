@@ -8,8 +8,6 @@ set PATH=%JAVA_HOME%\bin;%PATH%
 set PATH=%MAVEN_HOME%\bin;%PATH%
 
 call cd %~dp0
-call mvn clean package -Dmaven.test.skip=true -Dspring.profiles.active="local"
-rem call mvn clean package -Dmaven.test.skip=true -Dspring.profiles.active="staging"
-rem call mvn clean package -Dmaven.test.skip=true -Dspring.profiles.active="production"
+call mvn clean package -Dmaven.test.skip=true
 
 pause

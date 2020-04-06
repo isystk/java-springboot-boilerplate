@@ -11,7 +11,7 @@
 				</label>
 			</form>
 		</div>
-		<div id="logout" th:if="${LoginUser != ''}">
+		<div id="logout" th:if="${LoginUser != null}">
 			<a class="dropdown-item js-logout" href="#" >ログアウト</a>
 			<form name="logout" th:action="@{/logout}" method="post"></form>
 		</div>
