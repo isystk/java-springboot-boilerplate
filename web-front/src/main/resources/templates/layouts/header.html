@@ -5,11 +5,15 @@
 			<a href="#"><i class="fas fa-bars"></i></a>
 		</div>
 		<div class="search">
-			<form role="search" method="get" action="#">
+			<form role="search" method="get" action="/">
 				<label>
-					<input type="search" placeholder="検索ワードを入力" value="" name="s">
+					<input type="search" placeholder="検索ワードを入力" value="" name="freeword">
 				</label>
 			</form>
+		</div>
+		<div id="logout" th:if="${LoginUser != ''}">
+			<a class="dropdown-item js-logout" href="#" >ログアウト</a>
+			<form name="logout" th:action="@{/logout}" method="post"></form>
 		</div>
 	</header>
 

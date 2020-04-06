@@ -46,6 +46,8 @@ public interface Const {
 
 	String MAV_PULLDOWN_OPTION = "PulldownOption";
 
+	String MAV_LOGIN_USER = "LoginUser";
+
 //    String MAV_CODE_CATEGORIES = "CodeCategories";
 
 	/** ---- URLs ---- **/

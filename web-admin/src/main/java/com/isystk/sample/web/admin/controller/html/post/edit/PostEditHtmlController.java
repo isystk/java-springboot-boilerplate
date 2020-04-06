@@ -79,10 +79,10 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("{postId}")
-	public String editIndex(@ModelAttribute("postEditForm") PostEditForm form, Model model) {
-
-        // SessionAttributeを再生成する
-        model.addAttribute("postEditForm", new PostEditForm());
+	public String editIndex(@ModelAttribute PostEditForm form, Model model) {
+//
+//        // SessionAttributeを再生成する
+//        model.addAttribute("postEditForm", new PostEditForm());
 
 		// 1件取得する
 		val post = postRepository.findById(form.getPostId());
@@ -128,7 +128,7 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "confirm")
-	public String editConfirm(@Validated @ModelAttribute("postEditForm") PostEditForm form, BindingResult br,
+	public String editConfirm(@Validated @ModelAttribute PostEditForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる
@@ -150,7 +150,7 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "back")
-	public String editBack(@Validated @ModelAttribute("postEditForm") PostEditForm form, BindingResult br,
+	public String editBack(@Validated @ModelAttribute PostEditForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 		return showEditIndex(form, model);
 	}
@@ -166,7 +166,7 @@ public class PostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "complete")
-	public String updateComplete(@Validated @ModelAttribute("postEditForm") PostEditForm form, BindingResult br,
+	public String updateComplete(@Validated @ModelAttribute PostEditForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる

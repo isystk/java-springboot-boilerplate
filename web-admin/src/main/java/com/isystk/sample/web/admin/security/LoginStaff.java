@@ -29,4 +29,9 @@ public class LoginStaff extends User implements UserIdAware {
 		return String.valueOf(this.staff.getStaffId());
 	}
 
+	@Override
+	public String getUserName() {
+		return String.valueOf(this.staff.getFamilyName()) + " " + String.valueOf(this.staff.getName());
+	}
+
 }

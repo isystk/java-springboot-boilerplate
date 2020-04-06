@@ -21,6 +21,11 @@
 		<!--link /-->
 	</head>
 	<body class="hold-transition sidebar-mini">
+		<p class="headerSt" th:if="${!@env.isProduction()}" >
+			<th:block th:if="${@env.isStaging()}">ステージング環境</th:block>
+			<th:block th:if="${@env.isLocal()}">ローカル環境</th:block>
+			<span style="float: right;" onclick="javascript:$(this).closest('p').remove();">非表示</span>
+		</p>
 		<div class="wrapper">
 			<!--/* ヘッダー */-->
 			<div layout:fragment="header" th:remove="tag">

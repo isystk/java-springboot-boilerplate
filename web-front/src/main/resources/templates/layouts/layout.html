@@ -21,6 +21,11 @@
 		<!--link /-->
 	</head>
 	<body >
+		<p class="headerSt" th:if="${!@env.isProduction()}" >
+			<th:block th:if="${@env.isStaging()}">ステージング環境</th:block>
+			<th:block th:if="${@env.isLocal()}">ローカル環境</th:block>
+			<span style="float: right;" onclick="javascript:$(this).closest('p').remove();">非表示</span>
+		</p>
 		<div class="wrap">
 			<!--/* ヘッダー */-->
 			<div layout:fragment="header" th:remove="tag">
@@ -65,5 +70,13 @@
 			<script type="text/javascript" th:src="@{/static/js/lib/mixins.js}"></script>
 		</div>
 		<div layout:fragment="scripts" th:remove="tag" />
+		<script type="text/javascript" th:inline="javascript">
+			$(document).ready(function() {
+				// ログアウト
+				$(".js-logout").bind("click", function() {
+					$("form[name='logout']").submit();
+				});
+			});
+		</script>
 	</body>
 </html>

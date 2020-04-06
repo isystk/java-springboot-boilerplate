@@ -10,12 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -56,15 +53,15 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	@Autowired
 	MemberPostEditFormValidator memberPostFormValidator;
 
-    @ModelAttribute("memberPostForm")
-    public MemberPostEditForm memberPostForm() {
-        return new MemberPostEditForm();
-    }
+	@ModelAttribute("memberPostEditForm")
+	public MemberPostEditForm memberPostEditForm() {
+		return new MemberPostEditForm();
+	}
 
-    @InitBinder("memberPostForm")
-    public void validatorBinder(WebDataBinder binder) {
-        binder.addValidators(memberPostFormValidator);
-    }
+	@InitBinder("memberPostEditForm")
+	public void validatorBinder(WebDataBinder binder) {
+		binder.addValidators(memberPostFormValidator);
+	}
 
 	@Override
 	public String getFunctionName() {
@@ -79,7 +76,10 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@GetMapping("{postId}")
-	public String editIndex(@ModelAttribute("memberPostForm") MemberPostEditForm form, Model model) {
+	public String editIndex(@ModelAttribute MemberPostEditForm form, Model model) {
+
+//		// SessionAttributeを再生成する
+//		model.addAttribute("memberPostEditForm", new MemberPostEditForm());
 
 		// 1件取得する
 		val post = postRepository.findById(form.getPostId());
@@ -113,7 +113,7 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "confirm")
-	public String editConfirm(@Validated @ModelAttribute("memberPostForm") MemberPostEditForm form, BindingResult br,
+	public String editConfirm(@Validated @ModelAttribute MemberPostEditForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		// 入力チェックエラーがある場合は、元の画面にもどる
 		if (br.hasErrors()) {
@@ -132,7 +132,7 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "back")
-	public String editBack(@Validated @ModelAttribute("memberPostForm") MemberPostEditForm form, BindingResult br,
+	public String editBack(@Validated @ModelAttribute MemberPostEditForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 		return "modules/member/post/edit/index";
 	}
@@ -148,7 +148,7 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 	 * @return
 	 */
 	@PutMapping(params = "complete")
-	public String updateComplete(@Validated @ModelAttribute("memberPostForm") MemberPostEditForm form, BindingResult br,
+	public String updateComplete(@Validated @ModelAttribute MemberPostEditForm form, BindingResult br,
 			SessionStatus sessionStatus, RedirectAttributes attributes) {
 
 		// 入力チェックエラーがある場合は、元の画面にもどる

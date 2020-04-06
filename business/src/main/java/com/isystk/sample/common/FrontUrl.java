@@ -24,6 +24,10 @@ public class FrontUrl {
 
 	public static final String ENTRY_REGIST = "/entry/regist";
 
+	public static final String ENTRY_REMIND = "/entry/remind";
+
+	public static final String ENTRY_REMIND_CONFIG = "/entry/remind/config";
+
 	/** ---- APIｓ ---- **/
 
 	public static final String API_V1_POST = "/api/v1/post";
