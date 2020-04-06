@@ -8,8 +8,8 @@ set PATH=%JAVA_HOME%\bin;%PATH%
 set PATH=%MAVEN_HOME%\bin;%PATH%
 
 call cd %~dp0
-rem java -jar  -Dspring.profiles.active=local web-front/target/web-front.jar
-java -jar  -Dspring.profiles.active=staging web-front/target/web-front.jar
+java -jar  -Dspring.profiles.active=local web-front/target/web-front.jar
+rem java -jar  -Dspring.profiles.active=staging web-front/target/web-front.jar
 rem java -jar  -Dspring.profiles.active=production web-front/target/web-front.jar
 
 pause
