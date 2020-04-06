@@ -16,10 +16,10 @@ import com.isystk.sample.domain.dao.MPostTagDao;
 import com.isystk.sample.domain.dto.MPostTagCriteria;
 import com.isystk.sample.domain.dto.TPostCriteria;
 import com.isystk.sample.domain.entity.MPostTag;
-import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.repository.TPostRepository;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.repository.SolrPostRepository;
 
@@ -66,7 +66,7 @@ public class SolrPostService extends BaseTransactionalService {
 		}
 
 		List<SolrPost> solrPostList = Lists.newArrayList();
-		for (TPostDto tPostDto : postPage.getData()) {
+		for (TPostRepositoryDto tPostDto : postPage.getData()) {
 			SolrPost solrPost = ObjectMapperUtils.map(tPostDto, SolrPost.class);
 
 			// 投稿画像データを詰める

@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
+	<title>メールテンプレート詳細｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="sidebar">
+		<div th:replace="layouts/sidebar :: sidebar ('system', 'mail')"></div>
+	</div>
+	<div layout:fragment="content-header">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1>メールテンプレート詳細</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/system/mail/}">メールテンプレート一覧</a></li>
+					<li class="breadcrumb-item active">メールテンプレート詳細</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div>
+	<div layout:fragment="content">
+
+		<div class="card card-purple">
+			<div class="card-body">
+				<div th:object="${mMailTemplate}">
+					<input th:replace="fragments/labelField :: input ('メールテンプレートID', *{mailTemplateId}, 'col-md-6')" />
+					<input th:replace="fragments/labelField :: input ('メールテンプレート区分', *{mailTemplateDiv.text}, 'col-md-6')" />
+					<input th:replace="fragments/labelField :: input ('タイトル', *{title}, 'col-md-6')" />
+					<input th:replace="fragments/labelField :: input ('本文', *{text}, 'col-md-6')" />
+				</div>
+			</div>
+			<div class="card-footer clearfix row">
+				<div class="col-md-8" >
+					<a class="btn btn-secondary" th:href="@{/system/mail/}">一覧に戻る</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+		</script>
+	</div>
+</body>
+</html>

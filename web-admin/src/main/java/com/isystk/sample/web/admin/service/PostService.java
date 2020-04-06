@@ -6,8 +6,8 @@ import org.springframework.util.Assert;
 
 import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.domain.entity.TPost;
-import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.repository.TPostRepository;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 
 @Service
 public class PostService extends BaseTransactionalService {
@@ -21,7 +21,7 @@ public class PostService extends BaseTransactionalService {
 	 * @param input
 	 * @return
 	 */
-	public TPost create(final TPostDto tPostDto) {
+	public TPost create(final TPostRepositoryDto tPostDto) {
 		Assert.notNull(tPostDto, "input must not be null");
 		return postRepository.create(tPostDto);
 	}
@@ -32,7 +32,7 @@ public class PostService extends BaseTransactionalService {
 	 * @param input
 	 * @return
 	 */
-	public TPost update(final TPostDto tPostDto) {
+	public TPost update(final TPostRepositoryDto tPostDto) {
 		Assert.notNull(tPostDto, "input must not be null");
 		return postRepository.update(tPostDto);
 	}

@@ -26,10 +26,10 @@ import com.google.common.collect.Lists;
 import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.entity.TPostDto;
 import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.repository.TPostRepository;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import com.isystk.sample.web.front.controller.html.member.post.edit.MemberPostEditForm;
 import com.isystk.sample.web.front.controller.html.member.post.edit.MemberPostEditFormValidator;
 import com.isystk.sample.web.front.service.PostService;
@@ -158,7 +158,7 @@ public class MemberPostEditHtmlController extends AbstractHtmlController {
 		}
 
 		// 入力値を詰め替える
-		val tPostDto = ObjectMapperUtils.map(form, TPostDto.class);
+		val tPostDto = ObjectMapperUtils.map(form, TPostRepositoryDto.class);
 		// 投稿画像
 		List<TPostImage> tPostImageList = Lists.newArrayList();
 		if (form.getPostImageId() != null) {

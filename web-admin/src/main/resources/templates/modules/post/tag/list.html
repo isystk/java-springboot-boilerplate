@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+		layout:decorate="layouts/layout">
+	<head layout:fragment="layouts/layout::header">
+	<title>投稿タグ一覧｜Sample</title>
+</head>
+<body>
+	<div layout:fragment="sidebar">
+		<div th:replace="layouts/sidebar :: sidebar ('post', 'tag')"></div>
+	</div>
+	<div layout:fragment="content-header">
+		<div class="row mb-2">
+			<div class="col-sm-6">
+				<h1>投稿タグ一覧</h1>
+			</div><!-- /.col -->
+			<div class="col-sm-6">
+				<ol class="breadcrumb float-sm-right">
+					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+					<li class="breadcrumb-item active">投稿タグ一覧</li>
+				</ol>
+			</div><!-- /.col -->
+		</div><!-- /.row -->
+	</div>
+	<div layout:fragment="content">
+
+		<div class="card card-purple">
+			<!-- .card-header -->
+			<div class="card-header">
+				<h3 class="card-title">検索条件</h3>
+			</div>
+			<!-- /.card-header -->
+			<!-- form start -->
+			<form th:action="@{/post/tag/}" th:method="get" th:object="${postTagSearchForm}">
+				<input type="hidden" name="page" value="1" />
+				<div class="card-body">
+
+					<div class="form-group">
+						<div class="control-group">
+							<input th:replace="fragments/inputField :: input ('text', '投稿タグ名', 'postTagName', 'col-sm-10', 100)" />
+						</div>
+					</div>
+				</div>
+				<!-- /.card-body -->
+
+				<div class="card-footer text-center">
+					<button type="submit" class="btn btn-secondary">検索</button>
+				</div>
+
+			</form>
+		</div>
+
+		<form th:action="@{/post/tag}" th:method="get" th:object="${postTagSearchForm}" id="pagingForm">
+			<input type="hidden" name="postTagName" th:value="*{postTagName}">
+		</form>
+
+		<div class="row">
+			<div class="col-12">
+
+				<div class="card card-purple" th:if="${0 < pages.count}">
+					<!-- .card-header -->
+					<div class="card-header">
+						<h3 class="card-title">検索結果</h3>
+					</div>
+					<!-- /.card-header -->
+					<div class="card-body table-responsive p-0">
+						<table class="table table-hover" style="table-layout:fixed;">
+							<thead>
+								<tr>
+									<th>投稿タグID</th>
+									<th>投稿タグ名</th>
+									<th>作成日時</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="e : ${pages.data}">
+					 				<td th:text="*{e.postTagId}"></td>
+					 				<td th:text="*{e.name}"></td>
+					 				<td th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></td>
+					 			</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.card-body -->
+					<!-- .card-footer -->
+					<div class="card-footer clearfix ">
+						<div th:replace="fragments/paginator :: paginator (${pages}, '/post/tag')" />
+					</div>
+					<!-- /.card-footer -->
+				</div>
+				<!-- /.card -->
+			</div>
+		</div>
+
+	</div>
+	<div layout:fragment="scripts">
+		<script type="text/javascript" th:inline="javascript">
+		</script>
+	</div>
+</body>
+</html>

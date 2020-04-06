@@ -3,11 +3,11 @@
 		xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 		layout:decorate="layouts/layout">
 	<head layout:fragment="layouts/layout::header">
-	<title>投稿修正画面｜Sample</title>
+	<title>投稿修正｜Sample</title>
 </head>
 <body>
 	<div layout:fragment="sidebar">
-		<div th:replace="layouts/sidebar :: sidebar ('user', 'post')"></div>
+		<div th:replace="layouts/sidebar :: sidebar ('post', 'post')"></div>
 	</div>
 	<div layout:fragment="content-header">
 		<div class="row mb-2">
@@ -17,7 +17,7 @@
 			<div class="col-sm-6">
 				<ol class="breadcrumb float-sm-right" >
 					<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-					<li class="breadcrumb-item"><a th:href="@{/post/}">投稿管理</a></li>
+					<li class="breadcrumb-item"><a th:href="@{/post/}">投稿一覧</a></li>
 					<li class="breadcrumb-item active" >投稿修正</li>
 				</ol>
 			</div><!-- /.col -->
