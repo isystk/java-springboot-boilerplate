@@ -1,18 +1,18 @@
-# java-springboot-sample
+# 🌙 java-springboot-boilerplate
 
-![GitHub issues](https://img.shields.io/github/issues/isystk/java-springboot-sample)
-![GitHub forks](https://img.shields.io/github/forks/isystk/java-springboot-sample)
-![GitHub stars](https://img.shields.io/github/stars/isystk/java-springboot-sample)
-![GitHub license](https://img.shields.io/github/license/isystk/java-springboot-sample)
+![GitHub issues](https://img.shields.io/github/issues/isystk/java-springboot-boilerplate)
+![GitHub forks](https://img.shields.io/github/forks/isystk/java-springboot-boilerplate)
+![GitHub stars](https://img.shields.io/github/stars/isystk/java-springboot-boilerplate)
+![GitHub license](https://img.shields.io/github/license/isystk/java-springboot-boilerplate)
 
 ====
+
+## 📗 Description
 
 SpringBoot を利用したマルチモジュールのボイラープレートです。
 1. 管理画面(AdminLTE、ログイン/ログアウト、一覧/詳細/登録/更新/削除、CSV/Excel/PDFダウンロード)
 2. フロント画面（Vuejs、Solr検索API、ログイン/ログアウト）
 3. バッチ（Solrインデックス生成、CSV読み込み/DB登録）
-
-## Description
 
 ### ディレクトリ構造
 ```
@@ -47,7 +47,7 @@ SpringBoot を利用したマルチモジュールのボイラープレートで
 └── pom.xml （Maven用設定ファイル）
 ```
 
-## VS. 
+## 🖊️ VS. 
 
 ### 利用している技術
 - Docker
@@ -64,7 +64,7 @@ SpringBoot を利用したマルチモジュールのボイラープレートで
     - AdminLTE3
     - Vuejs2
 
-## Demo
+## 🌐 Demo
 
 管理画面
 ![管理画面](./admin.jpg "管理画面")
@@ -75,11 +75,11 @@ SpringBoot を利用したマルチモジュールのボイラープレートで
 テーブル構成.
 ![テーブル構成](./er.jpg "テーブル構成")
 
-## Requirement
+## 🎨 Requirement
 
 推奨するJDKのバージョン 8以上 
 
-## Usage
+## 💬 Usage
 
 #### Dockerの起動
 NginX、MySQL、Solrなどのサーバーを立ち上げる。
@@ -91,19 +91,19 @@ $ ./dc.sh start
 
 #### Eclipse用の初期設定
 ```bash
-$ cd /path/to/java-springboot-sample
+$ cd /path/to/java-springboot-boilerplate
 $ ./mvnw -X -U eclipse:clean eclipse:eclipse -f pom.xml
 ```
 
 #### 実行ファイルの生成
 
 ```bash
-$ cd /path/to/java-springboot-sample
+$ cd /path/to/java-springboot-boilerplate
 $ ./mvnw clean package -Dmaven.test.skip=true
 ```
 
 ```bash
-$ cd /path/to/java-springboot-sample
+$ cd /path/to/java-springboot-boilerplate
 # bootrun admin application
 $ java -jar web-admin/target/web-admin.jar
 # bootrun front application
@@ -114,7 +114,7 @@ $ java -jar web-front/target/web-front.jar
 
 ```bash
 $ # bootrun batch application
-$ cd /path/to/java-springboot-sample
+$ cd /path/to/java-springboot-boilerplate
 $ java -jar batch/target/batch.jar "--job=solrRegistJob"
 ```
 
@@ -130,13 +130,13 @@ $ java -jar batch/target/batch.jar "--job=solrRegistJob"
 | Solr| http://localhost:8983/solr/|
 | MailHog| http://localhost:8025/|
 
-## Install
+## 📦 Install
 
 ### 開発環境構築
 
 #### ソースのダウンロード
 ```bash
-$ git clone https://github.com/isystk/java-springboot-sample.git
+$ git clone https://github.com/isystk/java-springboot-boilerplate.git
 ```
 
 #### 必要な設定（Eclipseの場合）
@@ -160,15 +160,15 @@ docker\mysql\doma-gen\lib\doma-2.27.0.jar
 ##### MacOSXの場合
 * デフォルトで`unix:///var/run/docker.sock`に接続できる。
 
-## Contribution
+## 🔧 Contribution
 
-1. Fork it ( http://github.com/isystk/java-springboot-sample/fork )
+1. Fork it ( http://github.com/isystk/java-springboot-boilerplate/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
 5. Create new Pull Request
 
-## 参考
+## 🔗 参考
 
 | プロジェクト| 概要|
 | :---------------------------------------| :-------------------------------|
@@ -186,11 +186,11 @@ docker\mysql\doma-gen\lib\doma-2.27.0.jar
 | [Spock](http://spockframework.org/)| テストフレームワーク|
 | [Mockito](http://site.mockito.org/)| モッキングフレームワーク |
 
-## Licence
+## 🎫 Licence
 
-[MIT](https://github.com/isystk/java-springboot-sample/blob/master/LICENSE)
+[MIT](https://github.com/isystk/java-springboot-boilerplate/blob/master/LICENSE)
 
-## Author
+## 👀 Author
 
 [isystk](https://github.com/isystk)
 

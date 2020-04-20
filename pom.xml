@@ -9,7 +9,7 @@
 	<packaging>pom</packaging>
 	
 	<name>parent</name>
-	<description>isystk's Java SpringBoot Sample</description>
+	<description>isystk's Java SpringBoot Boilerplate</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
