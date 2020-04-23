@@ -185,6 +185,10 @@ docker\mysql\doma-gen\lib\doma-2.27.0.jar
 | [Ehcache](http://www.ehcache.org/)| キャッシュライブラリ|
 | [Spock](http://spockframework.org/)| テストフレームワーク|
 | [Mockito](http://site.mockito.org/)| モッキングフレームワーク |
+| [AdminLTE Docs](https://adminlte.io/docs/2.4/installation)| AdminLTE Docs|
+| [Bootstrap4 日本語リファレンス](https://getbootstrap.jp/docs/4.4/getting-started/introduction/)| Bootstrap4 日本語リファレンス|
+| [アイコン（fontawesome）](https://fontawesome.com/icons?d=gallery)| アイコン（fontawesome）|
+
 
 ## 🎫 Licence
 
