@@ -1,4 +1,4 @@
-# 🌙 java-springboot-gradle
+# 🌙 java-springboot-boilerplate
 
 ====
 
@@ -133,7 +133,7 @@ $ aws --endpoint-url http://localhost:9090 --profile isystk s3 cp ./test.txt s3:
 #### アプリケーションの起動
 
 ```bash
-$ cd /path/to/java-springboot-gradle
+$ cd /path/to/java-springboot-boilerplate
 
 # bootrun admin application
 $ ./gradlew web-admin::bootRun
@@ -168,7 +168,9 @@ test@sample.com / password
 
 #### ソースのダウンロード
 ```bash
-$ git clone https://github.com/isystk/java-springboot-gradle.git
+$ git clone https://github.com/isystk/java-springboot-boilerplate.git
+$ git submodule init
+$ git submodule update
 ```
 
 #### InteliJ IDEA のインストール
@@ -189,7 +191,7 @@ $ brew cask install intellij-idea-ce
 
 ## 🔧 Contribution
 
-1. Fork it ( http://github.com/isystk/java-springboot-gradle/fork )
+1. Fork it ( http://github.com/isystk/java-springboot-boilerplate/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -219,7 +221,7 @@ $ brew cask install intellij-idea-ce
 
 ## 🎫 Licence
 
-[MIT](https://github.com/isystk/java-springboot-gradle/blob/master/LICENSE)
+[MIT](https://github.com/isystk/java-springboot-boilerplate/blob/master/LICENSE)
 
 ## 👀 Author
 
