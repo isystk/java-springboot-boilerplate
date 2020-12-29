@@ -1,0 +1,13 @@
+apply plugin: "org.springframework.boot"
+
+bootJar {
+  enabled = false
+}
+
+jar {
+  enabled = true
+}
+
+dependencies {
+
+}

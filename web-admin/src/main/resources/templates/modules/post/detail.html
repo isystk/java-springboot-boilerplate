@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>投稿詳細｜Sample</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('post', 'post')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>投稿詳細</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/post/}">投稿一覧</a></li>
+        <li class="breadcrumb-item active">投稿詳細</li>
+      </ol>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</div>
+<div layout:fragment="content">
+
+  <div class="card card-purple">
+    <div class="card-body">
+      <div th:object="${post}">
+        <input
+            th:replace="fragments/labelField :: input ('投稿者', ${user['__familyName__']}, 'col-md-6')"/>
+        <input th:replace="fragments/labelField :: input ('タイトル', *{title}, 'col-md-6')"/>
+        <div class="form-group row">
+          <label class="col-md-2 control-label">写真</label>
+          <div class="col-md-10">
+            <div class="row selectedPhotoList">
+              <div class="col-2 mr-3" th:each="e, s : *{tPostImageList}">
+                <img th:src="${@img.url(e.imageId, '_square')}" width="120px"/>
+              </div>
+            </div>
+          </div>
+        </div>
+        <input th:replace="fragments/labelField :: input ('本文', *{text}, 'col-md-6')"/>
+      </div>
+    </div>
+    <div class="card-footer clearfix row">
+      <div class="col-md-8">
+        <a class="btn btn-secondary" th:href="@{/post/}">一覧に戻る</a>
+      </div>
+      <div class="col-md-4 text-right">
+        <form th:action="@{/post/{id}/(id=*{postId})}" th:method="delete">
+          <a class="btn btn-secondary" th:href="@{/post/edit/{id}/(id=*{postId})}">变更</a>
+          <button type="submit" class="btn btn-danger js-delete">削除</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div layout:fragment="scripts">
+  <script type="text/javascript" th:inline="javascript">
+			$(document).ready(function() {
+				$('.js-delete').click(function(e) {
+					if (!confirm('削除します。よろしいですか？')) {
+						e.preventDefault();
+						return false;
+					}
+				});
+			});
+
+  </script>
+</div>
+</body>
+</html>

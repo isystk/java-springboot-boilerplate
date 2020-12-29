@@ -1,0 +1,12 @@
+spring:
+  profiles: production
+  profiles.include:
+    - common-production
+
+server:
+  address: www.isystk.work
+
+####
+# アプリケーションの設定
+application:
+  imageUploadLocation: /var/www/html/thumb

@@ -1,0 +1,5 @@
+# 共通の設定を定義する
+spring:
+  profiles: local
+  profiles.include:
+    - common-local

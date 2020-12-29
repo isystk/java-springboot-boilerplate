@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+
+/* ローディング */
+#site_loader_overlay {
+position: fixed;
+background: #fff;
+background: rgba(255,255,255,1);
+top: 0px;
+left: 0px;
+bottom: 0px;
+right: 0px;
+z-index: 99999;
+opacity: 0.5;
+}
+#site_loader_overlay .site_loader_spinner {
+width: 60px;
+height: 60px;
+margin-top: -30px;
+margin-left: -30px;
+position: absolute;
+top: 50%;
+left: 50%;
+background-image: url(../images/loading.gif);
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+}
+
+/* 環境表示用ヘッダー */
+.headerSt {
+position: fixed;
+z-index: 9999;
+margin: 0;
+background: #ff0048;
+width: 100%;
+text-align: center;
+font-weight: bold;
+font-size: 0.8em;
+line-height: 1.6;
+color: #fff;
+}
+
+.selectedPhotoList a.js-close:after {
+content: "";
+background: url(../images/close.png) no-repeat;
+background-size: 25px auto;
+width: 25px;
+height: 25px;
+display: block;
+position: absolute;
+right: -12px;
+top: -12px;
+}
+.selectedPhotoList a{
+opacity: 1;
+}
+.selectedPhotoList a:hover{
+opacity: 0.8;
+}

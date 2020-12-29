@@ -1,0 +1,38 @@
+# 共通の設定を定義する
+spring:
+  profiles:
+    include: common
+    # デフォルトを明示的に指定する
+    # ローカル環境以外は環境変数でプロファイルを切り替える
+    default: local
+    active: local
+  main:
+    # DataValueProcessorのBean上書きのため暫定対応
+    allow-bean-definition-overriding: true
+  mvc.hiddenmethod.filter.enabled: true
+
+doma:
+  dialect: mysql
+  # 小文字のスネークケースに変換する（firstName → first_name）
+  naming: SNAKE_LOWER_CASE
+  # バルクインサート・アップデートのサイズ
+  batch-size: 1000
+
+logging:
+  pattern:
+    # MDCで設定した値を出力する
+    level: "[%X{FUNCTION_NAME}:%X{X-Track-Id}:%X{LOGIN_USER_ID}] %5p"
+
+server:
+  address: 127.0.0.1
+  port: 8080
+  compression:
+    enabled: true
+  servlet:
+    session:
+      # セッションを永続化してTomcat再起動後もログイン状態とする
+      persistent: true
+      timeout: 7200
+      # URLにセッションIDを出力しないようにする
+      tracking-modes: cookie
+    context-path: /

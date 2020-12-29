@@ -1,0 +1,407 @@
+﻿# A5:ER FORMAT:10
+# A5:ER ENCODING:UTF8
+# A5:ER Mk-1 Copyright (C)2007 m.matsubara
+# A5:SQL Mk-2 Copyright (C)1997 m.matsubara
+#  http://www.wind.sannet.ne.jp/m_matsu/developer/a5m2/
+
+[Manager]
+ProjectName=sample
+Author=isystk
+MaxEntityRowShow=1000
+ReadOnlyRecommend=0
+Page=サンプル
+PageInfo="サンプル",2,"A3Landscape",$FFFFFF
+Domain=TINYINT=TINYINT(1)
+Domain=VERSION=BIGINT
+Domain=PASSWORD=@VARCHAR(100)
+Domain=USER_NAME=@VARCHAR(20)
+Domain=T_BOX=@VARCHAR(100)
+Domain=TEXT=@VARCHAR(500)
+Domain=MAIL_TEXT=@VARCHAR(700)
+Domain=PATH=@VARCHAR(512)
+Domain=MEMO=@VARCHAR(700)
+Domain=TEL=@VARCHAR(13)
+Domain=ZIP=@VARCHAR(11)
+Domain=DIV=@INT(11)
+Domain=TYPE=@INT(11)
+Domain=AREA=@VARCHAR(100)
+Domain=URL=@VARCHAR(256)
+Domain=MAIL=@VARCHAR(256)
+Domain=ID=@INT(11)
+Domain=AUTO_INC_ID=INT(11) auto_increment
+Domain=UUID=@INT(11)
+Domain=AUTH=TEXT
+Domain=HISTORY_URL=TEXT
+Domain=*BLOB=BLOB
+LogicalView=0
+DecodeDomain=0
+ViewModePageIndividually=1
+ViewMode=2
+ViewFormat=0
+UseNondependenceDashLine=0
+FontName=Tahoma
+FontSize=6
+PaperSize=A3Landscape
+HeaderLeft=
+HeaderCenter=
+HeaderRight=
+FooterLeft=
+FooterCenter=
+FooterRight=
+ShowPageoutRelation=1
+RDBMSType=5
+RDBMSTypeName=MySQL
+CreateFk=1
+FKParentIndex=1
+DefaultPkName=%0:s_PKC
+DefaultPkIndexName=%0:s_PKI
+DefaultIndexName=%0:s_IX%1:d
+DefaultFkName=%0:s_FK%1:d
+SqlSeparator=0
+ShowTag=1
+ShowCommonAttributes=0
+
+[Entity]
+PName=M_MAIL_TEMPLATE
+LName=メールテンプレート
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=800
+Top=1200
+Field="テンプレートID","MAIL_TEMPLATE_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="テンプレート区分","MAIL_TEMPLATE_DIV","*DIV","NOT NULL",,"","",$FFFFFFFF,""
+Field="タイトル","TITLE","@VARCHAR(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="本文","TEXT","@VARCHAR(500)","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200403220805
+Position="サンプル",800,1200,421,207
+
+[Entity]
+PName=T_STAFF
+LName=管理者
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=200
+Top=1200
+Field="管理者ID","STAFF_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="メールアドレス","EMAIL","*MAIL","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワード","PASSWORD","*PASSWORD","NOT NULL",,"","",$FFFFFFFF,""
+Field="姓","FAMILY_NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="名","NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="姓（カナ）","FAMILY_NAME_KANA","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="名（カナ）","NAME_KANA","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="最終ログイン日時","LAST_LOGIN_TIME","@DATETIME",,,"","",$FFFFFFFF,""
+Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="削除フラグ","DELETE_FLG","*TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200325152714
+Position="サンプル",200,1200,398,451
+
+[Relation]
+Entity1=T_USER
+Entity2=T_USER_ONETIME_VALID
+RelationType1=2
+RelationType2=3
+Fields1=USER_ID
+Fields2=USER_ID
+Cardinarity1=
+Cardinarity2=
+Position="サンプル",0,549,9451,1640,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=55
+Bar2=945
+Bar3=164
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=T_USER
+Entity2=T_USER_ONETIME_PASS
+RelationType1=2
+RelationType2=3
+Fields1=USER_ID
+Fields2=USER_ID
+Cardinarity1=
+Cardinarity2=
+Position="サンプル",0,2288,7848,1562,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=229
+Bar2=785
+Bar3=156
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=T_USER_ONETIME_PASS
+LName=会員-パスワード変更
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=850
+Top=350
+Field="会員ID","USER_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ワンタイムキー","ONETIME_KEY","@CHAR(32)","NOT NULL",,"","",$FFFFFFFF,""
+Field="ワンタイム有効期限","ONETIME_VALID_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200224115113
+Position="サンプル",850,350,421,207
+
+[Relation]
+Entity1=T_POST
+Entity2=T_POST_TAG
+RelationType1=2
+RelationType2=3
+Fields1=POST_ID
+Fields2=POST_ID
+Cardinarity1=
+Cardinarity2=
+Position="サンプル",0,3620,6380,3040,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=362
+Bar2=638
+Bar3=304
+TermPos1=R
+TermPos2=R
+
+[Relation]
+Entity1=M_POST_TAG
+Entity2=T_POST_TAG
+RelationType1=2
+RelationType2=3
+Fields1=POST_TAG_ID
+Fields2=POST_TAG_ID
+Cardinarity1=
+Cardinarity2=
+Position="サンプル",0,3620,6380,2470,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=362
+Bar2=638
+Bar3=247
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=M_POST_TAG
+LName=投稿タグマスタ
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=1900
+Top=600
+Field="投稿タグID","POST_TAG_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="名称","NAME","@VARCHAR(20)","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="削除フラグ","DELETE_FLG","*TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200330164627
+Position="サンプル",1900,600,394,182
+
+[Entity]
+PName=T_POST_TAG
+LName=投稿タグID
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=1300
+Top=900
+Field="投稿ID","POST_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="投稿タグID","POST_TAG_ID","*ID","NOT NULL",1,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200224005345
+Position="サンプル",1300,900,402,224
+
+[Relation]
+Entity1=T_IMAGE
+Entity2=T_POST_IMAGE
+RelationType1=2
+RelationType2=3
+Fields1=IMAGE_ID
+Fields2=IMAGE_ID
+Cardinarity1=
+Cardinarity2=
+Position="サンプル",0,3600,6400,4100,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=360
+Bar2=640
+Bar3=410
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=T_IMAGE
+LName=画像
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=1500
+Top=50
+Field="画像ID","IMAGE_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="削除フラグ","DELETE_FLG","*TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200227132347
+Position="サンプル",1500,50,334,404
+
+[Relation]
+Entity1=T_POST
+Entity2=T_POST_IMAGE
+RelationType1=2
+RelationType2=3
+Fields1=POST_ID
+Fields2=POST_ID
+Cardinarity1=
+Cardinarity2=
+Position="サンプル",0,2420,7580,3040,R,R
+Dependence=1
+Caption=
+PName=
+LineMode=0
+Bar1=242
+Bar2=758
+Bar3=304
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=T_POST_IMAGE
+LName=投稿画像
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=1300
+Top=600
+Field="投稿ID","POST_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="画像ID","IMAGE_ID","*ID","NOT NULL",1,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200224004958
+Position="サンプル",1300,600,398,220
+
+[Relation]
+Entity1=T_USER
+Entity2=T_POST
+RelationType1=2
+RelationType2=3
+Fields1=USER_ID
+Fields2=USER_ID
+Cardinarity1=
+Cardinarity2=
+Position="サンプル",0,3350,6650,1560,R,R
+Dependence=0
+Caption=
+PName=
+LineMode=0
+Bar1=335
+Bar2=665
+Bar3=156
+TermPos1=R
+TermPos2=R
+
+[Entity]
+PName=T_POST
+LName=投稿
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=800
+Top=600
+Field="投稿ID","POST_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="会員ID","USER_ID","*ID","NOT NULL",,"","",$FFFFFFFF,""
+Field="タイトル","TITLE","*T_BOX","NOT NULL",,"","",$FFFFFFFF,""
+Field="本文","TEXT","*TEXT","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="削除フラグ","DELETE_FLG","*TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200224005022
+Position="サンプル",800,600,389,500
+
+[Entity]
+PName=T_USER_ONETIME_VALID
+LName=会員-初期承認
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=900
+Top=50
+Field="会員ID","USER_ID","*ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="ワンタイムキー","ONETIME_KEY","@CHAR(32)","NOT NULL",,"","",$FFFFFFFF,""
+Field="ワンタイム有効期限","ONETIME_VALID_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200224003255
+Position="サンプル",900,50,411,207
+
+[Entity]
+PName=T_USER
+LName=会員
+Comment=
+TableOption=ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed
+Page=サンプル
+Left=150
+Top=50
+Field="会員ID","USER_ID","*AUTO_INC_ID","NOT NULL",0,"","",$FFFFFFFF,""
+Field="メールアドレス","EMAIL","*MAIL","NOT NULL",,"","",$FFFFFFFF,""
+Field="パスワード","PASSWORD","*PASSWORD","NOT NULL",,"","",$FFFFFFFF,""
+Field="姓","FAMILY_NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="名","NAME","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="姓（カナ）","FAMILY_NAME_KANA","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="名（カナ）","NAME_KANA","*USER_NAME","NOT NULL",,"","",$FFFFFFFF,""
+Field="郵便番号","ZIP","*ZIP",,,"","",$FFFFFFFF,""
+Field="都道府県","PREFECTURE_ID","@INT(11)",,,"","",$FFFFFFFF,""
+Field="市区町村","AREA","*AREA",,,"","",$FFFFFFFF,""
+Field="町名番地","ADDRESS","*T_BOX",,,"","",$FFFFFFFF,""
+Field="建物名","BUILDING","*T_BOX",,,"","",$FFFFFFFF,""
+Field="電話番号","TEL","*TEL",,,"","",$FFFFFFFF,""
+Field="性別","SEX","*DIV",,,"","",$FFFFFFFF,""
+Field="生年月日","BIRTHDAY","@DATE",,,"","",$FFFFFFFF,""
+Field="最終ログイン日時","LAST_LOGIN_TIME","@DATETIME",,,"","",$FFFFFFFF,""
+Field="ステータス","STATUS","*DIV","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録日時","REGIST_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="更新日時","UPDATE_TIME","@DATETIME","NOT NULL",,"","",$FFFFFFFF,""
+Field="削除フラグ","DELETE_FLG","*TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="楽観チェック用バージョン","VERSION","*VERSION","NOT NULL",,"1","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20200325152708
+Position="サンプル",150,50,487,673
