@@ -1,0 +1,12 @@
+spring:
+  profiles: staging
+  profiles.include:
+    - common-staging
+
+server:
+  address: stg.isystk.work
+
+####
+# アプリケーションの設定
+application:
+  imageUploadLocation: /var/www/html/thumb

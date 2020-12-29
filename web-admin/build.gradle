@@ -1,0 +1,25 @@
+apply plugin: "org.springframework.boot"
+
+bootJar {
+  launchScript()
+}
+
+bootRun {
+  // プロジェクトプロパティを引数として渡す
+  if (project.hasProperty("args")) {
+    args project.args.split(",")
+  }
+
+  // thymeleafの反映もホットリロードさせる
+  sourceResources sourceSets.main
+}
+
+dependencies {
+
+  implementation project(":business")
+  implementation project(":web")
+
+  /* webjars */
+  implementation("org.webjars:AdminLTE:${webjarAdminLTEVersion}")
+
+}

@@ -1,0 +1,14 @@
+spring:
+  profiles: local
+  profiles.include:
+    - common-local
+  thymeleaf:
+    cache: false
+
+server:
+  address: localhost
+
+####
+# アプリケーションの設定
+application:
+  imageUploadLocation: ../docker/nginx/public/thumb

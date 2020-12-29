@@ -1,0 +1,20 @@
+// 環境変数を読み込み
+def url = System.getenv()['DATASOURCE_URL']
+def user = System.getenv()['DATASOURCE_USER']
+def password = System.getenv()['DATASOURCE_PASSWORD']
+
+task datasource {
+  // 環境変数が空の場合はローカル開発環境とみなす
+  if (url == null) {
+    url = "jdbc:mysql://localhost:3306"
+  }
+  if (user == null) {
+    user = "root"
+  }
+  if (password == null) {
+    password = "password"
+  }
+  ext.url = url + "/sample?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&nullNamePatternMatchesAll=true"
+  ext.user = user
+  ext.password = password
+}

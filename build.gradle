@@ -1,0 +1,266 @@
+buildscript {
+  repositories {
+    mavenCentral()
+    jcenter()
+  }
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    // Kotlinを利用する場合はコメントアウトを外す
+//    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+//    classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+    classpath("mysql:mysql-connector-java:${mysqlJdbcVersion}")
+    classpath("com.avast.gradle:gradle-docker-compose-plugin:${dockerComposePluginVersion}")
+    classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${detektVersion}")
+    classpath("gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibPluginVersion}")
+  }
+}
+
+plugins {
+  id "org.flywaydb.flyway" version "${flywayVersion}"
+  id "io.gitlab.arturbosch.detekt" version "${detektVersion}"
+  id "org.seasar.doma.compile" version "${domaCompilerPluginVersion}"
+}
+
+subprojects {
+  // Kotlinを利用する場合は以下2つをコメントアウトする
+  apply plugin: "java"
+  apply plugin: "org.springframework.boot"
+  // Kotlinを利用しない場合は以下3つをコメントアウトする
+//  apply plugin: "kotlin"
+//  apply plugin: "kotlin-spring"
+//  apply plugin: "kotlin-kapt"
+  apply plugin: "io.spring.dependency-management"
+  apply plugin: "jacoco"
+  apply plugin: "com.google.cloud.tools.jib"
+  apply plugin: "org.flywaydb.flyway"
+  apply plugin: "org.seasar.doma.compile"
+
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+
+  // Kotlinを利用する場合はコメントアウトを外す
+//  compileKotlin {
+//    kotlinOptions {
+//      freeCompilerArgs = ["-Xjsr305=strict"]
+//      jvmTarget = "11"
+//    }
+//  }
+//
+//  compileTestKotlin {
+//    kotlinOptions {
+//      freeCompilerArgs = ["-Xjsr305=strict"]
+//      jvmTarget = "11"
+//    }
+//  }
+  /* enable junit 5 */
+  test {
+    useJUnitPlatform()
+  }
+
+  // Kotlinを利用する場合はコメントアウトを外す
+//  kapt {
+//    javacOptions {
+//      // Increase the max count of errors from annotation processors.
+//      // Default is 100.
+//      option("-Xmaxerrs", 500)
+//    }
+//  }
+
+//  // DomaのSQLファイルの出力先をresourcesからclassesに変更する（これがないとAuto-buildが失敗する）
+//  apply plugin: 'idea'
+////  idea.module.outputDir = compileJava.destinationDir
+//  idea.module.outputDir = file("$buildDir/classes/java/main/")
+//  idea.module.inheritOutputDirs = true
+
+  /* flyway settings */
+  apply from: "$rootDir/datasource.gradle"
+  flyway {
+    url = datasource.url
+    user = datasource.user
+    password = datasource.password
+    placeholderReplacement = false
+    locations = ["filesystem:src/main/resources/db/createTable", "filesystem:src/main/resources/db/insertData"]
+  }
+  /* flyway task */
+  flywayMigrate
+
+  repositories {
+    mavenCentral()
+    jcenter()
+    maven { url 'https://jitpack.io' }
+    maven { url 'http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/' }
+  }
+
+  dependencyManagement {
+    imports {
+      mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+      mavenBom("com.amazonaws:aws-xray-recorder-sdk-bom:${awsXRayVersion}")
+    }
+  }
+
+  dependencies {
+    // Kotlinを利用する場合はコメントアウトを外す
+//    /* kotlin */
+//    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+//    implementation("org.jetbrains.kotlin:kotlin-reflect")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+//    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
+
+    /* spring */
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:${thymeleafLayoutVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-aop")
+    implementation("org.springframework.data:spring-data-elasticsearch")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
+    implementation("org.springframework.session:spring-session-data-redis")
+    runtimeOnly("org.springframework.boot:spring-boot-devtools")
+
+    /* solr */
+    implementation("org.springframework.boot:spring-boot-starter-data-solr")
+
+    /* spring security */
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
+
+    /* mysql */
+    runtimeOnly("mysql:mysql-connector-java")
+
+    /* jedis */
+    implementation("redis.clients:jedis:${jedisVersion}")
+
+    /* javax.mail */
+    implementation("javax.mail:mail:${javaxMailVersion}")
+
+    /* Doma2 */
+    implementation("org.seasar.doma.boot:doma-spring-boot-starter:$springBootDomaVersion")
+    implementation("org.seasar.doma:doma-kotlin:${domaVersion}")
+    // Kotlinを利用する場合はコメントアウトを外す
+//    kapt("org.seasar.doma:doma-processor:${domaVersion}")
+    annotationProcessor("org.seasar.doma:doma-processor:${domaVersion}")
+
+    /* aws sdk */
+    implementation("com.amazonaws:aws-xray-recorder-sdk-core")
+    implementation("com.amazonaws:aws-xray-recorder-sdk-spring")
+    implementation("com.amazonaws:aws-java-sdk-s3:${awsSdkVersion}")
+
+    /*ApacheCommons*/
+    implementation("org.apache.commons:commons-lang3:$commonsLangVersion")
+    implementation("commons-io:commons-io:${commonsIoVersion}")
+    implementation("org.apache.commons:commons-pool2:${commonsPool2Version}")
+    implementation("org.apache.commons:commons-compress:${commonsCompressVersion}")
+    implementation("commons-collections:commons-collections:${commonsCollectionsVersion}")
+
+    /* modelmapper */
+    implementation("com.github.jmnarloch:modelmapper-spring-boot-starter:${modelmapperVersion}")
+
+    /* lombok */
+    compileOnly("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+    testCompileOnly("org.projectlombok:lombok:${lombokVersion}")
+    testAnnotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    /* google */
+    implementation("com.google.guava:guava:${googleGuavaVersion}")
+
+    /* thumbnailator */
+    implementation("net.coobird:thumbnailator:${thumbnailatorVersion}")
+
+    /* csv */
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:$jacksonVersion")
+
+    /* poi */
+    implementation("org.apache.poi:poi-ooxml:${poiOoxmlVersion}")
+
+    /* pdf */
+    implementation("net.sf.jasperreports:jasperreports:${jasperreportsVersion}")
+
+    /* tika */
+    implementation("org.apache.tika:tika-core:${apacheTikaVersion}")
+
+    /* xml */
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:${jacksonVersion}")
+
+//    /* json */
+//    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${jacksonVersion}")
+
+    /* test */
+    testImplementation("org.springframework.boot:spring-boot-starter-test") {
+      exclude group: "org.junit.vintage", module: "junit-vintage-engine"
+    }
+    testImplementation("org.assertj:assertj-core:${assertJVersion}")
+    testImplementation("org.dbunit:dbunit:${dbunitVersion}")
+    testImplementation("com.github.springtestdbunit:spring-test-dbunit:${dbunitSpringVersion}")
+
+    /* mock */
+    testImplementation("io.mockk:mockk:${mockkVersion}")
+    testImplementation("io.mockk:mockk-common:${mockkVersion}")
+
+    /* ulid */
+    implementation("de.huxhorn.sulky:de.huxhorn.sulky.ulid:${ulidVersion}")
+
+    /* jwt */
+    compile("io.jsonwebtoken:jjwt-api:${jjwtVersion}")
+    runtime("io.jsonwebtoken:jjwt-impl:${jjwtVersion}")
+    runtime("io.jsonwebtoken:jjwt-jackson:${jjwtVersion}")
+
+    /* KMapper */
+    implementation("com.github.ProjectMapK:KMapper:${kmapperVersion}")
+
+    /* flyway */
+    implementation("org.flywaydb:flyway-core:${flywayVersion}")
+  }
+}
+
+/* docker-compose */
+apply plugin: "docker-compose"
+
+dockerCompose {
+  useComposeFiles = ["docker/docker-compose.yml"]
+}
+
+tasks.register("nginx") {
+  dependsOn composeUp
+  dockerCompose {
+    startedServices = ['nginx']
+  }
+}
+tasks.register("mysql") {
+  dependsOn composeUp
+  dockerCompose {
+    startedServices = ['mysql']
+  }
+}
+tasks.register("solr") {
+  dependsOn composeUp
+  dockerCompose {
+    startedServices = ['solr']
+  }
+}
+tasks.register("phpmyadmin") {
+  dependsOn composeUp
+  dockerCompose {
+    startedServices = ['phpmyadmingg']
+  }
+}
+tasks.register("mailhog") {
+  dependsOn composeUp
+  dockerCompose {
+    startedServices = ['mailhog']
+  }
+}
+tasks.register("radis") {
+  dependsOn composeUp
+  dockerCompose {
+    startedServices = ['radis']
+  }
+}
+tasks.register("s3") {
+  dependsOn composeUp
+  dockerCompose {
+    startedServices = ['s3']
+  }
+}
+

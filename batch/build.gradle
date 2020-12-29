@@ -1,0 +1,20 @@
+apply plugin: "org.springframework.boot"
+
+bootJar {
+  launchScript()
+}
+
+bootRun {
+  // プロジェクトプロパティを引数として渡す
+  if (project.hasProperty("args")) {
+    args project.args.split(",")
+  }
+}
+
+dependencies {
+
+  implementation project(":business")
+
+  implementation("org.springframework.boot:spring-boot-starter-batch")
+
+}

@@ -1,0 +1,12 @@
+spring:
+  profiles: local
+  profiles.include:
+    - common-local
+
+server:
+  address: localhost
+
+####
+# アプリケーションの設定
+application:
+  imageUploadLocation: ../docker/nginx/public/thumb

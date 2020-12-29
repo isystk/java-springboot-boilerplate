@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    platform: mysql
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sample
+    username: root
+    password: password
+  data.solr.host: http://localhost:8983/solr
+  mail:
+    host: 127.0.0.1
+    port: 25
+    username: test
+    password: test
+    properties:
+      mail:
+        from: from@test.com
+  flyway:
+    enabled: true
+    locations: classpath:/db/createTable,classpath:/db/insertData
+    placeholderReplacement: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
+logging:
+  level:
+    org.springframework: DEBUG
+    org.springframework.jdbc: DEBUG
+    org.thymeleaf: DEBUG
+    com.isystk.sample: DEBUG
+
+aws:
+  s3:
+    endpoint-url: "http://localhost:9090"
+    region: "ap-northeast-1"
+    bucket-name: "/www.isystk.work"
+    profile-name: "isystk"

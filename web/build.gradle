@@ -1,0 +1,18 @@
+apply plugin: "org.springframework.boot"
+
+bootJar {
+  enabled = false
+}
+
+jar {
+  enabled = true
+}
+
+dependencies {
+
+  implementation project(":business")
+
+  /* spring */
+  implementation("org.springframework.boot:spring-boot-starter-web")
+
+}
