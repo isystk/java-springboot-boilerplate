@@ -67,11 +67,9 @@ public class PostRestController extends AbstractRestController {
    */
   @GetMapping(value = "/{postId}")
   public Resource show(@PathVariable Integer postId) {
-    // 1件取得する
-    var post = postService.findDataById(postId);
 
     Resource resource = resourceFactory.create();
-    resource.setData(Arrays.asList(post.orElse(new FrontPostDto())));
+    resource.setData(Arrays.asList(postService.findDataById(postId).orElse(new FrontPostDto())));
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
     return resource;

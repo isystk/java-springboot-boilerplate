@@ -12,11 +12,6 @@ import lombok.Setter;
 @Setter
 public class CodeValueDto implements Dto {
 
-  public CodeValueDto(Values values) {
-    this.code = values.getCode();
-    this.text = values.getText();
-  }
-
   Integer code;
 
   String text;

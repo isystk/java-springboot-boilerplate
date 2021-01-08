@@ -31,7 +31,6 @@ public class FrontPostDto implements Dto {
 
   List<FrontPostImageDto> imageList;
 
-  List<String> tagNameList;
-
+  List<FrontPostTagDto> tagList;
 
 }

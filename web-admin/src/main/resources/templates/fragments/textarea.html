@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 <form>
-  <th:block th:fragment="textarea (label, name, class, rows)">
+  <th:block th:fragment="input (label, name, class, rows)">
     <div th:with="valid=${!#fields.hasErrors(name)}"
          th:class="${'form-group row' + (valid ? '' : ' has-error')}">
       <label class="col-md-2 control-label" th:text="${label}">Label</label>

@@ -63,7 +63,7 @@ public class UploadRestController extends AbstractRestController {
   /**
    * ファイルダウンロード
    *
-   * @param filename
+   * @param imageId
    * @return
    */
   @GetMapping("/download/{imageId}")
@@ -82,11 +82,8 @@ public class UploadRestController extends AbstractRestController {
   /**
    * 画像アップロードを行う
    *
-   * @param multipartFile
-   * @param fileType
-   * @param registrationType
-   * @param dailyAttendanceYyyymm
-   * @param loginUser
+   * @param form
+   * @param model
    * @return
    */
   @PostMapping("/image")
