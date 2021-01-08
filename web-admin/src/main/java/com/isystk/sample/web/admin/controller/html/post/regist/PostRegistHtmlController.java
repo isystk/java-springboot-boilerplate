@@ -1,11 +1,21 @@
 package com.isystk.sample.web.admin.controller.html.post.regist;
 
-import static com.isystk.sample.common.AdminUrl.*;
+import static com.isystk.sample.common.AdminUrl.POST_REGIST;
 
-import java.util.List;
+import com.isystk.sample.common.dto.CodeValueDto;
+import com.isystk.sample.common.helper.UserHelper;
+import com.isystk.sample.common.util.ObjectMapperUtils;
+import com.isystk.sample.domain.entity.TPostImage;
+import com.isystk.sample.domain.entity.TPostTag;
+import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.domain.repository.MPostTagRepository;
+import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
+import com.isystk.sample.web.admin.service.PostService;
+import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
+import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,23 +31,12 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Lists;
-import com.isystk.sample.common.helper.UserHelper;
-import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.entity.TPostImage;
-import com.isystk.sample.domain.entity.TPostTag;
-import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
-import com.isystk.sample.web.admin.service.PostService;
-import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
-
-import lombok.val;
-import lombok.extern.slf4j.Slf4j;
-
 @Controller
 @Slf4j
 @RequestMapping(POST_REGIST)
 @SessionAttributes(types = {PostRegistForm.class})
 public class PostRegistHtmlController extends AbstractHtmlController {
+
 
   @Autowired
   PostService postService;
@@ -47,6 +46,9 @@ public class PostRegistHtmlController extends AbstractHtmlController {
 
   @Autowired
   UserHelper userHelper;
+
+  @Autowired
+  MPostTagRepository mPostTagRepository;
 
   @ModelAttribute("postRegistForm")
   public PostRegistForm postRegistForm() {
@@ -87,8 +89,19 @@ public class PostRegistHtmlController extends AbstractHtmlController {
    */
   private String showRegistIndex(Model model) {
     // ユーザー一覧
-    val userList = userHelper.getUserList();
-    model.addAttribute("userList", userList);
+    model.addAttribute("userList", userHelper.getUserList()
+        .stream()
+        .map((tUser) -> {
+          CodeValueDto dto = new CodeValueDto();
+          dto.setCode(tUser.getUserId());
+          dto.setText(String.join(tUser.getFamilyName(), " ", tUser.getName()));
+          return dto;
+        }).collect(Collectors.toList())
+    );
+
+    // タグの一覧
+    model.addAttribute("postTagList", mPostTagRepository.findAllSelectList());
+
 
     return "modules/post/regist/index";
   }
@@ -111,7 +124,11 @@ public class PostRegistHtmlController extends AbstractHtmlController {
       return showRegistIndex(model);
     }
 
-    model.addAttribute("user", userHelper.getLoginUser(form.getUserId()));
+    TUser tUser = userHelper.getUser(form.getUserId());
+    model.addAttribute("userName", String.join(tUser.getFamilyName(), " ", tUser.getName()));
+
+    // タグの一覧
+    model.addAttribute("postTagList", mPostTagRepository.findAllSelectList());
 
     return "modules/post/regist/confirm";
   }

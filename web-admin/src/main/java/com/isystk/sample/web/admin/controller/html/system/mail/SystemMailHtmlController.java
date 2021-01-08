@@ -2,6 +2,7 @@ package com.isystk.sample.web.admin.controller.html.system.mail;
 
 import static com.isystk.sample.common.AdminUrl.*;
 
+import com.isystk.sample.domain.repository.dto.MMailTemplateRepositoryDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -75,8 +76,8 @@ public class SystemMailHtmlController extends AbstractHtmlController {
    */
   @GetMapping("{mailTemplateId}")
   public String show(@PathVariable Integer mailTemplateId, Model model) {
-    MMailTemplate mMailTemplate = mMailTemplateRepository.findById(mailTemplateId);
-    model.addAttribute("mMailTemplate", mMailTemplate);
+    MMailTemplateRepositoryDto mMailTemplateRepositoryDto = mMailTemplateRepository.findById(mailTemplateId);
+    model.addAttribute("mMailTemplateRepositoryDto", mMailTemplateRepositoryDto);
 
     return "modules/system/mail/detail";
   }

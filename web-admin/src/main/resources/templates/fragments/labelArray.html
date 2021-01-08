@@ -1,0 +1,22 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:ex="http://www.w3.org/1999/xhtml">
+<body>
+<form>
+  <th:block th:fragment="input (label, values, items, k, v, class)">
+    <div class="form-group row">
+      <label th:if="${label != ''}" class="col-md-2 control-label" th:text="${label}">Label</label>
+      <div th:class="${class}">
+        <th:block th:each="e,s : ${values}" >
+          <th:block th:if="${(s.index ne 0)}">
+            、
+          </th:block>
+          <th:block th:each="e2 : ${items}"
+                th:if="${(e eq e2['__${k}__'] )}"
+                ex:textbr="${e2['__${v}__']}" >hoge
+          </th:block>
+        </th:block>
+      </div>
+    </div>
+  </th:block>
+</form>
+</body>
+</html>

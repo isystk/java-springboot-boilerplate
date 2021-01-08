@@ -42,15 +42,15 @@
         <div class="form-group">
           <div class="control-group">
             <input
-                th:replace="fragments/inputField :: input ('text', '投稿ID', 'postId', 'col-sm-4', 10)"/>
+                th:replace="fragments/input :: input ('text', '投稿ID', 'postId', 'col-sm-4', 10)"/>
           </div>
           <div class="control-group">
             <input
-                th:replace="fragments/inputField :: input ('text', 'ユーザーID', 'userId', 'col-sm-4', 10)"/>
+                th:replace="fragments/input :: input ('text', 'ユーザーID', 'userId', 'col-sm-4', 10)"/>
           </div>
           <div class="control-group">
             <input
-                th:replace="fragments/inputField :: input ('text', 'タイトル', 'title', 'col-sm-10', 100)"/>
+                th:replace="fragments/input :: input ('text', 'タイトル', 'title', 'col-sm-10', 100)"/>
           </div>
           <div class="control-group">
             <div class="form-group row">
@@ -58,10 +58,10 @@
               <div class="col-md-10">
                 <div class="row">
                   <input
-                      th:replace="fragments/inputField :: input ('date', '', 'registDateFrom', '', 10)"/>
+                      th:replace="fragments/input :: input ('date', '', 'registDateFrom', '', 10)"/>
                   <div class="col-sm-1 text-center">～</div>
                   <input
-                      th:replace="fragments/inputField :: input ('date', '', 'registDateTo', '', 10)"/>
+                      th:replace="fragments/input :: input ('date', '', 'registDateTo', '', 10)"/>
                 </div>
               </div>
             </div>
@@ -110,7 +110,7 @@
             <tr>
               <th>投稿ID</th>
               <th>投稿者</th>
-              <th style="width:400px;">タイトル</th>
+              <th style="width:300px;">タイトル</th>
               <th>投稿日時</th>
               <th></th>
             </tr>
@@ -118,7 +118,7 @@
             <tbody>
             <tr th:each="e : ${pages.data}">
               <td th:text="*{e.postId}"></td>
-              <td th:text="*{e.tUser.familyName}"></td>
+              <td th:text="*{e.tUser.familyName + ' ' + e.tUser.name}"></td>
               <td th:text="*{e.title}"></td>
               <td th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></td>
               <td class="float-right">

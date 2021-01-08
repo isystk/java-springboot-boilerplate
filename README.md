@@ -6,7 +6,7 @@
 
 SpringBoot を利用したマルチモジュールのボイラープレートです。
 1. 管理画面(AdminLTE、ログイン/ログアウト、一覧/詳細/登録/更新/削除、CSV/Excel/PDFダウンロード)
-2. フロント画面（Vuejs、Solr検索API、ログイン/ログアウト）
+2. フロント画面（ReactJS、Solr検索表示、画像アップロード、会員登録、ログイン/ログアウト）
 3. バッチ（Solrインデックス生成、CSV読み込み/DB登録）
 
 ### ディレクトリ構造
@@ -115,16 +115,19 @@ $ ./gradlew business::flywayValidate
 #### minio に S3バケットを作成する
 
 ```bash
-$ export AWS_ACCESS_KEY_ID=access_key
-$ export AWS_SECRET_ACCESS_KEY=secret_key
-# バケットの一覧を確認する
-$ aws --endpoint-url http://localhost:9090 s3 ls
-# バケットを作成する
+# プロファイルを作成する
 $ aws configure --profile isystk
+ACCESS_KEY → access_key
+SECRET_ACCESS_KEY → secret_key
+# Windowsの場合はWSLのHOMEではなくWindowsのHOMEにコピーしないとアプリケーションから参照出来ないかも？
+$ cp -Rp /home/xxx/.aws /c/Users/xxx
+# バケットを作成する
 $ aws --endpoint-url http://localhost:9090 --profile isystk s3 mb s3://www.isystk.work
 # バケットを公開する
 $ POLICY='{ "Version": "2012-10-17", "Statement": [{ "Sid": "MakeItPublic", "Effect": "Allow", "Principal": "*", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::www.isystk.work/*" }] }'
 $ aws --endpoint-url http://localhost:9090 --profile isystk s3api put-bucket-policy --bucket www.isystk.work --policy $POLICY
+# バケットの一覧を確認する
+$ aws --endpoint-url http://localhost:9090 --profile isystk s3 ls
 # テストファイルをアップロードする
 $ echo 'hello' > test.txt
 $ aws --endpoint-url http://localhost:9090 --profile isystk s3 cp ./test.txt s3://www.isystk.work
@@ -143,8 +146,6 @@ $ ./gradlew web-front::bootRun
 
 $ # bootrun batch application
 $ ./gradlew batch::bootRun -Pargs=--job=solrRegistJob
-```
-
 ```
 
 #### 接続先情報

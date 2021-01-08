@@ -93,6 +93,8 @@
   <script type="text/javascript" th:src="@{/static/js/jquery-plugins.js}"></script>
   <script type="text/javascript" th:src="@{/static/js/admin.js}"></script>
 </div>
+<div layout:fragment="body-end" th:remove="tag">
+</div>
 <div layout:fragment="scripts" th:remove="tag"/>
 <script type="text/javascript" th:inline="javascript">
 			$(document).ready(function() {

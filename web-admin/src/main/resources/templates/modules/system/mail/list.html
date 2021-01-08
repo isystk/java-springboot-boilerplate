@@ -38,7 +38,7 @@
         <div class="form-group">
           <div class="control-group">
             <input
-                th:replace="fragments/selectField :: select ('テンプレート区分', 'templateDiv', ${@vh.values('MailTemplateDiv')}, 'code', 'text')"/>
+                th:replace="fragments/selectbox :: input ('テンプレート区分', 'templateDiv', ${@vh.values('MailTemplateDiv')}, 'code', 'text')"/>
           </div>
         </div>
       </div>

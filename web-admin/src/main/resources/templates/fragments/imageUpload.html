@@ -11,11 +11,10 @@
             th:if="${multiple}" type="file" name="imageFile" class="js-upload-postImage-btn"
             multiple="multiple"/></label>
         <div class="row selectedPhotoList">
-          <div class="col-3 m-2" th:each="e, s : ${items}">
-            <a href="#" class="js-close">
-              <input type="hidden" th:name="${name}" th:value="${e}"/>
-              <img th:src="${@img.url(e, '_square')}" width="120px"/>
-            </a>
+          <div class="m-2" style="width:120px;position: relative;" th:each="e, s : ${items}">
+            <a href="#" class="js-close"></a>
+            <input type="hidden" th:name="${name}" th:value="${e}"/>
+            <img th:src="${@img.url(e, '_square')}" width="120px"/>
           </div>
         </div>
         <div th:if="${!valid}" class="text-danger" th:errors="*{__${name}__}">Error</div>

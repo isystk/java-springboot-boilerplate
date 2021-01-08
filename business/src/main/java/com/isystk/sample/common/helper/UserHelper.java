@@ -3,8 +3,6 @@ package com.isystk.sample.common.helper;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import com.isystk.sample.common.exception.NoDataFoundException;
@@ -42,7 +40,7 @@ public class UserHelper {
    *
    * @return
    */
-  public TUser getLoginUser(Integer userId) {
+  public TUser getUser(Integer userId) {
     TUserCriteria criteria = new TUserCriteria();
     criteria.setUserIdEq(userId);
     return tUserDao.findOne(criteria).orElseThrow(
@@ -55,7 +53,7 @@ public class UserHelper {
    * @return
    */
   public Integer getLoginUserId() {
-    return getLoginUser().getUserId();
+    return getUser().getUserId();
   }
 
   /**
@@ -63,7 +61,7 @@ public class UserHelper {
    *
    * @return
    */
-  public TUser getLoginUser() {
+  public TUser getUser() {
     TUserCriteria criteria = new TUserCriteria();
     criteria.setEmailEq(AuditInfoHolder.getAuditUser());
     return tUserDao.findOne(criteria).orElseThrow(
@@ -77,7 +75,7 @@ public class UserHelper {
    * @return
    */
   public void updateLastLogin() {
-    TUser tUser = getLoginUser();
+    TUser tUser = getUser();
     tUser.setLastLoginTime(DateUtils.getNow());
     tUserDao.update(tUser);
   }

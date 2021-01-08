@@ -1,27 +1,21 @@
 package com.isystk.sample.web.front.controller.api.v1.auth;
 
-import com.google.common.collect.Maps;
-import com.isystk.sample.common.exception.NoDataFoundException;
-import com.isystk.sample.common.exception.SystemException;
-import com.isystk.sample.common.exception.ValidationErrorException;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.AuditInfoHolder;
 import com.isystk.sample.domain.entity.TUser;
-import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
-import com.isystk.sample.web.base.controller.api.resource.FieldErrorResource;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
-import com.isystk.sample.web.front.dto.FrontPostDto;
 import com.isystk.sample.web.front.dto.auth.AuthUserDto;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.validation.Errors;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Optional;
+import org.springframework.web.server.ResponseStatusException;
 
 import static com.isystk.sample.common.FrontUrl.*;
 
@@ -52,7 +46,7 @@ public class AuthRestController extends AbstractRestController {
       return null;
     }
 
-    TUser tUser = userHelper.getLoginUser();
+    TUser tUser = userHelper.getUser();
     AuthUserDto dto = ObjectMapperUtils.map(tUser, AuthUserDto.class);
     dto.setSessionId(session.getId());
     resource.setData(Arrays.asList(dto));
@@ -73,7 +67,7 @@ public class AuthRestController extends AbstractRestController {
     userHelper.updateLastLogin();
 
     Resource resource = resourceFactory.create();
-    TUser tUser = userHelper.getLoginUser();
+    TUser tUser = userHelper.getUser();
     AuthUserDto dto = ObjectMapperUtils.map(tUser, AuthUserDto.class);
     dto.setSessionId(session.getId());
     resource.setData(Arrays.asList(dto));
@@ -88,10 +82,10 @@ public class AuthRestController extends AbstractRestController {
    * @return
    */
   @GetMapping(API_V1_LOGIN_FAILURE_URL)
-  public Resource loginFailure() {
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public Resource loginFailure(HttpServletResponse response) {
     Resource resource = resourceFactory.create();
     resource.setMessage(getMessage("login.failed"));
-
     return resource;
   }
 

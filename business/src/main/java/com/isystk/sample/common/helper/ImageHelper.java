@@ -195,11 +195,10 @@ public class ImageHelper {
       for (ImageSuffix suffix : ImageSuffix.values()) {
         File dist = new File(dirPath.toUri().getPath(),
             String.valueOf(id) + suffix.getSuffix() + "." + IMAGE_EXTENSION);
-        dist.deleteOnExit();
         convert(source, dist, suffix.getWidth(), suffix.getHeight());
         // S3アップロード
         AwsS3Utils.putObject(dir + dist.toPath().getFileName().toString(), dist.length(),
-            file.getContentType(), new FileInputStream(dist));
+            file.getContentType(), dist);
       }
 
       TImage tImage = new TImage();

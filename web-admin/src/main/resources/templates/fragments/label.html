@@ -1,10 +1,13 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:ex="http://www.w3.org/1999/xhtml">
 <body>
 <form>
   <th:block th:fragment="input (label, value, class)">
     <div class="form-group row">
       <label th:if="${label != ''}" class="col-md-2 control-label" th:text="${label}">Label</label>
-      <div th:class="${class}" th:text="${value}"></div>
+      <div th:class="${class}">
+        <th:block
+            ex:textbr="${value}"></th:block>
+      </div>
     </div>
   </th:block>
 </form>

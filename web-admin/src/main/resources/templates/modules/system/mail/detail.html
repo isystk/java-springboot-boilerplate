@@ -27,13 +27,13 @@
 
   <div class="card card-purple">
     <div class="card-body">
-      <div th:object="${mMailTemplate}">
+      <div th:object="${mMailTemplateRepositoryDto}">
         <input
-            th:replace="fragments/labelField :: input ('メールテンプレートID', *{mailTemplateId}, 'col-md-6')"/>
+            th:replace="fragments/label :: input ('メールテンプレートID', *{mailTemplateId}, 'col-md-6')"/>
         <input
-            th:replace="fragments/labelField :: input ('メールテンプレート区分', *{mailTemplateDiv.text}, 'col-md-6')"/>
-        <input th:replace="fragments/labelField :: input ('タイトル', *{title}, 'col-md-6')"/>
-        <input th:replace="fragments/labelField :: input ('本文', *{text}, 'col-md-6')"/>
+            th:replace="fragments/label :: input ('メールテンプレート区分', *{mailTemplateDiv.text}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('タイトル', *{title}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('本文', *{text}, 'col-md-6')"/>
       </div>
     </div>
     <div class="card-footer clearfix row">

@@ -1,5 +1,6 @@
 package com.isystk.sample.web.front.controller.api.v1.entry.remind;
 
+import com.isystk.sample.common.exception.ValidationErrorException;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
@@ -11,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -54,27 +56,18 @@ public class EntryRemindRestController extends AbstractRestController {
    *
    * @param form
    * @param br
-   * @param bindingResult
+   * @param errors
    * @return
    */
   @PostMapping
   public Resource registOnetimePass(@Validated @ModelAttribute EntryRemindRestForm form,
-      BindingResult br,
-      BindingResult bindingResult) {
+      BindingResult br, Errors errors) {
 
     Resource resource = resourceFactory.create();
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
-      String message = "";
-      for (FieldError fieldError : bindingResult.getFieldErrors()) {
-
-        message += "<hr />Field:" + fieldError.getField();
-        message += "<br />Code:" + fieldError.getCode();
-        message += "<br />DefaultMessage:" + fieldError.getDefaultMessage();
-      }
-      resource.setMessage(message);
-      return resource;
+      throw new ValidationErrorException(errors);
     }
 
     // パスワード変更ワンタイムパス登録

@@ -24,6 +24,12 @@
 </div>
 <div layout:fragment="content">
 
+  <div class="card">
+    <div class="card-header text-center">
+      <button type="submit" class="btn btn-secondary js-overlay" data-panel="#postTagDetail">登録する</button>
+    </div>
+  </div>
+
   <div class="card card-purple">
     <!-- .card-header -->
     <div class="card-header">
@@ -38,7 +44,7 @@
         <div class="form-group">
           <div class="control-group">
             <input
-                th:replace="fragments/inputField :: input ('text', '投稿タグ名', 'postTagName', 'col-sm-10', 100)"/>
+                th:replace="fragments/input :: input ('text', '投稿タグ名', 'postTagName', 'col-sm-10', 100)"/>
           </div>
         </div>
       </div>
@@ -71,6 +77,7 @@
               <th>投稿タグID</th>
               <th>投稿タグ名</th>
               <th>作成日時</th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
@@ -78,6 +85,11 @@
               <td th:text="*{e.postTagId}"></td>
               <td th:text="*{e.name}"></td>
               <td th:text="${#temporals.format(e.registTime, 'yyyy/MM/dd')}"></td>
+              <td class="float-right">
+                <form th:action="@{/post/tag/{id}/(id=*{e.postTagId})}" th:method="delete">
+                  <button class="btn btn-danger m-1 btn-sm js-delete">削除</button>
+                </form>
+              </td>
             </tr>
             </tbody>
           </table>
@@ -92,10 +104,54 @@
       <!-- /.card -->
     </div>
   </div>
-
 </div>
+
+<div layout:fragment="body-end">
+  <div id="postTagDetail" class="isystk-overlay">
+    <a href="#" class="js-close"><span class="close"><img th:src="@{/static/images/close.png}" width="30px"></span></a>
+    <div class="card card-purple">
+      <!-- .card-header -->
+      <div class="card-header">
+        <h3 class="card-title">投稿タグ登録</h3>
+      </div>
+      <!-- /.card-header -->
+      <!-- form start -->
+      <form th:action="@{/post/tag/}" th:method="post" >
+        <div class="card-body">
+          <div class="form-group">
+            <div class="control-group">
+              <div class="form-group row">
+                <label class="col-md-2 control-label">投稿タグ名</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" name="name" maxlength="100"/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer text-center">
+          <button type="submit" class="btn btn-secondary">登録する</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <div layout:fragment="scripts">
   <script type="text/javascript" th:inline="javascript">
+    $(function() {
+      // オーバーレイ
+      $('.js-overlay').isystkOverlay();
+
+      // 削除
+      $('.js-delete').click(function(e) {
+        if (!confirm('削除します。よろしいですか？')) {
+          e.preventDefault();
+          return false;
+        }
+      });
+    })
   </script>
 </div>
 </body>

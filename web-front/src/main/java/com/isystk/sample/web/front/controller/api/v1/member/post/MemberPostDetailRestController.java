@@ -1,5 +1,6 @@
 package com.isystk.sample.web.front.controller.api.v1.member.post;
 
+import com.isystk.sample.common.exception.ValidationErrorException;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.entity.TPostImage;
@@ -14,6 +15,7 @@ import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -73,9 +75,6 @@ public class MemberPostDetailRestController extends AbstractRestController {
   @GetMapping(API_V1_MEMBER_POSTS_DETAIL)
   public Resource showDetail(@PathVariable Integer postId, Model model) {
 
-//		// SessionAttributeを再生成する
-//		model.addAttribute("memberPostDetailRestForm", new MemberPostEditForm());
-
     // 1件取得する
     val post = postService.findMyDataById(postId);
 
@@ -91,28 +90,19 @@ public class MemberPostDetailRestController extends AbstractRestController {
    *
    * @param form
    * @param br
-   * @param bindingResult
+   * @param errors
    * @return
    */
   @PutMapping(API_V1_MEMBER_POSTS_EDIT)
   public Resource update(
       @Validated @ModelAttribute("memberPostEditRestForm") MemberPostEditRestForm form,
-      BindingResult br,
-      BindingResult bindingResult) {
+      BindingResult br, Errors errors) {
 
     Resource resource = resourceFactory.create();
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
-      String message = "";
-      for (FieldError fieldError : bindingResult.getFieldErrors()) {
-
-        message += "<hr />Field:" + fieldError.getField();
-        message += "<br />Code:" + fieldError.getCode();
-        message += "<br />DefaultMessage:" + fieldError.getDefaultMessage();
-      }
-      resource.setMessage(message);
-      return resource;
+      throw new ValidationErrorException(errors);
     }
 
     // 入力値を詰め替える
@@ -159,27 +149,19 @@ public class MemberPostDetailRestController extends AbstractRestController {
    *
    * @param form
    * @param br
-   * @param bindingResult
+   * @param errors
    * @return
    */
   @PostMapping(API_V1_MEMBER_POSTS_NEW)
   public Resource regist(
       @Validated @ModelAttribute("memberPostRegistRestForm") MemberPostRegistRestForm form,
-      BindingResult br,
-      BindingResult bindingResult) {
+      BindingResult br, Errors errors) {
 
     Resource resource = resourceFactory.create();
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
-      String message = "";
-      for (FieldError fieldError : bindingResult.getFieldErrors()) {
-        message += "<hr />Field:" + fieldError.getField();
-        message += "<br />Code:" + fieldError.getCode();
-        message += "<br />DefaultMessage:" + fieldError.getDefaultMessage();
-      }
-      resource.setMessage(message);
-      return resource;
+      throw new ValidationErrorException(errors);
     }
 
     // 入力値からDTOを作成する

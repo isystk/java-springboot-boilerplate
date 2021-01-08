@@ -58,3 +58,64 @@ opacity: 1;
 .selectedPhotoList a:hover{
 opacity: 0.8;
 }
+
+/* オーバーレイ */
+#overlay-background {
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background-color:#0e0e0e;
+opacity:0.5;
+z-index:1000
+}
+.isystk-overlay {
+position: absolute;
+top: 10%;
+left: 10%;
+width: 80%;
+max-width: 1200px;
+z-index: 1100;
+background: #fff;
+opacity: 0;
+visibility: hidden;
+transition: .1s linear;
+}
+.isystk-overlay .wrap {
+background-color: #fff;
+padding: 10px;
+}
+.isystk-overlay.open {
+opacity: 1;
+visibility: visible;
+animation: open-animation .5s ease 0s 1 forwards;
+}
+@keyframes open-animation {
+  0% {
+    transform: scaleY(.1) scaleX(.1);
+  }
+  50% {
+    transform: scaleY(1) scaleX(.1);
+  }
+  100% {
+    transform: scaleY(1) scaleX(1);
+  }
+}
+.isystk-overlay .title{
+margin-bottom: 5px;
+padding: 5px;
+border-bottom: solid 1px #ccc;
+font-size: 20px;
+}
+.isystk-overlay td {
+padding: 10px;
+}
+.isystk-overlay .close {
+position: absolute;
+right: 0;
+margin: 5px;
+zoom: 100%;
+color: #333;
+z-index: 1;
+}

@@ -11,7 +11,7 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
         data-accordion="false">
       <li class="nav-item has-treeview">
-        <a href="/" class="nav-link" th:class="|nav-link ${category=='home' ? 'active' : ''}|">
+        <a th:href="@{/}" class="nav-link" th:class="|nav-link ${category=='home' ? 'active' : ''}|">
           <i class="nav-icon fas fa-home"></i>
           <p>HOME</p>
         </a>

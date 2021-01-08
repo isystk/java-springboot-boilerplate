@@ -30,12 +30,14 @@
       <p>投稿内容を入力して下さい</p>
       <form th:object="${postRegistForm}" th:action="@{/post/regist}" th:method="post">
         <input
-            th:replace="fragments/selectField :: select ('投稿者', 'userId', ${userList}, 'userId', 'familyName')"/>
+            th:replace="fragments/selectbox :: input ('投稿者', 'userId', ${userList}, 'code', 'text')"/>
         <input
-            th:replace="fragments/inputField :: input ('text', 'タイトル', 'title', 'col-md-6', 100)"/>
+            th:replace="fragments/input :: input ('text', 'タイトル', 'title', 'col-md-6', 100)"/>
         <input
             th:replace="fragments/imageUpload :: input ('写真', 'postImageId', *{postImageId}, 'col-md-10', true)"/>
-        <input th:replace="fragments/textarea :: textarea ('本文', 'text', 'col-md-10', 4)"/>
+        <input th:replace="fragments/textarea :: input ('本文', 'text', 'col-md-10', 4)"/>
+        <input
+            th:replace="fragments/checkbox :: input ('タグ', 'postTagId', ${postTagList}, 'code', 'text')"/>
         <div class="card-footer clearfix text-center">
           <div class="text-left float-left">
             <a class="btn btn-secondary" th:href="@{/post}">一覧に戻る</a>
@@ -83,10 +85,11 @@
 					// 画像をアニメーション（フェードイン）で表示します。
 					var src = data.imageUrlSquare + '?time=' + new Date().getTime();
 					var image = $([
-						'<div class="col-3 m-2"><a href="#" class="js-close">',
-							'<img src="'+src+'" width="120px" />',
-							'<input type="hidden" name="postImageId" value="'+data.imageId+'" />',
-						'</a></div>'
+            '<div class="m-2" style="width:120px;position: relative;">',
+              '<a href="#" class="js-close"></a>',
+              '<img src="'+src+'" width="120px" />',
+              '<input type="hidden" name="postImageId" value="'+data.imageId+'" />',
+            '</div>',
 						].join(''));
 					slides.append(image);
 
