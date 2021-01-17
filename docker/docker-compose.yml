@@ -15,7 +15,7 @@ services:
      - ./nginx/ssl:/etc/nginx/ssl
      - ./nginx/logs:/var/log/nginx
 #     - ./nginx/public:/usr/share/nginx/html
-     - ../static/public:/usr/share/nginx/html
+     - ../static/out:/usr/share/nginx/html
 
   mysql:
     image: isystk/mysql
