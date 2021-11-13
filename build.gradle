@@ -90,7 +90,7 @@ subprojects {
     mavenCentral()
     jcenter()
     maven { url 'https://jitpack.io' }
-    maven { url 'http://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/' }
+    maven { url 'https://jaspersoft.jfrog.io/jaspersoft/third-party-ce-artifacts/' }
   }
 
   dependencyManagement {
