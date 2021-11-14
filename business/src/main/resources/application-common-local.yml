@@ -32,7 +32,9 @@ logging:
 
 aws:
   s3:
-    endpoint-url: "http://localhost:9090"
+    endpoint-url: "http://localhost:9000"
     region: "ap-northeast-1"
-    bucket-name: "www.isystk.work"
-    profile-name: "isystk"
+    bucket-name: "aws.isystk.com"
+    #profile-name: "isystk"
+    aws-access-key: "access_key"
+    aws-secret-key: "secret_key"

@@ -31,7 +31,9 @@ public class AwsS3Utils {
   public static String ENDPOINT_URL;
   public static String REGION;
   public static String BUCKET_NAME;
-  private static String PROFILE_NAME;
+//  private static String PROFILE_NAME;
+  private static String AWS_ACCESS_KEY;
+  private static String AWS_SECRET_KEY;
 
   //--------------------------------------------------
   // アップロード
@@ -96,9 +98,9 @@ public class AwsS3Utils {
   private static AmazonS3 getClient(String BUCKET_NAME) {
 
     // 認証情報
-    AWSCredentialsProvider provider = new ProfileCredentialsProvider(PROFILE_NAME);
-//        AWSCredentials credentials = new BasicAWSCredentials(ACCESS_KEY, SECRET_KEY);
-    AWSCredentials credentials = provider.getCredentials();
+//    AWSCredentialsProvider provider = new ProfileCredentialsProvider(PROFILE_NAME);
+//    AWSCredentials credentials = provider.getCredentials();
+    AWSCredentials credentials = new BasicAWSCredentials(AWS_ACCESS_KEY, AWS_SECRET_KEY);
 
     // クライアント設定
     ClientConfiguration clientConfig = new ClientConfiguration();
@@ -144,9 +146,19 @@ public class AwsS3Utils {
     BUCKET_NAME = bucketName;
   }
 
-  @Value("${aws.s3.profile-name}")
-  public void setProfileName(String profileName) {
-    PROFILE_NAME = profileName;
+//  @Value("${aws.s3.profile-name}")
+//  public void setProfileName(String profileName) {
+//    PROFILE_NAME = profileName;
+//  }
+
+  @Value("${aws.s3.aws-access-key}")
+  public void setAwsAccessKey(String awsAccessKey) {
+    AWS_ACCESS_KEY = awsAccessKey;
+  }
+
+  @Value("${aws.s3.aws-secret-key}")
+  public void setAwsSecretKey(String awsSecretKey) {
+    AWS_SECRET_KEY = awsSecretKey;
   }
 
 }

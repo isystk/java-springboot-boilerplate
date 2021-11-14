@@ -113,7 +113,9 @@ docs/_build/
 
 # nginx
 docker/nginx/logs
-docker/nginx/public/thumb/*
+
+# apache
+docker/apache/logs
 
 # mysql
 docker/mysql/data
@@ -129,6 +131,9 @@ docker/elasticsearch/data
 
 # s3
 docker/s3/data
+
+# htdocs
+htdocs/thumb
 
 .DS_Store
 .history
