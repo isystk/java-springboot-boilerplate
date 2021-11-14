@@ -33,5 +33,5 @@ aws:
   s3:
     endpoint-url: "http://xxxxxxx"
     region: "ap-northeast-1"
-    bucket-name: "/www.isystk.work"
+    bucket-name: "/aws.isystk.com"
     profile-name: "isystk"

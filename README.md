@@ -115,22 +115,18 @@ $ ./gradlew business::flywayValidate
 #### minio に S3バケットを作成する
 
 ```bash
-# プロファイルを作成する
-$ aws configure --profile isystk
-ACCESS_KEY → access_key
-SECRET_ACCESS_KEY → secret_key
-# Windowsの場合はWSLのHOMEではなくWindowsのHOMEにコピーしないとアプリケーションから参照出来ないかも？
-$ cp -Rp /home/xxx/.aws /c/Users/xxx
+./dc.sh aws local
 # バケットを作成する
-$ aws --endpoint-url http://localhost:9090 --profile isystk s3 mb s3://www.isystk.work
+$ aws --endpoint-url http://host.docker.internal:9000 s3 mb s3://aws.isystk.com
 # バケットを公開する
-$ POLICY='{ "Version": "2012-10-17", "Statement": [{ "Sid": "MakeItPublic", "Effect": "Allow", "Principal": "*", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::www.isystk.work/*" }] }'
-$ aws --endpoint-url http://localhost:9090 --profile isystk s3api put-bucket-policy --bucket www.isystk.work --policy $POLICY
+$ POLICY='{ "Version": "2012-10-17", "Statement": [{ "Sid": "MakeItPublic", "Effect": "Allow", "Principal": "*", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::aws.isystk.com/*" }] }'
+$ aws --endpoint-url http://host.docker.internal:9000 s3api put-bucket-policy --bucket aws.isystk.com --policy "${POLICY}"
 # バケットの一覧を確認する
-$ aws --endpoint-url http://localhost:9090 --profile isystk s3 ls
+$ aws --endpoint-url http://host.docker.internal:9000 s3 ls
 # テストファイルをアップロードする
-$ echo 'hello' > test.txt
-$ aws --endpoint-url http://localhost:9090 --profile isystk s3 cp ./test.txt s3://www.isystk.work
+$ aws --endpoint-url http://host.docker.internal:9000 s3 cp ./front.png s3://aws.isystk.com
+# ブラウザでアップロードした画像を表示してみる
+$ open http://localhost:9000/aws.isystk.com/front.png
 ```
 
 #### アプリケーションの起動

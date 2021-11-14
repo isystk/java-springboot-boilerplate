@@ -1,26 +1,43 @@
 version: '3'
 
 services:
-  
-  nginx:
-    image: isystk/nginx
-#    container_name: isystk-nginx
-    build: ./nginx
+
+  apache:
+    image: java-springboot-boilerplate/apache
+    container_name: java-springboot-boilerplate-apache
+    build:
+      context: ./apache
+      dockerfile: Dockerfile
     ports:
-     - 80:80
-     - 443:443
+      - 80:80
+      - 443:443
     restart: always
     volumes:
-     - ./nginx/conf.d:/etc/nginx/conf.d
-     - ./nginx/ssl:/etc/nginx/ssl
-     - ./nginx/logs:/var/log/nginx
-#     - ./nginx/public:/usr/share/nginx/html
-     - ../static/out:/usr/share/nginx/html
+      - ./apache/conf.d:/etc/apache2/conf.d
+      - ./apache/ssl:/etc/apache2/ssl
+      - ./apache/logs:/var/log/apache2
+      - ../htdocs
+
+#  nginx:
+#    image: java-springboot-boilerplate/nginx
+#    container_name: java-springboot-boilerplate-nginx
+#    build: ./nginx
+#    ports:
+#     - 80:80
+#     - 443:443
+#    restart: always
+#    volumes:
+#     - ./nginx/conf.d:/etc/nginx/conf.d
+#     - ./nginx/ssl:/etc/nginx/ssl
+#     - ./nginx/logs:/var/log/nginx
+#     - ../htdocs:/usr/share/nginx/html
 
   mysql:
-    image: isystk/mysql
-#    container_name: isystk-mysql
-    build: ./mysql
+    image: java-springboot-boilerplate/mysql
+    container_name: java-springboot-boilerplate-mysql
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
     environment:
       MYSQL_ROOT_PASSWORD: password
     ports:
@@ -32,9 +49,11 @@ services:
      - ./mysql/logs:/var/log/mysql
 
   solr:
-    image: isystk/solr
-#    container_name: isystk-solr
-    build: ./solr
+    image: java-springboot-boilerplate/solr
+    container_name: java-springboot-boilerplate-solr
+    build:
+      context: ./solr
+      dockerfile: Dockerfile
     ports:
      - 8983:8983
     restart: always
@@ -46,24 +65,23 @@ services:
       - solr-precreate
       - mycore
 
-# ↓ 必要な場合はコメントアウトを外してご利用ください
-#  phpmyadmin:
-#    image: isystk/phpmyadmin
-##    container_name: isystk-phpmyadmin
-#    build: ./phpmyadmin
-#    ports:
-#      - 8888:80
-#    environment:
-#      - PMA_ARBITRARY=1
-#      - PMA_HOST=mysql
-#      - PMA_USER=root
-#      - PMA_PASSWORD=password
-#    volumes:
-#     - ./phpmyadmin/sessions:/sessions
+  phpmyadmin:
+    image: java-springboot-boilerplate/phpmyadmin
+    container_name: java-springboot-boilerplate-phpmyadmin
+    build: ./phpmyadmin
+    ports:
+      - 8888:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=password
+    volumes:
+     - ./phpmyadmin/sessions:/sessions
  
   mailhog:
     image: mailhog/mailhog:latest
-#    container_name: isystk-mailhog
+    container_name: java-springboot-boilerplate-mailhog
     ports:
       - 8025:8025
       - 25:1025
@@ -77,7 +95,7 @@ services:
 # ↓ Solrの代わりにElasticSearchを利用する場合はコメントアウトを外してください。
 #  elasticsearch:
 #    build: ./elasticsearch
-##    container_name: isystk-es
+##    container_name: java-springboot-boilerplate-es
 #    environment:
 #      - cluster.name=docker-cluster
 #      - bootstrap.memory_lock=true
@@ -93,13 +111,29 @@ services:
 #      - ./elasticsearch/data:/usr/share/elasticsearch/data
 
   s3:
-    image: minio/minio:latest
-    container_name: isystk-s3
+    image: minio/minio:RELEASE.2021-10-10T16-53-30Z
+    container_name: java-springboot-boilerplate-s3
+    ports:
+      - 9000:9000
+      - 9001:9001
     environment:
       MINIO_ACCESS_KEY: "access_key"
       MINIO_SECRET_KEY: "secret_key"
-    ports:
-      - 9090:9000 # VSCodeと競合するので9090番ポートを指定
-    command: ["--compat", "server", "/data"]
+    command: [ "--compat", "server", "/data", "--console-address", ":9001" ]
     volumes:
       - ./s3/data:/data
+
+  awscli:
+    container_name: "java-springboot-boilerplate-awscli"
+    build:
+      context: ./awscli
+      dockerfile: Dockerfile
+    tty: true
+    environment:
+      AWS_DEFAULT_REGION: ap-northeast-1
+      AWS_DEFAULT_OUTPUT: json
+      AWS_ACCESS_KEY_ID: access_key
+      AWS_SECRET_ACCESS_KEY: secret_key
+    volumes:
+      - ../:/aws
+    working_dir: /aws
