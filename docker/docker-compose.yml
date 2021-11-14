@@ -21,7 +21,9 @@ services:
 #  nginx:
 #    image: java-springboot-boilerplate/nginx
 #    container_name: java-springboot-boilerplate-nginx
-#    build: ./nginx
+#    build:
+#      context: ./nginx
+#      dockerfile: Dockerfile
 #    ports:
 #     - 80:80
 #     - 443:443
@@ -95,7 +97,7 @@ services:
 # ↓ Solrの代わりにElasticSearchを利用する場合はコメントアウトを外してください。
 #  elasticsearch:
 #    build: ./elasticsearch
-##    container_name: java-springboot-boilerplate-es
+#    container_name: java-springboot-boilerplate-es
 #    environment:
 #      - cluster.name=docker-cluster
 #      - bootstrap.memory_lock=true
