@@ -2,37 +2,37 @@ version: '3'
 
 services:
 
-  apache:
-    image: java-springboot-boilerplate/apache
-    container_name: java-springboot-boilerplate-apache
-    build:
-      context: ./apache
-      dockerfile: Dockerfile
-    ports:
-      - 80:80
-      - 443:443
-    restart: always
-    volumes:
-      - ./apache/conf.d:/etc/apache2/conf.d
-      - ./apache/ssl:/etc/apache2/ssl
-      - ./apache/logs:/var/log/apache2
-      - ../htdocs
-
-#  nginx:
-#    image: java-springboot-boilerplate/nginx
-#    container_name: java-springboot-boilerplate-nginx
+#  apache:
+#    image: java-springboot-boilerplate/apache
+#    container_name: java-springboot-boilerplate-apache
 #    build:
-#      context: ./nginx
+#      context: ./apache
 #      dockerfile: Dockerfile
 #    ports:
-#     - 80:80
-#     - 443:443
+#      - 80:80
+#      - 443:443
 #    restart: always
 #    volumes:
-#     - ./nginx/conf.d:/etc/nginx/conf.d
-#     - ./nginx/ssl:/etc/nginx/ssl
-#     - ./nginx/logs:/var/log/nginx
-#     - ../htdocs:/usr/share/nginx/html
+#      - ./apache/conf.d:/etc/apache2/conf.d
+#      - ./apache/ssl:/etc/apache2/ssl
+#      - ./apache/logs:/var/log/apache2
+#      - ../htdocs
+
+  nginx:
+    image: java-springboot-boilerplate/nginx
+    container_name: java-springboot-boilerplate-nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+     - 80:80
+     - 443:443
+    restart: always
+    volumes:
+     - ./nginx/conf.d:/etc/nginx/conf.d
+     - ./nginx/ssl:/etc/nginx/ssl
+     - ./nginx/logs:/var/log/nginx
+     - ../htdocs:/usr/share/nginx/html
 
   mysql:
     image: java-springboot-boilerplate/mysql
