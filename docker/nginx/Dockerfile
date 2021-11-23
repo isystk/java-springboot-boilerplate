@@ -1,21 +1,16 @@
-FROM alpine:latest
+#ngixのalpine Linux番を使用。
+FROM nginx:alpine
 
-MAINTAINER isystk
-
-# nginxのインストール
-RUN apk update && \
-    apk add --no-cache nginx
-
-# タイムゾーンを東京に設定
-RUN apk --update --no-cache add tzdata && \
-    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
-    apk del tzdata && \
-    rm -rf /var/cache/apk/*
-
-# ポート設定
+#Alpine Linuxのアップデート
+RUN apk update \
+    && apk upgrade \
+    && apk add --no-cache openssl \
+    && apk add --no-cache bash
+ 
+#www-dataを追加
+RUN set -x ; \
+    addgroup -g 82 -S www-data ; \
+    adduser -u 82 -D -S -G www-data www-data && exit 0 ; exit 1
+ 
+#ポートの80と443番を開放
 EXPOSE 80 443
-
-RUN mkdir -p /run/nginx
-
-# フォアグラウンドでnginx実行
-CMD nginx -g "daemon off;"
