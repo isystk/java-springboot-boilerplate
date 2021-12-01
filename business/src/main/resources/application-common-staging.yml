@@ -1,9 +1,9 @@
 spring:
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sample
-    username: root
-    password: password
+    url: jdbc:mysql://db:3306/sample
+    username: sample_user
+    password: sample_password
   data.solr.host: http://localhost:8983/solr
   mail:
     host: 127.0.0.1
