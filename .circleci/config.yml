@@ -1,0 +1,57 @@
+version: 2.1
+executors:
+  default:
+    working_directory: ~/java-springboot-boilerplate
+    docker:
+      - image: circleci/openjdk:11-jdk
+    environment:
+      # Customize the JVM maximum heap limit
+      JVM_OPTS: -Xmx2048m
+
+commands:
+  restore_npm:
+    steps:
+      - restore_cache:
+          name: Restore gradle dependencies
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+  
+  save_npm:
+    steps:
+      - save_cache:
+          name: Cache gradle dependencies
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+          paths:
+            - ~/.gradle
+
+jobs:
+  setup:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: gradle dependencies
+      - save_npm
+
+  test:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_npm
+      - run:
+          name: Test
+          command: gradle test
+      - save_npm
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - setup
+      - test:
+          requires:
+            - build
+
+
