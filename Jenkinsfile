@@ -244,7 +244,7 @@ def deploy(Map args) {
     def keyDir = '/var/lib/jenkins/.ssh/id_rsa'
     // Tomcatサーバのアドレスとユーザ名
     // def webServerAddress = 'ecX-XX-XXX-X-X.xx-xxxx-x.xxxxxxxx'
-    def webServerAddress = '172.30.0.111'
+    def webServerAddress = 'web'
     def webServerUser = 'isystk'
     def webServer = "${webServerUser}@${webServerAddress}"
 
@@ -254,8 +254,8 @@ def deploy(Map args) {
     // ファイル転送してTomcatのwebappsにwarを配置する
     // sh "sudo -S scp -i ${keyDir} ./${args.warDir}/${srcWar} ${webServer}:/home/ec2-user"
     // sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/ec2-user/${srcWar} /usr/share/tomcat8/webapps/${destWar}\""
-    sh "scp -i ${keyDir} ./${args.jarDir}/${args.fileName} ${webServer}:/home/isystk"
-    sh "ssh -i ${keyDir} ${webServer} \"sudo cp /home/isystk/${args.fileName} /opt/tomcat/webapps/${args.fileName}\""
+    sh "sudo -S scp -i ${keyDir} ./${args.jarDir}/${args.fileName} ${webServer}:/home/isystk"
+    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/isystk/${args.fileName} /opt/tomcat/webapps/${args.fileName}\""
     
 }
 
