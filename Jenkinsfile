@@ -241,7 +241,7 @@ def gradlew(command) {
 // args.appVersion アプリのバージョン
 def deploy(Map args) {
     // 秘密鍵のパス ※Tomcatサーバにファイル転送するので事前にJenkinsサーバのどこかに秘密鍵を格納しておく必要がある
-    def keyDir = '/var/lib/jenkins/.ssh/xxx'
+    def keyDir = '/var/lib/jenkins/.ssh/id_rsa'
     // Tomcatサーバのアドレスとユーザ名
     // def webServerAddress = 'ecX-XX-XXX-X-X.xx-xxxx-x.xxxxxxxx'
     def webServerAddress = 'web'
@@ -254,8 +254,8 @@ def deploy(Map args) {
     // ファイル転送してTomcatのwebappsにwarを配置する
     // sh "sudo -S scp -i ${keyDir} ./${args.warDir}/${srcWar} ${webServer}:/home/ec2-user"
     // sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/ec2-user/${srcWar} /usr/share/tomcat8/webapps/${destWar}\""
-    sh "sudo -S scp ./${args.jarDir}/${args.fileName} ${webServer}:/home/isystk"
-    sh "sudo -S ssh ${webServer} \"sudo cp /home/isystk/${args.fileName} /opt/tomcat/webapps/${args.fileName}\""
+    sh "sudo -S scp -i ${keyDir} ./${args.jarDir}/${args.fileName} ${webServer}:/home/isystk"
+    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/isystk/${args.fileName} /opt/tomcat/webapps/${args.fileName}\""
     
 }
 
