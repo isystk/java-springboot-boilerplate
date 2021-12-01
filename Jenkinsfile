@@ -244,7 +244,7 @@ def deploy(Map args) {
     def keyDir = '/var/lib/jenkins/.ssh/id_rsa'
     // Tomcatサーバのアドレスとユーザ名
     // def webServerAddress = 'ecX-XX-XXX-X-X.xx-xxxx-x.xxxxxxxx'
-    def webServerAddress = 'web'
+    def webServerAddress = '172.30.0.111'
     def webServerUser = 'isystk'
     def webServer = "${webServerUser}@${webServerAddress}"
 
