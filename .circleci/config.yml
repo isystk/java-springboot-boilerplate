@@ -9,13 +9,13 @@ executors:
       JVM_OPTS: -Xmx2048m
 
 commands:
-  restore_npm:
+  restore_gradle:
     steps:
       - restore_cache:
           name: Restore gradle dependencies
           key: v1-dependencies-{{ checksum "build.gradle" }}
   
-  save_npm:
+  save_gradle:
     steps:
       - save_cache:
           name: Cache gradle dependencies
@@ -32,26 +32,24 @@ jobs:
       - run:
           name: Install dependencies
           command: gradle dependencies
-      - save_npm
+      - save_gradle
 
   test:
     executor:
       name: default
     steps:
       - checkout
-      - restore_npm
+      - restore_gradle
       - run:
           name: Test
           command: gradle test
-      - save_npm
+      - save_gradle
 
 workflows:
   version: 2
   build_and_test:
     jobs:
       - setup
-      - test:
-          requires:
-            - build
+      - test
 
 
