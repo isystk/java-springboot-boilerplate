@@ -254,8 +254,8 @@ def deploy(Map args) {
     // ファイル転送してTomcatのwebappsにwarを配置する
     // sh "sudo -S scp -i ${keyDir} ./${args.warDir}/${srcWar} ${webServer}:/home/ec2-user"
     // sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/ec2-user/${srcWar} /usr/share/tomcat8/webapps/${destWar}\""
-    sh "sudo -S scp -i ${keyDir} ./${args.jarDir}/${args.fileName} ${webServer}:/home/isystk"
-    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/isystk/${args.fileName} /opt/tomcat/webapps/${args.fileName}\""
+    sh "scp -i ${keyDir} ./${args.jarDir}/${args.fileName} ${webServer}:/home/isystk"
+    sh "ssh -i ${keyDir} ${webServer} \"sudo cp /home/isystk/${args.fileName} /opt/tomcat/webapps/${args.fileName}\""
     
 }
 
