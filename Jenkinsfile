@@ -1,5 +1,11 @@
 pipeline {
     agent any
+    
+    // Jenkins pipelineで参照するJDK（Global Tool Configuration で設定する）
+    tools {
+      jdk 'jdk11'
+    }
+
     // 定数や変数を定義する
     environment {
         reportDir = 'build/reports'
