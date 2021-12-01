@@ -241,8 +241,10 @@ def deploy(Map args) {
     def destWar = "${args.appName}.war"
 
     // ファイル転送してTomcatのwebappsにwarを配置する
-    sh "sudo -S scp -i ${keyDir} ./${args.warDir}/${srcWar} ${webServer}:/home/isystk"
-    sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/isystk/${srcWar} /opt/tomcat/${destWar}\""
+    // sh "sudo -S scp -i ${keyDir} ./${args.warDir}/${srcWar} ${webServer}:/home/ec2-user"
+    // sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/ec2-user/${srcWar} /usr/share/tomcat8/webapps/${destWar}\""
+    sh "sudo -S scp ./${args.warDir}/${srcWar} ${webServer}:/home/isystk"
+    sh "sudo -S ssh ${webServer} \"sudo cp /home/isystk/${srcWar} /opt/tomcat/${destWar}\""
 }
 
 // メールをGmailに送信する
