@@ -193,10 +193,12 @@ pipeline {
                 // archiveArtifacts "${libsDir}/${appName}-${appVersion}.war"
                 // deploy warDir: libsDir, appName: appName, appVersion: appVersion
                 gradlew 'build -Dprofiles.active=staging'
-                archiveArtifacts "web-front/${libsDir}/web-front.jar"
-                archiveArtifacts "web-admin/${libsDir}/web-admin.jar"
-                deploy jarDir: "web-front/${libsDir}", fileName: "web-front.jar"
-                deploy jarDir: "web-admin/${libsDir}", fileName: "web-admin.jar"
+                archiveArtifacts "web-front/${libsDir}/web-front.war"
+                archiveArtifacts "web-admin/${libsDir}/web-admin.war"
+                archiveArtifacts "batch/${libsDir}/batch.jar"
+                deploy libsDir: "web-front/${libsDir}", fileName: "web-front.war"
+                deploy libsDir: "web-admin/${libsDir}", fileName: "web-admin.war"
+                deploy libsDir: "batch/${libsDir}", fileName: "batch.jar"
             }
         }
     }
@@ -254,7 +256,7 @@ def deploy(Map args) {
     // ファイル転送してTomcatのwebappsにwarを配置する
     // sh "sudo -S scp -i ${keyDir} ./${args.warDir}/${srcWar} ${webServer}:/home/ec2-user"
     // sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/ec2-user/${srcWar} /usr/share/tomcat8/webapps/${destWar}\""
-    sh "sudo -S scp -i ${keyDir} ./${args.jarDir}/${args.fileName} ${webServer}:/home/isystk"
+    sh "sudo -S scp -i ${keyDir} ./${args.libsDir}/${args.fileName} ${webServer}:/home/isystk"
     sh "sudo -S ssh -i ${keyDir} ${webServer} \"sudo cp /home/isystk/${args.fileName} /opt/tomcat/webapps/${args.fileName}\""
     
 }
