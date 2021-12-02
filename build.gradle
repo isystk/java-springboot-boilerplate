@@ -34,8 +34,8 @@ subprojects {
   apply plugin: "com.google.cloud.tools.jib"
   apply plugin: "org.flywaydb.flyway"
   apply plugin: "org.seasar.doma.compile"
-  // デプロイ用の成果物生成 ./gradlew distZip
-  apply plugin: "java-library-distribution"
+//   // デプロイ用の成果物生成 ./gradlew distZip
+//   apply plugin: "java-library-distribution"
 
   sourceCompatibility = JavaVersion.VERSION_11
   targetCompatibility = JavaVersion.VERSION_11
@@ -213,6 +213,7 @@ subprojects {
 
     /* flyway */
     implementation("org.flywaydb:flyway-core:${flywayVersion}")
+
   }
 }
 

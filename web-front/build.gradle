@@ -1,7 +1,12 @@
 apply plugin: "org.springframework.boot"
+apply plugin: "war"
 
-bootJar {
-  launchScript()
+// bootJar {
+//   launchScript()
+// }
+
+bootWar {
+  archiveName 'web-front.war'
 }
 
 bootRun {
@@ -20,5 +25,6 @@ dependencies {
   implementation project(":business")
   implementation project(":web")
 
+  providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 
