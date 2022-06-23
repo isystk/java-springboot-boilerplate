@@ -9,7 +9,7 @@ task datasource {
     url = "jdbc:mysql://localhost:3306"
   }
   if (user == null) {
-    user = "root"
+    user = "user"
   }
   if (password == null) {
     password = "password"

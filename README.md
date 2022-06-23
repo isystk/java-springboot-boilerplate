@@ -129,6 +129,9 @@ cd /c/Users/USER/github
 git clone git@github.com:isystk/java-springboot-boilerplate.git
 ```
 
+WSL の場合は、MySQLのConfファイルがWindows側のディスクにあると権限の違いでロードできなくなるのでWindows側で読み取り専用に変更してください。
+![WSL-MySQL](./wsl-mysql.png "WSL-MySQL")
+
 ### IntelliJ IDEAのインストール
 
 以下のURLから、IntelliJ IDEA をダウンロードしてインストールを行います。無料のCommunity版で問題ありません。
@@ -144,6 +147,9 @@ https://www.jetbrains.com/ja-jp/idea/download/
 # Annotation Processingを有効にする
 「Preferences - Build,Execution,Deployment - Compiler - Annotation Processors」から、
 ”Enable annotation processing” を有効にする
+
+# 自動ビルドを有効にする
+「Compiler」にて、”Build project automatically” を有効にする
 ```
 
 ### MySQL Client のインストール
@@ -179,7 +185,6 @@ $ npm install -g yarn
 ├── docker
 │   ├── mysql （DBサーバー）
 │   │   ├── conf.d (mysqlの設定ファイル)
-│   │   ├── data (mysqlのデータファイル)
 │   │   ├── doma-gen (doma2のジェネレータ)
 │   │   ├── init （mysqlの初期DDL）
 │   │   ├── logs （mysqlのログ）
@@ -294,6 +299,8 @@ $ ./gradlew business::flywayInfo
 (既存のSQLを修正するなどして整合性エラーになる場合は以下を実施してください。) 
 $ ./gradlew business::flywayRepair
 $ ./gradlew business::flywayValidate
+(すべてのオブジェクトを削除して初期化したい場合)
+$ ./gradlew business::flywayClean
 
 # フロント側のアプリケーションを起動します。
 # Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
