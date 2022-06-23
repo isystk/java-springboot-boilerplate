@@ -41,10 +41,10 @@ case ${1} in
         rm -Rf ./mysql/data && mkdir ./mysql/data && chmod 777 ./mysql/data
         rm -Rf ./mysql/logs && mkdir ./mysql/logs && chmod 777 ./mysql/logs
         rm -Rf ./apache/logs && mkdir ./apache/logs && chmod 777 ./apache/logs
+        rm -Rf ./nginx/logs && mkdir ./nginx/logs && chmod 777 ./nginx/logs
         rm -Rf ./solr/logs/* && mkdir ./solr/logs && chmod 777 ./solr/logs
         rm -Rf ./solr/data/mycore/data/* && mkdir ./solr/data/mycore/data && chmod 777 ./solr/data/mycore/data
         rm -Rf ./solr/data/post/data/* && mkdir ./solr/data/post/data && chmod 777 ./solr/data/post/data
-        rm -Rf ./elasticsearch/data/* && mkdir ./elasticsearch/data && chmod 777 ./elasticsearch/data
         rm -Rf ./s3/data && mkdir ./s3/data && chmod 777 ./s3/data
         popd
         chmod 777 ./htdocs
@@ -77,7 +77,7 @@ case ${1} in
     mysql)
       case ${2} in
           login)
-              mysql -u root -ppassword -h 127.0.0.1 sample
+              mysql -u user -ppassword -h 127.0.0.1 sample
           ;;
           export)
               mysqldump --skip-column-statistics -u root -h 127.0.0.1 -A > ${3}
