@@ -7,8 +7,8 @@
 	<property name="sqlDestDir" value="../../../business/src/main/resources"/>
 	<property name="dialectName" value="mysql"/>
 	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-	<property name="url" value="jdbc:mysql://127.0.0.1:3306/sample"/>
-	<property name="user" value="root"/>
+	<property name="url" value="jdbc:mysql://127.0.0.1:3306/laraec"/>
+	<property name="user" value="user"/>
 	<property name="password" value="password"/>
 	<property name="entityPackageName" value="com.isystk.sample.domain.entity"/>
 	<property name="criteriaPackageName" value="com.isystk.sample.domain.dto"/>

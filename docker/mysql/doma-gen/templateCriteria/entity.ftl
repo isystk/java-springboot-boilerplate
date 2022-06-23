@@ -7,6 +7,7 @@ ${lib.copyright}
 package ${packageName};
 </#if>
 
+import java.math.BigInteger;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.LocalDateTime;

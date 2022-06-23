@@ -7,6 +7,7 @@ ${lib.copyright}
 package ${packageName};
 </#if>
 
+import org.seasar.doma.Select;
 <#list lib.annotationHash?values as annotationImportName>
 import ${annotationImportName};
 </#list>
