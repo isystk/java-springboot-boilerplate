@@ -129,7 +129,8 @@ cd /c/Users/USER/github
 git clone git@github.com:isystk/java-springboot-boilerplate.git
 ```
 
-WSL の場合は、MySQLのConfファイルがWindows側のディスクにあると権限の違いでロードできなくなるのでWindows側で読み取り専用に変更してください。
+WSL の場合は、MySQLのConfファイルがWindows側のディスクにあると権限の違いでDockerコンテナがロードできなくなるのでWindows側で読み取り専用に変更してください。
+
 ![WSL-MySQL](./wsl-mysql.png "WSL-MySQL")
 
 ### IntelliJ IDEAのインストール
@@ -186,9 +187,7 @@ $ npm install -g yarn
 │   ├── mysql （DBサーバー）
 │   │   ├── conf.d (mysqlの設定ファイル)
 │   │   ├── doma-gen (doma2のジェネレータ)
-│   │   ├── init （mysqlの初期DDL）
 │   │   ├── logs （mysqlのログ）
-│   │   ├── script （mysql関連のスクリプト）
 │   │   └── sample.a5er （ER図）
 │   ├── nginx （Webサーバー）
 │   │   ├── conf.d (nginxの設定ファイル)
@@ -225,7 +224,7 @@ Options:
   init                     Dockerコンテナ・イメージ・生成ファイルの状態を初期化します。
   start                    すべてのDaemonを起動します。
   stop                     すべてのDaemonを停止します。
-  apache restart           Apacheを再起動します。
+  nginx restart            NginXを再起動します。
   mysql login              MySQLデータベースにログインします。
   mysql export <PAHT>      MySQLデータベースのdumpファイルをエクスポートします。
   mysql import <PAHT>      MySQLデータベースにdumpファイルをインポートします。
@@ -303,11 +302,11 @@ $ ./gradlew business::flywayValidate
 $ ./gradlew business::flywayClean
 
 # フロント側のアプリケーションを起動します。
-# Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
+# ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
 $ ./gradlew web-front::bootRun
 
 # 管理画面側のアプリケーションを起動します。
-# Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
+# ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
 $ ./gradlew web-admin::bootRun
 
 # バッチアプリケーションを起動します。

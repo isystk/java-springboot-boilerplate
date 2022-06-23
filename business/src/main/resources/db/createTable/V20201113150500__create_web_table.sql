@@ -1,145 +1,134 @@
--- Project Name : sample
--- Date/Time    : 2020/03/30 16:46:35
--- Author       : isystk
+-- Project Name : laraec
+-- Date/Time    : 2022/06/23 17:10:15
+-- Author       : USER
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
--- メールテンプレート
-create table M_MAIL_TEMPLATE (
-  MAIL_TEMPLATE_ID INT auto_increment not null comment 'MAIL_TEMPLATEID'
-  , TEMPLATE_DIV INT not null comment 'テンプレート区分'
-  , TITLE VARCHAR(100) not null comment 'タイトル'
-  , TEXT VARCHAR(500) not null comment '本文'
-  , REGIST_TIME DATETIME not null comment '登録日時'
-  , UPDATE_TIME DATETIME not null comment '更新日時'
-  , DELETE_FLG TINYINT default 0 not null comment '削除フラグ'
-  , VERSION BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint M_MAIL_TEMPLATE_PKC primary key (MAIL_TEMPLATE_ID)
-) comment 'メールテンプレート' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
+-- ユーザ
+create table users (
+  id bigint unsigned auto_increment not null comment 'ユーザID'
+  , provider_id varchar(255) comment 'プロバイダID'
+  , provider_name varchar(255) comment 'プロバイダ名'
+  , name varchar(255) not null comment 'ユーザ名'
+  , email varchar(255) not null comment 'メールアドレス'
+  , email_verified_at timestamp default null comment 'メール検証日時'
+  , password varchar(255) comment 'パスワード'
+  , remember_token varchar(100) comment 'remember_token'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint users_PKC primary key (id)
+) comment 'ユーザ' ;
+
+alter table users add unique users_IX1 (email) ;
+
+alter table users add unique users_IX2 (provider_id,provider_name) ;
+
+-- 商品
+create table stocks (
+  id bigint unsigned auto_increment not null comment '商品ID'
+  , name varchar(100) not null comment '商品名'
+  , detail varchar(500) not null comment '説明文'
+  , price int not null comment '価格'
+  , imgpath varchar(200) not null comment '画像ファイル名'
+  , quantity int comment '在庫数'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint stocks_PKC primary key (id)
+) comment '商品' ;
+
+-- パスワードリセット
+create table password_resets (
+  email varchar(255) not null comment 'メールアドレス'
+  , token varchar(255) not null comment 'ワンタイムトークン'
+  , created_at timestamp default null comment '登録日時'
+) comment 'パスワードリセット' ;
+
+create index password_resets_IX1
+  on password_resets(email);
+
+-- 注文
+create table orders (
+  id bigint unsigned auto_increment not null comment '注文ID'
+  , stock_id bigint unsigned not null comment '商品ID'
+  , user_id bigint unsigned not null comment 'ユーザID'
+  , price int comment '価格'
+  , quantity int comment '個数'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint orders_PKC primary key (id)
+) comment '注文' ;
+
+create index orders_IX1
+  on orders(stock_id);
+
+-- お問い合わせ
+create table contact_forms (
+  id bigint unsigned auto_increment not null comment 'id'
+  , your_name varchar(20) not null comment 'お名前'
+  , title varchar(50) not null comment 'タイトル'
+  , email varchar(255) not null comment 'メールアドレス'
+  , url longtext comment 'URL'
+  , gender tinyint(1) not null comment '性別'
+  , age tinyint not null comment '年齢'
+  , contact varchar(200) not null comment 'お問い合わせ内容'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint contact_forms_PKC primary key (id)
+) comment 'お問い合わせ' ;
+
+-- お問い合わせ画像
+create table contact_form_images (
+  id bigint unsigned auto_increment not null comment 'お問い合わせ画像ID'
+  , contact_form_id bigint unsigned not null comment 'お問い合わせID'
+  , file_name varchar(100) not null comment 'ファイル名'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint contact_form_images_PKC primary key (id)
+) comment 'お問い合わせ画像' ;
+
+create index contact_form_images_IX1
+  on contact_form_images(contact_form_id);
+
+-- カート
+create table carts (
+  id bigint unsigned auto_increment not null comment 'カートID'
+  , stock_id bigint unsigned not null comment '商品ID'
+  , user_id bigint unsigned not null comment 'ユーザID'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint carts_PKC primary key (id)
+) comment 'カート' ;
+
+create index carts_IX1
+  on carts(stock_id);
+
+create index carts_IX2
+  on carts(user_id);
 
 -- 管理者
-create table T_STAFF (
-  STAFF_ID INT auto_increment not null comment '管理者ID'
-  , EMAIL VARCHAR(256) not null comment 'メールアドレス'
-  , PASSWORD VARCHAR(100) not null comment 'パスワード'
-  , FAMILY_NAME VARCHAR(20) not null comment '姓'
-  , NAME VARCHAR(20) not null comment '名'
-  , FAMILY_NAME_KANA VARCHAR(20) not null comment '姓（カナ）'
-  , NAME_KANA VARCHAR(20) not null comment '名（カナ）'
-  , LAST_LOGIN_TIME DATETIME comment '最終ログイン日時'
-  , REGIST_TIME DATETIME not null comment '登録日時'
-  , UPDATE_TIME DATETIME not null comment '更新日時'
-  , DELETE_FLG TINYINT default 0 not null comment '削除フラグ'
-  , VERSION BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint T_STAFF_PKC primary key (STAFF_ID)
-) comment '管理者' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
+create table admins (
+  id int unsigned auto_increment not null comment '管理者ID'
+  , name varchar(255) not null comment '管理者名'
+  , email varchar(255) not null comment 'メールアドレス'
+  , password varchar(255) not null comment 'パスワード'
+  , remember_token varchar(100) comment 'remember_token'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint admins_PKC primary key (id)
+) comment '管理者' ;
 
--- 会員-パスワード変更
-create table T_USER_ONETIME_PASS (
-  USER_ID INT not null comment '会員ID'
-  , ONETIME_KEY CHAR(32) not null comment 'ワンタイムキー'
-  , ONETIME_VALID_TIME DATETIME not null comment 'ワンタイム有効期限'
-  , constraint T_USER_ONETIME_PASS_PKC primary key (USER_ID)
-) comment '会員-パスワード変更' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
--- 投稿タグマスタ
-create table M_POST_TAG (
-  POST_TAG_ID INT auto_increment not null comment '投稿タグID'
-  , NAME VARCHAR(20) not null comment '名称'
-  , REGIST_TIME DATETIME not null comment '登録日時'
-  , UPDATE_TIME DATETIME not null comment '更新日時'
-  , DELETE_FLG TINYINT default 0 not null comment '削除フラグ'
-  , VERSION BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint M_POST_TAG_PKC primary key (POST_TAG_ID)
-) comment '投稿タグマスタ' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
--- 投稿タグID
-create table T_POST_TAG (
-  POST_ID INT not null comment '投稿ID'
-  , POST_TAG_ID INT not null comment '投稿タグID'
-  , constraint T_POST_TAG_PKC primary key (POST_ID,POST_TAG_ID)
-) comment '投稿タグID' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
--- 画像
-create table T_IMAGE (
-  IMAGE_ID INT not null comment '画像ID'
-  , REGIST_TIME DATETIME not null comment '登録日時'
-  , UPDATE_TIME DATETIME not null comment '更新日時'
-  , DELETE_FLG TINYINT default 0 not null comment '削除フラグ'
-  , constraint T_IMAGE_PKC primary key (IMAGE_ID)
-) comment '画像' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
--- 投稿画像
-create table T_POST_IMAGE (
-  POST_ID INT not null comment '投稿ID'
-  , IMAGE_ID INT not null comment '画像ID'
-  , constraint T_POST_IMAGE_PKC primary key (POST_ID,IMAGE_ID)
-) comment '投稿画像' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
--- 投稿
-create table T_POST (
-  POST_ID INT auto_increment not null comment '投稿ID'
-  , USER_ID INT not null comment '会員ID'
-  , TITLE VARCHAR(100) not null comment 'タイトル'
-  , TEXT VARCHAR(500) not null comment '本文'
-  , REGIST_TIME DATETIME not null comment '登録日時'
-  , UPDATE_TIME DATETIME not null comment '更新日時'
-  , DELETE_FLG TINYINT default 0 not null comment '削除フラグ'
-  , VERSION BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint T_POST_PKC primary key (POST_ID)
-) comment '投稿' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
--- 会員-初期承認
-create table T_USER_ONETIME_VALID (
-  USER_ID INT not null comment '会員ID'
-  , ONETIME_KEY CHAR(32) not null comment 'ワンタイムキー'
-  , ONETIME_VALID_TIME DATETIME not null comment 'ワンタイム有効期限'
-  , constraint T_USER_ONETIME_VALID_PKC primary key (USER_ID)
-) comment '会員-初期承認' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
--- 会員
-create table T_USER (
-  USER_ID INT auto_increment not null comment '会員ID'
-  , EMAIL VARCHAR(256) not null comment 'メールアドレス'
-  , PASSWORD VARCHAR(100) not null comment 'パスワード'
-  , FAMILY_NAME VARCHAR(20) not null comment '姓'
-  , NAME VARCHAR(20) not null comment '名'
-  , FAMILY_NAME_KANA VARCHAR(20) not null comment '姓（カナ）'
-  , NAME_KANA VARCHAR(20) not null comment '名（カナ）'
-  , ZIP VARCHAR(11) comment '郵便番号'
-  , PREFECTURE_ID INT comment '都道府県'
-  , AREA VARCHAR(100) comment '市区町村'
-  , ADDRESS VARCHAR(100) comment '町名番地'
-  , BUILDING VARCHAR(100) comment '建物名'
-  , TEL VARCHAR(13) comment '電話番号'
-  , SEX INT comment '性別'
-  , BIRTHDAY DATE comment '生年月日'
-  , LAST_LOGIN_TIME DATETIME comment '最終ログイン日時'
-  , STATUS INT not null comment 'ステータス'
-  , REGIST_TIME DATETIME not null comment '登録日時'
-  , UPDATE_TIME DATETIME not null comment '更新日時'
-  , DELETE_FLG TINYINT default 0 not null comment '削除フラグ'
-  , VERSION BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint T_USER_PKC primary key (USER_ID)
-) comment '会員' ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=Compressed;
-
-alter table T_USER_ONETIME_VALID
-  add constraint T_USER_ONETIME_VALID_FK1 foreign key (USER_ID) references T_USER(USER_ID);
-
-alter table T_USER_ONETIME_PASS
-  add constraint T_USER_ONETIME_PASS_FK1 foreign key (USER_ID) references T_USER(USER_ID);
-
-alter table T_POST_TAG
-  add constraint T_POST_TAG_FK1 foreign key (POST_ID) references T_POST(POST_ID);
-
-alter table T_POST_TAG
-  add constraint T_POST_TAG_FK2 foreign key (POST_TAG_ID) references M_POST_TAG(POST_TAG_ID);
-
-alter table T_POST_IMAGE
-  add constraint T_POST_IMAGE_FK1 foreign key (IMAGE_ID) references T_IMAGE(IMAGE_ID);
-
-alter table T_POST_IMAGE
-  add constraint T_POST_IMAGE_FK2 foreign key (POST_ID) references T_POST(POST_ID);
-
-alter table T_POST
-  add constraint T_POST_FK1 foreign key (USER_ID) references T_USER(USER_ID);
+alter table admins add unique admins_IX1 (email) ;

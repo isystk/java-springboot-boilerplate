@@ -2,7 +2,7 @@ spring:
   datasource:
     platform: mysql
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sample
+    url: jdbc:mysql://localhost:3306/laraec
     username: user
     password: password
   data.solr.host: http://localhost:8983/solr

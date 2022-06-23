@@ -1,9 +1,8 @@
 
-DELETE FROM T_STAFF WHERE EMAIL = 'test@sample.com';
-INSERT INTO T_STAFF(EMAIL, PASSWORD, FAMILY_NAME, NAME, FAMILY_NAME_KANA, NAME_KANA, REGIST_TIME, UPDATE_TIME) VALUES
-('test@sample.com', '$2a$10$BkIISE3qUk3khS577JhW3OOuhJJ3LRo.xDZ9MfRuwkgq/TcTTWOyG', '管理者', '１', 'カンリシャ', 'ワン', now(), now());
+DELETE FROM admins WHERE email = 'sample@sample.com';
+INSERT INTO admins(name, email, password) VALUES
+('管理者A', 'sample@sample.com', '$2a$10$BkIISE3qUk3khS577JhW3OOuhJJ3LRo.xDZ9MfRuwkgq/TcTTWOyG');
 
-DELETE FROM T_USER WHERE EMAIL = 'test@sample.com';
-INSERT INTO T_USER (EMAIL, PASSWORD, FAMILY_NAME, NAME, FAMILY_NAME_KANA, NAME_KANA, ZIP, PREFECTURE_ID, AREA, ADDRESS, BUILDING, TEL, SEX, BIRTHDAY, LAST_LOGIN_TIME, STATUS, REGIST_TIME, UPDATE_TIME, DELETE_FLG, VERSION) VALUES
-('test@sample.com', '$2a$10$BkIISE3qUk3khS577JhW3OOuhJJ3LRo.xDZ9MfRuwkgq/TcTTWOyG', 'サンプル', '１', 'サンプル', 'ワン', '110-0006', 13, '台東区', '秋葉原１－１－１', 'XXXXビル１０１', '09012345678', 2, NULL, NULL, 0, now(), now(), 0, 0);
-
+DELETE FROM users WHERE email = 'test1@test.com';
+INSERT INTO users (name, email, password, email_verified_at, created_at, updated_at) VALUES
+('テスト1', 'test1@test.com', '$2a$10$BkIISE3qUk3khS577JhW3OOuhJJ3LRo.xDZ9MfRuwkgq/TcTTWOyG', now(), now(), now());
