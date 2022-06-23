@@ -6,9 +6,9 @@ import org.springframework.stereotype.Component;
 import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.domain.dao.AuditInfoHolder;
-import com.isystk.sample.domain.dao.TStaffDao;
-import com.isystk.sample.domain.dto.TStaffCriteria;
-import com.isystk.sample.domain.entity.TStaff;
+import com.isystk.sample.domain.dao.AdminsDao;
+import com.isystk.sample.domain.dto.AdminsCriteria;
+import com.isystk.sample.domain.entity.Admins;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 public class StaffHelper {
 
   @Autowired
-  TStaffDao tStaffDao;
+  AdminsDao adminsDao;
 
   /**
    * ログイン済みかどうか
@@ -34,8 +34,8 @@ public class StaffHelper {
    *
    * @return
    */
-  public Integer getLoginStaffId() {
-    return getLoginStaff().getStaffId();
+  public Long getLoginStaffId() {
+    return getLoginStaff().getId();
   }
 
   /**
@@ -43,10 +43,10 @@ public class StaffHelper {
    *
    * @return
    */
-  public TStaff getLoginStaff() {
-    TStaffCriteria criteria = new TStaffCriteria();
+  public Admins getLoginStaff() {
+    AdminsCriteria criteria = new AdminsCriteria();
     criteria.setEmailEq(AuditInfoHolder.getAuditUser());
-    return tStaffDao.findOne(criteria).orElseThrow(
+    return adminsDao.findOne(criteria).orElseThrow(
         () -> new NoDataFoundException(
             "email=" + AuditInfoHolder.getAuditUser() + "のデータが見つかりません。"));
   }
@@ -57,9 +57,9 @@ public class StaffHelper {
    * @return
    */
   public void updateLastLogin() {
-    TStaff tStaff = getLoginStaff();
-    tStaff.setLastLoginTime(DateUtils.getNow());
-    tStaffDao.update(tStaff);
+//    Admins admins = getLoginStaff();
+//    admins.setLastLoginTime(DateUtils.getNow());
+//    adminsDao.update(admins);
   }
 
 }

@@ -12,9 +12,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.isystk.sample.domain.dao.TStaffDao;
-import com.isystk.sample.domain.dto.TStaffCriteria;
-import com.isystk.sample.domain.entity.TStaff;
+import com.isystk.sample.domain.dao.AdminsDao;
+import com.isystk.sample.domain.dto.AdminsCriteria;
+import com.isystk.sample.domain.entity.Admins;
 import com.isystk.sample.web.base.security.BaseRealm;
 
 import lombok.val;
@@ -28,20 +28,20 @@ import lombok.extern.slf4j.Slf4j;
 public class StaffDaoRealm extends BaseRealm {
 
   @Autowired
-  TStaffDao tStaffDao;
+  AdminsDao adminsDao;
 
   @Override
   protected UserDetails getLoginUser(String email) {
-    TStaff staff = null;
+    Admins staff = null;
     List<GrantedAuthority> authorityList = null;
 
     try {
       // login_idをメールアドレスと見立てる
-      val criteria = new TStaffCriteria();
+      val criteria = new AdminsCriteria();
       criteria.setEmailEq(email);
 
       // 担当者を取得して、セッションに保存する
-      staff = tStaffDao.findOne(criteria)
+      staff = adminsDao.findOne(criteria)
           .orElseThrow(() -> new UsernameNotFoundException("no staff found [id=" + email + "]"));
 //
 //            // 担当者権限を取得する
