@@ -37,21 +37,21 @@ subprojects {
 //   // デプロイ用の成果物生成 ./gradlew distZip
 //   apply plugin: "java-library-distribution"
 
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
+  sourceCompatibility = JavaVersion.VERSION_15
+  targetCompatibility = JavaVersion.VERSION_15
 
   // Kotlinを利用する場合はコメントアウトを外す
 //  compileKotlin {
 //    kotlinOptions {
 //      freeCompilerArgs = ["-Xjsr305=strict"]
-//      jvmTarget = "11"
+//      jvmTarget = "15"
 //    }
 //  }
 //
 //  compileTestKotlin {
 //    kotlinOptions {
 //      freeCompilerArgs = ["-Xjsr305=strict"]
-//      jvmTarget = "11"
+//      jvmTarget = "15"
 //    }
 //  }
   /* enable junit 5 */
@@ -203,10 +203,10 @@ subprojects {
     /* ulid */
     implementation("de.huxhorn.sulky:de.huxhorn.sulky.ulid:${ulidVersion}")
 
-    /* jwt */
-    compile("io.jsonwebtoken:jjwt-api:${jjwtVersion}")
-    runtime("io.jsonwebtoken:jjwt-impl:${jjwtVersion}")
-    runtime("io.jsonwebtoken:jjwt-jackson:${jjwtVersion}")
+//    /* jwt */
+//    compile "io.jsonwebtoken:jjwt-api:${jjwtVersion}"
+//    runtime("io.jsonwebtoken:jjwt-impl:${jjwtVersion}")
+//    runtime("io.jsonwebtoken:jjwt-jackson:${jjwtVersion}")
 
     /* KMapper */
     implementation("com.github.ProjectMapK:KMapper:${kmapperVersion}")
