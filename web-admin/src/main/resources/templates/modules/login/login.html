@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>ログイン｜Sample</title>
+  <title>ログイン</title>
 </head>
 <body>
 <div layout:fragment="header">
@@ -25,7 +25,7 @@
       <img th:src="@{/static/images/AdminLTELogo.png}" alt="AdminSample Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE Sample</span>
+      <span class="brand-text font-weight-light">LaraEC</span>
     </a>
   </aside>
 </div>
@@ -39,29 +39,40 @@
 </div>
 <div layout:fragment="content">
 
-  <div class="card">
-    <div class="card-body login-card-body">
-      <p class="login-box-msg">メールアドレスとパスワードを入力して下さい</p>
-
       <form id="loginForm" class="form-horizontal" th:object="${loginForm}"
             th:action="@{/authenticate}" method="post">
-        <div class="box-body">
-          <div class="form-group" th:with="invalid=${#fields.hasErrors('loginId')}"
-               th:class="${'form-group' + (invalid ? ' has-error' : '')}">
-            <input type="text" class="form-control" name="loginId" autofocus=""
-                   placeholder="メールアドレス" th:value="*{loginId}"/>
+        <div class="card card-purple">
+          <div class="card-body">
+            <div class="form-group row">
+              <label for="loginId" class="col-md-4 col-form-label text-md-right">メールアドレス</label>
+              <div class="col-md-6">
+                <input type="text" class="form-control" id="loginId" name="loginId" autofocus=""
+                       placeholder="メールアドレス" th:value="*{loginId}"/>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="password" class="col-md-4 col-form-label text-md-right">パスワード</label>
+              <div class="col-md-6">
+                <input type="password" class="form-control" id="password" name="password"
+                       placeholder="パスワード"/>
+              </div>
+            </div>
+
+            <div class="col-md-6 offset-md-4 border mt-4 p-3">
+              <p class="">テスト用ユーザ</p>
+              メールアドレス: sample@sample.com<br>
+              パスワード: password
+            </div>
+
           </div>
-          <div class="form-group" th:with="invalid=${#fields.hasErrors('password')}"
-               th:class="${'form-group' + (invalid ? ' has-error' : '')}">
-            <input type="password" class="form-control" name="password" placeholder="パスワード"/>
-          </div>
-          <div class="form-group text-center">
-            <button type="submit" class="btn bg-purple w-50">ログイン</button>
+          <div class="card-footer text-center clearfix ">
+            <button type="submit" class="btn btn-danger">
+              ログイン
+            </button>
           </div>
         </div>
+
       </form>
-    </div>
-  </div>
 
 </div>
 </body>
