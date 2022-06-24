@@ -4,7 +4,7 @@
     <img th:src="@{/static/images/AdminLTELogo.png}" alt="AdminSample Logo"
          class="brand-image img-circle elevation-3"
          style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminLTE Sample</span>
+    <span class="brand-text font-weight-light">LaraEC</span>
   </a>
   <!-- Sidebar Menu -->
   <nav class="mt-2">
@@ -19,7 +19,7 @@
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link" th:class="|nav-link ${category=='post' ? 'active' : ''}|">
           <i class="nav-icon fas fa-table"></i>
-          <p>投稿管理
+          <p>商品管理
             <i class="fas fa-angle-left right"></i>
           </p>
         </a>
@@ -27,15 +27,39 @@
           <li class="nav-item">
             <a th:href="@{/post/}" class="nav-link"
                th:class="|nav-link ${item=='post' ? 'active' : ''}|">
-              <i class="far fa-circle nav-icon"></i>
-              <p>投稿一覧</p>
+              <i class="far fa-box-open nav-icon"></i>
+              <p>在庫管理</p>
             </a>
           </li>
           <li class="nav-item">
             <a th:href="@{/post/tag/}" class="nav-link"
                th:class="|nav-link ${item=='tag' ? 'active' : ''}|">
-              <i class="far fa-circle nav-icon"></i>
-              <p>投稿タグ一覧</p>
+              <i class="far fa-cart-arrow-down nav-icon"></i>
+              <p>注文履歴</p>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link" th:class="|nav-link ${category=='post' ? 'active' : ''}|">
+          <i class="nav-icon fas fa-frown"></i>
+          <p>ユーザ管理
+            <i class="fas fa-angle-left right"></i>
+          </p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item">
+            <a th:href="@{/post/}" class="nav-link"
+               th:class="|nav-link ${item=='post' ? 'active' : ''}|">
+              <i class="far fa-layer-group nav-icon"></i>
+              <p>顧客管理</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a th:href="@{/post/tag/}" class="nav-link"
+               th:class="|nav-link ${item=='tag' ? 'active' : ''}|">
+              <i class="far fa-comment nav-icon"></i>
+              <p>お問い合わせ</p>
             </a>
           </li>
         </ul>
@@ -51,8 +75,8 @@
           <li class="nav-item">
             <a th:href="@{/system/mail/}" class="nav-link"
                th:class="|nav-link ${item=='mail' ? 'active' : ''}|">
-              <i class="fa fa-envelope"></i>
-              <p>メールテンプレート</p>
+              <i class="fa fa-file-image"></i>
+              <p>画像管理</p>
             </a>
           </li>
         </ul>
