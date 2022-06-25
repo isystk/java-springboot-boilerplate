@@ -11,12 +11,6 @@
     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
         data-accordion="false">
       <li class="nav-item has-treeview">
-        <a th:href="@{/}" class="nav-link" th:class="|nav-link ${category=='home' ? 'active' : ''}|">
-          <i class="nav-icon fas fa-home"></i>
-          <p>HOME</p>
-        </a>
-      </li>
-      <li class="nav-item has-treeview">
         <a href="#" class="nav-link" th:class="|nav-link ${category=='stocks' ? 'active' : ''}|">
           <i class="nav-icon fas fa-table"></i>
           <p>商品管理
@@ -25,14 +19,14 @@
         </a>
         <ul class="nav nav-treeview">
           <li class="nav-item">
-            <a th:href="@{/post/}" class="nav-link"
+            <a th:href="@{/stocks/}" class="nav-link"
                th:class="|nav-link ${item=='stock' ? 'active' : ''}|">
               <i class="far fa-box-open nav-icon"></i>
               <p>在庫管理</p>
             </a>
           </li>
           <li class="nav-item">
-            <a th:href="@{/post/tag/}" class="nav-link"
+            <a th:href="@{/orders/}" class="nav-link"
                th:class="|nav-link ${item=='order' ? 'active' : ''}|">
               <i class="far fa-cart-arrow-down nav-icon"></i>
               <p>注文履歴</p>
