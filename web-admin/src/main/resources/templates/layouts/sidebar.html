@@ -17,7 +17,7 @@
         </a>
       </li>
       <li class="nav-item has-treeview">
-        <a href="#" class="nav-link" th:class="|nav-link ${category=='post' ? 'active' : ''}|">
+        <a href="#" class="nav-link" th:class="|nav-link ${category=='stocks' ? 'active' : ''}|">
           <i class="nav-icon fas fa-table"></i>
           <p>商品管理
             <i class="fas fa-angle-left right"></i>
@@ -26,14 +26,14 @@
         <ul class="nav nav-treeview">
           <li class="nav-item">
             <a th:href="@{/post/}" class="nav-link"
-               th:class="|nav-link ${item=='post' ? 'active' : ''}|">
+               th:class="|nav-link ${item=='stock' ? 'active' : ''}|">
               <i class="far fa-box-open nav-icon"></i>
               <p>在庫管理</p>
             </a>
           </li>
           <li class="nav-item">
             <a th:href="@{/post/tag/}" class="nav-link"
-               th:class="|nav-link ${item=='tag' ? 'active' : ''}|">
+               th:class="|nav-link ${item=='order' ? 'active' : ''}|">
               <i class="far fa-cart-arrow-down nav-icon"></i>
               <p>注文履歴</p>
             </a>

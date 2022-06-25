@@ -10,6 +10,8 @@ public interface AdminUrl {
    **/
   public static final String HOME = "/";
 
+  public static final String STOCKS = "/stocks";
+
   public static final String POST = "/post";
 
   public static final String POST_REGIST = "/post/regist";
