@@ -42,11 +42,11 @@
         <div class="form-group">
           <div class="control-group">
             <input
-                th:replace="fragments/input :: input ('text', '商品ID', 'stockId', 'col-sm-4', 10)"/>
+                th:replace="fragments/input :: input ('text', 'ID', 'stockId', 'col-sm-4', 10)"/>
           </div>
           <div class="control-group">
             <input
-                th:replace="fragments/input :: input ('text', '名称', 'name', 'col-sm-10', 100)"/>
+                th:replace="fragments/input :: input ('text', '商品名', 'name', 'col-sm-10', 100)"/>
           </div>
           <div class="control-group">
             <div class="form-group row">
@@ -103,9 +103,11 @@
           <table class="table table-hover" style="table-layout:fixed;">
             <thead>
             <tr>
-              <th>商品ID</th>
-              <th style="width:300px;">名称</th>
-              <th>商品日時</th>
+              <th>ID</th>
+              <th style="width:300px;">商品名</th>
+              <th>価格</th>
+              <th>在庫数</th>
+              <th>登録日時</th>
               <th></th>
             </tr>
             </thead>
@@ -113,7 +115,9 @@
             <tr th:each="e : ${pages.data}">
               <td th:text="*{e.id}"></td>
               <td th:text="*{e.name}"></td>
-              <td th:text="${#temporals.format(e.createdAt, 'yyyy/MM/dd')}"></td>
+              <td th:text="*{e.price}"></td>
+              <td th:text="*{e.quantity}"></td>
+              <td th:text="${#temporals.format(e.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
               <td class="float-right">
                 <form th:action="@{/stocks/{id}/(id=*{e.id})}" th:method="delete">
                   <a class="btn btn-secondary m-1 btn-sm" th:href="@{/stocks/{id}/(id=*{e.id})}">詳細</a><br>

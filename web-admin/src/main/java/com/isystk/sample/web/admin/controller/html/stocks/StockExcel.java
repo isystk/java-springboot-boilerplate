@@ -38,10 +38,12 @@ public class StockExcel implements ExcelView.Callback {
     style.setFont(font);
 
     Row header = sheet.createRow(0);
-    header.createCell(0).setCellValue("商品ID");
+    header.createCell(0).setCellValue("ID");
     header.getCell(0).setCellStyle(style);
-    header.createCell(1).setCellValue("名称");
+    header.createCell(1).setCellValue("商品名");
     header.getCell(1).setCellStyle(style);
+    header.createCell(2).setCellValue("価格");
+    header.getCell(2).setCellStyle(style);
 
     // 明細
     @SuppressWarnings("unchecked")
@@ -52,6 +54,7 @@ public class StockExcel implements ExcelView.Callback {
       Row userRow = sheet.createRow(count++);
       userRow.createCell(0).setCellValue(stock.getId().toString());
       userRow.createCell(1).setCellValue(stock.getName());
+      userRow.createCell(2).setCellValue(stock.getPrice());
     }
   }
 }
