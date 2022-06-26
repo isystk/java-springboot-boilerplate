@@ -1,5 +1,6 @@
 package com.isystk.sample.domain.entity;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
@@ -40,7 +41,7 @@ public class TPost extends DomaDtoImpl {
    * 会員ID
    */
   @Column(name = "USER_ID")
-  Integer userId;
+  BigInteger userId;
 
   /**
    * タイトル

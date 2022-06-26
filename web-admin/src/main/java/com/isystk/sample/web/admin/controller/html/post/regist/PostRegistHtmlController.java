@@ -8,6 +8,7 @@ import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.entity.TPostImage;
 import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.domain.entity.Users;
 import com.isystk.sample.domain.repository.MPostTagRepository;
 import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import com.isystk.sample.web.admin.service.PostService;
@@ -91,10 +92,10 @@ public class PostRegistHtmlController extends AbstractHtmlController {
     // ユーザー一覧
     model.addAttribute("userList", userHelper.getUserList()
         .stream()
-        .map((tUser) -> {
+        .map((users) -> {
           CodeValueDto dto = new CodeValueDto();
-          dto.setCode(tUser.getUserId());
-          dto.setText(String.join(tUser.getFamilyName(), " ", tUser.getName()));
+          dto.setCode(users.getId().toString());
+          dto.setText(String.join(users.getName()));
           return dto;
         }).collect(Collectors.toList())
     );
@@ -124,8 +125,8 @@ public class PostRegistHtmlController extends AbstractHtmlController {
       return showRegistIndex(model);
     }
 
-    TUser tUser = userHelper.getUser(form.getUserId());
-    model.addAttribute("userName", String.join(tUser.getFamilyName(), " ", tUser.getName()));
+    Users users = userHelper.getUser(form.getUserId());
+    model.addAttribute("userName", String.join(users.getName()));
 
     // タグの一覧
     model.addAttribute("postTagList", mPostTagRepository.findAllSelectList());

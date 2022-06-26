@@ -12,6 +12,10 @@ public interface AdminUrl {
 
   public static final String STOCKS = "/stocks";
 
+  public static final String STOCKS_REGIST = "/stocks/regist";
+
+  public static final String STOCKS_EDIT = "/stocks/edit";
+
   public static final String POST = "/post";
 
   public static final String POST_REGIST = "/post/regist";

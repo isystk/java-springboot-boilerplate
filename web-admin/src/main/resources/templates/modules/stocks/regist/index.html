@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>商品登録</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('stocks', 'stock')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>商品登録</h1>
+    </div><!-- /.col -->
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/stock/}">商品管理</a></li>
+        <li class="breadcrumb-item active">商品登録</li>
+      </ol>
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+</div>
+<div layout:fragment="content">
+
+  <div class="card card-purple">
+    <div class="card-body">
+      <p>商品内容を入力して下さい</p>
+      <form th:object="${stockRegistForm}" th:action="@{/stock/regist}" th:method="post">
+        <input
+            th:replace="fragments/selectbox :: input ('商品者', 'userId', ${userList}, 'code', 'text')"/>
+        <input
+            th:replace="fragments/input :: input ('text', 'タイトル', 'title', 'col-md-6', 100)"/>
+        <input
+            th:replace="fragments/imageUpload :: input ('写真', 'stockImageId', *{stockImageId}, 'col-md-10', true)"/>
+        <input th:replace="fragments/textarea :: input ('本文', 'text', 'col-md-10', 4)"/>
+        <input
+            th:replace="fragments/checkbox :: input ('タグ', 'stockTagId', ${stockTagList}, 'code', 'text')"/>
+        <div class="card-footer clearfix text-center">
+          <div class="text-left float-left">
+            <a class="btn btn-secondary" th:href="@{/stock}">一覧に戻る</a>
+          </div>
+          <button class="btn btn-secondary js-submit" th:data-uri="@{/stock/regist?confirm}">確認画面へ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div layout:fragment="scripts">
+  <script type="text/javascript" th:inline="javascript">
+		$(function() {
+			// サブミット
+			$('.js-submit').submitbutton();
+
+			// カテゴリー写真ファイル選択時
+			$('.js-upload-stockImage-btn').change(function(){
+
+				var dataType = 'stockImage';
+
+				var slides = $('.selectedPhotoList'),
+					imagesLength = slides.find('li').length;
+				var fileLength = this.files.length;
+				if (5 < (imagesLength + fileLength)) {
+					showErrorMsg(dataType, ['コンテンツ写真の登録可能件数は、最大8件です。']);
+					return;
+				}
+
+				// Loading画像
+				$('<div id="site_loader_overlay"><div class="site_loader_spinner" ></div></div>').appendTo('body');
+
+				var count = 0;
+				imageUpload(this, dataType, function(res) {
+
+					if (!res) {
+						// Loading画像
+						$('#site_loader_overlay').remove();
+						return false;
+					}
+
+					var data = res.data[0];
+
+					// 画像をアニメーション（フェードイン）で表示します。
+					var src = data.imageUrlSquare + '?time=' + new Date().getTime();
+					var image = $([
+            '<div class="m-2" style="width:120px;position: relative;">',
+              '<a href="#" class="js-close"></a>',
+              '<img src="'+src+'" width="120px" />',
+              '<input type="hidden" name="stockImageId" value="'+data.imageId+'" />',
+            '</div>',
+						].join(''));
+					slides.append(image);
+
+					count = count + 1;
+					if (fileLength == count) {
+						// エラーメッセージを消す
+						$('[id="addCategoryList[0].' + dataType + 'IdErrMessage"]').empty();
+
+						// Loading画像
+						$('#site_loader_overlay').remove();
+					}
+				});
+			});
+
+			// 画像ファイル選択時
+			var imageUpload = function(file, dataType, callbackfunc){
+				var self = $(file);
+
+				// 未選択の場合は何もしない。
+				if (self.val() === '') {
+					return;
+				}
+
+				// アップロード中は、「ファイル選択」ボタンを非活性にする。
+				self.attr('disabled', 'disabled');
+
+				$.imageUpload({
+					uploadUrl: '/admin/api/v1/fileupload/image',
+					form: $('#form1'),
+					successCallback : function(res) {
+
+						self.removeAttr('disabled');
+
+						// エラー処理
+						$('#errorsArea').empty();
+						$('input','select').removeClass('error');
+						if (res.errors) {
+							showErrorMsg(dataType, res.errors);
+							return false;
+						}
+
+						if (callbackfunc) {
+							callbackfunc(res);
+						}
+
+					},
+					errorsCallback : function(errors) {
+						self.removeAttr('disabled');
+
+						 if (callbackfunc) {
+							callbackfunc();
+						}
+
+						showErrorMsg(dataType, errors);
+						return false;
+					}
+
+				}).fileUpload(file, $('input[name="_csrf"]').val());
+
+			};
+
+			// 選択中の画像を削除する
+			$(document).on('click', '.selectedPhotoList a.js-close', function(e) {
+				e.preventDefault();
+				$(this).closest('div').remove();
+			});
+
+			// エラーメッセージを表示します。
+			var showErrorMsg = function(dataType, errors) {
+				var divs = _.map(errors, function(error) {
+					return '<p class=\"errortxt\">'+error+'</p>';
+				});
+				var errDiv = $('[id="' + dataType + 'IdErrMessage"]');
+				errDiv.empty().append('<div class=\"alertBox\">' + divs.join('') + '</div>');
+				// Loading画像削除
+				$('#site_loader_overlay').remove();
+			};
+
+		});
+
+  </script>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package com.isystk.sample.web.admin.controller.html.post.regist;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import javax.validation.constraints.Digits;
@@ -18,7 +19,7 @@ public class PostRegistForm extends BaseForm {
   private static final long serialVersionUID = 7593564324192730932L;
 
   @NotNull
-  Integer userId;
+  BigInteger userId;
 
   @NotEmpty
   String title;

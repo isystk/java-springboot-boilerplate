@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class CodeValueDto implements Dto {
 
-  Integer code;
+  String code;
 
   String text;
 }
