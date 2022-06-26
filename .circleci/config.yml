@@ -3,7 +3,7 @@ executors:
   default:
     working_directory: ~/java-springboot-boilerplate
     docker:
-      - image: circleci/openjdk:15-jdk
+      - image: cimg/openjdk:18.0.1
     environment:
       # Customize the JVM maximum heap limit
       JVM_OPTS: -Xmx2048m
