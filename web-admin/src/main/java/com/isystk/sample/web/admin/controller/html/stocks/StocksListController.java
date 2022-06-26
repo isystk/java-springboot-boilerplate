@@ -81,7 +81,7 @@ public class StocksListController extends AbstractHtmlController {
     }
 
     // 10件区切りで取得する
-    val pages = stockRepository.findAll(formToCriteria(form), form);
+    val pages = stockRepository.findPage(formToCriteria(form), form);
 
     // 画面に検索結果を渡す
     model.addAttribute("pages", pages);
@@ -149,11 +149,10 @@ public class StocksListController extends AbstractHtmlController {
   public CsvView downloadCsv(@PathVariable String filename, StocksListForm form, Model model) {
 
     // 全件取得する
-    form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-    val pages = stockRepository.findAll(formToCriteria(form), form);
+    val stocks = stockRepository.findAll(formToCriteria(form));
 
     // 詰め替える
-    List<StockCsv> csvList = ObjectMapperUtils.mapAll(pages.getData(), StockCsv.class);
+    List<StockCsv> csvList = ObjectMapperUtils.mapAll(stocks, StockCsv.class);
 
     // CSVスキーマクラス、データ、ダウンロード時のファイル名を指定する
     return new CsvView(StockCsv.class, csvList, filename);
@@ -170,11 +169,10 @@ public class StocksListController extends AbstractHtmlController {
       Model model) {
 
     // 全件取得する
-    form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-    val pages = stockRepository.findAll(formToCriteria(form), form);
+    val stocks = stockRepository.findAll(formToCriteria(form));
 
     // Excelプック生成コールバック、データ、ダウンロード時のファイル名を指定する
-    val view = new ExcelView(new StockExcel(), pages.getData(), filename);
+    val view = new ExcelView(new StockExcel(), stocks, filename);
 
     return new ModelAndView(view);
   }
@@ -189,11 +187,10 @@ public class StocksListController extends AbstractHtmlController {
   public ModelAndView downloadPdf(@PathVariable String filename, StocksListForm form, Model model) {
 
     // 全件取得する
-    form.setPerpage(Pageable.NO_LIMIT.getPerpage());
-    val pages = stockRepository.findAll(formToCriteria(form), form);
+    val stocks = stockRepository.findAll(formToCriteria(form));
 
     // 帳票レイアウト、データ、ダウンロード時のファイル名を指定する
-    val view = new PdfView("reports/stock.jrxml", pages.getData(), filename);
+    val view = new PdfView("reports/stocks.jrxml", stocks, filename);
 
     return new ModelAndView(view);
   }

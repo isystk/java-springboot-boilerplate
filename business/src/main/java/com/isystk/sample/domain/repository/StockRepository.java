@@ -19,6 +19,7 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 import lombok.val;
+import org.seasar.doma.jdbc.SelectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -38,17 +39,24 @@ public class StockRepository extends BaseRepository {
    * 商品を複数取得します。
    *
    * @param criteria
+   * @return
+   */
+  public List<StockRepositoryDto> findAll(StocksCriteria criteria) {
+    var options = createSelectOptions(1, Integer.MAX_VALUE);
+    return convertDto(stocksDao.findAll(criteria, options, toList()));
+  }
+
+  /**
+   * 商品を複数取得します。(ページングあり)
+   *
+   * @param criteria
    * @param pageable
    * @return
    */
-  public Page<StockRepositoryDto> findAll(StocksCriteria criteria, Pageable pageable) {
+  public Page<StockRepositoryDto> findPage(StocksCriteria criteria, Pageable pageable) {
     var options = createSelectOptions(pageable);
-    // ページングを指定する
-    return pageFactory.create(convertDto(
-        stocksDao.findAll(criteria,
-            options.count(),
-            toList()
-        )), pageable, options.getCount());
+    var stocksList =  convertDto(stocksDao.findAll(criteria, options.count(), toList()));
+    return pageFactory.create(stocksList, pageable, options.getCount());
   }
 
   /**

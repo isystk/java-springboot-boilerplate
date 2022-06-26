@@ -8,17 +8,20 @@ import lombok.Getter;
 import lombok.Setter;
 
 @JsonIgnoreProperties(ignoreUnknown = true) // 定義されていないプロパティを無視してマッピングする
-@JsonPropertyOrder({"商品ID", "名称"}) // CSVのヘッダ順
+@JsonPropertyOrder({"ID", "商品名", "価格"}) // CSVのヘッダ順
 @Getter
 @Setter
 public class StockCsv implements Serializable {
 
   private static final long serialVersionUID = -1883999589975469540L;
 
-  @JsonProperty("商品ID")
+  @JsonProperty("ID")
   String id;
 
-  @JsonProperty("名称")
+  @JsonProperty("商品名")
   String name;
+
+  @JsonProperty("価格")
+  String price;
 
 }

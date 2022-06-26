@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0	-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+  name="report2" pageWidth="595" pageHeight="842" whenNoDataType="NoPages" columnWidth="555"
+  leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20"
+  uuid="bd5bf893-182e-4b8c-aab1-91325dfc759f">
+  <field name="id" class="java.math.BigInteger"/>
+  <field name="name" class="java.lang.String"/>
+  <field name="price" class="java.lang.Integer"/>
+  <title>
+    <band height="50">
+      <staticText>
+        <reportElement x="225" y="10" width="100" height="30"
+          uuid="b79de7e2-69ee-48d7-b033-9aaec117caa7"/>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font fontName="IPA明朝" size="14"/>
+        </textElement>
+        <text><![CDATA[Stocks Data]]></text>
+      </staticText>
+    </band>
+  </title>
+  <columnHeader>
+    <band height="20" splitType="Stretch">
+      <staticText>
+        <reportElement mode="Opaque" x="0" y="0" width="60" height="20" backcolor="#F0F0F0"
+          uuid="70c6a907-8e3b-4d34-9691-b136fa36f8cf"/>
+        <box>
+          <pen lineWidth="0.5"/>
+        </box>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="10"/>
+        </textElement>
+        <text><![CDATA[STOCK ID]]></text>
+      </staticText>
+      <staticText>
+        <reportElement mode="Opaque" x="60" y="0" width="60" height="20" backcolor="#F0F0F0"
+          uuid="4f3679e1-8eba-41d8-a811-8b7cd4863b3a"/>
+        <box>
+          <pen lineWidth="0.5"/>
+        </box>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="10"/>
+        </textElement>
+        <text><![CDATA[NAME]]></text>
+      </staticText>
+      <staticText>
+        <reportElement mode="Opaque" x="120" y="0" width="90" height="20" backcolor="#F0F0F0"
+          uuid="4f3679e1-8eba-41d8-a811-8b7cd4863b3a"/>
+        <box>
+          <pen lineWidth="0.5"/>
+        </box>
+        <textElement textAlignment="Center" verticalAlignment="Middle">
+          <font size="10"/>
+        </textElement>
+        <text><![CDATA[PRICE]]></text>
+      </staticText>
+    </band>
+  </columnHeader>
+  <detail>
+    <band height="24" splitType="Stretch">
+      <textField>
+        <reportElement x="0" y="3" width="60" height="15"
+          uuid="2a07a2ad-165d-4ace-9fdb-92a99f33feef"/>
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font fontName="IPA明朝"/>
+        </textElement>
+        <textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="60" y="3" width="60" height="15"
+          uuid="3a341cb3-8acc-4e16-bab7-b938352ff705"/>
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font fontName="IPA明朝"/>
+        </textElement>
+        <textFieldExpression><![CDATA[$F{name}]]></textFieldExpression>
+      </textField>
+      <textField>
+        <reportElement x="120" y="3" width="160" height="15"
+          uuid="966618ef-5992-4273-9040-43295486ff7b"/>
+        <textElement textAlignment="Left" verticalAlignment="Middle">
+          <font fontName="IPA明朝"/>
+        </textElement>
+        <textFieldExpression><![CDATA[$F{price}]]></textFieldExpression>
+      </textField>
+      <line>
+        <reportElement x="0" y="18" width="550" height="1"
+          uuid="e4d351f1-0741-4a6b-8805-5adb5edaf29f"/>
+      </line>
+    </band>
+  </detail>
+</jasperReport>
