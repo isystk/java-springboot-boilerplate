@@ -27,10 +27,10 @@ public class MemberPostEditRestValidator extends AbstractValidator<MemberPostEdi
     // 自分の投稿かどうか
     TPostCriteria criteria = new TPostCriteria();
     criteria.setPostIdEq(form.getPostId());
-    criteria.setUserIdEq(userHelper.getUser().getUserId());
+//    criteria.setUserIdEq(userHelper.getUser().getUserId());
     tPostDao.findOne(criteria)
         .orElseThrow(() -> new NoDataFoundException(
-            "post_id=" + form.getPostId() + " user_id=" + userHelper.getUser().getUserId()
+            "post_id=" + form.getPostId() + " user_id=" + userHelper.getUser().getId()
                 + " のデータが見つかりません。"));
 
   }

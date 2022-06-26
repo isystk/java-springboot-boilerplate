@@ -168,9 +168,9 @@ public class EntryRemindService extends BaseTransactionalService {
    *
    * @return
    */
-  protected MMailTemplate getMailTemplate(Integer templateId) {
+  protected MMailTemplate getMailTemplate(String templateId) {
     val criteria = new MMailTemplateCriteria();
-    criteria.setMailTemplateIdEq(templateId);
+    criteria.setMailTemplateIdEq(Integer.valueOf(templateId));
     val mailTemplate = mMailTemplateDao.findOne(criteria).orElseThrow(
         () -> new NoDataFoundException("templateKey=" + templateId + " のデータが見つかりません。"));
 
