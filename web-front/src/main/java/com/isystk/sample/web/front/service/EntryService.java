@@ -59,7 +59,7 @@ public class EntryService extends BaseTransactionalService {
   public void registTemporary(TUser tUser) {
 
     // DB登録する
-    tUser.setStatus(UserStatus.TEMPORARY.getCode());
+    tUser.setStatus(Integer.valueOf(UserStatus.TEMPORARY.getCode()));
     tUserRepository.create(tUser);
 
     // 会員-初期承認を登録する
@@ -109,7 +109,7 @@ public class EntryService extends BaseTransactionalService {
             "user_id=" + tUserOnetimeValid.getUserId() + " のデータが見つかりません。"));
 
     // DB登録する
-    tUser.setStatus(UserStatus.VALID.getCode());
+    tUser.setStatus(Integer.valueOf(UserStatus.VALID.getCode()));
     tUserRepository.update(tUser);
 
     // 本会員登録完了メールを送信する
@@ -167,9 +167,9 @@ public class EntryService extends BaseTransactionalService {
    *
    * @return
    */
-  protected MMailTemplate getMailTemplate(Integer templateId) {
+  protected MMailTemplate getMailTemplate(String templateId) {
     val criteria = new MMailTemplateCriteria();
-    criteria.setMailTemplateIdEq(templateId);
+    criteria.setMailTemplateIdEq(Integer.valueOf(templateId));
     val mailTemplate = mMailTemplateDao.findOne(criteria).orElseThrow(
         () -> new NoDataFoundException("templateKey=" + templateId + " のデータが見つかりません。"));
 

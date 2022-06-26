@@ -47,7 +47,7 @@ public class MemberPostRestController extends AbstractRestController {
   public PageableResource index(MemberPostRestForm query, Model model) {
     // 入力値を詰め替える
     TPostCriteria criteria = new TPostCriteria();
-    criteria.setUserIdEq(userHelper.getLoginUserId());
+//    criteria.setUserIdEq(userHelper.getLoginUserId());
     criteria.setDeleteFlgFalse(true);
     criteria.setOrderBy("order by update_time desc");
 

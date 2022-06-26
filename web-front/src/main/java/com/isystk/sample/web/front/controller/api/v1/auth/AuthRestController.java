@@ -4,6 +4,7 @@ import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.AuditInfoHolder;
 import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.domain.entity.Users;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import com.isystk.sample.web.front.dto.auth.AuthUserDto;
@@ -46,8 +47,8 @@ public class AuthRestController extends AbstractRestController {
       return null;
     }
 
-    TUser tUser = userHelper.getUser();
-    AuthUserDto dto = ObjectMapperUtils.map(tUser, AuthUserDto.class);
+    Users users = userHelper.getUser();
+    AuthUserDto dto = ObjectMapperUtils.map(users, AuthUserDto.class);
     dto.setSessionId(session.getId());
     resource.setData(Arrays.asList(dto));
     resource.setMessage("ログイン状態です。");
@@ -67,8 +68,8 @@ public class AuthRestController extends AbstractRestController {
     userHelper.updateLastLogin();
 
     Resource resource = resourceFactory.create();
-    TUser tUser = userHelper.getUser();
-    AuthUserDto dto = ObjectMapperUtils.map(tUser, AuthUserDto.class);
+    Users users = userHelper.getUser();
+    AuthUserDto dto = ObjectMapperUtils.map(users, AuthUserDto.class);
     dto.setSessionId(session.getId());
     resource.setData(Arrays.asList(dto));
     resource.setMessage(getMessage("login.success"));

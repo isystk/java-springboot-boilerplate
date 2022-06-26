@@ -60,7 +60,7 @@ public class MMailTemplateRepository extends BaseRepository {
         .mapAll(mMailTemplateList, MMailTemplateRepositoryDto.class);
     list.stream()
         .forEach(dto -> {
-          dto.setMailTemplateDiv(MailTemplateDiv.getValue(dto.getTemplateDiv()));
+          dto.setMailTemplateDiv(MailTemplateDiv.getValue(dto.getTemplateDiv().toString()));
         });
 
     return list;

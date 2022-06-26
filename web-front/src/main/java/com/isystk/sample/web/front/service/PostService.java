@@ -119,17 +119,17 @@ public class PostService extends BaseTransactionalService {
         .collect(Collectors.toList()));
 
     // 投稿タグを設定
-    Map<Integer, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
-    dto.setTagList(Optional.ofNullable(solrPost.getTagIdList())
-        .orElse(Lists.newArrayList())
-        .stream()
-        .map((tagId) -> {
-          FrontPostTagDto tagDto = new FrontPostTagDto();
-          tagDto.setTagId(tagId);
-          tagDto.setTagName(mPostTagMap.get(tagId).getText());
-          return tagDto;
-        })
-        .collect(Collectors.toList()));
+//    Map<Integer, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
+//    dto.setTagList(Optional.ofNullable(solrPost.getTagIdList())
+//        .orElse(Lists.newArrayList())
+//        .stream()
+//        .map((tagId) -> {
+//          FrontPostTagDto tagDto = new FrontPostTagDto();
+//          tagDto.setTagId(tagId);
+//          tagDto.setTagName(mPostTagMap.get(tagId).getText());
+//          return tagDto;
+//        })
+//        .collect(Collectors.toList()));
 
     dto.setRegistTimeYYYYMMDD(
         DateUtils.format(solrPost.getRegistTime(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
@@ -150,9 +150,9 @@ public class PostService extends BaseTransactionalService {
 
     // 1件取得する
     val post = postRepository.findById(postId);
-    if (!post.getUserId().equals(userHelper.getUser().getUserId())) {
+    if (!post.getUserId().equals(userHelper.getUser().getId())) {
       throw new NoDataFoundException(
-          "データが見つかりません。post_id=" + postId + " user_id=" + userHelper.getUser().getUserId());
+          "データが見つかりません。post_id=" + postId + " user_id=" + userHelper.getUser().getId());
     }
 
     return Optional.of(convertTPostToFrontPostDto(post));
@@ -180,7 +180,7 @@ public class PostService extends BaseTransactionalService {
         .collect(Collectors.toList()));
 
     // 投稿タグを設定
-    Map<Integer, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
+    Map<String, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
     dto.setTagList(Optional.ofNullable(tPostRepositoryDto.getTPostTagList())
         .orElse(Lists.newArrayList())
         .stream()
@@ -228,7 +228,7 @@ public class PostService extends BaseTransactionalService {
           .collect(Collectors.toList()));
 
       // 投稿タグを設定
-      Map<Integer, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
+      Map<String, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
       dto.setTagList(Optional.ofNullable(postDto.getTPostTagList())
           .orElse(Lists.newArrayList())
           .stream()
