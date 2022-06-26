@@ -3,6 +3,7 @@ package com.isystk.sample.domain.repository;
 import static com.isystk.sample.domain.util.DomaUtils.createSelectOptions;
 import static java.util.stream.Collectors.toList;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -94,12 +95,12 @@ public class TPostRepository extends BaseRepository {
         .collect(Collectors.groupingBy(TPostTag::getPostId));
 
     // tPostListからUserIdのListを抽出
-    List<Integer> userIdList = tPostList.stream().map(e -> Integer.valueOf(e.getUserId()))
+    List<BigInteger> userIdList = tPostList.stream().map(e -> e.getUserId())
         .collect(Collectors.toList());
 
     // userId をkeyとした、tUserのMapを生成
     TUserCriteria tUserCriteria = new TUserCriteria();
-    tUserCriteria.setUserIdIn(userIdList);
+//    tUserCriteria.setUserIdIn(userIdList);
     Map<Integer, List<TUser>> tUserMap = tUserDao.findAll(tUserCriteria).stream()
         .collect(Collectors.groupingBy(TUser::getUserId));
 
@@ -111,7 +112,7 @@ public class TPostRepository extends BaseRepository {
         .forEach(postDto -> {
           postDto.setTPostImageList(tPostImageMap.get(postDto.getPostId()));
           postDto.setTPostTagList(tPostTagMap.get(postDto.getPostId()));
-          postDto.setTUser(tUserMap.get(postDto.getUserId()).get(0));
+//          postDto.setTUser(tUserMap.get(postDto.getUserId()).get(0));
         });
 
     return postDtoList;

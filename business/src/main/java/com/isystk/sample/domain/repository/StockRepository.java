@@ -93,7 +93,7 @@ public class StockRepository extends BaseRepository {
    */
   public StockRepositoryDto findById(final BigInteger id) {
     var data = stocksDao.selectById(id)
-        .orElseThrow(() -> new NoDataFoundException("post_id=" + id + " のデータが見つかりません。"));
+        .orElseThrow(() -> new NoDataFoundException("stock_id=" + id + " のデータが見つかりません。"));
     return convertDto(Lists.newArrayList(data)).get(0);
   }
 

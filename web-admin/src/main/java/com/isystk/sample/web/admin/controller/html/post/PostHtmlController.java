@@ -3,6 +3,7 @@ package com.isystk.sample.web.admin.controller.html.post;
 import static com.isystk.sample.common.AdminUrl.*;
 
 import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.domain.entity.Users;
 import com.isystk.sample.domain.repository.MPostTagRepository;
 import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import java.time.LocalTime;
@@ -138,8 +139,8 @@ public class PostHtmlController extends AbstractHtmlController {
     TPostRepositoryDto post = postRepository.findById(postId);
     model.addAttribute("post", post);
 
-    TUser tUser = userHelper.getUser(post.getUserId());
-    model.addAttribute("userName", String.join(tUser.getFamilyName(), " ", tUser.getName()));
+    Users users = userHelper.getUser(post.getUserId());
+    model.addAttribute("userName", String.join(users.getName()));
 
     // タグの一覧
     model.addAttribute("postTagList", mPostTagRepository.findAllSelectList());

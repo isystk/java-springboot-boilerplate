@@ -76,7 +76,7 @@ public class MPostTagRepository extends BaseRepository {
    *
    *  @return
    */
-  public Map<Integer, CodeValueDto> findAllSelectMap() {
+  public Map<String, CodeValueDto> findAllSelectMap() {
     return findAllSelectStream().collect(Collectors.toMap(
         s -> s.getCode(),
         s -> s
@@ -88,7 +88,7 @@ public class MPostTagRepository extends BaseRepository {
         .stream()
         .map((mPostTag -> {
           CodeValueDto dto = new CodeValueDto();
-          dto.setCode(mPostTag.getPostTagId());
+          dto.setCode(mPostTag.getPostTagId().toString());
           dto.setText(mPostTag.getName());
           return dto;
         }));

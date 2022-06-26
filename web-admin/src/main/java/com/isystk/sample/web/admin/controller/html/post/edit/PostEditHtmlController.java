@@ -3,6 +3,7 @@ package com.isystk.sample.web.admin.controller.html.post.edit;
 import static com.isystk.sample.common.AdminUrl.*;
 
 import com.isystk.sample.domain.entity.TUser;
+import com.isystk.sample.domain.entity.Users;
 import com.isystk.sample.domain.repository.MPostTagRepository;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -124,8 +125,8 @@ public class PostEditHtmlController extends AbstractHtmlController {
    */
   private String showEditIndex(PostEditForm form, Model model) {
 
-    TUser tUser = userHelper.getUser(form.getUserId());
-    model.addAttribute("userName", String.join(tUser.getFamilyName(), " ", tUser.getName()));
+    Users users = userHelper.getUser(form.getUserId());
+    model.addAttribute("userName", String.join(users.getName()));
 
     // タグの一覧
     model.addAttribute("postTagList", mPostTagRepository.findAllSelectList());
@@ -152,8 +153,8 @@ public class PostEditHtmlController extends AbstractHtmlController {
       return showEditIndex(form, model);
     }
 
-    TUser tUser = userHelper.getUser(form.getUserId());
-    model.addAttribute("userName", String.join(tUser.getFamilyName(), " ", tUser.getName()));
+    Users users = userHelper.getUser(form.getUserId());
+    model.addAttribute("userName", String.join(users.getName()));
 
     // タグの一覧
     model.addAttribute("postTagList", mPostTagRepository.findAllSelectList());

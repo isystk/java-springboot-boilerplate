@@ -50,7 +50,7 @@ public class PostExcel implements ExcelView.Callback {
     for (TPost post : posts) {
       Row userRow = sheet.createRow(count++);
       userRow.createCell(0).setCellValue(post.getPostId());
-      userRow.createCell(1).setCellValue(post.getUserId());
+      userRow.createCell(1).setCellValue(post.getUserId().toString());
       userRow.createCell(2).setCellValue(post.getTitle());
     }
   }
