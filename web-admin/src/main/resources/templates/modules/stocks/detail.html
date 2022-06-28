@@ -24,22 +24,17 @@
   </div>
 </div>
 <div layout:fragment="content">
-
   <div class="card card-purple">
     <div class="card-body">
       <div th:object="${stock}">
-        <input th:replace="fragments/label :: input ('商品名', *{name}, 'col-md-6')"/>
-        <input th:replace="fragments/label :: input ('商品説明', *{detail}, 'col-md-6')"/>
-        <input th:replace="fragments/label :: input ('価格', *{price}, 'col-md-6')"/>
-        <input th:replace="fragments/label :: input ('在庫数', *{quantity}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('商品名', *{name})"/>
+        <input th:replace="fragments/label :: input ('商品説明', *{detail})"/>
+        <input th:replace="fragments/label :: input ('価格', *{price})"/>
+        <input th:replace="fragments/label :: input ('在庫数', *{quantity})"/>
         <div class="form-group row">
           <label class="col-md-2 control-label">商品画像</label>
-          <div class="col-md-10">
-            <div class="row selectedPhotoList">
-              <div class="col-3 m-2">
-                <img th:src="*{imgpath}" width="120px"/>
-              </div>
-            </div>
+          <div class="col-md-3">
+            <img th:src="${@img.url(stock.imgpath)}" width="100%"/>
           </div>
         </div>
         <div class="card-footer clearfix text-center">
@@ -51,20 +46,6 @@
       </div>
     </div>
   </div>
-</div>
-<div layout:fragment="scripts">
-  <script type="text/javascript" th:inline="javascript">
-			$(document).ready(function() {
-				$('.js-delete').click(function(e) {
-					if (!confirm('削除します。よろしいですか？')) {
-						e.preventDefault();
-						return false;
-					}
-				});
-			});
-
-
-  </script>
 </div>
 </body>
 </html>

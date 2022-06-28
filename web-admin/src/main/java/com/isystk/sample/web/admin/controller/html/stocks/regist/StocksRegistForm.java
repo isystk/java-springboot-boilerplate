@@ -4,6 +4,7 @@ import com.isystk.sample.web.base.controller.html.BaseForm;
 import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.NumberFormat;
 
 @Setter
 @Getter
@@ -18,12 +19,17 @@ public class StocksRegistForm extends BaseForm {
   String detail;
 
   @NotBlank
+  @NumberFormat
   String price;
 
   @NotBlank
+  @NumberFormat
   String quantity;
 
   @NotBlank
-  String imgpath;
+  String stockImageName;
+
+  @NotBlank
+  String stockImageData;
 
 }

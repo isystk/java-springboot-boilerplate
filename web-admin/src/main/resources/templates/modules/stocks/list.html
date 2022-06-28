@@ -29,47 +29,27 @@
   </div>
 
   <div class="card card-purple">
-    <!-- .card-header -->
     <div class="card-header">
       <h3 class="card-title">検索条件</h3>
     </div>
-    <!-- /.card-header -->
-    <!-- form start -->
     <form th:action="@{/stocks/}" th:method="get" th:object="${stocksListForm}">
       <input type="hidden" name="page" value="1"/>
       <div class="card-body">
-
         <div class="form-group">
           <div class="control-group">
-            <input
-                th:replace="fragments/input :: input ('text', 'ID', 'stockId', 'col-sm-4', 10)"/>
+            <input th:replace="fragments/input :: input ('text', '商品ID', 'stockId', 10)"/>
           </div>
           <div class="control-group">
-            <input
-                th:replace="fragments/input :: input ('text', '商品名', 'name', 'col-sm-10', 100)"/>
+            <input th:replace="fragments/input :: input ('text', '商品名', 'name', 100)"/>
           </div>
           <div class="control-group">
-            <div class="form-group row">
-              <label class="col-md-2 control-label">登録日</label>
-              <div class="col-md-10">
-                <div class="row">
-                  <input
-                      th:replace="fragments/input :: input ('date', '', 'createdAtFrom', '', 10)"/>
-                  <div class="col-sm-1 text-center">～</div>
-                  <input
-                      th:replace="fragments/input :: input ('date', '', 'createdAtTo', '', 10)"/>
-                </div>
-              </div>
-            </div>
+            <input th:replace="fragments/datePeriod :: input ('登録日', 'createdAtFrom', 'createdAtTo')"/>
           </div>
         </div>
       </div>
-      <!-- /.card-body -->
-
       <div class="card-footer text-center">
         <button type="submit" class="btn btn-info">検索</button>
       </div>
-
     </form>
   </div>
 
@@ -80,9 +60,7 @@
 
   <div class="row">
     <div class="col-12">
-
       <div class="card card-purple" th:if="${0 < pages.count}">
-        <!-- .card-header -->
         <div class="card-header">
           <h3 class="card-title">検索結果</h3>
           <div class="dropdown text-right">
@@ -101,12 +79,11 @@
             </div>
           </div>
         </div>
-        <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
           <table class="table table-hover" style="table-layout:fixed;">
             <thead>
             <tr>
-              <th>ID</th>
+              <th>商品ID</th>
               <th style="width:300px;">商品名</th>
               <th>価格</th>
               <th>在庫数</th>
@@ -123,10 +100,8 @@
               <td th:text="${#temporals.format(e.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
               <td class="float-right">
                 <form th:action="@{/stocks/{id}/(id=*{e.id})}" th:method="delete">
-                  <a class="btn btn-info m-1 btn-sm"
-                     th:href="@{/stocks/{id}/(id=*{e.id})}">詳細</a><br>
-                  <a class="btn btn-info m-1 btn-sm"
-                     th:href="@{/stocks/edit/{id}/(id=*{e.id})}">变更</a><br>
+                  <a class="btn btn-info m-1 btn-sm" th:href="@{/stocks/{id}/(id=*{e.id})}">詳細</a><br>
+                  <a class="btn btn-info m-1 btn-sm" th:href="@{/stocks/edit/{id}/(id=*{e.id})}">变更</a><br>
                   <button class="btn btn-danger m-1 btn-sm js-delete">削除</button>
                 </form>
               </td>
@@ -134,36 +109,15 @@
             </tbody>
           </table>
         </div>
-        <!-- /.card-body -->
-        <!-- .card-footer -->
         <div class="card-footer clearfix ">
           <div th:replace="fragments/paginator :: paginator (${pages}, '/stocks')"/>
         </div>
-        <!-- /.card-footer -->
       </div>
-      <!-- /.card -->
     </div>
   </div>
-
 </div>
 <div layout:fragment="scripts">
-  <script type="text/javascript" th:inline="javascript">
-			$(document).ready(function() {
-				$('.js-download').click(function(e) {
-					e.preventDefault();
-					var self = $(this),
-						href = self.attr('href'),
-						form = $('#pagingForm');
-					location.href = [href, form.serialize()].join('?');
-				});
-				$('.js-delete').click(function(e) {
-					if (!confirm('削除します。よろしいですか？')) {
-						e.preventDefault();
-						return false;
-					}
-				});
-			});
-  </script>
+  <script type="text/javascript" th:src="@{/static/js/stocks/list.js}"></script>
 </div>
 </body>
 </html>

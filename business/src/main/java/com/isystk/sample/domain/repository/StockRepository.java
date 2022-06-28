@@ -7,19 +7,19 @@ import com.google.common.collect.Lists;
 import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.exception.NoDataFoundException;
+import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseRepository;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.StocksDao;
-import com.isystk.sample.domain.dao.UsersDao;
 import com.isystk.sample.domain.dto.StocksCriteria;
 import com.isystk.sample.domain.entity.Stocks;
 import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.val;
-import org.seasar.doma.jdbc.SelectOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -30,10 +30,10 @@ import org.springframework.stereotype.Repository;
 public class StockRepository extends BaseRepository {
 
   @Autowired
-  StocksDao stocksDao;
+  ImageHelper imageHelper;
 
   @Autowired
-  UsersDao usersDao;
+  StocksDao stocksDao;
 
   /**
    * 商品を複数取得します。
@@ -71,7 +71,13 @@ public class StockRepository extends BaseRepository {
     List<StockRepositoryDto> stockDtoList = ObjectMapperUtils
         .mapAll(stocksList, StockRepositoryDto.class);
 
-    return stockDtoList;
+    return stockDtoList.stream().map(e -> {
+          String imageData = imageHelper.getImageData(e.getImgpath());
+          e.setStockImageData(imageData);
+          e.setStockImageName(e.getImgpath());
+          return e;
+        })
+        .collect(Collectors.toList());
   }
 
   /**
@@ -104,10 +110,15 @@ public class StockRepository extends BaseRepository {
    * @return
    */
   public Stocks create(final StockRepositoryDto stocksDto) {
+
+    // 画像ファイルをS3にアップロードする
+    imageHelper.saveFile(stocksDto.getStockImageData(), stocksDto.getStockImageName());
+
     val time = DateUtils.getNow();
 
     // 商品テーブル
     val stocks = ObjectMapperUtils.map(stocksDto, Stocks.class);
+    stocks.setImgpath(stocksDto.getStockImageName());
     stocks.setCreatedAt(time); // 作成日
     stocks.setUpdatedAt(time); // 更新日
     stocks.setDeleteFlg(Byte.valueOf("0")); // 削除フラグ

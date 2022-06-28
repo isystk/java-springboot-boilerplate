@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 public class StockRepositoryDto extends Stocks {
 
-  Users users;
+  String stockImageName;
 
+  String stockImageData;
 }

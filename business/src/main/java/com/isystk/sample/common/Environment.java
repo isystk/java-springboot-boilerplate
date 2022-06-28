@@ -7,7 +7,7 @@ import java.io.File;
  */
 public enum Environment {
 
-  LOCAL, DEV, STG, PRODUCTION, UNKNOWN;
+  LOCAL, DEV, STG, PRODUCTION;
 
   private static final String SPRING_PROFILES_ACTIVE = "spring.profiles.active";
 
@@ -38,7 +38,7 @@ public enum Environment {
       return PRODUCTION;
     }
 
-    return UNKNOWN;
+    return LOCAL;
   }
 
   /**

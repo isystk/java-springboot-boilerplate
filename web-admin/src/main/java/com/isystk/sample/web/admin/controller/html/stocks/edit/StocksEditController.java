@@ -2,13 +2,10 @@ package com.isystk.sample.web.admin.controller.html.stocks.edit;
 
 import static com.isystk.sample.common.AdminUrl.STOCKS_EDIT;
 
-import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.repository.StockRepository;
 import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
 import com.isystk.sample.web.admin.service.StockService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
-import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +33,7 @@ public class StocksEditController extends AbstractHtmlController {
   StockService stockService;
 
   @Autowired
-  StockRepository stockRepository;
-
-  @Autowired
-  UserHelper userHelper;
-
-  @Autowired
   StocksEditFormValidator stocksEditFormValidator;
-
-  @Autowired
-  HttpSession session;
 
   @ModelAttribute("stocksEditForm")
   public StocksEditForm stocksEditForm() {
@@ -73,7 +61,7 @@ public class StocksEditController extends AbstractHtmlController {
   public String editIndex(@ModelAttribute StocksEditForm form, Model model) {
 
     // 1件取得する
-    val stocks = stockRepository.findById(form.getStockId());
+    val stocks = stockService.findById(form.getStockId());
 
     // 取得したDtoをFromに詰め替える
     ObjectMapperUtils.map(stocks, form);
