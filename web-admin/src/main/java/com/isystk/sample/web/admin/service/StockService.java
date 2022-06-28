@@ -5,6 +5,7 @@ import com.isystk.sample.domain.entity.Stocks;
 import com.isystk.sample.domain.repository.StockRepository;
 import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
 import java.math.BigInteger;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -14,6 +15,14 @@ public class StockService extends BaseTransactionalService {
 
   @Autowired
   StockRepository stockRepository;
+
+  public StockRepositoryDto findById(BigInteger stockId) {
+    // 1件取得する
+    val stocks = stockRepository.findById(stockId);
+
+    return stocks;
+  }
+
 
   /**
    * 商品を追加します。

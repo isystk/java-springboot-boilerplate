@@ -18,41 +18,33 @@
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
-        <li class="breadcrumb-item"><a
-            th:href="@{/stocks/{stockId}(stockId=${stocksEditForm.stockId})}">[[${stocksEditForm.name}]]</a>
-        </li>
+        <li class="breadcrumb-item"><a th:href="@{/stocks/{stockId}(stockId=${stocksEditForm.stockId})}">[[${stocksEditForm.name}]]</a></li>
         <li class="breadcrumb-item active">[[|${stocksEditForm.name}の変更|]]</li>
       </ol>
     </div>
   </div>
 </div>
 <div layout:fragment="content">
-
   <div class="card card-purple">
     <div class="card-body">
-
       <p>以下の内容で登録します。</p>
-      <form th:object="${stocksEditForm}" th:action="@{/stocks/edit/{id}/(id=*{stockId})}"
-            th:method="put">
+      <form th:object="${stocksEditForm}" th:action="@{/stocks/edit/{id}/(id=*{stockId})}" th:method="put">
         <input type="hidden" name="stockId" th:value="*{stockId}"/>
         <input type="hidden" name="name" th:value="*{name}"/>
         <input type="hidden" name="detail" th:value="*{detail}"/>
         <input type="hidden" name="price" th:value="*{price}"/>
         <input type="hidden" name="quantity" th:value="*{quantity}"/>
-        <input type="hidden" name="imgpath" th:value="*{imgpath}"/>
+        <input type="hidden" name="stockImageName" th:value="*{stockImageName}"/>
+        <input type="hidden" name="stockImageData" th:value="*{stockImageData}"/>
         <input type="hidden" name="version" th:value="*{version}"/>
-        <input th:replace="fragments/label :: input ('商品名', *{name}, 'col-md-6')"/>
-        <input th:replace="fragments/label :: input ('商品説明', *{detail}, 'col-md-6')"/>
-        <input th:replace="fragments/label :: input ('価格', *{price}, 'col-md-6')"/>
-        <input th:replace="fragments/label :: input ('在庫数', *{quantity}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('商品名', *{name})"/>
+        <input th:replace="fragments/label :: input ('商品説明', *{detail})"/>
+        <input th:replace="fragments/label :: input ('価格', *{price})"/>
+        <input th:replace="fragments/label :: input ('在庫数', *{quantity})"/>
         <div class="form-group row">
           <label class="col-md-2 control-label">商品画像</label>
-          <div class="col-md-10">
-            <div class="row selectedPhotoList">
-              <div class="col-3 m-2">
-                <img th:src="*{imgpath}" width="120px"/>
-              </div>
-            </div>
+          <div class="col-md-3">
+            <img th:src="*{stockImageData}" width="100%"/>
           </div>
         </div>
         <div class="card-footer clearfix text-center">
@@ -66,16 +58,6 @@
       </form>
     </div>
   </div>
-</div>
-<div layout:fragment="scripts">
-  <script type="text/javascript" th:inline="javascript">
-		$(function() {
-			// サブミット
-			$('.js-submit').submitbutton();
-		});
-
-
-  </script>
 </div>
 </body>
 </html>

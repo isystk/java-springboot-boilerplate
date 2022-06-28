@@ -34,258 +34,211 @@
 
 (function($) {
 	/*
-	 * imageUpload
+	 * imageUploader
 	 *
-	 * Copyright (c) 2017 iseyoshitaka at isystk.com
+	 * Copyright (c) 2021 iseyoshitaka
 	 *
 	 * Description:
-	 * ファイル非同期アップローダー
-	 *
+	 * 画像ファイルをアップロード用にリサイズする（HEIC形式の場合はJPEGに変換）
 	 */
-	$.imageUpload = function(options) {
+	$.fn.imageUploader = function(options) {
 
-		var params = $.extend({}, $.imageUpload.defaults, options);
+		var params = $.extend({}, $.fn.imageUploader.defaults, options);
 
-		var init = function(files) {
+		var nowLoading = false; // 処理中フラグ
+		var dropAreaSelector = params.dropAreaSelector;
+		var maxFileSize = params.maxFileSize;
+		var thumbnail_width = params.thumbnail_width;
+		var thumbnail_height = params.thumbnail_height;
+		var successCallback = params.successCallback;
+		var errorCallback = params.errorCallback;
 
-			var form = params.form;
-			var uploadUrl = params.uploadUrl;
-			var contentType = params.contentType;
-			var successCallback = params.successCallback;
-			var errorsCallback = params.errorsCallback;
-			var completeCallback = params.completeCallback;
+		var init = function(target) {
 
-			// 画像URLからファイルをアップロード
-			this.imageUrlUpload = function(imagePath, imageId) {
-
-				// 画像をロード
-				var img = $('<img>');
-				img
-					.load(function() {
-						var o_width = img[0].width;
-						var o_height = img[0].height;
-
-						// canvasに書き出し
-						var canvas = document.createElement('canvas');
-						canvas.width  = o_width;
-						canvas.height = o_height;
-						var ctx = canvas.getContext('2d');
-						ctx.drawImage(img[0], 0, 0);
-						var base64 = canvas.toDataURL(contentType);
-
-						// Base64からバイナリへ変換
-						var byteString = atob(base64.replace(/^.*,/, ''));
-
-						// バイナリからBlob へ変換
-						var arrayBuffer = new ArrayBuffer(byteString.length);
-						var intArray = new Uint8Array(arrayBuffer);
-						for (var i = 0; i < byteString.length; i++) {
-							intArray[i] = byteString.charCodeAt(i);
-						}
-						var blob = new Blob([intArray.buffer], {type: contentType});
-						blob.name = imagePath.substring(imagePath.lastIndexOf('/')+1).replace(/(.*)\.(.*)\?(.*)$/, '$1.$2');
-						blob.imageId = imageId;
-
-						var files = [blob];
-						var obj = {files : files};
-
-						fileUpload(obj);
-					});
-				img.attr('src', imagePath);
-			};
-
-			// ファイルのアップロード
-			var fileUpload = this.fileUpload = function (obj, csrf) {
-
-				// ファイルAPIに対応している場合は、画像チェックとサイズチェックをクライアント側でも行う。
-				if (window.File && window.FileReader && window.FileList && window.Blob){
-					var errors = [];
-					$.each(obj.files, function(i, file){
-						// 画像ファイルチェック
-						if( !file.type.match("image.*") ){
-							errors.push('画像ファイルが不正です。');
-						}
-					});
-
-					if (0 < errors.length) {
-						if (errorsCallback) {
-							errorsCallback(errors);
-						}
-
-						return false;
-					}
+			// ファイルドロップ時のイベントリスナー
+			var dropArea = $(dropAreaSelector);
+			dropArea.on('dragenter', function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+			});
+			dropArea.on('dragover', function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+			});
+			dropArea.on('drop', function (event) {
+				event.preventDefault();
+				event.stopPropagation();
+				var files = event.originalEvent.dataTransfer.files;
+				if (files.length === 0) {
+					return;
 				}
-
-				// 60秒以内にレスポンスがない場合は、タイムアウトメッセージを表示する。
-				var timer = setTimeout( function() {
-					var errors = [];
-					errors.push('タイムアウトが発生しました。');
-
-					if (errorsCallback) {
-						errorsCallback(errors);
-					}
-
-					return false;
-				}, 60000);
-
-				var def = $.Deferred();
-				var promise = def;
-
-				// ファイル分タスクを作成
-				$.each(obj.files, function(i, file){
-
-					promise = promise.pipe(function(response){
-
-						var newPromise = $.Deferred();
-
-						var formData = new FormData();
-						formData.enctype = 'multipart/form-data';
-						formData.append('_csrf', csrf);
-						formData.append('imageFile', file, file.name);
-
-						$.ajax({
-							url: uploadUrl,
-							type: 'POST',
-							dataType: 'json',
-							data: formData,
-							cache: false,
-							contentType: false,
-							processData: false,
-							success: function(res) {
-
-								clearInterval(timer);
-
-								if (successCallback) {
-									successCallback(res);
-								}
-
-							},
-							error: function(xhr, textStatus, errorThrown) {
-								var res = {};
-								try {
-									res = $.parseJSON(xhr.responseText);
-								} catch (e) {}
-								alert(res.errorMessage);
-							},
-							complete: function() {
-								newPromise.resolve();
-
-								if (completeCallback) {
-									completeCallback();
-								}
-
-							}
-						});
-						return newPromise;
-					});
-				});
-				def.resolve();
-			};
-
-		};
-
-		return new init();
-	}
-
-	$.imageUpload.defaults = {
-		uploadUrl: '',
-		form: null,
-		contentType : 'image/jpeg',
-		successCallback : null,
-		errorsCallback : null,
-		completeCallback : null
-	}
-
-})(jQuery);
-
-(function($) {
-  /*
-   * オーバーレイ表示
-	 */
-	$.fn.isystkOverlay = function(opts) {
-
-		// 引数に値が存在する場合、デフォルト値を上書きする
-		var settings = $.extend({}, $.fn.isystkOverlay.defaults, opts);
-
-		var init = function(panel) {
-
-			panel.find('.js-close').click(function(e) {
-				e.preventDefault();
-				closeDialog();
+				exec(event.originalEvent.dataTransfer);
 			});
 
-			// ダイアログ非表示
-			var showDialog = this.showDialog = function() {
-				$('body').append('<div id="overlay-background"></div>');
-				$('#overlay-background').click(function() {
-					closeDialog();
-				});
-
-				panel.addClass('open');
-				$('#overlay-background').fadeIn();
-
-				if (settings.openCallback) {
-					settings.openCallback();
+			// ファイル選択時のイベントリスナー
+			$(target).change(function(){
+				if (this.files.length === 0) {
+					return;
 				}
+				exec(this);
+			});
+		}
+
+		var exec = function(obj) {
+
+			// ファイルAPIに対応していない場合は、エラーメッセージを表示する
+			if (!window.File || !window.FileReader || !window.FileList || !window.Blob){
+				errorCallback(['お使いのブラウザはファイルAPIに対応していません。']);
+				return;
 			}
 
-			// ダイアログ非表示
-			var closeDialog = function() {
-				loading = false;
-				panel.removeClass('open');
-				$('#overlay-background').fadeOut(500, function() {
-					$(this).remove();
-				});
-				if (settings.closeCallback) {
-					settings.closeCallback();
-				}
+			if (nowLoading) {
+				errorCallback(['処理中です。']);
+				return;
 			}
 
-			return this;
+			$.each(obj.files, function(i, file){
+
+				nowLoading = true;
+
+				function getExt(filename) {
+					var pos = filename.lastIndexOf('.');
+					if (pos === -1) return '';
+					return filename.slice(pos + 1);
+				}
+				var ext = getExt(file.name).toLowerCase();
+
+				if (ext === 'heic') {
+					// HEIC対応 iphone11 以降で撮影された画像にも対応する
+					// console.log('HEIC形式の画像なのでJPEGに変換します。')
+
+					heic2any({
+						blob: file,
+						toType: "image/jpeg",
+						quality: 1
+					}).then(function(resultBlob) {
+						var errors = validate(resultBlob);
+						if (0 < errors.length) {
+							errorCallback(errors);
+							nowLoading = false;
+							return;
+						}
+						resize(resultBlob, function(res) {
+							res.fileName = file.name;
+							successCallback(res);
+							nowLoading = false;
+						}, function(errors) {
+							errorCallback(errors);
+							nowLoading = false;
+							return;
+						});
+					});
+				} else {
+
+					var errors = validate(file);
+					if (0 < errors.length) {
+						errorCallback(errors);
+						nowLoading = false;
+						return;
+					}
+					resize(file, function(res) {
+						successCallback(res);
+						nowLoading = false;
+					}, function(errors) {
+						errorCallback(errors);
+						nowLoading = false;
+						return;
+					});
+				}
+
+			});
+
+		}
+
+		// 入力チェック
+		var validate = function(blob) {
+			var errors = [];
+			// ファイルサイズチェック
+			if( maxFileSize < blob.size ){
+				errors.push('画像ファイルのファイルサイズが最大値('+Math.floor(maxFileSize/1000000)+'MB)を超えています。');
+			}
+			return errors;
+		}
+
+		// そのままの
+		var resize = function(blob, callback, errorCallback) {
+			var image = new Image();
+			var fr=new FileReader();
+			fr.onload=function(evt) {
+				// リサイズする
+				image.onload = function() {
+					var width, height;
+					if(image.width > image.height){
+						// 横長の画像は横のサイズを指定値にあわせる
+						var ratio = image.height/image.width;
+						width = thumbnail_width;
+						height = thumbnail_width * ratio;
+					} else {
+						// 縦長の画像は縦のサイズを指定値にあわせる
+						var ratio = image.width/image.height;
+						width = thumbnail_height * ratio;
+						height = thumbnail_height;
+					}
+					// サムネ描画用canvasのサイズを上で算出した値に変更
+					var canvas = $('<canvas id="canvas" width="0" height="0" ></canvas>')
+						.attr('width', width)
+						.attr('height', height);
+					var ctx = canvas[0].getContext('2d');
+					// canvasに既に描画されている画像をクリア
+					ctx.clearRect(0,0,width,height);
+					// canvasにサムネイルを描画
+					ctx.drawImage(image,0,0,image.width,image.height,0,0,width,height);
+
+					// canvasからbase64画像データを取得
+					var base64 = canvas.get(0).toDataURL('image/jpeg');
+					// base64からBlobデータを作成
+					var barr, bin, i, len;
+					bin = atob(base64.split('base64,')[1]);
+					len = bin.length;
+					barr = new Uint8Array(len);
+					i = 0;
+					while (i < len) {
+						barr[i] = bin.charCodeAt(i);
+						i++;
+					}
+					var resizeBlob = new Blob([barr], {type: 'image/jpeg'});
+					callback({
+						fileName: blob.name,
+						ofileData: evt.target.result,
+						fileData: base64,
+						ofileSize: blob.size,
+						fileSize: resizeBlob.size,
+						fileType: resizeBlob.type
+					})
+				}
+				image.onerror = function() {
+					errorCallback(['選択されたファイルをロードできません。']);
+				}
+				image.src = evt.target.result;
+			}
+			fr.readAsDataURL(blob);
 		}
 
 		$(this).each(function() {
-			var self = $(this),
-				panel = $(self.data('panel'));
-
-			// パネルの表示位置を調整します。
-			var adjustPanelPosition = function (){
-				var h = $(window).height();
-				var w = $(window).width();
-				var ph = panel.height();
-				var pw = panel.width();
-				var top = $(window).scrollTop() + Math.floor((h - ph)/2);
-				if ($(window).height() < panel.height()) {
-					top = $(window).scrollTop();
-				}
-				var left = $(window).scrollLeft() + Math.floor((w - pw)/2);
-				if ($(window).width() < panel.width()) {
-					left = 0;
-				}
-				panel.css('top', top  + 'px');
-				panel.css('left', left + 'px');
-			}
-			$(window).resize(function() {
-				adjustPanelPosition();
-			});
-
-			// ボタン押下時にパネル表示
-			self.click(function(e) {
-				e.preventDefault();
-				var obj = new init(panel);
-				obj.showDialog();
-				// 表示位置の調整
-				adjustPanelPosition();
-
-			});
+			init(this);
 		});
 
 		return this;
 	}
 
-	$.fn.isystkOverlay.defaults = {
-		closeCallback: null, // 画面を閉じた際のコールバック
-		openCallback: null // 画面を開いた際のコールバック
-	};
+	$.fn.imageUploader.defaults = {
+		dropAreaSelector: '',
+		maxFileSize : 10485760, // 10BM
+		thumbnail_width: 700, // 画像リサイズ後の横の長さの最大値
+		thumbnail_height: 700, // 画像リサイズ後の縦の長さの最大値
+		successCallback : function(res) {console.log(res);},
+		errorCallback : function(res) {console.log(res);}
+	}
 
 })(jQuery);
+

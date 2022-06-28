@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.isystk.sample.common.dto.UploadFileDto;
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;

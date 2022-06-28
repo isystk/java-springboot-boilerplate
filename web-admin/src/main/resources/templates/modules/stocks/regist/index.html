@@ -28,12 +28,11 @@
     <div class="card-body">
       <p>商品内容を入力して下さい</p>
       <form th:object="${stocksRegistForm}" th:action="@{/stocks/regist}" th:method="post">
-        <input th:replace="fragments/input :: input ('text', '商品名', 'name', 'col-md-6', 100)"/>
-        <input th:replace="fragments/textarea :: input ('商品説明', 'detail', 'col-md-6', 5)"/>
-        <input th:replace="fragments/input :: input ('number', '価格', 'price', 'col-md-6', 100)"/>
-        <input
-            th:replace="fragments/input :: input ('number', '在庫数', 'quantity', 'col-md-6', 100)"/>
-        <input th:replace="fragments/input :: input ('text', '商品画像', 'imgpath', 'col-md-6', 100)"/>
+        <input th:replace="fragments/input :: input ('text', '商品名', 'name', 100)"/>
+        <input th:replace="fragments/textarea :: input ('商品説明', 'detail', 5)"/>
+        <input th:replace="fragments/input :: input ('number', '価格', 'price', 100)"/>
+        <input th:replace="fragments/input :: input ('number', '在庫数', 'quantity', 100)"/>
+        <input th:replace="fragments/imageUpload :: input ('商品画像', 'stockImage')"/>
         <div class="card-footer clearfix text-center">
           <div class="text-left float-left">
             <a class="btn btn-secondary" th:href="@{/stocks}">一覧に戻る</a>
@@ -42,19 +41,11 @@
           </button>
         </div>
       </form>
-
     </div>
   </div>
 </div>
 <div layout:fragment="scripts">
-  <script type="text/javascript" th:inline="javascript">
-		$(function() {
-			// サブミット
-			$('.js-submit').submitbutton();
-
-		});
-
-  </script>
+  <script type="text/javascript" th:src="@{/static/js/stocks/regist/index.js}"></script>
 </div>
 </body>
 </html>

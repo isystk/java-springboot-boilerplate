@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       lang="ja" class="no-js">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -10,19 +9,14 @@
         name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="robots" content="noodp">
-
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
   <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">LaraEC</title>
-
   <link rel="stylesheet"
         th:href="@{/webjars/AdminLTE/3.0.2/plugins/fontawesome-free/css/all.min.css}"
         type="text/css"/>
   <link rel="stylesheet" th:href="@{/webjars/AdminLTE/3.0.2/dist/css/adminlte.min.css}"
         type="text/css"/>
-  <link rel="stylesheet" th:href="@{/static/css/admin.css}" type="text/css"/>
-
-  <!--/* original */-->
-  <!--link /-->
+  <link rel="stylesheet" th:href="@{/static/css/app.css}" type="text/css"/>
 </head>
 <body class="hold-transition sidebar-mini">
 <p class="headerSt" th:if="${!@env.isProduction()}">
@@ -35,12 +29,10 @@
   <div layout:fragment="header" th:remove="tag">
     <div th:replace="layouts/header"></div>
   </div>
-
   <!--/* サイドメニュー */-->
-  <div layout:fragment="sidebar" th:remove="tag">
+  <div layout:fragment="sidebar" th:remove="tag" data-open="">
     <div th:replace="layouts/sidebar"></div>
   </div>
-
   <!--/* メインコンテンツ */-->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -57,20 +49,15 @@
       <div class="container-fluid">
         <div layout:fragment="content-header" th:remove="tag">
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
-    <!-- /.content-header -->
 
-    <!-- Main content -->
+    <!-- メインコンテンツ -->
     <div class="content">
       <div class="container-fluid">
-
         <div class="row">
           <div class="col-12">
-
-            <div layout:fragment="content" th:remove="tag">
-            </div>
-
+            <div layout:fragment="content" th:remove="tag"></div>
           </div>
         </div>
       </div>
@@ -81,45 +68,18 @@
   <div layout:fragment="footer" th:remove="tag">
     <div th:replace="layouts/footer"></div>
   </div>
-</div><!--/* end wrapper */-->
+</div>
 
 <div layout:fragment="footer" th:remove="tag">
-  <script type="text/javascript"
-          th:src="@{/webjars/AdminLTE/3.0.2/plugins/jquery/jquery.min.js}"></script>
-  <script type="text/javascript"
-          th:src="@{/webjars/AdminLTE/3.0.2/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
-  <script type="text/javascript"
-          th:src="@{/webjars/AdminLTE/3.0.2/dist/js/adminlte.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/plugins/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/AdminLTE/3.0.2/dist/js/adminlte.min.js}"></script>
+  <script type="text/javascript" th:src="@{/static/js/lib/heic2any.min.js}"></script>
   <script type="text/javascript" th:src="@{/static/js/jquery-plugins.js}"></script>
-  <script type="text/javascript" th:src="@{/static/js/admin.js}"></script>
+  <script type="text/javascript" th:src="@{/static/js/app.js}"></script>
 </div>
 <div layout:fragment="body-end" th:remove="tag">
 </div>
 <div layout:fragment="scripts" th:remove="tag"/>
-<script type="text/javascript" th:inline="javascript">
-			$(document).ready(function() {
-				// ログアウト
-				$("#logout").bind("click", function() {
-					$("form[name='logout']").submit();
-				});
-				(function() {
-					var path = [# th:text="@{/}" /];　
-					$('.js-pushmenu').on('click', function() {
-						if ($('body').hasClass('sidebar-collapse')) {
-							document.cookie = "sidebarToggleState=opened; path=" + path + ";";
-						} else {
-							document.cookie = "sidebarToggleState=closed; path=" + path + ";";
-						}
-					});
-					var re = new RegExp('sidebarToggleState' + "=([^;]+)");
-					var value = re.exec(document.cookie);
-					var toggleState = (value != null) ? unescape(value[1]) : null;
-					if (toggleState == 'closed') {
-						$('body').addClass('sidebar-collapse');
-					}
-				})();
-			});
-
-</script>
 </body>
 </html>

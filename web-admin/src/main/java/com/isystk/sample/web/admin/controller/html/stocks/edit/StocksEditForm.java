@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.NumberFormat;
 
 @Setter
 @Getter
@@ -23,12 +24,17 @@ public class StocksEditForm extends BaseForm {
   String detail;
 
   @NotBlank
+  @NumberFormat
   String price;
 
   @NotBlank
+  @NumberFormat
   String quantity;
 
   @NotBlank
-  String imgpath;
+  String stockImageName;
+
+  @NotBlank
+  String stockImageData;
 
 }
