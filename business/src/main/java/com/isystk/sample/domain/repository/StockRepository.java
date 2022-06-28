@@ -126,12 +126,12 @@ public class StockRepository extends BaseRepository {
   public Stocks update(final StockRepositoryDto stocksDto) {
     val time = DateUtils.getNow();
 
-    val post = stocksDao.selectById(stocksDto.getId())
+    val stock = stocksDao.selectById(stocksDto.getId())
         .orElseThrow(
-            () -> new NoDataFoundException("post_id=" + stocksDto.getId() + " のデータが見つかりません。"));
+            () -> new NoDataFoundException("stock_id=" + stocksDto.getId() + " のデータが見つかりません。"));
 
     // 商品テーブル
-    val stocks = ObjectMapperUtils.mapExcludeNull(stocksDto, post);
+    val stocks = ObjectMapperUtils.mapExcludeNull(stocksDto, stock);
     stocks.setUpdatedAt(time); // 更新日
     stocksDao.update(stocks);
 

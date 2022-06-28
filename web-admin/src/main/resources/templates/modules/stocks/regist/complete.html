@@ -12,30 +12,24 @@
 <div layout:fragment="content-header">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>商品完了</h1>
-    </div><!-- /.col -->
+      <h1>商品登録完了</h1>
+    </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/stock/}">商品管理</a></li>
-        <li class="breadcrumb-item active">商品登録</li>
+        <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
+        <li class="breadcrumb-item active">商品登録完了</li>
       </ol>
-    </div><!-- /.col -->
-  </div><!-- /.row -->
-</div>
-<div layout:fragment="content">
-
-  <div class="card card-purple">
-    <div class="card-body">
-
-      <p>商品が完了しました。</p>
-
     </div>
   </div>
 </div>
-<div layout:fragment="scripts">
-  <script type="text/javascript" th:inline="javascript">
-  </script>
+<div layout:fragment="content">
+  <div class="card card-purple">
+    <div class="card-body">
+      <p>商品の登録が完了しました。</p>
+      <a th:href="@{/stocks/}">一覧に戻る</a>
+    </div>
+  </div>
 </div>
 </body>
 </html>

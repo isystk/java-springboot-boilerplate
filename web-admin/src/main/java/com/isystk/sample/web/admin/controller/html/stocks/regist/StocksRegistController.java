@@ -1,18 +1,11 @@
-package com.isystk.sample.web.admin.controller.html.stocks.edit;
+package com.isystk.sample.web.admin.controller.html.stocks.regist;
 
-import static com.isystk.sample.common.AdminUrl.STOCKS_EDIT;
+import static com.isystk.sample.common.AdminUrl.STOCKS_REGIST;
 
-import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.entity.TUser;
-import com.isystk.sample.domain.entity.Users;
-import com.isystk.sample.domain.repository.StockRepository;
 import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
 import com.isystk.sample.web.admin.service.StockService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +17,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
@@ -32,38 +25,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
-@RequestMapping(STOCKS_EDIT)
-@SessionAttributes(types = {StocksEditForm.class})
-public class StocksEditHtmlController extends AbstractHtmlController {
+@RequestMapping(STOCKS_REGIST)
+@SessionAttributes(types = {StocksRegistForm.class})
+public class StocksRegistController extends AbstractHtmlController {
 
   @Autowired
   StockService stockService;
 
   @Autowired
-  StockRepository stockRepository;
+  StocksRegistFormValidator stocksRegistFormValidator;
 
-  @Autowired
-  UserHelper userHelper;
-
-  @Autowired
-  StocksEditFormValidator stocksEditFormValidator;
-
-  @Autowired
-  HttpSession session;
-
-  @ModelAttribute("stocksEditForm")
-  public StocksEditForm stocksEditForm() {
-    return new StocksEditForm();
+  @ModelAttribute("stocksRegistForm")
+  public StocksRegistForm stocksRegistForm() {
+    return new StocksRegistForm();
   }
 
-  @InitBinder("stocksEditForm")
+  @InitBinder("stocksRegistForm")
   public void validatorBinder(WebDataBinder binder) {
-    binder.addValidators(stocksEditFormValidator);
+    binder.addValidators(stocksRegistFormValidator);
   }
 
   @Override
   public String getFunctionName() {
-    return "A_STOCKS_EDIT";
+    return "A_STOCKS_REGIST";
   }
 
   /**
@@ -73,36 +57,29 @@ public class StocksEditHtmlController extends AbstractHtmlController {
    * @param model
    * @return
    */
-  @GetMapping("{stockId}")
-  public String editIndex(@ModelAttribute StocksEditForm form, Model model) {
+  @GetMapping
+  public String registIndex(@ModelAttribute StocksRegistForm form, Model model) {
 
-    // 1件取得する
-    val stocks = stockRepository.findById(form.getStockId());
+    // SessionAttributeを再生成する
+    model.addAttribute("stocksRegistForm", new StocksRegistForm());
 
-    // 取得したDtoをFromに詰め替える
-    ObjectMapperUtils.map(stocks, form);
-
-    return showEditIndex(form, model);
+    return showRegistIndex(form, model);
   }
 
   /**
-   * 修正画面表示
+   * 登録画面表示
    *
    * @param form
    * @param model
    * @return
    */
-  private String showEditIndex(
-      StocksEditForm form, Model model) {
-
-    Users users = userHelper.getUser(form.getUserId());
-    model.addAttribute("userName", String.join(users.getName()));
-
-    return "modules/stocks/edit/index";
+  private String showRegistIndex(
+      StocksRegistForm form, Model model) {
+    return "modules/stocks/regist/index";
   }
 
   /**
-   * 修正確認画面表示
+   * 登録確認画面表示
    *
    * @param form
    * @param br
@@ -110,20 +87,17 @@ public class StocksEditHtmlController extends AbstractHtmlController {
    * @param attributes
    * @return
    */
-  @PutMapping(params = "confirm")
-  public String editConfirm(@Validated @ModelAttribute StocksEditForm form, BindingResult br,
+  @PostMapping(params = "confirm")
+  public String registConfirm(@Validated @ModelAttribute StocksRegistForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
       setFlashAttributeErrors(attributes, br);
-      return showEditIndex(form, model);
+      return showRegistIndex(form, model);
     }
 
-    Users users = userHelper.getUser(form.getUserId());
-    model.addAttribute("userName", String.join(users.getName()));
-
-    return "modules/stocks/edit/confirm";
+    return "modules/stocks/regist/confirm";
   }
 
   /**
@@ -135,14 +109,14 @@ public class StocksEditHtmlController extends AbstractHtmlController {
    * @param attributes
    * @return
    */
-  @PutMapping(params = "back")
-  public String editBack(@Validated @ModelAttribute StocksEditForm form, BindingResult br,
+  @PostMapping(params = "back")
+  public String registBack(@Validated @ModelAttribute StocksRegistForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
-    return showEditIndex(form, model);
+    return showRegistIndex(form, model);
   }
 
   /**
-   * 更新処理
+   * 登録処理
    *
    * @param form
    * @param br
@@ -150,36 +124,36 @@ public class StocksEditHtmlController extends AbstractHtmlController {
    * @param attributes
    * @return
    */
-  @PutMapping(params = "complete")
-  public String updateComplete(@Validated @ModelAttribute StocksEditForm form, BindingResult br,
+  @PostMapping(params = "complete")
+  public String registComplete(@Validated @ModelAttribute StocksRegistForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
       setFlashAttributeErrors(attributes, br);
-      return showEditIndex(form, model);
+      return showRegistIndex(form, model);
     }
 
     // 入力値を詰め替える
     val tStocksDto = ObjectMapperUtils.map(form, StockRepositoryDto.class);
 
-    // 更新する
-    stockService.update(tStocksDto);
+    // 登録する
+    stockService.create(tStocksDto);
 
-    // セッションのstocksEditFormをクリアする
+    // セッションのstocksRegistFormをクリアする
     sessionStatus.setComplete();
 
-    return "redirect:/stocks/edit/complete";
+    return "redirect:/stocks/regist/complete";
   }
 
   /**
-   * 修正完了画面表示
+   * 登録完了画面表示
    *
    * @return
    */
   @GetMapping("complete")
   public String showComplete() {
-    return "modules/stocks/edit/complete";
+    return "modules/stocks/regist/complete";
   }
 
 }

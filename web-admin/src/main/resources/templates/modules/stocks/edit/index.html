@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>商品修正</title>
+  <title>[[|${stocksEditForm.name}の変更|]]</title>
 </head>
 <body>
 <div layout:fragment="sidebar">
@@ -12,31 +12,39 @@
 <div layout:fragment="content-header">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>商品修正</h1>
-    </div><!-- /.col -->
+      <h1>[[|${stocksEditForm.name}の変更|]]</h1>
+    </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/stock/}">商品一覧</a></li>
-        <li class="breadcrumb-item active">商品修正</li>
+        <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
+        <li class="breadcrumb-item"><a
+            th:href="@{/stocks/{stockId}(stockId=${stocksEditForm.stockId})}">[[${stocksEditForm.name}]]</a>
+        </li>
+        <li class="breadcrumb-item active">[[|${stocksEditForm.name}の変更|]]</li>
       </ol>
-    </div><!-- /.col -->
-  </div><!-- /.row -->
+    </div>
+  </div>
 </div>
 <div layout:fragment="content">
 
   <div class="card card-purple">
     <div class="card-body">
       <p>商品内容を入力して下さい</p>
-      <form th:object="${stocksEditForm}" th:action="@{/stocks/edit}" th:method="put">
+      <form th:object="${stocksEditForm}" th:action="@{/stocks/edit/{id}/(id=*{stockId})}"
+            th:method="put">
         <input type="hidden" name="stockId" th:value="*{stockId}"/>
+        <input th:replace="fragments/input :: input ('text', '商品名', 'name', 'col-md-6', 100)"/>
+        <input th:replace="fragments/textarea :: input ('商品説明', 'detail', 'col-md-6', 5)"/>
+        <input th:replace="fragments/input :: input ('number', '価格', 'price', 'col-md-6', 100)"/>
         <input
-            th:replace="fragments/input :: input ('text', '商品名', 'name', 'col-md-6', 100)"/>
+            th:replace="fragments/input :: input ('number', '在庫数', 'quantity', 'col-md-6', 100)"/>
+        <input th:replace="fragments/input :: input ('text', '商品画像', 'imgpath', 'col-md-6', 100)"/>
         <div class="card-footer clearfix text-center">
           <div class="text-left float-left">
             <a class="btn btn-secondary" th:href="@{/stocks}">一覧に戻る</a>
           </div>
-          <button class="btn btn-secondary js-submit" th:data-uri="@{/stocks/edit?confirm}">確認画面へ
+          <button class="btn btn-info js-submit" th:data-uri="@{/stocks/edit?confirm}">確認画面へ
           </button>
         </div>
       </form>
@@ -163,6 +171,7 @@
 			};
 
 		});
+
 
   </script>
 </div>

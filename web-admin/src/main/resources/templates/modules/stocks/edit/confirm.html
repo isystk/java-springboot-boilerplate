@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>商品修正確認</title>
+  <title>[[|${stocksEditForm.name}の変更|]]</title>
 </head>
 <body>
 <div layout:fragment="sidebar">
@@ -12,16 +12,19 @@
 <div layout:fragment="content-header">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>商品修正確認</h1>
-    </div><!-- /.col -->
+      <h1>[[|${stocksEditForm.name}の変更|]]</h1>
+    </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/stock/}">商品一覧</a></li>
-        <li class="breadcrumb-item active">商品修正</li>
+        <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
+        <li class="breadcrumb-item"><a
+            th:href="@{/stocks/{stockId}(stockId=${stocksEditForm.stockId})}">[[${stocksEditForm.name}]]</a>
+        </li>
+        <li class="breadcrumb-item active">[[|${stocksEditForm.name}の変更|]]</li>
       </ol>
-    </div><!-- /.col -->
-  </div><!-- /.row -->
+    </div>
+  </div>
 </div>
 <div layout:fragment="content">
 
@@ -29,39 +32,35 @@
     <div class="card-body">
 
       <p>以下の内容で登録します。</p>
-      <form th:object="${stockEditForm}" th:action="@{/stock/edit}" th:method="put">
+      <form th:object="${stocksEditForm}" th:action="@{/stocks/edit/{id}/(id=*{stockId})}"
+            th:method="put">
         <input type="hidden" name="stockId" th:value="*{stockId}"/>
-        <input type="hidden" name="userId" th:value="*{userId}"/>
-        <input type="hidden" name="title" th:value="*{title}"/>
-        <th:block th:each="e, s : *{stockImageId}">
-          <input type="hidden" name="stockImageId" th:value="${e}"/>
-        </th:block>
-        <th:block th:each="e, s : *{stockTagId}">
-          <input type="hidden" name="stockTagId" th:value="${e}"/>
-        </th:block>
-        <input type="hidden" name="text" th:value="*{text}"/>
+        <input type="hidden" name="name" th:value="*{name}"/>
+        <input type="hidden" name="detail" th:value="*{detail}"/>
+        <input type="hidden" name="price" th:value="*{price}"/>
+        <input type="hidden" name="quantity" th:value="*{quantity}"/>
+        <input type="hidden" name="imgpath" th:value="*{imgpath}"/>
         <input type="hidden" name="version" th:value="*{version}"/>
-        <input
-            th:replace="fragments/label :: input ('商品者', ${userName}, 'col-md-6')"/>
-        <input th:replace="fragments/label :: input ('タイトル', *{title}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('商品名', *{name}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('商品説明', *{detail}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('価格', *{price}, 'col-md-6')"/>
+        <input th:replace="fragments/label :: input ('在庫数', *{quantity}, 'col-md-6')"/>
         <div class="form-group row">
-          <label class="col-md-2 control-label">写真</label>
+          <label class="col-md-2 control-label">商品画像</label>
           <div class="col-md-10">
             <div class="row selectedPhotoList">
-              <div class="col-3 m-2" th:each="e, s : *{stockImageId}">
-                <img th:src="${@img.url(e, '_square')}" width="120px"/>
+              <div class="col-3 m-2">
+                <img th:src="*{imgpath}" width="120px"/>
               </div>
             </div>
           </div>
         </div>
-        <input th:replace="fragments/label :: input ('本文', *{text}, 'col-md-6')"/>
-        <input th:replace="fragments/labelArray :: input ('タグ', *{stockTagId}, ${stockTagList}, 'code', 'text', 'col-md-6')"/>
         <div class="card-footer clearfix text-center">
           <div class="text-left float-left">
-            <button class="btn btn-secondary js-submit" th:data-uri="@{/stock/edit?back}">前に戻る
+            <button class="btn btn-secondary js-submit" th:data-uri="@{/stocks/edit?back}">前に戻る
             </button>
           </div>
-          <button class="btn btn-secondary js-submit" th:data-uri="@{/stock/edit?complete}">修正する
+          <button class="btn btn-info js-submit" th:data-uri="@{/stocks/edit?complete}">修正する
           </button>
         </div>
       </form>
@@ -74,6 +73,7 @@
 			// サブミット
 			$('.js-submit').submitbutton();
 		});
+
 
   </script>
 </div>
