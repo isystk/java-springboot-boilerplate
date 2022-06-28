@@ -2,7 +2,6 @@ package com.isystk.sample.web.admin.controller.html.stocks;
 
 import static com.isystk.sample.common.AdminUrl.STOCKS;
 
-import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.StocksCriteria;
 import com.isystk.sample.domain.repository.StockRepository;
@@ -124,7 +123,7 @@ public class StocksListController extends AbstractHtmlController {
   public String show(@PathVariable BigInteger stockId, Model model) {
     StockRepositoryDto stock = stockRepository.findById(stockId);
     model.addAttribute("stock", stock);
-    return "modules/stock/detail";
+    return "modules/stocks/detail";
   }
 
   /**
@@ -136,7 +135,7 @@ public class StocksListController extends AbstractHtmlController {
   @DeleteMapping("{id}")
   public String delete(@PathVariable BigInteger id) {
     stockService.delete(id);
-    return "redirect:/stock";
+    return "redirect:/stocks";
   }
 
   /**

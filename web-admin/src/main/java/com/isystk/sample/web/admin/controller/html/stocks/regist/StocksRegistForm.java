@@ -1,20 +1,15 @@
-package com.isystk.sample.web.admin.controller.html.stocks.edit;
+package com.isystk.sample.web.admin.controller.html.stocks.regist;
 
 import com.isystk.sample.web.base.controller.html.BaseForm;
-import java.math.BigInteger;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class StocksEditForm extends BaseForm {
+public class StocksRegistForm extends BaseForm {
 
   private static final long serialVersionUID = 7593564324192730932L;
-
-  @NotNull
-  BigInteger stockId;
 
   @NotBlank
   String name;
