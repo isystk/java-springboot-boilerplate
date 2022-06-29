@@ -49,227 +49,227 @@ public class PostService extends BaseTransactionalService {
   @Autowired
   UserHelper userHelper;
 
-  @Autowired
-  MPostTagRepository mPostTagRepository;
-
-  /**
-   * Solrの投稿インデックスを取得します。
-   *
-   * @param criteria
-   * @param pageable
-   * @return
-   */
-  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-  public Page<FrontPostDto> findSolrAll(SolrPostCriteria criteria, Pageable pageable) {
-    Assert.notNull(criteria, "criteria must not be null");
-
-    // TODO ここでページングを設定
-    Iterable<SolrPost> solrPosts = solrPostRepository.findAll();
-
-    List<FrontPostDto> solrPostList = Lists.newArrayList();
-    for (SolrPost solrPost : solrPosts) {
-      solrPostList.add(convertSolrToFrontPostDto(solrPost));
-    }
-
-    // ページングを指定する
-    val options = createSelectOptions(pageable).count();
-    return pageFactory.create(solrPostList, pageable, options.getCount());
-  }
-
-  /**
-   * Solrの投稿インデックスを取得します。
-   *
-   * @param postId
-   * @return
-   */
-  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-  public Optional<FrontPostDto> findDataById(Integer postId) {
-    Assert.notNull(postId, "criteria must not be null");
-
-    SolrPost solrPost = solrPostRepository.findByPostId(postId);
-
-    return Optional.of(convertSolrToFrontPostDto(solrPost));
-  }
-
-  /**
-   * @param solrPost
-   * @return
-   */
-  private FrontPostDto convertSolrToFrontPostDto(SolrPost solrPost) {
-    // 入力値を詰め替える
-    var dto = ObjectMapperUtils.map(solrPost, FrontPostDto.class);
-
-    // 画像のパスを設定
-    dto.setImageList(Optional.ofNullable(solrPost.getImageIdList())
-        .orElse(Lists.newArrayList())
-        .stream()
-        .map((imageId) -> {
-          FrontPostImageDto imageDto = new FrontPostImageDto();
-          imageDto.setImageId(imageId);
-          imageDto.setImageUrl(imageHelper.getUrl(imageId, ImageSuffix.SQUARE.getSuffix()));
-          return imageDto;
-        })
-        .collect(Collectors.toList()));
-
-    // 投稿タグを設定
-//    Map<Integer, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
-//    dto.setTagList(Optional.ofNullable(solrPost.getTagIdList())
+//  @Autowired
+//  MPostTagRepository mPostTagRepository;
+//
+//  /**
+//   * Solrの投稿インデックスを取得します。
+//   *
+//   * @param criteria
+//   * @param pageable
+//   * @return
+//   */
+//  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
+//  public Page<FrontPostDto> findSolrAll(SolrPostCriteria criteria, Pageable pageable) {
+//    Assert.notNull(criteria, "criteria must not be null");
+//
+//    // TODO ここでページングを設定
+//    Iterable<SolrPost> solrPosts = solrPostRepository.findAll();
+//
+//    List<FrontPostDto> solrPostList = Lists.newArrayList();
+//    for (SolrPost solrPost : solrPosts) {
+//      solrPostList.add(convertSolrToFrontPostDto(solrPost));
+//    }
+//
+//    // ページングを指定する
+//    val options = createSelectOptions(pageable).count();
+//    return pageFactory.create(solrPostList, pageable, options.getCount());
+//  }
+//
+//  /**
+//   * Solrの投稿インデックスを取得します。
+//   *
+//   * @param postId
+//   * @return
+//   */
+//  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
+//  public Optional<FrontPostDto> findDataById(Integer postId) {
+//    Assert.notNull(postId, "criteria must not be null");
+//
+//    SolrPost solrPost = solrPostRepository.findByPostId(postId);
+//
+//    return Optional.of(convertSolrToFrontPostDto(solrPost));
+//  }
+//
+//  /**
+//   * @param solrPost
+//   * @return
+//   */
+//  private FrontPostDto convertSolrToFrontPostDto(SolrPost solrPost) {
+//    // 入力値を詰め替える
+//    var dto = ObjectMapperUtils.map(solrPost, FrontPostDto.class);
+//
+//    // 画像のパスを設定
+//    dto.setImageList(Optional.ofNullable(solrPost.getImageIdList())
 //        .orElse(Lists.newArrayList())
 //        .stream()
-//        .map((tagId) -> {
+//        .map((imageId) -> {
+//          FrontPostImageDto imageDto = new FrontPostImageDto();
+//          imageDto.setImageId(imageId);
+//          imageDto.setImageUrl(imageHelper.getUrl(imageId, ImageSuffix.SQUARE.getSuffix()));
+//          return imageDto;
+//        })
+//        .collect(Collectors.toList()));
+//
+//    // 投稿タグを設定
+////    Map<Integer, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
+////    dto.setTagList(Optional.ofNullable(solrPost.getTagIdList())
+////        .orElse(Lists.newArrayList())
+////        .stream()
+////        .map((tagId) -> {
+////          FrontPostTagDto tagDto = new FrontPostTagDto();
+////          tagDto.setTagId(tagId);
+////          tagDto.setTagName(mPostTagMap.get(tagId).getText());
+////          return tagDto;
+////        })
+////        .collect(Collectors.toList()));
+//
+//    dto.setRegistTimeYYYYMMDD(
+//        DateUtils.format(solrPost.getRegistTime(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+//    dto.setRegistTimeMMDD(
+//        DateUtils.format(solrPost.getRegistTime(), DateTimeFormatter.ofPattern("MM/dd")));
+//    return dto;
+//  }
+//
+//  /**
+//   * DBの投稿インデックスを取得します。
+//   *
+//   * @param postId
+//   * @return
+//   */
+//  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
+//  public Optional<FrontPostDto> findMyDataById(Integer postId) {
+//    Assert.notNull(postId, "criteria must not be null");
+//
+//    // 1件取得する
+//    val post = postRepository.findById(postId);
+//    if (!post.getUserId().equals(userHelper.getUser().getId())) {
+//      throw new NoDataFoundException(
+//          "データが見つかりません。post_id=" + postId + " user_id=" + userHelper.getUser().getId());
+//    }
+//
+//    return Optional.of(convertTPostToFrontPostDto(post));
+//  }
+//
+//  /**
+//   * @param tPostRepositoryDto
+//   * @return
+//   */
+//  private FrontPostDto convertTPostToFrontPostDto(TPostRepositoryDto tPostRepositoryDto) {
+//    // 入力値を詰め替える
+//    var dto = ObjectMapperUtils.map(tPostRepositoryDto, FrontPostDto.class);
+//
+//    // 画像のパスを設定
+//    dto.setImageList(Optional.ofNullable(tPostRepositoryDto.getTPostImageList())
+//        .orElse(Lists.newArrayList())
+//        .stream()
+//        .map((tPostImage) -> {
+//          FrontPostImageDto imageDto = new FrontPostImageDto();
+//          imageDto.setImageId(tPostImage.getImageId());
+//          imageDto.setImageUrl(
+//              imageHelper.getUrl(tPostImage.getImageId(), ImageSuffix.SQUARE.getSuffix()));
+//          return imageDto;
+//        })
+//        .collect(Collectors.toList()));
+//
+//    // 投稿タグを設定
+//    Map<String, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
+//    dto.setTagList(Optional.ofNullable(tPostRepositoryDto.getTPostTagList())
+//        .orElse(Lists.newArrayList())
+//        .stream()
+//        .map((tPostTag) -> {
 //          FrontPostTagDto tagDto = new FrontPostTagDto();
-//          tagDto.setTagId(tagId);
-//          tagDto.setTagName(mPostTagMap.get(tagId).getText());
+//          tagDto.setTagId(tPostTag.getPostTagId());
+//          tagDto.setTagName(mPostTagMap.get(tPostTag.getPostTagId()).getText());
 //          return tagDto;
 //        })
 //        .collect(Collectors.toList()));
-
-    dto.setRegistTimeYYYYMMDD(
-        DateUtils.format(solrPost.getRegistTime(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
-    dto.setRegistTimeMMDD(
-        DateUtils.format(solrPost.getRegistTime(), DateTimeFormatter.ofPattern("MM/dd")));
-    return dto;
-  }
-
-  /**
-   * DBの投稿インデックスを取得します。
-   *
-   * @param postId
-   * @return
-   */
-  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-  public Optional<FrontPostDto> findMyDataById(Integer postId) {
-    Assert.notNull(postId, "criteria must not be null");
-
-    // 1件取得する
-    val post = postRepository.findById(postId);
-    if (!post.getUserId().equals(userHelper.getUser().getId())) {
-      throw new NoDataFoundException(
-          "データが見つかりません。post_id=" + postId + " user_id=" + userHelper.getUser().getId());
-    }
-
-    return Optional.of(convertTPostToFrontPostDto(post));
-  }
-
-  /**
-   * @param tPostRepositoryDto
-   * @return
-   */
-  private FrontPostDto convertTPostToFrontPostDto(TPostRepositoryDto tPostRepositoryDto) {
-    // 入力値を詰め替える
-    var dto = ObjectMapperUtils.map(tPostRepositoryDto, FrontPostDto.class);
-
-    // 画像のパスを設定
-    dto.setImageList(Optional.ofNullable(tPostRepositoryDto.getTPostImageList())
-        .orElse(Lists.newArrayList())
-        .stream()
-        .map((tPostImage) -> {
-          FrontPostImageDto imageDto = new FrontPostImageDto();
-          imageDto.setImageId(tPostImage.getImageId());
-          imageDto.setImageUrl(
-              imageHelper.getUrl(tPostImage.getImageId(), ImageSuffix.SQUARE.getSuffix()));
-          return imageDto;
-        })
-        .collect(Collectors.toList()));
-
-    // 投稿タグを設定
-    Map<String, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
-    dto.setTagList(Optional.ofNullable(tPostRepositoryDto.getTPostTagList())
-        .orElse(Lists.newArrayList())
-        .stream()
-        .map((tPostTag) -> {
-          FrontPostTagDto tagDto = new FrontPostTagDto();
-          tagDto.setTagId(tPostTag.getPostTagId());
-          tagDto.setTagName(mPostTagMap.get(tPostTag.getPostTagId()).getText());
-          return tagDto;
-        })
-        .collect(Collectors.toList()));
-
-    dto.setRegistTimeYYYYMMDD(DateUtils
-        .format(tPostRepositoryDto.getRegistTime(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
-    dto.setRegistTimeMMDD(
-        DateUtils.format(tPostRepositoryDto.getRegistTime(), DateTimeFormatter.ofPattern("MM/dd")));
-    return dto;
-  }
-
-  /**
-   * 投稿を複数取得します。
-   *
-   * @param criteria
-   * @param pageable
-   * @return
-   */
-  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-  public Page<FrontPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
-    Assert.notNull(criteria, "criteria must not be null");
-    Page<TPostRepositoryDto> postDtoPage = postRepository.findAll(criteria, pageable);
-
-    List<FrontPostDto> list = Lists.newArrayList();
-    for (TPostRepositoryDto postDto : postDtoPage.getData()) {
-      var dto = ObjectMapperUtils.map(postDto, FrontPostDto.class);
-
-      dto.setImageList(Optional.ofNullable(postDto.getTPostImageList())
-          .orElse(Lists.newArrayList())
-          .stream()
-          .map((tPostImage) -> {
-            FrontPostImageDto imageDto = new FrontPostImageDto();
-            imageDto.setImageId(tPostImage.getImageId());
-            imageDto.setImageUrl(
-                imageHelper.getUrl(tPostImage.getImageId(), ImageSuffix.SQUARE.getSuffix()));
-            return imageDto;
-          })
-          .collect(Collectors.toList()));
-
-      // 投稿タグを設定
-      Map<String, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
-      dto.setTagList(Optional.ofNullable(postDto.getTPostTagList())
-          .orElse(Lists.newArrayList())
-          .stream()
-          .map((tPostTag) -> {
-            FrontPostTagDto tagDto = new FrontPostTagDto();
-            tagDto.setTagId(tPostTag.getPostTagId());
-            tagDto.setTagName(mPostTagMap.get(tPostTag.getPostTagId()).getText());
-            return tagDto;
-          })
-          .collect(Collectors.toList()));
-
-      list.add(dto);
-    }
-
-    return pageFactory.create(list, postDtoPage, postDtoPage.getCount());
-  }
-
-  /**
-   * 投稿を追加します。
-   *
-   * @param tPostDto
-   * @return
-   */
-  public int create(final TPostRepositoryDto tPostDto) {
-    Assert.notNull(tPostDto, "input must not be null");
-    TPost tPost = postRepository.create(tPostDto);
-    return tPost.getPostId();
-  }
-
-  /**
-   * 投稿を更新します。
-   *
-   * @param tPostDto
-   * @return
-   */
-  public void update(final TPostRepositoryDto tPostDto) {
-    Assert.notNull(tPostDto, "input must not be null");
-    postRepository.update(tPostDto);
-  }
-
-  /**
-   * 投稿を論理削除します。
-   *
-   * @return
-   */
-  public TPost delete(final Integer postId) {
-    Assert.notNull(postId, "postId must not be null");
-    return postRepository.delete(postId);
-  }
+//
+//    dto.setRegistTimeYYYYMMDD(DateUtils
+//        .format(tPostRepositoryDto.getRegistTime(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+//    dto.setRegistTimeMMDD(
+//        DateUtils.format(tPostRepositoryDto.getRegistTime(), DateTimeFormatter.ofPattern("MM/dd")));
+//    return dto;
+//  }
+//
+//  /**
+//   * 投稿を複数取得します。
+//   *
+//   * @param criteria
+//   * @param pageable
+//   * @return
+//   */
+//  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
+//  public Page<FrontPostDto> findAll(TPostCriteria criteria, Pageable pageable) {
+//    Assert.notNull(criteria, "criteria must not be null");
+//    Page<TPostRepositoryDto> postDtoPage = postRepository.findAll(criteria, pageable);
+//
+//    List<FrontPostDto> list = Lists.newArrayList();
+//    for (TPostRepositoryDto postDto : postDtoPage.getData()) {
+//      var dto = ObjectMapperUtils.map(postDto, FrontPostDto.class);
+//
+//      dto.setImageList(Optional.ofNullable(postDto.getTPostImageList())
+//          .orElse(Lists.newArrayList())
+//          .stream()
+//          .map((tPostImage) -> {
+//            FrontPostImageDto imageDto = new FrontPostImageDto();
+//            imageDto.setImageId(tPostImage.getImageId());
+//            imageDto.setImageUrl(
+//                imageHelper.getUrl(tPostImage.getImageId(), ImageSuffix.SQUARE.getSuffix()));
+//            return imageDto;
+//          })
+//          .collect(Collectors.toList()));
+//
+//      // 投稿タグを設定
+//      Map<String, CodeValueDto> mPostTagMap = mPostTagRepository.findAllSelectMap();
+//      dto.setTagList(Optional.ofNullable(postDto.getTPostTagList())
+//          .orElse(Lists.newArrayList())
+//          .stream()
+//          .map((tPostTag) -> {
+//            FrontPostTagDto tagDto = new FrontPostTagDto();
+//            tagDto.setTagId(tPostTag.getPostTagId());
+//            tagDto.setTagName(mPostTagMap.get(tPostTag.getPostTagId()).getText());
+//            return tagDto;
+//          })
+//          .collect(Collectors.toList()));
+//
+//      list.add(dto);
+//    }
+//
+//    return pageFactory.create(list, postDtoPage, postDtoPage.getCount());
+//  }
+//
+//  /**
+//   * 投稿を追加します。
+//   *
+//   * @param tPostDto
+//   * @return
+//   */
+//  public int create(final TPostRepositoryDto tPostDto) {
+//    Assert.notNull(tPostDto, "input must not be null");
+//    TPost tPost = postRepository.create(tPostDto);
+//    return tPost.getPostId();
+//  }
+//
+//  /**
+//   * 投稿を更新します。
+//   *
+//   * @param tPostDto
+//   * @return
+//   */
+//  public void update(final TPostRepositoryDto tPostDto) {
+//    Assert.notNull(tPostDto, "input must not be null");
+//    postRepository.update(tPostDto);
+//  }
+//
+//  /**
+//   * 投稿を論理削除します。
+//   *
+//   * @return
+//   */
+//  public TPost delete(final Integer postId) {
+//    Assert.notNull(postId, "postId must not be null");
+//    return postRepository.delete(postId);
+//  }
 
 }

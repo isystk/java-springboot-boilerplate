@@ -1,4 +1,4 @@
-package com.isystk.sample.domain.dto.common;
+package com.isystk.sample.domain.dto;
 
 import java.io.Serializable;
 import org.seasar.doma.Entity;

@@ -2,6 +2,7 @@ package com.isystk.sample.web.front.controller.api.v1.entry;
 
 import com.isystk.sample.common.exception.ValidationErrorException;
 import com.isystk.sample.common.util.ObjectMapperUtils;
+import com.isystk.sample.domain.entity.User;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import com.isystk.sample.web.front.service.EntryService;
@@ -69,14 +70,14 @@ public class EntryRestController extends AbstractRestController {
     }
 
     // 入力値からDTOを作成する
-    val inputUser = ObjectMapperUtils.map(form, TUser.class);
+    val inputUser = ObjectMapperUtils.map(form, User.class);
     val password = form.getPassword();
 
     // パスワードをハッシュ化する
     inputUser.setPassword(passwordEncoder.encode(password));
 
-    // 仮会員登録
-    entryService.registTemporary(inputUser);
+//    // 仮会員登録
+//    entryService.registTemporary(inputUser);
 
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
@@ -94,8 +95,8 @@ public class EntryRestController extends AbstractRestController {
 
     Resource resource = resourceFactory.create();
 
-    // 本会員登録
-    entryService.registComplete(onetimeKey);
+//    // 本会員登録
+//    entryService.registComplete(onetimeKey);
 
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
