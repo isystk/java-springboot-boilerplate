@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.controller.html.stocks;
+package com.isystk.sample.web.admin.controller.html.stock;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;

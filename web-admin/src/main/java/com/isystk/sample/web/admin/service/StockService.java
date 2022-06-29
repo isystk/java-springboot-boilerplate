@@ -1,11 +1,15 @@
 package com.isystk.sample.web.admin.service;
 
+import com.isystk.sample.common.dto.Page;
+import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
+import com.isystk.sample.domain.dto.StockCriteria;
 import com.isystk.sample.domain.entity.Stock;
 import com.isystk.sample.domain.repository.StockRepository;
 import com.isystk.sample.domain.dto.StockRepositoryDto;
 import java.math.BigInteger;
+import java.util.List;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +24,34 @@ public class StockService extends BaseTransactionalService {
   @Autowired
   StockRepository stockRepository;
 
+  /**
+   * 商品を複数取得します。
+   *
+   * @param criteria
+   * @return
+   */
+  public List<StockRepositoryDto> findAll(StockCriteria criteria) {
+    return stockRepository.findAll(criteria);
+  }
+
+  /**
+   * 商品を複数取得します。(ページングあり)
+   *
+   * @param criteria
+   * @param pageable
+   * @return
+   */
+  public Page<StockRepositoryDto> findPage(StockCriteria criteria, Pageable pageable) {
+    return stockRepository.findPage(criteria, pageable);
+  }
+
+
+  /**
+   * 商品を取得します。
+   *
+   * @param stockId
+   * @return
+   */
   public StockRepositoryDto findById(BigInteger stockId) {
     // 1件取得する
     val stock = stockRepository.findById(stockId);

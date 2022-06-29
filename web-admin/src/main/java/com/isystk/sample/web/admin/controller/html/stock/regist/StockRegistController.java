@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.controller.html.stocks.regist;
+package com.isystk.sample.web.admin.controller.html.stock.regist;
 
 import static com.isystk.sample.common.AdminUrl.STOCKS_REGIST;
 
@@ -26,28 +26,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @Slf4j
 @RequestMapping(STOCKS_REGIST)
-@SessionAttributes(types = {StocksRegistForm.class})
-public class StocksRegistController extends AbstractHtmlController {
+@SessionAttributes(types = {StockRegistForm.class})
+public class StockRegistController extends AbstractHtmlController {
 
   @Autowired
   StockService stockService;
 
   @Autowired
-  StocksRegistFormValidator stocksRegistFormValidator;
+  StockRegistFormValidator stockRegistFormValidator;
 
-  @ModelAttribute("stocksRegistForm")
-  public StocksRegistForm stocksRegistForm() {
-    return new StocksRegistForm();
+  @ModelAttribute("stockRegistForm")
+  public StockRegistForm stockRegistForm() {
+    return new StockRegistForm();
   }
 
-  @InitBinder("stocksRegistForm")
+  @InitBinder("stockRegistForm")
   public void validatorBinder(WebDataBinder binder) {
-    binder.addValidators(stocksRegistFormValidator);
+    binder.addValidators(stockRegistFormValidator);
   }
 
   @Override
   public String getFunctionName() {
-    return "A_STOCKS_REGIST";
+    return "A_STOCK_REGIST";
   }
 
   /**
@@ -58,10 +58,10 @@ public class StocksRegistController extends AbstractHtmlController {
    * @return
    */
   @GetMapping
-  public String registIndex(@ModelAttribute StocksRegistForm form, Model model) {
+  public String registIndex(@ModelAttribute StockRegistForm form, Model model) {
 
     // SessionAttributeを再生成する
-    model.addAttribute("stocksRegistForm", new StocksRegistForm());
+    model.addAttribute("stocksRegistForm", new StockRegistForm());
 
     return showRegistIndex(form, model);
   }
@@ -74,8 +74,8 @@ public class StocksRegistController extends AbstractHtmlController {
    * @return
    */
   private String showRegistIndex(
-      StocksRegistForm form, Model model) {
-    return "modules/stocks/regist/index";
+      StockRegistForm form, Model model) {
+    return "modules/stock/regist/index";
   }
 
   /**
@@ -88,7 +88,7 @@ public class StocksRegistController extends AbstractHtmlController {
    * @return
    */
   @PostMapping(params = "confirm")
-  public String registConfirm(@Validated @ModelAttribute StocksRegistForm form, BindingResult br,
+  public String registConfirm(@Validated @ModelAttribute StockRegistForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
@@ -97,7 +97,7 @@ public class StocksRegistController extends AbstractHtmlController {
       return showRegistIndex(form, model);
     }
 
-    return "modules/stocks/regist/confirm";
+    return "modules/stock/regist/confirm";
   }
 
   /**
@@ -110,7 +110,7 @@ public class StocksRegistController extends AbstractHtmlController {
    * @return
    */
   @PostMapping(params = "back")
-  public String registBack(@Validated @ModelAttribute StocksRegistForm form, BindingResult br,
+  public String registBack(@Validated @ModelAttribute StockRegistForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
     return showRegistIndex(form, model);
   }
@@ -125,7 +125,7 @@ public class StocksRegistController extends AbstractHtmlController {
    * @return
    */
   @PostMapping(params = "complete")
-  public String registComplete(@Validated @ModelAttribute StocksRegistForm form, BindingResult br,
+  public String registComplete(@Validated @ModelAttribute StockRegistForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
@@ -153,7 +153,7 @@ public class StocksRegistController extends AbstractHtmlController {
    */
   @GetMapping("complete")
   public String showComplete() {
-    return "modules/stocks/regist/complete";
+    return "modules/stock/regist/complete";
   }
 
 }
