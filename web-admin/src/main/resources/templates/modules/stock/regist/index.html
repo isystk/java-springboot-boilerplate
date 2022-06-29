@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>[[|${stocksEditForm.name}の変更|]]</title>
+  <title>商品登録</title>
 </head>
 <body>
 <div layout:fragment="sidebar">
@@ -12,16 +12,13 @@
 <div layout:fragment="content-header">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>[[|${stocksEditForm.name}の変更|]]</h1>
+      <h1>商品登録</h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
-        <li class="breadcrumb-item"><a
-            th:href="@{/stocks/{stockId}(stockId=${stocksEditForm.stockId})}">[[${stocksEditForm.name}]]</a>
-        </li>
-        <li class="breadcrumb-item active">[[|${stocksEditForm.name}の変更|]]</li>
+        <li class="breadcrumb-item active">商品登録</li>
       </ol>
     </div>
   </div>
@@ -30,9 +27,7 @@
   <div class="card card-purple">
     <div class="card-body">
       <p>商品内容を入力して下さい</p>
-      <form th:object="${stocksEditForm}" th:action="@{/stocks/edit/{id}/(id=*{stockId})}"
-            th:method="put">
-        <input type="hidden" name="stockId" th:value="*{stockId}"/>
+      <form th:object="${stockRegistForm}" th:action="@{/stocks/regist}" th:method="post">
         <input th:replace="fragments/input :: input ('text', '商品名', 'name', 100)"/>
         <input th:replace="fragments/textarea :: input ('商品説明', 'detail', 5)"/>
         <input th:replace="fragments/input :: input ('number', '価格', 'price', 100)"/>
@@ -42,7 +37,7 @@
           <div class="text-left float-left">
             <a class="btn btn-secondary" th:href="@{/stocks}">一覧に戻る</a>
           </div>
-          <button class="btn btn-info js-submit" th:data-uri="@{/stocks/edit?confirm}">確認画面へ
+          <button class="btn btn-info js-submit" th:data-uri="@{/stocks/regist?confirm}">確認画面へ
           </button>
         </div>
       </form>
@@ -50,7 +45,7 @@
   </div>
 </div>
 <div layout:fragment="scripts">
-  <script type="text/javascript" th:src="@{/static/js/stocks/edit/index.js}"></script>
+  <script type="text/javascript" th:src="@{/static/js/stock/regist/index.js}"></script>
 </div>
 </body>
 </html>

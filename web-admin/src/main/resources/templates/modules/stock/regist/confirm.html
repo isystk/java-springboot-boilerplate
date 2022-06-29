@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>[[|${stocksEditForm.name}の変更|]]</title>
+  <title>商品登録確認</title>
 </head>
 <body>
 <div layout:fragment="sidebar">
@@ -12,14 +12,13 @@
 <div layout:fragment="content-header">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>[[|${stocksEditForm.name}の変更|]]</h1>
+      <h1>商品登録確認</h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/stocks/{stockId}(stockId=${stocksEditForm.stockId})}">[[${stocksEditForm.name}]]</a></li>
-        <li class="breadcrumb-item active">[[|${stocksEditForm.name}の変更|]]</li>
+        <li class="breadcrumb-item active">商品登録</li>
       </ol>
     </div>
   </div>
@@ -28,8 +27,7 @@
   <div class="card card-purple">
     <div class="card-body">
       <p>以下の内容で登録します。</p>
-      <form th:object="${stocksEditForm}" th:action="@{/stocks/edit/{id}/(id=*{stockId})}" th:method="put">
-        <input type="hidden" name="stockId" th:value="*{stockId}"/>
+      <form th:object="${stockRegistForm}" th:action="@{/stocks/regist}" th:method="post">
         <input type="hidden" name="name" th:value="*{name}"/>
         <input type="hidden" name="detail" th:value="*{detail}"/>
         <input type="hidden" name="price" th:value="*{price}"/>
@@ -49,10 +47,10 @@
         </div>
         <div class="card-footer clearfix text-center">
           <div class="text-left float-left">
-            <button class="btn btn-secondary js-submit" th:data-uri="@{/stocks/edit?back}">前に戻る
+            <button class="btn btn-secondary js-submit" th:data-uri="@{/stocks/regist?back}">前に戻る
             </button>
           </div>
-          <button class="btn btn-info js-submit" th:data-uri="@{/stocks/edit?complete}">修正する
+          <button class="btn btn-info js-submit" th:data-uri="@{/stocks/regist?complete}">登録する
           </button>
         </div>
       </form>

@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.controller.html.stocks;
+package com.isystk.sample.web.admin.controller.html.stock;
 
 import static org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined.DARK_GREEN;
 import static org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined.WHITE;

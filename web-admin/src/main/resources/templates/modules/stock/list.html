@@ -32,7 +32,7 @@
     <div class="card-header">
       <h3 class="card-title">検索条件</h3>
     </div>
-    <form th:action="@{/stocks/}" th:method="get" th:object="${stocksListForm}">
+    <form th:action="@{/stocks/}" th:method="get" th:object="${stockListForm}">
       <input type="hidden" name="page" value="1"/>
       <div class="card-body">
         <div class="form-group">
@@ -53,14 +53,14 @@
     </form>
   </div>
 
-  <form th:action="@{/stocks}" th:method="get" th:object="${stocksListForm}" id="pagingForm">
+  <form th:action="@{/stocks}" th:method="get" th:object="${stockListForm}" id="pagingForm">
     <input type="hidden" name="stockId" th:value="*{stockId}">
     <input type="hidden" name="name" th:value="*{name}">
   </form>
 
   <div class="row">
     <div class="col-12">
-      <div class="card card-purple" th:if="${0 < pages.count}">
+      <div class="card card-purple">
         <div class="card-header">
           <h3 class="card-title">検索結果</h3>
           <div class="dropdown text-right">
@@ -117,7 +117,7 @@
   </div>
 </div>
 <div layout:fragment="scripts">
-  <script type="text/javascript" th:src="@{/static/js/stocks/list.js}"></script>
+  <script type="text/javascript" th:src="@{/static/js/stock/list.js}"></script>
 </div>
 </body>
 </html>

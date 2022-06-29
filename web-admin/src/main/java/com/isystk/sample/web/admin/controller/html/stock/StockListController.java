@@ -1,11 +1,9 @@
-package com.isystk.sample.web.admin.controller.html.stocks;
+package com.isystk.sample.web.admin.controller.html.stock;
 
 import static com.isystk.sample.common.AdminUrl.STOCKS;
 
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.StockCriteria;
-import com.isystk.sample.domain.repository.StockRepository;
-import com.isystk.sample.domain.dto.StockRepositoryDto;
 import com.isystk.sample.web.admin.service.StockService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
@@ -36,31 +34,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @Slf4j
 @RequestMapping(STOCKS)
-@SessionAttributes(types = {StocksListForm.class})
-public class StocksListController extends AbstractHtmlController {
+@SessionAttributes(types = {StockListForm.class})
+public class StockListController extends AbstractHtmlController {
 
   @Autowired
   StockService stockService;
 
   @Autowired
-  StockRepository stockRepository;
-
-  @Autowired
-  StocksListFormValidator stocksListFormValidator;
+  StockListFormValidator stockListFormValidator;
 
   @Override
   public String getFunctionName() {
     return "A_STOCKS";
   }
 
-  @ModelAttribute("stocksListForm")
-  public StocksListForm stocksListForm() {
-    return new StocksListForm();
+  @ModelAttribute("stockListForm")
+  public StockListForm stockListForm() {
+    return new StockListForm();
   }
 
-  @InitBinder("stocksListForm")
+  @InitBinder("stockListForm")
   public void validatorBinder(WebDataBinder binder) {
-    binder.addValidators(stocksListFormValidator);
+    binder.addValidators(stockListFormValidator);
   }
 
   /**
@@ -71,21 +66,21 @@ public class StocksListController extends AbstractHtmlController {
    * @return
    */
   @GetMapping
-  public String index(@ModelAttribute @Valid StocksListForm form, BindingResult br,
+  public String index(@ModelAttribute @Valid StockListForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
     if (br.hasErrors()) {
       setFlashAttributeErrors(attributes, br);
-      return "modules/stocks/list";
+      return "modules/stock/list";
     }
 
     // 10件区切りで取得する
-    val pages = stockRepository.findPage(formToCriteria(form), form);
+    val pages = stockService.findPage(formToCriteria(form), form);
 
     // 画面に検索結果を渡す
     model.addAttribute("pages", pages);
 
-    return "modules/stocks/list";
+    return "modules/stock/list";
   }
 
   /**
@@ -94,7 +89,7 @@ public class StocksListController extends AbstractHtmlController {
    * @return
    */
   private StockCriteria formToCriteria(
-      StocksListForm form) {
+      StockListForm form) {
 
     // 入力値を詰め替える
     StockCriteria criteria = new StockCriteria();
@@ -110,20 +105,6 @@ public class StocksListController extends AbstractHtmlController {
     criteria.setOrderBy("order by updated_at desc");
 
     return criteria;
-  }
-
-  /**
-   * 詳細画面表示
-   *
-   * @param stockId
-   * @param model
-   * @return
-   */
-  @GetMapping("{stockId}")
-  public String show(@PathVariable BigInteger stockId, Model model) {
-    StockRepositoryDto stock = stockRepository.findById(stockId);
-    model.addAttribute("stock", stock);
-    return "modules/stocks/detail";
   }
 
   /**
@@ -145,10 +126,10 @@ public class StocksListController extends AbstractHtmlController {
    * @return
    */
   @GetMapping("/download/{filename:.+\\.csv}")
-  public CsvView downloadCsv(@PathVariable String filename, StocksListForm form, Model model) {
+  public CsvView downloadCsv(@PathVariable String filename, StockListForm form, Model model) {
 
     // 全件取得する
-    val stocks = stockRepository.findAll(formToCriteria(form));
+    val stocks = stockService.findAll(formToCriteria(form));
 
     // 詰め替える
     List<StockCsv> csvList = ObjectMapperUtils.mapAll(stocks, StockCsv.class);
@@ -164,11 +145,11 @@ public class StocksListController extends AbstractHtmlController {
    * @return
    */
   @GetMapping(path = "/download/{filename:.+\\.xlsx}")
-  public ModelAndView downloadExcel(@PathVariable String filename, StocksListForm form,
+  public ModelAndView downloadExcel(@PathVariable String filename, StockListForm form,
       Model model) {
 
     // 全件取得する
-    val stocks = stockRepository.findAll(formToCriteria(form));
+    val stocks = stockService.findAll(formToCriteria(form));
 
     // Excelプック生成コールバック、データ、ダウンロード時のファイル名を指定する
     val view = new ExcelView(new StockExcel(), stocks, filename);
@@ -183,10 +164,10 @@ public class StocksListController extends AbstractHtmlController {
    * @return
    */
   @GetMapping(path = "/download/{filename:.+\\.pdf}")
-  public ModelAndView downloadPdf(@PathVariable String filename, StocksListForm form, Model model) {
+  public ModelAndView downloadPdf(@PathVariable String filename, StockListForm form, Model model) {
 
     // 全件取得する
-    val stocks = stockRepository.findAll(formToCriteria(form));
+    val stocks = stockService.findAll(formToCriteria(form));
 
     // 帳票レイアウト、データ、ダウンロード時のファイル名を指定する
     val view = new PdfView("reports/stocks.jrxml", stocks, filename);

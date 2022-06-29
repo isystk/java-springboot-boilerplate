@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.controller.html.stocks.edit;
+package com.isystk.sample.web.admin.controller.html.stock.edit;
 
 import static com.isystk.sample.common.AdminUrl.STOCKS_EDIT;
 
@@ -26,28 +26,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @Slf4j
 @RequestMapping(STOCKS_EDIT)
-@SessionAttributes(types = {StocksEditForm.class})
-public class StocksEditController extends AbstractHtmlController {
+@SessionAttributes(types = {StockEditForm.class})
+public class StockEditController extends AbstractHtmlController {
 
   @Autowired
   StockService stockService;
 
   @Autowired
-  StocksEditFormValidator stocksEditFormValidator;
+  StockEditFormValidator stockEditFormValidator;
 
-  @ModelAttribute("stocksEditForm")
-  public StocksEditForm stocksEditForm() {
-    return new StocksEditForm();
+  @ModelAttribute("stockEditForm")
+  public StockEditForm stockEditForm() {
+    return new StockEditForm();
   }
 
-  @InitBinder("stocksEditForm")
+  @InitBinder("stockEditForm")
   public void validatorBinder(WebDataBinder binder) {
-    binder.addValidators(stocksEditFormValidator);
+    binder.addValidators(stockEditFormValidator);
   }
 
   @Override
   public String getFunctionName() {
-    return "A_STOCKS_EDIT";
+    return "A_STOCK_EDIT";
   }
 
   /**
@@ -58,13 +58,13 @@ public class StocksEditController extends AbstractHtmlController {
    * @return
    */
   @GetMapping("{stockId}")
-  public String editIndex(@ModelAttribute StocksEditForm form, Model model) {
+  public String editIndex(@ModelAttribute StockEditForm form, Model model) {
 
     // 1件取得する
-    val stocks = stockService.findById(form.getStockId());
+    val stock = stockService.findById(form.getStockId());
 
     // 取得したDtoをFromに詰め替える
-    ObjectMapperUtils.map(stocks, form);
+    ObjectMapperUtils.map(stock, form);
 
     return showEditIndex(form, model);
   }
@@ -77,8 +77,8 @@ public class StocksEditController extends AbstractHtmlController {
    * @return
    */
   private String showEditIndex(
-      StocksEditForm form, Model model) {
-    return "modules/stocks/edit/index";
+      StockEditForm form, Model model) {
+    return "modules/stock/edit/index";
   }
 
   /**
@@ -91,7 +91,7 @@ public class StocksEditController extends AbstractHtmlController {
    * @return
    */
   @PutMapping(params = "confirm")
-  public String editConfirm(@Validated @ModelAttribute StocksEditForm form, BindingResult br,
+  public String editConfirm(@Validated @ModelAttribute StockEditForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
@@ -100,7 +100,7 @@ public class StocksEditController extends AbstractHtmlController {
       return showEditIndex(form, model);
     }
 
-    return "modules/stocks/edit/confirm";
+    return "modules/stock/edit/confirm";
   }
 
   /**
@@ -113,7 +113,7 @@ public class StocksEditController extends AbstractHtmlController {
    * @return
    */
   @PutMapping(params = "back")
-  public String editBack(@Validated @ModelAttribute StocksEditForm form, BindingResult br,
+  public String editBack(@Validated @ModelAttribute StockEditForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
     return showEditIndex(form, model);
   }
@@ -128,7 +128,7 @@ public class StocksEditController extends AbstractHtmlController {
    * @return
    */
   @PutMapping(params = "complete")
-  public String updateComplete(@Validated @ModelAttribute StocksEditForm form, BindingResult br,
+  public String updateComplete(@Validated @ModelAttribute StockEditForm form, BindingResult br,
       SessionStatus sessionStatus, RedirectAttributes attributes, Model model) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
@@ -157,7 +157,7 @@ public class StocksEditController extends AbstractHtmlController {
    */
   @GetMapping("complete")
   public String showComplete() {
-    return "modules/stocks/edit/complete";
+    return "modules/stock/edit/complete";
   }
 
 }
