@@ -2,6 +2,9 @@ package com.isystk.sample.batch.jobs.importMst;
 
 import static com.isystk.sample.common.util.ValidateUtils.isNotEmpty;
 
+import com.isystk.sample.common.util.StringUtils;
+import com.isystk.sample.domain.dao.StockDao;
+import com.isystk.sample.domain.entity.Stock;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -13,7 +16,6 @@ import java.util.List;
 import javax.validation.ValidationException;
 
 import org.apache.commons.compress.utils.Lists;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.batch.core.StepContribution;
 import org.springframework.batch.core.scope.context.ChunkContext;
 import org.springframework.batch.repeat.RepeatStatus;
@@ -33,10 +35,10 @@ import lombok.extern.slf4j.Slf4j;
  * ユーザー情報取り込みタスク
  */
 @Slf4j
-public class ImportMstPostTasklet extends BaseTasklet<ImportMstPostDto> {
+public class ImportMstStockTasklet extends BaseTasklet<ImportMstStockDto> {
 
   @Autowired
-  MPostTagDao mPostTagDao;
+  StockDao stockDao;
 
   @Override
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -63,38 +65,34 @@ public class ImportMstPostTasklet extends BaseTasklet<ImportMstPostDto> {
   @Override
   protected void doProcess(BatchContext context) {
 
-    Path path = Paths.get("src/main/resources/tag_mst.csv");
-    val importTagDtoList = Lists.newArrayList();
+    Path path = Paths.get("src/main/resources/data/stocks.csv");
+    val list = Lists.newArrayList();
     try {
       List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
       lines.forEach(line -> {
-        val row = StringUtils.splitByWholeSeparatorPreserveAllTokens(line, ",");
-        val dto = new ImportMstPostDto();
+        val row = StringUtils.csvSplit(line);
+        val dto = new ImportMstStockDto();
         dto.setSourceName(path.toString());
-        dto.setPostTagId(row[0]);
-        dto.setName(row[1]);
-        importTagDtoList.add(dto);
+        dto.setName(row.get(0));
+        dto.setDetail(row.get(1));
+        dto.setPrice(row.get(2));
+        dto.setImgpath(row.get(3));
+        dto.setQuantity(row.get(4));
+        list.add(dto);
       });
     } catch (IOException e) {
       e.printStackTrace();
     }
 
-    val csvPostTags = ObjectMapperUtils.map(importTagDtoList, MPostTag[].class);
+    val stockList = ObjectMapperUtils.map(list, Stock[].class);
 
-    for (MPostTag csvPostTag : csvPostTags) {
-      var data = mPostTagDao.selectById(csvPostTag.getPostTagId());
-      if (data.isEmpty()) {
-        MPostTag mPostTag = ObjectMapperUtils.map(csvPostTag, MPostTag.class);
-        mPostTag.setRegistTime(DateUtils.getNow());
-        mPostTag.setUpdateTime(DateUtils.getNow());
-        mPostTag.setDeleteFlg(false);
-        mPostTagDao.insert(mPostTag);
-      } else {
-        MPostTag mPostTag = data.get();
-        mPostTag.setName(csvPostTag.getName());
-        mPostTag.setUpdateTime(DateUtils.getNow());
-        mPostTagDao.update(mPostTag);
-      }
+    for (Stock stock : stockList) {
+      // TODO DeleteFlgがデフォルト値0のカラムなのに設定しないとエラーになる。。
+      // Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'delete_flg' cannot be null
+      stock.setCreatedAt(DateUtils.getNow());
+      stock.setUpdatedAt(DateUtils.getNow());
+      stock.setDeleteFlg((byte)0);
+      stockDao.insert(stock);
     }
   }
 
