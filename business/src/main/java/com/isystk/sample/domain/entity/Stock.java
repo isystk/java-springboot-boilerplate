@@ -9,7 +9,7 @@ import org.seasar.doma.GenerationType;
 import org.seasar.doma.Id;
 import org.seasar.doma.Table;
 import org.seasar.doma.Version;
-import com.isystk.sample.domain.dto.common.DomaDtoImpl;
+import com.isystk.sample.domain.dto.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;

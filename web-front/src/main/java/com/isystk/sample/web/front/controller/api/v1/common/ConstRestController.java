@@ -22,9 +22,6 @@ import static com.isystk.sample.common.FrontUrl.API_V1_COMMON_CONST;
 @RequestMapping(path = API_V1_COMMON_CONST, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ConstRestController extends AbstractRestController {
 
-  @Autowired
-  MPostTagRepository mPostTagRepository;
-
   @Override
   public String getFunctionName() {
     return "API_COMMON_CONST";
@@ -60,7 +57,7 @@ public class ConstRestController extends AbstractRestController {
         ).collect(Collectors.toList())));
 
 
-    list.add(new CodeValueGroupDto("postTag", mPostTagRepository.findAllSelectList()));
+//    list.add(new CodeValueGroupDto("postTag", mPostTagRepository.findAllSelectList()));
 
     resource.setData(list);
     resource.setMessage(getMessage(MESSAGE_SUCCESS));

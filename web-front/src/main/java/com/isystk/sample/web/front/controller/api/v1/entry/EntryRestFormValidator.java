@@ -1,6 +1,8 @@
 package com.isystk.sample.web.front.controller.api.v1.entry;
 
 import com.isystk.sample.common.validator.AbstractValidator;
+import com.isystk.sample.domain.dao.UserDao;
+import com.isystk.sample.domain.dto.UserCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -14,7 +16,7 @@ import static com.isystk.sample.common.util.ValidateUtils.isNotEquals;
 public class EntryRestFormValidator extends AbstractValidator<EntryRestForm> {
 
   @Autowired
-  TUserDao tUserDao;
+  UserDao userDao;
 
   @Override
   protected void doValidate(EntryRestForm form, Errors errors) {
@@ -25,9 +27,9 @@ public class EntryRestFormValidator extends AbstractValidator<EntryRestForm> {
     }
 
     // メールアドレスの存在チェック
-    TUserCriteria criteria = new TUserCriteria();
+    UserCriteria criteria = new UserCriteria();
     criteria.setEmailEq(form.getEmail());
-    if (tUserDao.findOne(criteria).orElse(null) != null) {
+    if (userDao.findOne(criteria).orElse(null) != null) {
       errors.rejectValue("email", "errros.emailExist");
     }
   }

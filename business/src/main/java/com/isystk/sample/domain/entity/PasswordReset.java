@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import org.seasar.doma.Column;
 import org.seasar.doma.Entity;
 import org.seasar.doma.Table;
-import com.isystk.sample.domain.dto.common.DomaDtoImpl;
+import com.isystk.sample.domain.dto.DomaDtoImpl;
 
 import lombok.Getter;
 import lombok.Setter;

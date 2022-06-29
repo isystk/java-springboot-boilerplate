@@ -67,11 +67,11 @@ public class EntryRemindConfigRestController extends AbstractRestController {
 
     Resource resource = resourceFactory.create();
 
-    // ワンタイムキーからユーザーIDを取得する
-    var tUserOnetimePass = entryRemindService.getTUserOnetimePass(onetimeKey);
-    if (tUserOnetimePass == null) {
-      throw new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]");
-    }
+//    // ワンタイムキーからユーザーIDを取得する
+//    var tUserOnetimePass = entryRemindService.getTUserOnetimePass(onetimeKey);
+//    if (tUserOnetimePass == null) {
+//      throw new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]");
+//    }
 
     form.setOnetimeKey(onetimeKey);
 
@@ -96,12 +96,12 @@ public class EntryRemindConfigRestController extends AbstractRestController {
       throw new ValidationErrorException(errors);
     }
 
-    // ワンタイムキーからユーザーIDを取得する
-    var tUserOnetimePass = entryRemindService.getTUserOnetimePass(form.getOnetimeKey());
-    if (tUserOnetimePass == null) {
-      throw new NoDataFoundException(
-          "指定されたワンタイムキーが見つかりません。[onetimeKey=" + form.getOnetimeKey() + "]");
-    }
+//    // ワンタイムキーからユーザーIDを取得する
+//    var tUserOnetimePass = entryRemindService.getTUserOnetimePass(form.getOnetimeKey());
+//    if (tUserOnetimePass == null) {
+//      throw new NoDataFoundException(
+//          "指定されたワンタイムキーが見つかりません。[onetimeKey=" + form.getOnetimeKey() + "]");
+//    }
 
     // パスワードをハッシュ化する
     String password = passwordEncoder.encode(form.getPassword());

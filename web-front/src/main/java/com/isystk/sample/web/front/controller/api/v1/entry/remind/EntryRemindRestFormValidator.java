@@ -1,6 +1,8 @@
 package com.isystk.sample.web.front.controller.api.v1.entry.remind;
 
 import com.isystk.sample.common.validator.AbstractValidator;
+import com.isystk.sample.domain.dao.UserDao;
+import com.isystk.sample.domain.dto.UserCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -12,14 +14,14 @@ import org.springframework.validation.Errors;
 public class EntryRemindRestFormValidator extends AbstractValidator<EntryRemindRestForm> {
 
   @Autowired
-  TUserDao tUserDao;
+  UserDao userDao;
 
   @Override
   protected void doValidate(EntryRemindRestForm form, Errors errors) {
     // メールアドレスの存在チェック
-    TUserCriteria criteria = new TUserCriteria();
+    UserCriteria criteria = new UserCriteria();
     criteria.setEmailEq(form.getEmail());
-    if (tUserDao.findOne(criteria).orElse(null) == null) {
+    if (userDao.findOne(criteria).orElse(null) == null) {
       errors.rejectValue("email", "errros.emailNotExist");
     }
   }
