@@ -37,9 +37,10 @@ public class ImageHelper {
    * ファイルを保存します。
    *
    * @param imageData 画像データ
+   * @param dirPath ディレクトリパス
    * @param upFileName 画像ファイル名
    */
-  public void saveFile(String imageData, String upFileName) {
+  public void saveFile(String imageData, String dirPath , String upFileName) {
     Assert.notNull(imageData, "imageData can't be null");
 
     try {
@@ -49,7 +50,7 @@ public class ImageHelper {
       String imageFilePath = imageUploadLocation + System.getProperty("file.separator")
           + upFileName;
       org.apache.commons.io.FileUtils.writeByteArrayToFile(new File(imageFilePath), decodedBytes);
-      String remotePath = "/stocks" + "/" + upFileName;
+      String remotePath = dirPath + "/" + upFileName;
 
       // S3に保存
       AwsS3Utils.s3PutObject(imageFilePath, remotePath, BUCKET_NAME, true);
@@ -58,27 +59,28 @@ public class ImageHelper {
     }
   }
 
-  public String getImageData(String upFileName) {
-    String remotePath = "/stocks" + "/" + upFileName;
+  public String getImageData(String dirPath , String upFileName) {
+    String remotePath = dirPath + "/" + upFileName;
 
     try {
       // S3から画像を取得
       S3Object s3Object = AwsS3Utils.s3GetObject(BUCKET_NAME, remotePath);
 
+      // Base64のデータで読み込む
       if (s3Object != null) {
-        // Base64のデータで読み込む
         BufferedImage imgBuf;
         imgBuf = ImageIO.read(s3Object.getObjectContent());
         return encodeBase64URL(imgBuf);
-//				try (S3ObjectInputStream is = s3Object.getObjectContent()) {
-//					StringWriter writer = new StringWriter();
-//					IOUtils.copy(is, writer, StandardCharsets.UTF_8);
-//					return writer.toString();
-//				}
       }
+
     } catch (IOException | AmazonS3Exception e) {
+      throw new RuntimeException(e);
     }
     return null;
+  }
+  public String getImageUrl(String dirPath , String upFileName) {
+    String remotePath = dirPath + "/" + upFileName;
+    return "/thumb" + remotePath;
   }
 
   public String encodeBase64URL(BufferedImage imgBuf) {
@@ -101,8 +103,11 @@ public class ImageHelper {
   /**
    * JSPからアクセス用
    */
-  public String url(String imageFileName) {
-    return getImageData(imageFileName);
+  public String url(String dirPath, String imageFileName) {
+    return getImageUrl(dirPath, imageFileName);
+  }
+  public String data(String dirPath, String imageFileName) {
+    return getImageData(dirPath, imageFileName);
   }
 
   @Value("${aws.s3.bucket-name}")

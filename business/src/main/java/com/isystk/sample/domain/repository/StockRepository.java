@@ -18,7 +18,6 @@ import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -68,16 +67,9 @@ public class StockRepository extends BaseRepository {
   private List<StockRepositoryDto> convertDto(List<Stocks> stocksList) {
 
     // stocksList を元に、stockDtoList へコピー
-    List<StockRepositoryDto> stockDtoList = ObjectMapperUtils
+    return ObjectMapperUtils
         .mapAll(stocksList, StockRepositoryDto.class);
 
-    return stockDtoList.stream().map(e -> {
-          String imageData = imageHelper.getImageData(e.getImgpath());
-          e.setStockImageData(imageData);
-          e.setStockImageName(e.getImgpath());
-          return e;
-        })
-        .collect(Collectors.toList());
   }
 
   /**
@@ -112,7 +104,7 @@ public class StockRepository extends BaseRepository {
   public Stocks create(final StockRepositoryDto stocksDto) {
 
     // 画像ファイルをS3にアップロードする
-    imageHelper.saveFile(stocksDto.getStockImageData(), stocksDto.getStockImageName());
+    imageHelper.saveFile(stocksDto.getStockImageData(), "/stocks", stocksDto.getStockImageName());
 
     val time = DateUtils.getNow();
 
@@ -160,7 +152,7 @@ public class StockRepository extends BaseRepository {
 
     val time = DateUtils.getNow();
     stock.setUpdatedAt(time); // 削除日
-    stock.setDeleteFlg(Byte.valueOf("1")); // 削除フラグ
+    stock.setDeleteFlg((byte) 1); // 削除フラグ
     int updated = stocksDao.update(stock);
 
     if (updated < 1) {
