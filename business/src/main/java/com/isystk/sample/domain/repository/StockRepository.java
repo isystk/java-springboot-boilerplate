@@ -104,7 +104,7 @@ public class StockRepository extends BaseRepository {
   public Stock create(final StockRepositoryDto stockDto) {
 
     // 画像ファイルをS3にアップロードする
-    imageHelper.saveFile(stockDto.getStockImageData(), "/stocks", stockDto.getStockImageName());
+    imageHelper.saveFileData(stockDto.getStockImageData(), "/stocks", stockDto.getStockImageName(), true);
 
     val time = DateUtils.getNow();
 
@@ -113,7 +113,7 @@ public class StockRepository extends BaseRepository {
     stocks.setImgpath(stockDto.getStockImageName());
     stocks.setCreatedAt(time); // 作成日
     stocks.setUpdatedAt(time); // 更新日
-    stocks.setDeleteFlg(Byte.valueOf("0")); // 削除フラグ
+    stocks.setDeleteFlg((byte)0); // 削除フラグ
     stocks.setVersion(0L); // 楽観ロック改定番号
     stockDao.insert(stocks);
 
@@ -123,18 +123,22 @@ public class StockRepository extends BaseRepository {
   /**
    * 商品を更新します。
    *
-   * @param stocksDto
+   * @param stockDto
    * @return
    */
-  public Stock update(final StockRepositoryDto stocksDto) {
+  public Stock update(final StockRepositoryDto stockDto) {
+    // 画像ファイルをS3にアップロードする
+    imageHelper.saveFileData(stockDto.getStockImageData(), "/stocks", stockDto.getStockImageName(), true);
+
     val time = DateUtils.getNow();
 
-    val stock = stockDao.selectById(stocksDto.getId())
+    val stock = stockDao.selectById(stockDto.getId())
         .orElseThrow(
-            () -> new NoDataFoundException("stock_id=" + stocksDto.getId() + " のデータが見つかりません。"));
+            () -> new NoDataFoundException("stock_id=" + stockDto.getId() + " のデータが見つかりません。"));
 
     // 商品テーブル
-    val stocks = ObjectMapperUtils.mapExcludeNull(stocksDto, stock);
+    val stocks = ObjectMapperUtils.mapExcludeNull(stockDto, stock);
+    stocks.setImgpath(stockDto.getStockImageName());
     stocks.setUpdatedAt(time); // 更新日
     stockDao.update(stocks);
 
