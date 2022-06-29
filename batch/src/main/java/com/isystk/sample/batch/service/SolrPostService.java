@@ -30,9 +30,6 @@ public class SolrPostService extends BaseTransactionalService {
   TPostRepository postRepository;
 
   @Autowired
-  MPostTagDao mPostTagDao;
-
-  @Autowired
   PageFactory pageFactory;
 
   /**
@@ -42,62 +39,62 @@ public class SolrPostService extends BaseTransactionalService {
    */
   public void refresh() {
 
-    // 有効な投稿を全件取得する
-    var criteria = new TPostCriteria();
-    criteria.setDeleteFlgFalse(true);
-    val postPage = postRepository.findAll(criteria, Pageable.NO_LIMIT);
-    if (postPage.getCount() == 0) {
-      // 投稿データが0件の場合は何もしない
-      return;
-    }
-
-    MPostTagCriteria mPostTagCriteria = new MPostTagCriteria();
-    mPostTagCriteria.setDeleteFlgFalse(true);
-    val mPostTagList = mPostTagDao.findAll(mPostTagCriteria);
-    Map<Integer, String> tagNameMap = Maps.newHashMap();
-    mPostTagList.stream().forEach(mPostTag -> {
-      tagNameMap.put(mPostTag.getPostTagId(), mPostTag.getName());
-    });
-
-    List<SolrPost> solrPostList = Lists.newArrayList();
-    postPage.getData()
-        .stream()
-        .forEach(tPostDto -> {
-          SolrPost solrPost = ObjectMapperUtils.map(tPostDto, SolrPost.class);
-
-          // 投稿画像データを詰める
-          solrPost.setImageIdList(Optional.ofNullable(tPostDto.getTPostImageList())
-              .map(list -> list.stream()
-                  .map(tPostImage -> tPostImage.getImageId())
-                  .collect(Collectors.toList())
-              )
-              .orElse(Lists.newArrayList()));
-
-          // 投稿タグIDデータを詰める
-          List<Integer> tagIdList = Optional.ofNullable(tPostDto.getTPostTagList())
-              .map(list -> list.stream()
-                  .map(tPostTag -> tPostTag.getPostTagId())
-                  .collect(Collectors.toList())
-              )
-              .orElse(Lists.newArrayList());
-          solrPost.setTagIdList(tagIdList);
-
-          // 投稿タグ名称データを詰める
-          solrPost.setTagNameList(tagIdList
-              .stream()
-              .map(tagId -> {
-                return tagNameMap.get(tagId);
-              })
-              .collect(Collectors.toList())
-          );
-          solrPostList.add(solrPost);
-        });
-
-    // Solrをすべて削除
-    solrPostRepository.deleteAll();
-
-    // Solrに保存
-    solrPostRepository.saveAll(solrPostList);
+//    // 有効な投稿を全件取得する
+//    var criteria = new TPostCriteria();
+//    criteria.setDeleteFlgFalse(true);
+//    val postPage = postRepository.findAll(criteria, Pageable.NO_LIMIT);
+//    if (postPage.getCount() == 0) {
+//      // 投稿データが0件の場合は何もしない
+//      return;
+//    }
+//
+//    MPostTagCriteria mPostTagCriteria = new MPostTagCriteria();
+//    mPostTagCriteria.setDeleteFlgFalse(true);
+//    val mPostTagList = mPostTagDao.findAll(mPostTagCriteria);
+//    Map<Integer, String> tagNameMap = Maps.newHashMap();
+//    mPostTagList.stream().forEach(mPostTag -> {
+//      tagNameMap.put(mPostTag.getPostTagId(), mPostTag.getName());
+//    });
+//
+//    List<SolrPost> solrPostList = Lists.newArrayList();
+//    postPage.getData()
+//        .stream()
+//        .forEach(tPostDto -> {
+//          SolrPost solrPost = ObjectMapperUtils.map(tPostDto, SolrPost.class);
+//
+//          // 投稿画像データを詰める
+//          solrPost.setImageIdList(Optional.ofNullable(tPostDto.getTPostImageList())
+//              .map(list -> list.stream()
+//                  .map(tPostImage -> tPostImage.getImageId())
+//                  .collect(Collectors.toList())
+//              )
+//              .orElse(Lists.newArrayList()));
+//
+//          // 投稿タグIDデータを詰める
+//          List<Integer> tagIdList = Optional.ofNullable(tPostDto.getTPostTagList())
+//              .map(list -> list.stream()
+//                  .map(tPostTag -> tPostTag.getPostTagId())
+//                  .collect(Collectors.toList())
+//              )
+//              .orElse(Lists.newArrayList());
+//          solrPost.setTagIdList(tagIdList);
+//
+//          // 投稿タグ名称データを詰める
+//          solrPost.setTagNameList(tagIdList
+//              .stream()
+//              .map(tagId -> {
+//                return tagNameMap.get(tagId);
+//              })
+//              .collect(Collectors.toList())
+//          );
+//          solrPostList.add(solrPost);
+//        });
+//
+//    // Solrをすべて削除
+//    solrPostRepository.deleteAll();
+//
+//    // Solrに保存
+//    solrPostRepository.saveAll(solrPostList);
   }
 
 }

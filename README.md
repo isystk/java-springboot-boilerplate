@@ -301,6 +301,9 @@ $ ./gradlew business::flywayValidate
 (すべてのオブジェクトを削除して初期化したい場合)
 $ ./gradlew business::flywayClean
 
+# 商品マスタデータを登録します。
+$ ./gradlew batch::bootRun -Pargs=--job=importMstJob
+
 # フロント側のアプリケーションを起動します。
 # ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
 $ ./gradlew web-front::bootRun
@@ -308,9 +311,6 @@ $ ./gradlew web-front::bootRun
 # 管理画面側のアプリケーションを起動します。
 # ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
 $ ./gradlew web-admin::bootRun
-
-# バッチアプリケーションを起動します。
-$ ./gradlew batch::bootRun -Pargs=--job=solrRegistJob
 ```
 
 フロントエンド環境を構築する
