@@ -298,7 +298,7 @@ $ ./gradlew business::flywayInfo
 (既存のSQLを修正するなどして整合性エラーになる場合は以下を実施してください。) 
 $ ./gradlew business::flywayRepair
 $ ./gradlew business::flywayValidate
-(すべてのオブジェクトを削除して初期化したい場合)
+(すべてのオブジェクトを削除して初期化したい場合は以下を実施してください。)
 $ ./gradlew business::flywayClean
 
 # 商品マスタデータを登録します。

@@ -2,6 +2,7 @@ package com.isystk.sample.batch.jobs.importMst;
 
 import static com.isystk.sample.common.util.ValidateUtils.isNotEmpty;
 
+import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.util.StringUtils;
 import com.isystk.sample.domain.dao.StockDao;
 import com.isystk.sample.domain.entity.Stock;
@@ -13,6 +14,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.stream.Stream;
 import javax.validation.ValidationException;
 
 import org.apache.commons.compress.utils.Lists;
@@ -36,6 +38,9 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class ImportMstStockTasklet extends BaseTasklet<ImportMstStockDto> {
+
+  @Autowired
+  ImageHelper imageHelper;
 
   @Autowired
   StockDao stockDao;
@@ -87,13 +92,24 @@ public class ImportMstStockTasklet extends BaseTasklet<ImportMstStockDto> {
     val stockList = ObjectMapperUtils.map(list, Stock[].class);
 
     for (Stock stock : stockList) {
-      // TODO DeleteFlgがデフォルト値0のカラムなのに設定しないとエラーになる。。
-      // Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'delete_flg' cannot be null
       stock.setCreatedAt(DateUtils.getNow());
       stock.setUpdatedAt(DateUtils.getNow());
+      // TODO DeleteFlgがデフォルト値0のカラムなのに設定しないとエラーになる。。
+      // Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'delete_flg' cannot be null
       stock.setDeleteFlg((byte)0);
       stockDao.insert(stock);
     }
+
+    // S3に商品画像をアップロード
+    Path images = Paths.get("src/main/resources/data/stocks");
+    try(Stream<Path> stream = Files.list(images)) {
+      stream.forEach(p -> {
+        imageHelper.saveFile(p.toAbsolutePath().toString(), "/stocks", p.getFileName().toString(), false);
+      });
+    }catch(IOException e) {
+      e.printStackTrace();
+    }
+
   }
 
   @SuppressWarnings("unchecked")
