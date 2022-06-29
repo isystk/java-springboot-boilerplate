@@ -1,11 +1,11 @@
 -- Project Name : laraec
--- Date/Time    : 2022/06/23 17:10:15
+-- Date/Time    : 2022/06/29 14:56:14
 -- Author       : USER
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
 
 -- ユーザ
-create table users (
+create table user (
   id bigint unsigned auto_increment not null comment 'ユーザID'
   , provider_id varchar(255) comment 'プロバイダID'
   , provider_name varchar(255) comment 'プロバイダ名'
@@ -14,19 +14,20 @@ create table users (
   , email_verified_at timestamp default null comment 'メール検証日時'
   , password varchar(255) comment 'パスワード'
   , remember_token varchar(100) comment 'remember_token'
+  , last_login_at timestamp comment '最終ログイン日時'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
   , delete_flg TINYINT default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint users_PKC primary key (id)
+  , constraint user_PKC primary key (id)
 ) comment 'ユーザ' ;
 
-alter table users add unique users_IX1 (email) ;
+alter table user add unique user_IX1 (email) ;
 
-alter table users add unique users_IX2 (provider_id,provider_name) ;
+alter table user add unique user_IX2 (provider_id,provider_name) ;
 
 -- 商品
-create table stocks (
+create table stock (
   id bigint unsigned auto_increment not null comment '商品ID'
   , name varchar(100) not null comment '商品名'
   , detail varchar(500) not null comment '説明文'
@@ -37,22 +38,22 @@ create table stocks (
   , updated_at timestamp default null comment '更新日時'
   , delete_flg TINYINT default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint stocks_PKC primary key (id)
+  , constraint stock_PKC primary key (id)
 ) comment '商品' ;
 
 -- パスワードリセット
-create table password_resets (
+create table password_reset (
   email varchar(255) not null comment 'メールアドレス'
   , token varchar(255) not null comment 'ワンタイムトークン'
   , created_at timestamp default null comment '登録日時'
 ) comment 'パスワードリセット' ;
 
-create index password_resets_IX1
-  on password_resets(email);
+create index password_reset_IX1
+  on password_reset(email);
 
--- 注文
-create table orders (
-  id bigint unsigned auto_increment not null comment '注文ID'
+-- 注文履歴
+create table order_history (
+  id bigint unsigned auto_increment not null comment '注文履歴ID'
   , stock_id bigint unsigned not null comment '商品ID'
   , user_id bigint unsigned not null comment 'ユーザID'
   , price int comment '価格'
@@ -61,14 +62,14 @@ create table orders (
   , updated_at timestamp default null comment '更新日時'
   , delete_flg TINYINT default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint orders_PKC primary key (id)
-) comment '注文' ;
+  , constraint order_history_PKC primary key (id)
+) comment '注文履歴' ;
 
-create index orders_IX1
-  on orders(stock_id);
+create index order_history_IX1
+  on order_history(stock_id);
 
 -- お問い合わせ
-create table contact_forms (
+create table contact_form (
   id bigint unsigned auto_increment not null comment 'id'
   , your_name varchar(20) not null comment 'お名前'
   , title varchar(50) not null comment 'タイトル'
@@ -81,11 +82,11 @@ create table contact_forms (
   , updated_at timestamp default null comment '更新日時'
   , delete_flg TINYINT default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint contact_forms_PKC primary key (id)
+  , constraint contact_form_PKC primary key (id)
 ) comment 'お問い合わせ' ;
 
 -- お問い合わせ画像
-create table contact_form_images (
+create table contact_form_image (
   id bigint unsigned auto_increment not null comment 'お問い合わせ画像ID'
   , contact_form_id bigint unsigned not null comment 'お問い合わせID'
   , file_name varchar(100) not null comment 'ファイル名'
@@ -93,14 +94,14 @@ create table contact_form_images (
   , updated_at timestamp default null comment '更新日時'
   , delete_flg TINYINT default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint contact_form_images_PKC primary key (id)
+  , constraint contact_form_image_PKC primary key (id)
 ) comment 'お問い合わせ画像' ;
 
-create index contact_form_images_IX1
-  on contact_form_images(contact_form_id);
+create index contact_form_image_IX1
+  on contact_form_image(contact_form_id);
 
 -- カート
-create table carts (
+create table cart (
   id bigint unsigned auto_increment not null comment 'カートID'
   , stock_id bigint unsigned not null comment '商品ID'
   , user_id bigint unsigned not null comment 'ユーザID'
@@ -108,27 +109,28 @@ create table carts (
   , updated_at timestamp default null comment '更新日時'
   , delete_flg TINYINT default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint carts_PKC primary key (id)
+  , constraint cart_PKC primary key (id)
 ) comment 'カート' ;
 
-create index carts_IX1
-  on carts(stock_id);
+create index cart_IX1
+  on cart(stock_id);
 
-create index carts_IX2
-  on carts(user_id);
+create index cart_IX2
+  on cart(user_id);
 
 -- 管理者
-create table admins (
+create table admin (
   id int unsigned auto_increment not null comment '管理者ID'
   , name varchar(255) not null comment '管理者名'
   , email varchar(255) not null comment 'メールアドレス'
   , password varchar(255) not null comment 'パスワード'
   , remember_token varchar(100) comment 'remember_token'
+  , last_login_at timestamp comment '最終ログイン日時'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
   , delete_flg TINYINT default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
-  , constraint admins_PKC primary key (id)
+  , constraint admin_PKC primary key (id)
 ) comment '管理者' ;
 
-alter table admins add unique admins_IX1 (email) ;
+alter table admin add unique admin_IX1 (email) ;

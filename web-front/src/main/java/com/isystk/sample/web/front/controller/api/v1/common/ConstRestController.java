@@ -4,7 +4,6 @@ import com.isystk.sample.common.dto.CodeValueDto;
 import com.isystk.sample.common.dto.CodeValueGroupDto;
 import com.isystk.sample.common.values.Prefecture;
 import com.isystk.sample.common.values.Sex;
-import com.isystk.sample.domain.repository.MPostTagRepository;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import org.apache.commons.compress.utils.Lists;

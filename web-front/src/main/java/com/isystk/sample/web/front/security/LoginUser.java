@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import com.isystk.sample.domain.entity.TUser;
 import com.isystk.sample.web.base.filter.UserIdAware;
 
 public class LoginUser extends User implements UserIdAware {

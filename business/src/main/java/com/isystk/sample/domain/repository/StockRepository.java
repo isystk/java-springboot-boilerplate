@@ -11,10 +11,10 @@ import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseRepository;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.dao.StocksDao;
-import com.isystk.sample.domain.dto.StocksCriteria;
-import com.isystk.sample.domain.entity.Stocks;
-import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
+import com.isystk.sample.domain.dao.StockDao;
+import com.isystk.sample.domain.dto.StockCriteria;
+import com.isystk.sample.domain.dto.StockRepositoryDto;
+import com.isystk.sample.domain.entity.Stock;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +32,7 @@ public class StockRepository extends BaseRepository {
   ImageHelper imageHelper;
 
   @Autowired
-  StocksDao stocksDao;
+  StockDao stockDao;
 
   /**
    * 商品を複数取得します。
@@ -40,9 +40,9 @@ public class StockRepository extends BaseRepository {
    * @param criteria
    * @return
    */
-  public List<StockRepositoryDto> findAll(StocksCriteria criteria) {
+  public List<StockRepositoryDto> findAll(StockCriteria criteria) {
     var options = createSelectOptions(1, Integer.MAX_VALUE);
-    return convertDto(stocksDao.findAll(criteria, options, toList()));
+    return convertDto(stockDao.findAll(criteria, options, toList()));
   }
 
   /**
@@ -52,23 +52,23 @@ public class StockRepository extends BaseRepository {
    * @param pageable
    * @return
    */
-  public Page<StockRepositoryDto> findPage(StocksCriteria criteria, Pageable pageable) {
+  public Page<StockRepositoryDto> findPage(StockCriteria criteria, Pageable pageable) {
     var options = createSelectOptions(pageable);
-    var stocksList =  convertDto(stocksDao.findAll(criteria, options.count(), toList()));
+    var stocksList =  convertDto(stockDao.findAll(criteria, options.count(), toList()));
     return pageFactory.create(stocksList, pageable, options.getCount());
   }
 
   /**
    * RepositoryDto に変換します。
    *
-   * @param stocksList 
+   * @param stockList
    * @return
    */
-  private List<StockRepositoryDto> convertDto(List<Stocks> stocksList) {
+  private List<StockRepositoryDto> convertDto(List<Stock> stockList) {
 
-    // stocksList を元に、stockDtoList へコピー
+    // stockList を元に、stockDtoList へコピー
     return ObjectMapperUtils
-        .mapAll(stocksList, StockRepositoryDto.class);
+        .mapAll(stockList, StockRepositoryDto.class);
 
   }
 
@@ -78,8 +78,8 @@ public class StockRepository extends BaseRepository {
    * @param criteria
    * @return
    */
-  public Optional<StockRepositoryDto> findOne(StocksCriteria criteria) {
-    var data = stocksDao.findOne(criteria)
+  public Optional<StockRepositoryDto> findOne(StockCriteria criteria) {
+    var data = stockDao.findOne(criteria)
         .orElseThrow(() -> new NoDataFoundException(criteria + "のデータが見つかりません。"));
     return Optional.ofNullable(convertDto(Lists.newArrayList(data)).get(0));
   }
@@ -90,7 +90,7 @@ public class StockRepository extends BaseRepository {
    * @return
    */
   public StockRepositoryDto findById(final BigInteger id) {
-    var data = stocksDao.selectById(id)
+    var data = stockDao.selectById(id)
         .orElseThrow(() -> new NoDataFoundException("stock_id=" + id + " のデータが見つかりません。"));
     return convertDto(Lists.newArrayList(data)).get(0);
   }
@@ -98,24 +98,24 @@ public class StockRepository extends BaseRepository {
   /**
    * 商品を追加します。
    *
-   * @param stocksDto
+   * @param stockDto
    * @return
    */
-  public Stocks create(final StockRepositoryDto stocksDto) {
+  public Stock create(final StockRepositoryDto stockDto) {
 
     // 画像ファイルをS3にアップロードする
-    imageHelper.saveFile(stocksDto.getStockImageData(), "/stocks", stocksDto.getStockImageName());
+    imageHelper.saveFile(stockDto.getStockImageData(), "/stocks", stockDto.getStockImageName());
 
     val time = DateUtils.getNow();
 
     // 商品テーブル
-    val stocks = ObjectMapperUtils.map(stocksDto, Stocks.class);
-    stocks.setImgpath(stocksDto.getStockImageName());
+    val stocks = ObjectMapperUtils.map(stockDto, Stock.class);
+    stocks.setImgpath(stockDto.getStockImageName());
     stocks.setCreatedAt(time); // 作成日
     stocks.setUpdatedAt(time); // 更新日
     stocks.setDeleteFlg(Byte.valueOf("0")); // 削除フラグ
     stocks.setVersion(0L); // 楽観ロック改定番号
-    stocksDao.insert(stocks);
+    stockDao.insert(stocks);
 
     return stocks;
   }
@@ -126,17 +126,17 @@ public class StockRepository extends BaseRepository {
    * @param stocksDto
    * @return
    */
-  public Stocks update(final StockRepositoryDto stocksDto) {
+  public Stock update(final StockRepositoryDto stocksDto) {
     val time = DateUtils.getNow();
 
-    val stock = stocksDao.selectById(stocksDto.getId())
+    val stock = stockDao.selectById(stocksDto.getId())
         .orElseThrow(
             () -> new NoDataFoundException("stock_id=" + stocksDto.getId() + " のデータが見つかりません。"));
 
     // 商品テーブル
     val stocks = ObjectMapperUtils.mapExcludeNull(stocksDto, stock);
     stocks.setUpdatedAt(time); // 更新日
-    stocksDao.update(stocks);
+    stockDao.update(stocks);
 
     return stocks;
   }
@@ -146,14 +146,14 @@ public class StockRepository extends BaseRepository {
    *
    * @return
    */
-  public Stocks delete(final BigInteger stockId) {
-    val stock = stocksDao.selectById(stockId)
+  public Stock delete(final BigInteger stockId) {
+    val stock = stockDao.selectById(stockId)
         .orElseThrow(() -> new NoDataFoundException("stock_id=" + stockId + " のデータが見つかりません。"));
 
     val time = DateUtils.getNow();
     stock.setUpdatedAt(time); // 削除日
     stock.setDeleteFlg((byte) 1); // 削除フラグ
-    int updated = stocksDao.update(stock);
+    int updated = stockDao.update(stock);
 
     if (updated < 1) {
       throw new NoDataFoundException("stock_id=" + stockId + " は更新できませんでした。");

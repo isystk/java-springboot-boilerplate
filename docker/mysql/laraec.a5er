@@ -39,7 +39,7 @@ ShowTag=1
 ShowCommonAttributes=0
 
 [Entity]
-PName=admins
+PName=admin
 LName=管理者
 Comment=
 TableOption=
@@ -51,6 +51,7 @@ Field="管理者名","name","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="メールアドレス","email","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="パスワード","password","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="remember_token","remember_token","varchar(100)",,,"","",$FFFFFFFF,""
+Field="最終ログイン日時","last_login_at","timestamp",,,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
@@ -59,12 +60,12 @@ Index==2,email
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210717182252
+ModifiedDateTime=20220629144453
 Position="MAIN",1150,1200,343,246
 ZOrder=1
 
 [Entity]
-PName=carts
+PName=cart
 LName=カート
 Comment=
 TableOption=
@@ -83,12 +84,12 @@ Index==0,user_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210717182231
+ModifiedDateTime=20220629143946
 Position="MAIN",500,800,248,286
 ZOrder=2
 
 [Entity]
-PName=contact_form_images
+PName=contact_form_image
 LName=お問い合わせ画像
 Comment=
 TableOption=
@@ -106,12 +107,12 @@ Index==0,contact_form_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210717182245
+ModifiedDateTime=20220629143952
 Position="MAIN",650,1300,311,184
 ZOrder=3
 
 [Entity]
-PName=contact_forms
+PName=contact_form
 LName=お問い合わせ
 Comment=
 TableOption=
@@ -133,56 +134,19 @@ Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1",
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210717182237
+ModifiedDateTime=20220629143949
 Position="MAIN",150,1300,313,343
 ZOrder=4
 
 [Entity]
-PName=failed_jobs
-LName=失敗ジョブ
-Comment=
-TableOption=
-Page=MAIN
-Left=1750
-Top=1100
-Field="失敗ジョブID","id","bigint unsigned auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
-Field="接続","connection","text","NOT NULL",,"","",$FFFFFFFF,""
-Field="キュー","queue","text","NOT NULL",,"","",$FFFFFFFF,""
-Field="ペイロード","payload","longtext","NOT NULL",,"","",$FFFFFFFF,""
-Field="例外","exception","longtext","NOT NULL",,"","",$FFFFFFFF,""
-Field="失敗日時","failed_at","timestamp","NOT NULL",,"CURRENT_TIMESTAMP","",$FFFFFFFF,""
-EffectMode=None
-Color=$000000
-BkColor=$FFFFFF
-Position="MAIN",1750,1100,254,203
-ZOrder=5
-
-[Entity]
-PName=migrations
-LName=migrations
-Comment=
-TableOption=
-Page=MAIN
-Left=1750
-Top=1400
-Field="id","id","int unsigned auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
-Field="migration","migration","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
-Field="batch","batch","int","NOT NULL",,"","",$FFFFFFFF,""
-EffectMode=None
-Color=$000000
-BkColor=$FFFFFF
-Position="MAIN",1750,1400,294,197
-ZOrder=6
-
-[Entity]
-PName=orders
-LName=注文
+PName=order_history
+LName=注文履歴
 Comment=
 TableOption=
 Page=MAIN
 Left=150
 Top=800
-Field="注文ID","id","bigint unsigned auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
+Field="注文履歴ID","id","bigint unsigned auto_increment","NOT NULL",0,"","",$FFFFFFFF,""
 Field="商品ID","stock_id","bigint unsigned","NOT NULL",,"","",$FFFFFFFF,""
 Field="ユーザID","user_id","bigint unsigned","NOT NULL",,"","",$FFFFFFFF,""
 Field="価格","price","int",,,"","",$FFFFFFFF,""
@@ -195,12 +159,12 @@ Index==0,stock_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210717182224
+ModifiedDateTime=20220629145605
 Position="MAIN",150,800,222,248
 ZOrder=7
 
 [Entity]
-PName=password_resets
+PName=password_reset
 LName=パスワードリセット
 Comment=
 TableOption=
@@ -214,11 +178,12 @@ Index==0,email
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
+ModifiedDateTime=20220629144001
 Position="MAIN",1550,250,239,157
 ZOrder=8
 
 [Entity]
-PName=stocks
+PName=stock
 LName=商品
 Comment=
 TableOption=
@@ -238,12 +203,12 @@ Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1",
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220623170759
+ModifiedDateTime=20220629143936
 Position="MAIN",150,250,248,290
 ZOrder=9
 
 [Entity]
-PName=users
+PName=user
 LName=ユーザ
 Comment=
 TableOption=
@@ -258,6 +223,7 @@ Field="メールアドレス","email","varchar(255)","NOT NULL",,"","",$FFFFFFFF
 Field="メール検証日時","email_verified_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="パスワード","password","varchar(255)",,,"","",$FFFFFFFF,""
 Field="remember_token","remember_token","varchar(100)",,,"","",$FFFFFFFF,""
+Field="最終ログイン日時","last_login_at","timestamp",,,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
@@ -267,13 +233,13 @@ Index==2,provider_id,provider_name
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20210717182217
+ModifiedDateTime=20220629144434
 Position="MAIN",1200,250,243,364
 ZOrder=10
 
 [Relation]
-Entity1=stocks
-Entity2=orders
+Entity1=stock
+Entity2=order_history
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -293,8 +259,8 @@ TermPos2=R
 ZOrder=12
 
 [Relation]
-Entity1=contact_forms
-Entity2=contact_form_images
+Entity1=contact_form
+Entity2=contact_form_image
 RelationType1=1
 RelationType2=3
 Fields1=id
@@ -314,8 +280,8 @@ TermPos2=R
 ZOrder=11
 
 [Relation]
-Entity1=stocks
-Entity2=carts
+Entity1=stock
+Entity2=cart
 RelationType1=2
 RelationType2=3
 Fields1=id
@@ -336,8 +302,8 @@ TermPos2=R
 ZOrder=13
 
 [Relation]
-Entity1=users
-Entity2=carts
+Entity1=user
+Entity2=cart
 RelationType1=2
 RelationType2=3
 Fields1=id

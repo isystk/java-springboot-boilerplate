@@ -14,14 +14,7 @@ import com.isystk.sample.common.dto.PageFactory;
 import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.dao.MPostTagDao;
-import com.isystk.sample.domain.dto.MPostTagCriteria;
-import com.isystk.sample.domain.dto.TPostCriteria;
-import com.isystk.sample.domain.entity.MPostTag;
-import com.isystk.sample.domain.entity.TPostImage;
-import com.isystk.sample.domain.entity.TPostTag;
 import com.isystk.sample.domain.repository.TPostRepository;
-import com.isystk.sample.domain.repository.dto.TPostRepositoryDto;
 import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.repository.SolrPostRepository;
 

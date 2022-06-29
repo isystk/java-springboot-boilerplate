@@ -25,8 +25,6 @@ import com.isystk.sample.batch.item.ItemError;
 import com.isystk.sample.batch.jobs.BaseTasklet;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.dao.MPostTagDao;
-import com.isystk.sample.domain.entity.MPostTag;
 
 import lombok.val;
 import lombok.extern.slf4j.Slf4j;

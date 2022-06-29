@@ -2,11 +2,10 @@ package com.isystk.sample.web.admin.service;
 
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
-import com.isystk.sample.domain.entity.Stocks;
+import com.isystk.sample.domain.entity.Stock;
 import com.isystk.sample.domain.repository.StockRepository;
-import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
+import com.isystk.sample.domain.dto.StockRepositoryDto;
 import java.math.BigInteger;
-import java.util.stream.Collectors;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +38,7 @@ public class StockService extends BaseTransactionalService {
    * @param stockDto 
    * @return
    */
-  public Stocks create(final StockRepositoryDto stockDto) {
+  public Stock create(final StockRepositoryDto stockDto) {
     Assert.notNull(stockDto, "input must not be null");
     return stockRepository.create(stockDto);
   }
@@ -50,7 +49,7 @@ public class StockService extends BaseTransactionalService {
    * @param stockDto 
    * @return
    */
-  public Stocks update(final StockRepositoryDto stockDto) {
+  public Stock update(final StockRepositoryDto stockDto) {
     Assert.notNull(stockDto, "input must not be null");
     return stockRepository.update(stockDto);
   }
@@ -60,7 +59,7 @@ public class StockService extends BaseTransactionalService {
    *
    * @return
    */
-  public Stocks delete(final BigInteger id) {
+  public Stock delete(final BigInteger id) {
     Assert.notNull(id, "id must not be null");
     return stockRepository.delete(id);
   }
