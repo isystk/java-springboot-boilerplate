@@ -3,7 +3,7 @@ package com.isystk.sample.web.admin.controller.html.stocks.edit;
 import static com.isystk.sample.common.AdminUrl.STOCKS_EDIT;
 
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
+import com.isystk.sample.domain.dto.StockRepositoryDto;
 import com.isystk.sample.web.admin.service.StockService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import lombok.extern.slf4j.Slf4j;

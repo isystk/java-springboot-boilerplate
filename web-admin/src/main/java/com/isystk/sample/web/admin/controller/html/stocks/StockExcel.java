@@ -3,7 +3,7 @@ package com.isystk.sample.web.admin.controller.html.stocks;
 import static org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined.DARK_GREEN;
 import static org.apache.poi.hssf.util.HSSFColor.HSSFColorPredefined.WHITE;
 
-import com.isystk.sample.domain.entity.Stocks;
+import com.isystk.sample.domain.entity.Stock;
 import com.isystk.sample.web.base.view.ExcelView;
 import java.util.Collection;
 import java.util.List;
@@ -47,10 +47,10 @@ public class StockExcel implements ExcelView.Callback {
 
     // 明細
     @SuppressWarnings("unchecked")
-    val stocks = (List<Stocks>) data;
+    val stocks = (List<Stock>) data;
 
     int count = 1;
-    for (Stocks stock : stocks) {
+    for (Stock stock : stocks) {
       Row userRow = sheet.createRow(count++);
       userRow.createCell(0).setCellValue(stock.getId().toString());
       userRow.createCell(1).setCellValue(stock.getName());

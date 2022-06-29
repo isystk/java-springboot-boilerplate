@@ -3,8 +3,6 @@ package com.isystk.sample.web.front.controller.api.v1.auth;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.AuditInfoHolder;
-import com.isystk.sample.domain.entity.TUser;
-import com.isystk.sample.domain.entity.Users;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import com.isystk.sample.web.front.dto.auth.AuthUserDto;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Optional;
-import org.springframework.web.server.ResponseStatusException;
 
 import static com.isystk.sample.common.FrontUrl.*;
 

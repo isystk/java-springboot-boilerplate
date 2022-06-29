@@ -14,17 +14,6 @@ import com.isystk.sample.common.helper.SendMailHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.values.MailTemplate;
-import com.isystk.sample.common.values.UserStatus;
-import com.isystk.sample.domain.dao.MMailTemplateDao;
-import com.isystk.sample.domain.dao.TUserDao;
-import com.isystk.sample.domain.dao.TUserOnetimePassDao;
-import com.isystk.sample.domain.dto.MMailTemplateCriteria;
-import com.isystk.sample.domain.dto.TUserCriteria;
-import com.isystk.sample.domain.dto.TUserOnetimePassCriteria;
-import com.isystk.sample.domain.entity.MMailTemplate;
-import com.isystk.sample.domain.entity.TUser;
-import com.isystk.sample.domain.entity.TUserOnetimePass;
-import com.isystk.sample.domain.repository.TUserRepository;
 
 import lombok.val;
 

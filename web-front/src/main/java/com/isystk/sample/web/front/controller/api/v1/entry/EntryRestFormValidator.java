@@ -1,8 +1,6 @@
 package com.isystk.sample.web.front.controller.api.v1.entry;
 
 import com.isystk.sample.common.validator.AbstractValidator;
-import com.isystk.sample.domain.dao.TUserDao;
-import com.isystk.sample.domain.dto.TUserCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;

@@ -3,9 +3,9 @@ package com.isystk.sample.web.admin.controller.html.stocks;
 import static com.isystk.sample.common.AdminUrl.STOCKS;
 
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.dto.StocksCriteria;
+import com.isystk.sample.domain.dto.StockCriteria;
 import com.isystk.sample.domain.repository.StockRepository;
-import com.isystk.sample.domain.repository.dto.StockRepositoryDto;
+import com.isystk.sample.domain.dto.StockRepositoryDto;
 import com.isystk.sample.web.admin.service.StockService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
@@ -93,11 +93,11 @@ public class StocksListController extends AbstractHtmlController {
    *
    * @return
    */
-  private StocksCriteria formToCriteria(
+  private StockCriteria formToCriteria(
       StocksListForm form) {
 
     // 入力値を詰め替える
-    StocksCriteria criteria = new StocksCriteria();
+    StockCriteria criteria = new StockCriteria();
     criteria.setIdEq(form.getStockId());
     criteria.setNameLike(form.getName());
     if (form.getCreatedAtFrom() != null) {
