@@ -87,13 +87,13 @@ public class UploadRestController extends AbstractRestController {
    */
   @PostMapping("/image")
   public Resource post(@ModelAttribute("uploadRestForm") UploadRestForm form, Model model) {
-
-    // ファイルを保存する
-    UploadFileDto dto = imageHelper.saveFile(form.getImageFile());
-
-    Resource resource = resourceFactory.create();
-    resource.setData(Arrays.asList(dto));
-    resource.setMessage(getMessage("uploadfiles.upload.success"));
+//
+//    // ファイルを保存する
+//    UploadFileDto dto = imageHelper.saveFile(form.getImageFile());
+//
+//    Resource resource = resourceFactory.create();
+//    resource.setData(Arrays.asList(dto));
+//    resource.setMessage(getMessage("uploadfiles.upload.success"));
 
     return resource;
   }
