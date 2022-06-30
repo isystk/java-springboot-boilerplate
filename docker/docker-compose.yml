@@ -65,7 +65,7 @@ services:
     restart: always
     volumes:
       - ./solr/logs:/var/solr/logs
-      - ./solr/data:/var/solr/data
+      - java-springboot-boilerplate-solr-store:/var/solr/data
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -109,7 +109,7 @@ services:
       MINIO_SECRET_KEY: "secret_key"
     command: [ "--compat", "server", "/data", "--console-address", ":9001" ]
     volumes:
-      - ./s3/data:/data
+      - java-springboot-boilerplate-s3-store:/data
 
   awscli:
     container_name: "java-springboot-boilerplate-awscli"
@@ -128,3 +128,5 @@ services:
 
 volumes:
   java-springboot-boilerplate-db-store:
+  java-springboot-boilerplate-solr-store:
+  java-springboot-boilerplate-s3-store:
