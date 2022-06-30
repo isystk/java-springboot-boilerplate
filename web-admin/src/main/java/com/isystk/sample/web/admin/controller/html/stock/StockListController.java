@@ -45,7 +45,7 @@ public class StockListController extends AbstractHtmlController {
 
   @Override
   public String getFunctionName() {
-    return "A_STOCKS";
+    return "A_STOCK_LIST";
   }
 
   @ModelAttribute("stockListForm")
