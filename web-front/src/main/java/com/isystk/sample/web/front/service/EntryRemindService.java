@@ -4,22 +4,15 @@ import com.isystk.sample.domain.dao.UserDao;
 import com.isystk.sample.domain.dto.UserCriteria;
 import com.isystk.sample.domain.entity.User;
 import com.isystk.sample.domain.repository.UserRepository;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.isystk.sample.common.dto.mail.EntryRegistTemporary;
 import com.isystk.sample.common.exception.NoDataFoundException;
 import com.isystk.sample.common.helper.SendMailHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
-import com.isystk.sample.common.util.DateUtils;
-import com.isystk.sample.common.values.MailTemplate;
-
-import lombok.val;
 
 @Service
 public class EntryRemindService extends BaseTransactionalService {

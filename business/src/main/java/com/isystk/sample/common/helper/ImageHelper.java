@@ -2,12 +2,16 @@ package com.isystk.sample.common.helper;
 
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.S3Object;
+import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.google.common.collect.Lists;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import com.isystk.sample.common.util.AwsS3Utils;
+import java.util.List;
+import java.util.stream.Collectors;
 import javax.imageio.ImageIO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -63,6 +67,20 @@ public class ImageHelper {
     String remotePath = dirPath + "/" + upFileName;
     // S3に保存
     AwsS3Utils.s3PutObject(imageFilePath, remotePath, BUCKET_NAME, delete);
+  }
+
+  public List<String> getImageList(String dirPath) {
+    String remotePath = dirPath;
+
+    try {
+      // S3を探索
+      List<S3ObjectSummary> list = AwsS3Utils.s3GetListsObject(BUCKET_NAME, remotePath);
+
+      return list.stream().map((e) -> e.getKey()).collect(Collectors.toList());
+
+    } catch (AmazonS3Exception e) {
+      throw new RuntimeException(e);
+    }
   }
 
   public String getImageData(String dirPath , String upFileName) {
