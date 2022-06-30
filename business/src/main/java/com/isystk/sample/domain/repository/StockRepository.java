@@ -54,8 +54,8 @@ public class StockRepository extends BaseRepository {
    */
   public Page<StockRepositoryDto> findPage(StockCriteria criteria, Pageable pageable) {
     var options = createSelectOptions(pageable);
-    var stocksList =  convertDto(stockDao.findAll(criteria, options.count(), toList()));
-    return pageFactory.create(stocksList, pageable, options.getCount());
+    var stockList =  convertDto(stockDao.findAll(criteria, options.count(), toList()));
+    return pageFactory.create(stockList, pageable, options.getCount());
   }
 
   /**
@@ -109,15 +109,15 @@ public class StockRepository extends BaseRepository {
     val time = DateUtils.getNow();
 
     // 商品テーブル
-    val stocks = ObjectMapperUtils.map(stockDto, Stock.class);
-    stocks.setImgpath(stockDto.getStockImageName());
-    stocks.setCreatedAt(time); // 作成日
-    stocks.setUpdatedAt(time); // 更新日
-    stocks.setDeleteFlg((byte)0); // 削除フラグ
-    stocks.setVersion(0L); // 楽観ロック改定番号
-    stockDao.insert(stocks);
+    val stock = ObjectMapperUtils.map(stockDto, Stock.class);
+    stock.setImgpath(stockDto.getStockImageName());
+    stock.setCreatedAt(time); // 作成日
+    stock.setUpdatedAt(time); // 更新日
+    stock.setDeleteFlg((byte)0); // 削除フラグ
+    stock.setVersion(0L); // 楽観ロック改定番号
+    stockDao.insert(stock);
 
-    return stocks;
+    return stock;
   }
 
   /**
@@ -132,17 +132,17 @@ public class StockRepository extends BaseRepository {
 
     val time = DateUtils.getNow();
 
-    val stock = stockDao.selectById(stockDto.getId())
+    val before = stockDao.selectById(stockDto.getId())
         .orElseThrow(
             () -> new NoDataFoundException("stock_id=" + stockDto.getId() + " のデータが見つかりません。"));
 
     // 商品テーブル
-    val stocks = ObjectMapperUtils.mapExcludeNull(stockDto, stock);
-    stocks.setImgpath(stockDto.getStockImageName());
-    stocks.setUpdatedAt(time); // 更新日
-    stockDao.update(stocks);
+    val stock = ObjectMapperUtils.mapExcludeNull(stockDto, before);
+    stock.setImgpath(stockDto.getStockImageName());
+    stock.setUpdatedAt(time); // 更新日
+    stockDao.update(stock);
 
-    return stocks;
+    return stock;
   }
 
   /**

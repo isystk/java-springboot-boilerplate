@@ -320,14 +320,10 @@ $ ./gradlew web-admin::bootRun
 
 フロントエンド環境を構築する
 ```
-# フロントエンドのコードをダウンロードする。
-$ git submodule init
-$ git submodule update
-
 # フロントエンドをビルドする。
-$ cd static
+$ cd web-front/resources 
 $ yarn 
-& yarn dev
+& yarn start
 ```
 
 ## 🔗 参考
