@@ -6,6 +6,11 @@ package com.isystk.sample.common;
 public class FrontUrl {
 
   /**
+   * ---- URLs ----
+   **/
+  public static final String TOP = "/";
+
+  /**
    * ---- APIｓ ----
    **/
 

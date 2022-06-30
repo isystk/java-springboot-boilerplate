@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<body>
+<div layout:fragment="content">
+  <h1>内部エラーが発生しました。</h1>
+  <div class="card card-purple">
+    <div class="card-header">
+      <h3 class="card-title">詳細情報</h3>
+    </div>
+      <div class="card-body">
+        <div th:text="'timestamp: ' + ${timestamp}"></div>
+        <div th:text="'status: ' + ${status}"></div>
+        <div th:text="'error: ' + ${error}"></div>
+        <div th:text="'exception: ' + ${exception}"></div>
+        <div th:text="'message: ' + ${message}"></div>
+        <div th:text="'errors: ' + ${errors}"></div>
+        <div th:text="'trace: ' + ${trace}"></div>
+        <div th:text="'path: ' + ${path}"></div>
+      </div>
+  </div>
+</div>
+</body>
+</html>
