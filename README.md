@@ -202,13 +202,18 @@ $ npm install -g yarn
 │   ├── .env
 │   └── docker-compose.yml
 ├── batch (バッチ)
+│   └── src
 ├── business (共通ロジック)
-├── static (フロントエンドモジュール)
-│   └── public (WEB公開ディレクトリ)
-│       └── thumb （アップロードした写真）
+│   └── src
+├── htdocs
+│   └── thumb （アップロードした写真）
 ├── web (Web共通ロジック)
+│   └── src
 ├── web-admin (管理画面)
+│   └── src
 ├── web-front (フロント画面)
+│   ├── src
+│   └── resources (フロントエンドモジュール)
 ├── dc.sh （Dockerの起動用スクリプト）
 └── build.gradle （Gradle用設定ファイル）
 ```

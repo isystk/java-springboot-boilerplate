@@ -1,0 +1,50 @@
+@charset "UTF-8";
+
+body {
+  margin: 0px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.App-logo {
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  a {
+    color: #fff
+  }
+}
+
+/* 画面サイズが992pxより大きい場合に以下を適用 */
+@media screen and (min-width: 992px) {
+  .App-logo {
+    font-size: 24px;
+  }
+}
+
+.App-header {
+  position: static !important;
+  background-color: #3f51b5;
+}
+
+.App-footer {
+  background-color: #3f51b5;
+  color: #fff;
+  text-align: center;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  a {
+    color: #fff;
+  }
+}
+
+.error {
+    color: #f44336;
+    margin-left: 14px;
+    margin-right: 14px;
+    font-size: 0.75rem;
+}
