@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="ja" class="no-js">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="all">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+  <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">LaraEC</title>
+  <script defer="defer" th:src="@{/static/js/main.3f69163a.js}"></script>
+  <link th:href="@{/static/css/main.e7f11ef6.css}" rel="stylesheet"></head>
+  <link th:href="@{/static/css/app.css}" rel="stylesheet"></head>
+</head>
+<body>
+<p class="headerSt" th:if="${!@env.isProduction()}">
+  <th:block th:if="${@env.isStaging()}">ステージング環境</th:block>
+  <th:block th:if="${@env.isLocal()}">ローカル環境</th:block>
+  <span style="float: right;" onclick="javascript:document.querySelector('.headerSt').remove();">非表示</span>
+</p>
+<div layout:fragment="content" th:remove="tag"></div>
+</body>
+</html>
