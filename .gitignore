@@ -126,9 +126,6 @@ docker/solr/logs
 docker/solr/data/mycore/data
 docker/solr/data/post/data
 
-# elasticsearch
-docker/elasticsearch/data
-
 # s3
 docker/s3/data
 

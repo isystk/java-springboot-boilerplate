@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Logo 1`] = `
+<div
+  className="App-logo"
+>
+  <a
+    href="/"
+    onClick={[Function]}
+  >
+    amplify-reactjs-sample
+  </a>
+</div>
+`;
