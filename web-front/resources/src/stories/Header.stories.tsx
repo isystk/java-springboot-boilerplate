@@ -2,7 +2,7 @@ import React from 'react'
 import { MemoryRouter } from 'react-router'
 import { storiesOf } from '@storybook/react'
 import MainService from '@/services/main'
-import Header from '@/components/Header'
+import Header from '@/components/commons/Header'
 
 storiesOf('commons/Header', module)
   .addDecorator((getStory) => <MemoryRouter>{getStory()}</MemoryRouter>)
@@ -12,17 +12,14 @@ storiesOf('commons/Header', module)
         name: '',
       },
     } as MainService
-    return (
-      <Header isMenuOpen={false} setMenuOpen={() => ({})} appRoot={appRoot} />
-    )
+    return <Header appRoot={appRoot} />
   })
   .add('Logined', () => {
     const appRoot = {
       auth: {
         name: 'sample',
+        isLogined: true,
       },
     } as MainService
-    return (
-      <Header isMenuOpen={false} setMenuOpen={() => ({})} appRoot={appRoot} />
-    )
+    return <Header appRoot={appRoot} />
   })
