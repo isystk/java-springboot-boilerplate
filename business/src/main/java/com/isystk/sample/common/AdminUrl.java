@@ -17,4 +17,5 @@ public interface AdminUrl {
   public static final String STOCKS_EDIT = "/stocks/edit";
 
   public static final String ORDERS = "/orders";
+  public static final String PHOTOS = "/photos";
 }
