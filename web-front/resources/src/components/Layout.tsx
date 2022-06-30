@@ -1,43 +1,31 @@
-import React, { FC, useState } from 'react'
-import useAppRoot from '@/stores/useAppRoot'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import SideMenu from '@/components/SideMenu'
-import { Helmet } from 'react-helmet'
+import React, { FC } from 'react'
+import CommonHeader from '@/components/commons/Header'
+import CommonFooter from '@/components/commons/Footer'
+import Loading from '@/components/commons/Loading'
+import MainService from '@/services/main'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
 
 type Props = {
-  children?: React.ReactNode
+  appRoot: MainService
+  children: React.ReactNode
   title: string
 }
 
-const Layout: FC<Props> = ({ children, title }) => {
-  const appRoot = useAppRoot()
-  const [isMenuOpen, setMenuOpen] = useState(false)
-
+const Layout: FC<Props> = ({ appRoot, children, title }) => {
   return (
-    <div className="App">
-      <Helmet
-        title={title + ' | amplify-reactjs-sample'}
-        meta={[
-          {
-            name: 'description',
-            content: 'AWS Amplify の学習用サンプルアプリケーションです。',
-          },
-        ]}
-      />
-      <Header
-        isMenuOpen={isMenuOpen}
-        setMenuOpen={setMenuOpen}
-        appRoot={appRoot}
-      />
-      <div>{children}</div>
-      <Footer />
-      <SideMenu
-        isMenuOpen={isMenuOpen}
-        setMenuOpen={setMenuOpen}
-        appRoot={appRoot}
-      />
-    </div>
+    <HelmetProvider>
+      <Helmet>
+        <title>{title + ' | LaraEC'}</title>
+        <meta
+          name="description"
+          content="Laravel ＆ React.js の学習用サンプルアプリケーションです。"
+        />
+      </Helmet>
+      <CommonHeader appRoot={appRoot} />
+      {children}
+      <CommonFooter />
+      <Loading appRoot={appRoot} />
+    </HelmetProvider>
   )
 }
 

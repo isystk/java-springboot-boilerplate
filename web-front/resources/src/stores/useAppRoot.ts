@@ -17,9 +17,11 @@ const useAppRoot = () => {
   // const [, forceRender] = useReducer((boolean) => !boolean, false)
 
   const _setAppRoot = async (appRoot: MainService) => {
-    await dispatch(setAppRoot(appRoot))
+    // @ts-ignore
+    dispatch(setAppRoot(appRoot))
     // forceRender()
-    await dispatch(forceRender())
+    // @ts-ignore
+    dispatch(forceRender())
   }
 
   useEffect(() => {
