@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>注文ID:[[${stock.name}]]</title>
+  <title>注文ID:[[${order.id}]]</title>
 </head>
 <body>
 <div layout:fragment="sidebar">
@@ -12,13 +12,13 @@
 <div layout:fragment="content-header">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>注文ID:[[${stock.name}]]</h1>
+      <h1>注文ID:[[${order.id}]]</h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item"><a th:href="@{/orders/}">注文履歴一覧</a></li>
-        <li class="breadcrumb-item">注文ID:[[${stock.name}]]</li>
+        <li class="breadcrumb-item">注文ID:[[${order.id}]]</li>
       </ol>
     </div>
   </div>
@@ -26,11 +26,11 @@
 <div layout:fragment="content">
   <div class="card card-purple">
     <div class="card-body">
-      <div th:object="${stock}">
-        <input th:replace="fragments/label :: input ('注文者', *{userName})"/>
-        <input th:replace="fragments/label :: input ('商品名', *{stockName})"/>
+      <div th:object="${order}">
+        <input th:replace="fragments/label :: input ('注文者', *{user.name})"/>
+        <input th:replace="fragments/label :: input ('商品名', *{stock.name})"/>
         <input th:replace="fragments/label :: input ('個数', *{quantity})"/>
-        <input th:replace="fragments/label :: input ('注文日時', *{#temporals.format(e.createdAt, 'yyyy/MM/dd HH:mm:ss')})"/>
+        <input th:replace="fragments/label :: input ('注文日時', *{#temporals.format(createdAt, 'yyyy/MM/dd HH:mm:ss')})"/>
         <div class="card-footer clearfix text-center">
           <div class="text-left float-left">
             <a th:href="@{/orders}" class="btn btn-secondary">一覧に戻る</a>

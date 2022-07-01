@@ -16,11 +16,17 @@ import com.isystk.sample.domain.dao.StockDao;
 import com.isystk.sample.domain.dao.UserDao;
 import com.isystk.sample.domain.dto.OrderHistoryCriteria;
 import com.isystk.sample.domain.dto.OrderHistoryRepositoryDto;
+import com.isystk.sample.domain.dto.StockCriteria;
+import com.isystk.sample.domain.dto.UserCriteria;
 import com.isystk.sample.domain.entity.OrderHistory;
 import com.isystk.sample.domain.entity.OrderHistory;
+import com.isystk.sample.domain.entity.Stock;
+import com.isystk.sample.domain.entity.User;
 import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -72,10 +78,37 @@ public class OrderRepository extends BaseRepository {
    */
   private List<OrderHistoryRepositoryDto> convertDto(List<OrderHistory> orderHistoryList) {
 
-    // orderHistoryList を元に、orderHistoryDtoList へコピー
-    return ObjectMapperUtils
-        .mapAll(orderHistoryList, OrderHistoryRepositoryDto.class);
+    // orderHistoryListからstockIdのListを抽出
+    List<BigInteger> stockIdList = orderHistoryList.stream().map(e -> e.getStockId())
+        .collect(Collectors.toList());
 
+    // stockId をkeyとした、stockListのMapを生成
+    StockCriteria stockCriteria = new StockCriteria();
+    stockCriteria.setIdIn(stockIdList);
+    Map<BigInteger, List<Stock>> stockMap = stockDao.findAll(stockCriteria)
+        .stream().collect(Collectors.groupingBy(Stock::getId));
+
+    // orderHistoryListからuserIdのListを抽出
+    List<BigInteger> userIdList = orderHistoryList.stream().map(e -> e.getUserId())
+        .collect(Collectors.toList());
+
+    // userList をkeyとした、userListのMapを生成
+    UserCriteria userCriteria = new UserCriteria();
+    userCriteria.setIdIn(userIdList);
+    Map<BigInteger, List<User>> userMap = userDao.findAll(userCriteria)
+        .stream().collect(Collectors.groupingBy(User::getId));
+
+    // orderHistoryList を元に、orderHistoryDtoList へコピー
+    List<OrderHistoryRepositoryDto> orderHistoryDtoList = ObjectMapperUtils
+        .mapAll(orderHistoryList, OrderHistoryRepositoryDto.class);
+   orderHistoryDtoList
+        .stream()
+        .forEach(e -> {
+          e.setStock(stockMap.get(e.getStockId()).get(0));
+          e.setUser(userMap.get(e.getUserId()).get(0));
+        });
+
+    return orderHistoryDtoList;
   }
 
   /**
@@ -99,6 +132,31 @@ public class OrderRepository extends BaseRepository {
     var data = orderHistoryDao.selectById(id)
         .orElseThrow(() -> new NoDataFoundException("orderHistory_id=" + id + " のデータが見つかりません。"));
     return convertDto(Lists.newArrayList(data)).get(0);
+  }
+
+  /**
+   * RepositoryDto に変換します。
+   *
+   * @param orderHistory
+   * @return
+   */
+  private OrderHistoryRepositoryDto convertDto(OrderHistory orderHistory) {
+    // orderHistory を元に、OrderHistoryRepositoryDto へコピー
+    var dto = ObjectMapperUtils.map(orderHistory, OrderHistoryRepositoryDto.class);
+
+    // stock
+    StockCriteria stockCriteria = new StockCriteria();
+    stockCriteria.setIdEq(orderHistory.getStockId());
+    Stock stock = stockDao.findOne(stockCriteria).orElse(new Stock());
+    dto.setStock(stock);
+
+    // user
+    UserCriteria userCriteria = new UserCriteria();
+    userCriteria.setIdEq(orderHistory.getUserId());
+    User user = userDao.findOne(userCriteria).orElse(new User());
+    dto.setUser(user);
+
+    return dto;
   }
 
   /**

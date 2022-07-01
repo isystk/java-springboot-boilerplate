@@ -2,7 +2,9 @@ package com.isystk.sample.web.admin.controller.html.order;
 
 import static com.isystk.sample.common.AdminUrl.ORDERS;
 
+import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.OrderHistoryCriteria;
+import com.isystk.sample.web.admin.dto.OrderHistorySearchConditionDto;
 import com.isystk.sample.web.admin.service.OrderHistoryService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import java.time.LocalTime;
@@ -25,7 +27,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @Slf4j
 @RequestMapping(ORDERS)
-@SessionAttributes(types = {OrderListForm.class})
 public class OrderListController extends AbstractHtmlController {
 
   @Autowired
@@ -66,7 +67,7 @@ public class OrderListController extends AbstractHtmlController {
     }
 
     // 10件区切りで取得する
-    val pages = orderHistoryService.findPage(formToCriteria(form), form);
+    val pages = orderHistoryService.findPage(formToDto(form), form);
 
     // 画面に検索結果を渡す
     model.addAttribute("pages", pages);
@@ -79,23 +80,11 @@ public class OrderListController extends AbstractHtmlController {
    *
    * @return
    */
-  private OrderHistoryCriteria formToCriteria(
+  private OrderHistorySearchConditionDto formToDto(
       OrderListForm form) {
 
     // 入力値を詰め替える
-    OrderHistoryCriteria criteria = new OrderHistoryCriteria();
-    criteria.setIdEq(form.getStockId());
-//    criteria.setNameLike(form.getName());
-    if (form.getCreatedAtFrom() != null) {
-      criteria.setCreatedAtGe(form.getCreatedAtFrom().atStartOfDay());
-    }
-    if (form.getCreatedAtTo() != null) {
-      criteria.setCreatedAtLe(form.getCreatedAtTo().atTime(LocalTime.MAX));
-    }
-    criteria.setDeleteFlgFalse(true);
-    criteria.setOrderBy("order by updated_at desc");
-
-    return criteria;
+    return ObjectMapperUtils.map(form, OrderHistorySearchConditionDto.class);
   }
 
 }

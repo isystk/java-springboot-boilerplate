@@ -12,18 +12,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @Slf4j
 @RequestMapping(PHOTOS)
-@SessionAttributes(types = {PhotoListForm.class})
 public class PhotoListController extends AbstractHtmlController {
 
   @Autowired
@@ -70,6 +70,18 @@ public class PhotoListController extends AbstractHtmlController {
     model.addAttribute("pages", pages);
 
     return "modules/photo/list";
+  }
+
+  /**
+   * 削除処理
+   *
+   * @param imageName
+   * @return
+   */
+  @DeleteMapping()
+  public String delete(@RequestParam(value = "name") String imageName) {
+    photoService.delete(imageName);
+    return "redirect:/photos";
   }
 
 }

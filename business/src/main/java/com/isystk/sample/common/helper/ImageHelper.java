@@ -69,6 +69,18 @@ public class ImageHelper {
     AwsS3Utils.s3PutObject(imageFilePath, remotePath, BUCKET_NAME, delete);
   }
 
+  /**
+   * ファイルを削除します。
+   *
+   * @param dirPath ディレクトリパス
+   * @param upFileName 画像ファイル名
+   */
+  public void removeFile(String dirPath , String upFileName) {
+    String remotePath = dirPath + "/" + upFileName;
+    // S3から削除
+    AwsS3Utils.s3DeleteObject(BUCKET_NAME, remotePath);
+  }
+
   public List<String> getImageList(String dirPath) {
     String remotePath = dirPath;
 
