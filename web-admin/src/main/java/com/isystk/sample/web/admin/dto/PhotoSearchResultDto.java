@@ -6,7 +6,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class ImageDto {
+public class PhotoSearchResultDto {
 
   ImageType imageType;
 

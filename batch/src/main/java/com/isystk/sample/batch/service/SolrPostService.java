@@ -1,24 +1,11 @@
 package com.isystk.sample.batch.service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.isystk.sample.common.dto.PageFactory;
-import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.service.BaseTransactionalService;
-import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.repository.TPostRepository;
-import com.isystk.sample.solr.dto.SolrPost;
 import com.isystk.sample.solr.repository.SolrPostRepository;
-
-import lombok.val;
 
 @Service
 public class SolrPostService extends BaseTransactionalService {

@@ -3,14 +3,13 @@ package com.isystk.sample.web.admin.controller.html.stock;
 import static com.isystk.sample.common.AdminUrl.STOCKS;
 
 import com.isystk.sample.common.util.ObjectMapperUtils;
-import com.isystk.sample.domain.dto.StockCriteria;
+import com.isystk.sample.web.admin.dto.StockSearchConditionDto;
 import com.isystk.sample.web.admin.service.StockService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.base.view.CsvView;
 import com.isystk.sample.web.base.view.ExcelView;
 import com.isystk.sample.web.base.view.PdfView;
 import java.math.BigInteger;
-import java.time.LocalTime;
 import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +25,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -34,7 +32,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @Slf4j
 @RequestMapping(STOCKS)
-@SessionAttributes(types = {StockListForm.class})
 public class StockListController extends AbstractHtmlController {
 
   @Autowired
@@ -75,7 +72,7 @@ public class StockListController extends AbstractHtmlController {
     }
 
     // 10件区切りで取得する
-    val pages = stockService.findPage(formToCriteria(form), form);
+    val pages = stockService.findPage(formToDto(form), form);
 
     // 画面に検索結果を渡す
     model.addAttribute("pages", pages);
@@ -88,23 +85,11 @@ public class StockListController extends AbstractHtmlController {
    *
    * @return
    */
-  private StockCriteria formToCriteria(
+  private StockSearchConditionDto formToDto(
       StockListForm form) {
 
     // 入力値を詰め替える
-    StockCriteria criteria = new StockCriteria();
-    criteria.setIdEq(form.getStockId());
-    criteria.setNameLike(form.getName());
-    if (form.getCreatedAtFrom() != null) {
-      criteria.setCreatedAtGe(form.getCreatedAtFrom().atStartOfDay());
-    }
-    if (form.getCreatedAtTo() != null) {
-      criteria.setCreatedAtLe(form.getCreatedAtTo().atTime(LocalTime.MAX));
-    }
-    criteria.setDeleteFlgFalse(true);
-    criteria.setOrderBy("order by updated_at desc");
-
-    return criteria;
+    return ObjectMapperUtils.map(form, StockSearchConditionDto.class);
   }
 
   /**
@@ -129,7 +114,7 @@ public class StockListController extends AbstractHtmlController {
   public CsvView downloadCsv(@PathVariable String filename, StockListForm form, Model model) {
 
     // 全件取得する
-    val stocks = stockService.findAll(formToCriteria(form));
+    val stocks = stockService.findAll(formToDto(form));
 
     // 詰め替える
     List<StockCsv> csvList = ObjectMapperUtils.mapAll(stocks, StockCsv.class);
@@ -149,7 +134,7 @@ public class StockListController extends AbstractHtmlController {
       Model model) {
 
     // 全件取得する
-    val stocks = stockService.findAll(formToCriteria(form));
+    val stocks = stockService.findAll(formToDto(form));
 
     // Excelプック生成コールバック、データ、ダウンロード時のファイル名を指定する
     val view = new ExcelView(new StockExcel(), stocks, filename);
@@ -167,7 +152,7 @@ public class StockListController extends AbstractHtmlController {
   public ModelAndView downloadPdf(@PathVariable String filename, StockListForm form, Model model) {
 
     // 全件取得する
-    val stocks = stockService.findAll(formToCriteria(form));
+    val stocks = stockService.findAll(formToDto(form));
 
     // 帳票レイアウト、データ、ダウンロード時のファイル名を指定する
     val view = new PdfView("reports/stocks.jrxml", stocks, filename);

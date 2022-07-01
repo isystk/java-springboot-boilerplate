@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
-import com.isystk.sample.domain.repository.TPostRepository;
 import com.isystk.sample.solr.repository.SolrPostRepository;
 
 @Service

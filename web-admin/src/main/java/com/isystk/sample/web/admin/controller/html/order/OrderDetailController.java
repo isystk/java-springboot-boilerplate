@@ -30,14 +30,14 @@ public class OrderDetailController extends AbstractHtmlController {
   /**
    * 詳細画面表示
    *
-   * @param stockId
+   * @param orderId
    * @param model
    * @return
    */
-  @GetMapping("{stockId}")
-  public String show(@PathVariable BigInteger stockId, Model model) {
-    OrderHistoryRepositoryDto stock = orderHistoryService.findById(stockId);
-    model.addAttribute("stock", stock);
+  @GetMapping("{orderId}")
+  public String show(@PathVariable BigInteger orderId, Model model) {
+    OrderHistoryRepositoryDto order = orderHistoryService.findById(orderId);
+    model.addAttribute("order", order);
     return "modules/order/detail";
   }
 

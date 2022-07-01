@@ -15,10 +15,9 @@ public class OrderListForm extends BaseSearchForm implements Pageable {
 
   private static final long serialVersionUID = 7593564324192730932L;
 
-  @Digits(integer = 9, fraction = 0)
-  BigInteger stockId;
+  String userName;
 
-  String name;
+  String stockName;
 
   @DateTimeFormat(pattern = "yyyy-MM-dd")
   LocalDate createdAtFrom;

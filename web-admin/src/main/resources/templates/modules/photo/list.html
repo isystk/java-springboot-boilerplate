@@ -71,7 +71,7 @@
                 <img th:src="${@img.url('/stocks', e.imageName)}" width="150px"/>
               </td>
               <td class="float-right">
-                <form th:action="@{/photos/(imageName=*{e.imageName})}" th:method="delete">
+                <form th:action="@{/photos?(name=*{e.imageName})}" th:method="delete">
                   <button class="btn btn-danger m-1 btn-sm js-delete">削除</button>
                 </form>
               </td>

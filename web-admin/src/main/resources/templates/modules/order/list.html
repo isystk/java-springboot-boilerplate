@@ -28,12 +28,18 @@
     <div class="card-header">
       <h3 class="card-title">検索条件</h3>
     </div>
-    <form th:action="@{/stocks/}" th:method="get" th:object="${orderListForm}">
+    <form th:action="@{/orders/}" th:method="get" th:object="${orderListForm}">
       <input type="hidden" name="page" value="1"/>
       <div class="card-body">
         <div class="form-group">
           <div class="control-group">
-            <input th:replace="fragments/input :: input ('text', '注文者', 'name', 100)"/>
+            <input th:replace="fragments/input :: input ('text', '注文者', 'userName', 100)"/>
+          </div>
+          <div class="control-group">
+            <input th:replace="fragments/input :: input ('text', '商品名', 'stockName', 100)"/>
+          </div>
+          <div class="control-group">
+            <input th:replace="fragments/datePeriod :: input ('注文日時', 'createdAtFrom', 'createdAtTo')"/>
           </div>
         </div>
       </div>
@@ -44,7 +50,10 @@
   </div>
 
   <form th:action="@{/orders}" th:method="get" th:object="${orderListForm}" id="pagingForm">
-    <input type="hidden" name="name" th:value="*{name}">
+    <input type="hidden" name="userName" th:value="*{userName}">
+    <input type="hidden" name="stockName" th:value="*{stockName}">
+    <input type="hidden" name="createdAtFrom" th:value="*{createdAtFrom}">
+    <input type="hidden" name="createdAtTo" th:value="*{createdAtTo}">
   </form>
 
   <div class="row">
@@ -68,12 +77,12 @@
             <tbody>
             <tr th:each="e : ${pages.data}">
               <td th:text="*{e.id}"></td>
-              <td ></td>
-              <td ></td>
+              <td th:text="*{e.user.name}"></td>
+              <td th:text="*{e.stock.name}"></td>
               <td th:text="*{e.quantity}"></td>
               <td th:text="${#temporals.format(e.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
               <td class="float-right">
-                  <a class="btn btn-info m-1 btn-sm" th:href="@{/stocks/{id}/(id=*{e.id})}">詳細</a><br>
+                  <a class="btn btn-info m-1 btn-sm" th:href="@{/orders/{id}/(id=*{e.id})}">詳細</a><br>
               </td>
             </tr>
             </tbody>
