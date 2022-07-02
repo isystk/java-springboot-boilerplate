@@ -29,8 +29,8 @@
       <div th:object="${contact}">
         <input th:replace="fragments/label :: input ('氏名', *{yourName})"/>
         <input th:replace="fragments/label :: input ('メールアドレス', *{email})"/>
-        <input th:replace="fragments/label :: input ('性別', *{gender})"/>
-        <input th:replace="fragments/label :: input ('年齢', *{age})"/>
+        <input th:replace="fragments/findLabel ::input ('性別', *{gender}, ${@vh.values('Gender')}, 'code', 'text')"/>
+        <input th:replace="fragments/findLabel :: input ('年齢',*{age}, ${@vh.values('Age')}, 'code', 'text')"/>
         <input th:replace="fragments/label :: input ('件名', *{title})"/>
         <input th:replace="fragments/label :: input ('お問い合わせ内容', *{contact})"/>
         <input th:replace="fragments/label :: input ('ホームページURL', *{url})"/>

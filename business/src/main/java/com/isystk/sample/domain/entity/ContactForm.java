@@ -54,7 +54,7 @@ public class ContactForm extends DomaDtoImpl {
 
     /** 性別 */
     @Column(name = "gender")
-    Boolean gender;
+    Byte gender;
 
     /** 年齢 */
     @Column(name = "age")
@@ -74,7 +74,7 @@ public class ContactForm extends DomaDtoImpl {
 
     /** 削除フラグ */
     @Column(name = "delete_flg")
-    Byte deleteFlg;
+    Boolean deleteFlg;
 
     /** 楽観チェック用バージョン */
     @Version

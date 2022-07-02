@@ -104,7 +104,7 @@ public class UserRepository extends BaseRepository {
 
     inputUser.setCreatedAt(time); // 作成日
     inputUser.setUpdatedAt(time); // 更新日
-    inputUser.setDeleteFlg((byte)0); // 削除フラグ
+    inputUser.setDeleteFlg(false); // 削除フラグ
     inputUser.setVersion(0L); // 楽観ロック改定番号
     userDao.insert(inputUser);
 

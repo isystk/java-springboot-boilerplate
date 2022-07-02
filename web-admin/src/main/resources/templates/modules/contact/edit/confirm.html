@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>[[|${contactEditForm.name}の変更|]]</title>
+  <title>[[|お問い合わせID:${contactEditForm.contactId}の変更|]]</title>
 </head>
 <body>
 <div layout:fragment="sidebar">
@@ -12,14 +12,14 @@
 <div layout:fragment="content-header">
   <div class="row mb-2">
     <div class="col-sm-6">
-      <h1>[[|${contactEditForm.name}の変更|]]</h1>
+      <h1>[[|お問い合わせID:${contactEditForm.contactId}の変更|]]</h1>
     </div>
     <div class="col-sm-6">
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item"><a th:href="@{/contacts/}">お問い合わせ一覧</a></li>
-        <li class="breadcrumb-item"><a th:href="@{/contacts/{contactId}(contactId=${contactEditForm.contactId})}">[[${contactEditForm.name}]]</a></li>
-        <li class="breadcrumb-item active">[[|${contactEditForm.name}の変更|]]</li>
+        <li class="breadcrumb-item"><a th:href="@{/contacts/{contactId}(contactId=${contactEditForm.contactId})}">[[|お問い合わせID:${contactEditForm.contactId}|]]</a></li>
+        <li class="breadcrumb-item active">[[|お問い合わせID:${contactEditForm.contactId}の変更|]]</li>
       </ol>
     </div>
   </div>
@@ -30,17 +30,23 @@
       <p>以下の内容で登録します。</p>
       <form th:object="${contactEditForm}" th:action="@{/contacts/edit/{id}/(id=*{contactId})}" th:method="put">
         <input type="hidden" name="contactId" th:value="*{contactId}"/>
-        <input type="hidden" name="name" th:value="*{name}"/>
-        <input type="hidden" name="detail" th:value="*{detail}"/>
-        <input type="hidden" name="price" th:value="*{price}"/>
-        <input type="hidden" name="quantity" th:value="*{quantity}"/>
+        <input type="hidden" name="yourName" th:value="*{yourName}"/>
+        <input type="hidden" name="email" th:value="*{email}"/>
+        <input type="hidden" name="gender" th:value="*{gender}"/>
+        <input type="hidden" name="age" th:value="*{age}"/>
+        <input type="hidden" name="title" th:value="*{title}"/>
+        <input type="hidden" name="contact" th:value="*{contact}"/>
+        <input type="hidden" name="url" th:value="*{url}"/>
         <input type="hidden" name="contactImageName" th:value="*{contactImageName}"/>
         <input type="hidden" name="contactImageData" th:value="*{contactImageData}"/>
         <input type="hidden" name="version" th:value="*{version}"/>
-        <input th:replace="fragments/label :: input ('お問い合わせ名', *{name})"/>
-        <input th:replace="fragments/label :: input ('お問い合わせ説明', *{detail})"/>
-        <input th:replace="fragments/label :: input ('価格', *{price})"/>
-        <input th:replace="fragments/label :: input ('在庫数', *{quantity})"/>
+        <input th:replace="fragments/label :: input ('氏名', *{yourName})"/>
+        <input th:replace="fragments/label :: input ('メールアドレス', *{email})"/>
+        <input th:replace="fragments/findLabel ::input ('性別', *{gender}, ${@vh.values('Gender')}, 'code', 'text')"/>
+        <input th:replace="fragments/findLabel :: input ('年齢',*{age}, ${@vh.values('Age')}, 'code', 'text')"/>
+        <input th:replace="fragments/label :: input ('件名', *{title})"/>
+        <input th:replace="fragments/label :: input ('お問い合わせ内容', *{contact})"/>
+        <input th:replace="fragments/label :: input ('URL', *{url})"/>
         <div class="form-group row">
           <label class="col-md-2 control-label">お問い合わせ画像</label>
           <div class="col-md-3">

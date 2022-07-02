@@ -18,6 +18,7 @@
       <ol class="breadcrumb float-sm-right">
         <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
         <li class="breadcrumb-item"><a th:href="@{/contacts/}">お問い合わせ一覧</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/contacts/{contactId}(contactId=${contactEditForm.contactId})}">[[|お問い合わせID:${contactEditForm.contactId}|]]</a></li>
         <li class="breadcrumb-item active">[[|お問い合わせID:${contactEditForm.contactId}の変更|]]</li>
       </ol>
     </div>

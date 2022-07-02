@@ -35,4 +35,5 @@ public enum UserStatus implements Values {
     }
     return null;
   }
+
 }

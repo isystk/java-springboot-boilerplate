@@ -172,7 +172,7 @@ public class OrderRepository extends BaseRepository {
     val orderHistory = ObjectMapperUtils.map(orderHistoryDto, OrderHistory.class);
     orderHistory.setCreatedAt(time); // 作成日
     orderHistory.setUpdatedAt(time); // 更新日
-    orderHistory.setDeleteFlg((byte)0); // 削除フラグ
+    orderHistory.setDeleteFlg(false); // 削除フラグ
     orderHistory.setVersion(0L); // 楽観ロック改定番号
     orderHistoryDao.insert(orderHistory);
 
@@ -211,7 +211,7 @@ public class OrderRepository extends BaseRepository {
 
     val time = DateUtils.getNow();
     orderHistory.setUpdatedAt(time); // 削除日
-    orderHistory.setDeleteFlg((byte) 1); // 削除フラグ
+    orderHistory.setDeleteFlg(true); // 削除フラグ
     int updated = orderHistoryDao.update(orderHistory);
 
     if (updated < 1) {

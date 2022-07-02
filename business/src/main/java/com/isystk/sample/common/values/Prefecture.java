@@ -79,4 +79,5 @@ public enum Prefecture implements Values {
     }
     return null;
   }
+
 }

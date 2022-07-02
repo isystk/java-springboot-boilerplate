@@ -3,12 +3,16 @@ package com.isystk.sample.web.admin.controller.html.contact.edit;
 import static com.isystk.sample.common.AdminUrl.CONTACTS_EDIT;
 
 import com.isystk.sample.common.util.ObjectMapperUtils;
+import com.isystk.sample.common.util.StringUtils;
 import com.isystk.sample.common.values.Gender;
+import com.isystk.sample.domain.dto.ContactFormImageRepositoryDto;
 import com.isystk.sample.domain.dto.ContactFormRepositoryDto;
 import com.isystk.sample.web.admin.service.ContactService;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+import org.apache.commons.compress.utils.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -140,6 +144,14 @@ public class ContactEditController extends AbstractHtmlController {
 
     // 入力値を詰め替える
     val tContactsDto = ObjectMapperUtils.map(form, ContactFormRepositoryDto.class);
+    if (!StringUtils.isBlankOrSpace(form.contactImageName) && !StringUtils.isBlankOrSpace(form.contactImageData)) {
+      List<ContactFormImageRepositoryDto> imageList = Lists.newArrayList();
+      var dto = new ContactFormImageRepositoryDto();
+      dto.setContactImageName(form.getContactImageName());
+      dto.setContactImageData(form.getContactImageData());
+      imageList.add(dto);
+      tContactsDto.setImageList(imageList);
+    }
     tContactsDto.setId(form.getContactId());
 
     // 更新する

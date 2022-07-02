@@ -143,7 +143,7 @@ public class ContactFormRepository extends BaseRepository {
     val contactForm = ObjectMapperUtils.map(contactFormDto, ContactForm.class);
     contactForm.setCreatedAt(time); // 作成日
     contactForm.setUpdatedAt(time); // 更新日
-    contactForm.setDeleteFlg((byte)0); // 削除フラグ
+    contactForm.setDeleteFlg(false); // 削除フラグ
     contactForm.setVersion(0L); // 楽観ロック改定番号
     contactFormDao.insert(contactForm);
 
@@ -154,7 +154,7 @@ public class ContactFormRepository extends BaseRepository {
           contactFormImage.setFileName(e.getContactImageName());
           contactFormImage.setCreatedAt(time); // 作成日
           contactFormImage.setUpdatedAt(time); // 更新日
-          contactFormImage.setDeleteFlg((byte)0); // 削除フラグ
+          contactFormImage.setDeleteFlg(false); // 削除フラグ
           contactFormImage.setVersion(0L); // 楽観ロック改定番号
           contactFormImageDao.insert(contactFormImage);
         });
@@ -193,13 +193,14 @@ public class ContactFormRepository extends BaseRepository {
     contactFormImageList.stream().forEach((e) -> {
       contactFormImageDao.delete(e);
     });
-    contactFormDto.getImageList().stream()
+    Optional.ofNullable(contactFormDto.getImageList()).orElse(Lists.newArrayList()).stream()
         .forEach((e) -> {
           val contactFormImage = new ContactFormImage();
+          contactFormImage.setContactFormId(contactForm.getId());
           contactFormImage.setFileName(e.getContactImageName());
           contactFormImage.setCreatedAt(time); // 作成日
           contactFormImage.setUpdatedAt(time); // 更新日
-          contactFormImage.setDeleteFlg((byte)0); // 削除フラグ
+          contactFormImage.setDeleteFlg(false); // 削除フラグ
           contactFormImage.setVersion(0L); // 楽観ロック改定番号
           contactFormImageDao.insert(contactFormImage);
         });
@@ -219,7 +220,7 @@ public class ContactFormRepository extends BaseRepository {
     val time = DateUtils.getNow();
     {
       contactForm.setUpdatedAt(time); // 削除日
-      contactForm.setDeleteFlg((byte) 1); // 削除フラグ
+      contactForm.setDeleteFlg(true); // 削除フラグ
       int updated = contactFormDao.update(contactForm);
 
       if (updated < 1) {
@@ -232,7 +233,7 @@ public class ContactFormRepository extends BaseRepository {
     var contactFormImageList = contactFormImageDao.findAll(criteria);
     contactFormImageList.stream().forEach((e) -> {
       e.setUpdatedAt(time); // 削除日
-      e.setDeleteFlg((byte) 1); // 削除フラグ
+      e.setDeleteFlg(true); // 削除フラグ
       int updated = contactFormImageDao.update(e);
 
       if (updated < 1) {
