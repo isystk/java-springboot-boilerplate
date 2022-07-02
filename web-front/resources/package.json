@@ -4,7 +4,9 @@
   "private": true,
   "scripts": {
     "start": "react-app-rewired start --scripts-version",
-    "build": "react-app-rewired build --scripts-version",
+    "build": "react-app-rewired build --scripts-version && yarn jscopy && yarn csscopy",
+    "jscopy":  "cp ./build/static/js/main.*.js ../src/main/resources/public/static/js/main.js",
+    "csscopy":  "cp ./build/static/css/main.*.css ../src/main/resources/public/static/css/main.css",
     "test": "react-app-rewired test --watchAll=false --scripts-version=@next",
     "eject": "react-scripts eject",
     "lint": "eslint --ext .jsx,.js,.tsx,.ts src/",

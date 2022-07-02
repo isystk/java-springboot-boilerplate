@@ -323,7 +323,7 @@ $ ./gradlew web-admin::bootRun
 # フロントエンドをビルドする。
 $ cd web-front/resources 
 $ yarn 
-& yarn start
+& yarn build
 ```
 
 ## 🔗 参考
