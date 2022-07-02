@@ -105,6 +105,19 @@ case ${1} in
       esac
     ;;
 
+    front)
+      case ${2} in
+          build)
+              pushd web-front/resources
+              yarn build
+              popd
+          ;;
+          *)
+              usage
+          ;;
+      esac
+    ;;
+
     help|--help|-h)
         usage
     ;;

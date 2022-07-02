@@ -8,7 +8,7 @@ exports[`Logo 1`] = `
 >
   <img
     alt=""
-    src="/static/images/logo.png"
+    src="../static/images/logo.png"
   />
 </a>
 `;

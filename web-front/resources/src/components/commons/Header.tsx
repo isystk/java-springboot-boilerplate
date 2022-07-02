@@ -81,7 +81,7 @@ export const CommonHeader: FC<Props> = ({ appRoot }) => {
 
                   <a href="#" onClick={mycartSubmit}>
                     <img
-                      src="/static/images/cart.png"
+                      src="../static/images/cart.png"
                       className="cartImg ml-3"
                     />
                   </a>
