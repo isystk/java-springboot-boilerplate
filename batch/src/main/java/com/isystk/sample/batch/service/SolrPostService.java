@@ -14,9 +14,6 @@ public class SolrPostService extends BaseTransactionalService {
   SolrPostRepository solrPostRepository;
 
   @Autowired
-  TPostRepository postRepository;
-
-  @Autowired
   PageFactory pageFactory;
 
   /**

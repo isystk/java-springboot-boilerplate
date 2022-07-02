@@ -96,7 +96,7 @@ public class ImportMstStockTasklet extends BaseTasklet<ImportMstStockDto> {
       stock.setUpdatedAt(DateUtils.getNow());
       // TODO DeleteFlgがデフォルト値0のカラムなのに設定しないとエラーになる。。
       // Caused by: java.sql.SQLIntegrityConstraintViolationException: Column 'delete_flg' cannot be null
-      stock.setDeleteFlg((byte)0);
+      stock.setDeleteFlg(false);
       stockDao.insert(stock);
     }
 

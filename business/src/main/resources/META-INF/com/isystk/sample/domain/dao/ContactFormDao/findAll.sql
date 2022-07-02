@@ -227,28 +227,34 @@ WHERE
   and url NOT LIKE /* @suffix(criteria.urlNotEnds) */'smith'
 /*%end*/
 /*%if criteria.genderEq != null */
-  and gender = /* criteria.genderEq */'a'
+  and gender = /* criteria.genderEq */1
 /*%end*/
 /*%if criteria.genderNe != null */
-  and gender != /* criteria.genderNe */'a'
+  and gender != /* criteria.genderNe */1
 /*%end*/
 /*%if criteria.genderLt != null */
-  and gender < /* criteria.genderLt */'a'
+  and gender < /* criteria.genderLt */1
 /*%end*/
 /*%if criteria.genderLe != null */
-  and gender <= /* criteria.genderLe */'a'
+  and gender <= /* criteria.genderLe */1
 /*%end*/
 /*%if criteria.genderGt != null */
-  and gender > /* criteria.genderGt */'a'
+  and gender > /* criteria.genderGt */1
 /*%end*/
 /*%if criteria.genderGe != null */
-  and gender >= /* criteria.genderGe */'a'
+  and gender >= /* criteria.genderGe */1
 /*%end*/
 /*%if criteria.genderIsNull  */
   and gender IS NULL
 /*%end*/
 /*%if criteria.genderIsNotNull  */
   and gender IS NOT NULL
+/*%end*/
+/*%if criteria.genderIn != null  */
+  and gender IN /* criteria.genderIn */(1,2,3)
+/*%end*/
+/*%if criteria.genderNotIn != null  */
+  and gender NOT IN /* criteria.genderNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.ageEq != null */
   and age = /* criteria.ageEq */1

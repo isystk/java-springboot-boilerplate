@@ -68,7 +68,7 @@
               <td th:text="*{e.imageType.text}"></td>
               <td th:text="*{e.imageName}"></td>
               <td>
-                <img th:src="${@img.url('/stocks', e.imageName)}" width="150px"/>
+                <img th:src="${@img.url('', e.imageName)}" width="150px"/>
               </td>
               <td class="float-right">
                 <form th:action="@{/photos?(name=*{e.imageName})}" th:method="delete">

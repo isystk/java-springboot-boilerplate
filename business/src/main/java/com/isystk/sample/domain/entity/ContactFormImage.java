@@ -54,7 +54,7 @@ public class ContactFormImage extends DomaDtoImpl {
 
     /** 削除フラグ */
     @Column(name = "delete_flg")
-    Byte deleteFlg;
+    Boolean deleteFlg;
 
     /** 楽観チェック用バージョン */
     @Version

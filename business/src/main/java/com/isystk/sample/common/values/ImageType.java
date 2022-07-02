@@ -10,6 +10,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ImageType implements Values {
 
+  UNKNOWN("0", "不明"),
   STOCK("1", "商品"),
   CONTACT("2", "お問い合わせ");
 
@@ -33,4 +34,5 @@ public enum ImageType implements Values {
     }
     return null;
   }
+
 }

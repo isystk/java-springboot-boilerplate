@@ -113,7 +113,7 @@ public class StockRepository extends BaseRepository {
     stock.setImgpath(stockDto.getStockImageName());
     stock.setCreatedAt(time); // 作成日
     stock.setUpdatedAt(time); // 更新日
-    stock.setDeleteFlg((byte)0); // 削除フラグ
+    stock.setDeleteFlg(false); // 削除フラグ
     stock.setVersion(0L); // 楽観ロック改定番号
     stockDao.insert(stock);
 
@@ -156,7 +156,7 @@ public class StockRepository extends BaseRepository {
 
     val time = DateUtils.getNow();
     stock.setUpdatedAt(time); // 削除日
-    stock.setDeleteFlg((byte) 1); // 削除フラグ
+    stock.setDeleteFlg(true); // 削除フラグ
     int updated = stockDao.update(stock);
 
     if (updated < 1) {

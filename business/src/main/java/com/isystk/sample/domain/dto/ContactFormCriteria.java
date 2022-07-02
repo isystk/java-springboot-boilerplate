@@ -98,14 +98,16 @@ public class ContactFormCriteria {
     String urlEnds;
     String urlNotEnds;
 
-    Boolean genderEq;
-    Boolean genderNe;
-    Boolean genderLt;
-    Boolean genderLe;
-    Boolean genderGt;
-    Boolean genderGe;
+    Byte genderEq;
+    Byte genderNe;
+    Byte genderLt;
+    Byte genderLe;
+    Byte genderGt;
+    Byte genderGe;
     boolean genderIsNull;
     boolean genderIsNotNull;
+    List<Byte> genderIn;
+    List<Byte> genderNotIn;
 
     Byte ageEq;
     Byte ageNe;

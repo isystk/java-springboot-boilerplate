@@ -23,22 +23,24 @@ public class PhotoService extends BaseTransactionalService {
    * @return
    */
   public List<PhotoSearchResultDto> findAll(String name) {
-    List<String> stockImages = imageHelper.getImageList("/stocks");
+    List<String> stockImages = imageHelper.getImageList("");
     return stockImages.stream()
         .filter((e) -> {
           if (StringUtils.isBlankOrSpace(name)) {
             return true;
           }
-          String[] names = e.split("/");
-          String imageName = names[names.length-1];
-          return 0 <= imageName.indexOf(name);
+          return 0 <= e.indexOf(name);
         })
         .map((e) -> {
           PhotoSearchResultDto dto = new PhotoSearchResultDto();
-          dto.setImageType(ImageType.STOCK);
-          String[] names = e.split("/");
-          String imageName = names[names.length-1];
-          dto.setImageName(imageName);
+          if (0<=e.indexOf("stock")) {
+            dto.setImageType(ImageType.STOCK);
+          } else if (0<=e.indexOf("contact")) {
+            dto.setImageType(ImageType.CONTACT);
+          } else {
+            dto.setImageType(ImageType.UNKNOWN);
+          }
+          dto.setImageName(e);
           return dto;
     }).collect(Collectors.toList());
   }
@@ -48,6 +50,6 @@ public class PhotoService extends BaseTransactionalService {
    * @param imageName
    */
   public void delete(String imageName) {
-    imageHelper.removeFile("/stocks", imageName);
+    imageHelper.removeFile("/", imageName);
   }
 }
