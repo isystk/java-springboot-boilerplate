@@ -8,7 +8,7 @@ import lombok.Getter;
  */
 @Getter
 @AllArgsConstructor
-public enum Sex implements Values {
+public enum Gender implements Values {
 
   WOMAN("1", "女性"),
   MAN("2", "男性");
@@ -22,11 +22,11 @@ public enum Sex implements Values {
    * @param code
    * @return
    */
-  public static Sex getValue(String code) {
+  public static Gender getValue(String code) {
     if (code == null) {
       return null;
     }
-    for (Sex div : values()) {
+    for (Gender div : values()) {
       if (div.getCode().equals(code)) {
         return div;
       }

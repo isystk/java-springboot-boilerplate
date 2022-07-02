@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>お問い合わせID:[[${contact.id}]]</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('users', 'contact')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>お問い合わせID:[[${contact.id}]]</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/contacts/}">お問い合わせ一覧</a></li>
+        <li class="breadcrumb-item">お問い合わせID:[[${contact.id}]]</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div layout:fragment="content">
+  <div class="card card-purple">
+    <div class="card-body">
+      <div th:object="${contact}">
+        <input th:replace="fragments/label :: input ('氏名', *{yourName})"/>
+        <input th:replace="fragments/label :: input ('メールアドレス', *{email})"/>
+        <input th:replace="fragments/label :: input ('性別', *{gender})"/>
+        <input th:replace="fragments/label :: input ('年齢', *{age})"/>
+        <input th:replace="fragments/label :: input ('件名', *{title})"/>
+        <input th:replace="fragments/label :: input ('お問い合わせ内容', *{contact})"/>
+        <input th:replace="fragments/label :: input ('ホームページURL', *{url})"/>
+        <div class="form-group row">
+          <label class="col-md-2 control-label">お問い合わせ画像</label>
+          <div class="col-md-3" th:each="e : *{imageList}">
+            <img th:src="${@img.url('/contacts', e.fileName)}" width="100%"/>
+          </div>
+        </div>
+        <div class="card-footer clearfix text-center">
+          <div class="text-left float-left">
+            <a th:href="@{/contacts}" class="btn btn-secondary">一覧に戻る</a>
+          </div>
+          <a th:href="@{/contacts/edit/{id}/(id=*{id})}" class="btn btn-info">修正する</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

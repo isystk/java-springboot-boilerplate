@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>[[|お問い合わせID:${contactEditForm.contactId}の変更|]]</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('users', 'contact')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>[[|お問い合わせID:${contactEditForm.contactId}の変更|]]</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/contacts/}">お問い合わせ一覧</a></li>
+        <li class="breadcrumb-item active">[[|お問い合わせID:${contactEditForm.contactId}の変更|]]</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div layout:fragment="content">
+  <div class="card card-purple">
+    <div class="card-body">
+      <p>お問い合わせ内容を入力して下さい</p>
+      <form th:object="${contactEditForm}" th:action="@{/contacts/edit/{id}/(id=*{contactId})}"
+            th:method="put">
+        <input type="hidden" name="contactId" th:value="*{contactId}"/>
+        <input th:replace="fragments/input :: input ('text', '氏名', 'yourName', 100)"/>
+        <input th:replace="fragments/input :: input ('text', 'メールアドレス', 'email', 100)"/>
+        <input th:replace="fragments/radio :: input ('性別', 'gender', ${@vh.values('Gender')}, 'code', 'text')"/>
+        <input th:replace="fragments/selectbox :: input ('年齢', 'age', ${@vh.values('Age')}, 'code', 'text')"/>
+        <input th:replace="fragments/input :: input ('text', '件名', 'title', 100)"/>
+        <input th:replace="fragments/textarea :: input ('お問い合わせ内容', 'contact', 5)"/>
+        <input th:replace="fragments/input :: input ('url', 'URL', 'url', 100)"/>
+        <input th:replace="fragments/imageUpload :: input ('お問い合わせ画像', 'contactImage')"/>
+        <div class="card-footer clearfix text-center">
+          <div class="text-left float-left">
+            <a class="btn btn-secondary" th:href="@{/contacts}">一覧に戻る</a>
+          </div>
+          <button class="btn btn-info js-submit" th:data-uri="@{/contacts/edit?confirm}">確認画面へ
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div layout:fragment="scripts">
+  <script type="text/javascript" th:src="@{/static/js/contact/edit/index.js}"></script>
+</div>
+</body>
+</html>

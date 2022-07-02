@@ -58,6 +58,12 @@ WHERE
 /*%if criteria.nameIsNotNull  */
   and name IS NOT NULL
 /*%end*/
+/*%if criteria.nameIn != null  */
+  and name IN /* criteria.nameIn */(1,2,3)
+/*%end*/
+/*%if criteria.nameNotIn != null  */
+  and name NOT IN /* criteria.nameNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.nameLike != null  */
   and name LIKE /* @infix(criteria.nameLike) */'smith'
 /*%end*/
@@ -99,6 +105,12 @@ WHERE
 /*%end*/
 /*%if criteria.detailIsNotNull  */
   and detail IS NOT NULL
+/*%end*/
+/*%if criteria.detailIn != null  */
+  and detail IN /* criteria.detailIn */(1,2,3)
+/*%end*/
+/*%if criteria.detailNotIn != null  */
+  and detail NOT IN /* criteria.detailNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.detailLike != null  */
   and detail LIKE /* @infix(criteria.detailLike) */'smith'
@@ -171,6 +183,12 @@ WHERE
 /*%end*/
 /*%if criteria.imgpathIsNotNull  */
   and imgpath IS NOT NULL
+/*%end*/
+/*%if criteria.imgpathIn != null  */
+  and imgpath IN /* criteria.imgpathIn */(1,2,3)
+/*%end*/
+/*%if criteria.imgpathNotIn != null  */
+  and imgpath NOT IN /* criteria.imgpathNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.imgpathLike != null  */
   and imgpath LIKE /* @infix(criteria.imgpathLike) */'smith'

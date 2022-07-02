@@ -49,6 +49,8 @@ public class ContactFormImageCriteria {
     String fileNameGe;
     boolean fileNameIsNull;
     boolean fileNameIsNotNull;
+    List<String> fileNameIn;
+    List<String> fileNameNotIn;
     String fileNameLike;
     String fileNameNotLike;
     String fileNameStarts;

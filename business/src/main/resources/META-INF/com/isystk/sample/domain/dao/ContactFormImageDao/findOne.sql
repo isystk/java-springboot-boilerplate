@@ -88,6 +88,12 @@ WHERE
 /*%if criteria.fileNameIsNotNull  */
   and file_name IS NOT NULL
 /*%end*/
+/*%if criteria.fileNameIn != null  */
+  and file_name IN /* criteria.fileNameIn */(1,2,3)
+/*%end*/
+/*%if criteria.fileNameNotIn != null  */
+  and file_name NOT IN /* criteria.fileNameNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.fileNameLike != null  */
   and file_name LIKE /* @infix(criteria.fileNameLike) */'smith'
 /*%end*/

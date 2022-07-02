@@ -58,6 +58,12 @@ WHERE
 /*%if criteria.nameIsNotNull  */
   and name IS NOT NULL
 /*%end*/
+/*%if criteria.nameIn != null  */
+  and name IN /* criteria.nameIn */(1,2,3)
+/*%end*/
+/*%if criteria.nameNotIn != null  */
+  and name NOT IN /* criteria.nameNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.nameLike != null  */
   and name LIKE /* @infix(criteria.nameLike) */'smith'
 /*%end*/
@@ -99,6 +105,12 @@ WHERE
 /*%end*/
 /*%if criteria.emailIsNotNull  */
   and email IS NOT NULL
+/*%end*/
+/*%if criteria.emailIn != null  */
+  and email IN /* criteria.emailIn */(1,2,3)
+/*%end*/
+/*%if criteria.emailNotIn != null  */
+  and email NOT IN /* criteria.emailNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.emailLike != null  */
   and email LIKE /* @infix(criteria.emailLike) */'smith'
@@ -142,6 +154,12 @@ WHERE
 /*%if criteria.passwordIsNotNull  */
   and password IS NOT NULL
 /*%end*/
+/*%if criteria.passwordIn != null  */
+  and password IN /* criteria.passwordIn */(1,2,3)
+/*%end*/
+/*%if criteria.passwordNotIn != null  */
+  and password NOT IN /* criteria.passwordNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.passwordLike != null  */
   and password LIKE /* @infix(criteria.passwordLike) */'smith'
 /*%end*/
@@ -183,6 +201,12 @@ WHERE
 /*%end*/
 /*%if criteria.rememberTokenIsNotNull  */
   and remember_token IS NOT NULL
+/*%end*/
+/*%if criteria.rememberTokenIn != null  */
+  and remember_token IN /* criteria.rememberTokenIn */(1,2,3)
+/*%end*/
+/*%if criteria.rememberTokenNotIn != null  */
+  and remember_token NOT IN /* criteria.rememberTokenNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.rememberTokenLike != null  */
   and remember_token LIKE /* @infix(criteria.rememberTokenLike) */'smith'

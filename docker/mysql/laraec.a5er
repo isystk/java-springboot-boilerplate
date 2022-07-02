@@ -58,13 +58,13 @@ Field="remember_token","remember_token","varchar(100)",,,"","",$FFFFFFFF,""
 Field="最終ログイン日時","last_login_at","timestamp",,,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
-Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","tinyint(1)","NOT NULL",,"0","",$FFFFFFFF,""
 Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
 Index==2,email
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220629144453
+ModifiedDateTime=20220702131429
 Position="MAIN",1150,1200,343,246
 ZOrder=1
 
@@ -81,14 +81,14 @@ Field="商品ID","stock_id","bigint unsigned","NOT NULL",,"","",$FFFFFFFF,""
 Field="ユーザID","user_id","bigint unsigned","NOT NULL",,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
-Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","tinyint(1)","NOT NULL",,"0","",$FFFFFFFF,""
 Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
 Index==0,stock_id
 Index==0,user_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220629143946
+ModifiedDateTime=20220702131403
 Position="MAIN",500,800,248,286
 ZOrder=2
 
@@ -105,13 +105,13 @@ Field="お問い合わせID","contact_form_id","bigint unsigned","NOT NULL",,"",
 Field="ファイル名","file_name","varchar(100)","NOT NULL",,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
-Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","tinyint(1)","NOT NULL",,"0","",$FFFFFFFF,""
 Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
 Index==0,contact_form_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220629143952
+ModifiedDateTime=20220702131412
 Position="MAIN",650,1300,311,184
 ZOrder=3
 
@@ -128,17 +128,17 @@ Field="お名前","your_name","varchar(20)","NOT NULL",,"","",$FFFFFFFF,""
 Field="タイトル","title","varchar(50)","NOT NULL",,"","",$FFFFFFFF,""
 Field="メールアドレス","email","varchar(255)","NOT NULL",,"","",$FFFFFFFF,""
 Field="URL","url","longtext",,,"","",$FFFFFFFF,""
-Field="性別","gender","tinyint(1)","NOT NULL",,"","",$FFFFFFFF,""
+Field="性別","gender_flg","tinyint(1)","NOT NULL",,"","",$FFFFFFFF,""
 Field="年齢","age","tinyint","NOT NULL",,"","",$FFFFFFFF,""
 Field="お問い合わせ内容","contact","varchar(200)","NOT NULL",,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
-Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","tinyint(1)","NOT NULL",,"0","",$FFFFFFFF,""
 Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220629143949
+ModifiedDateTime=20220702132140
 Position="MAIN",150,1300,313,343
 ZOrder=4
 
@@ -157,13 +157,13 @@ Field="価格","price","int",,,"","",$FFFFFFFF,""
 Field="個数","quantity","int",,,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
-Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","tinyint(1)","NOT NULL",,"0","",$FFFFFFFF,""
 Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
 Index==0,stock_id
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220629145605
+ModifiedDateTime=20220702131349
 Position="MAIN",150,800,222,248
 ZOrder=7
 
@@ -202,12 +202,12 @@ Field="画像ファイル名","imgpath","varchar(200)","NOT NULL",,"","",$FFFFFF
 Field="在庫数","quantity","int",,,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
-Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","tinyint(1)","NOT NULL",,"0","",$FFFFFFFF,""
 Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220629143936
+ModifiedDateTime=20220702131336
 Position="MAIN",150,250,248,290
 ZOrder=9
 
@@ -230,14 +230,14 @@ Field="remember_token","remember_token","varchar(100)",,,"","",$FFFFFFFF,""
 Field="最終ログイン日時","last_login_at","timestamp",,,"","",$FFFFFFFF,""
 Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
 Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
-Field="削除フラグ","delete_flg","TINYINT","NOT NULL",,"0","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","tinyint(1)","NOT NULL",,"0","",$FFFFFFFF,""
 Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
 Index==2,email
 Index==2,provider_id,provider_name
 EffectMode=None
 Color=$000000
 BkColor=$FFFFFF
-ModifiedDateTime=20220629144434
+ModifiedDateTime=20220702131417
 Position="MAIN",1200,250,243,364
 ZOrder=10
 
@@ -271,14 +271,14 @@ Fields1=id
 Fields2=contact_form_id
 Cardinarity1=
 Cardinarity2=
-Position="MAIN",0,500,9500,443,R,R,""
+Position="MAIN",0,500,9500,552,R,R,""
 Dependence=0
 Caption=
 PName=
 LineMode=0
 Bar1=50
 Bar2=950
-Bar3=44
+Bar3=55
 TermPos1=R
 TermPos2=R
 ZOrder=11

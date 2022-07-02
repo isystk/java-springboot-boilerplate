@@ -17,4 +17,7 @@ public interface AdminUrl {
   public static final String PHOTOS = "/photos";
 
   public static final String USERS = "/users";
+
+  public static final String CONTACTS = "/contacts";
+  public static final String CONTACTS_EDIT = "/contacts/edit";
 }

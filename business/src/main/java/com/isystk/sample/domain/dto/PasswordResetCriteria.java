@@ -27,6 +27,8 @@ public class PasswordResetCriteria {
     String emailGe;
     boolean emailIsNull;
     boolean emailIsNotNull;
+    List<String> emailIn;
+    List<String> emailNotIn;
     String emailLike;
     String emailNotLike;
     String emailStarts;
@@ -42,6 +44,8 @@ public class PasswordResetCriteria {
     String tokenGe;
     boolean tokenIsNull;
     boolean tokenIsNotNull;
+    List<String> tokenIn;
+    List<String> tokenNotIn;
     String tokenLike;
     String tokenNotLike;
     String tokenStarts;

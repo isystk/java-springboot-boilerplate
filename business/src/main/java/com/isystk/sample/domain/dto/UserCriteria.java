@@ -38,6 +38,8 @@ public class UserCriteria {
     String providerIdGe;
     boolean providerIdIsNull;
     boolean providerIdIsNotNull;
+    List<String> providerIdIn;
+    List<String> providerIdNotIn;
     String providerIdLike;
     String providerIdNotLike;
     String providerIdStarts;
@@ -53,6 +55,8 @@ public class UserCriteria {
     String providerNameGe;
     boolean providerNameIsNull;
     boolean providerNameIsNotNull;
+    List<String> providerNameIn;
+    List<String> providerNameNotIn;
     String providerNameLike;
     String providerNameNotLike;
     String providerNameStarts;
@@ -68,6 +72,8 @@ public class UserCriteria {
     String nameGe;
     boolean nameIsNull;
     boolean nameIsNotNull;
+    List<String> nameIn;
+    List<String> nameNotIn;
     String nameLike;
     String nameNotLike;
     String nameStarts;
@@ -83,6 +89,8 @@ public class UserCriteria {
     String emailGe;
     boolean emailIsNull;
     boolean emailIsNotNull;
+    List<String> emailIn;
+    List<String> emailNotIn;
     String emailLike;
     String emailNotLike;
     String emailStarts;
@@ -107,6 +115,8 @@ public class UserCriteria {
     String passwordGe;
     boolean passwordIsNull;
     boolean passwordIsNotNull;
+    List<String> passwordIn;
+    List<String> passwordNotIn;
     String passwordLike;
     String passwordNotLike;
     String passwordStarts;
@@ -122,6 +132,8 @@ public class UserCriteria {
     String rememberTokenGe;
     boolean rememberTokenIsNull;
     boolean rememberTokenIsNotNull;
+    List<String> rememberTokenIn;
+    List<String> rememberTokenNotIn;
     String rememberTokenLike;
     String rememberTokenNotLike;
     String rememberTokenStarts;

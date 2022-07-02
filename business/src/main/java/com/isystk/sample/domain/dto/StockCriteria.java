@@ -38,6 +38,8 @@ public class StockCriteria {
     String nameGe;
     boolean nameIsNull;
     boolean nameIsNotNull;
+    List<String> nameIn;
+    List<String> nameNotIn;
     String nameLike;
     String nameNotLike;
     String nameStarts;
@@ -53,6 +55,8 @@ public class StockCriteria {
     String detailGe;
     boolean detailIsNull;
     boolean detailIsNotNull;
+    List<String> detailIn;
+    List<String> detailNotIn;
     String detailLike;
     String detailNotLike;
     String detailStarts;
@@ -79,6 +83,8 @@ public class StockCriteria {
     String imgpathGe;
     boolean imgpathIsNull;
     boolean imgpathIsNotNull;
+    List<String> imgpathIn;
+    List<String> imgpathNotIn;
     String imgpathLike;
     String imgpathNotLike;
     String imgpathStarts;

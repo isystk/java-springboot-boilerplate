@@ -38,6 +38,8 @@ public class ContactFormCriteria {
     String yourNameGe;
     boolean yourNameIsNull;
     boolean yourNameIsNotNull;
+    List<String> yourNameIn;
+    List<String> yourNameNotIn;
     String yourNameLike;
     String yourNameNotLike;
     String yourNameStarts;
@@ -53,6 +55,8 @@ public class ContactFormCriteria {
     String titleGe;
     boolean titleIsNull;
     boolean titleIsNotNull;
+    List<String> titleIn;
+    List<String> titleNotIn;
     String titleLike;
     String titleNotLike;
     String titleStarts;
@@ -68,6 +72,8 @@ public class ContactFormCriteria {
     String emailGe;
     boolean emailIsNull;
     boolean emailIsNotNull;
+    List<String> emailIn;
+    List<String> emailNotIn;
     String emailLike;
     String emailNotLike;
     String emailStarts;
@@ -83,6 +89,8 @@ public class ContactFormCriteria {
     String urlGe;
     boolean urlIsNull;
     boolean urlIsNotNull;
+    List<String> urlIn;
+    List<String> urlNotIn;
     String urlLike;
     String urlNotLike;
     String urlStarts;
@@ -98,12 +106,6 @@ public class ContactFormCriteria {
     Boolean genderGe;
     boolean genderIsNull;
     boolean genderIsNotNull;
-    Boolean genderLike;
-    Boolean genderNotLike;
-    Boolean genderStarts;
-    Boolean genderNotStarts;
-    Boolean genderEnds;
-    Boolean genderNotEnds;
 
     Byte ageEq;
     Byte ageNe;
@@ -124,6 +126,8 @@ public class ContactFormCriteria {
     String contactGe;
     boolean contactIsNull;
     boolean contactIsNotNull;
+    List<String> contactIn;
+    List<String> contactNotIn;
     String contactLike;
     String contactNotLike;
     String contactStarts;

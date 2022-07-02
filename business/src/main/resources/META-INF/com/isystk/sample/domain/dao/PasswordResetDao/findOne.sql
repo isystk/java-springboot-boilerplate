@@ -28,6 +28,12 @@ WHERE
 /*%if criteria.emailIsNotNull  */
   and email IS NOT NULL
 /*%end*/
+/*%if criteria.emailIn != null  */
+  and email IN /* criteria.emailIn */(1,2,3)
+/*%end*/
+/*%if criteria.emailNotIn != null  */
+  and email NOT IN /* criteria.emailNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.emailLike != null  */
   and email LIKE /* @infix(criteria.emailLike) */'smith'
 /*%end*/
@@ -69,6 +75,12 @@ WHERE
 /*%end*/
 /*%if criteria.tokenIsNotNull  */
   and token IS NOT NULL
+/*%end*/
+/*%if criteria.tokenIn != null  */
+  and token IN /* criteria.tokenIn */(1,2,3)
+/*%end*/
+/*%if criteria.tokenNotIn != null  */
+  and token NOT IN /* criteria.tokenNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.tokenLike != null  */
   and token LIKE /* @infix(criteria.tokenLike) */'smith'

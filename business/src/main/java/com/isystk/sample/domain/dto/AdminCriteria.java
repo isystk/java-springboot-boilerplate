@@ -38,6 +38,8 @@ public class AdminCriteria {
     String nameGe;
     boolean nameIsNull;
     boolean nameIsNotNull;
+    List<String> nameIn;
+    List<String> nameNotIn;
     String nameLike;
     String nameNotLike;
     String nameStarts;
@@ -53,6 +55,8 @@ public class AdminCriteria {
     String emailGe;
     boolean emailIsNull;
     boolean emailIsNotNull;
+    List<String> emailIn;
+    List<String> emailNotIn;
     String emailLike;
     String emailNotLike;
     String emailStarts;
@@ -68,6 +72,8 @@ public class AdminCriteria {
     String passwordGe;
     boolean passwordIsNull;
     boolean passwordIsNotNull;
+    List<String> passwordIn;
+    List<String> passwordNotIn;
     String passwordLike;
     String passwordNotLike;
     String passwordStarts;
@@ -83,6 +89,8 @@ public class AdminCriteria {
     String rememberTokenGe;
     boolean rememberTokenIsNull;
     boolean rememberTokenIsNotNull;
+    List<String> rememberTokenIn;
+    List<String> rememberTokenNotIn;
     String rememberTokenLike;
     String rememberTokenNotLike;
     String rememberTokenStarts;
