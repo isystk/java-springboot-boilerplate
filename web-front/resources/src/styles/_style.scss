@@ -301,7 +301,7 @@
 }
 .form-group .radio-wrap input + span::before{
   content: "";
-  background-image: url(/assets/images/radio.png);
+  background-image: url(../static/images/radio.png);
   background-size: contain;
   display: block;
   position: absolute;
@@ -317,7 +317,7 @@
 }
 .form-group .radio-wrap input:checked + span::after{
   content: "";
-  background-image: url(/assets/images/radio-checked.png);
+  background-image: url(../static/images/radio-checked.png);
   background-size: contain;
   display: block;
   position: absolute;
@@ -344,7 +344,7 @@
 }
 .form-group .checkbox-wrap input + span::before{
   content: "";
-  background-image: url(/assets/images/check.png);
+  background-image: url(../static/images/check.png);
   background-size: contain;
   display: block;
   position: absolute;
@@ -360,7 +360,7 @@
 }
 .form-group .checkbox-wrap input:checked + span::after{
   content: "";
-  background-image: url(/assets/images/check-checked.png);
+  background-image: url(../static/images/check-checked.png);
   background-size: contain;
   display: block;
   position: absolute;
@@ -385,7 +385,7 @@
   content: '';
   width: 15px;
   height: 15px;
-  background: url(/assets/images/select.png) no-repeat;
+  background: url(../static/images/select.png) no-repeat;
   background-size: contain;
 }
 .form-group .select-wrap select{
@@ -656,7 +656,7 @@ list-style: none;
   position: absolute;
   top: 50%;
   left: 50%;
-  //background-image: url(/assets/images/loading.gif);
+  //background-image: url(../static/images/loading.gif);
   //background-position: center;
   //background-repeat: no-repeat;
   //background-size: cover;

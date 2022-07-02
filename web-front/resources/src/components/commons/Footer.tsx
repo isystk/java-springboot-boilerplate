@@ -6,7 +6,7 @@ const CommonFooter: FC = () => {
     <footer className="footer">
       <div className="footer_inner">
         <p className="mt20">
-          <img src="/assets/images/logo_02.png" alt="" />
+          <img src="/static/images/logo_02.png" alt="" />
         </p>
         <p className="mt10">
           <small className="fz-s">
