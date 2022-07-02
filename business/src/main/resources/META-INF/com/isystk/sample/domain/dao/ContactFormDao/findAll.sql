@@ -58,6 +58,12 @@ WHERE
 /*%if criteria.yourNameIsNotNull  */
   and your_name IS NOT NULL
 /*%end*/
+/*%if criteria.yourNameIn != null  */
+  and your_name IN /* criteria.yourNameIn */(1,2,3)
+/*%end*/
+/*%if criteria.yourNameNotIn != null  */
+  and your_name NOT IN /* criteria.yourNameNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.yourNameLike != null  */
   and your_name LIKE /* @infix(criteria.yourNameLike) */'smith'
 /*%end*/
@@ -99,6 +105,12 @@ WHERE
 /*%end*/
 /*%if criteria.titleIsNotNull  */
   and title IS NOT NULL
+/*%end*/
+/*%if criteria.titleIn != null  */
+  and title IN /* criteria.titleIn */(1,2,3)
+/*%end*/
+/*%if criteria.titleNotIn != null  */
+  and title NOT IN /* criteria.titleNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.titleLike != null  */
   and title LIKE /* @infix(criteria.titleLike) */'smith'
@@ -142,6 +154,12 @@ WHERE
 /*%if criteria.emailIsNotNull  */
   and email IS NOT NULL
 /*%end*/
+/*%if criteria.emailIn != null  */
+  and email IN /* criteria.emailIn */(1,2,3)
+/*%end*/
+/*%if criteria.emailNotIn != null  */
+  and email NOT IN /* criteria.emailNotIn */(1,2,3)
+/*%end*/
 /*%if criteria.emailLike != null  */
   and email LIKE /* @infix(criteria.emailLike) */'smith'
 /*%end*/
@@ -183,6 +201,12 @@ WHERE
 /*%end*/
 /*%if criteria.urlIsNotNull  */
   and url IS NOT NULL
+/*%end*/
+/*%if criteria.urlIn != null  */
+  and url IN /* criteria.urlIn */(1,2,3)
+/*%end*/
+/*%if criteria.urlNotIn != null  */
+  and url NOT IN /* criteria.urlNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.urlLike != null  */
   and url LIKE /* @infix(criteria.urlLike) */'smith'
@@ -279,6 +303,12 @@ WHERE
 /*%end*/
 /*%if criteria.contactIsNotNull  */
   and contact IS NOT NULL
+/*%end*/
+/*%if criteria.contactIn != null  */
+  and contact IN /* criteria.contactIn */(1,2,3)
+/*%end*/
+/*%if criteria.contactNotIn != null  */
+  and contact NOT IN /* criteria.contactNotIn */(1,2,3)
 /*%end*/
 /*%if criteria.contactLike != null  */
   and contact LIKE /* @infix(criteria.contactLike) */'smith'

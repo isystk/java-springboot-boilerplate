@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>[[|${contactEditForm.name}の変更|]]</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('users', 'contact')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>[[|${contactEditForm.name}の変更|]]</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/contacts/}">お問い合わせ一覧</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/contacts/{contactId}(contactId=${contactEditForm.contactId})}">[[${contactEditForm.name}]]</a></li>
+        <li class="breadcrumb-item active">[[|${contactEditForm.name}の変更|]]</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div layout:fragment="content">
+  <div class="card card-purple">
+    <div class="card-body">
+      <p>以下の内容で登録します。</p>
+      <form th:object="${contactEditForm}" th:action="@{/contacts/edit/{id}/(id=*{contactId})}" th:method="put">
+        <input type="hidden" name="contactId" th:value="*{contactId}"/>
+        <input type="hidden" name="name" th:value="*{name}"/>
+        <input type="hidden" name="detail" th:value="*{detail}"/>
+        <input type="hidden" name="price" th:value="*{price}"/>
+        <input type="hidden" name="quantity" th:value="*{quantity}"/>
+        <input type="hidden" name="contactImageName" th:value="*{contactImageName}"/>
+        <input type="hidden" name="contactImageData" th:value="*{contactImageData}"/>
+        <input type="hidden" name="version" th:value="*{version}"/>
+        <input th:replace="fragments/label :: input ('お問い合わせ名', *{name})"/>
+        <input th:replace="fragments/label :: input ('お問い合わせ説明', *{detail})"/>
+        <input th:replace="fragments/label :: input ('価格', *{price})"/>
+        <input th:replace="fragments/label :: input ('在庫数', *{quantity})"/>
+        <div class="form-group row">
+          <label class="col-md-2 control-label">お問い合わせ画像</label>
+          <div class="col-md-3">
+            <img th:src="*{contactImageData}" width="100%"/>
+          </div>
+        </div>
+        <div class="card-footer clearfix text-center">
+          <div class="text-left float-left">
+            <button class="btn btn-secondary js-submit" th:data-uri="@{/contacts/edit?back}">前に戻る
+            </button>
+          </div>
+          <button class="btn btn-info js-submit" th:data-uri="@{/contacts/edit?complete}">修正する
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

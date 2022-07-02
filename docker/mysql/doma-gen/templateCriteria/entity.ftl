@@ -50,6 +50,8 @@ public class ${simpleName}Criteria {
     <#if !useAccessor>public </#if>List<${property.propertyClassSimpleName}> ${property.name}In;
     <#if !useAccessor>public </#if>List<${property.propertyClassSimpleName}> ${property.name}NotIn;
 <#else>
+    <#if !useAccessor>public </#if>List<${property.propertyClassSimpleName}> ${property.name}In;
+    <#if !useAccessor>public </#if>List<${property.propertyClassSimpleName}> ${property.name}NotIn;
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name}Like;
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name}NotLike;
     <#if !useAccessor>public </#if>${property.propertyClassSimpleName} ${property.name}Starts;

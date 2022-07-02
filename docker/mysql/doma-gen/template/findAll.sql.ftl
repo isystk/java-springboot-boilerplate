@@ -47,6 +47,12 @@ WHERE
   and ${property.columnName} NOT IN /* criteria.${property.name}NotIn */(1,2,3)
 /*%end*/
 <#else>
+/*%if criteria.${property.name}In != null  */
+  and ${property.columnName} IN /* criteria.${property.name}In */(1,2,3)
+/*%end*/
+/*%if criteria.${property.name}NotIn != null  */
+  and ${property.columnName} NOT IN /* criteria.${property.name}NotIn */(1,2,3)
+/*%end*/
 /*%if criteria.${property.name}Like != null  */
   and ${property.columnName} LIKE /* @infix(criteria.${property.name}Like) */'smith'
 /*%end*/

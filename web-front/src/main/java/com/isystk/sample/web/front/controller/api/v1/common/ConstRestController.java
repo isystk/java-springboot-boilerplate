@@ -3,11 +3,10 @@ package com.isystk.sample.web.front.controller.api.v1.common;
 import com.isystk.sample.common.dto.CodeValueDto;
 import com.isystk.sample.common.dto.CodeValueGroupDto;
 import com.isystk.sample.common.values.Prefecture;
-import com.isystk.sample.common.values.Sex;
+import com.isystk.sample.common.values.Gender;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import org.apache.commons.compress.utils.Lists;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +37,7 @@ public class ConstRestController extends AbstractRestController {
     Resource resource = resourceFactory.create();
 
     List<CodeValueGroupDto> list = Lists.newArrayList();
-    list.add(new CodeValueGroupDto("sex", Arrays.stream(Sex.values())
+    list.add(new CodeValueGroupDto("sex", Arrays.stream(Gender.values())
         .map((values) -> {
               CodeValueDto dto = new CodeValueDto();
               dto.setText(values.getText());

@@ -1,5 +1,5 @@
 -- Project Name : laraec
--- Date/Time    : 2022/07/01 20:28:15
+-- Date/Time    : 2022/07/02 13:15:23
 -- Author       : USER
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
@@ -19,7 +19,7 @@ create table user (
   , last_login_at timestamp comment '最終ログイン日時'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
-  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , delete_flg tinyint(1) default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint user_PKC primary key (id)
 ) comment 'ユーザ' ;
@@ -40,7 +40,7 @@ create table stock (
   , quantity int comment '在庫数'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
-  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , delete_flg tinyint(1) default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint stock_PKC primary key (id)
 ) comment '商品' ;
@@ -68,7 +68,7 @@ create table order_history (
   , quantity int comment '個数'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
-  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , delete_flg tinyint(1) default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint order_history_PKC primary key (id)
 ) comment '注文履歴' ;
@@ -90,7 +90,7 @@ create table contact_form (
   , contact varchar(200) not null comment 'お問い合わせ内容'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
-  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , delete_flg tinyint(1) default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint contact_form_PKC primary key (id)
 ) comment 'お問い合わせ' ;
@@ -104,7 +104,7 @@ create table contact_form_image (
   , file_name varchar(100) not null comment 'ファイル名'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
-  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , delete_flg tinyint(1) default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint contact_form_image_PKC primary key (id)
 ) comment 'お問い合わせ画像' ;
@@ -121,7 +121,7 @@ create table cart (
   , user_id bigint unsigned not null comment 'ユーザID'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
-  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , delete_flg tinyint(1) default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint cart_PKC primary key (id)
 ) comment 'カート' ;
@@ -144,7 +144,7 @@ create table admin (
   , last_login_at timestamp comment '最終ログイン日時'
   , created_at timestamp default null comment '登録日時'
   , updated_at timestamp default null comment '更新日時'
-  , delete_flg TINYINT default 0 not null comment '削除フラグ'
+  , delete_flg tinyint(1) default 0 not null comment '削除フラグ'
   , version BIGINT default 1 not null comment '楽観チェック用バージョン'
   , constraint admin_PKC primary key (id)
 ) comment '管理者' ;
