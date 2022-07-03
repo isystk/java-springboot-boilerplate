@@ -34,15 +34,18 @@ public class AuthRestController extends AbstractRestController {
    *
    * @return
    */
-  @PostMapping(API_V1_LOGIN_CHECK_URL)
-  public Resource loginCheck(HttpSession session) {
+  @PostMapping(API_V1_SESSION)
+  public Resource session(HttpSession session) {
 
     String userId = AuditInfoHolder.getAuditUser();
 
     Resource resource = resourceFactory.create();
-    if (Optional.of(userId).isEmpty()) {
-      // 未ログイン状態です
-      return null;
+    if (Optional.of(userId).isEmpty() || "GUEST".equals(userId)) {
+      AuthUserDto dto = new AuthUserDto();
+      dto.setSessionId(session.getId());
+      resource.setData(Arrays.asList(dto));
+      resource.setMessage("未ログイン状態です。");
+      return resource;
     }
 
     User user = userHelper.getUser();
@@ -59,7 +62,7 @@ public class AuthRestController extends AbstractRestController {
    *
    * @return
    */
-  @PostMapping(API_V1_LOGIN_SUCCESS_URL)
+  @PostMapping(API_V1_LOGIN_SUCCESS)
   public Resource loginSuccess(HttpSession session) {
 
     // 最終ログイン日時を更新します。
@@ -80,7 +83,7 @@ public class AuthRestController extends AbstractRestController {
    *
    * @return
    */
-  @GetMapping(API_V1_LOGIN_FAILURE_URL)
+  @GetMapping(API_V1_LOGIN_FAILURE)
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   public Resource loginFailure(HttpServletResponse response) {
     Resource resource = resourceFactory.create();
@@ -93,7 +96,7 @@ public class AuthRestController extends AbstractRestController {
    *
    * @return
    */
-  @GetMapping(API_V1_LOGOUT_SUCCESS_URL)
+  @GetMapping(API_V1_LOGOUT_SUCCESS)
   public Resource logoutSuccess() {
     Resource resource = resourceFactory.create();
     resource.setMessage(getMessage("login.success"));

@@ -109,6 +109,7 @@ case ${1} in
       case ${2} in
           build)
               pushd web-front/resources
+              yarn fix
               yarn build
               popd
           ;;

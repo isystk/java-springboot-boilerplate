@@ -79,22 +79,22 @@ public class SecurityConfig extends BaseSecurityConfig {
         // 認可を処理するURL
         .loginProcessingUrl(API_V1_AUTH)
         // ログイン成功時の遷移先
-        .successForwardUrl(API_V1_LOGIN_SUCCESS_URL)
+        .successForwardUrl(API_V1_LOGIN_SUCCESS)
         // ログイン失敗時の遷移先
-        .failureUrl(API_V1_LOGIN_FAILURE_URL)
+        .failureUrl(API_V1_LOGIN_FAILURE)
         // ログインIDのパラメータ名
         .usernameParameter("loginId")
         // パスワードのパラメータ名
         .passwordParameter("password").permitAll();
 
     // ログアウト処理
-    http.logout().logoutRequestMatcher(new AntPathRequestMatcher(API_V1_LOGOUT_URL))
+    http.logout().logoutRequestMatcher(new AntPathRequestMatcher(API_V1_LOGOUT))
         // Cookieを破棄する
         .deleteCookies("SESSION", "JSESSIONID")
         // ログアウト画面のURL
-        .logoutUrl(API_V1_LOGOUT_URL)
+        .logoutUrl(API_V1_LOGOUT)
         // ログアウト後の遷移先
-        .logoutSuccessUrl(API_V1_LOGOUT_SUCCESS_URL)
+        .logoutSuccessUrl(API_V1_LOGOUT_SUCCESS)
         // ajaxの場合は、HTTPステータスを返す
         .defaultLogoutSuccessHandlerFor(new HttpStatusReturningLogoutSuccessHandler(),
             RequestUtils::isAjaxRequest)
