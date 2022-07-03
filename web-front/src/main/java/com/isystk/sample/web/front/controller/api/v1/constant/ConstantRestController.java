@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.api.v1.common;
+package com.isystk.sample.web.front.controller.api.v1.constant;
 
 import com.isystk.sample.common.dto.CodeValueDto;
 import com.isystk.sample.common.dto.CodeValueGroupDto;
@@ -15,15 +15,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.isystk.sample.common.Const.MESSAGE_SUCCESS;
-import static com.isystk.sample.common.FrontUrl.API_V1_COMMON_CONST;
+import static com.isystk.sample.common.FrontUrl.API_V1_CONSTANT;
 
 @RestController
-@RequestMapping(path = API_V1_COMMON_CONST, produces = MediaType.APPLICATION_JSON_VALUE)
-public class ConstRestController extends AbstractRestController {
+@RequestMapping(path = API_V1_CONSTANT, produces = MediaType.APPLICATION_JSON_VALUE)
+public class ConstantRestController extends AbstractRestController {
 
   @Override
   public String getFunctionName() {
-    return "API_COMMON_CONST";
+    return "API_CONSTANT";
   }
 
   /**

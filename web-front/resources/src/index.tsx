@@ -10,6 +10,7 @@ import reducers from '@/stores'
 import reportWebVitals from '@/reportWebVitals'
 import thunk from 'redux-thunk'
 import { Session } from '@/services/auth'
+import axios from 'axios'
 
 const render = (session: Session) => {
   // 開発環境の場合は、redux-devtools-extension を利用できるようにする
@@ -34,13 +35,12 @@ const render = (session: Session) => {
 }
 
 const init = () => {
-  //     const params = new URLSearchParams();
-  //     const url = "/session";
-  //     axios.post(url, params).then((response) => {
-  //         render(response.data);
-  //     });
-  // TODO get session
-  render({} as Session)
+  const params = new URLSearchParams()
+  const url = '/api/v1/session'
+  axios.post(url, params).then((response) => {
+    const { data } = response.data
+    render(data[0])
+  })
 }
 
 // start

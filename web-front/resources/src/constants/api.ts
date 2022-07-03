@@ -1,11 +1,9 @@
-import Env from '@/constants/env'
-
 /**
  * BFF（バックエンドフォーフロントエンド）用の URL を作成する
  * @param path
  */
 const getBffUrl = (path: string): string => {
-  const url = [Env.externalEndpointUrl, path].join('')
+  const url = ['/api/v1', path].join('')
   return url
 }
 
