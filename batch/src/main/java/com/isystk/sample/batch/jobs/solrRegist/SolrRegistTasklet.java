@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.isystk.sample.batch.context.BatchContext;
 import com.isystk.sample.batch.jobs.BaseTasklet;
-import com.isystk.sample.batch.service.SolrPostService;
+import com.isystk.sample.batch.service.SolrStockService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,10 +17,10 @@ import lombok.extern.slf4j.Slf4j;
  * インデックス生成
  */
 @Slf4j
-public class SolrRegistTasklet extends BaseTasklet<SolrRegistPostDto> {
+public class SolrRegistTasklet extends BaseTasklet {
 
   @Autowired
-  SolrPostService solrPostService;
+  SolrStockService solrStockService;
 
   @Override
   public RepeatStatus execute(StepContribution contribution, ChunkContext chunkContext)
@@ -31,7 +31,7 @@ public class SolrRegistTasklet extends BaseTasklet<SolrRegistPostDto> {
   @Override
   protected void doProcess(BatchContext context) {
     // Solrの投稿インデックスを更新します。
-    solrPostService.refresh();
+    solrStockService.refresh();
   }
 
 }
