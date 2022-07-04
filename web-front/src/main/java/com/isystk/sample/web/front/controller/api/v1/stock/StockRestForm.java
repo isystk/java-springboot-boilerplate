@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.api.v1.post;
+package com.isystk.sample.web.front.controller.api.v1.stock;
 
 import java.io.Serializable;
 

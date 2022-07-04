@@ -1,5 +1,6 @@
 package com.isystk.sample.web.front.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Setter
 public class StockSearchResultDto implements Dto {
 
+  @JsonProperty("id")
   BigInteger stockId;
 
   String name;
@@ -26,6 +28,7 @@ public class StockSearchResultDto implements Dto {
 
   String imgpath;
 
+  @JsonProperty("img_url")
   String imgUrl;
 
   Integer quantity;

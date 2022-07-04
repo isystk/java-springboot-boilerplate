@@ -1,16 +1,16 @@
-package com.isystk.sample.web.front.controller.api.v1.post;
+package com.isystk.sample.web.front.controller.api.v1.stock;
 
 import static com.isystk.sample.common.Const.*;
 
-import com.isystk.sample.common.dto.Pageable;
+import com.google.common.collect.Maps;
 import java.math.BigInteger;
 import java.util.Arrays;
 
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-
-import com.isystk.sample.common.dto.Page;
 
 import static com.isystk.sample.common.FrontUrl.API_V1_STOCKS;
 
@@ -52,9 +52,13 @@ public class StockRestController extends AbstractRestController {
     val criteria = ObjectMapperUtils.map(query, SolrStockCriteria.class);
 
     // 10件で区切って取得する
-    Page<StockSearchResultDto> posts = stockService.findSolrAll(criteria, Pageable.NO_LIMIT);
+    List<StockSearchResultDto> stocks = stockService.findSolrAll(criteria);
 
-    PageableResource resource = ObjectMapperUtils.map(posts, PageableResourceImpl.class);
+    Map data = Maps.newHashMap();
+    data.put("data", stocks);
+    data.put("currentPage", 1);
+    data.put("total", stocks.size());
+    PageableResource resource = ObjectMapperUtils.map(data, PageableResourceImpl.class);
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
     return resource;

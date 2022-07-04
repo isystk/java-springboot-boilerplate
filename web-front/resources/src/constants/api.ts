@@ -29,7 +29,7 @@ export const API_ENDPOINT = {
   CONTACT_STORE: getBffUrl('/contact/store'),
 
   /** 商品一覧データ取得 */
-  SHOPS: getBffUrl('/shops'),
+  STOCKS: getBffUrl('/stocks'),
   /** マイカートデータ取得 */
   MYCARTS: getBffUrl('/mycart'),
   /** カートに商品を追加する */

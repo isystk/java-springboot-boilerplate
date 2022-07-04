@@ -21,9 +21,9 @@ const Index: FC<Props> = ({ appRoot }) => {
   const { total, current_page } = appRoot.shop.stocks
 
   useEffect(() => {
-    //     // 商品データを取得する
-    //     appRoot.shop.readStocks(search)
-    //
+    // 商品データを取得する
+    appRoot.shop.readStocks(search)
+
     //     // お気に入りデータを取得する
     //     appRoot.like.readLikesAsync()
   }, [search])
@@ -52,7 +52,7 @@ const Index: FC<Props> = ({ appRoot }) => {
             </a>
           </div>
           <img
-            src={`/uploads/stock/${stock.imgpath}`}
+            src={`/thumb/stocks/${stock.imgpath}`}
             alt=""
             className="block01_img"
           />

@@ -2,11 +2,11 @@ package com.isystk.sample.web.base.controller.api.resource;
 
 public interface PageableResource extends Resource {
 
-  int getPage();
+  int getCurrentPage();
 
-  int getTotalPages();
+  int getTotal();
 
-  void setPage(int page);
+  void setCurrentPage(int currentPage);
 
-  void setTotalPages(int totalPages);
+  void setTotal(int total);
 }

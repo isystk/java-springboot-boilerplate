@@ -32,7 +32,7 @@ const MyCart: FC<Props> = ({ appRoot }) => {
         {carts.data.map((cart, index) => (
           <div className="block01_item" key={index}>
             <img
-              src={`/uploads/stock/${cart.imgpath}`}
+              src={`/thumb/stocks/${cart.imgpath}`}
               alt=""
               className="block01_img"
             />
