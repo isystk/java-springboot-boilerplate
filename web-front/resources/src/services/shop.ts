@@ -49,11 +49,12 @@ export default class ShopService {
   async readStocks(search = '') {
     // ローディングを表示する
     this.main.showLoading()
-    const response = await API.get(`${API_ENDPOINT.SHOPS}${search}`)
+    const response = await API.get(`${API_ENDPOINT.STOCKS}${search}`)
+    const { current_page, total, data } = response
     this.stocks = {
-      current_page: response.stocks.current_page,
-      total: response.stocks.total,
-      data: response.stocks.data,
+      current_page,
+      total,
+      data,
     }
     // ローディングを非表示にする
     this.main.hideLoading()

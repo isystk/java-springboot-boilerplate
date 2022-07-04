@@ -37,11 +37,10 @@ public class StockService extends BaseTransactionalService {
    * Solrの投稿インデックスを取得します。
    *
    * @param criteria
-   * @param pageable
    * @return
    */
   @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-  public Page<StockSearchResultDto> findSolrAll(SolrStockCriteria criteria, Pageable pageable) {
+  public List<StockSearchResultDto> findSolrAll(SolrStockCriteria criteria) {
     Assert.notNull(criteria, "criteria must not be null");
 
     // TODO ここでページングを設定
@@ -52,9 +51,7 @@ public class StockService extends BaseTransactionalService {
       solrStockList.add(convertSolrToFrontStockDto(solrStock));
     }
 
-    // ページングを指定する
-    val options = createSelectOptions(pageable).count();
-    return pageFactory.create(solrStockList, pageable, options.getCount());
+    return solrStockList;
   }
 
   /**
