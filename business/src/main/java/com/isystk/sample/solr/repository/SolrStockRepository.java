@@ -1,5 +1,7 @@
 package com.isystk.sample.solr.repository;
 
+import com.isystk.sample.common.dto.Page;
+import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.solr.dto.SolrStock;
 import java.math.BigInteger;
 import org.springframework.data.solr.repository.Query;

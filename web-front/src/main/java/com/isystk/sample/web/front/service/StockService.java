@@ -40,18 +40,24 @@ public class StockService extends BaseTransactionalService {
    * @return
    */
   @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-  public List<StockSearchResultDto> findSolrAll(SolrStockCriteria criteria) {
+  public Page<StockSearchResultDto> findSolrAll(SolrStockCriteria criteria, Pageable pageable) {
     Assert.notNull(criteria, "criteria must not be null");
 
     // TODO ここでページングを設定
     Iterable<SolrStock> solrStocks = solrStockRepository.findAll();
 
     List<StockSearchResultDto> solrStockList = Lists.newArrayList();
+    int count = 0;
     for (SolrStock solrStock : solrStocks) {
-      solrStockList.add(convertSolrToFrontStockDto(solrStock));
+      int from = (pageable.getPage()-1) * pageable.getPerpage();
+      int to = pageable.getPage() * pageable.getPerpage();
+      if (from <= count && count< to) {
+        solrStockList.add(convertSolrToFrontStockDto(solrStock));
+      }
+      count++;
     }
 
-    return solrStockList;
+    return pageFactory.create(solrStockList, pageable, count);
   }
 
   /**

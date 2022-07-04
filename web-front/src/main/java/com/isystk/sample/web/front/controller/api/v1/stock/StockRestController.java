@@ -3,6 +3,7 @@ package com.isystk.sample.web.front.controller.api.v1.stock;
 import static com.isystk.sample.common.Const.*;
 
 import com.google.common.collect.Maps;
+import com.isystk.sample.common.dto.Page;
 import java.math.BigInteger;
 import java.util.Arrays;
 
@@ -40,24 +41,24 @@ public class StockRestController extends AbstractRestController {
   /**
    * 商品一覧を複数取得します。
    *
-   * @param query
+   * @param form
    * @param page
    * @return
    */
   @GetMapping
-  public PageableResource index(StockRestForm query,
+  public PageableResource index(StockRestForm form,
       @RequestParam(required = false, defaultValue = "1") int page) {
 
     // 入力値からDTOを作成する
-    val criteria = ObjectMapperUtils.map(query, SolrStockCriteria.class);
+    val criteria = ObjectMapperUtils.map(form, SolrStockCriteria.class);
 
     // 10件で区切って取得する
-    List<StockSearchResultDto> stocks = stockService.findSolrAll(criteria);
+    Page<StockSearchResultDto> stocks = stockService.findSolrAll(criteria, form);
 
     Map data = Maps.newHashMap();
-    data.put("data", stocks);
-    data.put("currentPage", 1);
-    data.put("total", stocks.size());
+    data.put("data", stocks.getData());
+    data.put("currentPage", form.getPage());
+    data.put("total", stocks.getCount());
     PageableResource resource = ObjectMapperUtils.map(data, PageableResourceImpl.class);
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
 
