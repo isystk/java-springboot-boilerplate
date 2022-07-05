@@ -11,6 +11,7 @@ import reportWebVitals from '@/reportWebVitals'
 import thunk from 'redux-thunk'
 import { Session } from '@/services/auth'
 import axios from 'axios'
+import { API_ENDPOINT } from '@/constants/api'
 
 const render = (session: Session) => {
   // 開発環境の場合は、redux-devtools-extension を利用できるようにする
@@ -36,7 +37,7 @@ const render = (session: Session) => {
 
 const init = () => {
   const params = new URLSearchParams()
-  const url = '/api/v1/session'
+  const url = API_ENDPOINT.SESSION
   axios.post(url, params).then((response) => {
     const { data } = response.data
     render(data[0])
