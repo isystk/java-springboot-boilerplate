@@ -76,6 +76,7 @@ public class EntryRemindConfigRestController extends AbstractRestController {
     form.setOnetimeKey(onetimeKey);
 
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }
@@ -110,6 +111,7 @@ public class EntryRemindConfigRestController extends AbstractRestController {
     entryRemindService.changePassword(form.getOnetimeKey(), password);
 
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }

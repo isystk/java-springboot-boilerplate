@@ -11,7 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 投稿フロント表示用DTO
+ * 商品フロント表示用DTO
  */
 @Getter
 @Setter

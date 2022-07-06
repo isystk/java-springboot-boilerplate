@@ -41,8 +41,7 @@ public class StockRepository extends BaseRepository {
    * @return
    */
   public List<StockRepositoryDto> findAll(StockCriteria criteria) {
-    var options = createSelectOptions(1, Integer.MAX_VALUE);
-    return convertDto(stockDao.findAll(criteria, options, toList()));
+    return convertDto(stockDao.findAll(criteria));
   }
 
   /**

@@ -36,14 +36,7 @@ const render = (session: Session) => {
 }
 
 const init = () => {
-  const url = API_ENDPOINT.SESSION
-  const data = {
-    _csrf:
-      document
-        .querySelector('meta[name="csrf-token"]')
-        ?.getAttribute('content') || '',
-  }
-  API.post(url, data).then((response) => {
+  API.post(API_ENDPOINT.SESSION).then((response) => {
     render(response.data[0])
   })
 }

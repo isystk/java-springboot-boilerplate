@@ -9,4 +9,8 @@ public interface PageableResource extends Resource {
   void setCurrentPage(int currentPage);
 
   void setTotal(int total);
+
+  Boolean getResult();
+
+  void setResult(Boolean result);
 }

@@ -74,6 +74,7 @@ public class EntryRemindRestController extends AbstractRestController {
     entryRemindService.registOnetimePass(form.getEmail());
 
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }

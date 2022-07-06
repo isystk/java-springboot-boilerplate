@@ -7,7 +7,6 @@ import com.isystk.sample.common.dto.Page;
 import java.math.BigInteger;
 import java.util.Arrays;
 
-import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -61,6 +60,7 @@ public class StockRestController extends AbstractRestController {
     data.put("total", stocks.getCount());
     PageableResource resource = ObjectMapperUtils.map(data, PageableResourceImpl.class);
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }
@@ -77,6 +77,7 @@ public class StockRestController extends AbstractRestController {
     Resource resource = resourceFactory.create();
     resource.setData(Arrays.asList(stockService.findSolrById(stockId).orElse(new StockSearchResultDto())));
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }

@@ -32,12 +32,12 @@ const MyCart: FC<Props> = ({ appRoot }) => {
         {carts.data.map((cart, index) => (
           <div className="block01_item" key={index}>
             <img
-              src={`/thumb/stocks/${cart.imgpath}`}
+              src={`/thumb/stocks/${cart.stock?.imgpath}`}
               alt=""
               className="block01_img"
             />
-            <p>{cart.name} </p>
-            <p className="c-red mb20">{cart.price}円 </p>
+            <p>{cart.stock?.name} </p>
+            <p className="c-red mb20">{cart.stock?.price}円 </p>
             <input
               type="button"
               value="カートから削除する"
