@@ -13,4 +13,9 @@ public interface Resource {
   String getMessage();
 
   void setMessage(String message);
+
+  Boolean getResult();
+
+  void setResult(Boolean result);
+
 }

@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @Slf4j
-public class LoginHtmlController extends AbstractHtmlController {
+public class LoginController extends AbstractHtmlController {
 
   @Autowired
   UserHelper userHelper;

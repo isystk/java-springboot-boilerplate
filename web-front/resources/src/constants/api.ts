@@ -13,8 +13,6 @@ const getBffUrl = (path: string): string => {
 export const API_ENDPOINT = {
   /** ログイン状態チェック */
   SESSION: getBffUrl('/session'),
-  /** ログイン状態チェック */
-  LOGIN_CHECK: getBffUrl('/loginCheck'),
   /** ログイン */
   LOGIN: getBffUrl('/authenticate'),
   /** ログアウト */
@@ -35,13 +33,13 @@ export const API_ENDPOINT = {
   /** 商品一覧データ取得 */
   STOCKS: getBffUrl('/stocks'),
   /** マイカートデータ取得 */
-  MYCARTS: getBffUrl('/mycart'),
+  MYCARTS: getBffUrl('/mycarts'),
   /** カートに商品を追加する */
-  ADD_MYCART: getBffUrl('/addMycart'),
+  MYCARTS_ADD: getBffUrl('/mycarts/add'),
   /** カートから商品を削除する */
-  REMOVE_MYCART: getBffUrl('/cartdelete'),
+  MYCARTS_REMOVE: getBffUrl('/mycarts/remove'),
   /** Stripe用のペイメント作成 */
-  CREATE_PAYMENT: getBffUrl('/createPayment'),
+  MYCARTS_PAYMENT: getBffUrl('/mycarts/payment'),
   /** 決算処理後の後処理 */
-  CHECKOUT: getBffUrl('/checkout'),
+  MYCARTS_CHECKOUT: getBffUrl('/mycarts/checkout'),
 }

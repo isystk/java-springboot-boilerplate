@@ -60,6 +60,7 @@ public class ConstantRestController extends AbstractRestController {
 
     resource.setData(list);
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }

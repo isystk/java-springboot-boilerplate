@@ -1,7 +1,5 @@
 package com.isystk.sample.web.front.service;
 
-import static com.isystk.sample.domain.util.DomaUtils.createSelectOptions;
-
 import com.google.common.collect.Lists;
 import com.isystk.sample.common.dto.Page;
 import com.isystk.sample.common.dto.Pageable;
@@ -15,7 +13,6 @@ import java.math.BigInteger;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import lombok.val;
 import org.castor.core.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

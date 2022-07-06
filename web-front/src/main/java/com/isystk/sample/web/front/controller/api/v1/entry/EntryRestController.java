@@ -80,6 +80,7 @@ public class EntryRestController extends AbstractRestController {
 //    entryService.registTemporary(inputUser);
 
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }
@@ -99,6 +100,7 @@ public class EntryRestController extends AbstractRestController {
 //    entryService.registComplete(onetimeKey);
 
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
 
     return resource;
   }

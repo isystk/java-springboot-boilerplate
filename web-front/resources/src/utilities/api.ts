@@ -6,15 +6,36 @@ const get = async (url: string): Promise<any> => {
 }
 
 const post = async (url: string, values?: any, config?: any): Promise<any> => {
-  return await request('post', url, values, config)
+  const data = {
+    ...values,
+    _csrf:
+      document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute('content') || '',
+  }
+  return await request('post', url, data, config)
 }
 
 const put = async (url: string, values?: any, config?: any): Promise<any> => {
-  return await request('put', url, values, config)
+  const data = {
+    ...values,
+    _csrf:
+      document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute('content') || '',
+  }
+  return await request('put', url, data, config)
 }
 
 const del = async (url: string, values?: any, config?: any): Promise<any> => {
-  return await request('delete', url, values, config)
+  const data = {
+    ...values,
+    _csrf:
+      document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute('content') || '',
+  }
+  return await request('delete', url, data, config)
 }
 
 const request = async (

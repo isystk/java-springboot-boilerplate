@@ -54,6 +54,7 @@ public class AuthRestController extends AbstractRestController {
     dto.setSessionId(session.getId());
     resource.setData(Arrays.asList(dto));
     resource.setMessage("ログイン状態です。");
+    resource.setResult(true);
 
     return resource;
   }
@@ -75,6 +76,7 @@ public class AuthRestController extends AbstractRestController {
 //    dto.setSessionId(session.getId());
 //    resource.setData(Arrays.asList(dto));
 //    resource.setMessage(getMessage("login.success"));
+//    resource.setResult(true);
 //
 //    return resource;
 //  }
@@ -89,6 +91,7 @@ public class AuthRestController extends AbstractRestController {
 //  public Resource loginFailure(HttpServletResponse response) {
 //    Resource resource = resourceFactory.create();
 //    resource.setMessage(getMessage("login.failed"));
+//    resource.setResult(false);
 //    return resource;
 //  }
 //
@@ -101,7 +104,7 @@ public class AuthRestController extends AbstractRestController {
 //  public Resource logoutSuccess() {
 //    Resource resource = resourceFactory.create();
 //    resource.setMessage(getMessage("login.success"));
-//
+//    resource.setResult(true);
 //    return resource;
 //  }
 

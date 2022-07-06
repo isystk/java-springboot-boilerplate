@@ -1,7 +1,7 @@
 package com.isystk.sample.web.front;
 
 import static com.isystk.sample.common.Const.*;
-import static com.isystk.sample.common.FrontUrl.API_V1_MEMBER;
+import static com.isystk.sample.common.FrontUrl.API_V1_MYCARTS;
 
 import com.isystk.sample.web.base.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +56,7 @@ public class SecurityConfig extends BaseSecurityConfig {
 
     String[] permittedUrls = {"*"};
 
-    String[] authenticatedUrls = {API_V1_MEMBER + "/**"};
+    String[] authenticatedUrls = {API_V1_MYCARTS + "/**"};
 
     // 認証除外設定
     http.authorizeRequests()
