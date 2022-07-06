@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="doma-gen-example" default="all" basedir=".">
+<project name="doma-gen-example" default="all" basedir="">
 
 	<property name="templatePrimaryDir" value="template"/>
 	<property name="templateCriteriaPrimaryDir" value="templateCriteria"/>
-	<property name="javaDestDir" value="../../../business/src/main/java"/>
-	<property name="sqlDestDir" value="../../../business/src/main/resources"/>
+	<property name="javaDestDir" value="../../java"/>
+	<property name="sqlDestDir" value=".."/>
 	<property name="dialectName" value="mysql"/>
 	<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
 	<property name="url" value="jdbc:mysql://127.0.0.1:3306/laraec"/>
@@ -32,22 +32,22 @@
 			url="${url}"
 			user="${user}"
 			password="${password}"
-			templatePrimaryDir="${templatePrimaryDir}"
+			templatePrimaryDir="template"
 			ignoredTableNamePattern="${ignoredTableNamePattern}" >
 			<entityConfig
-				destdir="${javaDestDir}"
+				destdir="../../java"
 				packageName="${entityPackageName}"
 				overwrite="true"
 				useListener="false"
 			/>
 			<daoConfig
 				overwrite="false"
-				destdir="${javaDestDir}"
+				destdir="../../java"
 				packageName="${daoPackageName}"
 			/>
 			<sqlConfig
 				overwrite="true"
-				destdir="${sqlDestDir}"
+				destdir=".."
 			/>
 		</gen>
 	</target>
@@ -60,10 +60,10 @@
 			url="${url}"
 			user="${user}"
 			password="${password}"
-			templatePrimaryDir="${templateCriteriaPrimaryDir}"
+			templatePrimaryDir="templateCriteria"
 			ignoredTableNamePattern="${ignoredTableNamePattern}">
 			<entityConfig
-				destdir="${javaDestDir}"
+				destdir="../../java"
 				packageName="${criteriaPackageName}"
 				overwrite="true"
 				useListener="false"

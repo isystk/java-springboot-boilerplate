@@ -52,10 +52,9 @@ public class SecurityConfig extends BaseSecurityConfig {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-//		// CookieにCSRFトークンを保存する
-//		http.csrf()//
-//				.csrfTokenRepository(new CookieCsrfTokenRepository());
-    http.csrf().disable();
+		// CookieにCSRFトークンを保存する
+		http.csrf()//
+				.csrfTokenRepository(new CookieCsrfTokenRepository());
 
     String[] permittedUrls = {"*"};
 

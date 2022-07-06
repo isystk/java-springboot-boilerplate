@@ -8,7 +8,7 @@ type Props = {
 
 const CSRFToken: FC<Props> = ({ appRoot }) => {
   const { csrf } = appRoot.auth
-  return <Input type="hidden" name="_token" defaultValue={csrf} />
+  return <Input type="hidden" name="_csrf" defaultValue={csrf} />
 }
 
 export default CSRFToken
