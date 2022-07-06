@@ -44,11 +44,11 @@ const LoginForm: FC<Props> = ({ appRoot }) => {
               </Form>
             </Col>
           </Row>
-          <Form method="POST" action={Url.LOGIN} id="login-form">
+          <Form method="POST" action={Url.AUTHENTICATE} id="login-form">
             <CSRFToken appRoot={appRoot} />
             <TextInput
-              identity="email"
-              controlType="email"
+              identity="loginId"
+              controlType="loginId"
               label="メールアドレス"
               autoFocus={true}
             />

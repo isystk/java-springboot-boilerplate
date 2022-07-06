@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Optional;
 
+import static com.isystk.sample.common.Const.*;
 import static com.isystk.sample.common.FrontUrl.*;
 
 @RestController
@@ -56,52 +57,52 @@ public class AuthRestController extends AbstractRestController {
 
     return resource;
   }
-
-  /**
-   * ログイン成功
-   *
-   * @return
-   */
-  @PostMapping(API_V1_LOGIN_SUCCESS)
-  public Resource loginSuccess(HttpSession session) {
-
-    // 最終ログイン日時を更新します。
-    userHelper.updateLastLogin();
-
-    Resource resource = resourceFactory.create();
-    User user = userHelper.getUser();
-    AuthUserDto dto = ObjectMapperUtils.map(user, AuthUserDto.class);
-    dto.setSessionId(session.getId());
-    resource.setData(Arrays.asList(dto));
-    resource.setMessage(getMessage("login.success"));
-
-    return resource;
-  }
-
-  /**
-   * ログイン失敗
-   *
-   * @return
-   */
-  @GetMapping(API_V1_LOGIN_FAILURE)
-  @ResponseStatus(HttpStatus.UNAUTHORIZED)
-  public Resource loginFailure(HttpServletResponse response) {
-    Resource resource = resourceFactory.create();
-    resource.setMessage(getMessage("login.failed"));
-    return resource;
-  }
-
-  /**
-   * ログアウト
-   *
-   * @return
-   */
-  @GetMapping(API_V1_LOGOUT_SUCCESS)
-  public Resource logoutSuccess() {
-    Resource resource = resourceFactory.create();
-    resource.setMessage(getMessage("login.success"));
-
-    return resource;
-  }
+//
+//  /**
+//   * ログイン成功
+//   *
+//   * @return
+//   */
+//  @PostMapping(LOGIN_SUCCESS_URL)
+//  public Resource loginSuccess(HttpSession session) {
+//
+//    // 最終ログイン日時を更新します。
+//    userHelper.updateLastLogin();
+//
+//    Resource resource = resourceFactory.create();
+//    User user = userHelper.getUser();
+//    AuthUserDto dto = ObjectMapperUtils.map(user, AuthUserDto.class);
+//    dto.setSessionId(session.getId());
+//    resource.setData(Arrays.asList(dto));
+//    resource.setMessage(getMessage("login.success"));
+//
+//    return resource;
+//  }
+//
+//  /**
+//   * ログイン失敗
+//   *
+//   * @return
+//   */
+//  @GetMapping(LOGIN_FAILURE_URL)
+//  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+//  public Resource loginFailure(HttpServletResponse response) {
+//    Resource resource = resourceFactory.create();
+//    resource.setMessage(getMessage("login.failed"));
+//    return resource;
+//  }
+//
+//  /**
+//   * ログアウト
+//   *
+//   * @return
+//   */
+//  @GetMapping(LOGOUT_SUCCESS_URL)
+//  public Resource logoutSuccess() {
+//    Resource resource = resourceFactory.create();
+//    resource.setMessage(getMessage("login.success"));
+//
+//    return resource;
+//  }
 
 }
