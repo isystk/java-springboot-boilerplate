@@ -35,7 +35,7 @@ public class StockRestController extends AbstractRestController {
 
   @Override
   public String getFunctionName() {
-    return "API_POSTS";
+    return "API_STOCKS";
   }
 
   /**

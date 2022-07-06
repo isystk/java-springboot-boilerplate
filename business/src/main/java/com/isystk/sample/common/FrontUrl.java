@@ -14,17 +14,7 @@ public class FrontUrl {
    * ---- APIｓ ----
    **/
 
-  public static final String API_V1_AUTH = "/api/v1/authenticate";
-
   public static final String API_V1_SESSION = "/api/v1/session";
-
-  public static final String API_V1_LOGIN_SUCCESS = "/api/v1/loginSuccess";
-
-  public static final String API_V1_LOGIN_FAILURE = "/api/v1/loginFailure";
-
-  public static final String API_V1_LOGOUT = "/api/v1/logout";
-
-  public static final String API_V1_LOGOUT_SUCCESS = "/api/v1/logoutSuccess";
 
   public static final String API_V1_STOCKS = "/api/v1/stocks";
 

@@ -1,7 +1,7 @@
 package com.isystk.sample.web.front;
 
-import static com.isystk.sample.common.FrontUrl.*;
 import static com.isystk.sample.common.Const.*;
+import static com.isystk.sample.common.FrontUrl.API_V1_MEMBER;
 
 import com.isystk.sample.web.base.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +16,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.access.AccessDeniedHandler;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
-import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -76,24 +74,24 @@ public class SecurityConfig extends BaseSecurityConfig {
         // ログイン画面のURL
         .loginPage(LOGIN_URL)
         // 認可を処理するURL
-        .loginProcessingUrl(API_V1_AUTH)
+        .loginProcessingUrl(LOGIN_PROCESSING_URL)
         // ログイン成功時の遷移先
-        .successForwardUrl(API_V1_LOGIN_SUCCESS)
+        .successForwardUrl(LOGIN_SUCCESS_URL)
         // ログイン失敗時の遷移先
-        .failureUrl(API_V1_LOGIN_FAILURE)
+        .failureUrl(LOGIN_FAILURE_URL)
         // ログインIDのパラメータ名
         .usernameParameter("loginId")
         // パスワードのパラメータ名
         .passwordParameter("password").permitAll();
 
     // ログアウト処理
-    http.logout().logoutRequestMatcher(new AntPathRequestMatcher(API_V1_LOGOUT))
+    http.logout().logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL))
         // Cookieを破棄する
         .deleteCookies("SESSION", "JSESSIONID")
         // ログアウト画面のURL
-        .logoutUrl(API_V1_LOGOUT)
+        .logoutUrl(LOGOUT_URL)
         // ログアウト後の遷移先
-        .logoutSuccessUrl(API_V1_LOGOUT_SUCCESS)
+        .logoutSuccessUrl(LOGOUT_SUCCESS_URL)
         // ajaxの場合は、HTTPステータスを返す
         .defaultLogoutSuccessHandlerFor(new HttpStatusReturningLogoutSuccessHandler(),
             RequestUtils::isAjaxRequest)

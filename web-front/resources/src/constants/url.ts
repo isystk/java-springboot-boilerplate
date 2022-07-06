@@ -4,10 +4,12 @@ export const Url = {
   TOP: '/',
   /** ログイン */
   LOGIN: '/login',
+  /** ログイン処理 */
+  AUTHENTICATE: '/auth/authenticate',
   /** Googleログイン */
   AUTH_GOOGLE: '/auth/google',
   /** ログアウト */
-  LOGOUT: '/logout',
+  LOGOUT: '/auth/logout',
   /** 会員登録 */
   REGISTER: '/register',
   /** パスワード忘れ */
