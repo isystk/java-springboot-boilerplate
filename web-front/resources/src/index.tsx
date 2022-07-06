@@ -10,7 +10,7 @@ import reducers from '@/stores'
 import reportWebVitals from '@/reportWebVitals'
 import thunk from 'redux-thunk'
 import { Session } from '@/services/auth'
-import axios from 'axios'
+import { API } from '@/utilities/api'
 import { API_ENDPOINT } from '@/constants/api'
 
 const render = (session: Session) => {
@@ -36,11 +36,15 @@ const render = (session: Session) => {
 }
 
 const init = () => {
-  const params = new URLSearchParams()
   const url = API_ENDPOINT.SESSION
-  axios.post(url, params).then((response) => {
-    const { data } = response.data
-    render(data[0])
+  const data = {
+    _csrf:
+      document
+        .querySelector('meta[name="csrf-token"]')
+        ?.getAttribute('content') || '',
+  }
+  API.post(url, data).then((response) => {
+    render(response.data[0])
   })
 }
 

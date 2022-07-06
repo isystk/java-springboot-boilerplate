@@ -9,6 +9,7 @@
         name="viewport">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="robots" content="all">
+  <meta name="csrf-token" th:content="${_csrf.token}">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
   <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">LaraEC</title>
   <script>
