@@ -15,7 +15,7 @@ export default class ContactService {
     this.main.showLoading()
     try {
       // 入力したお問い合わせ内容を送信する。
-      const response = await API.post(API_ENDPOINT.CONTACT_STORE, values)
+      const response = await API.post(API_ENDPOINT.CONTACTS_REGIST, values)
       result = response.result
       this.main.setAppRoot()
     } catch (e) {

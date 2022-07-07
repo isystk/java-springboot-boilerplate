@@ -31,7 +31,8 @@ export const ImageFileInput: FC<Props> = ({ label, name, ...rest }) => {
                       multiple={false}
                       handleChange={(data) => {
                         if (data.result) {
-                          setFieldValue(name, data.fileData)
+                          setFieldValue(name + 'Name', data.fileName)
+                          setFieldValue(name + 'Data', data.fileData)
                         } else {
                           setPhotoErrors([...photoErrors, ...data.messages])
                         }

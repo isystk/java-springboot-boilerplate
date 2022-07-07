@@ -28,8 +28,9 @@ public class FrontUrl {
 
   public static final String API_V1_ENTRY_REMIND_CONFIG = "/api/v1/entry/remind/config";
 
-  public static final String API_V1_CONSTANTS = "/api/v1/constants";
+  public static final String API_V1_CONSTS = "/api/v1/consts";
 
   public static final String API_V1_LIKES = "/api/v1/likes";
 
+  public static final String API_V1_CONTACTS = "/api/v1/contacts";
 }
