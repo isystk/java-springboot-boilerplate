@@ -23,6 +23,16 @@ public final class StringUtils {
   }
 
   /**
+   * 指定した文字列がnullの場合は空文字に変換する。
+   *
+   * @param string 対象文字列
+   * @return 文字列
+   */
+  public static String nullToEmpty(Object string) {
+    return string == null ? "" : string.toString();
+  }
+
+  /**
    * 指定した文字列がnullまたは空文字列であるか否かを取得する。
    *
    * @param string 対象文字列
@@ -85,5 +95,28 @@ public final class StringUtils {
     }else {
       return str;
     }
+  }
+
+  /**
+   * 文字を連結する
+   *
+   * @param separator 分割文字列
+   * @param objects Stringの集合
+   * @return 連結後の文字列
+   */
+  public static String join(String separator, Object... objects) {
+    StringBuilder sb = new StringBuilder();
+    boolean first = true;
+    for (Object object : objects) {
+      String str = nullToEmpty(object);
+      if (str.length() != 0) {
+        if (!first) {
+            sb.append(separator);
+        }
+        sb.append(str);
+        first = false;
+      }
+    }
+    return sb.toString();
   }
 }

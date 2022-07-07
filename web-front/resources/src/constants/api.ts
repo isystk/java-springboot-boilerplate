@@ -23,9 +23,9 @@ export const API_ENDPOINT = {
   /** お気に入りデータ取得 */
   LIKES: getBffUrl('/likes'),
   /** お気に入り追加 */
-  LIKES_STORE: getBffUrl('/likes/store'),
+  LIKES_ADD: getBffUrl('/likes/add'),
   /** お気に入り削除 */
-  LIKES_DESTROY: getBffUrl('/likes/destroy'),
+  LIKES_REMOVE: getBffUrl('/likes/remove'),
 
   /** お問い合わせ登録 */
   CONTACT_STORE: getBffUrl('/contact/store'),
