@@ -106,7 +106,7 @@ public class NumberUtils {
   /**
    * 値がNULLの場合にデフォルト値を設定します。
    */
-  public static final Long toLong(Long num, Long defaultValue) {
+  public static final BigInteger toBigInteger(BigInteger num, BigInteger defaultValue) {
     if (num == null) {
       return defaultValue;
     }
@@ -114,44 +114,44 @@ public class NumberUtils {
   }
 
   /**
-   * 文字列をLongに変換します
+   * 文字列をBigIntegerに変換します
    *
    * @param str 文字列
-   * @return Long
-   * @see NumberUtils#toLong(String)
+   * @return BigInteger
+   * @see NumberUtils#toBigInteger(String)
    */
-  public static final Long toLong(String str) {
-    return toLong(str, null);
+  public static final BigInteger toBigInteger(String str) {
+    return toBigInteger(str, null);
   }
 
   /**
-   * 文字列をLongに変換します
+   * 文字列をBigIntegerに変換します
    *
    * @param str          文字列
    * @param defaultValue 数値変換に失敗した場合のデフォルト値
-   * @return Long
+   * @return BigInteger
    */
-  public static final Long toLong(String str, Long defaultValue) {
+  public static final BigInteger toBigInteger(String str, BigInteger defaultValue) {
     if (str == null) {
       return defaultValue;
     }
     try {
-      return Long.parseLong(str);
+      return new BigInteger(str);
     } catch (NumberFormatException nfe) {
       return defaultValue;
     }
   }
 
   /**
-   * 文字列の配列をLongの配列に変換します
+   * 文字列の配列をBigIntegerの配列に変換します
    *
    * @param strArray 文字列の配列
-   * @return Longの配列
+   * @return BigIntegerの配列
    */
-  public static final Long[] toLongArray(String[] strArray) {
-    Long[] intArray = new Long[strArray.length];
+  public static final BigInteger[] toBigIntegerArray(String[] strArray) {
+    BigInteger[] intArray = new BigInteger[strArray.length];
     for (int i = 0; i < strArray.length; i++) {
-      intArray[i] = toLong(strArray[i], null);
+      intArray[i] = toBigInteger(strArray[i], null);
     }
     return intArray;
   }
@@ -160,7 +160,7 @@ public class NumberUtils {
    * IntegerをBigIntegerに変換します
    *
    * @param num Integer値
-   * @return Long
+   * @return BigInteger
    * @see NumberUtils#toBigInteger(Integer)
    */
   public static final BigInteger toBigInteger(Integer num) {
@@ -172,7 +172,7 @@ public class NumberUtils {
    *
    * @param num          Integer値
    * @param defaultValue 数値変換に失敗した場合のデフォルト値
-   * @return Long
+   * @return BigInteger
    */
   public static final BigInteger toBigInteger(Integer num, BigInteger defaultValue) {
     if (num == null) {
@@ -269,7 +269,7 @@ public class NumberUtils {
    *
    * @return
    */
-  public static Long defaultValue(Long target, Long defaultValue) {
+  public static BigInteger defaultValue(BigInteger target, BigInteger defaultValue) {
     if (target == null) {
       return defaultValue;
     }

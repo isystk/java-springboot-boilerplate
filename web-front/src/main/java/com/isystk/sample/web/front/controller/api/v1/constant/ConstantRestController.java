@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.isystk.sample.common.Const.MESSAGE_SUCCESS;
-import static com.isystk.sample.common.FrontUrl.API_V1_CONSTANT;
+import static com.isystk.sample.common.FrontUrl.API_V1_CONSTANTS;
 
 @RestController
-@RequestMapping(path = API_V1_CONSTANT, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = API_V1_CONSTANTS, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ConstantRestController extends AbstractRestController {
 
   @Override

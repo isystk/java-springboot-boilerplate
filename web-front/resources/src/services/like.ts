@@ -4,7 +4,7 @@ import { API_ENDPOINT } from '@/constants/api'
 
 export default class LikeService {
   main: MainService
-  data: string[]
+  data: number[]
 
   constructor(main: MainService) {
     this.main = main
@@ -16,7 +16,7 @@ export default class LikeService {
     this.main.showLoading()
     try {
       const response = await API.get(API_ENDPOINT.LIKES)
-      this.data = response.likes.data
+      this.data = response.data
       this.main.setAppRoot()
     } catch (e) {
       alert('お気に入りの取得に失敗しました')
@@ -28,13 +28,12 @@ export default class LikeService {
   async addLikeAsync(id: number) {
     this.main.showLoading()
     try {
-      const response = await API.post(API_ENDPOINT.LIKES_STORE, {
+      const response = await API.post(API_ENDPOINT.LIKES_ADD, {
         id: id,
       })
       if (response.result) {
         window.alert('お気に入りに追加しました')
-        const newData: string = id + ''
-        this.data = [newData, ...this.data]
+        this.data = [id, ...this.data]
       }
       this.main.setAppRoot()
     } catch (e) {
@@ -46,9 +45,11 @@ export default class LikeService {
   async removeLikeAsync(id: number) {
     this.main.showLoading()
     try {
-      const response = await API.post(API_ENDPOINT.LIKES_DESTROY + '/' + id)
+      const response = await API.post(API_ENDPOINT.LIKES_REMOVE, {
+        id: id,
+      })
       if (response.result) {
-        this.data = this.data.filter((n) => n !== id + '')
+        this.data = this.data.filter((n) => n !== id)
       }
       this.main.setAppRoot()
     } catch (e) {

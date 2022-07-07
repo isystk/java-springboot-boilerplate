@@ -16,7 +16,7 @@ const Index: FC<Props> = ({ appRoot }) => {
   const stocks = appRoot.shop.stocks.data.map((stock) => ({
     ...stock,
     price: stock.price + '円',
-    isLike: appRoot.like.data.includes(stock.id + ''),
+    isLike: appRoot.like.data.includes(stock.id),
   }))
   const { total, current_page } = appRoot.shop.stocks
 
@@ -24,8 +24,8 @@ const Index: FC<Props> = ({ appRoot }) => {
     // 商品データを取得する
     appRoot.shop.readStocks(search)
 
-    //     // お気に入りデータを取得する
-    //     appRoot.like.readLikesAsync()
+    // お気に入りデータを取得する
+    appRoot.like.readLikesAsync()
   }, [search])
 
   const renderStocks = (): JSX.Element => (
