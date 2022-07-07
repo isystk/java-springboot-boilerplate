@@ -15,8 +15,8 @@ export interface Const {
 }
 
 export interface KeyValue {
-  key: number
-  value: string
+  code: string
+  text: string
 }
 
 const initialState: Consts = {}
@@ -33,7 +33,7 @@ export default class ConstService {
   async readConsts() {
     const response = await API.get(API_ENDPOINT.CONSTS)
     // APIで返却されるJSONとStoreに保存するオブジェクトのフォーマットが異なるので加工する
-    this.data = _.mapKeys(response.consts.data, 'name')
+    this.data = _.mapKeys(response.data, 'name')
     this.main.setAppRoot()
   }
 }

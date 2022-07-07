@@ -38,7 +38,8 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
     title: '',
     contact: '',
     url: '',
-    imageBase64: '',
+    contactImageName: '',
+    contactImageData: '',
     caution: [],
   }
 
@@ -59,7 +60,7 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
       .max(200, 'タイトルは200文字以下を入れてください')
       .required('本文を入力してください'),
     url: Yup.string().url('URLを正しく入力してください'),
-    imageBase64: Yup.string().required('画像を選択してください'),
+    contactImageData: Yup.string().required('画像を選択してください'),
     caution: Yup.array().min(1, '注意事項に同意してください'),
   })
 
@@ -136,15 +137,15 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
                             <Input
                               type="radio"
                               name="gender"
-                              value={e.key}
+                              value={e.code}
                               checked={
-                                values.gender === e.key + '' ? true : false
+                                values.gender === e.code + '' ? true : false
                               }
                               onChange={handleChange}
                               onBlur={handleBlur}
                               invalid={Boolean(touched.gender && errors.gender)}
                             />{' '}
-                            <span>{e.value}</span>
+                            <span>{e.text}</span>
                           </Label>
                         </div>
                       ))}
@@ -169,8 +170,8 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
                         <option value="">選択してください</option>
                         {consts.age &&
                           (consts.age.data as KeyValue[]).map((e, index) => (
-                            <option value={e.key} key={index}>
-                              {e.value}
+                            <option value={e.code} key={index}>
+                              {e.text}
                             </option>
                           ))}
                       </Input>
@@ -244,7 +245,7 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
                       画像を選択してください
                       <span className="required">必須</span>
                     </Label>
-                    <ImageFileInput label="画像" name="imageBase64" />
+                    <ImageFileInput label="画像" name="contactImage" />
                   </div>
                 </FormGroup>
                 <FormGroup>

@@ -29,10 +29,10 @@ const Router: FC<Props> = ({ session }) => {
     if (!appRoot) return
     // セッションのセット
     appRoot.auth.setSession(session)
-    //     ;(async () => {
-    //       // 定数のセット
-    //       await appRoot.const.readConsts()
-    //     })()
+    ;(async () => {
+      // 定数のセット
+      await appRoot.const.readConsts()
+    })()
 
     // CSRFのセット
     const token = document.head.querySelector<HTMLMetaElement>(
