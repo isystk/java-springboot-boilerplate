@@ -38,8 +38,8 @@ services:
     image: java-springboot-boilerplate/mysql
     container_name: java-springboot-boilerplate-mysql
     build:
-      context: "./mysql"
-      dockerfile: "Dockerfile"
+      context: ./mysql
+      dockerfile: Dockerfile
     environment:
       MYSQL_DATABASE: laraec
       MYSQL_USER: user
@@ -47,7 +47,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
       TZ: Asia/Tokyo
     ports:
-      - "3306:3306"
+      - 3306:3306
     restart: always
     volumes:
       - java-springboot-boilerplate-db-store:/var/lib/mysql
@@ -102,8 +102,8 @@ services:
     image: minio/minio:RELEASE.2021-10-10T16-53-30Z
     container_name: java-springboot-boilerplate-s3
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - 9000:9000
+      - 9001:9001
     environment:
       MINIO_ACCESS_KEY: "access_key"
       MINIO_SECRET_KEY: "secret_key"
@@ -112,7 +112,7 @@ services:
       - java-springboot-boilerplate-s3-store:/data
 
   awscli:
-    container_name: "java-springboot-boilerplate-awscli"
+    container_name: java-springboot-boilerplate-awscli
     build:
       context: ./awscli
       dockerfile: Dockerfile
