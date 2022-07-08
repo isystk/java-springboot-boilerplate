@@ -8,9 +8,9 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class EntryRegistTemporary {
+public class MailEntryRegistTemporary {
 
-  String familyName;
+  String userName;
   String domain;
   String onetimeKey;
 }

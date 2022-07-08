@@ -38,3 +38,7 @@ aws:
     #profile-name: "isystk"
     aws-access-key: "access_key"
     aws-secret-key: "secret_key"
+
+stripe:
+  apiKey: "pk_xxxxxx"
+  apiSecret: "pk_xxxxxx"

@@ -110,7 +110,6 @@ export default class CartService {
         amount: values.amount,
         username: values.username,
       })
-
       //レスポンスからclient_secretを取得
       const client_secret = response.data[0].client_secret
 
@@ -126,8 +125,8 @@ export default class CartService {
       })
 
       if (
-        confirmRes.data[0].paymentIntent &&
-        confirmRes.data[0].paymentIntent.status === 'succeeded'
+        confirmRes.paymentIntent &&
+        confirmRes.paymentIntent.status === 'succeeded'
       ) {
         // 決算処理が完了したら、注文履歴に追加してマイカートから商品を削除する。
         const response = await API.post(API_ENDPOINT.MYCARTS_CHECKOUT, {})
@@ -135,6 +134,7 @@ export default class CartService {
         result = response.result
       }
     } catch (e) {
+      console.log(e)
       alert('決算処理に失敗しました')
     }
     // ローディングを非表示にする

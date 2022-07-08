@@ -2,6 +2,7 @@ package com.isystk.sample.web.base.controller.api;
 
 import static com.isystk.sample.common.Const.*;
 
+import com.isystk.sample.common.exception.ErrorMessagesException;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -66,6 +67,26 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     val message = MessageUtils.getMessage(VALIDATION_ERROR, null, "validation error", locale);
     val errorContext = new ErrorResourceImpl();
     errorContext.setMessage(message);
+    errorContext.setFieldErrors(fieldErrorContexts);
+
+    return new ResponseEntity<>(errorContext, headers, status);
+  }
+
+  /**
+   * 論理チェックエラーのハンドリング
+   *
+   * @param ex
+   * @param request
+   * @return
+   */
+  @ExceptionHandler(ErrorMessagesException.class)
+  public ResponseEntity<Object> handleErrorMessagesException(Exception ex, WebRequest request) {
+    val headers = new HttpHeaders();
+    val status = HttpStatus.BAD_REQUEST;
+    val fieldErrorContexts = new ArrayList<FieldErrorResource>();
+
+    val errorContext = new ErrorResourceImpl();
+    errorContext.setMessage(ex.getMessage());
     errorContext.setFieldErrors(fieldErrorContexts);
 
     return new ResponseEntity<>(errorContext, headers, status);

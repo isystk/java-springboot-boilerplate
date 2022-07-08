@@ -11,14 +11,12 @@ import com.isystk.sample.common.service.BaseRepository;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dao.OrderHistoryDao;
-import com.isystk.sample.domain.dao.OrderHistoryDao;
 import com.isystk.sample.domain.dao.StockDao;
 import com.isystk.sample.domain.dao.UserDao;
 import com.isystk.sample.domain.dto.OrderHistoryCriteria;
 import com.isystk.sample.domain.dto.OrderHistoryRepositoryDto;
 import com.isystk.sample.domain.dto.StockCriteria;
 import com.isystk.sample.domain.dto.UserCriteria;
-import com.isystk.sample.domain.entity.OrderHistory;
 import com.isystk.sample.domain.entity.OrderHistory;
 import com.isystk.sample.domain.entity.Stock;
 import com.isystk.sample.domain.entity.User;
@@ -35,7 +33,7 @@ import org.springframework.stereotype.Repository;
  * 注文履歴リポジトリ
  */
 @Repository
-public class OrderRepository extends BaseRepository {
+public class OrderHistoryRepository extends BaseRepository {
 
   @Autowired
   OrderHistoryDao orderHistoryDao;

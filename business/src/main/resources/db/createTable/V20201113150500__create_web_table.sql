@@ -1,8 +1,21 @@
 -- Project Name : laraec
--- Date/Time    : 2022/07/02 14:58:43
+-- Date/Time    : 2022/07/08 15:55:48
 -- Author       : USER
 -- RDBMS Type   : MySQL
 -- Application  : A5:SQL Mk-2
+
+-- メールテンプレート
+create table mail_template (
+  mail_template_id int not null comment 'テンプレートID'
+  , mail_template_div tinyint not null comment 'テンプレート区分'
+  , title varchar(100) not null comment 'タイトル'
+  , text varchar(500) not null comment '本文'
+  , created_at timestamp default null comment '登録日時'
+  , updated_at timestamp default null comment '更新日時'
+  , delete_flg boolean default 0 not null comment '削除フラグ'
+  , version BIGINT default 1 not null comment '楽観チェック用バージョン'
+  , constraint mail_template_PKC primary key (mail_template_id)
+) comment 'メールテンプレート' ;
 
 -- ユーザ
 create table user (

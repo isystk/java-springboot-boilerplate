@@ -4,14 +4,14 @@ import { API_ENDPOINT } from '@/constants/api'
 import _ from 'lodash'
 
 export interface Consts {
-  stripe_key?: Const
+  stripe?: Const
   gender?: Const
   age?: Const
 }
 
 export interface Const {
   name: string
-  data: KeyValue[] | string
+  data: KeyValue[]
 }
 
 export interface KeyValue {

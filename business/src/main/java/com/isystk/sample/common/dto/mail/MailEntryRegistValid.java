@@ -8,8 +8,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class EntryRegistValid {
+public class MailEntryRegistValid {
 
-  String familyName;
+  String userName;
   String domain;
 }

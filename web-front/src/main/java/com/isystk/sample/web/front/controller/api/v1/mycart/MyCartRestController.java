@@ -76,4 +76,39 @@ public class MyCartRestController extends AbstractRestController {
     return resource;
   }
 
+  /**
+   * Stripeの支払情報を生成します。
+   *
+   * @return
+   */
+  @PostMapping("/payment")
+  public Resource payment(@RequestParam("amount") Integer amount, @RequestParam("username") String email) {
+
+    var dto = cartService.createPayment(amount, email);
+
+    Resource resource = resourceFactory.create();
+    resource.setData(Arrays.asList(dto));
+    resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(true);
+
+    return resource;
+  }
+
+  /**
+   * 決算処理完了後の後処理をします。
+   *
+   * @return
+   */
+  @PostMapping("/checkout")
+  public Resource checkout() {
+
+    var result = cartService.checkout();
+
+    Resource resource = resourceFactory.create();
+    resource.setMessage(getMessage(MESSAGE_SUCCESS));
+    resource.setResult(result);
+
+    return resource;
+  }
+
 }
