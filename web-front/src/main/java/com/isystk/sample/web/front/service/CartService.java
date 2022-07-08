@@ -1,5 +1,6 @@
 package com.isystk.sample.web.front.service;
 
+import com.isystk.sample.common.dto.StripePaymentDto;
 import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.domain.dto.CartRepositoryDto;
@@ -77,5 +78,26 @@ public class CartService extends BaseTransactionalService {
 
     var cartList = cartRepository.removeCart(user.getId(), cartId);
     return convertCartSearchResultDto(user, cartList);
+  }
+
+
+  /**
+   * Stripeの支払情報を生成します。
+   *
+   * @return
+   */
+  public StripePaymentDto createPayment(Integer amount, String email) {
+    var user = userHelper.getUser();
+    return cartRepository.createPayment(user, amount, email);
+  }
+
+  /**
+   * 決算処理完了後の後処理をします。
+   *
+   * @return
+   */
+  public boolean checkout() {
+    var user = userHelper.getUser();
+    return cartRepository.checkout(user);
   }
 }

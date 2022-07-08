@@ -176,6 +176,9 @@ subprojects {
     /* poi */
     implementation("org.apache.poi:poi-ooxml:${poiOoxmlVersion}")
 
+    /* stripe */
+    implementation("com.stripe:stripe-java:${stripeVersion}")
+
     /* pdf */
     implementation("net.sf.jasperreports:jasperreports:${jasperreportsVersion}")
 

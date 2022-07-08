@@ -113,7 +113,7 @@ graph LR
 - CSV商品データ/画像取り込みバッチ
 
 
-## 🔧 開発環境の構築
+## 💬 インストール
 
 ※ この環境を利用する為には、事前にdocker、docker-composeが動作する状態であることが前提条件です。
 (Windowsの場合は、以下を参考に「WSL」と「Docker Desktop for Windows」を用意してください)
@@ -302,55 +302,8 @@ $ npm install -g yarn
 └── build.gradle (Gradle用設定ファイル)
 ```
 
-## 🖊️ Docker 操作用シェルスクリプトの使い方
 
-```
-Usage:
-  $(basename ${0}) [command] [<options>]
-
-Options:
-  stats|st                 Dockerコンテナの状態を表示します。
-  init                     Dockerコンテナ・イメージ・生成ファイルの状態を初期化します。
-  start                    すべてのDaemonを起動します。
-  stop                     すべてのDaemonを停止します。
-  nginx restart            NginXを再起動します。
-  mysql login              MySQLデータベースにログインします。
-  mysql export <PAHT>      MySQLデータベースのdumpファイルをエクスポートします。
-  mysql import <PAHT>      MySQLデータベースにdumpファイルをインポートします。
-  mysql restart            MySQLデータベースを再起動します。
-  --version, -v     バージョンを表示します。
-  --help, -h        ヘルプを表示します。
-```
-
-### PhpMyAdmin
-MySQLデータベースに接続してデータの参照や編集が可能です。<br>
-Dockerを起動後に以下のURLにアクセスすると利用可能です。
-
-http://localhost:8888/
-
-### Mailhog
-ダミーのメールサーバーです。実際にはメールは送信されず、送信されたメールはブラウザで閲覧できます。<br>
-Dockerを起動後に以下のURLにアクセスすると利用可能です。
-
-http://localhost:8025/
-
-### Minio
-S3に準拠したダミーのオブジェクトストレージです。<br>
-Dockerを起動後に以下のURLにアクセスすると利用可能です。
-
-http://localhost:9001/
-
-| Username   | Password |
-|:-----------| :----------|
-| access_key | secret_key |
-
-### Solr
-Solrの管理コンソールです。インデックスされたデータを検索したり出来ます。<br>
-Dockerを起動後に以下のURLにアクセスすると利用可能です。
-
-http://localhost:8983/
-
-## 🔧 環境構築
+## 🔧 開発環境の構築 
 
 各種デーモンを起動する
 ```bash
@@ -418,6 +371,54 @@ $ cd web-front/resources
 $ yarn 
 $ yarn build
 ```
+
+## 🖊️ Docker 操作用シェルスクリプトの使い方
+
+```
+Usage:
+  $(basename ${0}) [command] [<options>]
+
+Options:
+  stats|st                 Dockerコンテナの状態を表示します。
+  init                     Dockerコンテナ・イメージ・生成ファイルの状態を初期化します。
+  start                    すべてのDaemonを起動します。
+  stop                     すべてのDaemonを停止します。
+  nginx restart            NginXを再起動します。
+  mysql login              MySQLデータベースにログインします。
+  mysql export <PAHT>      MySQLデータベースのdumpファイルをエクスポートします。
+  mysql import <PAHT>      MySQLデータベースにdumpファイルをインポートします。
+  mysql restart            MySQLデータベースを再起動します。
+  --version, -v     バージョンを表示します。
+  --help, -h        ヘルプを表示します。
+```
+
+### PhpMyAdmin
+MySQLデータベースに接続してデータの参照や編集が可能です。<br>
+Dockerを起動後に以下のURLにアクセスすると利用可能です。
+
+http://localhost:8888/
+
+### Mailhog
+ダミーのメールサーバーです。実際にはメールは送信されず、送信されたメールはブラウザで閲覧できます。<br>
+Dockerを起動後に以下のURLにアクセスすると利用可能です。
+
+http://localhost:8025/
+
+### Minio
+S3に準拠したダミーのオブジェクトストレージです。<br>
+Dockerを起動後に以下のURLにアクセスすると利用可能です。
+
+http://localhost:9001/
+
+| Username   | Password |
+|:-----------| :----------|
+| access_key | secret_key |
+
+### Solr
+Solrの管理コンソールです。インデックスされたデータを検索したり出来ます。<br>
+Dockerを起動後に以下のURLにアクセスすると利用可能です。
+
+http://localhost:8983/
 
 ## 🔗 参考
 

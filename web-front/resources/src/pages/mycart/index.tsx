@@ -17,7 +17,9 @@ const MyCart: FC<Props> = ({ appRoot }) => {
   const auth = appRoot.auth
   const { carts } = appRoot.cart
   const [isOpen, setIsOpen] = useState<boolean>(false)
-  const stripePromise = loadStripe(appRoot.const.data.stripe_key?.data + '')
+  const stripePromise = loadStripe(
+    appRoot.const.data.stripe?.data[0]?.code + ''
+  )
 
   useEffect(() => {
     ;(async () => {

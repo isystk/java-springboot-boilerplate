@@ -8,6 +8,7 @@ import com.isystk.sample.common.values.Gender;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import org.apache.commons.compress.utils.Lists;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,6 +22,9 @@ import static com.isystk.sample.common.FrontUrl.API_V1_CONSTS;
 @RestController
 @RequestMapping(path = API_V1_CONSTS, produces = MediaType.APPLICATION_JSON_VALUE)
 public class ConstantRestController extends AbstractRestController {
+
+  @Value("${stripe.apiKey}")
+  String apiKey;
 
   @Override
   public String getFunctionName() {
@@ -62,6 +66,10 @@ public class ConstantRestController extends AbstractRestController {
               return dto;
             }
         ).collect(Collectors.toList())));
+    CodeValueDto dto = new CodeValueDto();
+    dto.setText("stripe_key");
+    dto.setCode(apiKey);
+    list.add(new CodeValueGroupDto("stripe", Arrays.asList(dto)));
 
     resource.setData(list);
     resource.setMessage(getMessage(MESSAGE_SUCCESS));

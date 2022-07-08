@@ -10,7 +10,7 @@ import com.isystk.sample.domain.dto.OrderHistoryCriteria;
 import com.isystk.sample.domain.dto.OrderHistoryRepositoryDto;
 import com.isystk.sample.domain.dto.StockCriteria;
 import com.isystk.sample.domain.dto.UserCriteria;
-import com.isystk.sample.domain.repository.OrderRepository;
+import com.isystk.sample.domain.repository.OrderHistoryRepository;
 import com.isystk.sample.web.admin.dto.OrderHistorySearchConditionDto;
 import java.math.BigInteger;
 import java.time.LocalTime;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Service;
 public class OrderHistoryService extends BaseTransactionalService {
 
   @Autowired
-  OrderRepository orderRepository;
+  OrderHistoryRepository orderHistoryRepository;
 
   @Autowired
   UserDao userDao;
@@ -38,7 +38,7 @@ public class OrderHistoryService extends BaseTransactionalService {
    * @return
    */
   public List<OrderHistoryRepositoryDto> findAll(OrderHistorySearchConditionDto dto) {
-    return orderRepository.findAll(dtoToCriteria(dto));
+    return orderHistoryRepository.findAll(dtoToCriteria(dto));
   }
 
   /**
@@ -49,7 +49,7 @@ public class OrderHistoryService extends BaseTransactionalService {
    * @return
    */
   public Page<OrderHistoryRepositoryDto> findPage(OrderHistorySearchConditionDto dto, Pageable pageable) {
-    return orderRepository.findPage(dtoToCriteria(dto), pageable);
+    return orderHistoryRepository.findPage(dtoToCriteria(dto), pageable);
   }
 
 
@@ -103,7 +103,7 @@ public class OrderHistoryService extends BaseTransactionalService {
    * @return
    */
   public OrderHistoryRepositoryDto findById(BigInteger stockId) {
-    return orderRepository.findById(stockId);
+    return orderHistoryRepository.findById(stockId);
   }
 
 }

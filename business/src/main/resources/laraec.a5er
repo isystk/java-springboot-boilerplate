@@ -409,3 +409,26 @@ Top=1010
 ZOrder=-4
 Width=1145
 Height=698
+
+[Entity]
+PName=mail_template
+LName=メールテンプレート
+Comment=
+TableOption=
+Page=MAIN
+Left=1600
+Top=1200
+Field="テンプレートID","mail_template_id","int","NOT NULL",0,"","",$FFFFFFFF,""
+Field="テンプレート区分","mail_template_div","tinyint","NOT NULL",,"","",$FFFFFFFF,""
+Field="タイトル","title","varchar(100)","NOT NULL",,"","",$FFFFFFFF,""
+Field="本文","text","varchar(500)","NOT NULL",,"","",$FFFFFFFF,""
+Field="登録日時","created_at","timestamp",,,"null","",$FFFFFFFF,""
+Field="更新日時","updated_at","timestamp",,,"null","",$FFFFFFFF,""
+Field="削除フラグ","delete_flg","boolean","NOT NULL",,"0","",$FFFFFFFF,""
+Field="楽観チェック用バージョン","version","BIGINT","NOT NULL",,"1","",$FFFFFFFF,""
+EffectMode=None
+Color=$000000
+BkColor=$FFFFFF
+ModifiedDateTime=20220708162039
+Position="MAIN",1600,1200,379,241
+ZOrder=15
