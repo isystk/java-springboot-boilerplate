@@ -59,7 +59,9 @@ export const ImageFileInput: FC<Props> = ({ label, name, ...rest }) => {
                 console.log(values)
                 return (
                   <CardImg
-                    src={values[name] || '../static/images/no-image.gif'}
+                    src={
+                      values[name + 'Data'] || '../static/images/no-image.gif'
+                    }
                     alt="Contemplative Reptile"
                   />
                 )

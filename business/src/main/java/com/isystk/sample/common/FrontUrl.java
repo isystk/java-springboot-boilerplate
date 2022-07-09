@@ -9,8 +9,11 @@ public class FrontUrl {
    * ---- URLs ----
    **/
   public static final String TOP = "/";
-
   public static final String REGISTER = "/register";
+
+  public static final String REGISTER_REMIND = "/register/remind";
+
+  public static final String REGISTER_REMIND_CONFIG = "/register/remind/config";
 
   /**
    * ---- APIｓ ----
@@ -21,12 +24,6 @@ public class FrontUrl {
   public static final String API_V1_STOCKS = "/api/v1/stocks";
 
   public static final String API_V1_MYCARTS = "/api/v1/mycarts";
-
-  public static final String API_V1_ENTRY_REGIST = "/api/v1/entry/regist";
-
-  public static final String API_V1_ENTRY_REMIND = "/api/v1/entry/remind";
-
-  public static final String API_V1_ENTRY_REMIND_CONFIG = "/api/v1/entry/remind/config";
 
   public static final String API_V1_CONSTS = "/api/v1/consts";
 

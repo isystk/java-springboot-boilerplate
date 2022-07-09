@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.api.v1.entry.remind;
+package com.isystk.sample.web.front.controller.html.register.remind;
 
 import com.isystk.sample.common.validator.AbstractValidator;
 import com.isystk.sample.domain.dao.UserDao;
@@ -11,13 +11,14 @@ import org.springframework.validation.Errors;
  * 会員パスワード変更 入力チェック
  */
 @Component
-public class EntryRemindRestFormValidator extends AbstractValidator<EntryRemindRestForm> {
+public class RegisterRemindFormValidator extends AbstractValidator<RegisterRemindForm> {
 
   @Autowired
   UserDao userDao;
 
   @Override
-  protected void doValidate(EntryRemindRestForm form, Errors errors) {
+  protected void doValidate(
+      RegisterRemindForm form, Errors errors) {
     // メールアドレスの存在チェック
     UserCriteria criteria = new UserCriteria();
     criteria.setEmailEq(form.getEmail());

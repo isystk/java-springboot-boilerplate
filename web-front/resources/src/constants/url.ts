@@ -12,6 +12,10 @@ export const Url = {
   LOGOUT: '/auth/logout',
   /** 会員登録 */
   REGISTER: '/register',
+  /** 仮会員登録 */
+  REGISTER_SENDMAIL: '/register/sendMail',
+  /** 会員登録完了 */
+  REGISTER_COMPLETE: '/register/complete',
   /** パスワード忘れ */
   PASSWORD_RESET: '/password/reset',
   /** メールアドレス認証 */

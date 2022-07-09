@@ -10,6 +10,8 @@ import LoginForm from '@/pages/login'
 import MyCart from '@/pages/mycart'
 import NotFound from '@/pages/NotFound'
 import RegisterForm from '@/pages/register'
+import RegisterSendMailForm from '@/pages/register/sendMail'
+import RegisterCompleteForm from '@/pages/register/complete'
 import ResetForm from '@/pages/password/reset/[id]'
 import ShopComplete from '@/pages/complete'
 import ShopTop from '@/pages'
@@ -54,6 +56,14 @@ const Router: FC<Props> = ({ session }) => {
           <Route
             path={Url.REGISTER}
             element={<RegisterForm appRoot={appRoot} />}
+          />
+          <Route
+            path={Url.REGISTER_SENDMAIL}
+            element={<RegisterSendMailForm appRoot={appRoot} />}
+          />
+          <Route
+            path={Url.REGISTER_COMPLETE}
+            element={<RegisterCompleteForm appRoot={appRoot} />}
           />
           <Route
             path={Url.PASSWORD_RESET}

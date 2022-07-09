@@ -60,7 +60,7 @@ public class ContactRestController extends AbstractRestController {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
-
+      // TODO エラーメッセージを返却できるようにしたい
       resource.setMessage(getMessage(VALIDATION_ERROR));
       resource.setResult(false);
       return resource;
@@ -76,7 +76,6 @@ public class ContactRestController extends AbstractRestController {
       imageList.add(dto);
       tContactsDto.setImageList(imageList);
     }
-    tContactsDto.setId(form.getContactId());
 
     // 登録する
     contactService.create(tContactsDto);

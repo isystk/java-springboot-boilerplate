@@ -151,6 +151,7 @@ public class ContactFormRepository extends BaseRepository {
     contactFormDto.getImageList().stream()
         .forEach((e) -> {
           val contactFormImage = new ContactFormImage();
+          contactFormImage.setContactFormId(contactForm.getId());
           contactFormImage.setFileName(e.getContactImageName());
           contactFormImage.setCreatedAt(time); // 作成日
           contactFormImage.setUpdatedAt(time); // 更新日
