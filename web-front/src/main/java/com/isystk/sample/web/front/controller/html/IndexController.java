@@ -19,7 +19,7 @@ public class IndexController extends AbstractHtmlController {
     return "F_TOP";
   }
 
-  @GetMapping("*")
+  @GetMapping({"/", "{path:(?!^static$).*}/**"})
   public String index(Model model) {
     return "modules/index";
   }

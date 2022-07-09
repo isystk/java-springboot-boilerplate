@@ -16,8 +16,12 @@ export const Url = {
   REGISTER_SENDMAIL: '/register/sendMail',
   /** 会員登録完了 */
   REGISTER_COMPLETE: '/register/complete',
-  /** パスワード忘れ */
+  /** パスワード変更 */
   PASSWORD_RESET: '/password/reset',
+  /** パスワード変更メール送信完了 */
+  PASSWORD_RESET_SENDMAIL: '/password/reset/sendMail',
+  /** パスワード変更完了 */
+  PASSWORD_RESET_COMPLETE: '/password/reset/complete',
   /** メールアドレス認証 */
   EMAIL_VERIFY: '/email/verify',
   /** ユーザーHOME */

@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.register.remind;
+package com.isystk.sample.web.front.controller.html.password;
 
 import static com.isystk.sample.common.util.ValidateUtils.isNotEquals;
 
@@ -10,14 +10,14 @@ import org.springframework.validation.Errors;
  * 会員パスワード変更 入力チェック
  */
 @Component
-public class RegisterRemindConfigFormValidator extends
-    AbstractValidator<RegisterRemindConfigForm> {
+public class PasswordResetConfigFormValidator extends
+    AbstractValidator<PasswordResetConfigForm> {
 
   @Override
   protected void doValidate(
-      RegisterRemindConfigForm form, Errors errors) {
+      PasswordResetConfigForm form, Errors errors) {
     // 確認用パスワードと突き合わせる
-    if (isNotEquals(form.getPassword(), form.getPasswordConf())) {
+    if (isNotEquals(form.getPassword(), form.getPasswordConfirmation())) {
       errors.rejectValue("password", "errros.unmatchPassword");
       errors.rejectValue("passwordConf", "errros.unmatchPassword");
     }

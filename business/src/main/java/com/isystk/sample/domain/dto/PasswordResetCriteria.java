@@ -19,6 +19,17 @@ import lombok.Setter;
 public class PasswordResetCriteria {
 
 
+    BigInteger idEq;
+    BigInteger idNe;
+    BigInteger idLt;
+    BigInteger idLe;
+    BigInteger idGt;
+    BigInteger idGe;
+    boolean idIsNull;
+    boolean idIsNotNull;
+    List<BigInteger> idIn;
+    List<BigInteger> idNotIn;
+
     String emailEq;
     String emailNe;
     String emailLt;
@@ -61,6 +72,19 @@ public class PasswordResetCriteria {
     LocalDateTime createdAtGe;
     boolean createdAtIsNull;
     boolean createdAtIsNotNull;
+
+    LocalDateTime updatedAtEq;
+    LocalDateTime updatedAtNe;
+    LocalDateTime updatedAtLt;
+    LocalDateTime updatedAtLe;
+    LocalDateTime updatedAtGt;
+    LocalDateTime updatedAtGe;
+    boolean updatedAtIsNull;
+    boolean updatedAtIsNotNull;
+
+    boolean deleteFlgTrue;
+    boolean deleteFlgFalse;
+
 
     String orderBy;
 }

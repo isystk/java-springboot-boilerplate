@@ -1,5 +1,5 @@
-import React, { useState, FC } from 'react'
-import { Form } from 'reactstrap'
+import React, { useEffect, useState, FC } from 'react'
+import { Form, Input } from 'reactstrap'
 import TextInput from '@/components/elements/TextInput'
 import SubmitButton from '@/components/elements/SubmitButton'
 import CSRFToken from '@/components/elements/CSRFToken'
@@ -8,42 +8,41 @@ import SessionAlert from '@/components/elements/SessionAlert'
 import Box from '@/components/Box'
 import Layout from '@/components/Layout'
 import MainService from '@/services/main'
+import { useParams } from 'react-router-dom'
 
 type Props = {
   appRoot: MainService
 }
 
 const ResetForm: FC<Props> = ({ appRoot }) => {
-  const [email, setEmail] = useState<string>('')
+  const [onetimeKey, setOnetimeKey] = useState<string>('')
+  const { id } = useParams()
 
-  const handleSetEmail = (value: string) => {
-    setEmail(value)
-  }
+  useEffect(() => {
+    if (!id) {
+      return
+    }
+    setOnetimeKey(id)
+  }, [id])
 
   return (
     <Layout appRoot={appRoot} title="パスワード変更">
       <main className="main">
         <Box title="パスワード変更" small={true}>
           <SessionAlert target="status" />
-          <Form method="POST" action="/password/reset" id="login-form">
+          <Form method="POST" action="/password/reset/config" id="login-form">
             <CSRFToken appRoot={appRoot} />
             <RequestToken />
-            <TextInput
-              identity="email"
-              controlType="email"
-              label="メールアドレス"
-              defaultValue={email}
-              action={handleSetEmail}
-              autoFocus={true}
-            />
+            <Input type="hidden" name="onetimeKey" defaultValue={onetimeKey} />
             <TextInput
               identity="password"
               controlType="password"
               autoComplete="new-password"
               label="新しいパスワード"
+              autoFocus={true}
             />
             <TextInput
-              identity="password_confirmation"
+              identity="passwordConfirmation"
               controlType="password"
               autoComplete="new-password"
               label="新しいパスワード(確認)"

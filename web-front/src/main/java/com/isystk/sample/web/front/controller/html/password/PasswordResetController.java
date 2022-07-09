@@ -1,9 +1,9 @@
-package com.isystk.sample.web.front.controller.html.register.remind;
+package com.isystk.sample.web.front.controller.html.password;
 
-import static com.isystk.sample.common.FrontUrl.REGISTER_REMIND;
+import static com.isystk.sample.common.FrontUrl.PASSWORD_RESET;
 
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
-import com.isystk.sample.web.front.service.RegisterRemindService;
+import com.isystk.sample.web.front.service.PasswordResetService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,28 +21,28 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @Slf4j
-@RequestMapping(path = REGISTER_REMIND)
-public class RegisterRemindController extends AbstractHtmlController {
+@RequestMapping(path = PASSWORD_RESET)
+public class PasswordResetController extends AbstractHtmlController {
 
   @Autowired
-  RegisterRemindService registerRemindService;
+  PasswordResetService passwordResetService;
 
   @Autowired
-  RegisterRemindFormValidator registerRemindFormValidator;
+  PasswordResetFormValidator passwordResetFormValidator;
 
   @ModelAttribute("entryRemindForm")
-  public RegisterRemindForm entryRemindForm() {
-    return new RegisterRemindForm();
+  public PasswordResetForm entryRemindForm() {
+    return new PasswordResetForm();
   }
 
   @InitBinder("entryRemindForm")
   public void validatorBinder(WebDataBinder binder) {
-    binder.addValidators(registerRemindFormValidator);
+    binder.addValidators(passwordResetFormValidator);
   }
 
   @Override
   public String getFunctionName() {
-    return "F_REGISTER_REMIND";
+    return "F_PASSWORD_RESET";
   }
 
   /**
@@ -53,7 +53,7 @@ public class RegisterRemindController extends AbstractHtmlController {
    * @return
    */
   @PostMapping
-  public String registOnetimePass(@Validated @ModelAttribute RegisterRemindForm form,
+  public String registOnetimePass(@Validated @ModelAttribute PasswordResetForm form,
       BindingResult br, RedirectAttributes attributes) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
@@ -63,9 +63,9 @@ public class RegisterRemindController extends AbstractHtmlController {
     }
 
     // パスワード変更ワンタイムパス登録
-    registerRemindService.registOnetimePass(form.getEmail());
+    passwordResetService.registOnetimePass(form.getEmail());
 
-    return "redirect:/password/reset";
+    return "redirect:/password/reset/sendMail";
   }
 
 
