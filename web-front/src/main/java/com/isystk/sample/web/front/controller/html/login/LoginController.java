@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- * 管理側ログイン
+ * ログイン
  */
 @Controller
 @Slf4j
@@ -48,7 +48,7 @@ public class LoginController extends AbstractHtmlController {
     userHelper.updateLastLogin();
 
     attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("login.success"));
-    return "redirect:/";
+    return "redirect:/home";
   }
 
   /**
@@ -61,7 +61,7 @@ public class LoginController extends AbstractHtmlController {
   @GetMapping(LOGIN_FAILURE_URL)
   public String loginFailure(@ModelAttribute LoginForm form, Model model) {
     model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.failed"));
-    return "modules/login/login";
+    return "redirect:/login";
   }
 
   /**
@@ -74,7 +74,7 @@ public class LoginController extends AbstractHtmlController {
   @GetMapping(LOGIN_TIMEOUT_URL)
   public String loginTimeout(@ModelAttribute LoginForm form, Model model) {
     model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.timeout"));
-    return "modules/login/login";
+    return "redirect:/login";
   }
 
   /**

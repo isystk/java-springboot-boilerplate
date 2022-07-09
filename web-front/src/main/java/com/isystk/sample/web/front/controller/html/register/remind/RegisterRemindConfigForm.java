@@ -1,15 +1,14 @@
-package com.isystk.sample.web.front.controller.api.v1.entry.remind;
+package com.isystk.sample.web.front.controller.html.register.remind;
 
+import java.io.Serializable;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import java.io.Serializable;
-
 @Setter
 @Getter
-class EntryRemindConfigRestForm implements Serializable {
+class RegisterRemindConfigForm implements Serializable {
 
   private static final long serialVersionUID = 7593564324192730932L;
 

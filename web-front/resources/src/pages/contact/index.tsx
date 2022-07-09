@@ -31,7 +31,7 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
   }
 
   const initialValues = {
-    your_name: auth.name || '',
+    yourName: auth.name || '',
     email: auth.email || '',
     gender: '',
     age: '',
@@ -44,7 +44,7 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
   }
 
   const validation = Yup.object().shape({
-    your_name: Yup.string()
+    yourName: Yup.string()
       .max(20, 'お名前は20文字以下を入れてください')
       .required('お名前を入力してください'),
     email: Yup.string()
@@ -85,22 +85,22 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
                 <CSRFToken appRoot={appRoot} />
                 <FormGroup>
                   <div style={{ width: '100%' }}>
-                    <Label for="your_name" className="item-name">
+                    <Label for="yourName" className="item-name">
                       お名前を入力してください
                       <span className="required">必須</span>
                     </Label>
                     <div className="text-wrap large">
                       <Input
                         type="text"
-                        id="your_name"
-                        name="your_name"
-                        value={values.your_name}
+                        id="yourName"
+                        name="yourName"
+                        value={values.yourName}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        invalid={Boolean(touched.your_name && errors.your_name)}
+                        invalid={Boolean(touched.yourName && errors.yourName)}
                       />
                       <div className="form-bottom"></div>
-                      <p className="error">{errors.your_name}</p>
+                      <p className="error">{errors.yourName}</p>
                     </div>
                   </div>
                 </FormGroup>

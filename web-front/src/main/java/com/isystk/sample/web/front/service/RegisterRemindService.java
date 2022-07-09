@@ -1,10 +1,19 @@
 package com.isystk.sample.web.front.service;
 
+import com.google.common.collect.Maps;
+import com.isystk.sample.common.dto.mail.MailEntryRegistTemporary;
+import com.isystk.sample.common.util.DateUtils;
+import com.isystk.sample.common.values.MailTemplateDiv;
+import com.isystk.sample.domain.dao.PasswordResetDao;
 import com.isystk.sample.domain.dao.UserDao;
+import com.isystk.sample.domain.dto.PasswordResetCriteria;
 import com.isystk.sample.domain.dto.UserCriteria;
+import com.isystk.sample.domain.entity.PasswordReset;
 import com.isystk.sample.domain.entity.User;
-import com.isystk.sample.domain.repository.UserRepository;
+import com.isystk.sample.domain.repository.MailTemplateRepository;
 
+import java.util.Map;
+import lombok.val;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +24,7 @@ import com.isystk.sample.common.helper.SendMailHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
 
 @Service
-public class EntryRemindService extends BaseTransactionalService {
+public class RegisterRemindService extends BaseTransactionalService {
 
   @Value("${spring.mail.properties.mail.from}")
   String fromAddress;
@@ -27,7 +36,10 @@ public class EntryRemindService extends BaseTransactionalService {
   UserDao userDao;
 
   @Autowired
-  UserRepository userRepository;
+  PasswordResetDao passwordResetDao;
+
+  @Autowired
+  MailTemplateRepository mailTemplateRepository;
 
   @Autowired
   SendMailHelper sendMailHelper;
@@ -45,36 +57,37 @@ public class EntryRemindService extends BaseTransactionalService {
     criteria.setDeleteFlgFalse(true);
     User user = userDao.findOne(criteria)
         .orElseThrow(() -> new NoDataFoundException("email=" + email + " のデータが見つかりません。"));
-//
-//    // パスワード変更ワンタイムパスを登録する(Delete→Insert)
-//    TUserOnetimePassCriteria onetimePassCriteria = new TUserOnetimePassCriteria();
-//    onetimePassCriteria.setUserIdEq(tUser.getUserId());
-//    TUserOnetimePass tUserOnetimePass = tUserOnetimePassDao.findOne(onetimePassCriteria)
-//        .orElse(null);
-//    if (tUserOnetimePass != null) {
-//      tUserOnetimePassDao.delete(tUserOnetimePass);
-//    }
-//
-//    tUserOnetimePass = new TUserOnetimePass();
-//    tUserOnetimePass.setUserId(tUser.getUserId());
-//    String onetimeKey = generateOnetimeKey();
-//    tUserOnetimePass.setOnetimeKey(onetimeKey);
-//    // 7時間の制限時間を設ける
-//    tUserOnetimePass.setOnetimeValidTime(DateUtils.getNow().plusHours(7));
-//    tUserOnetimePassDao.insert(tUserOnetimePass);
-//
-//    // 新パスワード設定画面のお知らせメールを送信する
-//    val mailTemplate = getMailTemplate(MailTemplate.ENTRY_REMIND.getCode());
-//    val subject = mailTemplate.getTitle();
-//    val templateBody = mailTemplate.getText();
-//    EntryRegistTemporary dto = new EntryRegistTemporary();
-//    dto.setFamilyName(tUser.getFamilyName());
-//    dto.setDomain(domain);
-//    dto.setOnetimeKey(onetimeKey);
-//    Map<String, Object> objects = new HashMap<>();
-//    objects.put("dto", dto);
-//    val body = sendMailHelper.getMailBody(templateBody, objects);
-//    sendMailHelper.sendMail(fromAddress, tUser.getEmail(), subject, body);
+
+    // パスワード変更ワンタイムパスを登録する(Delete→Insert)
+    {
+      PasswordResetCriteria passwordResetCriteria = new PasswordResetCriteria();
+      passwordResetCriteria.setEmailEq(user.getEmail());
+      PasswordReset passwordReset = passwordResetDao.findOne(passwordResetCriteria)
+          .orElse(null);
+      if (passwordReset != null) {
+        passwordResetDao.delete(passwordReset);
+      }
+    }
+
+    PasswordReset passwordReset = new PasswordReset();
+    passwordReset.setEmail(user.getEmail());
+    String onetimeKey = generateOnetimeKey();
+    passwordReset.setToken(onetimeKey);
+    passwordReset.setCreatedAt(DateUtils.getNow());
+    passwordResetDao.insert(passwordReset);
+
+    // 新パスワード設定画面のお知らせメールを送信する
+    val mailTemplate = mailTemplateRepository.getMailTemplate(MailTemplateDiv.ENTRY_REMIND);
+    val subject = mailTemplate.getTitle();
+    val templateBody = mailTemplate.getText();
+    MailEntryRegistTemporary dto = new MailEntryRegistTemporary();
+    dto.setUserName(user.getName());
+    dto.setDomain(domain);
+    dto.setOnetimeKey(onetimeKey);
+    Map<String, Object> objects = Maps.newHashMap();
+    objects.put("dto", dto);
+    val body = sendMailHelper.getMailBody(templateBody, objects);
+    sendMailHelper.sendMail(fromAddress, user.getEmail(), subject, body);
   }
 
   /**

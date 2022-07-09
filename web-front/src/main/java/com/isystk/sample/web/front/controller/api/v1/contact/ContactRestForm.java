@@ -15,9 +15,6 @@ public class ContactRestForm extends BaseSearchForm implements Pageable {
 
   private static final long serialVersionUID = 7593564324192730932L;
 
-  @NotNull
-  BigInteger contactId;
-
   @NotBlank
   String yourName;
 
