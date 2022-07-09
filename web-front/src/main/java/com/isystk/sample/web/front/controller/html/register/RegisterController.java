@@ -80,14 +80,6 @@ public class RegisterController extends AbstractHtmlController {
   }
 
   /**
-   * 仮会員登録完了画面
-   */
-  @GetMapping("/sendMail")
-  public String sendMail() {
-    return "modules/index";
-  }
-
-  /**
    * 本会員登録処理
    *
    * @param onetimeKey
@@ -102,11 +94,4 @@ public class RegisterController extends AbstractHtmlController {
     return "redirect:/register/complete";
   }
 
-  /**
-   * 本会員登録完了画面
-   */
-  @GetMapping("/complete")
-  public String complete() {
-    return "modules/index";
-  }
 }

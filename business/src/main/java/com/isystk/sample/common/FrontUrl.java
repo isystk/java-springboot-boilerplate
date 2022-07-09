@@ -11,9 +11,9 @@ public class FrontUrl {
   public static final String TOP = "/";
   public static final String REGISTER = "/register";
 
-  public static final String REGISTER_REMIND = "/register/remind";
+  public static final String PASSWORD_RESET = "/password/reset";
 
-  public static final String REGISTER_REMIND_CONFIG = "/register/remind/config";
+  public static final String PASSWORD_RESET_CONFIG = "/password/reset/config";
 
   /**
    * ---- APIｓ ----

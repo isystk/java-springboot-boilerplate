@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import AuthCheck from '@/components/auths/AuthCheck'
 import ContactComplete from '@/pages/contact/complete'
 import ContactCreate from '@/pages/contact'
-import EMailForm from '@/pages/password/reset'
 import Home from '@/pages/home'
 import LoginForm from '@/pages/login'
 import MyCart from '@/pages/mycart'
@@ -12,7 +11,10 @@ import NotFound from '@/pages/NotFound'
 import RegisterForm from '@/pages/register'
 import RegisterSendMailForm from '@/pages/register/sendMail'
 import RegisterCompleteForm from '@/pages/register/complete'
-import ResetForm from '@/pages/password/reset/[id]'
+import PasswordResetForm from '@/pages/password/reset'
+import PasswordResetSendMailForm from '@/pages/password/reset/sendMail'
+import PasswordResetInputForm from '@/pages/password/reset/[id]'
+import PasswordResetCompleteForm from '@/pages/password/reset/complete'
 import ShopComplete from '@/pages/complete'
 import ShopTop from '@/pages'
 import Verify from '@/pages/email/verify'
@@ -67,11 +69,19 @@ const Router: FC<Props> = ({ session }) => {
           />
           <Route
             path={Url.PASSWORD_RESET}
-            element={<EMailForm appRoot={appRoot} />}
+            element={<PasswordResetForm appRoot={appRoot} />}
+          />
+          <Route
+            path={Url.PASSWORD_RESET_SENDMAIL}
+            element={<PasswordResetSendMailForm appRoot={appRoot} />}
           />
           <Route
             path={`${Url.PASSWORD_RESET}/:id`}
-            element={<ResetForm appRoot={appRoot} />}
+            element={<PasswordResetInputForm appRoot={appRoot} />}
+          />
+          <Route
+            path={Url.PASSWORD_RESET_COMPLETE}
+            element={<PasswordResetCompleteForm appRoot={appRoot} />}
           />
           <Route
             path={Url.EMAIL_VERIFY}

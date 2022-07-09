@@ -14,11 +14,11 @@ type Props = {
 
 const ResetForm: FC<Props> = ({ appRoot }) => {
   return (
-    <Layout appRoot={appRoot} title="パスワードリセット">
+    <Layout appRoot={appRoot} title="パスワード変更">
       <main className="main">
-        <Box title="パスワードリセット" small={true}>
+        <Box title="パスワード変更" small={true}>
           <SessionAlert target="status" />
-          <Form method="POST" action="/password/email" id="login-form">
+          <Form method="POST" action="/password/reset" id="login-form">
             <CSRFToken appRoot={appRoot} />
             <TextInput
               identity="email"

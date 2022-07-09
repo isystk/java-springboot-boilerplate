@@ -5,13 +5,13 @@ import com.isystk.sample.common.dto.mail.MailEntryRegistTemporary;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.values.MailTemplateDiv;
 import com.isystk.sample.domain.dao.PasswordResetDao;
-import com.isystk.sample.domain.dao.UserDao;
 import com.isystk.sample.domain.dto.PasswordResetCriteria;
 import com.isystk.sample.domain.dto.UserCriteria;
 import com.isystk.sample.domain.entity.PasswordReset;
 import com.isystk.sample.domain.entity.User;
 import com.isystk.sample.domain.repository.MailTemplateRepository;
 
+import com.isystk.sample.domain.repository.UserRepository;
 import java.util.Map;
 import lombok.val;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -24,7 +24,7 @@ import com.isystk.sample.common.helper.SendMailHelper;
 import com.isystk.sample.common.service.BaseTransactionalService;
 
 @Service
-public class RegisterRemindService extends BaseTransactionalService {
+public class PasswordResetService extends BaseTransactionalService {
 
   @Value("${spring.mail.properties.mail.from}")
   String fromAddress;
@@ -33,13 +33,13 @@ public class RegisterRemindService extends BaseTransactionalService {
   String domain;
 
   @Autowired
-  UserDao userDao;
-
-  @Autowired
   PasswordResetDao passwordResetDao;
 
   @Autowired
   MailTemplateRepository mailTemplateRepository;
+
+  @Autowired
+  UserRepository userRepository;
 
   @Autowired
   SendMailHelper sendMailHelper;
@@ -55,7 +55,7 @@ public class RegisterRemindService extends BaseTransactionalService {
     UserCriteria criteria = new UserCriteria();
     criteria.setEmailEq(email);
     criteria.setDeleteFlgFalse(true);
-    User user = userDao.findOne(criteria)
+    User user = userRepository.findOne(criteria)
         .orElseThrow(() -> new NoDataFoundException("email=" + email + " のデータが見つかりません。"));
 
     // パスワード変更ワンタイムパスを登録する(Delete→Insert)
@@ -74,6 +74,8 @@ public class RegisterRemindService extends BaseTransactionalService {
     String onetimeKey = generateOnetimeKey();
     passwordReset.setToken(onetimeKey);
     passwordReset.setCreatedAt(DateUtils.getNow());
+    passwordReset.setUpdatedAt(DateUtils.getNow());
+    passwordReset.setDeleteFlg(false);
     passwordResetDao.insert(passwordReset);
 
     // 新パスワード設定画面のお知らせメールを送信する
@@ -98,28 +100,29 @@ public class RegisterRemindService extends BaseTransactionalService {
    */
   public void changePassword(String onetimeKey, String password) {
 
-//    // ワンタイムキーからユーザーIDを取得する
-//    var tUserOnetimePass = getTUserOnetimePass(onetimeKey);
-//    if (tUserOnetimePass == null) {
-//      throw new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]");
-//    }
+    // ワンタイムキーからユーザーIDを取得する
+    PasswordResetCriteria criteria = new PasswordResetCriteria();
+    criteria.setTokenEq(onetimeKey);
+    var passwordReset = passwordResetDao.findOne(criteria).orElseThrow(() -> new NoDataFoundException("指定されたワンタイムキーが見つかりません。[onetimeKey=" + onetimeKey + "]"));
 
-//    // 承認期限オーバー
-//    if (DateUtils.beforeNow(tUserOnetimePass.getOnetimeValidTime())) {
-//      throw new NoDataFoundException("指定されたワンタイムキーは承認期限を過ぎています。[onetimeKey=" + onetimeKey + "]");
-//    }
+    // 承認期限オーバー
+    if (DateUtils.beforeNow(DateUtils.addMinutes(passwordReset.getCreatedAt(), 60))) {
+      throw new NoDataFoundException("指定されたワンタイムキーは期限を過ぎています。[onetimeKey=" + onetimeKey + "]");
+    }
 
-//    // ユーザー情報を取得する
-//    User user = userDao.selectById(tUserOnetimePass.getUserId())
-//        .orElseThrow(() -> new NoDataFoundException(
-//            "user_id=" + tUserOnetimePass.getUserId() + " のデータが見つかりません。"));
-//
-//    // パスワードを変更する
-//    tUser.setPassword(password);
-//    tUserRepository.update(tUser);
-//
-//    // ワンタイムキーを削除
-//    tUserOnetimePassDao.delete(tUserOnetimePass);
+    // ユーザー情報を取得する
+    UserCriteria userCriteria = new UserCriteria();
+    userCriteria.setEmailEq(passwordReset.getEmail());
+    User user = userRepository.findOne(userCriteria)
+        .orElseThrow(() -> new NoDataFoundException(
+            "email=" + passwordReset.getEmail() + " のデータが見つかりません。"));
+
+    // パスワードを変更する
+    user.setPassword(password);
+    userRepository.update(user);
+
+    // ワンタイムキーを削除
+    passwordResetDao.delete(passwordReset);
   }
 
   /**
@@ -128,46 +131,8 @@ public class RegisterRemindService extends BaseTransactionalService {
    * @return 生成されたワンタイムキー
    */
   private String generateOnetimeKey() {
-    String onetimeKey = "";
-    boolean loopFlg = true;
-
-    do {
       // ランダムな文字列を生成する。
-      onetimeKey = RandomStringUtils.randomAlphanumeric(32);
-
-//      // 生成したキーが存在しないか確認する
-//      if (null == getTUserOnetimePass(onetimeKey)) {
-//        loopFlg = false;
-//      }
-    } while (loopFlg);
-
-    return onetimeKey;
+      return RandomStringUtils.randomAlphanumeric(32);
   }
-
-  /**
-//   * パスワード変更ワンタイムEntityを取得する
-//   *
-//   * @param onetimeKey ワンタイムキー
-//   * @return パスワード変更ワンタイムEntity
-//   */
-//  public TUserOnetimePass getTUserOnetimePass(String onetimeKey) {
-//    TUserOnetimePassCriteria criteria = new TUserOnetimePassCriteria();
-//    criteria.setOnetimeKeyEq(onetimeKey);
-//    return tUserOnetimePassDao.findOne(criteria).orElse(null);
-//  }
-
-//  /**
-//   * メールテンプレートを取得する。
-//   *
-//   * @return
-//   */
-//  protected MMailTemplate getMailTemplate(String templateId) {
-//    val criteria = new MMailTemplateCriteria();
-//    criteria.setMailTemplateIdEq(Integer.valueOf(templateId));
-//    val mailTemplate = mMailTemplateDao.findOne(criteria).orElseThrow(
-//        () -> new NoDataFoundException("templateKey=" + templateId + " のデータが見つかりません。"));
-//
-//    return mailTemplate;
-//  }
 
 }

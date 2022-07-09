@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.register.remind;
+package com.isystk.sample.web.front.controller.html.password;
 
 import java.io.Serializable;
 import javax.validation.constraints.Email;
@@ -9,7 +9,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-class RegisterRemindForm implements Serializable {
+class PasswordResetForm implements Serializable {
 
   private static final long serialVersionUID = 7593564324192730932L;
 

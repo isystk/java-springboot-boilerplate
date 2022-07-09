@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.register.remind;
+package com.isystk.sample.web.front.controller.html.password;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-class RegisterRemindConfigForm implements Serializable {
+class PasswordResetConfigForm implements Serializable {
 
   private static final long serialVersionUID = 7593564324192730932L;
 
@@ -24,7 +24,7 @@ class RegisterRemindConfigForm implements Serializable {
    */
   @NotBlank
   @Size(max = 100)
-  String passwordConf;
+  String passwordConfirmation;
 
   @NotBlank
   String onetimeKey;

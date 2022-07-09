@@ -54,11 +54,11 @@ const ContactCreate: FC<Props> = ({ appRoot }) => {
     gender: Yup.number().required('性別を選択してください'),
     age: Yup.number().required('年齢を選択してください'),
     title: Yup.string()
-      .max(50, 'タイトルは50文字以下を入れてください')
-      .required('タイトルを入力してください'),
+      .max(50, '件名は50文字以下を入れてください')
+      .required('件名を入力してください'),
     contact: Yup.string()
-      .max(200, 'タイトルは200文字以下を入れてください')
-      .required('本文を入力してください'),
+      .max(200, '件名は200文字以下を入れてください')
+      .required('お問い合わせ内容を入力してください'),
     url: Yup.string().url('URLを正しく入力してください'),
     contactImageData: Yup.string().required('画像を選択してください'),
     caution: Yup.array().min(1, '注意事項に同意してください'),
