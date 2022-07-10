@@ -27,7 +27,7 @@ import lombok.val;
 
 @RestController
 @RequestMapping(path = API_V1_STOCKS, produces = MediaType.APPLICATION_JSON_VALUE)
-public class StockRestController extends AbstractRestController {
+public class StockController extends AbstractRestController {
 
   @Autowired
   StockService stockService;
@@ -45,7 +45,7 @@ public class StockRestController extends AbstractRestController {
    * @return
    */
   @GetMapping
-  public PageableResource index(StockRestForm form,
+  public PageableResource index(StockForm form,
       @RequestParam(required = false, defaultValue = "1") int page) {
 
     // 入力値からDTOを作成する
@@ -56,7 +56,7 @@ public class StockRestController extends AbstractRestController {
 
     Map data = Maps.newHashMap();
     data.put("data", stocks.getData());
-    data.put("currentPage", form.getPage());
+    data.put("currentPage", page);
     data.put("total", stocks.getCount());
     PageableResource resource = ObjectMapperUtils.map(data, PageableResourceImpl.class);
     resource.setMessage(getMessage(MESSAGE_SUCCESS));

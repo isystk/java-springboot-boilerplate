@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.password;
+package com.isystk.sample.web.front.controller.html.password.config;
 
 import static com.isystk.sample.common.util.ValidateUtils.isNotEquals;
 

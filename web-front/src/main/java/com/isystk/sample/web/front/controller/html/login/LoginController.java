@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -33,16 +32,14 @@ public class LoginController extends AbstractHtmlController {
     return "F_LOGIN";
   }
 
-
   /**
    * ログイン成功
    *
-   * @param form
    * @param attributes
    * @return
    */
   @PostMapping(LOGIN_SUCCESS_URL)
-  public String loginSuccess(@ModelAttribute LoginForm form, RedirectAttributes attributes) {
+  public String loginSuccess(RedirectAttributes attributes) {
 
     // 最終ログイン日時を更新します。
     userHelper.updateLastLogin();
@@ -54,25 +51,23 @@ public class LoginController extends AbstractHtmlController {
   /**
    * ログイン失敗
    *
-   * @param form
    * @param model
    * @return
    */
   @GetMapping(LOGIN_FAILURE_URL)
-  public String loginFailure(@ModelAttribute LoginForm form, Model model) {
+  public String loginFailure(Model model) {
     model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.failed"));
-    return "redirect:/login";
+    return "modules/index";
   }
 
   /**
    * タイムアウトした時
    *
-   * @param form
    * @param model
    * @return
    */
   @GetMapping(LOGIN_TIMEOUT_URL)
-  public String loginTimeout(@ModelAttribute LoginForm form, Model model) {
+  public String loginTimeout(Model model) {
     model.addAttribute(GLOBAL_DANGER_MESSAGE, getMessage("login.timeout"));
     return "redirect:/login";
   }
@@ -83,7 +78,7 @@ public class LoginController extends AbstractHtmlController {
    * @return
    */
   @GetMapping(LOGOUT_SUCCESS_URL)
-  public String logoutSuccess(@ModelAttribute LoginForm form, RedirectAttributes attributes) {
+  public String logoutSuccess(RedirectAttributes attributes) {
     attributes.addFlashAttribute(GLOBAL_SUCCESS_MESSAGE, getMessage("logout.success"));
     return "redirect:/login";
   }

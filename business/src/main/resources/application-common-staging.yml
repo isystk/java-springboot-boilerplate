@@ -38,4 +38,4 @@ aws:
 
 stripe:
   apiKey: "pk_xxxxxx"
-  apiSecret: "pk_xxxxxx"
+  apiSecret: "sk_xxxxxx"

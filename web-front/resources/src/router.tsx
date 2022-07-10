@@ -56,6 +56,10 @@ const Router: FC<Props> = ({ session }) => {
           <Route index element={<ShopTop appRoot={appRoot} />} />
           <Route path={Url.LOGIN} element={<LoginForm appRoot={appRoot} />} />
           <Route
+            path="/auth/loginFailure"
+            element={<LoginForm appRoot={appRoot} />}
+          />
+          <Route
             path={Url.REGISTER}
             element={<RegisterForm appRoot={appRoot} />}
           />

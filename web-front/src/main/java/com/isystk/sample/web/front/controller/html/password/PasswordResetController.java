@@ -30,12 +30,12 @@ public class PasswordResetController extends AbstractHtmlController {
   @Autowired
   PasswordResetFormValidator passwordResetFormValidator;
 
-  @ModelAttribute("entryRemindForm")
-  public PasswordResetForm entryRemindForm() {
+  @ModelAttribute("form")
+  public PasswordResetForm initForm() {
     return new PasswordResetForm();
   }
 
-  @InitBinder("entryRemindForm")
+  @InitBinder("form")
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(passwordResetFormValidator);
   }
@@ -48,22 +48,22 @@ public class PasswordResetController extends AbstractHtmlController {
   /**
    * パスワード変更メール送信処理
    *
-   * @param form
+   * @param passwordResetForm
    * @param br
    * @return
    */
   @PostMapping
-  public String registOnetimePass(@Validated @ModelAttribute PasswordResetForm form,
+  public String registOnetimePass(@Validated @ModelAttribute("form") PasswordResetForm passwordResetForm,
       BindingResult br, RedirectAttributes attributes) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
       setFlashAttributeErrors(attributes, br);
-      return "redirect:/password/reset";
+      return "modules/index";
     }
 
     // パスワード変更ワンタイムパス登録
-    passwordResetService.registOnetimePass(form.getEmail());
+    passwordResetService.registOnetimePass(passwordResetForm.getEmail());
 
     return "redirect:/password/reset/sendMail";
   }

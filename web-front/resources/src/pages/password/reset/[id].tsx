@@ -1,5 +1,5 @@
 import React, { useEffect, useState, FC } from 'react'
-import { Form, Input } from 'reactstrap'
+import { Form } from 'reactstrap'
 import TextInput from '@/components/elements/TextInput'
 import SubmitButton from '@/components/elements/SubmitButton'
 import CSRFToken from '@/components/elements/CSRFToken'
@@ -30,10 +30,13 @@ const ResetForm: FC<Props> = ({ appRoot }) => {
       <main className="main">
         <Box title="パスワード変更" small={true}>
           <SessionAlert target="status" />
-          <Form method="POST" action="/password/reset/config" id="login-form">
+          <Form
+            method="POST"
+            action={`/password/reset/${onetimeKey}`}
+            id="login-form"
+          >
             <CSRFToken appRoot={appRoot} />
             <RequestToken />
-            <Input type="hidden" name="onetimeKey" defaultValue={onetimeKey} />
             <TextInput
               identity="password"
               controlType="password"

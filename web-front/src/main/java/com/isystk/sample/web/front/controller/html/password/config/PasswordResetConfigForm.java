@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.password;
+package com.isystk.sample.web.front.controller.html.password.config;
 
 import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
@@ -26,6 +26,4 @@ class PasswordResetConfigForm implements Serializable {
   @Size(max = 100)
   String passwordConfirmation;
 
-  @NotBlank
-  String onetimeKey;
 }

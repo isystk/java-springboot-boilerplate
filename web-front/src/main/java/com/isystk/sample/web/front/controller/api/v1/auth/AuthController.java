@@ -7,20 +7,17 @@ import com.isystk.sample.domain.entity.User;
 import com.isystk.sample.web.base.controller.api.AbstractRestController;
 import com.isystk.sample.web.base.controller.api.resource.Resource;
 import com.isystk.sample.web.front.dto.auth.AuthUserDto;
-import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.isystk.sample.common.Const.*;
 import static com.isystk.sample.common.FrontUrl.*;
 
 @RestController
-public class AuthRestController extends AbstractRestController {
+public class AuthController extends AbstractRestController {
 
   @Override
   public String getFunctionName() {

@@ -12,16 +12,8 @@
   <meta name="csrf-token" th:content="${_csrf.token}">
   <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
   <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">LaraEC</title>
-  <script>
-    var laravelSession = {};
-    laravelSession['status']='';
-    laravelSession['resent']='';
-    var laravelErrors=[];
-  </script>
-  <script defer="defer" th:src="@{/static/js/main.js}"></script>
-  <script src="https://js.stripe.com/v3/"></script>
-  <link th:href="@{/static/css/main.css}" rel="stylesheet"></head>
-  <link th:href="@{/static/css/app.css}" rel="stylesheet"></head>
+  <link th:href="@{/static/css/main.css}" rel="stylesheet" />
+  <link th:href="@{/static/css/app.css}" rel="stylesheet" />
 </head>
 <body>
 <p class="headerSt" th:if="${!@env.isProduction()}">
@@ -30,5 +22,14 @@
   <span style="float: right;" onclick="javascript:document.querySelector('.headerSt').remove();">非表示</span>
 </p>
 <div layout:fragment="content" th:remove="tag"></div>
+<div class="d-none" id="registerForm-errors" th:if="${form}">{<span th:remove="tag" th:each="e, s : ${#fields.detailedErrors('${form.*}')}" >"<span th:remove="tag" th:text="${e.global}? '*' : ${e.fieldName}">The field name</span>" : ["<span th:remove="tag" th:text="${e.message}">The error message</span>"] <span th:unless="${s.last}">,</span></span>}</div>
+<script>
+  var laravelSession = {};
+  laravelSession['status']='';
+  laravelSession['resent']='';
+  var laravelErrors=document.getElementById('registerForm-errors') ? JSON.parse(document.getElementById('registerForm-errors').textContent) : [];
+</script>
+<script defer="defer" th:src="@{/static/js/main.js}"></script>
+<script src="https://js.stripe.com/v3/"></script>
 </body>
 </html>
