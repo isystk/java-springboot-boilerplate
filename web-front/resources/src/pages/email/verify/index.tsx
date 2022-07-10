@@ -4,6 +4,7 @@ import Box from '@/components/Box'
 import Layout from '@/components/Layout'
 import MainService from '@/services/main'
 import CSRFToken from '@/components/elements/CSRFToken'
+import { Form } from 'reactstrap'
 
 type Props = {
   appRoot: MainService
@@ -32,14 +33,14 @@ const Verify: FC<Props> = ({ appRoot }) => (
           こちら
         </a>{' '}
         から再度リクエストしてください。
-        <form
+        <Form
           id="email-form"
-          action="/email/resend"
+          action="/register/resend"
           method="POST"
           style={{ display: 'none' }}
         >
           <CSRFToken appRoot={appRoot} />
-        </form>
+        </Form>
       </Box>
     </main>
   </Layout>

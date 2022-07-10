@@ -10,6 +10,7 @@ import com.isystk.sample.domain.entity.User;
 import com.isystk.sample.domain.repository.MailTemplateRepository;
 import com.isystk.sample.domain.repository.UserRepository;
 
+import java.math.BigInteger;
 import java.util.Map;
 import lombok.val;
 import org.apache.commons.lang.RandomStringUtils;
@@ -50,13 +51,28 @@ public class RegisterService extends BaseTransactionalService {
     userRepository.create(user);
 
     // 仮会員登録メールを送信する
+   sendMail(user.getId());
+  }
+
+  /**
+   * 仮会員登録メール再送信
+   *
+   * @param userId
+   */
+  public void sendMail(BigInteger userId) {
+    var user = userRepository.findById(userId);
+    if(user.getEmailVerifiedAt() != null) {
+      throw new NoDataFoundException("既に本会員の状態です。");
+    }
+
+    // 仮会員登録メールを送信する
     val mailTemplate = mailTemplateRepository.getMailTemplate(MailTemplateDiv.ENTRY_REGIST_TEMPORARY);
     val subject = mailTemplate.getTitle();
     val templateBody = mailTemplate.getText();
     MailEntryRegistTemporary dto = new MailEntryRegistTemporary();
     dto.setUserName(user.getName());
     dto.setDomain(domain);
-    dto.setOnetimeKey(onetimeKey);
+    dto.setOnetimeKey(user.getRememberToken());
     Map<String, Object> objects = Maps.newHashMap();
     objects.put("dto", dto);
     val body = sendMailHelper.getMailBody(templateBody, objects);

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = API_V1_LIKES, produces = MediaType.APPLICATION_JSON_VALUE)
-public class LikeRestController extends AbstractRestController {
+public class LikeController extends AbstractRestController {
 
   @Autowired
   LikeService likeService;

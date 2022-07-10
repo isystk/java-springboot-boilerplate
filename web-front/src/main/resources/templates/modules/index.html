@@ -4,9 +4,9 @@
       layout:decorate="layouts/layout">
 <body>
 <div layout:fragment="content">
-<!--  <div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalDangerMessage}">-->
-<!--    <p th:text="${str}" class="alert alert-danger"></p>-->
-<!--  </div>-->
+  <div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalDangerMessage}">
+    <p th:text="${str}" class="alert alert-danger"></p>
+  </div>
   <div id="root"></div>
 </div>
 </body>

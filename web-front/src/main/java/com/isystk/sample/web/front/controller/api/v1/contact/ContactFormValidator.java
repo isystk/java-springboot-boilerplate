@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 
 @Component
-public class ContactRestFormValidator extends AbstractValidator<ContactRestForm> {
+public class ContactFormValidator extends AbstractValidator<ContactForm> {
 
   @Override
-  protected void doValidate(ContactRestForm form, Errors errors) {
+  protected void doValidate(ContactForm form, Errors errors) {
   }
 }

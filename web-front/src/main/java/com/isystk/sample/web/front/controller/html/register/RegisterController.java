@@ -1,9 +1,12 @@
 package com.isystk.sample.web.front.controller.html.register;
 
+import com.isystk.sample.common.exception.NoDataFoundException;
+import com.isystk.sample.common.helper.UserHelper;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.entity.User;
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.front.service.RegisterService;
+import java.util.Optional;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,16 +36,19 @@ public class RegisterController extends AbstractHtmlController {
   PasswordEncoder passwordEncoder;
 
   @Autowired
-  RegisterFormValidator entryFormValidator;
+  RegisterFormValidator registerFormValidator;
 
-  @ModelAttribute("registerForm")
-  public RegisterForm registerForm() {
+  @Autowired
+  UserHelper userHelper;
+
+  @ModelAttribute("form")
+  public RegisterForm initForm() {
     return new RegisterForm();
   }
 
-  @InitBinder("registerForm")
+  @InitBinder("form")
   public void validatorBinder(WebDataBinder binder) {
-    binder.addValidators(entryFormValidator);
+    binder.addValidators(registerFormValidator);
   }
 
   @Override
@@ -53,28 +59,44 @@ public class RegisterController extends AbstractHtmlController {
   /**
    * 仮会員登録処理
    *
-   * @param form
+   * @param registerForm
    * @param br
    * @return
    */
   @PostMapping
-  public String index(@Validated @ModelAttribute RegisterForm form, BindingResult br, RedirectAttributes attributes) {
+  public String index(@Validated @ModelAttribute("form") RegisterForm registerForm, BindingResult br, RedirectAttributes attributes) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
         setFlashAttributeErrors(attributes, br);
-        return "redirect:/register";
+      return "modules/index";
     }
 
     // 入力値からDTOを作成する
-    val inputUser = ObjectMapperUtils.map(form, User.class);
-    val password = form.getPassword();
+    val inputUser = ObjectMapperUtils.map(registerForm, User.class);
+    val password = registerForm.getPassword();
 
     // パスワードをハッシュ化する
     inputUser.setPassword(passwordEncoder.encode(password));
 
     // 仮会員登録
     registerService.registTemporary(inputUser);
+
+    return "redirect:/register/sendMail";
+  }
+
+  /**
+   * 仮会員登録メール再送信
+   *
+   * @return
+   */
+  @PostMapping("/resend")
+  public String resend() {
+
+    var userId = Optional.of(userHelper.getLoginUserId()).orElseThrow(() -> new NoDataFoundException("未ログイン状態です"));
+
+    // 仮会員登録メール再送信
+    registerService.sendMail(userId);
 
     return "redirect:/register/sendMail";
   }

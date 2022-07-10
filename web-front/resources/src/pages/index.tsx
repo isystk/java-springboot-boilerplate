@@ -5,6 +5,7 @@ import TopCarousel from '@/components/pages/shop/TopCarousel'
 import Layout from '@/components/Layout'
 import MainService from '@/services/main'
 import { useLocation, useNavigate } from 'react-router-dom'
+import { Form } from 'reactstrap'
 
 type Props = {
   appRoot: MainService
@@ -59,7 +60,7 @@ const Index: FC<Props> = ({ appRoot }) => {
           <p>{stock.name}</p>
           <p className="c-red">{stock.price}</p>
           <p className="mb20">{stock.detail} </p>
-          <form action="/shop/addcart" method="post">
+          <Form action="/shop/addcart" method="post">
             <input type="hidden" name="stock_id" value={stock.id} />
 
             {stock.quantity === 0 ? (
@@ -86,7 +87,7 @@ const Index: FC<Props> = ({ appRoot }) => {
                 }}
               />
             )}
-          </form>
+          </Form>
         </div>
       ))}
     </>

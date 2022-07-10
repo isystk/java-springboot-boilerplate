@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = API_V1_CONTACTS, produces = MediaType.APPLICATION_JSON_VALUE)
-public class ContactRestController extends AbstractRestController {
+public class ContactController extends AbstractRestController {
 
   @Autowired
   ContactService contactService;
@@ -37,16 +37,16 @@ public class ContactRestController extends AbstractRestController {
   }
 
   @Autowired
-  ContactRestFormValidator contactRestFormValidator;
+  ContactFormValidator contactFormValidator;
 
-  @ModelAttribute("contactRestForm")
-  public ContactRestForm contactRestForm() {
-    return new ContactRestForm();
+  @ModelAttribute("form")
+  public ContactForm initForm() {
+    return new ContactForm();
   }
 
-  @InitBinder("contactRestForm")
+  @InitBinder("form")
   public void validatorBinder(WebDataBinder binder) {
-    binder.addValidators(contactRestFormValidator);
+    binder.addValidators(contactFormValidator);
   }
 
   /**
@@ -55,7 +55,7 @@ public class ContactRestController extends AbstractRestController {
    * @return
    */
   @PostMapping("/regist")
-  public Resource regist(@Validated @ModelAttribute ContactRestForm form, BindingResult br) {
+  public Resource regist(@Validated @ModelAttribute("form") ContactForm form, BindingResult br) {
     Resource resource = resourceFactory.create();
 
     // 入力チェックエラーがある場合は、元の画面にもどる

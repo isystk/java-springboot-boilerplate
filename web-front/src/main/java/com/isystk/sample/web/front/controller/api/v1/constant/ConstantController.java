@@ -21,7 +21,7 @@ import static com.isystk.sample.common.FrontUrl.API_V1_CONSTS;
 
 @RestController
 @RequestMapping(path = API_V1_CONSTS, produces = MediaType.APPLICATION_JSON_VALUE)
-public class ConstantRestController extends AbstractRestController {
+public class ConstantController extends AbstractRestController {
 
   @Value("${stripe.apiKey}")
   String apiKey;

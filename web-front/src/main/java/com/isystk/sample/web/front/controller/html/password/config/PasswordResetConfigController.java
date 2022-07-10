@@ -1,6 +1,6 @@
-package com.isystk.sample.web.front.controller.html.password;
+package com.isystk.sample.web.front.controller.html.password.config;
 
-import static com.isystk.sample.common.FrontUrl.PASSWORD_RESET_CONFIG;
+import static com.isystk.sample.common.FrontUrl.PASSWORD_RESET;
 
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
 import com.isystk.sample.web.front.service.PasswordResetService;
@@ -8,11 +8,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  */
 @Controller
 @Slf4j
-@RequestMapping(path = PASSWORD_RESET_CONFIG)
+@RequestMapping(path = PASSWORD_RESET)
 public class PasswordResetConfigController extends AbstractHtmlController {
 
   @Autowired
@@ -37,12 +35,12 @@ public class PasswordResetConfigController extends AbstractHtmlController {
   @Autowired
   PasswordResetConfigFormValidator passwordResetConfigFormValidator;
 
-  @ModelAttribute("passwordResetConfigForm")
-  public PasswordResetConfigForm passwordResetConfigForm() {
+  @ModelAttribute("form")
+  public PasswordResetConfigForm initForm() {
     return new PasswordResetConfigForm();
   }
 
-  @InitBinder("passwordResetConfigForm")
+  @InitBinder("form")
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(passwordResetConfigFormValidator);
   }
@@ -57,21 +55,21 @@ public class PasswordResetConfigController extends AbstractHtmlController {
    *
    * @return
    */
-  @PostMapping
-  public String changePassword(@Validated @ModelAttribute PasswordResetConfigForm form,
+  @PostMapping(value = "/{onetimeKey}")
+  public String changePassword(@PathVariable String onetimeKey, @Validated @ModelAttribute("form") PasswordResetConfigForm passwordResetConfigForm,
       BindingResult br, RedirectAttributes attributes) {
 
     // 入力チェックエラーがある場合は、元の画面にもどる
     if (br.hasErrors()) {
       setFlashAttributeErrors(attributes, br);
-      return "redirect:/password/reset/config";
+      return "modules/index";
     }
 
     // パスワードをハッシュ化する
-    String password = passwordEncoder.encode(form.getPassword());
+    String password = passwordEncoder.encode(passwordResetConfigForm.getPassword());
 
     // パスワード変更ワンタイムパス登録
-    passwordResetService.changePassword(form.getOnetimeKey(), password);
+    passwordResetService.changePassword(onetimeKey, password);
 
     return "redirect:/password/reset/complete";
   }
