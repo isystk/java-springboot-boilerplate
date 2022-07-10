@@ -35,12 +35,12 @@ public class StockEditController extends AbstractHtmlController {
   @Autowired
   StockEditFormValidator stockEditFormValidator;
 
-  @ModelAttribute("stockEditForm")
-  public StockEditForm stockEditForm() {
+  @ModelAttribute
+  public StockEditForm initForm() {
     return new StockEditForm();
   }
 
-  @InitBinder("stockEditForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(stockEditFormValidator);
   }

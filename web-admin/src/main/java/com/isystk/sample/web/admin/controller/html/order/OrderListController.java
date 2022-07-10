@@ -40,12 +40,12 @@ public class OrderListController extends AbstractHtmlController {
     return "A_ORDER_LIST";
   }
 
-  @ModelAttribute("orderListForm")
-  public OrderListForm orderListForm() {
+  @ModelAttribute
+  public OrderListForm initForm() {
     return new OrderListForm();
   }
 
-  @InitBinder("orderListForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(orderListFormValidator);
   }

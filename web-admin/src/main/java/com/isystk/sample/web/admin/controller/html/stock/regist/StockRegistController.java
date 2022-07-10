@@ -35,12 +35,12 @@ public class StockRegistController extends AbstractHtmlController {
   @Autowired
   StockRegistFormValidator stockRegistFormValidator;
 
-  @ModelAttribute("stockRegistForm")
-  public StockRegistForm stockRegistForm() {
+  @ModelAttribute
+  public StockRegistForm initForm() {
     return new StockRegistForm();
   }
 
-  @InitBinder("stockRegistForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(stockRegistFormValidator);
   }

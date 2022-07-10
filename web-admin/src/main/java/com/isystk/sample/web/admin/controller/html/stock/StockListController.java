@@ -45,12 +45,12 @@ public class StockListController extends AbstractHtmlController {
     return "A_STOCK_LIST";
   }
 
-  @ModelAttribute("stockListForm")
-  public StockListForm stockListForm() {
+  @ModelAttribute
+  public StockListForm initForm() {
     return new StockListForm();
   }
 
-  @InitBinder("stockListForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(stockListFormValidator);
   }

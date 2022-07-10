@@ -88,7 +88,7 @@ public class ContactFormRepository extends BaseRepository {
             .map((e) -> {
               return ObjectMapperUtils.map(e, ContactFormImageRepositoryDto.class);
             })
-            .collect(Collectors.groupingBy(ContactFormImageRepositoryDto::getId));
+            .collect(Collectors.groupingBy(ContactFormImageRepositoryDto::getContactFormId));
 
     // contactFormList を元に、contactFormDtoList へコピー
     var contactFormDtoList = ObjectMapperUtils
