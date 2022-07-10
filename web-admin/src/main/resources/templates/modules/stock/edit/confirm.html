@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>[[|${stockEditForm.name}の変更|]]</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('stocks', 'stock')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>[[|${stockEditForm.name}の変更|]]</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/stocks/{stockId}(stockId=${stockEditForm.stockId})}">[[${stockEditForm.name}]]</a></li>
+        <li class="breadcrumb-item active">[[|${stockEditForm.name}の変更|]]</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div layout:fragment="content">
+  <div class="card card-purple">
+    <div class="card-body">
+      <p>以下の内容で登録します。</p>
+      <form th:object="${stockEditForm}" th:action="@{/stocks/edit/{id}/(id=*{stockId})}" th:method="put">
+        <input type="hidden" name="stockId" th:value="*{stockId}"/>
+        <input type="hidden" name="name" th:value="*{name}"/>
+        <input type="hidden" name="detail" th:value="*{detail}"/>
+        <input type="hidden" name="price" th:value="*{price}"/>
+        <input type="hidden" name="quantity" th:value="*{quantity}"/>
+        <input type="hidden" name="stockImageName" th:value="*{stockImageName}"/>
+        <input type="hidden" name="stockImageData" th:value="*{stockImageData}"/>
+        <input type="hidden" name="version" th:value="*{version}"/>
+        <input th:replace="fragments/label :: input ('商品名', *{name})"/>
+        <input th:replace="fragments/label :: input ('商品説明', *{detail})"/>
+        <input th:replace="fragments/label :: input ('価格', *{price})"/>
+        <input th:replace="fragments/label :: input ('在庫数', *{quantity})"/>
+        <div class="form-group row">
+          <label class="col-md-2 control-label">商品画像</label>
+          <div class="col-md-3">
+            <img th:src="*{stockImageData}" width="100%"/>
+          </div>
+        </div>
+        <div class="card-footer clearfix text-center">
+          <div class="text-left float-left">
+            <button class="btn btn-secondary js-submit" th:data-uri="@{/stocks/edit?back}">前に戻る
+            </button>
+          </div>
+          <button class="btn btn-info js-submit" th:data-uri="@{/stocks/edit?complete}">修正する
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>

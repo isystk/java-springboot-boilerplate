@@ -124,10 +124,7 @@ docker/mysql/logs
 # solr
 docker/solr/logs
 docker/solr/data/mycore/data
-docker/solr/data/post/data
-
-# elasticsearch
-docker/elasticsearch/data
+docker/solr/data/stock/data
 
 # s3
 docker/s3/data

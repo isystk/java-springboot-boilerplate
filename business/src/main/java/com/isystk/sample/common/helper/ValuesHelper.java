@@ -3,6 +3,9 @@ package com.isystk.sample.common.helper;
 import com.google.common.reflect.ClassPath;
 import com.isystk.sample.common.values.Values;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -32,7 +35,6 @@ public class ValuesHelper {
   /**
    * JSPからアクセス用
    */
-  @SuppressWarnings("unchecked")
   public <T extends Enum<T> & Values> T[] values(String classSimpleName)
       throws ClassNotFoundException {
     Class<T> enumType = (Class<T>) Class.forName(this.valuesObjList.get(classSimpleName));

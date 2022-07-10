@@ -2,8 +2,8 @@ spring:
   datasource:
     platform: mysql
     driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/sample
-    username: root
+    url: jdbc:mysql://localhost:3306/laraec
+    username: user
     password: password
   data.solr.host: http://localhost:8983/solr
   mail:
@@ -38,3 +38,7 @@ aws:
     #profile-name: "isystk"
     aws-access-key: "access_key"
     aws-secret-key: "secret_key"
+
+stripe:
+  apiKey: "pk_xxxxxx"
+  apiSecret: "sk_xxxxxx"

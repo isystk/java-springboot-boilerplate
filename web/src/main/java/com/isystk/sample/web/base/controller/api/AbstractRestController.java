@@ -2,6 +2,7 @@ package com.isystk.sample.web.base.controller.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.isystk.sample.common.FunctionNameAware;
@@ -15,6 +16,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @ResponseStatus(HttpStatus.OK)
 @Slf4j
+@CrossOrigin
 public abstract class AbstractRestController extends BaseController implements FunctionNameAware {
 
   @Autowired

@@ -69,21 +69,21 @@ public interface Const {
 
   String LOGIN_URL = "/login";
 
-  String LOGIN_PROCESSING_URL = "/authenticate";
+  String LOGIN_PROCESSING_URL = "/auth/authenticate";
 
-  String LOGIN_SUCCESS_URL = "/loginSuccess";
+  String LOGIN_SUCCESS_URL = "/auth/loginSuccess";
 
-  String LOGIN_FAILURE_URL = "/loginFailure";
+  String LOGIN_FAILURE_URL = "/auth/loginFailure";
 
-  String LOGIN_TIMEOUT_URL = "/loginTimeout";
+  String LOGIN_TIMEOUT_URL = "/auth/loginTimeout";
 
-  String RESET_PASSWORD_URL = "/resetPassword";
+  String RESET_PASSWORD_URL = "/auth/resetPassword";
 
-  String CHANGE_PASSWORD_URL = "/changePassword";
+  String CHANGE_PASSWORD_URL = "/auth/changePassword";
 
-  String LOGOUT_URL = "/logout";
+  String LOGOUT_URL = "/auth/logout";
 
-  String LOGOUT_SUCCESS_URL = "/logoutSuccess";
+  String LOGOUT_SUCCESS_URL = "/auth/logoutSuccess";
 
   String WEBJARS_URL = "/webjars/**";
 

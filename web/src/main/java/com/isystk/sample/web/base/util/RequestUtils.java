@@ -1,5 +1,6 @@
 package com.isystk.sample.web.base.util;
 
+import javax.servlet.http.HttpServletResponse;
 import lombok.val;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
@@ -41,9 +42,19 @@ public class RequestUtils {
    *
    * @return
    */
-  public static HttpServletRequest getHttpServletRequest() {
+  public static HttpServletRequest getRequest() {
     val attributes = RequestContextHolder.getRequestAttributes();
     return ((ServletRequestAttributes) attributes).getRequest();
+  }
+
+  /**
+   * HttpServletRequestを返します。
+   *
+   * @return
+   */
+  public static HttpServletResponse getResponse() {
+    val attributes = RequestContextHolder.getRequestAttributes();
+    return ((ServletRequestAttributes) attributes).getResponse();
   }
 
   /**
@@ -52,7 +63,7 @@ public class RequestUtils {
    * @return
    */
   public static String getSiteUrl() {
-    val servletRequest = getHttpServletRequest();
+    val servletRequest = getRequest();
 
     String scheme = servletRequest.getScheme();
     String host = servletRequest.getRemoteHost();

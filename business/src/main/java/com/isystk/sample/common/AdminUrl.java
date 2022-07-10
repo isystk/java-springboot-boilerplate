@@ -10,20 +10,14 @@ public interface AdminUrl {
    **/
   public static final String HOME = "/";
 
-  public static final String POST = "/post";
+  public static final String STOCKS = "/stocks";
+  public static final String STOCKS_REGIST = "/stocks/regist";
+  public static final String STOCKS_EDIT = "/stocks/edit";
+  public static final String ORDERS = "/orders";
+  public static final String PHOTOS = "/photos";
 
-  public static final String POST_REGIST = "/post/regist";
+  public static final String USERS = "/users";
 
-  public static final String POST_EDIT = "/post/edit";
-
-  public static final String POST_TAG = "/post/tag";
-
-  public static final String SYSTEM_MAIL = "/system/mail";
-
-  /**
-   * ---- APIｓ ----
-   **/
-
-  public static final String API_V1_FILEUPLOAD = "/api/v1/fileupload";
-
+  public static final String CONTACTS = "/contacts";
+  public static final String CONTACTS_EDIT = "/contacts/edit";
 }
