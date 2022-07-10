@@ -13,6 +13,7 @@ import java.math.BigInteger;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.val;
 import org.apache.commons.compress.utils.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,17 +78,15 @@ public class ContactService extends BaseTransactionalService {
    * @return
    */
   public ContactFormRepositoryDto findById(BigInteger contactId) {
-    // 1件取得する
-    val contact = contactRepository.findById(contactId);
-
-    Optional.ofNullable(contact.getImageList()).orElse(Lists.newArrayList()).stream()
+    var contact = contactRepository.findById(contactId);
+    var imageList = Optional.of(contact.getImageList()).orElse(Lists.newArrayList()).stream()
         .map((e) -> {
           String imageData = imageHelper.getImageData("/contacts", e.getFileName());
           e.setContactImageData(imageData);
           e.setContactImageName(e.getFileName());
           return e;
-        });
-
+        }).collect(Collectors.toList());
+    contact.setImageList(imageList);
     return contact;
   }
 

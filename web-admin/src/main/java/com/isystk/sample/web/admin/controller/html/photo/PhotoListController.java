@@ -37,12 +37,12 @@ public class PhotoListController extends AbstractHtmlController {
     return "A_PHOTO_LIST";
   }
 
-  @ModelAttribute("photoListForm")
-  public PhotoListForm photoListForm() {
+  @ModelAttribute
+  public PhotoListForm initForm() {
     return new PhotoListForm();
   }
 
-  @InitBinder("photoListForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(photoListFormValidator);
   }

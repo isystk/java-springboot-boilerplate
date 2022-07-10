@@ -37,12 +37,12 @@ public class UserListController extends AbstractHtmlController {
     return "A_USER_LIST";
   }
 
-  @ModelAttribute("userListForm")
-  public UserListForm userListForm() {
+  @ModelAttribute
+  public UserListForm initForm() {
     return new UserListForm();
   }
 
-  @InitBinder("userListForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(userListFormValidator);
   }

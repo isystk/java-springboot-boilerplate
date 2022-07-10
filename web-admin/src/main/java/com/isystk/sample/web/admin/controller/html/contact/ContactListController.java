@@ -40,12 +40,12 @@ public class ContactListController extends AbstractHtmlController {
     return "A_CONTACT_LIST";
   }
 
-  @ModelAttribute("contactListForm")
-  public ContactListForm contactListForm() {
+  @ModelAttribute
+  public ContactListForm initForm() {
     return new ContactListForm();
   }
 
-  @InitBinder("contactListForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(contactListFormValidator);
   }

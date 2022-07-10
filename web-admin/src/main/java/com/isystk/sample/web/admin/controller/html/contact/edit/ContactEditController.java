@@ -40,12 +40,12 @@ public class ContactEditController extends AbstractHtmlController {
   @Autowired
   ContactEditFormValidator contactEditFormValidator;
 
-  @ModelAttribute("contactEditForm")
-  public ContactEditForm contactEditForm() {
+  @ModelAttribute
+  public ContactEditForm initForm() {
     return new ContactEditForm();
   }
 
-  @InitBinder("contactEditForm")
+  @InitBinder
   public void validatorBinder(WebDataBinder binder) {
     binder.addValidators(contactEditFormValidator);
   }
@@ -70,6 +70,11 @@ public class ContactEditController extends AbstractHtmlController {
 
     // 取得したDtoをFromに詰め替える
     ObjectMapperUtils.map(contact, form);
+    val contactImageList = contact.getImageList();
+    if (0<contactImageList.size()) {
+      form.setContactImageData(contactImageList.get(0).getContactImageData());
+      form.setContactImageName(contactImageList.get(0).getContactImageName());
+    }
 
     return showEditIndex(form, model);
   }
