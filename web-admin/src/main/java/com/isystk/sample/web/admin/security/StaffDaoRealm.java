@@ -1,5 +1,8 @@
 package com.isystk.sample.web.admin.security;
 
+import com.isystk.sample.domain.dao.AdminDao;
+import com.isystk.sample.domain.dto.AdminCriteria;
+import com.isystk.sample.domain.entity.Admin;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -12,9 +15,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.isystk.sample.domain.dao.TStaffDao;
-import com.isystk.sample.domain.dto.TStaffCriteria;
-import com.isystk.sample.domain.entity.TStaff;
 import com.isystk.sample.web.base.security.BaseRealm;
 
 import lombok.val;
@@ -28,20 +28,20 @@ import lombok.extern.slf4j.Slf4j;
 public class StaffDaoRealm extends BaseRealm {
 
   @Autowired
-  TStaffDao tStaffDao;
+  AdminDao adminDao;
 
   @Override
   protected UserDetails getLoginUser(String email) {
-    TStaff staff = null;
+    Admin staff = null;
     List<GrantedAuthority> authorityList = null;
 
     try {
       // login_idをメールアドレスと見立てる
-      val criteria = new TStaffCriteria();
+      val criteria = new AdminCriteria();
       criteria.setEmailEq(email);
 
       // 担当者を取得して、セッションに保存する
-      staff = tStaffDao.findOne(criteria)
+      staff = adminDao.findOne(criteria)
           .orElseThrow(() -> new UsernameNotFoundException("no staff found [id=" + email + "]"));
 //
 //            // 担当者権限を取得する

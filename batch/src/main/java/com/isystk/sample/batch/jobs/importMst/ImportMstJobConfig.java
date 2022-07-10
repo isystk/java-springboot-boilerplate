@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Configuration;
 import com.isystk.sample.batch.listener.DefaultStepExecutionListener;
 
 /**
- * ユーザー情報取り込み
+ * マスタ取り込み
  */
 @Configuration
 @EnableBatchProcessing
@@ -35,19 +35,20 @@ public class ImportMstJobConfig {
   @Bean
   public Job importMstJob() {
     return jobBuilderFactory.get("importMstJob").incrementer(new RunIdIncrementer())
-        .listener(importUserJobListener()).start(importMstPostStep())
-//              .next(importMstPostStep())
+        .listener(importUserJobListener())
+        .start(importMstStockStep())
+//       .next(importMstPostStep())
         .build();
   }
 
   @Bean
-  public Step importMstPostStep() {
-    return stepBuilderFactory.get("importMstPostStep").listener(new DefaultStepExecutionListener())
-        .tasklet(importMstPostTasklet()).build();
+  public Step importMstStockStep() {
+    return stepBuilderFactory.get("importMstStockStep").listener(new DefaultStepExecutionListener())
+        .tasklet(importMstStockTasklet()).build();
   }
 
   @Bean
-  public Tasklet importMstPostTasklet() {
-    return new ImportMstPostTasklet();
+  public Tasklet importMstStockTasklet() {
+    return new ImportMstStockTasklet();
   }
 }

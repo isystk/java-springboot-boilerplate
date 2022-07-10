@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<body>
+<div layout:fragment="content">
+  <div th:remove="${#strings.isEmpty(str)}? body : none" th:with="str=${GlobalDangerMessage}">
+    <p th:text="${str}" class="alert alert-danger"></p>
+  </div>
+  <div id="root"></div>
+</div>
+</body>
+</html>

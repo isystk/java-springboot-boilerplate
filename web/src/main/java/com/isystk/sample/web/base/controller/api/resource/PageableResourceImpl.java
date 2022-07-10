@@ -1,5 +1,6 @@
 package com.isystk.sample.web.base.controller.api.resource;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -15,16 +16,17 @@ import lombok.Setter;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PageableResourceImpl extends ResourceImpl implements PageableResource {
 
-  int page = 1;
+  @JsonProperty("current_page")
+  int currentPage = 1;
 
-  int totalPages;
+  int total;
 
   public PageableResourceImpl() {
   }
 
-  public PageableResourceImpl(List<? extends Dto> data, int page, int totalPages) {
+  public PageableResourceImpl(List<? extends Dto> data, int currentPage, int total) {
     this.data = data;
-    this.page = page;
-    this.totalPages = totalPages;
+    this.currentPage = currentPage;
+    this.total = total;
   }
 }

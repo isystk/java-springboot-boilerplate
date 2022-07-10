@@ -1,5 +1,8 @@
 package com.isystk.sample.web.front.security;
 
+import com.isystk.sample.domain.dao.UserDao;
+import com.isystk.sample.domain.dto.UserCriteria;
+import com.isystk.sample.domain.entity.User;
 import java.util.HashSet;
 import java.util.List;
 
@@ -11,9 +14,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import com.isystk.sample.domain.dao.TUserDao;
-import com.isystk.sample.domain.dto.TUserCriteria;
-import com.isystk.sample.domain.entity.TUser;
 import com.isystk.sample.web.base.security.BaseRealm;
 
 import lombok.val;
@@ -27,20 +27,20 @@ import lombok.extern.slf4j.Slf4j;
 public class UserDaoRealm extends BaseRealm {
 
   @Autowired
-  TUserDao tUserDao;
+  UserDao userDao;
 
   @Override
   protected UserDetails getLoginUser(String email) {
-    TUser user = null;
+    User user = null;
     List<GrantedAuthority> authorityList = null;
 
     try {
       // login_idをメールアドレスと見立てる
-      val criteria = new TUserCriteria();
+      val criteria = new UserCriteria();
       criteria.setEmailEq(email);
 
       // 担当者を取得して、セッションに保存する
-      user = tUserDao.findOne(criteria)
+      user = userDao.findOne(criteria)
           .orElseThrow(() -> new UsernameNotFoundException("no user found [id=" + email + "]"));
 
       // 役割と権限を両方ともGrantedAuthorityとして渡す

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="ja" class="no-js">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+        name="viewport">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="robots" content="all">
+  <meta name="csrf-token" th:content="${_csrf.token}">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+  <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE">LaraEC</title>
+  <link th:href="@{/static/css/main.css}" rel="stylesheet" />
+  <link th:href="@{/static/css/app.css}" rel="stylesheet" />
+</head>
+<body>
+<p class="headerSt" th:if="${!@env.isProduction()}">
+  <th:block th:if="${@env.isStaging()}">ステージング環境</th:block>
+  <th:block th:if="${@env.isLocal()}">ローカル環境</th:block>
+  <span style="float: right;" onclick="javascript:document.querySelector('.headerSt').remove();">非表示</span>
+</p>
+<div layout:fragment="content" th:remove="tag"></div>
+<div class="d-none" id="registerForm-errors" th:if="${form}">{<span th:remove="tag" th:each="e, s : ${#fields.detailedErrors('${form.*}')}" >"<span th:remove="tag" th:text="${e.global}? '*' : ${e.fieldName}">The field name</span>" : ["<span th:remove="tag" th:text="${e.message}">The error message</span>"] <span th:unless="${s.last}">,</span></span>}</div>
+<script>
+  var laravelSession = {};
+  laravelSession['status']='';
+  laravelSession['resent']='';
+  var laravelErrors=document.getElementById('registerForm-errors') ? JSON.parse(document.getElementById('registerForm-errors').textContent) : [];
+</script>
+<script defer="defer" th:src="@{/static/js/main.js}"></script>
+<script src="https://js.stripe.com/v3/"></script>
+</body>
+</html>

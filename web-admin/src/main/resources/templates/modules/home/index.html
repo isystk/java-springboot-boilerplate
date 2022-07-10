@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>Home｜Sample</title>
+  <title>Home</title>
 </head>
 <body>
 <div layout:fragment="sidebar">
@@ -22,7 +22,11 @@
   </div><!-- /.row -->
 </div>
 <div layout:fragment="content">
-
+  <div class="card card-purple">
+    <div class="card-body">
+      <p>[[|ようこそ！${LoginUser.userName}さん|]]</p>
+    </div>
+  </div>
 </div>
 </body>
 </html>

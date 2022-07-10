@@ -2,11 +2,41 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layouts/layout">
 <head layout:fragment="layouts/layout::header">
-  <title>エラー</title>
+  <title>404エラー</title>
 </head>
 <body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('home', 'home')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>お探しのページは見つかりませんでした。</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item active">404エラー</li>
+      </ol>
+    </div>
+  </div>
+</div>
 <div layout:fragment="content">
-  <h1>ページが見つかりません。</h1>
+  <div class="card card-purple">
+    <div class="card-header">
+      <h3 class="card-title">詳細情報</h3>
+    </div>
+    <div class="card-body">
+      <div th:text="'timestamp: ' + ${timestamp}"></div>
+      <div th:text="'status: ' + ${status}"></div>
+      <div th:text="'error: ' + ${error}"></div>
+      <div th:text="'exception: ' + ${exception}"></div>
+      <div th:text="'message: ' + ${message}"></div>
+      <div th:text="'errors: ' + ${errors}"></div>
+      <div th:text="'trace: ' + ${trace}"></div>
+      <div th:text="'path: ' + ${path}"></div>
+    </div>
+  </div>
 </div>
 </body>
 </html>

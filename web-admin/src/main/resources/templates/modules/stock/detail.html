@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>[[${stock.name}]]</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('stock', 'stock')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>[[${stock.name}]]</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item"><a th:href="@{/stocks/}">商品一覧</a></li>
+        <li class="breadcrumb-item">[[${stock.name}]]</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div layout:fragment="content">
+  <div class="card card-purple">
+    <div class="card-body">
+      <div th:object="${stock}">
+        <input th:replace="fragments/label :: input ('商品名', *{name})"/>
+        <input th:replace="fragments/label :: input ('商品説明', *{detail})"/>
+        <input th:replace="fragments/label :: input ('価格', *{price})"/>
+        <input th:replace="fragments/label :: input ('在庫数', *{quantity})"/>
+        <div class="form-group row">
+          <label class="col-md-2 control-label">商品画像</label>
+          imageList
+          <div class="col-md-3">
+            <img th:src="${@img.url('/stocks', stock.imgpath)}" width="100%"/>
+          </div>
+        </div>
+        <div class="card-footer clearfix text-center">
+          <div class="text-left float-left">
+            <a th:href="@{/stocks}" class="btn btn-secondary">一覧に戻る</a>
+          </div>
+          <a th:href="@{/stocks/edit/{id}/(id=*{id})}" class="btn btn-info">修正する</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

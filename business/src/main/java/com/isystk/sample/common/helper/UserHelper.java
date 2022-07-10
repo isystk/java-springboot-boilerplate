@@ -1,16 +1,17 @@
 package com.isystk.sample.common.helper;
 
+import com.isystk.sample.common.util.DateUtils;
+import com.isystk.sample.domain.dao.UserDao;
+import com.isystk.sample.domain.dto.UserCriteria;
+import com.isystk.sample.domain.entity.User;
+import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.isystk.sample.common.exception.NoDataFoundException;
-import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.domain.dao.AuditInfoHolder;
-import com.isystk.sample.domain.dao.TUserDao;
-import com.isystk.sample.domain.dto.TUserCriteria;
-import com.isystk.sample.domain.entity.TUser;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,17 +23,17 @@ import lombok.extern.slf4j.Slf4j;
 public class UserHelper {
 
   @Autowired
-  TUserDao tUserDao;
+  UserDao userDao;
 
   /**
    * ユーザーを全件取得します。
    *
    * @return
    */
-  public List<TUser> getUserList() {
-    TUserCriteria criteria = new TUserCriteria();
+  public List<User> getUserList() {
+    UserCriteria criteria = new UserCriteria();
     criteria.setDeleteFlgFalse(true);
-    return tUserDao.findAll(criteria);
+    return userDao.findAll(criteria);
   }
 
   /**
@@ -40,10 +41,10 @@ public class UserHelper {
    *
    * @return
    */
-  public TUser getUser(Integer userId) {
-    TUserCriteria criteria = new TUserCriteria();
-    criteria.setUserIdEq(userId);
-    return tUserDao.findOne(criteria).orElseThrow(
+  public User getUser(BigInteger userId) {
+    UserCriteria criteria = new UserCriteria();
+    criteria.setIdEq(userId);
+    return userDao.findOne(criteria).orElseThrow(
         () -> new NoDataFoundException("userId=" + userId + "のデータが見つかりません。"));
   }
 
@@ -52,8 +53,8 @@ public class UserHelper {
    *
    * @return
    */
-  public Integer getLoginUserId() {
-    return getUser().getUserId();
+  public BigInteger getLoginUserId() {
+    return getUser().getId();
   }
 
   /**
@@ -61,10 +62,10 @@ public class UserHelper {
    *
    * @return
    */
-  public TUser getUser() {
-    TUserCriteria criteria = new TUserCriteria();
+  public User getUser() {
+    UserCriteria criteria = new UserCriteria();
     criteria.setEmailEq(AuditInfoHolder.getAuditUser());
-    return tUserDao.findOne(criteria).orElseThrow(
+    return userDao.findOne(criteria).orElseThrow(
         () -> new NoDataFoundException(
             "email=" + AuditInfoHolder.getAuditUser() + "のデータが見つかりません。"));
   }
@@ -75,9 +76,9 @@ public class UserHelper {
    * @return
    */
   public void updateLastLogin() {
-    TUser tUser = getUser();
-    tUser.setLastLoginTime(DateUtils.getNow());
-    tUserDao.update(tUser);
+    User user = getUser();
+    user.setLastLoginAt(DateUtils.getNow());
+    userDao.update(user);
   }
 
 }

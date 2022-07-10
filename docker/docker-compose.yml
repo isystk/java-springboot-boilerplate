@@ -41,14 +41,18 @@ services:
       context: ./mysql
       dockerfile: Dockerfile
     environment:
+      MYSQL_DATABASE: laraec
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
+      TZ: Asia/Tokyo
     ports:
-     - 3306:3306
+      - 3306:3306
     restart: always
     volumes:
-     - ./mysql/conf.d:/etc/mysql/conf.d
-     - ./mysql/data:/var/lib/mysql
-     - ./mysql/logs:/var/log/mysql
+      - java-springboot-boilerplate-db-store:/var/lib/mysql
+      - ./mysql/logs:/var/log/mysql
+      - ./mysql/conf:/etc/mysql/conf.d
 
   solr:
     image: java-springboot-boilerplate/solr
@@ -94,39 +98,21 @@ services:
     ports:
       - 6379:6379
 
-# ↓ Solrの代わりにElasticSearchを利用する場合はコメントアウトを外してください。
-#  elasticsearch:
-#    build: ./elasticsearch
-#    container_name: java-springboot-boilerplate-es
-#    environment:
-#      - cluster.name=docker-cluster
-#      - bootstrap.memory_lock=true
-#      - "ES_JAVA_OPTS=-Xms256m -Xmx256m"
-#    ulimits:
-#      memlock:
-#        soft: -1
-#        hard: -1
-#    ports:
-#      - 9200:9200
-#    # esデータの永続化
-#    volumes:
-#      - ./elasticsearch/data:/usr/share/elasticsearch/data
-
   s3:
     image: minio/minio:RELEASE.2021-10-10T16-53-30Z
     container_name: java-springboot-boilerplate-s3
     ports:
-      - "9000:9000"
-      - "9001:9001"
+      - 9000:9000
+      - 9001:9001
     environment:
       MINIO_ACCESS_KEY: "access_key"
       MINIO_SECRET_KEY: "secret_key"
     command: [ "--compat", "server", "/data", "--console-address", ":9001" ]
     volumes:
-      - ./s3/data:/data
+      - java-springboot-boilerplate-s3-store:/data
 
   awscli:
-    container_name: "java-springboot-boilerplate-awscli"
+    container_name: java-springboot-boilerplate-awscli
     build:
       context: ./awscli
       dockerfile: Dockerfile
@@ -139,3 +125,8 @@ services:
     volumes:
       - ../:/aws
     working_dir: /aws
+
+volumes:
+  java-springboot-boilerplate-db-store:
+  java-springboot-boilerplate-solr-store:
+  java-springboot-boilerplate-s3-store:

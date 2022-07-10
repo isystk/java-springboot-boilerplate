@@ -17,6 +17,8 @@ SpringBoot ＆ React.js の学習用サンプルアプリケーションです�
 - フロントだけでなく管理画面も作成して統合的なサンプルを作成したい方
 - オブジェクトストレージへの画像アップロードを作成してみたい方
 - フロントエンドをReact.jsで作成してみたい方
+- Stripeを利用した決算処理を作成してみたい方
+- ソーシャルログインを作成してみたい方
 
 ### 利用している技術
 
@@ -31,46 +33,92 @@ SpringBoot ＆ React.js の学習用サンプルアプリケーションです�
 #### ■ アプリケーション
 
 - SpringBoot 2
-- React 16
+- React 18
 - Typescript
 - Bootstrap 4
 - Adminlte 3
 
 ## 🌐 Demo
 
-#### ■ フロント画面（React）
+#### ■ フロント画面(React)
 
 ![フロント画面](./front.png "フロント画面")
 
 - ログイン/ログアウト
 - 会員登録
-- 投稿一覧
-- 投稿詳細
-- マイページ
-- 投稿登録・変更・削除
+- パスワードリマインダ
+- 商品一覧
+- カートに追加
+- 決算処理(Stripe)
+- お気に入り追加
+- お問い合わせ
+- ソーシャルログイン(Google)
 
-#### ■ 管理画面（Bootstrap）
+```mermaid
+graph LR
 
-![管理画面](./admin.jpg "管理画面")
+  classDef default fill: #fff,stroke: #333,stroke-width: 1px;
+  style funcA fill: #fff,stroke: #333,stroke-width: 1px;
+  style funcB fill: #fff,stroke: #333,stroke-width: 1px;
+  style funcC fill: #fff,stroke: #333,stroke-width: 1px;
+  style funcD fill: #fff,stroke: #333,stroke-width: 1px;
+  style header fill: #fff,stroke: #333,stroke-width: 1px;
+
+  TOP-->ログイン--ID/パスワード認証-->マイカート
+  TOP-->お問い合わせ入力
+  ログイン-->会員仮登録
+  ログイン-->パスワードリセット
+
+  subgraph funcA [商品購入]
+    マイカート-->商品購入完了
+  end
+
+  subgraph funcB [会員登録]
+    会員仮登録-->会員仮登録完了--メール送信-->会員登録完了
+  end
+
+  subgraph funcC [パスワードリセット]
+    パスワードリセット--メール送信-->パスワード変更
+  end
+
+  subgraph funcD [お問い合わせ]
+    お問い合わせ入力-->お問い合わせ完了
+  end
+
+  subgraph header [ヘッダ]
+    マイカート
+    お問い合わせ入力
+    ログアウト
+  end
+```
+
+
+#### ■ 管理画面(Bootstrap)
+
+![管理画面](./admin.png "管理画面")
 
 - ログイン/ログアウト
-- 投稿管理
+- 商品管理
+- 注文履歴
+- 顧客管理
+- お問い合わせ管理
+- 画像管理
 - CSVダウンロード
-- Excelダウンロード
 - PDFダウンロード
+- 画像アップロード 
 
 #### ■ バッチ処理
 
 - Solrインデックス生成バッチ
-- CSV読み込み/DB登録バッチ
+- CSV商品データ/画像取り込みバッチ
 
 
-## 🔧 開発環境の構築
+## 💬 インストール
 
 ※ この環境を利用する為には、事前にdocker、docker-composeが動作する状態であることが前提条件です。
 (Windowsの場合は、以下を参考に「WSL」と「Docker Desktop for Windows」を用意してください)
 
-### WSLのインストール（Windowsの場合）
+### WSLのインストール(Windowsの場合)
 参考
 https://docs.microsoft.com/ja-jp/windows/wsl/install
 
@@ -86,7 +134,7 @@ $ update-locale LANG=ja_JP.UTF8
 $ apt -y install manpages-ja manpages-ja-dev
 ```
 
-### Docker Desktop for Windows のインストール（Windowsの場合）
+### Docker Desktop for Windows のインストール(Windowsの場合)
 
 https://docs.docker.com/docker-for-windows/install/
 ```
@@ -94,7 +142,7 @@ https://docs.docker.com/docker-for-windows/install/
 docker --version
 ```
 
-### WSL2から、Docker for Windows を利用できるようにする（Windowsの場合）
+### WSL2から、Docker for Windows を利用できるようにする(Windowsの場合)
 参考
 https://qiita.com/endo_hizumi/items/0cc50bdfbd827579733e
 ```
@@ -129,6 +177,10 @@ cd /c/Users/USER/github
 git clone git@github.com:isystk/java-springboot-boilerplate.git
 ```
 
+WSL の場合は、MySQLのConfファイルがWindows側のディスクにあると権限の違いでDockerコンテナがロードできなくなるのでWindows側で読み取り専用に変更してください。
+
+![WSL-MySQL](./wsl-mysql.png "WSL-MySQL")
+
 ### IntelliJ IDEAのインストール
 
 以下のURLから、IntelliJ IDEA をダウンロードしてインストールを行います。無料のCommunity版で問題ありません。
@@ -138,18 +190,21 @@ https://www.jetbrains.com/ja-jp/idea/download/
 # コードフォーマッターを設定する
 「Preferences - Editor - Code Style - Java」にて、Schemeのところの設定アイコンから、"intellij-java-google-style.xml" をインポートする。
 
-# Lombok pluginをインストールする（既にインストールされている場合は不要です）
+# Lombok pluginをインストールする(既にインストールされている場合は不要です)
 「Preferences - Plugins - Marketplace」から、"Lombok"をインストール後、InteliJを再起動する
 
 # Annotation Processingを有効にする
 「Preferences - Build,Execution,Deployment - Compiler - Annotation Processors」から、
 ”Enable annotation processing” を有効にする
+
+# 自動ビルドを有効にする
+「Compiler」にて、”Build project automatically” を有効にする
 ```
 
 ### MySQL Client のインストール
 
 ```
-# MySQLに接続する為のコマンドをインストールします。（バージョンは何でもOK）
+# MySQLに接続する為のコマンドをインストールします。(バージョンは何でもOK)
 # Windowsの場合
 $ apt install mysql-client
 # Macの場合
@@ -177,36 +232,144 @@ $ npm install -g yarn
 ```
 .
 ├── docker
-│   ├── mysql （DBサーバー）
+│   ├── mysql (DBサーバー)
 │   │   ├── conf.d (mysqlの設定ファイル)
-│   │   ├── data (mysqlのデータファイル)
-│   │   ├── doma-gen (doma2のジェネレータ)
-│   │   ├── init （mysqlの初期DDL）
-│   │   ├── logs （mysqlのログ）
-│   │   ├── script （mysql関連のスクリプト）
-│   │   └── sample.a5er （ER図）
-│   ├── nginx （Webサーバー）
+│   │   └─── logs (mysqlのログ)
+│   ├── nginx (Webサーバー)
 │   │   ├── conf.d (nginxの設定ファイル)
-│   │   ├── logs （nginxのログ）
-│   │   └── ssl （SSL自己証明書）
-│   ├── phpmyadmin （DB管理コンソール）
-│   ├── s3（Minio）
-│   │   └── data (オブジェクトストレージ)
-│   ├── solr （検索エンジン）
+│   │   ├── logs (nginxのログ)
+│   │   └── ssl (SSL自己証明書)
+│   ├── phpmyadmin (DB管理コンソール)
+│   ├── s3 (Minio)
+│   ├── solr (検索エンジン)
 │   │   ├── data (solrのデータファイル)
-│   │   └── logs （solrのログ）
-│   ├── .env
+│   │   └── logs (solrのログ)
 │   └── docker-compose.yml
 ├── batch (バッチ)
+│   └── src
+│       └── main
+│           ├── java
+│           └── resources
 ├── business (共通ロジック)
-├── static (フロントエンドモジュール)
-│   └── public (WEB公開ディレクトリ)
-│       └── thumb （アップロードした写真）
+│   └── src
+│       └── main
+│           ├── java
+│           └── resources
+│               ├── doma-gen (doma2のジェネレータ)
+│               └── sample.a5er (ER図)
+├── htdocs
+│   └── thumb (アップロード画像の一時保存)
 ├── web (Web共通ロジック)
+│   └── src
+│       └── main
+│           ├── java
+│           └── resources
 ├── web-admin (管理画面)
+│   └── src
+│       └── main
+│           ├── java
+│           └── resources
 ├── web-front (フロント画面)
-├── dc.sh （Dockerの起動用スクリプト）
-└── build.gradle （Gradle用設定ファイル）
+│   ├── src
+│   │   └── main
+│   │       ├── java
+│   │       └── resources
+│   └── resources (フロントエンドモジュール)
+│       ├── node_modules
+│       ├── package.json
+│       ├── public
+│       ├── src
+│       │   ├── @types
+│       │   ├── __test__
+│       │   ├── auth
+│       │   ├── components
+│       │   ├── constants
+│       │   ├── index.tsx
+│       │   ├── pages
+│       │   ├── react-app-env.d.ts
+│       │   ├── reportWebVitals.ts
+│       │   ├── router.tsx
+│       │   ├── services
+│       │   ├── setupTests.ts
+│       │   ├── static
+│       │   ├── stores
+│       │   ├── stories
+│       │   ├── styles
+│       │   └── utilities
+│       ├── tsconfig.json
+│       └── yarn.lock
+├── dc.sh (Docker操作用スクリプト)
+└── build.gradle (Gradle用設定ファイル)
+```
+
+
+## 🔧 開発環境の構築 
+
+各種デーモンを起動する
+```bash
+# 初期化
+$ ./dc.sh init
+# すべてのDockerコンテナを起動する
+$ ./dc.sh start
+# データベースが立ち上がるまで少し待ちます。(初回は5分程度)
+# データベースが起動したら、MySQLにログインしてみる
+$ ./dc.sh mysql login
+```
+
+Minio にS3バケットを作成する
+```bash
+$ ./dc.sh aws local
+# バケットを作成する
+aws --endpoint-url http://host.docker.internal:9000 s3 mb s3://aws.isystk.com
+# バケットを公開する
+POLICY='{ "Version": "2012-10-17", "Statement": [{ "Sid": "MakeItPublic", "Effect": "Allow", "Principal": "*", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::aws.isystk.com/*" }] }'
+aws --endpoint-url http://host.docker.internal:9000 s3api put-bucket-policy --bucket aws.isystk.com --policy "${POLICY}"
+# バケットの一覧を確認する
+aws --endpoint-url http://host.docker.internal:9000 s3 ls
+# テストファイルをアップロードする
+aws --endpoint-url http://host.docker.internal:9000 s3 cp ./front.png s3://aws.isystk.com
+# ブラウザでアップロードした画像を表示してみる
+$ open http://localhost:9000/aws.isystk.com/front.png
+```
+
+バックエンド環境を構築する
+```bash
+# Gradleで利用できるタスクの一覧を確認します。
+$ ./gradlew tasks
+
+# Flywayでベースライン作成とマイグレードを実行します。
+$ ./gradlew business::flywayInfo
+$ ./gradlew business::flywayBaseline 
+$ ./gradlew business::flywayMigrate
+$ ./gradlew business::flywayInfo
+
+# (既存のSQLを修正するなどして整合性エラーになる場合は以下を実施してください。) 
+$ ./gradlew business::flywayRepair
+$ ./gradlew business::flywayValidate
+# (すべてのオブジェクトを削除して初期化したい場合は以下を実施してください。)
+$ ./gradlew business::flywayClean
+
+# バッチを実行して商品マスタデータを登録する
+$ ./gradlew batch::bootRun -Pargs=--job=importMstJob
+
+# 管理画面側のアプリケーションを起動します。
+# ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
+$ ./gradlew web-admin::bootRun
+
+# バッチを実行してSolrに商品データをインデックスする
+$ ./gradlew batch::bootRun -Pargs=--job=solrRegistJob
+
+# フロント側のアプリケーションを起動します。
+# ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
+$ ./gradlew web-front::bootRun
+```
+
+フロントエンド環境を構築する
+```bash
+# フロントエンドをビルドする。
+$ cd web-front/resources 
+$ yarn 
+$ yarn build
 ```
 
 ## 🖊️ Docker 操作用シェルスクリプトの使い方
@@ -220,7 +383,7 @@ Options:
   init                     Dockerコンテナ・イメージ・生成ファイルの状態を初期化します。
   start                    すべてのDaemonを起動します。
   stop                     すべてのDaemonを停止します。
-  apache restart           Apacheを再起動します。
+  nginx restart            NginXを再起動します。
   mysql login              MySQLデータベースにログインします。
   mysql export <PAHT>      MySQLデータベースのdumpファイルをエクスポートします。
   mysql import <PAHT>      MySQLデータベースにdumpファイルをインポートします。
@@ -229,101 +392,38 @@ Options:
   --help, -h        ヘルプを表示します。
 ```
 
-### phpMyAdmin
-データベースに接続してデータの参照や編集が可能です。
+### PhpMyAdmin
+MySQLデータベースに接続してデータの参照や編集が可能です。<br>
 Dockerを起動後に以下のURLにアクセスすると利用可能です。
 
 http://localhost:8888/
 
-### mailhog
-ダミーのメールサーバーです。実際にはメールは送信されず、送信されたメールはブラウザで閲覧できます。
+### Mailhog
+ダミーのメールサーバーです。実際にはメールは送信されず、送信されたメールはブラウザで閲覧できます。<br>
 Dockerを起動後に以下のURLにアクセスすると利用可能です。
 
 http://localhost:8025/
 
-### minio
-S3に準拠したダミーのオブジェクトストレージです。
+### Minio
+S3に準拠したダミーのオブジェクトストレージです。<br>
 Dockerを起動後に以下のURLにアクセスすると利用可能です。
 
-http://localhost:9001
-Username / Password
-access_key / secret_key
+http://localhost:9001/
 
-```bash
-./dc.sh aws local
-# バケットを作成する
-$ aws --endpoint-url http://host.docker.internal:9000 s3 mb s3://aws.isystk.com
-# バケットを公開する
-$ POLICY='{ "Version": "2012-10-17", "Statement": [{ "Sid": "MakeItPublic", "Effect": "Allow", "Principal": "*", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::aws.isystk.com/*" }] }'
-$ aws --endpoint-url http://host.docker.internal:9000 s3api put-bucket-policy --bucket aws.isystk.com --policy "${POLICY}"
-# バケットの一覧を確認する
-$ aws --endpoint-url http://host.docker.internal:9000 s3 ls
-# テストファイルをアップロードする
-$ aws --endpoint-url http://host.docker.internal:9000 s3 cp ./front.png s3://aws.isystk.com
-# ブラウザでアップロードした画像を表示してみる
-$ open http://localhost:9000/aws.isystk.com/front.png
-```
+| Username   | Password |
+|:-----------| :----------|
+| access_key | secret_key |
 
-## 💬 使い方
+### Solr
+Solrの管理コンソールです。インデックスされたデータを検索したり出来ます。<br>
+Dockerを起動後に以下のURLにアクセスすると利用可能です。
 
-各種デーモンを起動する
-```
-# 下準備
-$ ./dc.sh init
-# サーバーを起動する
-$ ./dc.sh start
-# データベースが立ち上がるまで少し待ちます。(初回は5分程度)
-# MySQLにログインしてみる
-$ ./dc.sh mysql login
-```
-
-バックエンド環境を構築する
-```
-# Gradleで利用できるタスクの一覧を確認します。
-$ ./gradlew tasks
-
-# Dockerの起動
-NginX、MySQL、Solr、S3などのサーバーを立ち上げる。
-$ ./gradlew composeUp
-
-# Flywayでベースライン作成とマイグレードを実行します。
-$ ./gradlew business::flywayInfo
-$ ./gradlew business::flywayBaseline 
-$ ./gradlew business::flywayMigrate
-$ ./gradlew business::flywayInfo
-(既存のSQLを修正するなどして整合性エラーになる場合は以下を実施してください。) 
-$ ./gradlew business::flywayRepair
-$ ./gradlew business::flywayValidate
-
-# フロント側のアプリケーションを起動します。
-# Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
-$ ./gradlew web-front::bootRun
-
-# 管理画面側のアプリケーションを起動します。
-# Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
-$ ./gradlew web-admin::bootRun
-
-# バッチアプリケーションを起動します。
-$ ./gradlew batch::bootRun -Pargs=--job=solrRegistJob
-```
-
-フロントエンド環境を構築する
-```
-# フロントエンドのコードをダウンロードする。
-$ git submodule init
-$ git submodule update
-
-# フロントエンドをビルドする。
-$ cd static
-$ yarn 
-& yarn dev
-```
+http://localhost:8983/
 
 ## 🔗 参考
 
 | プロジェクト| 概要|
 | :---------------------------------------| :-------------------------------|
-| [Lombok Project](https://projectlombok.org/)| 定型的なコードを書かなくてもよくする|
 | [Springframework](https://projects.spring.io/spring-framework/)| Spring Framework|
 | [Spring Security](https://projects.spring.io/spring-security/)| セキュリティ対策、認証・認可のフレームワーク|
 | [Doma2](https://doma.readthedocs.io/ja/stable/)| O/Rマッパー|
@@ -338,7 +438,7 @@ $ yarn
 | [Mockito](http://site.mockito.org/)| モッキングフレームワーク |
 | [AdminLTE Docs](https://adminlte.io/docs/2.4/installation)| AdminLTE Docs|
 | [Bootstrap4 日本語リファレンス](https://getbootstrap.jp/docs/4.4/getting-started/introduction/)| Bootstrap4 日本語リファレンス|
-| [アイコン（fontawesome）](https://fontawesome.com/icons?d=gallery)| アイコン（fontawesome）|
+| [アイコン(fontawesome)](https://fontawesome.com/icons?d=gallery)| アイコン(fontawesome)|
 
 
 ## 🎫 Licence
@@ -348,5 +448,3 @@ $ yarn
 ## 👀 Author
 
 [isystk](https://github.com/isystk)
-
-

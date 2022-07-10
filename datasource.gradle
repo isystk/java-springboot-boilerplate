@@ -9,12 +9,12 @@ task datasource {
     url = "jdbc:mysql://localhost:3306"
   }
   if (user == null) {
-    user = "root"
+    user = "user"
   }
   if (password == null) {
     password = "password"
   }
-  ext.url = url + "/sample?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&nullNamePatternMatchesAll=true"
+  ext.url = url + "/laraec?useSSL=false&zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf8&nullNamePatternMatchesAll=true"
   ext.user = user
   ext.password = password
 }

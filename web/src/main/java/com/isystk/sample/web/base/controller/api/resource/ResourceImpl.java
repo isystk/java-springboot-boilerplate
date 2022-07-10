@@ -15,4 +15,6 @@ public class ResourceImpl implements Resource {
 
   // メッセージ
   String message;
+
+  Boolean result;
 }

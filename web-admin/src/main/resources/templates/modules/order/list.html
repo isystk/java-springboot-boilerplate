@@ -1,0 +1,102 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layouts/layout">
+<head layout:fragment="layouts/layout::header">
+  <title>注文履歴一覧</title>
+</head>
+<body>
+<div layout:fragment="sidebar">
+  <div th:replace="layouts/sidebar :: sidebar ('stocks', 'order')"></div>
+</div>
+<div layout:fragment="content-header">
+  <div class="row mb-2">
+    <div class="col-sm-6">
+      <h1>注文履歴一覧</h1>
+    </div>
+    <div class="col-sm-6">
+      <ol class="breadcrumb float-sm-right">
+        <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+        <li class="breadcrumb-item active">注文履歴一覧</li>
+      </ol>
+    </div>
+  </div>
+</div>
+<div layout:fragment="content">
+
+  <div class="card card-purple">
+    <div class="card-header">
+      <h3 class="card-title">検索条件</h3>
+    </div>
+    <form th:action="@{/orders/}" th:method="get" th:object="${orderListForm}">
+      <input type="hidden" name="page" value="1"/>
+      <div class="card-body">
+        <div class="form-group">
+          <div class="control-group">
+            <input th:replace="fragments/input :: input ('text', '注文者', 'userName', 100)"/>
+          </div>
+          <div class="control-group">
+            <input th:replace="fragments/input :: input ('text', '商品名', 'stockName', 100)"/>
+          </div>
+          <div class="control-group">
+            <input th:replace="fragments/datePeriod :: input ('注文日', 'createdAtFrom', 'createdAtTo')"/>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-center">
+        <button type="submit" class="btn btn-info">検索</button>
+      </div>
+    </form>
+  </div>
+
+  <form th:action="@{/orders}" th:method="get" th:object="${orderListForm}" id="pagingForm">
+    <input type="hidden" name="userName" th:value="*{userName}">
+    <input type="hidden" name="stockName" th:value="*{stockName}">
+    <input type="hidden" name="createdAtFrom" th:value="*{createdAtFrom}">
+    <input type="hidden" name="createdAtTo" th:value="*{createdAtTo}">
+  </form>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="card card-purple">
+        <div class="card-header">
+          <h3 class="card-title">検索結果</h3>
+        </div>
+        <div class="card-body table-responsive p-0">
+          <table class="table table-hover" style="table-layout:fixed;">
+            <thead>
+            <tr>
+              <th>注文ID</th>
+              <th>注文者</th>
+              <th style="width:300px;">商品名</th>
+              <th>個数</th>
+              <th>注文日時</th>
+              <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="e : ${pages.data}">
+              <td th:text="*{e.id}"></td>
+              <td th:text="*{e.user.name}"></td>
+              <td th:text="*{e.stock.name}"></td>
+              <td th:text="*{e.quantity}"></td>
+              <td th:text="${#temporals.format(e.createdAt, 'yyyy/MM/dd HH:mm:ss')}"></td>
+              <td class="float-right">
+                  <a class="btn btn-info m-1 btn-sm" th:href="@{/orders/{id}/(id=*{e.id})}">詳細</a><br>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer clearfix ">
+          <div th:replace="fragments/paginator :: paginator (${pages}, '/orders')"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div layout:fragment="scripts">
+  <script type="text/javascript" th:src="@{/static/js/order/list.js}"></script>
+</div>
+</body>
+</html>

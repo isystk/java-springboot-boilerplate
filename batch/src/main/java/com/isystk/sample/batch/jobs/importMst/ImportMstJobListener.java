@@ -11,6 +11,6 @@ public class ImportMstJobListener extends BaseJobExecutionListener {
 
   @Override
   protected String getBatchName() {
-    return "マスタデータ取り込み";
+    return "マスタ取り込み";
   }
 }

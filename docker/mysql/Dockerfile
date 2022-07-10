@@ -1,8 +1,3 @@
-FROM mysql:5.7
+FROM mysql:8.0
 
-# タイムゾーンを東京に設定
-ENV TZ "Asia/Tokyo"
-
-COPY init/* /docker-entrypoint-initdb.d/
-
-EXPOSE 3306
+CMD ["mysqld", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_unicode_ci"]
