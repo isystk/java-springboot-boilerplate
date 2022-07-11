@@ -32,7 +32,7 @@ SpringBoot ＆ React.js の学習用サンプルアプリケーションです�
 
 #### ■ アプリケーション
 
-- SpringBoot 2
+- SpringBoot 2.7
 - React 18
 - Typescript
 - Bootstrap 4
@@ -197,8 +197,8 @@ https://www.jetbrains.com/ja-jp/idea/download/
 「Preferences - Build,Execution,Deployment - Compiler - Annotation Processors」から、
 ”Enable annotation processing” を有効にする
 
-# 自動ビルドを有効にする
-「Compiler」にて、”Build project automatically” を有効にする
+# デバック時のホットスワップを有効にする
+「Preferences - Advanced Settings - Compiler」から、”Allow auto-make to start even if developed application is currently running” を有効にする。
 ```
 
 ### MySQL Client のインストール
@@ -345,7 +345,6 @@ $ ./gradlew business::flywayInfo
 
 # (既存のSQLを修正するなどして整合性エラーになる場合は以下を実施してください。) 
 $ ./gradlew business::flywayRepair
-$ ./gradlew business::flywayValidate
 # (すべてのオブジェクトを削除して初期化したい場合は以下を実施してください。)
 $ ./gradlew business::flywayClean
 

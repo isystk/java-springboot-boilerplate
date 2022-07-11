@@ -1,3 +1,14 @@
+spring.profiles.group:
+  local:
+    - local
+    - common-local
+  staging:
+    - staging
+    - common-staging
+  product:
+    - product
+    - common-product
+
 # 共通の設定を定義する
 spring:
   profiles:
