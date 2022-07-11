@@ -33,7 +33,6 @@ public class ContactForm extends BaseSearchForm implements Pageable {
   @NotBlank
   String contact;
 
-  @NotBlank
   String url;
 
   @NotBlank

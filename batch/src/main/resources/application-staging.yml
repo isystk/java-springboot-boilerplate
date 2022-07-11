@@ -1,5 +1,3 @@
 # 共通の設定を定義する
 spring:
   profiles: staging
-  profiles.include:
-    - common-staging

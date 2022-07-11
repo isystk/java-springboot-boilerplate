@@ -1,7 +1,5 @@
 spring:
   profiles: production
-  profiles.include:
-    - common-production
 
 server:
   address: aws.isystk.com

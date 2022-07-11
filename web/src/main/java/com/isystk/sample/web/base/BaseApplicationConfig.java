@@ -27,7 +27,6 @@ import com.isystk.sample.web.base.controller.api.resource.ResourceFactory;
 import com.isystk.sample.web.base.filter.LoginUserTrackingFilter;
 
 import lombok.val;
-import nz.net.ultraq.thymeleaf.LayoutDialect;
 
 public abstract class BaseApplicationConfig
     implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory>, WebMvcConfigurer {
