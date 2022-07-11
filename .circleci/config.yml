@@ -13,13 +13,13 @@ commands:
     steps:
       - restore_cache:
           name: Restore gradle dependencies
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+          key: v２-dependencies-{{ checksum "build.gradle" }}
   
   save_gradle:
     steps:
       - save_cache:
           name: Cache gradle dependencies
-          key: v1-dependencies-{{ checksum "build.gradle" }}
+          key: v２-dependencies-{{ checksum "build.gradle" }}
           paths:
             - ~/.gradle
 
