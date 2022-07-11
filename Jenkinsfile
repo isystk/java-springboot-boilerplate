@@ -3,7 +3,7 @@ pipeline {
     
     // Jenkins pipelineで参照するJDK（Global Tool Configuration で設定する）
     tools {
-      jdk 'jdk15'
+      jdk 'jdk17'
     }
 
     // 定数や変数を定義する
