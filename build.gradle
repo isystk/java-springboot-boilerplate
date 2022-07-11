@@ -6,14 +6,12 @@ buildscript {
     classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     classpath("mysql:mysql-connector-java:${mysqlJdbcVersion}")
     classpath("com.avast.gradle:gradle-docker-compose-plugin:${dockerComposePluginVersion}")
-    classpath("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${detektVersion}")
     classpath("gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:${jibPluginVersion}")
   }
 }
 
 plugins {
   id "org.flywaydb.flyway" version "${flywayVersion}"
-  id "io.gitlab.arturbosch.detekt" version "${detektVersion}"
   id "org.seasar.doma.compile" version "${domaCompilerPluginVersion}"
 }
 
@@ -116,9 +114,6 @@ subprojects {
     /* google */
     implementation("com.google.guava:guava:${googleGuavaVersion}")
 
-    /* thumbnailator */
-    implementation("net.coobird:thumbnailator:${thumbnailatorVersion}")
-
     /* csv */
     implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-csv:$jacksonVersion")
 
@@ -141,6 +136,7 @@ subprojects {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
       exclude group: "org.junit.vintage", module: "junit-vintage-engine"
     }
+    testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:${assertJVersion}")
     testImplementation("org.dbunit:dbunit:${dbunitVersion}")
     testImplementation("com.github.springtestdbunit:spring-test-dbunit:${dbunitSpringVersion}")
@@ -148,12 +144,6 @@ subprojects {
     /* mock */
     testImplementation("io.mockk:mockk:${mockkVersion}")
     testImplementation("io.mockk:mockk-common:${mockkVersion}")
-
-    /* ulid */
-    implementation("de.huxhorn.sulky:de.huxhorn.sulky.ulid:${ulidVersion}")
-
-    /* KMapper */
-    implementation("com.github.ProjectMapK:KMapper:${kmapperVersion}")
 
     /* flyway */
     implementation("org.flywaydb:flyway-core:${flywayVersion}")

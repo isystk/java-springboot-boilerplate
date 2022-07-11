@@ -13,13 +13,13 @@ import java.math.BigInteger;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
-import org.castor.core.util.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.isystk.sample.common.service.BaseTransactionalService;
 import com.isystk.sample.solr.repository.SolrStockRepository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 @Service
 public class StockService extends BaseTransactionalService {

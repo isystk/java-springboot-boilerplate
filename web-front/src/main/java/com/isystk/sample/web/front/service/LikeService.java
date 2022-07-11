@@ -8,8 +8,8 @@ import com.isystk.sample.web.base.util.CookieUtils;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.castor.core.util.Assert;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 @Service
 public class LikeService extends BaseTransactionalService {
