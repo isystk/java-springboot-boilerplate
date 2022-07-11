@@ -12,7 +12,7 @@ spring:
     password: test
     properties:
       mail:
-        from: from@test.com
+        from: no-reply@isystk.com
   flyway:
     enabled: true
     locations: classpath:/db/createTable,classpath:/db/insertData
