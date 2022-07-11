@@ -3,7 +3,6 @@ package com.isystk.sample.common.helper;
 import com.amazonaws.services.s3.model.AmazonS3Exception;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.google.common.collect.Lists;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -99,6 +98,10 @@ public class ImageHelper {
     String remotePath = dirPath + "/" + upFileName;
 
     try {
+      boolean exist = AwsS3Utils.s3Exist(BUCKET_NAME, remotePath);
+      if (!exist) {
+        return null;
+      }
       // S3から画像を取得
       S3Object s3Object = AwsS3Utils.s3GetObject(BUCKET_NAME, remotePath);
 

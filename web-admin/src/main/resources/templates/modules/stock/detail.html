@@ -33,7 +33,6 @@
         <input th:replace="fragments/label :: input ('在庫数', *{quantity})"/>
         <div class="form-group row">
           <label class="col-md-2 control-label">商品画像</label>
-          imageList
           <div class="col-md-3">
             <img th:src="${@img.url('/stocks', stock.imgpath)}" width="100%"/>
           </div>

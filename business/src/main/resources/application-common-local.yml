@@ -13,9 +13,10 @@ spring:
     password: test
     properties:
       mail:
-        from: from@test.com
+        from: no-reply@isystk.com
   flyway:
-    enabled: true
+    baseline-on-migrate: true
+    enabled: false
     locations: classpath:/db/createTable,classpath:/db/insertData
     placeholderReplacement: false
   servlet:
