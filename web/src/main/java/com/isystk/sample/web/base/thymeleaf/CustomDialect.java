@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 import org.thymeleaf.dialect.AbstractProcessorDialect;
 import org.thymeleaf.processor.IProcessor;
-import org.thymeleaf.standard.processor.StandardXmlNsTagProcessor;
-import org.thymeleaf.templatemode.TemplateMode;
 
 /**
  * 独自定義したダイアレクトを登録する
