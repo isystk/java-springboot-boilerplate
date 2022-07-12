@@ -148,6 +148,10 @@ subprojects {
     /* flyway */
     implementation("org.flywaydb:flyway-core:${flywayVersion}")
 
+    /* swagger */
+    implementation("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.10.1")
+    implementation("io.springfox:springfox-boot-starter:${swaggerVersion}")
+
   }
 }
 
