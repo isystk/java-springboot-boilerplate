@@ -1,5 +1,4 @@
 # 🌙 java-springboot-boilerplate
-====
 
 [![isystk](https://circleci.com/gh/isystk/java-springboot-boilerplate.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 ![GitHub issues](https://img.shields.io/github/issues/isystk/java-springboot-boilerplate)
