@@ -10,6 +10,7 @@
 ## 📗 プロジェクトの概要
 
 SpringBoot ＆ React.js の学習用サンプルアプリケーションです。
+本プロジェクトは、[こちら](https://github.com/isystk/laravel-react-boilerplate)で作成した「laravel-react-boilerplate」をJavaでリメイクしたものになります。
 
 ### 対象としている方
 - SpringBootを初めて学習してみたい方
@@ -29,10 +30,11 @@ SpringBoot ＆ React.js の学習用サンプルアプリケーションです�
 - MailHog 　・・・　ダミーのSMTPサーバーです。送信したメールをブラウザで閲覧することが可能です。実際にはメールは送信されないので開発時の誤送信してしまう心配がありません。
 - Minio 　・・・　S3に完全互換性のあるオブジェクトストレージです。アップロードした画像の保存先として利用しています。
 - Redis 　・・・　永続化可能なインメモリデータベースです。DBから取得したデータのキャッシュとして利用しています。
+- Solr 　・・・　検索サーバーです。事前にバッチを実行してDBの値をSolrにインデックスしておくことでWeb検索時の速度アップや負荷軽減が期待できます。
 
 #### ■ アプリケーション
 
-- SpringBoot 2.7
+- SpringBoot 2.5
 - React 18
 - Typescript
 - Bootstrap 4
@@ -111,7 +113,6 @@ graph LR
 
 - Solrインデックス生成バッチ
 - CSV商品データ/画像取り込みバッチ
-
 
 ## 💬 インストール
 
@@ -338,8 +339,6 @@ $ open http://localhost:9000/aws.isystk.com/front.png
 $ ./gradlew tasks
 
 # Flywayでベースライン作成とマイグレードを実行します。
-$ ./gradlew business::flywayInfo
-$ ./gradlew business::flywayBaseline 
 $ ./gradlew business::flywayMigrate
 $ ./gradlew business::flywayInfo
 
@@ -349,17 +348,19 @@ $ ./gradlew business::flywayRepair
 $ ./gradlew business::flywayClean
 
 # バッチを実行して商品マスタデータを登録する
+# ※ Windowsの場合はWSLからコマンド実行ではなくInteliJ側のGradleから起動しないと正常に動作しないので注意してください。
 $ ./gradlew batch::bootRun -Pargs=--job=importMstJob
 
 # 管理画面側のアプリケーションを起動します。
-# ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
+# ※ Windowsの場合はWSLからコマンド実行ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
 $ ./gradlew web-admin::bootRun
 
 # バッチを実行してSolrに商品データをインデックスする
+# ※ Windowsの場合はWSLからコマンド実行ではなくInteliJ側のGradleから起動しないと正常に動作しないので注意してください。
 $ ./gradlew batch::bootRun -Pargs=--job=solrRegistJob
 
 # フロント側のアプリケーションを起動します。
-# ※ Windowsの場合はWSLからコマンド起動ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
+# ※ Windowsの場合はWSLからコマンド実行ではなくInteliJ側のGradleから起動しないとブラウザからアクセスできないので注意してください。
 $ ./gradlew web-front::bootRun
 ```
 
@@ -419,6 +420,12 @@ Dockerを起動後に以下のURLにアクセスすると利用可能です。
 
 http://localhost:8983/
 
+### Swagger
+作成したAPIの一覧を確認したりデータを検索できます。<br>
+フロントを起動後に以下のURLにアクセスすると利用可能です。
+
+http://localhost:8080/swagger-ui/
+
 ## 🔗 参考
 
 | プロジェクト| 概要|
@@ -437,7 +444,6 @@ http://localhost:8983/
 | [Mockito](http://site.mockito.org/)| モッキングフレームワーク |
 | [AdminLTE Docs](https://adminlte.io/docs/2.4/installation)| AdminLTE Docs|
 | [Bootstrap4 日本語リファレンス](https://getbootstrap.jp/docs/4.4/getting-started/introduction/)| Bootstrap4 日本語リファレンス|
-| [アイコン(fontawesome)](https://fontawesome.com/icons?d=gallery)| アイコン(fontawesome)|
 
 
 ## 🎫 Licence
