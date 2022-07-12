@@ -34,7 +34,7 @@ SpringBoot ＆ React.js の学習用サンプルアプリケーションです�
 
 #### ■ アプリケーション
 
-- SpringBoot 2.7
+- SpringBoot 2.5
 - React 18
 - Typescript
 - Bootstrap 4
@@ -419,6 +419,12 @@ Solrの管理コンソールです。インデックスされたデータを検�
 Dockerを起動後に以下のURLにアクセスすると利用可能です。
 
 http://localhost:8983/
+
+### Swagger
+作成したAPIの一覧を確認したりデータを検索できます。<br>
+フロントを起動後に以下のURLにアクセスすると利用可能です。
+
+http://localhost:8080/swagger-ui/
 
 ## 🔗 参考
 

@@ -1,5 +1,6 @@
 package com.isystk.sample.web.front;
 
+import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -18,10 +19,11 @@ public class SwaggerConfig {
         .select()
 //        // パッケージを指定して表示するAPIを絞り込む
 //        .apis(RequestHandlerSelectors.basePackage("com.isystk.sample.web.front.controller.api.v1"))
-//        .paths(PathSelectors.any())
-        // パスを指定して絞り込むこともできる
+        // パスを指定して絞り込む
         .paths(PathSelectors.ant("/api/v1/**"))
         .build()
+        .protocols(Collections.singleton("https"))
+        .host("localhost")
         .apiInfo(apiInfo());
   }
 
