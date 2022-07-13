@@ -1,4 +1,4 @@
-package com.isystk.sample.web.front.controller.html.login;
+package com.isystk.sample.web.front.controller.html.auth;
 
 import static com.isystk.sample.common.Const.GLOBAL_DANGER_MESSAGE;
 import static com.isystk.sample.common.Const.GLOBAL_SUCCESS_MESSAGE;

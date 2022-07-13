@@ -82,7 +82,10 @@ public class SecurityConfig extends BaseSecurityConfig {
         // ログインIDのパラメータ名
         .usernameParameter("loginId")
         // パスワードのパラメータ名
-        .passwordParameter("password").permitAll();
+        .passwordParameter("password").permitAll()
+        // Google OAuth認証
+        .and()
+        .oauth2Login();
 
     // ログアウト処理
     http.logout().logoutRequestMatcher(new AntPathRequestMatcher(LOGOUT_URL))

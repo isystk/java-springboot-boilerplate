@@ -21,6 +21,13 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: "xxxxx"
+            client-secret: "xxxxx"
 
 logging:
   level:

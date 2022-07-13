@@ -19,7 +19,7 @@ public class IndexController extends AbstractHtmlController {
     return "F_TOP";
   }
 
-  @GetMapping({"/", "{path:(?!^static|swagger-ui$).*}/**"})
+  @GetMapping({"/", "{path:(?!^static|oauth|swagger-ui$).*}/**"})
   public String index(Model model) {
     return "modules/index";
   }
