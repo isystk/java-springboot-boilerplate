@@ -14,7 +14,7 @@ public class FrontUrl {
 
   public static final String PASSWORD_RESET_CONFIG = "/password/reset/config";
 
-  public static final String AUTH_GOOGLE_CALLBACK = "/auth/google/callback";
+  public static final String AUTH_GOOGLE_CALLBACK = "/auth/google/loginSuccess";
 
   /**
    * ---- APIｓ ----

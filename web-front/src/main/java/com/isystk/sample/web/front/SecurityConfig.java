@@ -83,7 +83,7 @@ public class SecurityConfig extends BaseSecurityConfig {
         .usernameParameter("loginId")
         // パスワードのパラメータ名
         .passwordParameter("password").permitAll()
-        // Google OAuth認証
+        // OAuth 2.0 Login機能を有効化
         .and()
         .oauth2Login();
 
