@@ -10,10 +10,11 @@ public class FrontUrl {
    **/
   public static final String TOP = "/";
   public static final String REGISTER = "/register";
-
   public static final String PASSWORD_RESET = "/password/reset";
 
   public static final String PASSWORD_RESET_CONFIG = "/password/reset/config";
+
+  public static final String AUTH_GOOGLE_CALLBACK = "/auth/google/callback";
 
   /**
    * ---- APIｓ ----

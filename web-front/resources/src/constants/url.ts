@@ -7,7 +7,7 @@ export const Url = {
   /** ログイン処理 */
   AUTHENTICATE: '/auth/authenticate',
   /** Googleログイン */
-  AUTH_GOOGLE: '/auth/google',
+  AUTH_GOOGLE: '/oauth2/authorization/google',
   /** ログアウト */
   LOGOUT: '/auth/logout',
   /** 会員登録 */

@@ -1,4 +1,4 @@
-package com.isystk.sample.web.admin.controller.html.login;
+package com.isystk.sample.web.admin.controller.html.auth;
 
 import static com.isystk.sample.common.Const.*;
 
