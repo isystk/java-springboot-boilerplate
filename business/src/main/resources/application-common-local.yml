@@ -30,6 +30,7 @@ spring:
           google:
             client-id: "xxxxx"
             client-secret: "xxxxx"
+            redirectUri: "http://localhost:8080/auth/google/loginSuccess"
 
 logging:
   level:

@@ -1,5 +1,6 @@
 package com.isystk.sample.web.front.controller.html;
 
+
 import static com.isystk.sample.common.FrontUrl.TOP;
 
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;

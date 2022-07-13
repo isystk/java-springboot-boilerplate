@@ -28,6 +28,7 @@ spring:
           google:
             client-id: "xxxxx"
             client-secret: "xxxxx"
+            redirectUri: "https://xxxx/auth/google/loginSuccess"
 
 logging:
   level:
