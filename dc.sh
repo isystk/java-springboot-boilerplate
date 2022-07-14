@@ -43,7 +43,7 @@ case ${1} in
         rm -Rf ./nginx/logs && mkdir ./nginx/logs && chmod 777 ./nginx/logs
         rm -Rf ./solr/logs/* && mkdir ./solr/logs && chmod 777 ./solr/logs
         rm -Rf ./solr/data/mycore/data/* && mkdir ./solr/data/mycore/data && chmod 777 ./solr/data/mycore/data
-        rm -Rf ./solr/data/post/data/* && mkdir ./solr/data/post/data && chmod 777 ./solr/data/post/data
+        rm -Rf ./solr/data/stock/data/* && mkdir ./solr/data/stock/data && chmod 777 ./solr/data/stock/data
         rm -Rf ./s3/data && mkdir ./s3/data && chmod 777 ./s3/data
         popd
         chmod 777 ./htdocs

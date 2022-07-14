@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
+import java.util.stream.Collectors;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.converter.JobParametersConverter;
 import org.springframework.batch.core.explore.JobExplorer;
@@ -213,7 +214,8 @@ public class SingleJobCommandLineRunner implements CommandLineRunner,
 
     for (val parameter : copy.entrySet()) {
       if (!parameter.getValue().isIdentifying()) {
-        parameters.remove(parameter.getKey());
+        parameters.entrySet().stream().filter(e -> !parameter.getKey().equals(e.getKey())).collect(
+            Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
       }
     }
   }
