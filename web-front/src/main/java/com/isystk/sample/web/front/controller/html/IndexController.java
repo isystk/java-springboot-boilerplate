@@ -1,5 +1,6 @@
 package com.isystk.sample.web.front.controller.html;
 
+
 import static com.isystk.sample.common.FrontUrl.TOP;
 
 import com.isystk.sample.web.base.controller.html.AbstractHtmlController;
@@ -19,7 +20,7 @@ public class IndexController extends AbstractHtmlController {
     return "F_TOP";
   }
 
-  @GetMapping({"/", "{path:(?!^static|swagger-ui$).*}/**"})
+  @GetMapping({"/", "{path:(?!^static|oauth|swagger-ui$).*}/**"})
   public String index(Model model) {
     return "modules/index";
   }
