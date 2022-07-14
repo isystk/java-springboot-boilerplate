@@ -75,7 +75,7 @@ public class StockController extends AbstractRestController {
   public Resource show(@PathVariable BigInteger stockId) {
 
     Resource resource = resourceFactory.create();
-    resource.setData(Arrays.asList(stockService.findSolrById(stockId).orElse(new StockSearchResultDto())));
+    resource.setData(Arrays.asList(stockService.findById(stockId)));
     resource.setMessage(getMessage(MESSAGE_SUCCESS));
     resource.setResult(true);
 

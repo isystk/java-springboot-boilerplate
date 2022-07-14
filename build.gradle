@@ -70,7 +70,7 @@ subprojects {
     runtimeOnly("org.springframework.boot:spring-boot-devtools")
 
     /* solr */
-    implementation("org.springframework.boot:spring-boot-starter-data-solr:${springBootSolrVersion}")
+    implementation("org.apache.solr:solr-solrj:${solrJVersion}")
 
     /* spring security */
     implementation("org.springframework.boot:spring-boot-starter-security")

@@ -6,13 +6,15 @@ import com.isystk.sample.common.dto.Pageable;
 import com.isystk.sample.common.helper.ImageHelper;
 import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.ObjectMapperUtils;
+import com.isystk.sample.domain.dto.StockRepositoryDto;
+import com.isystk.sample.domain.repository.StockRepository;
 import com.isystk.sample.solr.dto.SolrStock;
 import com.isystk.sample.solr.dto.SolrStockCriteria;
 import com.isystk.sample.web.front.dto.StockSearchResultDto;
 import java.math.BigInteger;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,9 @@ public class StockService extends BaseTransactionalService {
   SolrStockRepository solrStockRepository;
 
   @Autowired
+  StockRepository stockRepository;
+
+  @Autowired
   ImageHelper imageHelper;
 
   /**
@@ -40,37 +45,31 @@ public class StockService extends BaseTransactionalService {
   public Page<StockSearchResultDto> findSolrAll(SolrStockCriteria criteria, Pageable pageable) {
     Assert.notNull(criteria, "criteria must not be null");
 
-    // TODO ここでページングを設定
-    Iterable<SolrStock> solrStocks = solrStockRepository.findAll();
-
+    // Solrから商品データを取得する
     List<StockSearchResultDto> solrStockList = Lists.newArrayList();
-    int count = 0;
-    for (SolrStock solrStock : solrStocks) {
-      int from = (pageable.getPage()-1) * pageable.getPerpage();
-      int to = pageable.getPage() * pageable.getPerpage();
-      if (from <= count && count< to) {
+    long count = solrStockRepository.count(criteria);
+    if (0 < count) {
+      List<SolrStock> solrStocks = solrStockRepository.query(criteria, pageable);
+
+      for (SolrStock solrStock : solrStocks) {
         solrStockList.add(convertSolrToFrontStockDto(solrStock));
       }
-      count++;
     }
-
     return pageFactory.create(solrStockList, pageable, count);
   }
 
   /**
-   * Solrの投稿インデックスを取得します。
+   * 商品を取得します。
    *
    * @param stockId
    * @return
    */
-  @Transactional(readOnly = true) // 読み取りのみの場合は指定する
-  public Optional<StockSearchResultDto> findSolrById(BigInteger stockId) {
-    Assert.notNull(stockId, "criteria must not be null");
-
-    SolrStock solrStock = solrStockRepository.findByStockId(stockId);
-
-    return Optional.of(convertSolrToFrontStockDto(solrStock));
+  public StockSearchResultDto findById(BigInteger stockId) {
+    // 1件取得する
+    val stock = stockRepository.findById(stockId);
+    return convertDbToFrontStockDto(stock);
   }
+
 
   /**
    * @param solrStock
@@ -82,9 +81,25 @@ public class StockService extends BaseTransactionalService {
     dto.setImgUrl(
         imageHelper.getImageUrl("/stocks", solrStock.getImgpath()));
     dto.setCreatedAtYYYYMMDD(
-        DateUtils.format(solrStock.getCreatedAt(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+        DateUtils.format(solrStock.getCreatedAtDate(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
     dto.setCreatedAtMMDD(
-        DateUtils.format(solrStock.getCreatedAt(), DateTimeFormatter.ofPattern("MM/dd")));
+        DateUtils.format(solrStock.getCreatedAtDate(), DateTimeFormatter.ofPattern("MM/dd")));
+    return dto;
+  }
+
+  /**
+   * @param stockRepositoryDto
+   * @return
+   */
+  private StockSearchResultDto convertDbToFrontStockDto(StockRepositoryDto stockRepositoryDto) {
+    // 入力値を詰め替える
+    var dto = ObjectMapperUtils.map(stockRepositoryDto, StockSearchResultDto.class);
+    dto.setImgUrl(
+        imageHelper.getImageUrl("/stocks", stockRepositoryDto.getImgpath()));
+    dto.setCreatedAtYYYYMMDD(
+        DateUtils.format(stockRepositoryDto.getCreatedAt(), DateTimeFormatter.ofPattern("yyyy/MM/dd")));
+    dto.setCreatedAtMMDD(
+        DateUtils.format(stockRepositoryDto.getCreatedAt(), DateTimeFormatter.ofPattern("MM/dd")));
     return dto;
   }
 
