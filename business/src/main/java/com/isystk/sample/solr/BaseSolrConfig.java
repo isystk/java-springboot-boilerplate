@@ -1,25 +1,18 @@
 package com.isystk.sample.solr;
 
-import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.solr.core.SolrTemplate;
-import org.springframework.data.solr.repository.config.EnableSolrRepositories;
+import org.springframework.context.annotation.Configuration;
 
-@EnableSolrRepositories(basePackages = "com.isystk.sample.solr.repository")
 public class BaseSolrConfig {
 
   @Value("#{'${spring.data.solr.host:*}'}")
-  String solrURL;
+  String solrHost;
 
   @Bean
-  public SolrClient solrClient() {
-    return new HttpSolrClient.Builder(solrURL).build();
+  public HttpSolrClient stockSolrClient() {
+    return new HttpSolrClient.Builder(solrHost + "/stock").build();
   }
 
-  @Bean
-  public SolrTemplate solrTemplate(SolrClient client) throws Exception {
-    return new SolrTemplate(client);
-  }
 }

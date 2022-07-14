@@ -1,6 +1,7 @@
 package com.isystk.sample.batch.service;
 
 import com.google.common.collect.Lists;
+import com.isystk.sample.common.util.DateUtils;
 import com.isystk.sample.common.util.ObjectMapperUtils;
 import com.isystk.sample.domain.dto.StockCriteria;
 import com.isystk.sample.domain.repository.StockRepository;
@@ -44,14 +45,20 @@ public class SolrStockService extends BaseTransactionalService {
         .forEach(stock -> {
           SolrStock solrStock = ObjectMapperUtils.map(stock, SolrStock.class);
           solrStock.setStockId(stock.getId().intValue());
+          solrStock.setCreatedAtDate(DateUtils.toDate(stock.getCreatedAt()));
           solrStockList.add(solrStock);
         });
 
-    // Solrをすべて削除
-    solrStockRepository.deleteAll();
+    try {
+      // Solrをすべて削除
+      solrStockRepository.deleteStockByQuery("*:*");
 
-    // Solrに保存
-    solrStockRepository.saveAll(solrStockList);
+      // Solrに保存
+      solrStockRepository.addStocks(solrStockList);
+    } catch (Exception e) {
+      throw new RuntimeException(e);
+    }
+
   }
 
 }
