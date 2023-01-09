@@ -94,17 +94,6 @@ case ${1} in
       esac
     ;;
 
-    aws)
-      case ${2} in
-          local)
-              $DOCKER_COMPOSE exec awscli /bin/bash
-          ;;
-          *)
-              usage
-          ;;
-      esac
-    ;;
-
     front)
       case ${2} in
           build)

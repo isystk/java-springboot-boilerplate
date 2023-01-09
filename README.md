@@ -317,20 +317,15 @@ $ ./dc.sh mysql login
 ```
 
 Minio にS3バケットを作成する
-```bash
-$ ./dc.sh aws local
-# バケットを作成する
-aws --endpoint-url http://host.docker.internal:9000 s3 mb s3://aws.isystk.com
-# バケットを公開する
-POLICY='{ "Version": "2012-10-17", "Statement": [{ "Sid": "MakeItPublic", "Effect": "Allow", "Principal": "*", "Action": "s3:GetObject", "Resource": "arn:aws:s3:::aws.isystk.com/*" }] }'
-aws --endpoint-url http://host.docker.internal:9000 s3api put-bucket-policy --bucket aws.isystk.com --policy "${POLICY}"
-# バケットの一覧を確認する
-aws --endpoint-url http://host.docker.internal:9000 s3 ls
-# テストファイルをアップロードする
-aws --endpoint-url http://host.docker.internal:9000 s3 cp ./front.png s3://aws.isystk.com
-# ブラウザでアップロードした画像を表示してみる
-$ open http://localhost:9000/aws.isystk.com/front.png
-```
+
+http://localhost:9001
+
+画像ファイルなどを保存する為のバケットを
+「aws.isystk.com」 という名前で作成して、
+HTMLから参照できるように Publicにしておきます。
+
+![Minio](./minio.png "Minio")
+
 
 バックエンド環境を構築する
 ```bash
