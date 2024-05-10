@@ -163,7 +163,7 @@ $ pwd
 # WSL 上にDockerとDocker Composeをインストールする。
 $ apt install docker
 $ apt install docker-compose
-これでWSLからWindows側にインストールしたDockerが利用できるようになります。
+これでWSLで起動したDockerコンテナがホストマシン側で利用できるようになります。
 ```
 
 ### ソースコードをダウンロードする
@@ -172,33 +172,9 @@ github からソースコードをダウンロードします。 Windows の場�
 WSL側でSpringbootを起動した場合はホスト側のブラウザからアクセスが出来なくなってしまいます。
 ```
 # ソースコードを配置したいディレクトリに移動する
-cd /c/Users/USER/github
+cd /root/github
 # Githubからソースコードをダウンロードする
 git clone git@github.com:isystk/java-springboot-boilerplate.git
-```
-
-WSL の場合は、MySQLのConfファイルがWindows側のディスクにあると権限の違いでDockerコンテナがロードできなくなるのでWindows側で読み取り専用に変更してください。
-
-![WSL-MySQL](./wsl-mysql.png "WSL-MySQL")
-
-### IntelliJ IDEAのインストール
-
-以下のURLから、IntelliJ IDEA をダウンロードしてインストールを行います。無料のCommunity版で問題ありません。
-https://www.jetbrains.com/ja-jp/idea/download/
-
-```
-# コードフォーマッターを設定する
-「Preferences - Editor - Code Style - Java」にて、Schemeのところの設定アイコンから、"intellij-java-google-style.xml" をインポートする。
-
-# Lombok pluginをインストールする(既にインストールされている場合は不要です)
-「Preferences - Plugins - Marketplace」から、"Lombok"をインストール後、InteliJを再起動する
-
-# Annotation Processingを有効にする
-「Preferences - Build,Execution,Deployment - Compiler - Annotation Processors」から、
-”Enable annotation processing” を有効にする
-
-# デバック時のホットスワップを有効にする
-「Preferences - Advanced Settings - Compiler」から、”Allow auto-make to start even if developed application is currently running” を有効にする。
 ```
 
 ### MySQL Client のインストール
@@ -300,6 +276,26 @@ $ npm install -g yarn
 │       └── yarn.lock
 ├── dc.sh (Docker操作用スクリプト)
 └── build.gradle (Gradle用設定ファイル)
+```
+
+### IntelliJ IDEAのインストール
+
+以下のURLから、IntelliJ IDEA をダウンロードしてインストールを行います。無料のCommunity版で問題ありません。
+https://www.jetbrains.com/ja-jp/idea/download/
+
+```
+# コードフォーマッターを設定する
+「Preferences - Editor - Code Style - Java」にて、Schemeのところの設定アイコンから、"intellij-java-google-style.xml" をインポートする。
+
+# Lombok pluginをインストールする(既にインストールされている場合は不要です)
+「Preferences - Plugins - Marketplace」から、"Lombok"をインストール後、InteliJを再起動する
+
+# Annotation Processingを有効にする
+「Preferences - Build,Execution,Deployment - Compiler - Annotation Processors」から、
+”Enable annotation processing” を有効にする
+
+# デバック時のホットスワップを有効にする
+「Preferences - Advanced Settings - Compiler」から、”Allow auto-make to start even if developed application is currently running” を有効にする。
 ```
 
 
